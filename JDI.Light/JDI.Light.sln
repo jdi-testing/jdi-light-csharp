@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2016
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JDI.Light", "JDI.Light\JDI.Light.csproj", "{ABAF27B0-BFDE-4FEC-B93E-15B595FA77AA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ABAF27B0-BFDE-4FEC-B93E-15B595FA77AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABAF27B0-BFDE-4FEC-B93E-15B595FA77AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABAF27B0-BFDE-4FEC-B93E-15B595FA77AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABAF27B0-BFDE-4FEC-B93E-15B595FA77AA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E0CA568D-A0F4-4ED3-8542-93FE90963EB6}
+	EndGlobalSection
+EndGlobal
