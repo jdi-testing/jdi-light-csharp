@@ -29,7 +29,9 @@ namespace JDI.Light.Elements.Base
 
         public string GetValue()
         {
-            throw new System.NotImplementedException();
+            var text = _webElement.Text;
+            var value = string.IsNullOrWhiteSpace(text) ? _webElement.GetAttribute("value") : text;
+            return value;
         }
 
         public void Hover()
@@ -39,27 +41,27 @@ namespace JDI.Light.Elements.Base
 
         public bool IsEnabled()
         {
-            throw new System.NotImplementedException();
+            return _webElement.Enabled;
         }
 
         public bool IsDisplayed()
         {
-            throw new System.NotImplementedException();
+            return _webElement.Displayed;
         }
 
         public Point GetLocation()
         {
-            throw new System.NotImplementedException();
+            return _webElement.Location;
         }
 
         public Size GetSize()
         {
-            throw new System.NotImplementedException();
+            return _webElement.Size;
         }
 
         public Rectangle GetRect()
         {
-            throw new System.NotImplementedException();
+            return new Rectangle(_webElement.Location, _webElement.Size);
         }
 
         public T GetScreenshotAs<T>(T outputType)
