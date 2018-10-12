@@ -48,14 +48,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Elements\Base\UIElement.cs" />
     <Compile Include="Elements\Interfaces\IBaseElement.cs" />
     <Compile Include="Elements\Interfaces\IHasValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Elements\Base\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
