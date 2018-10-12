@@ -39,16 +39,6 @@ namespace JDI.Light.Elements.Base
             throw new System.NotImplementedException();
         }
 
-        public bool IsEnabled()
-        {
-            return _webElement.Enabled;
-        }
-
-        public bool IsDisplayed()
-        {
-            return _webElement.Displayed;
-        }
-
         public Point GetLocation()
         {
             return _webElement.Location;

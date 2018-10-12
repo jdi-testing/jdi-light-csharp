@@ -6,8 +6,6 @@ namespace JDI.Light.Elements.Interfaces
     public interface IBaseElement : IHasValue
     {
         void Hover();
-        bool IsEnabled();
-        bool IsDisplayed();
         Point GetLocation();
         Size GetSize();
         Rectangle GetRect();
