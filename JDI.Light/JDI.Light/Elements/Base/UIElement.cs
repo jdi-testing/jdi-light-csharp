@@ -11,10 +11,12 @@ namespace JDI.Light.Elements.Base
     public class UIElement : IWebElement, IBaseElement
     {
         private IWebElement _webElement;
+        private IWebDriver _webDriver;
 
-        public UIElement(IWebElement element)
+        public UIElement(IWebElement element, IWebDriver webDriver)
         {
             _webElement = element;
+            _webDriver = webDriver;
         }
 
         public string TagName => _webElement.TagName;
@@ -81,7 +83,7 @@ namespace JDI.Light.Elements.Base
 
         public SelectElement Select()
         {
-            throw new System.NotImplementedException();
+            return new SelectElement(_webElement);
         }
 
         #endregion
