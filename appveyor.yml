@@ -1,0 +1,44 @@
+-
+  branches:
+    only:
+    - nuget
+    
+  before_build:
+    - nuget restore JDI.Light/JDI.Light.sln
+
+  build_script: 
+    - msbuild JDI.Light/JDI.Light.sln /p:Configuration=Release /t:Rebuild
+
+  after_build:
+    - nuget pack "JDI.Light/JDI.Light.csproj" -Prop Configuration=Release
+
+  artifacts:
+    - path: '*.nupkg'
+      name: nupkg
+
+  deploy:
+    provider: NuGet
+    server: 
+    api_key:
+      secure: <ADD_HERE_BEFORE_PUBLISH>
+    skip_symbols: false
+    artifact: nupkg
+ 
+  test:
+    assemblies:
+      - '**\*Tests.dll'
+        
+-
+  branches:
+    except:
+    - nuget
+    
+  before_build:
+    - nuget restore JDI.Light/JDI.Light.sln
+
+  build_script: 
+    - msbuild JDI.Light/JDI.Light.sln /p:Configuration=Release /t:Rebuild
+
+  test:
+    assemblies:
+      - '**\*Tests.dll'
