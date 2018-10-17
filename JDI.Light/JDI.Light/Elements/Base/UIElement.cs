@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using JDI.Light.Elements.Interfaces;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.Extensions;
 using OpenQA.Selenium.Support.UI;
 
 namespace JDI.Light.Elements.Base
@@ -10,13 +11,15 @@ namespace JDI.Light.Elements.Base
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class UIElement : IWebElement, IBaseElement
     {
-        private IWebElement _webElement;
-        private IWebDriver _webDriver;
+        private readonly IWebElement _webElement;
+        private readonly IWebDriver _webDriver;
+        private readonly Js _js;
 
         public UIElement(IWebElement element, IWebDriver webDriver)
         {
             _webElement = element;
             _webDriver = webDriver;
+            _js = new Js(_webDriver, _webElement);
         }
 
         public string TagName => _webElement.TagName;
@@ -38,7 +41,7 @@ namespace JDI.Light.Elements.Base
 
         public void Hover()
         {
-            throw new System.NotImplementedException();
+            _js.ScrollIntoView();
         }
 
         public Point GetLocation()
@@ -56,29 +59,31 @@ namespace JDI.Light.Elements.Base
             return new Rectangle(_webElement.Location, _webElement.Size);
         }
 
-        public T GetScreenshotAs<T>(T outputType)
+        public Screenshot GetScreenshot()
         {
-            throw new System.NotImplementedException();
+            Show();
+            var screenshot = _webDriver.TakeScreenshot();
+            return screenshot;
         }
 
         public void SetAttribute(string name, string value)
         {
-            throw new System.NotImplementedException();
+            _js.SetAttribute(name, value);
         }
 
         public void Highlight(string color)
         {
-            throw new System.NotImplementedException();
+            _js.AddBorder(color);
         }
 
         public void Highlight()
         {
-            throw new System.NotImplementedException();
+            _js.AddBorder();
         }
 
         public void Show()
         {
-            throw new System.NotImplementedException();
+            _js.ScrollIntoView();
         }
 
         public SelectElement Select()

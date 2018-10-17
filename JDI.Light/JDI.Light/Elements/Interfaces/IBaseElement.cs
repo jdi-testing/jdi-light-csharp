@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
 namespace JDI.Light.Elements.Interfaces
@@ -9,7 +10,7 @@ namespace JDI.Light.Elements.Interfaces
         Point GetLocation();
         Size GetSize();
         Rectangle GetRect();
-        T GetScreenshotAs<T>(T outputType);
+        Screenshot GetScreenshot();
         string GetAttribute(string name);
         void SetAttribute(string name, string value);
         void Highlight(string color);

@@ -48,10 +48,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\IWebDriverFactory.cs" />
     <Compile Include="Common\WebDriverFactory.cs" />
     <Compile Include="Elements\Base\UIElement.cs" />
     <Compile Include="Elements\Interfaces\IBaseElement.cs" />
     <Compile Include="Elements\Interfaces\IHasValue.cs" />
+    <Compile Include="Elements\Base\Js.cs" />
     <Compile Include="Enums\DriverType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
