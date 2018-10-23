@@ -6,28 +6,36 @@ namespace JDI.Light.Common
     public class WebDriverFactory : IWebDriverFactory
     {
         private IWebDriver _currentWebDriver;
+        private IWebDriver _defaultWebDriver;
 
         public WebDriverFactory()
         {
-            DefaultWebDriver =  new ChromeDriver();
         }
 
         public WebDriverFactory(IWebDriver webDriver)
         {
             _currentWebDriver = webDriver;
-            DefaultWebDriver = new ChromeDriver();
         }
 
-        public IWebDriver DefaultWebDriver { get; set; }
+        public IWebDriver DefaultWebDriver
+        {
+            get => _defaultWebDriver ?? new ChromeDriver();
+            set => _defaultWebDriver = value;
+        }
 
         public IWebDriver GetWebDriver()
         {
             return _currentWebDriver ?? DefaultWebDriver;
         }
 
-        public void SetWebDriver(IWebDriver webDriver)
+        public void SetCurrentWebDriver(IWebDriver webDriver)
         {
             _currentWebDriver = webDriver;
+        }
+
+        public void SetDefaultWebDriver(IWebDriver webDriver)
+        {
+            _defaultWebDriver = webDriver;
         }
 
         public void Dispose()

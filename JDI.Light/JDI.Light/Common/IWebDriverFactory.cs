@@ -6,7 +6,8 @@ namespace JDI.Light.Common
     {
         IWebDriver DefaultWebDriver { get; set; }
         IWebDriver GetWebDriver();
-        void SetWebDriver(IWebDriver webDriver);
+        void SetCurrentWebDriver(IWebDriver webDriver);
+        void SetDefaultWebDriver(IWebDriver webDriver);
         void Dispose();
     }
 }
