@@ -39,15 +39,9 @@ namespace JDI.Light.Elements.Base
             ExecuteOnElement("scrollIntoView(true)");
         }
 
-        public void AddBorder()
-        {
-            ExecuteOnElement("style.border='3px dashed red'");
-        }
-
         public void AddBorder(string color)
         {
             ExecuteOnElement($"style.border='3px dashed {color}'");
         }
-
     }
 }

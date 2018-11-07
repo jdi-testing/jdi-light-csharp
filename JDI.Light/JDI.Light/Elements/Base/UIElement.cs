@@ -71,14 +71,9 @@ namespace JDI.Light.Elements.Base
             _js.SetAttribute(name, value);
         }
 
-        public void Highlight(string color)
+        public void Highlight(string color = "red")
         {
             _js.AddBorder(color);
-        }
-
-        public void Highlight()
-        {
-            _js.AddBorder();
         }
 
         public void Show()

@@ -14,7 +14,6 @@ namespace JDI.Light.Elements.Interfaces
         string GetAttribute(string name);
         void SetAttribute(string name, string value);
         void Highlight(string color);
-        void Highlight();
         void Show();
         SelectElement Select();
     }
