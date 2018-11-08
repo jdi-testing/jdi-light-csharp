@@ -9,7 +9,6 @@ using JDI.Web.Selenium.DriverFactory;
 using JDI.Web.Selenium.Elements.Base;
 using JDI.Web.Settings;
 using OpenQA.Selenium;
-using WebDriverFactory = JDI.Web.Selenium.DriverFactory.WebDriverFactory;
 
 namespace JDI.Web.Selenium.Elements.APIInteract
 {
@@ -29,7 +28,7 @@ namespace JDI.Web.Selenium.Elements.APIInteract
         {
             Element = element;
             ByLocator = byLocator;
-            if (String.IsNullOrEmpty(DriverName) && WebSettings.WebDriverFactory != null && !String.IsNullOrEmpty(WebSettings.WebDriverFactory.CurrentDriverName))
+            if (string.IsNullOrEmpty(DriverName) && WebSettings.WebDriverFactory != null && !string.IsNullOrEmpty(WebSettings.WebDriverFactory.CurrentDriverName))
                 DriverName = WebSettings.WebDriverFactory.CurrentDriverName;
         }
 

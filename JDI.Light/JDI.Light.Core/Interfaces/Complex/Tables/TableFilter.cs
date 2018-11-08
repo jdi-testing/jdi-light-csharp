@@ -5,8 +5,8 @@ namespace JDI.Core.Interfaces.Complex.Tables
 {
     public class TableFilter
     {
-        public String name;
-        public String value;
+        public string name;
+        public string value;
         public CheckPageTypes type;
 
         public TableFilter(string template)
@@ -23,7 +23,7 @@ namespace JDI.Core.Interfaces.Complex.Tables
             }
             if (Regex.IsMatch(template, "[^=]+~=[^=]*"))
             {
-                split = template.Split(new string[] { "~=" }, StringSplitOptions.None);
+                split = template.Split(new[] { "~=" }, StringSplitOptions.None);
                 name = split[0];
                 value = split[1];
                 type = CheckPageTypes.CONTAINS;
@@ -31,7 +31,7 @@ namespace JDI.Core.Interfaces.Complex.Tables
             }
             if (Regex.IsMatch(template, "[^=] +=[^=] * "))
             {
-                split = template.Split(new string[] { "=" }, StringSplitOptions.None);
+                split = template.Split(new[] { "=" }, StringSplitOptions.None);
                 name = split[0];
                 value = split[1];
                 type = CheckPageTypes.EQUAL;

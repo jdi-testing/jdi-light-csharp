@@ -33,7 +33,7 @@ namespace JDI.Core.Attributes
         {
             var result = camel.ToUpper().FirstOrDefault().ToString();
             for (var i = 1; i < camel.Length - 1; i++)
-                result += (Char.IsUpper(camel[i]) && !Char.IsUpper(camel[i - 1]) ? " " : "") + camel[i];
+                result += (char.IsUpper(camel[i]) && !char.IsUpper(camel[i - 1]) ? " " : "") + camel[i];
             return result + camel[camel.Length - 1];
         }
     }

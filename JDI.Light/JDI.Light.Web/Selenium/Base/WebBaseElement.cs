@@ -57,7 +57,7 @@ namespace JDI.Web.Selenium.Base
 
         public static Action<string, Action<string>> SetValueEmptyAction = (text, action) =>
         {
-            if (String.IsNullOrEmpty(text)) return;
+            if (string.IsNullOrEmpty(text)) return;
             action.Invoke(text.Equals("#CLEAR#") ? "" : text);
         };
 
@@ -156,7 +156,7 @@ namespace JDI.Web.Selenium.Base
 
         public void LogAction(string actionName, LogLevels level)
         {
-            JDISettings.ToLog(String.Format(JDISettings.ShortLogMessagesFormat
+            JDISettings.ToLog(string.Format(JDISettings.ShortLogMessagesFormat
                 ? "{0} for {1}"
                 : "Perform action '{0}' with WebElement ({1})", actionName, ToString()), level);
         }

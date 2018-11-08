@@ -1,10 +1,10 @@
 ﻿using System;
-using JDI.Core;
+using JDI.Commons;
 using JDI.Core.Logging;
 using JDI.Core.Reporting;
 using JDI.Core.Settings;
 using JDI.Web.Selenium.Base;
-using Timer = JDI.Commons.Timer;
+using ExceptionUtils = JDI.Core.ExceptionUtils;
 
 namespace JDI.Web.Selenium.Elements.WebActions
 {

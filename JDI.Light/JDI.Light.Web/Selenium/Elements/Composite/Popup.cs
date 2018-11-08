@@ -8,8 +8,6 @@ namespace JDI.Web.Selenium.Elements.Composite
 {
     public class Popup : Text, IPopup
     {
-        public Popup() { }
-
         protected override Func<WebBaseElement, string> GetTextAction => p => GetElementClass.GetTextElement().GetText;
 
         public void Ok()

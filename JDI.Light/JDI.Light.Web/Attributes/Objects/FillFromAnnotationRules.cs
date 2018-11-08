@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using JDI.Core.Settings;
 using JDI.Web.Selenium.Elements.Complex;
 using JDI.Web.Selenium.Elements.Complex.Table;
@@ -30,8 +29,8 @@ namespace JDI.Web.Attributes.Objects
                     split = jTable.Size.Split('X');
                 if (split.Length != 2)
                     throw JDISettings.Exception("Can't setup Table from attribute. Bad size: " + jTable.Size);
-                table.SetColumnsCount(Int32.Parse(split[0]));
-                table.SetRowsCount(Int32.Parse(split[1]));
+                table.SetColumnsCount(int.Parse(split[0]));
+                table.SetRowsCount(int.Parse(split[1]));
             }
             table.HeaderType = jTable.HeaderType;
             table.UseCache(jTable.UseCache);

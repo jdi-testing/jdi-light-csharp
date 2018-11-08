@@ -60,7 +60,7 @@ namespace JDI.UIWebTests.Tests.Common
         [Test]
         public void MultiKeyTest()
         {
-            foreach (char ch in DEFAULT_DATE.ToCharArray()) 
+            foreach (char ch in DEFAULT_DATE) 
             {
                 _datePicker.SendKeys(ch.ToString());
             }

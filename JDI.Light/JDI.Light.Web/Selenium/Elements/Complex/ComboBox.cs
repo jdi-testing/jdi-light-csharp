@@ -8,7 +8,6 @@ namespace JDI.Web.Selenium.Elements.Complex
 {
     public class ComboBox : ComboBox<IConvertible>, IComboBox
     {
-        public ComboBox() { }
     }
     public class ComboBox<TEnum> : Dropdown<TEnum>, IComboBox<TEnum>
         where TEnum : IConvertible

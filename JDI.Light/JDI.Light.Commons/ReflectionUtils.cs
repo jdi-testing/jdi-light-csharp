@@ -17,7 +17,7 @@ namespace JDI.Commons
             return type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static).ToList();
         }
 
-        public static object Value(this FieldInfo f, Object parent)
+        public static object Value(this FieldInfo f, object parent)
         {
             try
             {

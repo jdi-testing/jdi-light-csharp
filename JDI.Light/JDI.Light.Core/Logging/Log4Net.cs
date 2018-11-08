@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Reflection;
 using log4net;
+using log4net.Core;
 
 namespace JDI.Core.Logging
 {
@@ -17,7 +19,7 @@ namespace JDI.Core.Logging
                 lock (_locker)
                 {
                     if (_log == null)
-                        _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+                        _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
                 }
                 return _log;
             }
@@ -30,7 +32,7 @@ namespace JDI.Core.Logging
 
         public void Trace(string message)
         {
-            Log.Logger.Log(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType, log4net.Core.Level.Trace, message, null);
+            Log.Logger.Log(MethodBase.GetCurrentMethod().DeclaringType, Level.Trace, message, null);
         }
 
         public void Debug(string message)

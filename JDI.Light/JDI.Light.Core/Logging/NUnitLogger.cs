@@ -16,7 +16,7 @@ namespace JDI.Core.Logging
 
         public void Exception(Exception ex)
         {
-            TestContext.WriteLine($"Exception");
+            TestContext.WriteLine("Exception");
         }
 
         public void Trace(string message)

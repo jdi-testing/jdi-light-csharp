@@ -1,48 +1,49 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using OpenQA.Selenium;
 
 namespace JDI.Light.UnitTests
 {
     public class MockWebDriver : IWebDriver
     {
-        public IWebElement FindElement(By @by)
+        public IWebElement FindElement(By by)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        public ReadOnlyCollection<IWebElement> FindElements(By @by)
+        public ReadOnlyCollection<IWebElement> FindElements(By by)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void Dispose()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void Close()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void Quit()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public IOptions Manage()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public INavigation Navigate()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public ITargetLocator SwitchTo()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public string Url { get; set; }

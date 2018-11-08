@@ -103,7 +103,7 @@ namespace JDI.Web.Settings
                 if (p.ToLower().Split('x').Length == 2)
                     split = p.ToLower().Split('x');
                 if (split != null)
-                    WebDriverFactory.BrowserSize = new Size(Int32.Parse(split[0]), Int32.Parse(split[1]));
+                    WebDriverFactory.BrowserSize = new Size(int.Parse(split[0]), int.Parse(split[1]));
             }, "BrowserSize");
         }
 

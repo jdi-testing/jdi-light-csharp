@@ -99,7 +99,7 @@ namespace JDI.UIWebTests.Tests.Complex
         [Test]
         public void GetSelectedTest()
         {
-            new Check().AreEquals(_colors().Selected().ToString(), "Colors");            
+            new Check().AreEquals(_colors().Selected(), "Colors");            
         }
 
         //TO_DO

@@ -90,7 +90,7 @@ namespace JDI.Web.Selenium.Elements.Composite
 
         public void CheckOpened()
         {
-            if (String.IsNullOrEmpty(UrlTemplate) && new[] {CheckPageTypes.None, CheckPageTypes.Equal}.Contains(CheckUrlType))
+            if (string.IsNullOrEmpty(UrlTemplate) && new[] {CheckPageTypes.None, CheckPageTypes.Equal}.Contains(CheckUrlType))
                 CheckUrl().Equal();
             else
                 switch (CheckUrlType)
@@ -138,7 +138,7 @@ namespace JDI.Web.Selenium.Elements.Composite
         private bool IsOnPage()
         {
             var url = WebDriver.Url;
-            if (String.IsNullOrEmpty(UrlTemplate)
+            if (string.IsNullOrEmpty(UrlTemplate)
                 && new[] {CheckPageTypes.None, CheckPageTypes.Equal}.Contains(CheckUrlType))
                 return url.Equals(Url);
             switch (CheckUrlType)
@@ -150,7 +150,7 @@ namespace JDI.Web.Selenium.Elements.Composite
                 case CheckPageTypes.Match:
                     return url.Matches(UrlTemplate);
                 case CheckPageTypes.Contains:
-                    return url.Contains(String.IsNullOrEmpty(UrlTemplate) ? Url : UrlTemplate);
+                    return url.Contains(string.IsNullOrEmpty(UrlTemplate) ? Url : UrlTemplate);
             }
             return false;
         }
@@ -240,7 +240,7 @@ namespace JDI.Web.Selenium.Elements.Composite
 
             public void Equal()
             {
-                if (String.IsNullOrEmpty(_equals)) return;
+                if (string.IsNullOrEmpty(_equals)) return;
                 JDISettings.Logger.Info($"Page {_what} equals to '{_equals}'");
                 JDISettings.Asserter.IsTrue(_timer().Wait(() => _actual().Equals(_equals)));
             }
@@ -251,7 +251,7 @@ namespace JDI.Web.Selenium.Elements.Composite
 
             public void Match()
             {
-                if (String.IsNullOrEmpty(_template)) return;
+                if (string.IsNullOrEmpty(_template)) return;
                 JDISettings.Logger.Info($"Page {_what} matches to '{_template}'");
                 JDISettings.Asserter.IsTrue(_timer().Wait(() => _actual().Matches(_template)));
             }
@@ -262,7 +262,7 @@ namespace JDI.Web.Selenium.Elements.Composite
 
             public void Contains()
             {
-                var url = String.IsNullOrEmpty(_template)
+                var url = string.IsNullOrEmpty(_template)
                     ? _equals
                     : _template;
                 JDISettings.Logger.Info($"Page {_what} contains to '{url}'");

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using JDI.Core;
+using JDI.Commons;
 using JDI.Core.Settings;
 using JDI.Web.Selenium.Elements.Complex.Table.Interfaces;
 using JDI.Web.Utils;
 using OpenQA.Selenium;
-using CommonExtensions = JDI.Commons.CommonExtensions;
+using ExceptionUtils = JDI.Core.ExceptionUtils;
 
 namespace JDI.Web.Selenium.Elements.Complex.Table
 {

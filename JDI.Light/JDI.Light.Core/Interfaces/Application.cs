@@ -1,5 +1,6 @@
 ﻿using JDI.Core.Preconditions;
 using JDI.Core.Settings;
+using NUnit.Framework;
 
 namespace JDI.Core.Interfaces
 {
@@ -17,7 +18,7 @@ namespace JDI.Core.Interfaces
             JDISettings.DriverFactory.CurrentDriverName = driverName;
             PreconditionsState.IsInState(precondition);
         }
-        public void IsInState(IPreconditions precondition, NUnit.Framework.DescriptionAttribute method)
+        public void IsInState(IPreconditions precondition, DescriptionAttribute method)
         {
             JDISettings.DriverFactory.CurrentDriverName = driverName;
             PreconditionsState.IsInState(precondition, method);

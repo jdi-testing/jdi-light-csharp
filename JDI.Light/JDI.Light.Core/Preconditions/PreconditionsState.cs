@@ -1,6 +1,7 @@
 ﻿using System;
 using JDI.Core.Logging;
 using JDI.Core.Settings;
+using NUnit.Framework;
 
 namespace JDI.Core.Preconditions
 {
@@ -9,7 +10,7 @@ namespace JDI.Core.Preconditions
         public static bool alwaysMoveToCondition;
         private PreconditionsState() { }
 
-        public static void IsInState(IPreconditions condition, NUnit.Framework.DescriptionAttribute method)
+        public static void IsInState(IPreconditions condition, DescriptionAttribute method)
         {
             try
             {
@@ -18,12 +19,12 @@ namespace JDI.Core.Preconditions
                 if (!alwaysMoveToCondition && condition.CheckAction())
                     return;
                 condition.MoveToAction();
-                NUnit.Framework.Assert.IsTrue(condition.CheckAction());
+                Assert.IsTrue(condition.CheckAction());
                 new Log4Net().Info(condition + " condition achieved");
             }
             catch (Exception ex)
             {
-                throw new ArgumentException(String.Format("Can't reach state: %s. Reason: %s", condition, ex.Message));
+                throw new ArgumentException(string.Format("Can't reach state: %s. Reason: %s", condition, ex.Message));
             }
         }
 
@@ -32,7 +33,7 @@ namespace JDI.Core.Preconditions
             IsInState(condition, null);
         }
 
-        public static void MoveToState(IPreconditions condition, NUnit.Framework.DescriptionAttribute method)
+        public static void MoveToState(IPreconditions condition, DescriptionAttribute method)
         {
             try
             {
@@ -43,7 +44,7 @@ namespace JDI.Core.Preconditions
             }
             catch (Exception ex)
             {
-                throw new ArgumentException(String.Format("Can't reach state: %s. Reason: %s", condition, ex.Message));
+                throw new ArgumentException(string.Format("Can't reach state: %s. Reason: %s", condition, ex.Message));
             }
         }
 

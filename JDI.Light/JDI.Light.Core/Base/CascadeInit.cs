@@ -102,7 +102,7 @@ namespace JDI.Core.Base
                     InitElements(instance, driverName);
             },
                 ex =>
-                    $"Error in SetElement for field '{field.Name}' with parent '{parentType?.Name ?? "NULL Class" + CommonExtensions.FromNewLine(ex)}'");
+                    $"Error in SetElement for field '{field.Name}' with parent '{parentType?.Name ?? "NULL Class" + ex.FromNewLine()}'");
         }
 
         protected abstract IBaseElement GetElementsRules(FieldInfo field, string driverName, Type type, string fieldName);
@@ -113,7 +113,7 @@ namespace JDI.Core.Base
             var fieldName = field.Name;
             return ExceptionUtils.ActionWithException(() => GetElementsRules(field, driverName, type, fieldName),
                 ex =>
-                    $"Error in GetElementInstance for field '{fieldName}'{(parent != null ? "in " + parent.GetClassName() : "")} with type '{type.Name + CommonExtensions.FromNewLine(ex)}'");
+                    $"Error in GetElementInstance for field '{fieldName}'{(parent != null ? "in " + parent.GetClassName() : "")} with type '{type.Name + ex.FromNewLine()}'");
         }
     }
 }

@@ -91,7 +91,7 @@ namespace JDI.UIWebTests.Tests.Complex
             _nature().Select("Water", "Fire");
             CommonActionsData.CheckAction("Fire: condition changed to true");            
             string asd = TestSite.ActionsLog.TextElements.First().Value;
-            _cheсkAllLogMessages(new List<string>() { "Fire", "Water" });
+            _cheсkAllLogMessages(new List<string> { "Fire", "Water" });
         }
 
         [Test]
@@ -99,7 +99,7 @@ namespace JDI.UIWebTests.Tests.Complex
         {
             _nature().Select(1, 4);
             CommonActionsData.CheckAction("Fire: condition changed to true");
-            _cheсkAllLogMessages(new List<string>() { "Fire", "Water" });
+            _cheсkAllLogMessages(new List<string> { "Fire", "Water" });
         }
 
         [Test]
@@ -107,7 +107,7 @@ namespace JDI.UIWebTests.Tests.Complex
         {
             _nature().Select(Elements.Water, Elements.Fire);
             CommonActionsData.CheckAction("Fire: condition changed to true");
-            _cheсkAllLogMessages(new List<string>() { "Fire", "Water" });
+            _cheсkAllLogMessages(new List<string> { "Fire", "Water" });
         }
 
         [Test]
@@ -136,7 +136,7 @@ namespace JDI.UIWebTests.Tests.Complex
         {
             _nature().Check("Water", "Fire");
             CommonActionsData.CheckAction("Fire: condition changed to true");
-            _cheсkAllLogMessages(new List<string>() { "Fire", "Water" });
+            _cheсkAllLogMessages(new List<string> { "Fire", "Water" });
         }
 
         [Test]
@@ -144,7 +144,7 @@ namespace JDI.UIWebTests.Tests.Complex
         {
             _nature().Check(1, 4);
             CommonActionsData.CheckAction("Fire: condition changed to true");
-            _cheсkAllLogMessages(new List<string>() { "Fire", "Water" });
+            _cheсkAllLogMessages(new List<string> { "Fire", "Water" });
         }
 
         [Test]
@@ -152,14 +152,14 @@ namespace JDI.UIWebTests.Tests.Complex
         {
             _nature().Check(Elements.Water, Elements.Fire);
             CommonActionsData.CheckAction("Fire: condition changed to true");
-            _cheсkAllLogMessages(new List<string>() { "Fire", "Water" });
+            _cheсkAllLogMessages(new List<string> { "Fire", "Water" });
         }
 
         [Test]
         public void SelectAllTest()
         {
             _nature().SelectAll();            
-            _cheсkAllLogMessages(new List<string>() { "Fire", "Wind", "Earth", "Water" });
+            _cheсkAllLogMessages(new List<string> { "Fire", "Wind", "Earth", "Water" });
             _checkAllIsChecked(true);         
 
         }
@@ -168,7 +168,7 @@ namespace JDI.UIWebTests.Tests.Complex
         public void CheckAllTest()
         {
             _nature().CheckAll();
-            _cheсkAllLogMessages(new List<string>() { "Fire", "Wind", "Earth", "Water" });
+            _cheсkAllLogMessages(new List<string> { "Fire", "Wind", "Earth", "Water" });
             _checkAllIsChecked(true);
         }
 
@@ -202,7 +202,7 @@ namespace JDI.UIWebTests.Tests.Complex
         [Test]
         public void GetOptionsAsTextTest()
         {
-            new Check().AreEquals(_nature().OptionsAsText.ToString(), ALL_VALUES);            
+            new Check().AreEquals(_nature().OptionsAsText, ALL_VALUES);            
         }
 
         [Test]

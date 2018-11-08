@@ -250,7 +250,7 @@ namespace JDI.Matchers
                 }
                 return;
             }
-            throw new Exception($"Action 'action name' throws no exceptions. Expected ''");
+            throw new Exception("Action \'action name\' throws no exceptions. Expected \'\'");
         }
 
         public void HasNoException(Action action)

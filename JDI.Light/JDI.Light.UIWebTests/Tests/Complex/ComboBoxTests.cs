@@ -114,7 +114,7 @@ namespace JDI.UIWebTests.Tests.Complex
             {
                 MetalsControl.WaitSelected("Col");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw JDISettings.Exception("WaitSelected throws exception");
             }

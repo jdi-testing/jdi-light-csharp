@@ -37,7 +37,7 @@ namespace JDI.Core.Interfaces.Complex.Tables
             return action.Invoke(this);
         }
 
-        public T Get<T>(Func<string, T> nameAction, Func<Int32, T> numAction)
+        public T Get<T>(Func<string, T> nameAction, Func<int, T> numAction)
         {
             return HasName() ? nameAction.Invoke(name) : numAction.Invoke(num);
         }

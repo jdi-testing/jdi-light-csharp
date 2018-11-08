@@ -76,7 +76,7 @@ namespace JDI.Web.Selenium.DriverFactory
             {"Name", By.Name},
             {"PartialLinkText", By.PartialLinkText},
             {"TagName", By.TagName},
-            {"XPath", By.XPath},
+            {"XPath", By.XPath}
 
         };
     }

@@ -108,7 +108,7 @@ namespace JDI.Web.Selenium.Elements.WebActions
                 el =>
                 {
                     clearAction(el);
-                    inputAction(el, String.Join("\n", textLines));
+                    inputAction(el, string.Join("\n", textLines));
                 });
         }
 

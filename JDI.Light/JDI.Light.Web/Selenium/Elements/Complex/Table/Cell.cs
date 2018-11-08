@@ -43,11 +43,11 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
             GetValueFunc = w => TextAction(this);
         }
         
-        public string ColumnName => !String.IsNullOrEmpty(_columnName)
+        public string ColumnName => !string.IsNullOrEmpty(_columnName)
                     ? _columnName
                     : Table.Columns.Headers[ColumnNum - 1];
 
-        public string RowName => !String.IsNullOrEmpty(_rowName)
+        public string RowName => !string.IsNullOrEmpty(_rowName)
                     ? _rowName
                     : Table.Rows.Headers[RowNum - 1];
         protected Func<Cell, string> TextAction => c => Get().GetText;
@@ -92,9 +92,9 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
 
         public Cell UpdateData(string colName, string rowName)
         {
-            if (String.IsNullOrEmpty(_columnName) && !String.IsNullOrEmpty(colName))
+            if (string.IsNullOrEmpty(_columnName) && !string.IsNullOrEmpty(colName))
                 _columnName = colName;
-            if (String.IsNullOrEmpty(_rowName) && !String.IsNullOrEmpty(rowName))
+            if (string.IsNullOrEmpty(_rowName) && !string.IsNullOrEmpty(rowName))
                 _rowName = rowName;
             return this;
         }

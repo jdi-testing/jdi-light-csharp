@@ -7,6 +7,7 @@ using JDI.Core.Interfaces.Base;
 using JDI.Core.Interfaces.Settings;
 using JDI.Core.Settings;
 using JDI.Web.Selenium.Elements.Base;
+using JDI.Web.Settings;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
@@ -48,7 +49,7 @@ namespace JDI.Web.Selenium.DriverFactory
         {
             get
             {
-                if (String.IsNullOrEmpty(_currentDriverName))
+                if (string.IsNullOrEmpty(_currentDriverName))
                 {
                     _currentDriverName = _driverNamesDictionary[DriverTypes.Chrome];
                     RegisterLocalDriver(DriverTypes.Chrome);
@@ -74,11 +75,11 @@ namespace JDI.Web.Selenium.DriverFactory
         private readonly Dictionary<DriverTypes, Func<string, IWebDriver>> _driversDictionary = new Dictionary
             <DriverTypes, Func<string, IWebDriver>>
         {
-            {DriverTypes.Chrome, path => String.IsNullOrEmpty(path) ? new ChromeDriver() : new ChromeDriver(path)},
+            {DriverTypes.Chrome, path => string.IsNullOrEmpty(path) ? new ChromeDriver() : new ChromeDriver(path)},
             {DriverTypes.Firefox, path => new FirefoxDriver()},
             {
                 DriverTypes.IE,
-                path => String.IsNullOrEmpty(path) 
+                path => string.IsNullOrEmpty(path) 
                     ? new InternetExplorerDriver() 
                     : new InternetExplorerDriver(path)
             }
@@ -87,7 +88,7 @@ namespace JDI.Web.Selenium.DriverFactory
         private string RegisterLocalDriver(DriverTypes driverType)
         {
 
-            if (Settings.WebSettings.GetLatestDriver)
+            if (WebSettings.GetLatestDriver)
             {
                 if(!DriverManager.WebDriverManager.IsLocalVersionLatestVersion(driverType, DriverPath))
                 DriverPath = DriverManager.WebDriverManager.GetLatestVersion(driverType);
@@ -136,7 +137,7 @@ namespace JDI.Web.Selenium.DriverFactory
         {
             try
             {
-                if (!String.IsNullOrEmpty(CurrentDriverName))
+                if (!string.IsNullOrEmpty(CurrentDriverName))
                     return GetDriver(CurrentDriverName);
                 RegisterDriver(DriverTypes.Chrome);
                 return GetDriver(DriverTypes.Chrome);
@@ -226,7 +227,7 @@ namespace JDI.Web.Selenium.DriverFactory
             var capabilities = new DesiredCapabilities(new Dictionary<string, object>
             {
                 {"browserName", _driverNamesDictionary[driverType]},
-                {"version", String.Empty},
+                {"version", string.Empty},
                 {"javaScript", true}
             });
 

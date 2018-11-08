@@ -61,7 +61,7 @@ namespace JDI.UIWebTests.Tests.Common
         [Test]
         public void MultiKeyTest()
         {
-            foreach (char letter in TO_ADD_TEXT.ToCharArray())
+            foreach (char letter in TO_ADD_TEXT)
             {
                 TestSite.ContactFormPage.NameField.SendKeys(letter.ToString());
             }

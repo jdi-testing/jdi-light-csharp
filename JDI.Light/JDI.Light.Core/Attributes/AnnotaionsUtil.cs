@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
 using JDI.Core.Attributes.Functions;
 
@@ -7,10 +6,10 @@ namespace JDI.Core.Attributes
 {
     public  class AnnotaionsUtil
     {
-        public static String GetElementName(FieldInfo field)
+        public static string GetElementName(FieldInfo field)
         {
             var name = NameAttribute.GetName(field);
-            return String.IsNullOrEmpty(name)
+            return string.IsNullOrEmpty(name)
                 ? name
                 : SplitCamelCase(field.Name);
         }
@@ -26,14 +25,14 @@ namespace JDI.Core.Attributes
             return Functions.Functions.None;
         }
 
-        private static String SplitCamelCase(String camel)
+        private static string SplitCamelCase(string camel)
         {
             var result = camel.ToUpper().First().ToString();
             for (int i = 1; i < camel.Length - 1; i++)
                 result += (IsCapital(camel[i]) && !IsCapital(camel[i - 1]) ? " " : "") + camel[i];
             return result + camel[camel.Length - 1];
         }
-        private static Boolean IsCapital(char ch)
+        private static bool IsCapital(char ch)
         {
             return 'A' < ch && ch < 'Z';
         }
