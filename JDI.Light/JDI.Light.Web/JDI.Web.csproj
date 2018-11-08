@@ -9,7 +9,7 @@
     <ProjectGuid>{48A9B353-CB6B-4A15-84B4-B062B1C9BACC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>JDI_Web</RootNamespace>
+    <RootNamespace>JDI.Web</RootNamespace>
     <AssemblyName>JDI Web</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -196,17 +196,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\JDI.Light.Commons\JDI Commons.csproj">
+    <ProjectReference Include="..\JDI.Light.Commons\JDI.Commons.csproj">
       <Project>{c749644d-5901-4fd6-9add-06209bdc1cd2}</Project>
-      <Name>JDI Commons</Name>
+      <Name>JDI.Commons</Name>
     </ProjectReference>
-    <ProjectReference Include="..\JDI.Light.Core\JDI Core.csproj">
+    <ProjectReference Include="..\JDI.Light.Core\JDI.Core.csproj">
       <Project>{99ee5894-9f49-43e2-a129-7916d924d49c}</Project>
-      <Name>JDI Core</Name>
+      <Name>JDI.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\JDI.Light.Matchers\JDI Matchers.csproj">
+    <ProjectReference Include="..\JDI.Light.Matchers\JDI.Matchers.csproj">
       <Project>{822c29a7-c835-40ef-9e83-ae5388be9a1c}</Project>
-      <Name>JDI Matchers</Name>
+      <Name>JDI.Matchers</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

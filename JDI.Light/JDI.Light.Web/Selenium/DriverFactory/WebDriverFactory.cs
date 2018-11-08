@@ -14,7 +14,7 @@ using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Remote;
 using static System.String;
 using static Epam.JDI.Core.Settings.JDISettings;
-using static JDI_Web.Properties.Settings;
+using static JDI.Web.Properties.Settings;
 using Manager = WebDriverManager;
 
 namespace JDI_Web.Selenium.DriverFactory

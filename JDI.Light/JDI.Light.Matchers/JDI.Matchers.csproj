@@ -6,11 +6,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E49AC2C4-CDC7-4BFE-BFAC-D49830E0E748}</ProjectGuid>
+    <ProjectGuid>{822C29A7-C835-40EF-9E83-AE5388BE9A1C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>JDI_UIWebTests</RootNamespace>
-    <AssemblyName>JDI UIWebTests</AssemblyName>
+    <RootNamespace>JDI.Matchers</RootNamespace>
+    <AssemblyName>JDI Matchers</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -40,11 +40,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="nunit.framework, Version=3.11.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.11.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp, Version=106.5.4.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.5.4\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
     <Reference Include="WebDriver, Version=3.141.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Selenium.WebDriver.3.141.0\lib\net45\WebDriver.dll</HintPath>
     </Reference>
@@ -58,95 +73,31 @@
         <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
       </ItemGroup>
     </When>
-    <Otherwise>
-      <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
-      </ItemGroup>
-    </Otherwise>
+    <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="DataProviders\CheckBoxProvider.cs" />
-    <Compile Include="DataProviders\IndexesProvider.cs" />
-    <Compile Include="Entities\Contact.cs" />
-    <Compile Include="Entities\User.cs" />
-    <Compile Include="Enums\Buttons.cs" />
-    <Compile Include="Enums\Colors.cs" />
-    <Compile Include="Enums\Metals.cs" />
-    <Compile Include="Enums\Elements.cs" />
-    <Compile Include="Enums\Odds.cs" />
-    <Compile Include="Tests\Common\ButtonTests.cs" />
-    <Compile Include="Tests\Common\CheckBoxTests.cs" />
-    <Compile Include="Tests\Common\DatePickerTests.cs" />
-    <Compile Include="Tests\Common\ImagesTests.cs" />
-    <Compile Include="Tests\Common\LabelsTests.cs" />
-    <Compile Include="Tests\Common\LinkTests.cs" />
-    <Compile Include="Tests\Common\TextFieldsTests.cs" />
-    <Compile Include="Tests\Common\TextTests.cs" />
-    <Compile Include="Tests\Complex\CheckListTests.cs" />
-    <Compile Include="Tests\Complex\ComboBoxTests.cs" />
-    <Compile Include="Tests\Complex\CommonActionsData.cs" />
-    <Compile Include="Tests\Complex\DropdownExpandedTests.cs" />
-    <Compile Include="Tests\Complex\DropdownTests.cs" />
-    <Compile Include="Tests\Complex\RadioButtonsTests.cs" />
-    <Compile Include="Tests\Complex\SelectorTests.cs" />
-    <Compile Include="Tests\Complex\Table\Base\SupportTableTestBase.cs" />
-    <Compile Include="Tests\Complex\Table\GetCellTests.cs" />
-    <Compile Include="Tests\Complex\Table\NegativeTableTests.cs" />
-    <Compile Include="Tests\Complex\Table\SearchCellsTests.cs" />
-    <Compile Include="Tests\Complex\Table\SearchRowsColumnsTests.cs" />
-    <Compile Include="Tests\Complex\Table\SmokeTableTests.cs" />
-    <Compile Include="Tests\Complex\Table\WaiterTests.cs" />
-    <Compile Include="Tests\Composite\FormTests.cs" />
-    <Compile Include="Tests\Composite\FormTwoButtonsTests.cs" />
-    <Compile Include="Tests\Composite\PageTests.cs" />
-    <Compile Include="Tests\Composite\PaginationTests.cs" />
-    <Compile Include="Tests\Composite\SearchTests.cs" />
-    <Compile Include="Tests\TestBase.cs" />
-    <Compile Include="UIObjects\Pages\ContactPage.cs" />
-    <Compile Include="UIObjects\Pages\DatesPage.cs" />
-    <Compile Include="UIObjects\Pages\DynamicTablePage.cs" />
-    <Compile Include="UIObjects\Pages\HomePage.cs" />
-    <Compile Include="UIObjects\Pages\Login.cs" />
-    <Compile Include="UIObjects\Pages\MetalsColorsPage.cs" />
-    <Compile Include="UIObjects\Pages\SimpleTablePage.cs" />
-    <Compile Include="UIObjects\Pages\SortingTablePage.cs" />
-    <Compile Include="UIObjects\Pages\SupportPage.cs" />
-    <Compile Include="UIObjects\Sections\ContactForm.cs" />
-    <Compile Include="UIObjects\Sections\ContactFormTwoButtons.cs" />
-    <Compile Include="UIObjects\Sections\Footer.cs" />
-    <Compile Include="UIObjects\Sections\Header.cs" />
-    <Compile Include="UIObjects\Sections\JdiPaginator.cs" />
-    <Compile Include="UIObjects\Sections\JdiSearch.cs" />
-    <Compile Include="UIObjects\Sections\LoginForm.cs" />
-    <Compile Include="UIObjects\Sections\Summary.cs" />
-    <Compile Include="UIObjects\TestSite.cs" />
+    <Compile Include="NUnitMatcher.cs" />
+    <Compile Include="NUnit\Assert.cs" />
+    <Compile Include="BaseMatcher.cs" />
+    <Compile Include="NUnit\Check.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScreenshotState.cs" />
+    <Compile Include="StringExtentions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="JDI Matchers.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\JDI.Light.Commons\JDI Commons.csproj">
-      <Project>{C749644D-5901-4FD6-9ADD-06209BDC1CD2}</Project>
-      <Name>JDI Commons</Name>
+    <ProjectReference Include="..\JDI.Light.Commons\JDI.Commons.csproj">
+      <Project>{c749644d-5901-4fd6-9add-06209bdc1cd2}</Project>
+      <Name>JDI.Commons</Name>
     </ProjectReference>
-    <ProjectReference Include="..\JDI.Light.Core\JDI Core.csproj">
-      <Project>{99EE5894-9F49-43E2-A129-7916D924D49C}</Project>
-      <Name>JDI Core</Name>
+    <ProjectReference Include="..\JDI.Light.Core\JDI.Core.csproj">
+      <Project>{99ee5894-9f49-43e2-a129-7916d924d49c}</Project>
+      <Name>JDI.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\JDI.Light.Matchers\JDI Matchers.csproj">
-      <Project>{822C29A7-C835-40EF-9E83-AE5388BE9A1C}</Project>
-      <Project>{822c29a7-c835-40ef-9e83-ae5388be9a1c}</Project>
-      <Name>JDI Matchers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\JDI.Light.Web\JDI Web.csproj">
-      <Project>{48A9B353-CB6B-4A15-84B4-B062B1C9BACC}</Project>
-      <Name>JDI Web</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UIObjects\Forms\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

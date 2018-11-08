@@ -3,7 +3,7 @@ using Epam.JDI.Core.Interfaces.Settings;
 using Epam.JDI.Core.Logging;
 using JDI_Core.Interfaces.Settings;
 using static System.Int32;
-using static Epam.JDI.Core.Properties.Settings;
+using static JDI.Core.Properties.Settings;
 
 // ReSharper disable InconsistentNaming
 

@@ -9,7 +9,7 @@
     <ProjectGuid>{C749644D-5901-4FD6-9ADD-06209BDC1CD2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>JDI_Commons</RootNamespace>
+    <RootNamespace>JDI.Commons</RootNamespace>
     <AssemblyName>JDI Commons</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
