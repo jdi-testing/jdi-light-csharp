@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Epam.JDI.Core.Interfaces.Base;
 using Epam.JDI.Core.Interfaces.Common;
-using JDI_Core.Interfaces.Complex.Tables;
 using System.Runtime.Remoting.Messaging;
 
 namespace JDI_Core.Interfaces.Complex.Tables

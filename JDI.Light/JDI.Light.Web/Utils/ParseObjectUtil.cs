@@ -4,7 +4,6 @@ using System.Text.RegularExpressions;
 using JDI_Commons;
 using Epam.JDI.Core.Attributes;
 using JDI_Matchers;
-using RestSharp.Extensions;
 using static Epam.JDI.Core.ExceptionUtils;
 
 namespace JDI_Web.Utils

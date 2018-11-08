@@ -1,5 +1,4 @@
-﻿using Epam.JDI.Core.Logging;
-using Epam.JDI.Core.Settings;
+﻿using Epam.JDI.Core.Settings;
 using JDI_Web.Selenium.DriverFactory;
 using JDI_Web.Settings;
 using NUnit.Framework;

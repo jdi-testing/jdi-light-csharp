@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using Epam.JDI.Core.Settings;
 
 namespace Epam.JDI.Core

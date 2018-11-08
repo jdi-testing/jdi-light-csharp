@@ -1,7 +1,6 @@
 ﻿
 using System;
 using System.Linq;
-using JDI_Commons;
 
 namespace Epam.JDI.Core.Logging
 {

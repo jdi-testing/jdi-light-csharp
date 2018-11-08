@@ -2,7 +2,6 @@
 using Epam.JDI.Core.Settings;
 using JDI_Commons;
 using NUnit.Framework;
-using RestSharp.Extensions;
 
 namespace JDI_Matchers
 {

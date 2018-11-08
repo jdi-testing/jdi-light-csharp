@@ -1,6 +1,4 @@
 ﻿using System;
-using RestSharp;
-
 using Epam.JDI.Core.Logging;
 using Epam.JDI.Core.Settings;
 

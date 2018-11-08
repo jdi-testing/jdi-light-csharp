@@ -8,7 +8,6 @@ using Epam.JDI.Core.Interfaces.Complex;
 using Epam.JDI.Core.Interfaces.Settings;
 using Epam.JDI.Core.Logging;
 using Epam.JDI.Core.Settings;
-using JDI_Matchers;
 using JDI_Web.Selenium.Base;
 using JDI_Web.Selenium.DriverFactory;
 using JDI_Web.Selenium.Elements.Base;

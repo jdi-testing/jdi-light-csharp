@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RestSharp;
-
-using Epam.JDI.Core.Settings;
+﻿using Epam.JDI.Core.Settings;
 using JDI_Core.Preconditions;
 
 namespace JDI_Core.Interfaces

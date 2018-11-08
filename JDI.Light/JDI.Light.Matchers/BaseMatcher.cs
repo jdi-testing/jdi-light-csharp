@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using Epam.JDI.Core.Logging;
 using JDI_Commons;
-using RestSharp.Extensions;
 
 namespace JDI_Matchers
 {
