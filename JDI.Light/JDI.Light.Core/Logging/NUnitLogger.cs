@@ -12,7 +12,7 @@ namespace JDI.Core.Logging
             _writeDebug = writeDebug;
         }
 
-        private static string Dt => $"{DateTime.Now:hh:mm:ss dd.MM.yy}";
+        private static string Dt => $"{DateTime.Now:hh:mm:ss dd.MM.yy.fff}";
 
         public void Exception(Exception ex)
         {
