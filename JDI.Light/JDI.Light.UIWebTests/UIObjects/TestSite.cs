@@ -1,12 +1,10 @@
-﻿using JDI_UIWebTests.UIObjects.Pages;
-using JDI_UIWebTests.UIObjects.Sections;
-using JDI_Web.Attributes;
-using JDI_Web.Selenium.Elements.Complex;
-using JDI_Web.Selenium.Elements.Composite;
-using JDIWebTests.UIObjects.Sections;
+﻿using JDI.UIWebTests.UIObjects.Pages;
+using JDI.UIWebTests.UIObjects.Sections;
+using JDI.Web.Attributes;
+using JDI.Web.Selenium.Elements.Complex;
+using JDI.Web.Selenium.Elements.Composite;
 
-
-namespace JDI_UIWebTests.UIObjects
+namespace JDI.UIWebTests.UIObjects
 {
     [Site(Domain = "https://jdi-framework.github.io/tests")]
     public class TestSite:WebSite

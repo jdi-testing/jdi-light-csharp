@@ -2,7 +2,7 @@
 
 //using VIQA.SiteClasses;
 
-namespace JDI_Web.Attributes
+namespace JDI.Web.Attributes
 {
     [AttributeUsage(AttributeTargets.All, Inherited = false)]
     public class DemoSettingsAttribute : Attribute

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace JDI_Commons.Pairs
+namespace JDI.Commons.Pairs
 {
     public static class PairsExtentions
     {

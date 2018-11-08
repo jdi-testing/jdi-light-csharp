@@ -2,12 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using JDI_Web.Selenium.Base;
+using JDI.Core;
+using JDI.Core.Settings;
+using JDI.Web.Selenium.Base;
 using OpenQA.Selenium;
-using static Epam.JDI.Core.ExceptionUtils;
-using static Epam.JDI.Core.Settings.JDISettings;
 
-namespace JDI_Web.Selenium.Elements.Complex
+namespace JDI.Web.Selenium.Elements.Complex
 {
     public class Elements<T> : WebBaseElement, IList<T> where T : WebBaseElement
     {
@@ -21,10 +21,10 @@ namespace JDI_Web.Selenium.Elements.Complex
         {
             get
             {
-                if (UseCache && _elements != null && _elements.Any())
+                if (JDISettings.UseCache && _elements != null && _elements.Any())
                     return _elements;
                 return _elements = WebAvatar.SearchAll().WebElements
-                    .Select(el => ActionWithException(
+                    .Select(el => ExceptionUtils.ActionWithException(
                         () =>
                         {
                             var element = (T) Activator.CreateInstance(typeof(T), el);

@@ -1,7 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 
-namespace Epam.JDI.Core.Logging
+namespace JDI.Core.Logging
 {
     public class NUnitLogger : ILogger
     {

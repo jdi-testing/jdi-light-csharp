@@ -1,13 +1,13 @@
 ﻿using System.Linq;
-using JDI_Commons;
-using Epam.JDI.Core.Attributes.Functions;
-using Epam.JDI.Core.Interfaces.Common;
-using JDI_Web.Selenium.Base;
-using JDI_Web.Selenium.Elements.Common;
-using static Epam.JDI.Core.Settings.JDISettings;
-using static JDI_Web.Utils.WebExtensions;
+using JDI.Commons;
+using JDI.Core.Attributes.Functions;
+using JDI.Core.Interfaces.Common;
+using JDI.Core.Settings;
+using JDI.Web.Selenium.Base;
+using JDI.Web.Selenium.Elements.Common;
+using JDI.Web.Utils;
 
-namespace JDI_Web.Selenium.Attributes
+namespace JDI.Web.Selenium.Attributes
 {
     public class GetElementClass
     {
@@ -20,7 +20,7 @@ namespace JDI_Web.Selenium.Attributes
 
         public static bool NamesEqual(string name1, string name2)
         {
-            return Simplify(name1).Equals(Simplify(name2));
+            return WebExtensions.Simplify(name1).Equals(WebExtensions.Simplify(name2));
         }
         private static string ToButton(string buttonName)
         {
@@ -33,14 +33,14 @@ namespace JDI_Web.Selenium.Attributes
             switch (fields.Count)
             {
                 case 0:
-                    throw Exception($"Can't find ny buttons on form {ToString()}'");
+                    throw JDISettings.Exception($"Can't find ny buttons on form {ToString()}'");
                 case 1:
                     return (Button)fields[0].GetValue(_element);
                 default:
                     var buttons = fields.Select(f => (Button)f.GetValue(_element)).ToList();
                     var button = buttons.FirstOrDefault(b => NamesEqual(ToButton(b.Name), ToButton(buttonName)));
                     if (button == null)
-                        throw Exception($"Can't find button '{buttonName}' for Element '{ToString()}'." +
+                        throw JDISettings.Exception($"Can't find button '{buttonName}' for Element '{ToString()}'." +
                                         $"(Found following buttons: {buttons.Select(el => el.Name).Print()}).".FromNewLine());
                     return button;
             }
@@ -57,7 +57,7 @@ namespace JDI_Web.Selenium.Attributes
             var name = funcName.ToString();
             button = buttons.FirstOrDefault(b => NamesEqual(ToButton(b.Name), ToButton(name)));
             if (button == null)
-                throw Exception($"Can't find button '{name}' for Element '{ToString()}'");
+                throw JDISettings.Exception($"Can't find button '{name}' for Element '{ToString()}'");
             return button;
         }
 
@@ -65,7 +65,7 @@ namespace JDI_Web.Selenium.Attributes
         {
             var textField = this.GetFirstField(typeof(Text), typeof(IText));
             if (textField == null)
-                throw Exception($"Can't find Text Element '{ToString()}'");
+                throw JDISettings.Exception($"Can't find Text Element '{ToString()}'");
             return (Text) textField.GetValue(_element);
         }
     }

@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using JDI_Commons;
-using JDI_Matchers;
-using JDI_Web.Selenium.Base;
-using static System.String;
-using static Epam.JDI.Core.Settings.JDISettings;
+using JDI.Commons;
+using JDI.Core.Settings;
+using JDI.Matchers;
+using JDI.Web.Selenium.Base;
 
-namespace JDI_Web.Selenium.Elements.WebActions
+namespace JDI.Web.Selenium.Elements.WebActions
 {
     public class ElementsActions
     {
@@ -109,7 +108,7 @@ namespace JDI_Web.Selenium.Elements.WebActions
                 el =>
                 {
                     clearAction(el);
-                    inputAction(el, Join("\n", textLines));
+                    inputAction(el, String.Join("\n", textLines));
                 });
         }
 
@@ -192,7 +191,7 @@ namespace JDI_Web.Selenium.Elements.WebActions
         {
             var result = Invoker.DoJActionResult($"Are deselected '{names.Print()}'", 
                 el => names.All(name => waitSelectedAction(el, name)) );
-            Asserter.IsTrue(result);
+            JDISettings.Asserter.IsTrue(result);
         }
 
         public List<string> AreDeselected(Func<WebBaseElement, IList<string>> getNames, Func<string, bool> waitSelectedAction)
@@ -210,7 +209,7 @@ namespace JDI_Web.Selenium.Elements.WebActions
         {
             var result = Invoker.DoJActionResult($"Are deselected '{names.Print()}'", 
                 el => names.All(name => !waitSelectedAction(el, name)));
-            Asserter.IsTrue(result);
+            JDISettings.Asserter.IsTrue(result);
         }
     }
 }

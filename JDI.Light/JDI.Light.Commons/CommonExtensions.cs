@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace JDI_Commons
+namespace JDI.Commons
 {
     public static class CommonExtensions
     {

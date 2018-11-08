@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace JDI_Matchers.NUnit
+namespace JDI.Matchers.NUnit
 {
     public class Assert
     {

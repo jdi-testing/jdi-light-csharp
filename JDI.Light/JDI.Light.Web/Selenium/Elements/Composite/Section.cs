@@ -1,7 +1,7 @@
-﻿using Epam.JDI.Core.Interfaces.Base;
-using JDI_Web.Selenium.Elements.Base;
+﻿using JDI.Core.Interfaces.Base;
+using JDI.Web.Selenium.Elements.Base;
 
-namespace JDI_Web.Selenium.Elements.Composite
+namespace JDI.Web.Selenium.Elements.Composite
 {
     public class Section : WebElement, IComposite
     {

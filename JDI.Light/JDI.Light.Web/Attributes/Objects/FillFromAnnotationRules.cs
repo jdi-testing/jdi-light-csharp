@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using JDI_Web.Selenium.Elements.Complex;
-using JDI_Web.Selenium.Elements.Complex.Table;
-using static System.Int32;
-using static Epam.JDI.Core.Settings.JDISettings;
+﻿using System;
+using System.Linq;
+using JDI.Core.Settings;
+using JDI.Web.Selenium.Elements.Complex;
+using JDI.Web.Selenium.Elements.Complex.Table;
 
-namespace JDI_Web.Attributes.Objects
+namespace JDI.Web.Attributes.Objects
 {
     public class FillFromAnnotationRules
     {
@@ -29,9 +29,9 @@ namespace JDI_Web.Attributes.Objects
                 if (split.Length == 1)
                     split = jTable.Size.Split('X');
                 if (split.Length != 2)
-                    throw Exception("Can't setup Table from attribute. Bad size: " + jTable.Size);
-                table.SetColumnsCount(Parse(split[0]));
-                table.SetRowsCount(Parse(split[1]));
+                    throw JDISettings.Exception("Can't setup Table from attribute. Bad size: " + jTable.Size);
+                table.SetColumnsCount(Int32.Parse(split[0]));
+                table.SetRowsCount(Int32.Parse(split[1]));
             }
             table.HeaderType = jTable.HeaderType;
             table.UseCache(jTable.UseCache);

@@ -2,28 +2,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
-using Epam.JDI.Core.Base;
-using Epam.JDI.Core.Interfaces.Base;
-using Epam.JDI.Core.Interfaces.Complex;
-using JDI_Commons;
-using JDI_Web.Attributes;
-using JDI_Web.Attributes.Objects;
-using JDI_Web.Selenium.DriverFactory;
-using JDI_Web.Selenium.Elements.APIInteract;
-using JDI_Web.Selenium.Elements.Base;
-using JDI_Web.Selenium.Elements.Complex;
-using JDI_Web.Selenium.Elements.Complex.Table;
-using JDI_Web.Selenium.Elements.Complex.Table.Interfaces;
-using JDI_Web.Selenium.Elements.Composite;
-using JDI_Web.Settings;
+using JDI.Commons;
+using JDI.Core.Base;
+using JDI.Core.Interfaces.Base;
+using JDI.Core.Interfaces.Complex;
+using JDI.Core.Settings;
+using JDI.Web.Attributes;
+using JDI.Web.Attributes.Objects;
+using JDI.Web.Selenium.DriverFactory;
+using JDI.Web.Selenium.Elements.APIInteract;
+using JDI.Web.Selenium.Elements.Base;
+using JDI.Web.Selenium.Elements.Complex;
+using JDI.Web.Selenium.Elements.Complex.Table;
+using JDI.Web.Selenium.Elements.Complex.Table.Interfaces;
+using JDI.Web.Selenium.Elements.Composite;
+using JDI.Web.Settings;
 using OpenQA.Selenium;
 using RestSharp.Extensions;
-using static Epam.JDI.Core.Settings.JDIData;
-using static Epam.JDI.Core.Settings.JDISettings;
-using static JDI_Web.Attributes.Objects.FillFromAnnotationRules;
-using EUtils = Epam.JDI.Core.ExceptionUtils;
+using EUtils = JDI.Core.ExceptionUtils;
 
-namespace JDI_Web.Selenium.Base
+namespace JDI.Web.Selenium.Base
 {
     public class WebCascadeInit : CascadeInit
     {
@@ -74,7 +72,7 @@ namespace JDI_Web.Selenium.Base
             var newLocator = GetNewLocator(field);
             WebBaseElement instance = null;
             if (type == typeof(List<>))
-                throw Exception($"Can't init element {fieldName} with type 'List<>'. Please use 'IList<>' or 'Elements<>' instead");
+                throw JDISettings.Exception($"Can't init element {fieldName} with type 'List<>'. Please use 'IList<>' or 'Elements<>' instead");
             if (typeof(IList).IsAssignableFrom(type))
             {
                 var elementClass = type.GetGenericArguments()[0];
@@ -94,7 +92,7 @@ namespace JDI_Web.Selenium.Base
                 }
             }
             if (instance == null)
-                throw Exception("Unknown interface: " + type +
+                throw JDISettings.Exception("Unknown interface: " + type +
                                 ". Add relation interface -> class in VIElement.InterfaceTypeMap");
             instance.Avatar.DriverName = driverName;
             return instance;
@@ -108,7 +106,7 @@ namespace JDI_Web.Selenium.Base
         protected By GetNewLocatorFromField(FieldInfo field)
         {
             By byLocator = null;
-            var locatorGroup = APP_VERSION;
+            var locatorGroup = JDIData.APP_VERSION;
             if (locatorGroup == null)
                 return FindByAttribute.Locator(field) ?? field.GetFindsBy();
             var jFindBy = field.GetAttribute<JFindByAttribute>();
@@ -129,7 +127,7 @@ namespace JDI_Web.Selenium.Base
             var jTable = field.GetAttribute<JTableAttribute>();
             if (jTable == null || !typeof(ITable).IsAssignableFrom(field.FieldType))
                 return;
-            SetUpTable((Table)instance, jTable);
+            FillFromAnnotationRules.SetUpTable((Table)instance, jTable);
         }
 
         private static void SetUpMenuFromAnnotation(WebBaseElement instance, FieldInfo field)
@@ -137,14 +135,14 @@ namespace JDI_Web.Selenium.Base
             var jDropdown = field.GetAttribute<JDropdownAttribute>();
             if (jDropdown == null || !typeof(IDropDown).IsAssignableFrom(field.FieldType))
                 return;
-            SetUpDropdown((Dropdown)instance, jDropdown);
+            FillFromAnnotationRules.SetUpDropdown((Dropdown)instance, jDropdown);
         }
         private static void SetUpDropdownFromAnnotation(WebBaseElement instance, FieldInfo field)
         {
             var jMenu = field.GetAttribute<JMenuAttribute>();
             if (jMenu == null || !typeof(IMenu).IsAssignableFrom(field.FieldType))
                 return;
-            SetUpMenu((Menu)instance, jMenu);
+            FillFromAnnotationRules.SetUpMenu((Menu)instance, jMenu);
         }
         
     }

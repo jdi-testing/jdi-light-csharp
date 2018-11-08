@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using JDI_Web.Selenium.Elements.Composite;
+using JDI.Web.Selenium.Elements.Composite;
 
-namespace JDI_Web.Selenium.Base
+namespace JDI.Web.Selenium.Base
 {
     public class SiteFactory<TScope, TSite> 
         where TSite : WebSite 

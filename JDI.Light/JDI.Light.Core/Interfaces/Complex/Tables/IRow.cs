@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace JDI_Core.Interfaces.Complex.Tables
+namespace JDI.Core.Interfaces.Complex.Tables
 {
     public interface IRow : ITableLine
     {

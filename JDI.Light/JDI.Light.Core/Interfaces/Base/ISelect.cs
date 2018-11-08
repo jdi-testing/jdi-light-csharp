@@ -1,6 +1,6 @@
-﻿using Epam.JDI.Core.Interfaces.Common;
+﻿using JDI.Core.Interfaces.Common;
 
-namespace Epam.JDI.Core.Interfaces.Base
+namespace JDI.Core.Interfaces.Base
 {
     public interface ISelect: IClickable, IText, ISetValue
     {

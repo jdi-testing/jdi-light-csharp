@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using JDI_Web.Selenium.Base;
-using JDI_Web.Selenium.DriverFactory;
-using JDI_Web.Selenium.Elements.Base;
-using JDI_Web.Selenium.Elements.Complex.Table.Interfaces;
+using JDI.Web.Selenium.Base;
+using JDI.Web.Selenium.DriverFactory;
+using JDI.Web.Selenium.Elements.Base;
+using JDI.Web.Selenium.Elements.Complex.Table.Interfaces;
 using OpenQA.Selenium;
 
-namespace JDI_Web.Selenium.Elements.Complex.Table
+namespace JDI.Web.Selenium.Elements.Complex.Table
 {
     public enum ElementIndexType { Nums, Names }
     public abstract class TableLine : WebBaseElement, ITableLine

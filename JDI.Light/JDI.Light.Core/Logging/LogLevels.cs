@@ -1,4 +1,4 @@
-﻿namespace Epam.JDI.Core.Logging
+﻿namespace JDI.Core.Logging
 {
     public enum LogLevels
     {

@@ -1,32 +1,32 @@
-﻿using NUnit.Framework;
-using static Epam.JDI.Core.Settings.JDISettings;
-using static JDI_UIWebTests.UIObjects.TestSite;
-using JDI_UIWebTests.Entities;
-using static JDI_UIWebTests.Tests.Complex.CommonActionsData;
-using JDI_UIWebTests.UIObjects.Sections;
+﻿using JDI.Core.Settings;
+using JDI.UIWebTests.Entities;
+using JDI.UIWebTests.Tests.Complex;
+using JDI.UIWebTests.UIObjects;
+using JDI.UIWebTests.UIObjects.Sections;
+using NUnit.Framework;
 
-namespace JDI_UIWebTests.Tests.Composite
+namespace JDI.UIWebTests.Tests.Composite
 {
     public class FormTwoButtonsTests
     {
-        private ContactFormTwoButtons _contactForm = ContactFormPage.ContactFormTwoButtons;
+        private ContactFormTwoButtons _contactForm = TestSite.ContactFormPage.ContactFormTwoButtons;
 
         [SetUp]
         public void SetUp()
         {
-            Logger.Info("Navigating to Contact page.");
-            ContactFormPage.Open();
-            ContactFormPage.CheckTitle();
-            ContactFormPage.IsOpened();
-            Logger.Info("Setup method finished");
-            Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            JDISettings.Logger.Info("Navigating to Contact page.");
+            TestSite.ContactFormPage.Open();
+            TestSite.ContactFormPage.CheckTitle();
+            TestSite.ContactFormPage.IsOpened();
+            JDISettings.Logger.Info("Setup method finished");
+            JDISettings.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         [Test]
         public void SubmitSpecButtonStringTest()
         {
             _contactForm.Submit(Contact.DEFAULT_CONTACT, "calculate");
-            CheckResult("Summary: 3");
+            CommonActionsData.CheckResult("Summary: 3");
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace JDI_Core.Interfaces.Complex.Tables
+namespace JDI.Core.Interfaces.Complex.Tables
 {
     public class TableFilter
     {

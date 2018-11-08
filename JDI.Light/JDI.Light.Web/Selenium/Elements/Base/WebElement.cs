@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Linq;
-using JDI_Commons;
-using Epam.JDI.Core.Interfaces.Base;
-using Epam.JDI.Core.Logging;
-using Epam.JDI.Core.Settings;
-using JDI_Web.Selenium.Base;
+using JDI.Commons;
+using JDI.Core.Interfaces.Base;
+using JDI.Core.Logging;
+using JDI.Core.Settings;
+using JDI.Web.Selenium.Base;
+using JDI.Web.Settings;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-using static Epam.JDI.Core.ExceptionUtils;
-using static Epam.JDI.Core.Settings.JDISettings;
-using static JDI_Web.Settings.WebSettings;
+using ExceptionUtils = JDI.Core.ExceptionUtils;
 
-namespace JDI_Web.Selenium.Elements.Base
+namespace JDI.Web.Selenium.Elements.Base
 {
     public class WebElement : WebBaseElement, IElement
     {
@@ -21,7 +20,7 @@ namespace JDI_Web.Selenium.Elements.Base
         
         public static T Copy<T>(T element, By newLocator) where T : WebElement
         {
-            return ActionWithException(() => 
+            return ExceptionUtils.ActionWithException(() => 
             {
                 var result = (T)Activator.CreateInstance(element.GetType());
                 result.SetAvatar(element.WebAvatar, newLocator);
@@ -94,7 +93,7 @@ namespace JDI_Web.Selenium.Elements.Base
         public void Wait(Func<IWebElement, bool> resultFunc)
         {
             var result = Wait(resultFunc, r => r);
-            Asserter.IsTrue(result);
+            JDISettings.Asserter.IsTrue(result);
         }
 
         /**
@@ -115,7 +114,7 @@ namespace JDI_Web.Selenium.Elements.Base
         public void Wait(Func<IWebElement, bool> resultFunc, int timeoutSec)
         {
             var result = Wait(resultFunc, r => r, timeoutSec);
-            Asserter.IsTrue(result);
+            JDISettings.Asserter.IsTrue(result);
         }
 
         /**
@@ -134,12 +133,12 @@ namespace JDI_Web.Selenium.Elements.Base
 
         public void Highlight()
         {
-            WebDriverFactory.Highlight(this);
+            WebSettings.WebDriverFactory.Highlight(this);
         }
 
         public void Highlight(HighlightSettings highlightSettings)
         {
-            WebDriverFactory.Highlight(this, highlightSettings);
+            WebSettings.WebDriverFactory.Highlight(this, highlightSettings);
         }
 
         public void ClickWithKeys(params string[] keys)

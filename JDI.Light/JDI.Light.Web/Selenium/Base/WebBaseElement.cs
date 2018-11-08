@@ -1,22 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Epam.JDI.Core.Attributes;
-using Epam.JDI.Core.Attributes.Functions;
-using Epam.JDI.Core.Interfaces.Base;
-using Epam.JDI.Core.Logging;
-using JDI_Commons;
-using JDI_Web.Selenium.Attributes;
-using JDI_Web.Selenium.DriverFactory;
-using JDI_Web.Selenium.Elements.APIInteract;
-using JDI_Web.Selenium.Elements.WebActions;
+using JDI.Commons;
+using JDI.Core.Attributes;
+using JDI.Core.Attributes.Functions;
+using JDI.Core.Interfaces.Base;
+using JDI.Core.Logging;
+using JDI.Core.Settings;
+using JDI.Web.Selenium.Attributes;
+using JDI.Web.Selenium.DriverFactory;
+using JDI.Web.Selenium.Elements.APIInteract;
+using JDI.Web.Selenium.Elements.Base;
+using JDI.Web.Selenium.Elements.WebActions;
 using OpenQA.Selenium;
-using static System.String;
-using static Epam.JDI.Core.Logging.LogLevels;
-using static Epam.JDI.Core.Settings.JDISettings;
-using JDI_Web.Selenium.Elements.Base;
 
-namespace JDI_Web.Selenium.Base
+namespace JDI.Web.Selenium.Base
 {
     public class WebBaseElement : IBaseElement
     {
@@ -59,7 +57,7 @@ namespace JDI_Web.Selenium.Base
 
         public static Action<string, Action<string>> SetValueEmptyAction = (text, action) =>
         {
-            if (IsNullOrEmpty(text)) return;
+            if (String.IsNullOrEmpty(text)) return;
             action.Invoke(text.Equals("#CLEAR#") ? "" : text);
         };
 
@@ -130,24 +128,24 @@ namespace JDI_Web.Selenium.Base
 
         public void SetWaitTimeout(long mSeconds)
         {
-            Logger.Debug("Set wait timeout to " + mSeconds);
+            JDISettings.Logger.Debug("Set wait timeout to " + mSeconds);
             WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(mSeconds);
-            Timeouts.CurrentTimeoutSec = (int) (mSeconds/1000);
+            JDISettings.Timeouts.CurrentTimeoutSec = (int) (mSeconds/1000);
         }
 
         public void RestoreWaitTimeout()
         {
-            SetWaitTimeout(Timeouts.WaitElementSec);
+            SetWaitTimeout(JDISettings.Timeouts.WaitElementSec);
         }
 
-        public void DoAction(string actionName, Action action, LogLevels logLevels = Info)
+        public void DoAction(string actionName, Action action, LogLevels logLevels = LogLevels.Info)
         {
             LogAction(actionName, logLevels);
             action.Invoke();
         }
 
         public void DoActionResult<TResult>(string actionName, Func<TResult> action,
-            Func<TResult, string> logResult = null, LogLevels logLevels = Info)
+            Func<TResult, string> logResult = null, LogLevels logLevels = LogLevels.Info)
         {
             LogAction(actionName, logLevels);
             var res = action.Invoke();
@@ -158,19 +156,19 @@ namespace JDI_Web.Selenium.Base
 
         public void LogAction(string actionName, LogLevels level)
         {
-            ToLog(Format(ShortLogMessagesFormat
+            JDISettings.ToLog(String.Format(JDISettings.ShortLogMessagesFormat
                 ? "{0} for {1}"
                 : "Perform action '{0}' with WebElement ({1})", actionName, ToString()), level);
         }
 
         public void LogAction(string actionName)
         {
-            LogAction(actionName, Info);
+            LogAction(actionName, LogLevels.Info);
         }
 
         public new string ToString()
         {
-            return ShortLogMessagesFormat
+            return JDISettings.ShortLogMessagesFormat
                 ? $"{TypeName} '{Name}' ({ParentTypeName}.{VarName}; {Avatar})"
                 : $"Name: '{Name}', Type: '{TypeName}' In: '{ParentTypeName}', {Avatar}";
         }

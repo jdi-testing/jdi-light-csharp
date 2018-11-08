@@ -1,37 +1,37 @@
-﻿using Epam.JDI.Core.Interfaces.Common;
-using JDI_Matchers.NUnit;
+﻿using JDI.Core.Interfaces.Common;
+using JDI.Core.Settings;
+using JDI.Matchers.NUnit;
+using JDI.UIWebTests.UIObjects;
 using NUnit.Framework;
-using static Epam.JDI.Core.Settings.JDISettings;
-using static JDI_UIWebTests.UIObjects.TestSite;
 
-namespace JDI_UIWebTests.Tests.Common
+namespace JDI.UIWebTests.Tests.Common
 {
     public class LinkTests
     {
-        private ILink _link = Footer.About;
+        private ILink _link = TestSite.Footer.About;
 
         [SetUp]
         public void SetUp()
         {
-            Logger.Info("Navigating to Metals and Colors page.");
-            HomePage.Open();
-            HomePage.CheckTitle();
-            HomePage.IsOpened();
-            Logger.Info("Setup method finished");
-            Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            JDISettings.Logger.Info("Navigating to Metals and Colors page.");
+            TestSite.HomePage.Open();
+            TestSite.HomePage.CheckTitle();
+            TestSite.HomePage.IsOpened();
+            JDISettings.Logger.Info("Setup method finished");
+            JDISettings.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         [Test]
         public void ClickTest()
         {
             _link.Click();
-            SupportPage.IsOpened();
+            TestSite.SupportPage.IsOpened();
         }
 
         [Test]
         public void GetReferenceTest()
         {
-            new Check().AreEquals(_link.GetReference(), SupportPage.Url);            
+            new Check().AreEquals(_link.GetReference(), TestSite.SupportPage.Url);            
         }
 
         /*

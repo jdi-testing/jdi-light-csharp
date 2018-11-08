@@ -1,11 +1,11 @@
 ﻿using System;
-using Epam.JDI.Core.Base;
-using JDI_Web.Selenium.Base;
-using JDI_Web.Selenium.DriverFactory;
-using JDI_Web.Settings;
+using JDI.Core.Base;
+using JDI.Web.Selenium.Base;
+using JDI.Web.Selenium.DriverFactory;
+using JDI.Web.Settings;
 using OpenQA.Selenium;
 
-namespace JDI_Web.Selenium.Elements.Composite
+namespace JDI.Web.Selenium.Elements.Composite
 {
     public class WebSite : Application
     {

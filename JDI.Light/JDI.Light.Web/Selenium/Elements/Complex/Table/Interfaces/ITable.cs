@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Epam.JDI.Core.Interfaces.Common;
-using JDI_Web.Selenium.Elements.Base;
+using JDI.Core.Interfaces.Common;
+using JDI.Web.Selenium.Elements.Base;
 
-namespace JDI_Web.Selenium.Elements.Complex.Table.Interfaces
+namespace JDI.Web.Selenium.Elements.Complex.Table.Interfaces
 {
     public interface ITable : IText
     {

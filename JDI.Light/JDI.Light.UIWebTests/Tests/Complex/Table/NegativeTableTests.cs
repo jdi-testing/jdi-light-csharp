@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using JDI_UIWebTests.DataProviders;
-using JDI_UIWebTests.Tests.Complex.Table.Base;
+using JDI.UIWebTests.DataProviders;
+using JDI.UIWebTests.Tests.Complex.Table.Base;
 using NUnit.Framework;
 
-namespace JDI_UIWebTests.Tests.Complex.Table
+namespace JDI.UIWebTests.Tests.Complex.Table
 {
     [TestFixture]
     class NegativeTableTests : SupportTableTestBase

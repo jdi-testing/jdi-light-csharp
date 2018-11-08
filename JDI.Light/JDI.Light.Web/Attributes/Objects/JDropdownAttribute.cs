@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JDI_Web.Attributes.Objects
+namespace JDI.Web.Attributes.Objects
 {
     [AttributeUsage(AttributeTargets.All, Inherited = false)]
     public class JDropdownAttribute : Attribute

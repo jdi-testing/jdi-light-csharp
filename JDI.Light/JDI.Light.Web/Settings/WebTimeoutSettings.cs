@@ -1,6 +1,6 @@
-﻿using Epam.JDI.Core.Settings;
+﻿using JDI.Core.Settings;
 
-namespace JDI_Web.Settings
+namespace JDI.Web.Settings
 {
     public class WebTimeoutSettings : TimeoutSettings
     {

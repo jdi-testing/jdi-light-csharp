@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using static System.Char;
 
-namespace Epam.JDI.Core.Attributes
+namespace JDI.Core.Attributes
 {
     [AttributeUsage(AttributeTargets.All, Inherited = false)]
     public class NameAttribute : Attribute
@@ -34,7 +33,7 @@ namespace Epam.JDI.Core.Attributes
         {
             var result = camel.ToUpper().FirstOrDefault().ToString();
             for (var i = 1; i < camel.Length - 1; i++)
-                result += (IsUpper(camel[i]) && !IsUpper(camel[i - 1]) ? " " : "") + camel[i];
+                result += (Char.IsUpper(camel[i]) && !Char.IsUpper(camel[i - 1]) ? " " : "") + camel[i];
             return result + camel[camel.Length - 1];
         }
     }

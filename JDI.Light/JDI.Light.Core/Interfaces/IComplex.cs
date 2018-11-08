@@ -1,4 +1,4 @@
-﻿namespace Epam.JDI.Core.Interfaces
+﻿namespace JDI.Core.Interfaces
 {
     public interface IComplex
     {

@@ -1,16 +1,15 @@
-﻿using Epam.JDI.Core.Interfaces.Common;
-using Epam.JDI.Core.Interfaces.Complex;
-using JDI_UIWebTests.Enums;
-using JDI_UIWebTests.UIObjects.Sections;
-using JDI_Web.Attributes;
-using JDI_Web.Selenium.Elements.Base;
-using JDI_Web.Selenium.Elements.Common;
-using JDI_Web.Selenium.Elements.Complex;
-using JDI_Web.Selenium.Elements.Composite;
+﻿using JDI.Core.Interfaces.Common;
+using JDI.Core.Interfaces.Complex;
+using JDI.UIWebTests.Enums;
+using JDI.UIWebTests.UIObjects.Sections;
+using JDI.Web.Attributes;
+using JDI.Web.Selenium.Elements.Base;
+using JDI.Web.Selenium.Elements.Common;
+using JDI.Web.Selenium.Elements.Complex;
+using JDI.Web.Selenium.Elements.Composite;
 using OpenQA.Selenium;
 
-
-namespace JDI_UIWebTests.UIObjects.Pages
+namespace JDI.UIWebTests.UIObjects.Pages
 {
     public class MetalsColorsPage : WebPage
     {       

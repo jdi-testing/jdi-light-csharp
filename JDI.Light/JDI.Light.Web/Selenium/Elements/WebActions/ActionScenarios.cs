@@ -1,12 +1,12 @@
 ﻿using System;
-using Epam.JDI.Core.Logging;
-using Epam.JDI.Core.Reporting;
-using Epam.JDI.Core.Settings;
-using JDI_Web.Selenium.Base;
-using Timer = JDI_Commons.Timer;
-using static Epam.JDI.Core.ExceptionUtils;
+using JDI.Core;
+using JDI.Core.Logging;
+using JDI.Core.Reporting;
+using JDI.Core.Settings;
+using JDI.Web.Selenium.Base;
+using Timer = JDI.Commons.Timer;
 
-namespace JDI_Web.Selenium.Elements.WebActions
+namespace JDI.Web.Selenium.Elements.WebActions
 {
     public class ActionScenarios
     {
@@ -35,7 +35,7 @@ namespace JDI_Web.Selenium.Elements.WebActions
             _element.LogAction(actionName);
             var timer = new Timer();
             var result =
-                ActionWithException(() => new Timer(JDISettings.Timeouts.CurrentTimeoutSec)
+                ExceptionUtils.ActionWithException(() => new Timer(JDISettings.Timeouts.CurrentTimeoutSec)
                     .GetResultByCondition(() => action.Invoke(_element), res => true),
                     ex => $"Do action {actionName} failed. Can't got result. Reason: {ex}");
             if (result == null)

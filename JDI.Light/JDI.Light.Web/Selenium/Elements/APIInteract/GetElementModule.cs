@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using JDI_Commons;
-using Epam.JDI.Core.Interfaces.Base;
-using JDI_Web.Selenium.DriverFactory;
-using JDI_Web.Selenium.Base;
-using JDI_Web.Selenium.Elements.Base;
-using JDI_Web.Settings;
+using JDI.Commons;
+using JDI.Core.Interfaces.Base;
+using JDI.Core.Settings;
+using JDI.Web.Selenium.Base;
+using JDI.Web.Selenium.DriverFactory;
+using JDI.Web.Selenium.Elements.Base;
+using JDI.Web.Settings;
 using OpenQA.Selenium;
-using static System.String;
-using static Epam.JDI.Core.Settings.JDISettings;
-using WebDriverFactory = JDI_Web.Selenium.DriverFactory.WebDriverFactory;
+using WebDriverFactory = JDI.Web.Selenium.DriverFactory.WebDriverFactory;
 
-namespace JDI_Web.Selenium.Elements.APIInteract
+namespace JDI.Web.Selenium.Elements.APIInteract
 {
     public class GetElementModule : IAvatar
     {
@@ -30,11 +29,11 @@ namespace JDI_Web.Selenium.Elements.APIInteract
         {
             Element = element;
             ByLocator = byLocator;
-            if (IsNullOrEmpty(DriverName) && WebSettings.WebDriverFactory != null && !IsNullOrEmpty(WebSettings.WebDriverFactory.CurrentDriverName))
+            if (String.IsNullOrEmpty(DriverName) && WebSettings.WebDriverFactory != null && !String.IsNullOrEmpty(WebSettings.WebDriverFactory.CurrentDriverName))
                 DriverName = WebSettings.WebDriverFactory.CurrentDriverName;
         }
 
-        public Timer Timer => new Timer(Timeouts.CurrentTimeoutSec*1000);
+        public Timer Timer => new Timer(JDISettings.Timeouts.CurrentTimeoutSec*1000);
         public bool HasLocator => ByLocator != null;
         private IWebElement _webElement;
         private List<IWebElement> _webElements;
@@ -63,9 +62,9 @@ namespace JDI_Web.Selenium.Elements.APIInteract
         {
             get
             {
-                Logger.Debug($"Get Web Element: {Element}");
+                JDISettings.Logger.Debug($"Get Web Element: {Element}");
                 var element = Timer.GetResultByCondition(GetWebElemetAction, el => el != null);
-                Logger.Debug("OneElement found");
+                JDISettings.Logger.Debug("OneElement found");
                 return element;
             }
             set => _webElement = value;
@@ -75,9 +74,9 @@ namespace JDI_Web.Selenium.Elements.APIInteract
         {
             get
             {
-                Logger.Debug($"Get Web Elements: {Element}");
+                JDISettings.Logger.Debug($"Get Web Elements: {Element}");
                 var elements = GetWebElemetsAction();
-                Logger.Debug($"Found {elements.Count} elements");
+                JDISettings.Logger.Debug($"Found {elements.Count} elements");
                 return elements;
             }
             set => _webElements = value;
@@ -99,17 +98,17 @@ namespace JDI_Web.Selenium.Elements.APIInteract
         {
             if (_webElement != null)
                 return _webElement;
-            var timeout = Timeouts.CurrentTimeoutSec;
+            var timeout = JDISettings.Timeouts.CurrentTimeoutSec;
             var result = GetWebElemetsAction();
             switch (result.Count)
             {
                 case 0:
-                    throw Exception($"Can't find Element '{Element}' during {timeout} seconds");
+                    throw JDISettings.Exception($"Can't find Element '{Element}' during {timeout} seconds");
                 case 1:
                     return result[0];
                 default:
                     if (WebDriverFactory.OnlyOneElementAllowedInSearch)
-                        throw Exception(
+                        throw JDISettings.Exception(
                             $"Find {result.Count} elements instead of one for Element '{Element}' during {timeout} seconds");
                     return result[0];
             }
@@ -122,9 +121,9 @@ namespace JDI_Web.Selenium.Elements.APIInteract
             var result = Timer.GetResultByCondition(
                     SearchElements,
                     els => els.Count(GetSearchCriteria) > 0);
-            Timeouts.DropTimeouts();
+            JDISettings.Timeouts.DropTimeouts();
             if (result == null)
-                throw Exception("Can't get Web Elements");
+                throw JDISettings.Exception("Can't get Web Elements");
             return result.Where(GetSearchCriteria).ToList();
 
         }

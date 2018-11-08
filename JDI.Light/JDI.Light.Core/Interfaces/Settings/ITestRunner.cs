@@ -1,4 +1,4 @@
-﻿namespace JDI_Core.Interfaces.Settings
+﻿namespace JDI.Core.Interfaces.Settings
 {
     public interface ITestRunner
     {

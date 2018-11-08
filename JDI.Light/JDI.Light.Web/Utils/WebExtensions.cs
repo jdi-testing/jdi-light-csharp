@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace JDI_Web.Utils
+namespace JDI.Web.Utils
 {
     public static class WebExtensions
     {

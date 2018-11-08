@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using JDI_Commons;
-using JDI_Web.Selenium.Base;
-using JDI_Web.Selenium.Elements.Complex.Table.Interfaces;
-using JDI_Web.Settings;
-using static JDI_Web.Selenium.Attributes.GetElementClass;
+using JDI.Commons;
+using JDI.Web.Selenium.Attributes;
+using JDI.Web.Selenium.Base;
+using JDI.Web.Selenium.Elements.Complex.Table.Interfaces;
+using JDI.Web.Settings;
 
-namespace JDI_Web.Selenium.Elements.Complex.Table
+namespace JDI.Web.Selenium.Elements.Complex.Table
 {
     public class EntityTable<TEntity, TRow> : EntityTable<TEntity>
     {
@@ -23,7 +23,7 @@ namespace JDI_Web.Selenium.Elements.Complex.Table
         }
         private static void SetRowField(TRow entity, List<FieldInfo> fields, string fieldName, ICell cell)
         {
-            var field = fields.FirstOrDefault(f => NamesEqual(f.Name, fieldName));
+            var field = fields.FirstOrDefault(f => GetElementClass.NamesEqual(f.Name, fieldName));
             var clazz = field?.FieldType;
             if (clazz == null) return;
             var value = (WebBaseElement) Activator.CreateInstance(clazz.IsInterface
@@ -74,7 +74,7 @@ namespace JDI_Web.Selenium.Elements.Complex.Table
 
         private static void SetEntityField(TEntity entity, List<FieldInfo> fields, string fieldName, string value)
         {
-            var field = fields.FirstOrDefault(f => NamesEqual(f.Name, fieldName));
+            var field = fields.FirstOrDefault(f => GetElementClass.NamesEqual(f.Name, fieldName));
             field?.SetValue(entity, value.ConvertStringToType(field));
         }
         

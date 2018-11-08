@@ -1,6 +1,6 @@
-using Epam.JDI.Core.Interfaces.Common;
+using JDI.Core.Interfaces.Common;
 
-namespace JDI_Web.Selenium.Elements.Complex.Table
+namespace JDI.Web.Selenium.Elements.Complex.Table
 {
     public class FilterDsl
     {

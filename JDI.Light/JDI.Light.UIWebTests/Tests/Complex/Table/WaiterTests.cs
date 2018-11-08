@@ -1,12 +1,11 @@
-﻿using JDI_Matchers.NUnit;
-using JDI_UIWebTests.Tests.Complex.Table.Base;
-using JDI_Web.Selenium.Elements.Complex.Table;
+﻿using JDI.Matchers.NUnit;
+using JDI.UIWebTests.Tests.Complex.Table.Base;
+using JDI.UIWebTests.UIObjects;
+using JDI.Web.Selenium.Elements.Complex.Table;
 using NUnit.Framework;
-using static JDI_UIWebTests.Tests.Complex.CommonActionsData;
-using static JDI_UIWebTests.UIObjects.TestSite;
-using Assert = JDI_Matchers.NUnit.Assert;
+using Assert = JDI.Matchers.NUnit.Assert;
 
-namespace JDI_UIWebTests.Tests.Complex.Table
+namespace JDI.UIWebTests.Tests.Complex.Table
 {
     [TestFixture]
     class WaiterTests : SupportTableTestBase
@@ -44,40 +43,40 @@ namespace JDI_UIWebTests.Tests.Complex.Table
         [Test]
         public void CellWaitTextTest()
         {
-            HomePage.IsOpened();
-            RunParallel(() => SupportPage.IsOpened());
-            CheckText(() => Table.Cell(2, 2).WaitText("TestNG, JUnit, Custom"), "TestNG, JUnit, Custom");
+            TestSite.HomePage.IsOpened();
+            CommonActionsData.RunParallel(() => TestSite.SupportPage.IsOpened());
+            CommonActionsData.CheckText(() => Table.Cell(2, 2).WaitText("TestNG, JUnit, Custom"), "TestNG, JUnit, Custom");
         }
 
         [Test]
         public void CellWaitMatchTextTest()
         {
-            HomePage.IsOpened();
-            RunParallel(() => SupportPage.IsOpened());
-            CheckText(() => Table.Cell(2, 2).WaitMatchText("[a-zA-Z, ]*JUnit,[a-zA-Z ]*"), "TestNG, JUnit, Custom");
+            TestSite.HomePage.IsOpened();
+            CommonActionsData.RunParallel(() => TestSite.SupportPage.IsOpened());
+            CommonActionsData.CheckText(() => Table.Cell(2, 2).WaitMatchText("[a-zA-Z, ]*JUnit,[a-zA-Z ]*"), "TestNG, JUnit, Custom");
         }
 
         [Test]
         public void WaitHaveRowsTest()
         {
-            HomePage.IsOpened();
-            RunParallel(() => SupportPage.IsOpened());
+            TestSite.HomePage.IsOpened();
+            CommonActionsData.RunParallel(() => TestSite.SupportPage.IsOpened());
             Assert.IsTrue(Table.WaitHaveRows());
         }
 
         [Test]
         public void WaitRowsTest()
         {
-            HomePage.IsOpened();
-            RunParallel(() => SupportPage.IsOpened());
+            TestSite.HomePage.IsOpened();
+            CommonActionsData.RunParallel(() => TestSite.SupportPage.IsOpened());
             Assert.IsTrue(Table.WaitRows(6));
         }
 
         [Test]
         public void WaitRowsTimeoutTest()
         {
-            HomePage.IsOpened();
-            RunParallel(() => SupportPage.IsOpened());
+            TestSite.HomePage.IsOpened();
+            CommonActionsData.RunParallel(() => TestSite.SupportPage.IsOpened());
             Assert.IsFalse(Table.WaitRows(7));
         }
     }

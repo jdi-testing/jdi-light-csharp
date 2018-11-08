@@ -1,9 +1,9 @@
 ﻿using System;
-using Epam.JDI.Core.Interfaces.Common;
-using JDI_Web.Selenium.Base;
+using JDI.Core.Interfaces.Common;
+using JDI.Web.Selenium.Base;
 using OpenQA.Selenium;
 
-namespace JDI_Web.Selenium.Elements.Base
+namespace JDI.Web.Selenium.Elements.Base
 {
     public class ClickableText : Clickable, IText
     {

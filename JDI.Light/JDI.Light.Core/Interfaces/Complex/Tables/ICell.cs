@@ -1,7 +1,7 @@
 ﻿using System;
-using Epam.JDI.Core.Interfaces.Base;
+using JDI.Core.Interfaces.Base;
 
-namespace JDI_Core.Interfaces.Complex.Tables
+namespace JDI.Core.Interfaces.Complex.Tables
 {
     public interface ICell : ISelect
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Epam.JDI.Core.Interfaces.Base
+namespace JDI.Core.Interfaces.Base
 {
     public interface IMultiSelector<in TEnum>: IBaseElement, ISetValue
         where TEnum  : IConvertible

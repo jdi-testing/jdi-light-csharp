@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace JDI_Commons.Pairs
+namespace JDI.Commons.Pairs
 {
     public class Pairs : Pairs<string, string>
     {

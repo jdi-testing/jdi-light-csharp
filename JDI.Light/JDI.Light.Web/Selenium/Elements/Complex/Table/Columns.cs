@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using JDI_Commons;
-using JDI_Web.Selenium.Elements.Complex.Table.Interfaces;
+using JDI.Commons;
+using JDI.Core.Settings;
+using JDI.Web.Selenium.Elements.Complex.Table.Interfaces;
 using OpenQA.Selenium;
-using static Epam.JDI.Core.Settings.JDISettings;
-using static Epam.JDI.Core.ExceptionUtils;
+using ExceptionUtils = JDI.Core.ExceptionUtils;
 
-namespace JDI_Web.Selenium.Elements.Complex.Table
+namespace JDI.Web.Selenium.Elements.Complex.Table
 {
     public class Columns : TableLine
     {
@@ -27,12 +27,12 @@ namespace JDI_Web.Selenium.Elements.Complex.Table
         
         public Dictionary<string, ICell> GetColumn(string colName)
         {
-            return ActionWithException(() =>
+            return ExceptionUtils.ActionWithException(() =>
             {
                 var rowsCount = Table.Rows.Count;
                 var webColumn = Timer.GetResultByCondition(() => GetLineAction(colName), els => els.Count >= rowsCount);
                 if (webColumn == null)
-                    throw Exception($"Table has only {GetLineAction(colName).Count} columns " +
+                    throw JDISettings.Exception($"Table has only {GetLineAction(colName).Count} columns " +
                                     $"but expected at least {rowsCount}");
 
                 var result = new Dictionary<string, ICell>();
@@ -59,7 +59,7 @@ namespace JDI_Web.Selenium.Elements.Complex.Table
         public IList<string> GetColumnValue(string colName)
         {
             return
-                ActionWithException(
+                ExceptionUtils.ActionWithException(
                     () => GetLineAction(colName).Select(el => el.Text).ToList(), 
                     ex => $"Can't Get Column '{colName}'. Reason: {ex}");
         }
@@ -77,14 +77,14 @@ namespace JDI_Web.Selenium.Elements.Complex.Table
         public Dictionary<string, ICell> GetColumn(int colNum)
         {
             if (Count < 0 || Count < colNum || colNum <= 0)
-                throw Exception($"Can't Get Column '{colNum}'. [num] > RowsCount({Count}).");
-            return ActionWithException(() =>
+                throw JDISettings.Exception($"Can't Get Column '{colNum}'. [num] > RowsCount({Count}).");
+            return ExceptionUtils.ActionWithException(() =>
             {
                 var rowsCount = Table.Rows.Count;
                 var webColumn = Timer.GetResultByCondition(() => GetLineAction(colNum),
                     els => els.Count >= rowsCount);
                 if (webColumn == null)
-                    throw Exception($"Table has only {GetLineAction(colNum).Count} columns " +
+                    throw JDISettings.Exception($"Table has only {GetLineAction(colNum).Count} columns " +
                                     $"but expected at least {rowsCount}");
                 var result = new Dictionary<string, ICell>();
                 if (webColumn.Count == rowsCount)
@@ -115,8 +115,8 @@ namespace JDI_Web.Selenium.Elements.Complex.Table
         public IList<string> GetColumnValue(int colNum)
         {
             if (Count < 0 || Count < colNum || colNum <= 0)
-                throw Exception($"Can't Get Column '{colNum}'. [num] > RowsCount({Count}).");
-            return ActionWithException(() => GetLineAction(colNum).Select(el => el.Text).ToList(),
+                throw JDISettings.Exception($"Can't Get Column '{colNum}'. [num] > RowsCount({Count}).");
+            return ExceptionUtils.ActionWithException(() => GetLineAction(colNum).Select(el => el.Text).ToList(),
                 ex => $"Can't Get Column '{colNum}'. Reason: {ex}");
         }
 

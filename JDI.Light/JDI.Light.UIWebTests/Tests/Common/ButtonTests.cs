@@ -1,24 +1,24 @@
-﻿using NUnit.Framework;
-using static Epam.JDI.Core.Settings.JDISettings;
-using static JDI_UIWebTests.UIObjects.TestSite;
-using Epam.JDI.Core.Interfaces.Common;
-using JDI_UIWebTests.Tests.Complex;
+﻿using JDI.Core.Interfaces.Common;
+using JDI.Core.Settings;
+using JDI.UIWebTests.Tests.Complex;
+using JDI.UIWebTests.UIObjects;
+using NUnit.Framework;
 
-namespace JDI_UIWebTests.Tests.Common
+namespace JDI.UIWebTests.Tests.Common
 {
     public class ButtonTests
     {
-        private IButton _button = MetalsColorsPage.CalculateButton;
+        private IButton _button = TestSite.MetalsColorsPage.CalculateButton;
 
         [SetUp]
         public void SetUp()
         {
-            Logger.Info("Navigating to Metals and Colors page.");
-            MetalsColorsPage.Open();
-            MetalsColorsPage.CheckTitle();
-            MetalsColorsPage.IsOpened();
-            Logger.Info("Setup method finished");
-            Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);            
+            JDISettings.Logger.Info("Navigating to Metals and Colors page.");
+            TestSite.MetalsColorsPage.Open();
+            TestSite.MetalsColorsPage.CheckTitle();
+            TestSite.MetalsColorsPage.IsOpened();
+            JDISettings.Logger.Info("Setup method finished");
+            JDISettings.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);            
         }
 
         [Test]

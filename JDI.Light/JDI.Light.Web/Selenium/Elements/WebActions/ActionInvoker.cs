@@ -1,12 +1,12 @@
 ﻿using System;
-using JDI_Commons;
-using Epam.JDI.Core.Logging;
-using Epam.JDI.Core.Settings;
-using JDI_Web.Selenium.Base;
-using JDI_Web.Selenium.Elements.Base;
-using static Epam.JDI.Core.ExceptionUtils;
+using JDI.Commons;
+using JDI.Core.Logging;
+using JDI.Core.Settings;
+using JDI.Web.Selenium.Base;
+using JDI.Web.Selenium.Elements.Base;
+using ExceptionUtils = JDI.Core.ExceptionUtils;
 
-namespace JDI_Web.Selenium.Elements.WebActions
+namespace JDI.Web.Selenium.Elements.WebActions
 {
     public class ActionInvoker
     {
@@ -22,7 +22,7 @@ namespace JDI_Web.Selenium.Elements.WebActions
         public TResult DoJActionResult<TResult>(string actionName, Func<WebBaseElement, TResult> action,
             Func<TResult, string> logResult = null, LogLevels level = LogLevels.Info)
         {
-            return ActionWithException(() =>
+            return ExceptionUtils.ActionWithException(() =>
             {
                 ProcessDemoMode();
                 return ActionScenrios.SetElement(_element).ResultScenario(actionName, action, logResult, level);

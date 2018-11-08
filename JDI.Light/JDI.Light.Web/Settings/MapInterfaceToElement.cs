@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using JDI_Commons;
+using JDI.Commons;
 
-namespace JDI_Web.Settings
+namespace JDI.Web.Settings
 {
     public static class MapInterfaceToElement
     {

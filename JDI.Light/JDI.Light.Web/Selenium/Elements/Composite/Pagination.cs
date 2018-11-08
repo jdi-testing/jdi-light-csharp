@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Linq;
-using JDI_Commons;
-using Epam.JDI.Core.Attributes;
-using Epam.JDI.Core.Interfaces.Base;
-using Epam.JDI.Core.Interfaces.Complex;
-using JDI_Web.Selenium.Base;
-using JDI_Web.Selenium.DriverFactory;
-using JDI_Web.Selenium.Elements.Base;
+using JDI.Commons;
+using JDI.Core.Attributes;
+using JDI.Core.Interfaces.Base;
+using JDI.Core.Interfaces.Complex;
+using JDI.Core.Settings;
+using JDI.Web.Selenium.Base;
+using JDI.Web.Selenium.DriverFactory;
+using JDI.Web.Selenium.Elements.Base;
 using OpenQA.Selenium;
-using static Epam.JDI.Core.Settings.JDISettings;
 
-namespace JDI_Web.Selenium.Elements.Composite
+namespace JDI.Web.Selenium.Elements.Composite
 {
     public class Pagination : WebBaseElement, IPagination
     {
@@ -81,7 +81,7 @@ or override {action}() in class";
 
             if (p.Locator != null && p.Locator.ToString().Contains("{0}"))
                 return new Clickable(p.Locator.FillByTemplate(shortName));
-            throw Exception(p.CantChooseElementMsg("Next", shortName, "nextAction"));
+            throw JDISettings.Exception(p.CantChooseElementMsg("Next", shortName, "nextAction"));
         };
 
         public Func<Pagination, Clickable> PreviousAction = p =>
@@ -96,7 +96,7 @@ or override {action}() in class";
 
             if (p.Locator != null && p.Locator.ToString().Contains("{0}"))
                 return new Clickable(p.Locator.FillByTemplate(shortName));
-            throw Exception(p.CantChooseElementMsg("Previous", shortName, "previousAction"));
+            throw JDISettings.Exception(p.CantChooseElementMsg("Previous", shortName, "previousAction"));
         };
 
         public Func<Pagination, Clickable> FirstAction = p =>
@@ -111,7 +111,7 @@ or override {action}() in class";
 
             if (p.Locator != null && p.Locator.ToString().Contains("{0}"))
                 return new Clickable(p.Locator.FillByTemplate(shortName));
-            throw Exception(p.CantChooseElementMsg("First", shortName, "firstAction"));
+            throw JDISettings.Exception(p.CantChooseElementMsg("First", shortName, "firstAction"));
         };
 
         public Func<Pagination, Clickable> LastAction = p =>
@@ -126,7 +126,7 @@ or override {action}() in class";
 
             if (p.Locator != null && p.Locator.ToString().Contains("{0}"))
                 return new Clickable(p.Locator.FillByTemplate(shortName));
-            throw Exception(p.CantChooseElementMsg("Last", shortName, "lastAction"));
+            throw JDISettings.Exception(p.CantChooseElementMsg("Last", shortName, "lastAction"));
         };
 
         public Func<Pagination, int, Clickable> PageAction = (p, index) =>
@@ -138,7 +138,7 @@ or override {action}() in class";
             var pageLink = p.GetClickable(shortName);
             if (pageLink != null)
                 return pageLink;
-            throw Exception(p.CantChooseElementMsg(index.ToString(), shortName, "pageAction"));
+            throw JDISettings.Exception(p.CantChooseElementMsg(index.ToString(), shortName, "pageAction"));
         };
     }
 }

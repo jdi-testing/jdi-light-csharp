@@ -1,4 +1,4 @@
-﻿namespace Epam.JDI.Core.Settings
+﻿namespace JDI.Core.Settings
 {
     public class TimeoutSettings
     {

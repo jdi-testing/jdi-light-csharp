@@ -1,7 +1,7 @@
-﻿using JDI_UIWebTests.Entities;
-using JDI_Web.Selenium.Elements.Composite;
+﻿using JDI.UIWebTests.Entities;
+using JDI.Web.Selenium.Elements.Composite;
 
-namespace JDI_UIWebTests.UIObjects.Pages
+namespace JDI.UIWebTests.UIObjects.Pages
 {
     public class Login:Form<User>
     {

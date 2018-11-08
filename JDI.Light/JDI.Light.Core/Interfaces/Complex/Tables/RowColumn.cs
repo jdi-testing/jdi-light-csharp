@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JDI_Core.Interfaces.Complex.Tables
+namespace JDI.Core.Interfaces.Complex.Tables
 {
     public abstract class RowColumn
     {

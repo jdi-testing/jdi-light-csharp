@@ -1,55 +1,53 @@
 ﻿using System;
-using NUnit.Framework;
 using System.Collections.Generic;
-using Epam.JDI.Core.Interfaces.Complex;
-using static Epam.JDI.Core.Settings.JDISettings;
-using static JDI_UIWebTests.UIObjects.TestSite;
-using static JDI_UIWebTests.Enums.Metals;
-using JDI_UIWebTests.Enums;
-using JDI_Matchers.NUnit;
-using static JDI_UIWebTests.Tests.Complex.CommonActionsData;
-using JDI_Web.Settings;
+using JDI.Core.Interfaces.Complex;
+using JDI.Core.Settings;
+using JDI.Matchers.NUnit;
+using JDI.UIWebTests.Enums;
+using JDI.UIWebTests.UIObjects;
+using JDI.Web.Settings;
+using NUnit.Framework;
 using OpenQA.Selenium;
-using Assert = JDI_Matchers.NUnit.Assert;
+using Assert = JDI.Matchers.NUnit.Assert;
 
-namespace JDI_UIWebTests.Tests.Complex
+namespace JDI.UIWebTests.Tests.Complex
 {
     public class ComboBoxTests
     {
         private static readonly IList<string> OddOptions = new List<string> { "Col", "Gold", "Silver", "Bronze", "Selen" };
 
-        private IComboBox<Metals> MetalsControl => MetalsColorsPage.ComboBox;
+        private IComboBox<Metals> MetalsControl => TestSite.MetalsColorsPage.ComboBox;
 
         [SetUp]
         public void SetUp()
         {
-            Logger.Info("Navigating to Metals and Colors page.");
-            MetalsColorsPage.Open();
-            MetalsColorsPage.CheckTitle();
-            MetalsColorsPage.IsOpened();
-            Logger.Info("Setup method finished");
-            Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            JDISettings.Logger.Info("Navigating to Metals and Colors page.");
+            TestSite.MetalsColorsPage.Open();
+            TestSite.MetalsColorsPage.CheckTitle();
+            TestSite.MetalsColorsPage.IsOpened();
+            JDISettings.Logger.Info("Setup method finished");
+            JDISettings.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         [Test]
         public void SelectStringTest()
         {
             MetalsControl.Select("Gold");
-            CheckAction("Metals: value changed to Gold");
+            CommonActionsData.CheckAction("Metals: value changed to Gold");
         }
 
         [Test]
         public void SelectIndexTest()
         {
             MetalsControl.Select(3);
-            CheckAction("Metals: value changed to Silver");
+            CommonActionsData.CheckAction("Metals: value changed to Silver");
         }
 
         [Test]
         public void SelectEnumTest()
         {
-            MetalsControl.Select(Gold);
-            CheckAction("Metals: value changed to Gold");
+            MetalsControl.Select(Metals.Gold);
+            CommonActionsData.CheckAction("Metals: value changed to Gold");
         }
 
         [Test]
@@ -81,7 +79,7 @@ namespace JDI_UIWebTests.Tests.Complex
         {
             MetalsControl.Value = "Blue";
             WebSettings.WebDriver.FindElement(By.ClassName("footer-content")).Click();
-            CheckAction("Metals: value changed to Blue");
+            CommonActionsData.CheckAction("Metals: value changed to Blue");
         }
 
         [Test]
@@ -94,7 +92,7 @@ namespace JDI_UIWebTests.Tests.Complex
         [Test]
         public void GetSelectedIndexTest()
         {
-            CheckActionThrowError(() => MetalsControl.SelectedIndex(), NoElementsMessage);
+            CommonActionsData.CheckActionThrowError(() => MetalsControl.SelectedIndex(), CommonActionsData.NoElementsMessage);
         }
 
         [Test]
@@ -106,7 +104,7 @@ namespace JDI_UIWebTests.Tests.Complex
         [Test]
         public void IsSelectedEnumTest()
         {
-            Assert.AreEquals(MetalsControl.Selected(Col), true);
+            Assert.AreEquals(MetalsControl.Selected(Metals.Col), true);
         }
 
         [Test]
@@ -118,7 +116,7 @@ namespace JDI_UIWebTests.Tests.Complex
             }
             catch (Exception ex)
             {
-                throw Exception("WaitSelected throws exception");
+                throw JDISettings.Exception("WaitSelected throws exception");
             }
         }
 

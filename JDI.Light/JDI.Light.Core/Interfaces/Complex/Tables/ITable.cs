@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Epam.JDI.Core.Interfaces.Base;
-using Epam.JDI.Core.Interfaces.Common;
 using System.Runtime.Remoting.Messaging;
+using JDI.Core.Interfaces.Base;
+using JDI.Core.Interfaces.Common;
 
-namespace JDI_Core.Interfaces.Complex.Tables
+namespace JDI.Core.Interfaces.Complex.Tables
 {
     public interface ITable : IText
     {

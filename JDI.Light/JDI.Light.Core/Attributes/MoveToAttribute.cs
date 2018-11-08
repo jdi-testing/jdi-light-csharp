@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace Epam.JDI.Core.Attributes
+namespace JDI.Core.Attributes
 {
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
     public class MoveToAttribute : Attribute

@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Linq;
-using JDI_Commons;
-using JDI_Web.Selenium.Base;
-using JDI_Web.Selenium.DriverFactory;
-using JDI_Web.Selenium.Elements.Base;
-using JDI_Web.Selenium.Elements.Complex.Table.Interfaces;
-using JDI_Web.Settings;
+using JDI.Commons;
+using JDI.Core.Settings;
+using JDI.Web.Selenium.Base;
+using JDI.Web.Selenium.DriverFactory;
+using JDI.Web.Selenium.Elements.Base;
+using JDI.Web.Selenium.Elements.Complex.Table.Interfaces;
+using JDI.Web.Settings;
 using OpenQA.Selenium;
-using static System.String;
-using static Epam.JDI.Core.Settings.JDISettings;
 
-namespace JDI_Web.Selenium.Elements.Complex.Table
+namespace JDI.Web.Selenium.Elements.Complex.Table
 {
     public class Cell : SelectableElement, ICell
     {
@@ -44,11 +43,11 @@ namespace JDI_Web.Selenium.Elements.Complex.Table
             GetValueFunc = w => TextAction(this);
         }
         
-        public string ColumnName => !IsNullOrEmpty(_columnName)
+        public string ColumnName => !String.IsNullOrEmpty(_columnName)
                     ? _columnName
                     : Table.Columns.Headers[ColumnNum - 1];
 
-        public string RowName => !IsNullOrEmpty(_rowName)
+        public string RowName => !String.IsNullOrEmpty(_rowName)
                     ? _rowName
                     : Table.Rows.Headers[RowNum - 1];
         protected Func<Cell, string> TextAction => c => Get().GetText;
@@ -73,7 +72,7 @@ namespace JDI_Web.Selenium.Elements.Complex.Table
             }
             catch
             {
-                throw Exception("Can't get Cell from interface/class: " + clazz.ToString().Split("\\.").Last());
+                throw JDISettings.Exception("Can't get Cell from interface/class: " + clazz.ToString().Split("\\.").Last());
             }
             return Get(instance);
         }
@@ -84,7 +83,7 @@ namespace JDI_Web.Selenium.Elements.Complex.Table
             if (locator == null || locator.ToString().Equals(""))
                 locator = _cellLocatorTemplate;
             if (!locator.ToString().Contains("{0}") || !locator.ToString().Contains("{1}"))
-                throw Exception("Can't create cell with locator template " + cell.Locator
+                throw JDISettings.Exception("Can't create cell with locator template " + cell.Locator
                         + ". Template for Cell should contains '{0}' - for column and '{1}' - for row indexes.");
             cell.WebAvatar.ByLocator = locator.FillByTemplate(RowIndex, ColumnIndex);
             cell.Parent = Table;
@@ -93,9 +92,9 @@ namespace JDI_Web.Selenium.Elements.Complex.Table
 
         public Cell UpdateData(string colName, string rowName)
         {
-            if (IsNullOrEmpty(_columnName) && !IsNullOrEmpty(colName))
+            if (String.IsNullOrEmpty(_columnName) && !String.IsNullOrEmpty(colName))
                 _columnName = colName;
-            if (IsNullOrEmpty(_rowName) && !IsNullOrEmpty(rowName))
+            if (String.IsNullOrEmpty(_rowName) && !String.IsNullOrEmpty(rowName))
                 _rowName = rowName;
             return this;
         }

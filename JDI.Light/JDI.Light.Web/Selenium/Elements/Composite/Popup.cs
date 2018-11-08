@@ -1,10 +1,10 @@
 ﻿using System;
-using Epam.JDI.Core.Attributes.Functions;
-using Epam.JDI.Core.Interfaces.Complex;
-using JDI_Web.Selenium.Base;
-using JDI_Web.Selenium.Elements.Common;
+using JDI.Core.Attributes.Functions;
+using JDI.Core.Interfaces.Complex;
+using JDI.Web.Selenium.Base;
+using JDI.Web.Selenium.Elements.Common;
 
-namespace JDI_Web.Selenium.Elements.Composite
+namespace JDI.Web.Selenium.Elements.Composite
 {
     public class Popup : Text, IPopup
     {

@@ -1,12 +1,10 @@
 ﻿using System;
-using Epam.JDI.Core.Interfaces.Settings;
-using Epam.JDI.Core.Logging;
-using static System.Int32;
-using static JDI.Core.Properties.Settings;
+using JDI.Core.Interfaces.Settings;
+using JDI.Core.Logging;
 
 // ReSharper disable InconsistentNaming
 
-namespace Epam.JDI.Core.Settings
+namespace JDI.Core.Settings
 {
     public class JDISettings
     {
@@ -44,20 +42,20 @@ namespace Epam.JDI.Core.Settings
         {
             FillFromSettings(p => DriverFactory.RegisterDriver(p), "Driver");
             FillFromSettings(p => DriverFactory.SetRunType(p), "RunType");
-            FillFromSettings(p => Timeouts.WaitElementSec = Parse(p), "TimeoutWaitElement");
+            FillFromSettings(p => Timeouts.WaitElementSec = Int32.Parse(p), "TimeoutWaitElement");
             FillFromSettings(p => ShortLogMessagesFormat = p.ToLower().Equals("short"), "LogMessageFormat");
             FillFromSettings(p =>
                 UseCache = p.ToLower().Equals("true") || p.ToLower().Equals("1"), "Cache");
             FillFromSettings(p =>
                 UseCache = p.ToLower().Equals("true") || p.ToLower().Equals("1"), "DemoMode");
-            FillFromSettings(p => HighlightSettings.SetTimeoutInSec(Parse(p)), "DemoDelay");
+            FillFromSettings(p => HighlightSettings.SetTimeoutInSec(Int32.Parse(p)), "DemoDelay");
         }
 
         protected static void FillFromSettings(Action<string> action, string name)
         {
             //var b = System.Configuration.ConfigurationManager.AppSettings["DriversFolder"];
             //var a = Properties.Settings.Default["DriversFolder"];
-            ExceptionUtils.AvoidExceptions(() => action.Invoke(Default[name].ToString()));
+            ExceptionUtils.AvoidExceptions(() => action.Invoke(Properties.Settings.Default[name].ToString()));
         }
 
         public static void InitFromProperties(string propertyPath)

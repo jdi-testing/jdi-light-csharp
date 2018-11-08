@@ -1,4 +1,4 @@
-﻿namespace JDI_Web.Selenium.Elements.Composite
+﻿namespace JDI.Web.Selenium.Elements.Composite
 {
     public class NavigationPane : Pagination
     {

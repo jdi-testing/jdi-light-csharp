@@ -1,13 +1,13 @@
 ﻿using System;
-using static JDI_UIWebTests.UIObjects.TestSite;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Epam.JDI.Core.Settings;
-using JDI_Matchers.NUnit;
+using JDI.Core.Settings;
+using JDI.Matchers.NUnit;
+using JDI.UIWebTests.UIObjects;
 using OpenQA.Selenium;
 
-namespace JDI_UIWebTests.Tests.Complex
+namespace JDI.UIWebTests.Tests.Complex
 {
     public class CommonActionsData
     {
@@ -20,7 +20,7 @@ namespace JDI_UIWebTests.Tests.Complex
         /// <param name="text"></param>
         public static void CheckCalculate(string text)
         {
-            new Check().Contains(MetalsColorsPage.CalculateText.GetText, text);            
+            new Check().Contains(TestSite.MetalsColorsPage.CalculateText.GetText, text);            
         }
 
         public static void CheckText(Func<string> func, string expectedAttrValue)
@@ -30,13 +30,13 @@ namespace JDI_UIWebTests.Tests.Complex
 
         public static void CheckAction(string text)            
         {            
-            IList<IWebElement> logOutput = HomePage.WebDriver.FindElements(By.CssSelector(".logs li"));
+            IList<IWebElement> logOutput = TestSite.HomePage.WebDriver.FindElements(By.CssSelector(".logs li"));
             new Check().Contains(logOutput[0].Text, text);            
         }
 
         public static void CheckResult(string text)
         {
-            new Check().Contains(ContactFormPage.Result.GetText, text);              
+            new Check().Contains(TestSite.ContactFormPage.Result.GetText, text);              
         }
 
         public static void CheckActionThrowError(Action checkedAction, string message)

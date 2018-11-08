@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace JDI_Commons.Pairs
+namespace JDI.Commons.Pairs
 {
     public class Pair : Pair<string,string> { public Pair(string value1, string value2) : base(value1, value2) {} }
 

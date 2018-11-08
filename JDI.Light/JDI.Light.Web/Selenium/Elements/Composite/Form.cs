@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using JDI_Commons;
-using Epam.JDI.Core.Attributes;
-using Epam.JDI.Core.Interfaces.Base;
-using Epam.JDI.Core.Interfaces.Complex;
-using JDI_Web.Selenium.Attributes;
-using JDI_Web.Selenium.Elements.Base;
-using JDI_Web.Utils;
+using JDI.Commons;
+using JDI.Core.Attributes;
+using JDI.Core.Interfaces.Base;
+using JDI.Core.Interfaces.Complex;
+using JDI.Core.Settings;
+using JDI.Web.Selenium.Attributes;
+using JDI.Web.Selenium.Elements.Base;
+using JDI.Web.Utils;
 using OpenQA.Selenium;
-using static Epam.JDI.Core.Settings.JDISettings;
 
-namespace JDI_Web.Selenium.Elements.Composite
+namespace JDI.Web.Selenium.Elements.Composite
 {
     public class Form : WebElement, IForm
     {
@@ -120,7 +120,7 @@ namespace JDI_Web.Selenium.Elements.Composite
         {
             var result = Verify(objStrings);
             if (result.Count > 0)
-                throw Exception("Check form failed:" + result.Print("".FromNewLine()).FromNewLine());
+                throw JDISettings.Exception("Check form failed:" + result.Print("".FromNewLine()).FromNewLine());
         }
         protected Func<Form, string> GetValueAction =>
             f => this.GetFields(typeof(IHasValue)).Select(field => ((IHasValue)field.GetValue(this)).Value).Print();

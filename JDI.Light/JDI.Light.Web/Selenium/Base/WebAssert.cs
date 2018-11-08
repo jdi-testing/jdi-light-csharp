@@ -1,6 +1,6 @@
-﻿using JDI_Matchers;
+﻿using JDI.Matchers;
 
-namespace JDI_Web.Selenium.Base
+namespace JDI.Web.Selenium.Base
 {
     public class WebAssert : NUnitMatcher
     {

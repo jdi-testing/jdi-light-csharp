@@ -1,7 +1,6 @@
 ﻿using System;
-using static JDI_Web.Attributes.Objects.TableHeaderTypes;
 
-namespace JDI_Web.Attributes.Objects
+namespace JDI.Web.Attributes.Objects
 {
     [AttributeUsage(AttributeTargets.All, Inherited = false)]
     public class JTableAttribute : Attribute
@@ -22,7 +21,7 @@ namespace JDI_Web.Attributes.Objects
         public int RowStartIndex = -1;
         public int ColStartIndex = -1;
 
-        public TableHeaderTypes HeaderType = ColumnsHeaders;
+        public TableHeaderTypes HeaderType = TableHeaderTypes.ColumnsHeaders;
         public bool UseCache = true;
 
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace JDI_Commons
+namespace JDI.Commons
 {
     public static class ReflectionUtils
     {

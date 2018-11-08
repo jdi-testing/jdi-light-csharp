@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using JDI_Commons;
-using Epam.JDI.Core.Interfaces.Common;
-using Epam.JDI.Core.Interfaces.Complex;
-using JDI_Web.Selenium.DriverFactory;
-using JDI_Web.Selenium.Elements.Base;
-using JDI_Web.Selenium.Elements.Common;
-using JDI_Web.Selenium.Elements.Complex;
+using JDI.Commons;
+using JDI.Core.Interfaces.Common;
+using JDI.Core.Interfaces.Complex;
+using JDI.Core.Settings;
+using JDI.Web.Selenium.DriverFactory;
+using JDI.Web.Selenium.Elements.Base;
+using JDI.Web.Selenium.Elements.Common;
+using JDI.Web.Selenium.Elements.Complex;
 using OpenQA.Selenium;
-using static Epam.JDI.Core.Settings.JDISettings;
 
-namespace JDI_Web.Selenium.Elements.Composite
+namespace JDI.Web.Selenium.Elements.Composite
 {
     public class Search : TextField, ISearch
     {
@@ -77,7 +77,7 @@ namespace JDI_Web.Selenium.Elements.Composite
             get {
                 if (_suggestions != null)
                     return _suggestions;
-                throw Exception("Suggestions list locator not specified for search. Use accordance constructor");
+                throw JDISettings.Exception("Suggestions list locator not specified for search. Use accordance constructor");
             }
         }
 
@@ -85,7 +85,7 @@ namespace JDI_Web.Selenium.Elements.Composite
         {
             if (Select != null)
                 return Copy(Select, Locator.FillByTemplate(name));
-            throw Exception("Select locator not specified for search. Use accordance constructor");
+            throw JDISettings.Exception("Select locator not specified for search. Use accordance constructor");
         }
 
         private ITextField SearchField
@@ -96,11 +96,11 @@ namespace JDI_Web.Selenium.Elements.Composite
                 switch (fields.Count)
                 {
                     case 0:
-                        throw Exception($"Can't find any buttons on form '{ToString()}'.");
+                        throw JDISettings.Exception($"Can't find any buttons on form '{ToString()}'.");
                     case 1:
                         return (ITextField) fields[0].GetValue(this);
                     default:
-                        throw Exception($"Form '{ToString()}' have more than 1 button. Use submit(entity, buttonName) for this case instead");
+                        throw JDISettings.Exception($"Form '{ToString()}' have more than 1 button. Use submit(entity, buttonName) for this case instead");
                 }
             }
         }
@@ -113,11 +113,11 @@ namespace JDI_Web.Selenium.Elements.Composite
                 switch (fields.Count)
                 {
                     case 0:
-                        throw Exception($"Can't find any buttons on form '{ToString()}'.");
+                        throw JDISettings.Exception($"Can't find any buttons on form '{ToString()}'.");
                     case 1:
                         return (IButton) fields[0].GetValue(this);
                     default:
-                        throw Exception(
+                        throw JDISettings.Exception(
                             $"Form '{ToString()}' have more than 1 button. Use submit(entity, buttonName) for this case instead");
                 }
             }

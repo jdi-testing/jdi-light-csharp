@@ -1,8 +1,7 @@
-﻿
-using System;
+﻿using System;
 using System.Linq;
 
-namespace Epam.JDI.Core.Logging
+namespace JDI.Core.Logging
 {
     public class LogAgregator : ILogger
     {

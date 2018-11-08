@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Epam.JDI.Core.Interfaces.Complex
+namespace JDI.Core.Interfaces.Complex
 {
     public interface IMenu : IMenu<IConvertible> { }
     public interface IMenu<in TEnum> : ISelector<TEnum>

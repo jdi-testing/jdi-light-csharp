@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using Epam.JDI.Core.Attributes.Functions;
+using JDI.Core.Attributes.Functions;
 
-namespace Epam.JDI.Core.Attributes
+namespace JDI.Core.Attributes
 {
     public  class AnnotaionsUtil
     {

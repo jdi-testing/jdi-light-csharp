@@ -1,28 +1,28 @@
 ﻿using System.Collections.Generic;
-using Epam.JDI.Core.Interfaces.Complex;
-using JDI_Matchers.NUnit;
-using JDI_UIWebTests.Enums;
+using JDI.Core.Interfaces.Complex;
+using JDI.Core.Settings;
+using JDI.Matchers.NUnit;
+using JDI.UIWebTests.Enums;
+using JDI.UIWebTests.UIObjects;
 using NUnit.Framework;
-using static Epam.JDI.Core.Settings.JDISettings;
-using static JDI_UIWebTests.UIObjects.TestSite;
-using Assert = JDI_Matchers.NUnit.Assert;
+using Assert = JDI.Matchers.NUnit.Assert;
 
-namespace JDI_UIWebTests.Tests.Complex
+namespace JDI.UIWebTests.Tests.Complex
 {
     public class DropdownTests
     {
         private static readonly List<string> OddOptions = new List<string> { "Colors", "Red", "Green", "Blue", "Yellow" };
-        private IDropDown<Colors> ColorsControl => MetalsColorsPage.Colors;
+        private IDropDown<Colors> ColorsControl => TestSite.MetalsColorsPage.Colors;
 
         [SetUp]
         public void Setup()
         {
-            Logger.Info("Navigating to Metals and Colors page.");
-            MetalsColorsPage.Open();
-            MetalsColorsPage.CheckTitle();
-            MetalsColorsPage.IsOpened();
-            Logger.Info("Setup method finished");
-            Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            JDISettings.Logger.Info("Navigating to Metals and Colors page.");
+            TestSite.MetalsColorsPage.Open();
+            TestSite.MetalsColorsPage.CheckTitle();
+            TestSite.MetalsColorsPage.IsOpened();
+            JDISettings.Logger.Info("Setup method finished");
+            JDISettings.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         [Test]

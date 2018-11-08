@@ -1,11 +1,11 @@
-﻿using Epam.JDI.Core.Attributes;
-using Epam.JDI.Core.Interfaces.Base;
-using Epam.JDI.Core.Interfaces.Common;
-using JDI_Web.Attributes;
-using JDI_Web.Selenium.Elements.Composite;
-using JDI_UIWebTests.Entities;
+﻿using JDI.Core.Attributes;
+using JDI.Core.Interfaces.Base;
+using JDI.Core.Interfaces.Common;
+using JDI.UIWebTests.Entities;
+using JDI.Web.Attributes;
+using JDI.Web.Selenium.Elements.Composite;
 
-namespace JDIWebTests.UIObjects.Sections
+namespace JDI.UIWebTests.UIObjects.Sections
 {
     public class LoginForm : Form<User>
     {

@@ -1,7 +1,7 @@
-﻿using Epam.JDI.Core.Settings;
-using JDI_Core.Preconditions;
+﻿using JDI.Core.Preconditions;
+using JDI.Core.Settings;
 
-namespace JDI_Core.Interfaces
+namespace JDI.Core.Interfaces
 {
     public class Application
     {

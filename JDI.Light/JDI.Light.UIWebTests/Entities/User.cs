@@ -1,6 +1,6 @@
-﻿using Epam.JDI.Core.Attributes;
+﻿using JDI.Core.Attributes;
 
-namespace JDI_UIWebTests.Entities
+namespace JDI.UIWebTests.Entities
 {
     public class User
     {

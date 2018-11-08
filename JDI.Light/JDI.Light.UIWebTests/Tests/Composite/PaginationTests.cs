@@ -1,29 +1,29 @@
-﻿using NUnit.Framework;
-using static Epam.JDI.Core.Settings.JDISettings;
-using static JDI_UIWebTests.UIObjects.TestSite;
-using JDI_Web.Selenium.Elements.Composite;
-using static JDI_Web.Settings.WebSettings;
+﻿using JDI.Core.Settings;
+using JDI.UIWebTests.UIObjects;
+using JDI.Web.Selenium.Elements.Composite;
+using JDI.Web.Settings;
+using NUnit.Framework;
 
-namespace JDI_UIWebTests.Tests.Composite
+namespace JDI.UIWebTests.Tests.Composite
 {
     public class PaginationTests
     {
-        Pagination simplePagePaginator = SimpleTablePage.Paginator;
+        Pagination simplePagePaginator = TestSite.SimpleTablePage.Paginator;
 
         [SetUp]
         public void SetUp()
         {
-            Logger.Info("Navigating to Simple Table page.");
-            SimpleTablePage.Open();
-            SimpleTablePage.CheckTitle();
-            SimpleTablePage.IsOpened();
-            Logger.Info("Setup method finished");
-            Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            JDISettings.Logger.Info("Navigating to Simple Table page.");
+            TestSite.SimpleTablePage.Open();
+            TestSite.SimpleTablePage.CheckTitle();
+            TestSite.SimpleTablePage.IsOpened();
+            JDISettings.Logger.Info("Setup method finished");
+            JDISettings.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         private void CheckPageOpened(int num)
         {
-            Assert.True(WebDriver.Url.Contains("/page" + num + ".htm"));            
+            Assert.True(WebSettings.WebDriver.Url.Contains("/page" + num + ".htm"));            
         }
 
         [Test]

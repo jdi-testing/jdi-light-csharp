@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Epam.JDI.Core.Settings
+namespace JDI.Core.Settings
 {
     public interface IAssert
     {

@@ -1,7 +1,7 @@
 ﻿using System;
-using Epam.JDI.Core.Interfaces.Base;
+using JDI.Core.Interfaces.Base;
 
-namespace Epam.JDI.Core.Interfaces.Complex
+namespace JDI.Core.Interfaces.Complex
 {
     public interface IGroup<out TType> : IGroup<IConvertible, TType>
         where TType : IElement

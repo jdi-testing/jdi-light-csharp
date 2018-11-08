@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using JDI_Web.Selenium.Elements.Composite;
-using JDI_Web.Settings;
+using JDI.Web.Selenium.Elements.Composite;
+using JDI.Web.Settings;
 
-namespace JDI_Web.Attributes
+namespace JDI.Web.Attributes
 {
     [AttributeUsage(AttributeTargets.All, Inherited = false)]
     public class PageAttribute : Attribute

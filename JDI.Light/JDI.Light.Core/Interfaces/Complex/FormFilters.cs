@@ -1,4 +1,4 @@
-﻿namespace JDI_Core.Interfaces.Complex
+﻿namespace JDI.Core.Interfaces.Complex
 {
      public enum FormFilters
     {

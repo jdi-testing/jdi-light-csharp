@@ -1,4 +1,4 @@
-﻿namespace JDI_Core.Reporting
+﻿namespace JDI.Core.Reporting
 {
     public enum ActionsType
     {

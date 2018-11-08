@@ -1,11 +1,11 @@
 ﻿using System.Linq;
-using JDI_Commons;
-using JDI_Matchers.NUnit;
-using JDI_UIWebTests.Tests.Complex.Table.Base;
-using JDI_Web.Selenium.Elements.Complex.Table;
+using JDI.Commons;
+using JDI.Matchers.NUnit;
+using JDI.UIWebTests.Tests.Complex.Table.Base;
+using JDI.Web.Selenium.Elements.Complex.Table;
 using NUnit.Framework;
 
-namespace JDI_UIWebTests.Tests.Complex.Table
+namespace JDI.UIWebTests.Tests.Complex.Table
 {
     [TestFixture]
     public class SearchRowsColumnsTests : SupportTableTestBase

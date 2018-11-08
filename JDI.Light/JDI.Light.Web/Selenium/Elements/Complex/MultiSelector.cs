@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using JDI_Commons;
-using Epam.JDI.Core.Interfaces.Base;
-using JDI_Web.Selenium.DriverFactory;
-using JDI_Web.Selenium.Elements.APIInteract;
+using JDI.Commons;
+using JDI.Core.Interfaces.Base;
+using JDI.Core.Settings;
+using JDI.Web.Selenium.DriverFactory;
+using JDI.Web.Selenium.Elements.APIInteract;
 using OpenQA.Selenium;
-using static Epam.JDI.Core.Settings.JDISettings;
 
-namespace JDI_Web.Selenium.Elements.Complex
+namespace JDI.Web.Selenium.Elements.Complex
 {
     public abstract class MultiSelector<TEnum> : BaseSelector<TEnum>, IMultiSelector<TEnum>
         where TEnum : IConvertible
@@ -25,7 +25,7 @@ namespace JDI_Web.Selenium.Elements.Complex
             {
                 var ms = (MultiSelector<TEnum>) s;
                 if (!ms.HasLocator && ms.AllLabels == null)
-                    throw Exception("Can't get option. No optionsNamesLocator and allLabelsLocator found");
+                    throw JDISettings.Exception("Can't get option. No optionsNamesLocator and allLabelsLocator found");
                 if (ms.Locator.ToString().Contains("{0}"))
                     return new GetElementModule(ms, ms.Locator.FillByTemplate(name))
                         .WebElements[0];
@@ -40,9 +40,9 @@ namespace JDI_Web.Selenium.Elements.Complex
         public Action<MultiSelector<TEnum>> ClearAction = m =>
         {
             if (!m.HasLocator && m.AllLabels == null)
-                throw Exception("Can't clear options. No optionsNamesLocator and allLabelsLocator found");
+                throw JDISettings.Exception("Can't clear options. No optionsNamesLocator and allLabelsLocator found");
             if (m.Locator.ToString().Contains("{0}"))
-                throw Exception(
+                throw JDISettings.Exception(
                     "Can't clear options. Specify allLabelsLocator or fix optionsNamesLocator (should not contain '{0}')");
             if (m.AllLabels != null)
             {
@@ -57,7 +57,7 @@ namespace JDI_Web.Selenium.Elements.Complex
                     return;
                 }
                 else
-                    throw Exception($"<select> tag has no <option> tags. Please Clarify element locator ({m})");
+                    throw JDISettings.Exception($"<select> tag has no <option> tags. Please Clarify element locator ({m})");
             if (elements.Count == 1 && elements[0].TagName.Equals("ul"))
                 elements = elements[0].FindElements(By.TagName("li")).ToList();
             m.ClearElements(elements);
@@ -71,19 +71,19 @@ namespace JDI_Web.Selenium.Elements.Complex
         private IWebElement GetWebElement(IList<IWebElement> els, string name)
         {
             if (els == null)
-                throw Exception("Can't get option. No optionsNamesLocator and allLabelsLocator found");
+                throw JDISettings.Exception("Can't get option. No optionsNamesLocator and allLabelsLocator found");
             var elements = els.Where(el => el.Text.Equals(name)).ToList();
             if (elements.Count == 1)
                 return elements[0];
-            throw Exception("Can't get option. No optionsNamesLocator and allLabelsLocator found");
+            throw JDISettings.Exception("Can't get option. No optionsNamesLocator and allLabelsLocator found");
         }
 
         protected IWebElement GetWebElement(int num)
         {
             if (!HasLocator && AllLabels == null)
-                throw Exception("Can't get option. No optionsNamesLocator and allLabelsLocator found");
+                throw JDISettings.Exception("Can't get option. No optionsNamesLocator and allLabelsLocator found");
             if (Locator.ToString().Contains("{0}"))
-                throw Exception("Can't get options. Specify allLabelsLocator or fix optionsNamesLocator (should not contain '{0}')");
+                throw JDISettings.Exception("Can't get options. Specify allLabelsLocator or fix optionsNamesLocator (should not contain '{0}')");
             if (AllLabels != null)
                 return GetWebElement(AllLabels.WebElements, num);
             return GetWebElement(GetElementsFromTag(), num);
@@ -92,9 +92,9 @@ namespace JDI_Web.Selenium.Elements.Complex
         private IWebElement GetWebElement(IList<IWebElement> els, int num)
         {
             if (num <= 0)
-                throw Exception($"Can't get option with num '{num}'. Number should be 1 or more");
+                throw JDISettings.Exception($"Can't get option with num '{num}'. Number should be 1 or more");
             if (num > els.Count)
-                throw Exception($"Can't get option with num '{num}'. Found only {els.Count} options");
+                throw JDISettings.Exception($"Can't get option with num '{num}'. Found only {els.Count} options");
             return els[num - 1];
         }
 

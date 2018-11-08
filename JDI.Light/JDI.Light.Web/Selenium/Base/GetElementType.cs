@@ -1,7 +1,7 @@
-﻿using JDI_Web.Selenium.Elements.APIInteract;
+﻿using JDI.Web.Selenium.Elements.APIInteract;
 using OpenQA.Selenium;
 
-namespace JDI_Web.Selenium.Base
+namespace JDI.Web.Selenium.Base
 {
     public class GetElementType
     {

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Epam.JDI.Core.Logging;
-using JDI_Commons;
+using JDI.Commons;
+using JDI.Core.Logging;
 
-namespace JDI_Matchers
+namespace JDI.Matchers
 {
     public abstract class BaseMatcher
     {

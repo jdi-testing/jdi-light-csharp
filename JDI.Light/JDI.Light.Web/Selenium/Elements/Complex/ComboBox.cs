@@ -1,10 +1,10 @@
 ﻿using System;
-using Epam.JDI.Core.Interfaces.Complex;
-using JDI_Web.Selenium.Base;
-using JDI_Web.Selenium.Elements.Common;
+using JDI.Core.Interfaces.Complex;
+using JDI.Web.Selenium.Base;
+using JDI.Web.Selenium.Elements.Common;
 using OpenQA.Selenium;
 
-namespace JDI_Web.Selenium.Elements.Complex
+namespace JDI.Web.Selenium.Elements.Complex
 {
     public class ComboBox : ComboBox<IConvertible>, IComboBox
     {

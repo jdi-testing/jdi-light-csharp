@@ -1,8 +1,8 @@
 ﻿using System;
-using JDI_Web.Selenium.Elements.Composite;
+using JDI.Web.Selenium.Elements.Composite;
 using NUnit.Framework;
 
-namespace JDI_Web.Selenium.Base
+namespace JDI.Web.Selenium.Base
 {
     public class BaseParallelTest<TSite> : BaseParallelTest<string, TSite>
         where TSite : WebSite

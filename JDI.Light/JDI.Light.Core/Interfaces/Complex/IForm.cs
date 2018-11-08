@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Epam.JDI.Core.Interfaces.Base;
+using JDI.Core.Interfaces.Base;
 
-namespace Epam.JDI.Core.Interfaces.Complex
+namespace JDI.Core.Interfaces.Complex
 {
     public interface IForm : IComposite, ISetValue, IElement
     {

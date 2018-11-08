@@ -1,4 +1,4 @@
-﻿namespace JDI_UIWebTests.Enums
+﻿namespace JDI.UIWebTests.Enums
 {
     public enum Elements
     {

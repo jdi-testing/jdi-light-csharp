@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using JDI_Commons;
+using JDI.Commons;
 using OpenQA.Selenium;
-using static Epam.JDI.Core.ExceptionUtils;
+using ExceptionUtils = JDI.Core.ExceptionUtils;
 
-namespace JDI_Web.Selenium.DriverFactory
+namespace JDI.Web.Selenium.DriverFactory
 {
     public static class WebDriverByUtils
     {
@@ -24,7 +24,7 @@ namespace JDI_Web.Selenium.DriverFactory
             if (!byLocator.Contains("{0}"))
                 throw new Exception(GetBadLocatorMsg(byLocator, args));
             var locator = byLocator;
-            byLocator = ActionWithException(
+            byLocator = ExceptionUtils.ActionWithException(
                 () => string.Format(locator, args),
                 ex => GetBadLocatorMsg(locator, args));
             return by.GetByFunc()(byLocator);

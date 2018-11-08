@@ -1,13 +1,12 @@
-﻿using Epam.JDI.Core.Interfaces.Complex;
+﻿using System.Collections.Generic;
+using JDI.Core.Interfaces.Complex;
+using JDI.Core.Settings;
+using JDI.Matchers.NUnit;
+using JDI.UIWebTests.Enums;
+using JDI.UIWebTests.UIObjects;
 using NUnit.Framework;
-using System.Collections.Generic;
-using static Epam.JDI.Core.Settings.JDISettings;
-using static JDI_UIWebTests.UIObjects.TestSite;
-using JDI_UIWebTests.Enums;
-using static JDI_UIWebTests.Tests.Complex.CommonActionsData;
-using JDI_Matchers.NUnit;
 
-namespace JDI_UIWebTests.Tests.Complex
+namespace JDI.UIWebTests.Tests.Complex
 {
     public class DropdownExpandedTests
     {
@@ -15,26 +14,26 @@ namespace JDI_UIWebTests.Tests.Complex
 
         private IDropDown<Colors> _colors()
         {
-            return MetalsColorsPage.Colors;
+            return TestSite.MetalsColorsPage.Colors;
         }
 
         [SetUp]
         public void SetUp()
         {
-            Logger.Info("Navigating to Metals and Colors page.");
-            MetalsColorsPage.Open();
-            MetalsColorsPage.CheckTitle();
-            MetalsColorsPage.IsOpened();
+            JDISettings.Logger.Info("Navigating to Metals and Colors page.");
+            TestSite.MetalsColorsPage.Open();
+            TestSite.MetalsColorsPage.CheckTitle();
+            TestSite.MetalsColorsPage.IsOpened();
             _colors().Expand();
-            Logger.Info("Setup method finished");
-            Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            JDISettings.Logger.Info("Setup method finished");
+            JDISettings.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         [Test]
         public void SelectStringTest()
         {
             _colors().Select("Blue");
-            CheckAction("Colors: value changed to Blue");
+            CommonActionsData.CheckAction("Colors: value changed to Blue");
         }
 
         
@@ -42,7 +41,7 @@ namespace JDI_UIWebTests.Tests.Complex
         public void SelectIndexTest()
         {
             _colors().Select(4);            
-            CheckAction("Colors: value changed to Blue");
+            CommonActionsData.CheckAction("Colors: value changed to Blue");
         }
 
         
@@ -50,7 +49,7 @@ namespace JDI_UIWebTests.Tests.Complex
         public void SelectEnumTest()
         {
             _colors().Select(Colors.Blue);
-            CheckAction("Colors: value changed to Blue");
+            CommonActionsData.CheckAction("Colors: value changed to Blue");
         }
 
         
@@ -86,7 +85,7 @@ namespace JDI_UIWebTests.Tests.Complex
         public void SetValueTest()
         {
             _colors().Value = "Blue";
-            CheckAction("Colors: value changed to Blue");
+            CommonActionsData.CheckAction("Colors: value changed to Blue");
         }
 
         

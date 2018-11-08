@@ -1,11 +1,11 @@
 ﻿using System;
-using Epam.JDI.Core.Interfaces.Common;
-using JDI_Web.Selenium.Base;
-using JDI_Web.Selenium.Elements.Base;
+using JDI.Core.Interfaces.Common;
+using JDI.Core.Settings;
+using JDI.Web.Selenium.Base;
+using JDI.Web.Selenium.Elements.Base;
 using OpenQA.Selenium;
-using static Epam.JDI.Core.Settings.JDISettings;
 
-namespace JDI_Web.Selenium.Elements.Common
+namespace JDI.Web.Selenium.Elements.Common
 {
     public class CheckBox : Clickable, ICheckBox
     {
@@ -18,7 +18,7 @@ namespace JDI_Web.Selenium.Elements.Common
             if (!el.IsCheckedAction(el))
                 el.ClickAction(el);
             if (!el.IsCheckedAction(el))
-                throw Exception("Can't check element. Verify locator for click or isCheckedAction");
+                throw JDISettings.Exception("Can't check element. Verify locator for click or isCheckedAction");
         };
         public void Check()
         {
@@ -30,7 +30,7 @@ namespace JDI_Web.Selenium.Elements.Common
             if (IsCheckedAction((CheckBox)el))
                 ClickAction(el);
             if (IsCheckedAction((CheckBox)el))
-                throw Exception("Can't uncheck element. Verify locator for click or isCheckedAction");
+                throw JDISettings.Exception("Can't uncheck element. Verify locator for click or isCheckedAction");
         }
         public void Uncheck()
         {
@@ -66,7 +66,7 @@ namespace JDI_Web.Selenium.Elements.Common
                     ((CheckBox) el).Uncheck();
                     break;
                 default:
-                    throw Exception(
+                    throw JDISettings.Exception(
                         $"SetValue not specified correctly {value}, expected: 'true','false','0','1','check','uncheck'");
             }
         };

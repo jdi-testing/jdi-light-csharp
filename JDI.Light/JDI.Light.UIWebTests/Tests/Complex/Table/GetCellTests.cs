@@ -1,9 +1,9 @@
-﻿using JDI_UIWebTests.Tests.Complex.Table.Base;
-using JDI_Web.Selenium.Elements.Complex.Table;
+﻿using JDI.UIWebTests.Tests.Complex.Table.Base;
+using JDI.Web.Selenium.Elements.Complex.Table;
 using NUnit.Framework;
-using Assert = JDI_Matchers.NUnit.Assert;
+using Assert = JDI.Matchers.NUnit.Assert;
 
-namespace JDI_UIWebTests.Tests.Complex.Table
+namespace JDI.UIWebTests.Tests.Complex.Table
 {
     [TestFixture]
     class GetCellTests : SupportTableTestBase

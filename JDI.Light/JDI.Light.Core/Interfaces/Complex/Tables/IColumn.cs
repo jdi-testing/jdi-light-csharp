@@ -1,7 +1,7 @@
-﻿using Epam.JDI.Core.Interfaces.Base;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using JDI.Core.Interfaces.Base;
 
-namespace JDI_Core.Interfaces.Complex.Tables
+namespace JDI.Core.Interfaces.Complex.Tables
 {
     public interface IColumn
     {

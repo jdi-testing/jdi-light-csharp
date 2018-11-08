@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
-using Epam.JDI.Core.Attributes.Functions;
+using JDI.Core.Attributes.Functions;
 
-namespace Epam.JDI.Core.Interfaces.Base
+namespace JDI.Core.Interfaces.Base
 {
     public interface IBaseElement
     {

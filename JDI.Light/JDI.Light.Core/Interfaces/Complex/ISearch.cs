@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Epam.JDI.Core.Interfaces.Base;
-using Epam.JDI.Core.Interfaces.Common;
+using JDI.Core.Interfaces.Base;
+using JDI.Core.Interfaces.Common;
 
-namespace Epam.JDI.Core.Interfaces.Complex
+namespace JDI.Core.Interfaces.Complex
 {
     public interface ISearch : ITextField, IComposite
     {

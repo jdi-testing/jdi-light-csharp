@@ -1,4 +1,4 @@
-﻿namespace Epam.JDI.Core.Attributes.Functions
+﻿namespace JDI.Core.Attributes.Functions
 {
     public enum Functions
     {

@@ -1,8 +1,8 @@
 ﻿using System;
-using Epam.JDI.Core.Logging;
-using Epam.JDI.Core.Settings;
+using JDI.Core.Logging;
+using JDI.Core.Settings;
 
-namespace JDI_Core.Preconditions
+namespace JDI.Core.Preconditions
 {
     public class PreconditionsState
     {

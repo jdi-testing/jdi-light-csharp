@@ -1,11 +1,11 @@
 ﻿using System;
-using JDI_Commons;
-using Epam.JDI.Core.Interfaces.Complex;
-using JDI_Web.Selenium.Base;
-using JDI_Web.Selenium.Elements.Base;
+using JDI.Commons;
+using JDI.Core.Interfaces.Complex;
+using JDI.Web.Selenium.Base;
+using JDI.Web.Selenium.Elements.Base;
 using OpenQA.Selenium;
 
-namespace JDI_Web.Selenium.Elements.Complex
+namespace JDI.Web.Selenium.Elements.Complex
 {
     public class DropList : DropList<IConvertible>, IDropList
     {

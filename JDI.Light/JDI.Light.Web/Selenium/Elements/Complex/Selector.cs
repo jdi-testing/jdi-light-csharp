@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Epam.JDI.Core.Interfaces.Complex;
-using JDI_Web.Selenium.Base;
+using JDI.Core.Interfaces.Complex;
+using JDI.Core.Settings;
+using JDI.Web.Selenium.Base;
 using OpenQA.Selenium;
-using static Epam.JDI.Core.Settings.JDISettings;
 
-namespace JDI_Web.Selenium.Elements.Complex
+namespace JDI.Web.Selenium.Elements.Complex
 {
     public class Selector : Selector<IConvertible>, ISelector
     {
@@ -64,7 +64,7 @@ namespace JDI_Web.Selenium.Elements.Complex
         public string Selected(IList<IWebElement> els) {
             var element = els.FirstOrDefault(el => SelectedElementAction(this, el));
             if (element == null)
-                throw Exception("No elements selected. Override getSelectedAction or place locator to <select> tag");
+                throw JDISettings.Exception("No elements selected. Override getSelectedAction or place locator to <select> tag");
             return element.Text;
         }
 
@@ -73,7 +73,7 @@ namespace JDI_Web.Selenium.Elements.Complex
         private int SelectedIndex(IList<IWebElement> els) {
             var num = els.ToList().FindIndex(el => SelectedElementAction(this, el)) + 1;
             if (num == 0)
-                throw Exception("No elements selected. Override getSelectedAction or place locator to <select> tag");
+                throw JDISettings.Exception("No elements selected. Override getSelectedAction or place locator to <select> tag");
             return num;
         }
 

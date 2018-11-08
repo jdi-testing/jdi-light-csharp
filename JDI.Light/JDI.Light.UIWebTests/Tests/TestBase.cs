@@ -1,12 +1,12 @@
-﻿using Epam.JDI.Core.Settings;
-using JDI_Web.Selenium.DriverFactory;
-using JDI_Web.Settings;
+﻿using JDI.Core.Settings;
+using JDI.UIWebTests.Entities;
+using JDI.UIWebTests.UIObjects;
+using JDI.Web.Selenium.DriverFactory;
+using JDI.Web.Selenium.Elements.Composite;
+using JDI.Web.Settings;
 using NUnit.Framework;
-using JDI_Web.Selenium.Elements.Composite;
-using JDI_UIWebTests.UIObjects;
-using JDI_UIWebTests.Entities;
 
-namespace JDI_UIWebTests.Tests
+namespace JDI.UIWebTests.Tests
 {
     [SetUpFixture]
     public class TestBase

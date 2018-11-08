@@ -1,14 +1,14 @@
-﻿using NUnit.Framework;
-using static Epam.JDI.Core.Settings.JDISettings;
-using static JDI_UIWebTests.UIObjects.TestSite;
-using Epam.JDI.Core.Interfaces.Common;
-using JDI_Matchers.NUnit;
+﻿using JDI.Core.Interfaces.Common;
+using JDI.Core.Settings;
+using JDI.Matchers.NUnit;
+using JDI.UIWebTests.UIObjects;
+using NUnit.Framework;
 
-namespace JDI_UIWebTests.Tests.Common
+namespace JDI.UIWebTests.Tests.Common
 {
     public class DatePickerTests
     {
-        private ITextField _datePicker = Dates.Datepicker;
+        private ITextField _datePicker = TestSite.Dates.Datepicker;
         private const string DEFAULT_DATE = "09/09/1945";
         private const string CHECK_DATE = "09/05/1945";
         private const string PARTIAL_TEXT_FIRST = "09/";
@@ -17,13 +17,13 @@ namespace JDI_UIWebTests.Tests.Common
         [SetUp]
         public void SetUp()
         {
-            Logger.Info("Navigating to Metals and Colors page.");
-            Dates.Open();
-            Dates.CheckTitle();
-            Dates.IsOpened();
-            Dates.Datepicker.Clear();            
-            Logger.Info("Setup method finished");
-            Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            JDISettings.Logger.Info("Navigating to Metals and Colors page.");
+            TestSite.Dates.Open();
+            TestSite.Dates.CheckTitle();
+            TestSite.Dates.IsOpened();
+            TestSite.Dates.Datepicker.Clear();            
+            JDISettings.Logger.Info("Setup method finished");
+            JDISettings.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
 
         }
 

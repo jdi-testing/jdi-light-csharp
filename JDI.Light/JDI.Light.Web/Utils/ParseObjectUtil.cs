@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using JDI_Commons;
-using Epam.JDI.Core.Attributes;
-using JDI_Matchers;
-using static Epam.JDI.Core.ExceptionUtils;
+using JDI.Commons;
+using JDI.Core.Attributes;
+using JDI.Matchers;
+using ExceptionUtils = JDI.Core.ExceptionUtils;
 
-namespace JDI_Web.Utils
+namespace JDI.Web.Utils
 {
     public static class ParseObjectUtil
     {
         public static Dictionary<string, string> ParseAsString(this string objString)
         {
-            return ActionWithException(() =>
+            return ExceptionUtils.ActionWithException(() =>
             {
                 if (objString == null)
                     return null;

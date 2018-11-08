@@ -1,4 +1,4 @@
-﻿namespace Epam.JDI.Core.Interfaces.Common
+﻿namespace JDI.Core.Interfaces.Common
 {
     public interface ITextArea : ITextField
     {

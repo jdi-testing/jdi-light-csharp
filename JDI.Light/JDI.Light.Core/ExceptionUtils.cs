@@ -1,7 +1,7 @@
 ﻿using System;
-using Epam.JDI.Core.Settings;
+using JDI.Core.Settings;
 
-namespace Epam.JDI.Core
+namespace JDI.Core
 {
     public static class ExceptionUtils
     {

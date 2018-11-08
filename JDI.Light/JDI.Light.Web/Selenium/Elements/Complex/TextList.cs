@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using JDI_Commons;
-using Epam.JDI.Core.Interfaces.Complex;
-using JDI_Web.Selenium.Base;
-using JDI_Web.Selenium.Elements.Common;
+using JDI.Commons;
+using JDI.Core.Interfaces.Complex;
+using JDI.Core.Settings;
+using JDI.Web.Selenium.Base;
+using JDI.Web.Selenium.Elements.Common;
 using OpenQA.Selenium;
-using static Epam.JDI.Core.Settings.JDISettings;
 
-namespace JDI_Web.Selenium.Elements.Complex
+namespace JDI.Web.Selenium.Elements.Complex
 {
     public class TextList : WebBaseElement, ITextList
     {
@@ -31,7 +31,7 @@ namespace JDI_Web.Selenium.Elements.Complex
         {
             if (Timer.Wait(() => Texts.Contains(expected)))
                 return Texts;
-            throw Exception($"Wait Text '{expected}' Failed ({ToString()}");
+            throw JDISettings.Exception($"Wait Text '{expected}' Failed ({ToString()}");
         }
 
         public IList<string> Texts => _texts.Select(el => el.GetText).ToList();
@@ -74,7 +74,7 @@ namespace JDI_Web.Selenium.Elements.Complex
                 var elements = WebElements;
                 return elements != null && elements.Any() && elements.All(el => el.Displayed);
             }))
-                throw Exception($"Wait displayed failed ({ToString()})");
+                throw JDISettings.Exception($"Wait displayed failed ({ToString()})");
         }
 
         public void WaitVanished()
@@ -84,7 +84,7 @@ namespace JDI_Web.Selenium.Elements.Complex
                 var elements = WebElements;
                 return elements == null || !elements.Any() && elements.All(el => !el.Displayed);
             }))
-                throw Exception($"Wait vanished failed ({ToString()})");
+                throw JDISettings.Exception($"Wait vanished failed ({ToString()})");
         }
     }
 }

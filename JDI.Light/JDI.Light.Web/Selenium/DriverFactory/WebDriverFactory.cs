@@ -3,21 +3,17 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
-using Epam.JDI.Core.Interfaces.Base;
-using Epam.JDI.Core.Interfaces.Settings;
-using Epam.JDI.Core.Settings;
-using JDI_Web.Selenium.Elements.Base;
+using JDI.Core.Interfaces.Base;
+using JDI.Core.Interfaces.Settings;
+using JDI.Core.Settings;
+using JDI.Web.Selenium.Elements.Base;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Remote;
-using static System.String;
-using static Epam.JDI.Core.Settings.JDISettings;
-using static JDI.Web.Properties.Settings;
-using Manager = WebDriverManager;
 
-namespace JDI_Web.Selenium.DriverFactory
+namespace JDI.Web.Selenium.DriverFactory
 {
     public enum RunTypes
     {
@@ -52,7 +48,7 @@ namespace JDI_Web.Selenium.DriverFactory
         {
             get
             {
-                if (IsNullOrEmpty(_currentDriverName))
+                if (String.IsNullOrEmpty(_currentDriverName))
                 {
                     _currentDriverName = _driverNamesDictionary[DriverTypes.Chrome];
                     RegisterLocalDriver(DriverTypes.Chrome);
@@ -78,11 +74,11 @@ namespace JDI_Web.Selenium.DriverFactory
         private readonly Dictionary<DriverTypes, Func<string, IWebDriver>> _driversDictionary = new Dictionary
             <DriverTypes, Func<string, IWebDriver>>
         {
-            {DriverTypes.Chrome, path => IsNullOrEmpty(path) ? new ChromeDriver() : new ChromeDriver(path)},
+            {DriverTypes.Chrome, path => String.IsNullOrEmpty(path) ? new ChromeDriver() : new ChromeDriver(path)},
             {DriverTypes.Firefox, path => new FirefoxDriver()},
             {
                 DriverTypes.IE,
-                path => IsNullOrEmpty(path) 
+                path => String.IsNullOrEmpty(path) 
                     ? new InternetExplorerDriver() 
                     : new InternetExplorerDriver(path)
             }
@@ -117,7 +113,7 @@ namespace JDI_Web.Selenium.DriverFactory
         {
             if (Drivers.ContainsKey(driverName))
             {
-                throw Exception($"Can't register WebDriver {driverName}. Driver with the same name already registered");
+                throw JDISettings.Exception($"Can't register WebDriver {driverName}. Driver with the same name already registered");
             }
             try
             {
@@ -126,7 +122,7 @@ namespace JDI_Web.Selenium.DriverFactory
             }
             catch(Exception e)
             {
-                throw Exception($"Can't register WebDriver {driverName}. StackTrace: {e.StackTrace}");
+                throw JDISettings.Exception($"Can't register WebDriver {driverName}. StackTrace: {e.StackTrace}");
             }
             return driverName;
         }
@@ -140,7 +136,7 @@ namespace JDI_Web.Selenium.DriverFactory
         {
             try
             {
-                if (!IsNullOrEmpty(CurrentDriverName))
+                if (!String.IsNullOrEmpty(CurrentDriverName))
                     return GetDriver(CurrentDriverName);
                 RegisterDriver(DriverTypes.Chrome);
                 return GetDriver(DriverTypes.Chrome);
@@ -164,7 +160,7 @@ namespace JDI_Web.Selenium.DriverFactory
                 driver.Manage().Window.Maximize();
             else
                 driver.Manage().Window.Size = BrowserSize;
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(Timeouts.WaitElementSec);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(JDISettings.Timeouts.WaitElementSec);
             return driver;
         };
 
@@ -230,12 +226,12 @@ namespace JDI_Web.Selenium.DriverFactory
             var capabilities = new DesiredCapabilities(new Dictionary<string, object>
             {
                 {"browserName", _driverNamesDictionary[driverType]},
-                {"version", Empty},
+                {"version", String.Empty},
                 {"javaScript", true}
             });
 
             return RegisterDriver("Remote_" + _driverNamesDictionary[driverType],
-                () => new RemoteWebDriver(new Uri(Default.remote_url), capabilities));
+                () => new RemoteWebDriver(new Uri(Properties.Settings.Default.remote_url), capabilities));
         }
 
         public void SwitchToDriver(string driverName)

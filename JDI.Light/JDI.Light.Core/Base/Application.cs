@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Epam.JDI.Core.Base
+namespace JDI.Core.Base
 {
     public class Application
     {

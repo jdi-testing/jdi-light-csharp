@@ -2,20 +2,18 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using JDI_Commons;
-using JDI_Matchers;
-using JDI_Web.Attributes.Objects;
-using JDI_Web.Selenium.Base;
-using JDI_Web.Selenium.Elements.APIInteract;
-using JDI_Web.Selenium.Elements.Base;
-using JDI_Web.Selenium.Elements.Common;
-using JDI_Web.Selenium.Elements.Complex.Table.Interfaces;
+using JDI.Commons;
+using JDI.Core.Settings;
+using JDI.Matchers;
+using JDI.Web.Attributes.Objects;
+using JDI.Web.Selenium.Base;
+using JDI.Web.Selenium.Elements.APIInteract;
+using JDI.Web.Selenium.Elements.Base;
+using JDI.Web.Selenium.Elements.Common;
+using JDI.Web.Selenium.Elements.Complex.Table.Interfaces;
 using OpenQA.Selenium;
-using static Epam.JDI.Core.Settings.JDISettings;
-using static JDI_Web.Selenium.Elements.Complex.Table.Column;
-using static JDI_Web.Selenium.Elements.Complex.Table.Row;
 
-namespace JDI_Web.Selenium.Elements.Complex.Table
+namespace JDI.Web.Selenium.Elements.Complex.Table
 {
     public class Table : Text, ITable
     {
@@ -311,12 +309,12 @@ namespace JDI_Web.Selenium.Elements.Complex.Table
 
         public ICell Cell(string columnName, string rowName)
         {
-            return Cell(column(columnName), row(rowName));
+            return Cell(Complex.Table.Column.column(columnName), Complex.Table.Row.row(rowName));
         }
 
         public ICell Cell(int columnIndex, int rowIndex)
         {
-            return Cell(column(columnIndex), row(rowIndex));
+            return Cell(Complex.Table.Column.column(columnIndex), Complex.Table.Row.row(rowIndex));
         }
 
         public ICell Cell(IWebElement webElement, Column column, Row row)
@@ -358,7 +356,7 @@ namespace JDI_Web.Selenium.Elements.Complex.Table
                 foreach (var colNameValue in colNameValues)
                 {
                     if (!colNameValue.Matches("[^=]+=[^=]*"))
-                        throw Exception($"Wrong searchCriteria for Cells: {colNameValue}");
+                        throw JDISettings.Exception($"Wrong searchCriteria for Cells: {colNameValue}");
                     var splitted = colNameValue.Split(Convert.ToChar("="));
                     var colName = splitted[0];
                     var colValue = splitted[1];
@@ -384,7 +382,7 @@ namespace JDI_Web.Selenium.Elements.Complex.Table
                 foreach (var rowNameValue in rowNameValues)
                 {
                     if (!rowNameValue.Matches("[^=]+=[^=]*"))
-                        throw Exception($"Wrong searchCritaria for Cells: {rowNameValue}");
+                        throw JDISettings.Exception($"Wrong searchCritaria for Cells: {rowNameValue}");
                     var splitted = rowNameValue.Split(Convert.ToChar("="));
                     var rowName = splitted[0];
                     var rowValue = splitted[1];
@@ -417,7 +415,7 @@ namespace JDI_Web.Selenium.Elements.Complex.Table
             {
                 WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.Zero;
                 var rowsCount = Rows.GetCount(true);
-                WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(Timeouts.CurrentTimeoutSec);
+                WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(JDISettings.Timeouts.CurrentTimeoutSec);
                 return rowsCount == 0;
             }
         }
@@ -474,7 +472,7 @@ namespace JDI_Web.Selenium.Elements.Complex.Table
             if (headers != null && headers.Contains(name))
                 nameIndex = headers.IndexOf(name);
             else
-                throw Exception("Can't Get Column: '" + name + "'. " + ((headers == null) ? "ColumnHeaders is Null" : "Available ColumnHeaders: " + headers.Print(", ", "'{0}'") + ")"));
+                throw JDISettings.Exception("Can't Get Column: '" + name + "'. " + ((headers == null) ? "ColumnHeaders is Null" : "Available ColumnHeaders: " + headers.Print(", ", "'{0}'") + ")"));
             return nameIndex + Columns.StartIndex;
         }
 
@@ -485,7 +483,7 @@ namespace JDI_Web.Selenium.Elements.Complex.Table
             if (headers != null && headers.Contains(name))
                 nameIndex = headers.IndexOf(name);
             else
-                throw Exception($"Can't Get Row: {name}. Available RowHeaders: {Headers.Print(", ", "'{0}'")}");
+                throw JDISettings.Exception($"Can't Get Row: {name}. Available RowHeaders: {Headers.Print(", ", "'{0}'")}");
             return nameIndex + Rows.StartIndex;
         }
 

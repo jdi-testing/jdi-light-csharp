@@ -4,7 +4,7 @@ using WebDriverManager.DriverConfigs.Impl;
 using WebDriverManager.Helpers;
 using Manager = WebDriverManager;
 
-namespace JDI_Web.Selenium.DriverManager
+namespace JDI.Web.Selenium.DriverManager
 {
     public class WebDriverManager
     {

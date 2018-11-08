@@ -2,7 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace JDI_Web.Attributes
+namespace JDI.Web.Attributes
 {
     public static class FindsByExtension
     {

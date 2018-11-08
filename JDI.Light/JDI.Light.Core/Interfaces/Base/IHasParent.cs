@@ -1,4 +1,4 @@
-﻿namespace JDI_Core.Interfaces.Base
+﻿namespace JDI.Core.Interfaces.Base
 {
     public interface IHasParent
     {

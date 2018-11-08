@@ -1,8 +1,8 @@
-﻿using NUnit.Framework;
-using static Epam.JDI.Core.Settings.JDISettings;
-using static JDI_UIWebTests.UIObjects.TestSite;
+﻿using JDI.Core.Settings;
+using JDI.UIWebTests.UIObjects;
+using NUnit.Framework;
 
-namespace JDI_UIWebTests.Tests.Composite
+namespace JDI.UIWebTests.Tests.Composite
 {
     public class SearchTests
     {
@@ -10,21 +10,21 @@ namespace JDI_UIWebTests.Tests.Composite
         [SetUp]
         public void SetUp()
         {
-            Logger.Info("Navigating to Home page.");
-            HomePage.Open();
-            HomePage.CheckTitle();
-            HomePage.IsOpened();
-            Logger.Info("Setup method finished");
-            Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            JDISettings.Logger.Info("Navigating to Home page.");
+            TestSite.HomePage.Open();
+            TestSite.HomePage.CheckTitle();
+            TestSite.HomePage.IsOpened();
+            JDISettings.Logger.Info("Setup method finished");
+            JDISettings.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         [Test]
         public void FillTest()
         {
-            Header.Search.SearchButton.Click();
-            Header.Search.Find("something");
-            Header.Search.SearchButonActive.Click();
-            SupportPage.CheckOpened();
+            TestSite.Header.Search.SearchButton.Click();
+            TestSite.Header.Search.Find("something");
+            TestSite.Header.Search.SearchButonActive.Click();
+            TestSite.SupportPage.CheckOpened();
         }
 
     }

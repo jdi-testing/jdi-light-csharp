@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Epam.JDI.Core.Attributes.Functions;
-using Epam.JDI.Core.Interfaces.Complex;
-using JDI_Matchers;
+using JDI.Core.Attributes.Functions;
+using JDI.Core.Interfaces.Complex;
+using JDI.Matchers;
 
-namespace JDI_Web.Selenium.Elements.Composite
+namespace JDI.Web.Selenium.Elements.Composite
 {
     public class PopupForm<T> : Form<T>, IPopup
     {

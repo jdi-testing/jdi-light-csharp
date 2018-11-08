@@ -2,27 +2,25 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using Epam.JDI.Core.Interfaces.Base;
-using Epam.JDI.Core.Interfaces.Common;
-using Epam.JDI.Core.Interfaces.Complex;
-using Epam.JDI.Core.Interfaces.Settings;
-using Epam.JDI.Core.Logging;
-using Epam.JDI.Core.Settings;
-using JDI_Web.Selenium.Base;
-using JDI_Web.Selenium.DriverFactory;
-using JDI_Web.Selenium.Elements.Base;
-using JDI_Web.Selenium.Elements.Common;
-using JDI_Web.Selenium.Elements.Complex;
-using JDI_Web.Selenium.Elements.Complex.Table;
-using JDI_Web.Selenium.Elements.Complex.Table.Interfaces;
+using JDI.Core.Interfaces.Base;
+using JDI.Core.Interfaces.Common;
+using JDI.Core.Interfaces.Complex;
+using JDI.Core.Interfaces.Settings;
+using JDI.Core.Logging;
+using JDI.Core.Settings;
+using JDI.Web.Selenium.Base;
+using JDI.Web.Selenium.DriverFactory;
+using JDI.Web.Selenium.Elements.Base;
+using JDI.Web.Selenium.Elements.Common;
+using JDI.Web.Selenium.Elements.Complex;
+using JDI.Web.Selenium.Elements.Complex.Table;
+using JDI.Web.Selenium.Elements.Complex.Table.Interfaces;
 using OpenQA.Selenium;
-using static System.Int32;
-using static JDI_Web.Selenium.DriverFactory.WebDriverFactory;
-using Image = JDI_Web.Selenium.Elements.Common.Image;
+using Image = JDI.Web.Selenium.Elements.Common.Image;
 
 // ReSharper disable InconsistentNaming
 
-namespace JDI_Web.Settings
+namespace JDI.Web.Settings
 {
     public class WebSettings : JDISettings
     {
@@ -92,9 +90,9 @@ namespace JDI_Web.Settings
                 if (parameters.Contains("any") || parameters.Contains("all"))
                     WebDriverFactory.ElementSearchCriteria = el => el != null;
                 if (parameters.Contains("single") || parameters.Contains("displayed"))
-                    OnlyOneElementAllowedInSearch = true;
+                    WebDriverFactory.OnlyOneElementAllowedInSearch = true;
                 if (parameters.Contains("multiple") || parameters.Contains("displayed"))
-                    OnlyOneElementAllowedInSearch = false;
+                    WebDriverFactory.OnlyOneElementAllowedInSearch = false;
             }, "SearchElementStrategy");
 
             FillFromSettings(p =>
@@ -105,7 +103,7 @@ namespace JDI_Web.Settings
                 if (p.ToLower().Split('x').Length == 2)
                     split = p.ToLower().Split('x');
                 if (split != null)
-                    BrowserSize = new Size(Parse(split[0]), Parse(split[1]));
+                    WebDriverFactory.BrowserSize = new Size(Int32.Parse(split[0]), Int32.Parse(split[1]));
             }, "BrowserSize");
         }
 

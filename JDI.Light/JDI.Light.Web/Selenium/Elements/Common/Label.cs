@@ -1,9 +1,9 @@
-﻿using Epam.JDI.Core.Interfaces.Common;
-using JDI_Web.Selenium.Base;
-using JDI_Web.Selenium.Elements.Base;
+﻿using JDI.Core.Interfaces.Common;
+using JDI.Web.Selenium.Base;
+using JDI.Web.Selenium.Elements.Base;
 using OpenQA.Selenium;
 
-namespace JDI_Web.Selenium.Elements.Common
+namespace JDI.Web.Selenium.Elements.Common
 {
     public class Label: ClickableText, ILabel
     {

@@ -1,13 +1,12 @@
-﻿using Epam.JDI.Core.Interfaces.Common;
-using JDI_UIWebTests.Entities;
-using JDI_Web.Attributes;
-using JDI_Web.Selenium.Elements.Common;
-using JDI_Web.Selenium.Elements.Composite;
+﻿using System.Collections.Generic;
+using JDI.Core.Interfaces.Common;
+using JDI.UIWebTests.Entities;
+using JDI.Web.Attributes;
+using JDI.Web.Selenium.Elements.Common;
+using JDI.Web.Selenium.Elements.Composite;
 using OpenQA.Selenium;
-using System.Collections.Generic;
 
-
-namespace JDI_UIWebTests.UIObjects.Sections
+namespace JDI.UIWebTests.UIObjects.Sections
 {
     public class ContactFormTwoButtons:Form<Contact>
     {

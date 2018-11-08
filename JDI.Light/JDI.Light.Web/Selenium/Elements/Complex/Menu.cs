@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
-using Epam.JDI.Core.Interfaces.Complex;
-using JDI_Commons;
+using JDI.Commons;
+using JDI.Core.Interfaces.Complex;
+using JDI.Core.Settings;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-using static Epam.JDI.Core.Settings.JDISettings;
 
-namespace JDI_Web.Selenium.Elements.Complex
+namespace JDI.Web.Selenium.Elements.Complex
 {
     public class Menu : Menu<IConvertible>, IMenu { }
     public class Menu<TEnum> : Selector<TEnum>, IMenu<TEnum>
@@ -86,7 +86,7 @@ namespace JDI_Web.Selenium.Elements.Complex
                 return;
             }
             if (split.Count > m.MenuLevelsLocators.Count)
-                throw Exception($"Can't hover and click on element ({m}) by value: {names.Print(m.Separator)}. Amount of locators ({m.MenuLevelsLocators.Count}) less than select path length ({split.Count})");
+                throw JDISettings.Exception($"Can't hover and click on element ({m}) by value: {names.Print(m.Separator)}. Amount of locators ({m.MenuLevelsLocators.Count}) less than select path length ({split.Count})");
             m.Hover(split.ListCopy(to: -1).ToArray());
             var lastIndex = split.Count - 1;
             if (m.Delay > 0) Thread.Sleep(m.Delay);
@@ -131,7 +131,7 @@ namespace JDI_Web.Selenium.Elements.Complex
                     var elements = new Selector(m.MenuLevelsLocators[i], element: m).Elements;
                     var element = elements.FirstOrDefault(el => el.Text.Equals(value));
                     if (element == null)
-                        throw Exception("Can't choose element:" + value);
+                        throw JDISettings.Exception("Can't choose element:" + value);
                     if (m.Delay > 0) Thread.Sleep(m.Delay);
                     action(m.WebDriver, element);
                 }

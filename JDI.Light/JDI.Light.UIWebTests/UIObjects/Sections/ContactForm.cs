@@ -1,14 +1,14 @@
-﻿using Epam.JDI.Core.Attributes;
-using Epam.JDI.Core.Interfaces.Common;
-using JDI_UIWebTests.Entities;
-using JDI_Web.Attributes;
-using JDI_Web.Selenium.Elements.Common;
-using JDI_Web.Selenium.Elements.Composite;
-using JDI_Web.Settings;
+﻿using System.Collections.Generic;
+using JDI.Core.Attributes;
+using JDI.Core.Interfaces.Common;
+using JDI.UIWebTests.Entities;
+using JDI.Web.Attributes;
+using JDI.Web.Selenium.Elements.Common;
+using JDI.Web.Selenium.Elements.Composite;
+using JDI.Web.Settings;
 using OpenQA.Selenium;
-using System.Collections.Generic;
 
-namespace JDIWebTests.UIObjects.Sections
+namespace JDI.UIWebTests.UIObjects.Sections
 {
     public class ContactForm : Form<Contact>
     {

@@ -1,4 +1,4 @@
-﻿namespace Epam.JDI.Core.Interfaces.Base
+﻿namespace JDI.Core.Interfaces.Base
 {
     public interface IHasValue
     {

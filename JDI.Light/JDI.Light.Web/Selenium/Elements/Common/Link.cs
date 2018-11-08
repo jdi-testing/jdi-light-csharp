@@ -1,12 +1,12 @@
 ﻿using System;
-using JDI_Commons;
-using Epam.JDI.Core.Interfaces.Common;
-using JDI_Web.Selenium.Base;
-using JDI_Web.Selenium.Elements.Base;
+using JDI.Commons;
+using JDI.Core.Interfaces.Common;
+using JDI.Matchers;
+using JDI.Web.Selenium.Base;
+using JDI.Web.Selenium.Elements.Base;
 using OpenQA.Selenium;
-using JDI_Matchers;
 
-namespace JDI_Web.Selenium.Elements.Common
+namespace JDI.Web.Selenium.Elements.Common
 {
     public class Link : ClickableText, ILink
     {

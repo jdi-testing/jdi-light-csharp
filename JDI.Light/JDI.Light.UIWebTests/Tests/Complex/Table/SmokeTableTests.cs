@@ -1,10 +1,10 @@
 ﻿using System.Linq;
-using JDI_Commons;
-using JDI_Matchers.NUnit;
-using JDI_UIWebTests.Tests.Complex.Table.Base;
+using JDI.Commons;
+using JDI.Matchers.NUnit;
+using JDI.UIWebTests.Tests.Complex.Table.Base;
 using NUnit.Framework;
 
-namespace JDI_UIWebTests.Tests.Complex.Table
+namespace JDI.UIWebTests.Tests.Complex.Table
 {
     [TestFixture]
     class SmokeTableTests : SupportTableTestBase

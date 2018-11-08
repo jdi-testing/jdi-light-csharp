@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JDI_Commons
+namespace JDI.Commons
 {
     public static class ExceptionUtils
     {

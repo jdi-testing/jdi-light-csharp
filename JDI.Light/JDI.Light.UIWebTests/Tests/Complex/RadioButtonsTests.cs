@@ -1,42 +1,41 @@
-﻿using NUnit.Framework;
-using System.Collections.Generic;
-using JDI_UIWebTests.Enums;
-using JDI_Web.Selenium.Elements.Complex;
-using static Epam.JDI.Core.Settings.JDISettings;
-using static JDI_UIWebTests.Tests.Complex.CommonActionsData;
-using static JDI_UIWebTests.UIObjects.TestSite;
-using Assert = JDI_Matchers.NUnit.Assert;
+﻿using System.Collections.Generic;
+using JDI.Core.Settings;
+using JDI.UIWebTests.Enums;
+using JDI.UIWebTests.UIObjects;
+using JDI.Web.Selenium.Elements.Complex;
+using NUnit.Framework;
+using Assert = JDI.Matchers.NUnit.Assert;
 
-namespace JDI_UIWebTests.Tests.Complex
+namespace JDI.UIWebTests.Tests.Complex
 {
     public class RadioButtonsTests
     {
         private static readonly IList<string> OddOptions = new List<string> { "1", "3", "5", "7"};
-        private RadioButtons<Odds> OddNumbersControl => MetalsColorsPage.SummaryBlock.OddNumbers;
+        private RadioButtons<Odds> OddNumbersControl => TestSite.MetalsColorsPage.SummaryBlock.OddNumbers;
 
         [SetUp]
         public void SetUp()
         {
-            Logger.Info("Navigating to Metals and Colors page.");
-            MetalsColorsPage.Open();
-            MetalsColorsPage.CheckTitle();
-            MetalsColorsPage.IsOpened();            
-            Logger.Info("Setup method finished");
-            Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            JDISettings.Logger.Info("Navigating to Metals and Colors page.");
+            TestSite.MetalsColorsPage.Open();
+            TestSite.MetalsColorsPage.CheckTitle();
+            TestSite.MetalsColorsPage.IsOpened();            
+            JDISettings.Logger.Info("Setup method finished");
+            JDISettings.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         [Test]
         public void SelectStringTest()
         {
             OddNumbersControl.Select("7");
-            CheckAction("Summary (Odd): value changed to 7");
+            CommonActionsData.CheckAction("Summary (Odd): value changed to 7");
         }
 
         [Test]
         public void SelectIndexTest()
         {
             OddNumbersControl.Select(4);
-            CheckAction("Summary (Odd): value changed to 7");
+            CommonActionsData.CheckAction("Summary (Odd): value changed to 7");
         }
 
         [Test]
@@ -45,7 +44,7 @@ namespace JDI_UIWebTests.Tests.Complex
         {
             // Select method is waiting for string "7" not "Seven"
             OddNumbersControl.Select(Odds.Seven);
-            CheckAction("Summary (Odd): value changed to 7");
+            CommonActionsData.CheckAction("Summary (Odd): value changed to 7");
         }
 
         [Test]
@@ -76,7 +75,7 @@ namespace JDI_UIWebTests.Tests.Complex
         public void SetValueTest()
         {
             OddNumbersControl.Value = "7";
-            CheckAction("Summary (Odd): value changed to 7");
+            CommonActionsData.CheckAction("Summary (Odd): value changed to 7");
         }
 
         [Test]
@@ -88,19 +87,19 @@ namespace JDI_UIWebTests.Tests.Complex
         [Test]
         public void GetSelectedTest()
         {
-            CheckActionThrowError(() => OddNumbersControl.Selected(), NoElementsMessage);
+            CommonActionsData.CheckActionThrowError(() => OddNumbersControl.Selected(), CommonActionsData.NoElementsMessage);
         }
 
         [Test]
         public void GetSelectedIndexTest()
         {
-            CheckActionThrowError(() => OddNumbersControl.SelectedIndex(), NoElementsMessage);
+            CommonActionsData.CheckActionThrowError(() => OddNumbersControl.SelectedIndex(), CommonActionsData.NoElementsMessage);
         }
 
         [Test]
         public void IsSelectedTest()
         {
-            CheckActionThrowError(() => OddNumbersControl.Selected("7"), NoElementsMessage);
+            CommonActionsData.CheckActionThrowError(() => OddNumbersControl.Selected("7"), CommonActionsData.NoElementsMessage);
         }
 
         [Test]
@@ -108,27 +107,27 @@ namespace JDI_UIWebTests.Tests.Complex
         public void IsSelectedEnumTest()
         {
             // Select method is waiting for string "7" not "Seven"
-            CheckActionThrowError(() => OddNumbersControl.Selected(Odds.Seven), NoElementsMessage);
+            CommonActionsData.CheckActionThrowError(() => OddNumbersControl.Selected(Odds.Seven), CommonActionsData.NoElementsMessage);
         }
 
         [Test]
         [Ignore("Timer.cs wait method hide exceptions unlike Java")]
         public void WaitSelectedTest()
         {
-            CheckActionThrowError(() => OddNumbersControl.WaitSelected("7"), NoElementsMessage);
+            CommonActionsData.CheckActionThrowError(() => OddNumbersControl.WaitSelected("7"), CommonActionsData.NoElementsMessage);
         }
 
         [Test]
         [Ignore("Timer.cs wait method hide exceptions unlike Java. C# enum does not support strings")]
         public void WaitSelectedEnumTest()
         {
-            CheckActionThrowError(() => OddNumbersControl.WaitSelected(Odds.Seven), NoElementsMessage);
+            CommonActionsData.CheckActionThrowError(() => OddNumbersControl.WaitSelected(Odds.Seven), CommonActionsData.NoElementsMessage);
         }
 
         [Test]
         public void GetValueTest()
         {
-            CheckActionThrowError(() => OddNumbersControl.Value.ToString(), NoElementsMessage);
+            CommonActionsData.CheckActionThrowError(() => OddNumbersControl.Value.ToString(), CommonActionsData.NoElementsMessage);
         }
     }
 }

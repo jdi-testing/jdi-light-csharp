@@ -1,9 +1,9 @@
 ﻿using System;
-using Epam.JDI.Core.Settings;
-using JDI_Commons;
+using JDI.Commons;
+using JDI.Core.Settings;
 using NUnit.Framework;
 
-namespace JDI_Matchers
+namespace JDI.Matchers
 {
     public class NUnitMatcher : IAssert
     {

@@ -1,16 +1,15 @@
-﻿using Epam.JDI.Core.Interfaces.Complex;
-using NUnit.Framework;
-using System.Collections.Generic;
-using static Epam.JDI.Core.Settings.JDISettings;
-using static JDI_UIWebTests.UIObjects.TestSite;
-using JDI_UIWebTests.Enums;
-using static JDI_UIWebTests.Tests.Complex.CommonActionsData;
-using JDI_Matchers.NUnit;
-using OpenQA.Selenium;
+﻿using System.Collections.Generic;
 using System.Linq;
+using JDI.Core.Interfaces.Complex;
+using JDI.Core.Settings;
+using JDI.Matchers.NUnit;
+using JDI.UIWebTests.Enums;
+using JDI.UIWebTests.UIObjects;
+using NUnit.Framework;
+using OpenQA.Selenium;
+using Assert = JDI.Matchers.NUnit.Assert;
 
-
-namespace JDI_UIWebTests.Tests.Complex
+namespace JDI.UIWebTests.Tests.Complex
 {
     public class CheckListTests
     {
@@ -19,12 +18,12 @@ namespace JDI_UIWebTests.Tests.Complex
 
         private ICheckList<Elements> _nature()
         {
-            return MetalsColorsPage.Elements;
+            return TestSite.MetalsColorsPage.Elements;
         }
 
         private void _checkAllIsChecked(bool isChecked)
         {
-            IList<bool> checkedElems = HomePage.WebDriver.
+            IList<bool> checkedElems = TestSite.HomePage.WebDriver.
                 FindElements(By.CssSelector("#elements-checklist input")).
                 Select(e => e.GetAttribute("checked") != null).ToList();
             new Check("Check that all checkbox elements checked = " + isChecked).
@@ -32,8 +31,8 @@ namespace JDI_UIWebTests.Tests.Complex
         }
 
         private void _clearCheckBoxBlock() {
-            IList<IWebElement> inputElems = HomePage.WebDriver.FindElements(By.CssSelector("#elements-checklist input"));
-            IList<IWebElement> labelsElems = HomePage.WebDriver.FindElements(By.CssSelector(".checkbox>label"));
+            IList<IWebElement> inputElems = TestSite.HomePage.WebDriver.FindElements(By.CssSelector("#elements-checklist input"));
+            IList<IWebElement> labelsElems = TestSite.HomePage.WebDriver.FindElements(By.CssSelector(".checkbox>label"));
 
             for (int i = 0; i < inputElems.Count; i++)
             {
@@ -47,51 +46,51 @@ namespace JDI_UIWebTests.Tests.Complex
         private void _cheсkAllLogMessages(IList<string> logLines) {
             //TO_DO: replace with TextList.Texts when will be fixed
             //var texts = ActionsLog.Texts; 
-            IList<string> log = HomePage.WebDriver.FindElements(By.CssSelector(".logs li")).Select(e => e.Text).ToList();            
+            IList<string> log = TestSite.HomePage.WebDriver.FindElements(By.CssSelector(".logs li")).Select(e => e.Text).ToList();            
             for (int i = 0; i < log.Count; i++)
             {
-                JDI_Matchers.NUnit.Assert.Contains(log[i], logLines[i] + ": condition changed to true");
+                Assert.Contains(log[i], logLines[i] + ": condition changed to true");
             }            
         }
 
         [SetUp]
         public void SetUp()
         {
-            Logger.Info("Navigating to Metals and Colors page.");
-            MetalsColorsPage.Open();
-            MetalsColorsPage.CheckTitle();
-            MetalsColorsPage.IsOpened();
-            Logger.Info("Setup method finished");
-            Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            JDISettings.Logger.Info("Navigating to Metals and Colors page.");
+            TestSite.MetalsColorsPage.Open();
+            TestSite.MetalsColorsPage.CheckTitle();
+            TestSite.MetalsColorsPage.IsOpened();
+            JDISettings.Logger.Info("Setup method finished");
+            JDISettings.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         [Test]
         public void SelectStringTest()
         {
             _nature().Select("Fire");
-            CheckAction("Fire: condition changed to true");
+            CommonActionsData.CheckAction("Fire: condition changed to true");
         }
 
         [Test]
         public void SelectIndexTest()
         {
             _nature().Select(4);
-            CheckAction("Fire: condition changed to true");
+            CommonActionsData.CheckAction("Fire: condition changed to true");
         }
 
         [Test]
         public void SelectEnumTest()
         {
             _nature().Select(Elements.Fire);
-            CheckAction("Fire: condition changed to true");
+            CommonActionsData.CheckAction("Fire: condition changed to true");
         }
 
         [Test]
         public void Select2StringTest()
         {
             _nature().Select("Water", "Fire");
-            CheckAction("Fire: condition changed to true");            
-            string asd = ActionsLog.TextElements.First().Value;
+            CommonActionsData.CheckAction("Fire: condition changed to true");            
+            string asd = TestSite.ActionsLog.TextElements.First().Value;
             _cheсkAllLogMessages(new List<string>() { "Fire", "Water" });
         }
 
@@ -99,7 +98,7 @@ namespace JDI_UIWebTests.Tests.Complex
         public void Select2IndexTest()
         {
             _nature().Select(1, 4);
-            CheckAction("Fire: condition changed to true");
+            CommonActionsData.CheckAction("Fire: condition changed to true");
             _cheсkAllLogMessages(new List<string>() { "Fire", "Water" });
         }
 
@@ -107,7 +106,7 @@ namespace JDI_UIWebTests.Tests.Complex
         public void Select2EnumTest()
         {
             _nature().Select(Elements.Water, Elements.Fire);
-            CheckAction("Fire: condition changed to true");
+            CommonActionsData.CheckAction("Fire: condition changed to true");
             _cheсkAllLogMessages(new List<string>() { "Fire", "Water" });
         }
 
@@ -115,28 +114,28 @@ namespace JDI_UIWebTests.Tests.Complex
         public void CheckStringTest()
         {
             _nature().Check("Fire");
-            CheckAction("Fire: condition changed to true");
+            CommonActionsData.CheckAction("Fire: condition changed to true");
         }
 
         [Test]
         public void CheckIndexTest()
         {
             _nature().Check(4);
-            CheckAction("Fire: condition changed to true");
+            CommonActionsData.CheckAction("Fire: condition changed to true");
         }
 
         [Test]
         public void CheckEnumTest()
         {
             _nature().Check(Elements.Fire);
-            CheckAction("Fire: condition changed to true");
+            CommonActionsData.CheckAction("Fire: condition changed to true");
         }
 
         [Test]
         public void Check2StringTest()
         {
             _nature().Check("Water", "Fire");
-            CheckAction("Fire: condition changed to true");
+            CommonActionsData.CheckAction("Fire: condition changed to true");
             _cheсkAllLogMessages(new List<string>() { "Fire", "Water" });
         }
 
@@ -144,7 +143,7 @@ namespace JDI_UIWebTests.Tests.Complex
         public void Check2IndexTest()
         {
             _nature().Check(1, 4);
-            CheckAction("Fire: condition changed to true");
+            CommonActionsData.CheckAction("Fire: condition changed to true");
             _cheсkAllLogMessages(new List<string>() { "Fire", "Water" });
         }
 
@@ -152,7 +151,7 @@ namespace JDI_UIWebTests.Tests.Complex
         public void Check2EnumTest()
         {
             _nature().Check(Elements.Water, Elements.Fire);
-            CheckAction("Fire: condition changed to true");
+            CommonActionsData.CheckAction("Fire: condition changed to true");
             _cheсkAllLogMessages(new List<string>() { "Fire", "Water" });
         }
 
@@ -210,7 +209,7 @@ namespace JDI_UIWebTests.Tests.Complex
         public void SetValueTest()
         {
             _nature().Value = "Fire";                
-            CheckAction("Fire: condition changed to true");
+            CommonActionsData.CheckAction("Fire: condition changed to true");
         }
 
         [Test]

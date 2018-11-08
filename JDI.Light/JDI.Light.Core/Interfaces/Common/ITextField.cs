@@ -1,8 +1,8 @@
-﻿using Epam.JDI.Core.Interfaces.Base;
+﻿using JDI.Core.Interfaces.Base;
 
 //using System.IComparable instead of interface CharSequence
 
-namespace Epam.JDI.Core.Interfaces.Common
+namespace JDI.Core.Interfaces.Common
 {
     public interface ITextField : ISetValue, IText
     {

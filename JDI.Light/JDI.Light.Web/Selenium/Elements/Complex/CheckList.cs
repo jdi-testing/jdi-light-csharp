@@ -1,8 +1,8 @@
 ﻿using System;
-using Epam.JDI.Core.Interfaces.Complex;
+using JDI.Core.Interfaces.Complex;
 using OpenQA.Selenium;
 
-namespace JDI_Web.Selenium.Elements.Complex
+namespace JDI.Web.Selenium.Elements.Complex
 {
     public class CheckList : CheckList<IConvertible>, ICheckList
     {

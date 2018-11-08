@@ -1,9 +1,8 @@
 ﻿using System;
-using Epam.JDI.Core.Interfaces.Base;
-using Epam.JDI.Core.Interfaces.Settings;
-using Epam.JDI.Core.Settings;
+using JDI.Core.Interfaces.Base;
+using JDI.Core.Settings;
 
-namespace JDI_Core.Interfaces.Settings
+namespace JDI.Core.Interfaces.Settings
 {
     public class DefaultDriver : IDriver<object>
     {

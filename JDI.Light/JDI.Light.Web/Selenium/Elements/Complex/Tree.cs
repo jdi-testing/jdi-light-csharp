@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using JDI_Commons;
-using JDI_Web.Selenium.Base;
-using JDI_Web.Selenium.DriverFactory;
+using JDI.Commons;
+using JDI.Core.Settings;
+using JDI.Web.Selenium.Base;
+using JDI.Web.Selenium.DriverFactory;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-using static Epam.JDI.Core.Settings.JDISettings;
 
-namespace JDI_Web.Selenium.Elements.Complex
+namespace JDI.Web.Selenium.Elements.Complex
 {
     public class Tree : Selector
     {
@@ -59,7 +59,7 @@ namespace JDI_Web.Selenium.Elements.Complex
                 {
                     var elements = ctx.FindElements(m.Locator.FillByTemplate(node));
                     if (elements == null || elements.Count != 0)
-                        throw Exception($"Can't select element by path '{names.Print(m.Separator)}'");
+                        throw JDISettings.Exception($"Can't select element by path '{names.Print(m.Separator)}'");
                     var element = elements.First();
                     element.Click();
                     ctx = element;

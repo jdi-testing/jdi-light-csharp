@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using JDI_Commons;
+using JDI.Commons;
 
-namespace Epam.JDI.Core.Reporting
+namespace JDI.Core.Reporting
 {
     public static class PerformanceStatistic
     {

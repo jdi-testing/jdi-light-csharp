@@ -1,7 +1,7 @@
-﻿using Epam.JDI.Core.Interfaces.Base;
-using Epam.JDI.Core.Settings;
+﻿using JDI.Core.Interfaces.Base;
+using JDI.Core.Settings;
 
-namespace Epam.JDI.Core.Interfaces.Settings
+namespace JDI.Core.Interfaces.Settings
 {
     public interface IDriver<out T>
     {

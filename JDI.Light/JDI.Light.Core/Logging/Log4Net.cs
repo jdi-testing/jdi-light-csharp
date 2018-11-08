@@ -1,7 +1,7 @@
 ﻿using System;
 using log4net;
 
-namespace Epam.JDI.Core.Logging
+namespace JDI.Core.Logging
 {
     public class Log4Net : ILogger
     {

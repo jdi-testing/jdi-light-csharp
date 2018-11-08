@@ -1,4 +1,4 @@
-﻿namespace JDI_Core.Preconditions
+﻿namespace JDI.Core.Preconditions
 {
     public interface IPreconditions
     {

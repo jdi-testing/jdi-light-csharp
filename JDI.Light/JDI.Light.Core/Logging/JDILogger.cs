@@ -2,9 +2,8 @@
 using System.Collections.Concurrent;
 using System.IO;
 using System.Linq;
-using static JDI.Core.Properties.Settings;
 
-namespace Epam.JDI.Core.Logging
+namespace JDI.Core.Logging
 {
     public class JDILogger : ILogger
     {
@@ -26,7 +25,7 @@ namespace Epam.JDI.Core.Logging
         {
             var logRoot =
                 GetValidUrl(
-                    JDI_Commons.ExceptionUtils.AvoidExceptions(() => Default["log.path"].ToString()));
+                    Commons.ExceptionUtils.AvoidExceptions(() => Properties.Settings.Default["log.path"].ToString()));
             if (!string.IsNullOrEmpty(logRoot))
                 LogDirectoryRoot = () => logRoot;
         }
