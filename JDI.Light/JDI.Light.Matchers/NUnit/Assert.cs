@@ -5,88 +5,88 @@ namespace JDI.Matchers.NUnit
 {
     public class Assert
     {
-        private static readonly ScreenshotState _screen = ScreenshotState.OnFail;
-        private static readonly BaseMatcher _matcher = new Check().SetScreenshot(_screen);
+        private static readonly ScreenshotState Screen = ScreenshotState.OnFail;
+        private static readonly BaseMatcher Matcher = new Check().SetScreenshot(Screen);
 
         public static void Contains(string actual, string expected)
         {
-            _matcher.Contains(actual, expected);
+            Matcher.Contains(actual, expected);
         }
 
         public static void Matches(string actual, string regEx)
         {
-            _matcher.Matches(actual, regEx);
+            Matcher.Matches(actual, regEx);
         }
 
         public static void IsTrue(bool condition)
         {
-            _matcher.IsTrue(condition);
+            Matcher.IsTrue(condition);
         }
 
         public static void IsFalse(bool condition)
         {
-            _matcher.IsFalse(condition);
+            Matcher.IsFalse(condition);
         }
 
         public static BaseMatcher IgnoreCase()
         {
-            return _matcher.IgnoreCase();
+            return Matcher.IgnoreCase();
         }
 
         public static BaseMatcher.ListChecker<T> Each<T>(IEnumerable<T> collection)
         {
             // TODO: Need to use interface instead of ListChecker<T> ???
-            return _matcher.EachElementOf(collection);
+            return Matcher.EachElementOf(collection);
         }
 
         public static void CollectionEquals<T>(IEnumerable<T> actual, IEnumerable<T> expected)
         {
-            _matcher.CollectionEquals(actual, expected);
+            Matcher.CollectionEquals(actual, expected);
         }
 
         public static void IsSortedByAsc(IEnumerable<int> collection)
         {
-            _matcher.IsSortedByAsc(collection);
+            Matcher.IsSortedByAsc(collection);
         }
 
         public static void IsSortedByDesc(IEnumerable<int> collection)
         {
-            _matcher.IsSortedByDesc(collection);
+            Matcher.IsSortedByDesc(collection);
         }
 
         public static void AreEquals<T>(Func<T> actualFunc, T expected)
         {
-            _matcher.AreEquals(actualFunc, expected);
+            Matcher.AreEquals(actualFunc, expected);
         }
 
         public static void AreEquals<T>(T actual, T expected)
         {
-            _matcher.AreEquals(actual, expected);
+            Matcher.AreEquals(actual, expected);
         }
 
         public static void Contains(Func<string> actualFunc, string expected)
         {
-            _matcher.Contains(actualFunc, expected);
+            Matcher.Contains(actualFunc, expected);
         }
 
         public static BaseMatcher WaitTimeout(long timeout)
         {
-            return _matcher.SetTimeout(timeout);
+            return Matcher.SetTimeout(timeout);
         }
 
         public static void ThrowException(Action throwException, string exceptionMessage)
         {
-            _matcher.ThrowException(throwException, null, exceptionMessage);
+            Matcher.ThrowException(throwException, null, exceptionMessage);
         }
 
         public static void ThrowException(Action throwException, Type exceptionType, string exceptionMessage = null)
         {
-            _matcher.ThrowException(throwException, exceptionType, exceptionMessage);
+            Matcher.ThrowException(throwException, exceptionType, exceptionMessage);
         }
 
         public static void HasNoException(Action action)
         {
-            _matcher.HasNoException(action);
+            Matcher.HasNoException(action);
         }
     }
 }

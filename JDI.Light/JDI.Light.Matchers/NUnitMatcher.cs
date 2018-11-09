@@ -1,5 +1,4 @@
 ﻿using System;
-using JDI.Core;
 using JDI.Core.Settings;
 using NUnit.Framework;
 
@@ -23,26 +22,6 @@ namespace JDI.Matchers
         public void IsTrue(bool actual)
         {
             Assert.IsTrue(actual);
-        }
-
-        public void AreEqual<T>(T actual, T expected)
-        {
-            Assert.AreEqual(actual, expected);
-        }
-
-        public void Matches(string actual, string regEx)
-        {
-            IsTrue(actual.Matches(regEx));
-        }
-
-        public void Contains(string actual, string expected)
-        {
-            IsTrue(actual.Contains(expected));
-        }
-
-        public void IsTrue(Func<bool> actual)
-        {
-            Assert.IsTrue(actual.ForceDone());
         }
     }
 }

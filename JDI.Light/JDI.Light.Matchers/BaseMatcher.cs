@@ -11,13 +11,12 @@ namespace JDI.Matchers
         private static ILogger _logger;
         private static long _waitTimeout = 10;
 
-        private readonly string _chekMessage;
+        private readonly string _checkMessage;
         private bool _ignoreCase;
-        private ScreenshotState _screenshot = ScreenshotState.Off;
 
         protected BaseMatcher(string checkMessage) : this() // TODO: Fix it! (setting logger)
         {
-            _chekMessage = getCheckMessage(checkMessage);
+            _checkMessage = getCheckMessage(checkMessage);
         }
 
         protected BaseMatcher()
@@ -40,7 +39,6 @@ namespace JDI.Matchers
 
         public BaseMatcher SetScreenshot(ScreenshotState screenshot)
         {
-            _screenshot = screenshot;
             return this;
         }
 
@@ -72,7 +70,7 @@ namespace JDI.Matchers
 
         private string GetBeforeMessage(string message)
         {
-            return !string.IsNullOrEmpty(_chekMessage) ? _chekMessage : message;
+            return !string.IsNullOrEmpty(_checkMessage) ? _checkMessage : message;
         }
 
         private void AssertAction(string message, Func<bool> resultFunc)
