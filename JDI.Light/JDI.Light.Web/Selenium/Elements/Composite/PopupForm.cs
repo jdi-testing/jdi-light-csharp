@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using JDI.Core.Attributes.Functions;
+using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Complex;
 using JDI.Matchers;
 

@@ -61,6 +61,7 @@
     <Compile Include="Base\Application.cs" />
     <Compile Include="Base\CascadeInit.cs" />
     <Compile Include="Extensions\CommonExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Utils\ExceptionUtils.cs" />
     <Compile Include="Interfaces\Application.cs" />
     <Compile Include="Interfaces\Base\IAvatar.cs" />
@@ -194,6 +195,9 @@
     <Reference Include="WebDriver.Support, Version=3.141.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Selenium.Support.3.141.0\lib\net45\WebDriver.Support.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Matchers\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

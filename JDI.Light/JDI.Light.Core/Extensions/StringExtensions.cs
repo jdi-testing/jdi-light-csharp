@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace JDI.Matchers
+namespace JDI.Core.Extensions
 {
     public static class StringExtensions
     {

@@ -17,7 +17,7 @@ namespace JDI.Matchers
 
         protected BaseMatcher(string checkMessage) : this() // TODO: Fix it! (setting logger)
         {
-            _checkMessage = getCheckMessage(checkMessage);
+            _checkMessage = GetCheckMessage(checkMessage);
         }
 
         protected BaseMatcher()
@@ -28,7 +28,7 @@ namespace JDI.Matchers
 
         protected abstract void ThrowFail(string message);
 
-        private string getCheckMessage(string checkMessage)
+        private string GetCheckMessage(string checkMessage)
         {
             if (string.IsNullOrEmpty(checkMessage)) return string.Empty;
             var firstWord = checkMessage.Split(' ')[0];
