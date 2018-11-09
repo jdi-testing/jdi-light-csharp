@@ -10,8 +10,7 @@ namespace JDI.UIWebTests.Tests.Common
 {
     public class CheckBoxTests
     {
-
-        private ICheckBox _checkBoxWater = TestSite.MetalsColorsPage.CbWater;
+        private readonly ICheckBox _checkBoxWater = TestSite.MetalsColorsPage.CbWater;
 
         [SetUp]
         public void SetUp()
@@ -25,9 +24,9 @@ namespace JDI.UIWebTests.Tests.Common
         }
 
         [Test]
-        public void CheckSingleTest() 
+        public void CheckSingleTest()
         {
-            _checkBoxWater.Check();            
+            _checkBoxWater.Check();
             CommonActionsData.CheckAction("Water: condition changed to true");
         }
 
@@ -69,12 +68,9 @@ namespace JDI.UIWebTests.Tests.Common
         [TestCaseSource(typeof(CheckBoxProvider), nameof(CheckBoxProvider.InputData))]
         public void SetValueTest(string value, bool expected)
         {
-            if (!expected)
-            {
-                _checkBoxWater.Click();
-            }
+            if (!expected) _checkBoxWater.Click();
             _checkBoxWater.Value = value;
-            string resultMsg = "Water: condition changed to " + expected.ToString().ToLower();
+            var resultMsg = "Water: condition changed to " + expected.ToString().ToLower();
             CommonActionsData.CheckAction(resultMsg);
         }
 

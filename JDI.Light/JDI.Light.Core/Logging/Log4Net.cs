@@ -7,8 +7,9 @@ namespace JDI.Core.Logging
 {
     public class Log4Net : ILogger
     {
-        private ILog _log;
         private readonly object _locker = new object();
+        private ILog _log;
+
         public ILog Log
         {
             get
@@ -21,6 +22,7 @@ namespace JDI.Core.Logging
                     if (_log == null)
                         _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
                 }
+
                 return _log;
             }
         }

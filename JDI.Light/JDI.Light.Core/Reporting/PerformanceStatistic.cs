@@ -6,7 +6,7 @@ namespace JDI.Core.Reporting
     public static class PerformanceStatistic
     {
         private static readonly Dictionary<string, List<double>> Statistic = new Dictionary<string, List<double>>();
-        
+
         public static void AddStatistic(double time)
         {
             AddStatistic("JDI_ACTION", time);
@@ -20,8 +20,10 @@ namespace JDI.Core.Reporting
 
         public static string PrintStatistic()
         {
-            return "Average Actions Time: " + Statistic.ToDictionary(el => el.Key, el => Average(el.Value).ToString("F")).Print();
+            return "Average Actions Time: " +
+                   Statistic.ToDictionary(el => el.Key, el => Average(el.Value).ToString("F")).Print();
         }
+
         public static double Average(List<double> collection)
         {
             if (collection == null || collection.Count == 0)

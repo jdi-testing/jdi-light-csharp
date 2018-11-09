@@ -4,7 +4,7 @@ using JDI.Core.Attributes.Functions;
 
 namespace JDI.Core.Attributes
 {
-    public  class AnnotaionsUtil
+    public class AnnotaionsUtil
     {
         public static string GetElementName(FieldInfo field)
         {
@@ -28,15 +28,14 @@ namespace JDI.Core.Attributes
         private static string SplitCamelCase(string camel)
         {
             var result = camel.ToUpper().First().ToString();
-            for (int i = 1; i < camel.Length - 1; i++)
+            for (var i = 1; i < camel.Length - 1; i++)
                 result += (IsCapital(camel[i]) && !IsCapital(camel[i - 1]) ? " " : "") + camel[i];
             return result + camel[camel.Length - 1];
         }
+
         private static bool IsCapital(char ch)
         {
             return 'A' < ch && ch < 'Z';
         }
     }
-
-
 }

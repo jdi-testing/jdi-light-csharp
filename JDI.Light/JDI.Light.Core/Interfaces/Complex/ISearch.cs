@@ -6,14 +6,13 @@ namespace JDI.Core.Interfaces.Complex
 {
     public interface ISearch : ITextField, IComposite
     {
-
         /**
          * @param text        Specify Text to search
          * @param selectValue Specify value to choose from suggested search result
          *                    Input text in search and then select value from suggestions
          */
         //TODO[JDIAction]
-    void ChooseSuggestion(string text, string selectValue);
+        void ChooseSuggestion(string text, string selectValue);
 
         /**
          * @param text        Specify Text to search

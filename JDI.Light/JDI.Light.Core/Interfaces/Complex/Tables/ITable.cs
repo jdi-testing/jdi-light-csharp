@@ -15,11 +15,11 @@ namespace JDI.Core.Interfaces.Complex.Tables
 
         ICell Cell(string columnName, string rowName);
         //{
-            //return cell(Column.column(columnName), Row.row(rowName));
+        //return cell(Column.column(columnName), Row.row(rowName));
         //}
 
         ICell Cell(int columnIndex, int rowIndex);
-       /*{
+        /*{
             if (columnIndex <= 0 || rowIndex <= 0)
                 throw new ArgumentException("Table indexes starts from 1");
             return cell(Column.column(columnIndex), Row.row(rowIndex));
@@ -43,55 +43,55 @@ namespace JDI.Core.Interfaces.Complex.Tables
         /**
          * Get all Cells with values equals to searched value
          */
-        
-            List<ICell> Cells(string value);
+
+        List<ICell> Cells(string value);
 
         /**
          * Get first Cell in row with value contains expected value
          */
-        
-            ICell CellContains(string value, Row row);
+
+        ICell CellContains(string value, Row row);
 
         /**
          * Get first Cell in row with value match expected regEx
          */
-        
-            ICell CellMatch(string regex, Row row);
+
+        ICell CellMatch(string regex, Row row);
 
         /**
          * Get first Cell in column with value contains expected value
          */
-        
-            ICell CellContains(string value, Column column);
+
+        ICell CellContains(string value, Column column);
 
         /**
          * Get first Cell in column with value match expected regEx
          */
-        
-            ICell CellMatch(string regex, Column column);
+
+        ICell CellMatch(string regex, Column column);
         /**
          * Get all Cells with values contains expected value
          */
-        
-            List<ICell> CellsContains(string value);
+
+        List<ICell> CellsContains(string value);
 
         /**
          * Get all Cells with values matches to searched regex
          */
-        
-            List<ICell> CellsMatch(string regex);
+
+        List<ICell> CellsMatch(string regex);
 
         /**
          * Get first Cell with equals to searched value
          */
-        
-            ICell cell(string value);
+
+        ICell cell(string value);
 
         /**
          * Get first Cell with matches to searched regex
          */
-        
-            ICell cellMatch(string regex);
+
+        ICell cellMatch(string regex);
 
         /**
          * Searches Rows in table matches specified criteria colNameValues - list of search criteria in format columnName=columnValue<br>
@@ -102,11 +102,12 @@ namespace JDI.Core.Interfaces.Complex.Tables
          * e.g. rows("Name*=.* +*", "Profession~=Test") <br>
          * Each Row is map: columnName:cell
          */
-        
-            Dictionary<string, Dictionary<string, ICell>> rows(string colNameValues);
+
+        Dictionary<string, Dictionary<string, ICell>> rows(string colNameValues);
 
         Dictionary<string, Dictionary<string, ICell>> rows(string value, Column column);
         Dictionary<string, Dictionary<string, ICell>> rowsContains(string value, Column column);
+
         Dictionary<string, Dictionary<string, ICell>> rowsMatches(string regEx, Column column);
         /**
          * Searches Columns in table matches specified criteria rowNameValues - list of search criteria in format rowName=rowValue<br>
@@ -117,8 +118,8 @@ namespace JDI.Core.Interfaces.Complex.Tables
          * e.g. columns("Total*=\\d+", "Profession~=QA") <br>
          * Each Column is map: rowName:cell
          */
-        
-            Dictionary<string, Dictionary<string, ICell>> columns(string rowNameValues);
+
+        Dictionary<string, Dictionary<string, ICell>> columns(string rowNameValues);
 
         Dictionary<string, Dictionary<string, ICell>> columns(string value, Row row);
         Dictionary<string, Dictionary<string, ICell>> columnsContains(string value, Row row);
@@ -129,66 +130,66 @@ namespace JDI.Core.Interfaces.Complex.Tables
          * e.g. waitValue("100", row("Total")) <br>
          * or   waitValue("100", row(5))
          */
-        
-            bool waitValue(string value, Row row);
+
+        bool waitValue(string value, Row row);
 
         /**
          * Waits while value appear in Column <br>
          * e.g. waitValue("Roman", column("Name")) <br>
          * or   waitValue("Roman", column(3))
          */
-        
-            bool waitValue(string value, Column column);
+
+        bool waitValue(string value, Column column);
 
         /**
          * Indicates are any rows in table. Check immediately
          */
-        
-            bool isEmpty();
+
+        bool isEmpty();
 
         /**
          * Wait while at least one row appear in table
          */
-        
-            bool waitHaveRows();
+
+        bool waitHaveRows();
 
         /**
          * Wait while at least count of rows appear in table
          */
-        
-            bool waitRows(int count);
+
+        bool waitRows(int count);
 
         /**
          * Get first Cell with searched value in row by index (Int) or name(string)<br>
          * e.g. cell("100", row("Total")) <br>
          * or   cell("100", row(5))
          */
-        
-            ICell cell(string value, Row row);
+
+        ICell cell(string value, Row row);
 
         /**
          * Get first Cell with searched value in column by index (Int) or name(string)<br>
          * e.g. cell("Roman", column("Name")) <br>
          * or   cell("Roman", column(3))
          */
-        
-            ICell cell(string value, Column column);
+
+        ICell cell(string value, Column column);
 
         /**
          * Get all Cells with values matches to searched in Row by index (Int) or name(string) <br>
          * e.g. cellsMatch(".*uccess.*", row("Result")) <br>
          * or   cellsMatch(".*uccess.*", row(5))
          */
-        
-            List<ICell> cellsMatch(string regex, Row row);
+
+        List<ICell> cellsMatch(string regex, Row row);
 
         /**
          * Get all Cells with values matches to searched in Column by index (Int) or name(string) <br>
          * e.g. cellsMatch("Roma.*", column("Name")) <br>
          * or   cellsMatch("Roma.*", column(3))
          */
-        
-            List<ICell> cellsMatch(string regex, Column column);
+
+        List<ICell> cellsMatch(string regex, Column column);
 
         /**
          * Get Row cells for Cell with searched value in Column by index(Int) or name(string) <br>
@@ -196,8 +197,8 @@ namespace JDI.Core.Interfaces.Complex.Tables
          * or   row("Roman", column(3)) <br>
          * Each Row is map: columnName:cell
          */
-        
-            Dictionary<string, ICell> row(string value, Column column);
+
+        Dictionary<string, ICell> row(string value, Column column);
 
         /**
          * Get Column cells for Cell with searched value in Row by index(Int) or name(string) <br>
@@ -205,40 +206,40 @@ namespace JDI.Core.Interfaces.Complex.Tables
          * or   column("100", row(5)) <br>
          * Each Column is map: rowName:cell
          */
-        
-            Dictionary<string, ICell> column(string value, Row row);
+
+        Dictionary<string, ICell> column(string value, Row row);
         /**
          * Get Column cells for Cell with searched value contains in Row's values by index(Int) or name(string) <br>
          * e.g. columnContains("Framewo", row("Total") <br>
          * or   columnContains("mwork", row(5)) <br>
          * Each Column is map: rowName:cell
          */
-        
-            Dictionary<string, ICell> columnContains(string value, Row row);
+
+        Dictionary<string, ICell> columnContains(string value, Row row);
         /**
          * Get Column cells for Cell with Row's values match regEx by index(Int) or name(string) <br>
          * e.g. columnContains(".*work", row("Total") <br>
          * or   columnContains("Frame.+ork", row(5)) <br>
          * Each Column is map: rowName:cell
          */
-        
-            Dictionary<string, ICell> columnMatch(string regEx, Row row);
+
+        Dictionary<string, ICell> columnMatch(string regEx, Row row);
         /**
          * Get Column cells for Cell with searched value contains in Column's values by index(Int) or name(string) <br>
          * e.g. row("Framewo", column("Name")) <br>
          * or   row("mwork", column(3)) <br>
          * Each Row is map: columnName:cell
          */
-        
-            Dictionary<string, ICell> rowContains(string value, Column column);
+
+        Dictionary<string, ICell> rowContains(string value, Column column);
         /**
          * Get Column cells for Cell with Column's values match regEx by index(Int) or name(string) <br>
          * e.g. row(".*work", column("Name")) <br>
          * or   row("Frame.+ork", column(3)) <br>
          * Each Row is map: columnName:cell
          */
-        
-            Dictionary<string, ICell> rowMatch(string regEx, Column column);
+
+        Dictionary<string, ICell> rowMatch(string regEx, Column column);
 
         Row rows();
 
@@ -246,27 +247,27 @@ namespace JDI.Core.Interfaces.Complex.Tables
          * Get Row with index <br>
          * Each Row is map: columnName:cell
          */
-        
-            Dictionary<string, ICell> row(int rowNum);
+
+        Dictionary<string, ICell> row(int rowNum);
 
         /**
          * Get Row with name <br>
          * Each Row is map: columnName:cell
          */
-        
-            Dictionary<string, ICell> row(string rowName);
+
+        Dictionary<string, ICell> row(string rowName);
 
         /**
          * Get Row value
          */
-        
-            List<string> rowValue(int colNum);
+
+        List<string> rowValue(int colNum);
 
         /**
          * Get Row value
          */
-        
-            List<string> rowValue(string colName);
+
+        List<string> rowValue(string colName);
 
         IColumn columns();
 
@@ -274,54 +275,54 @@ namespace JDI.Core.Interfaces.Complex.Tables
          * Get Column with index <br>
          * Each Column is map: rowName:cell
          */
-        
-            Dictionary<string, ICell> column(int colNum);
+
+        Dictionary<string, ICell> column(int colNum);
 
         /**
          * Get Column with name <br>
          * Each Column is map: rowName:cell
          */
-        
-            Dictionary<string, ICell> column(string colName);
+
+        Dictionary<string, ICell> column(string colName);
 
         /**
          * Get Column value
          */
-        
-            List<string> columnValue(int colNum);
+
+        List<string> columnValue(int colNum);
 
         /**
          * Get Column value
          */
-        
-            List<string> columnValue(string colName);
+
+        List<string> columnValue(string colName);
 
         /**
          * Get Header
          */
-        
-            Dictionary<string, ISelect> header();
 
-        
-            ISelect header(string name);
+        Dictionary<string, ISelect> header();
+
+
+        ISelect header(string name);
 
         /**
          * Get Header
          */
-        
-            List<string> headers();
+
+        List<string> headers();
 
         /**
          * Get Footer
          */
-        
-            List<string> footer();
+
+        List<string> footer();
 
         /**
          * Get All Cells
          */
-        
-            List<ICell> getCells();
+
+        List<ICell> getCells();
 
         /**
          * Clean all already founded Cells

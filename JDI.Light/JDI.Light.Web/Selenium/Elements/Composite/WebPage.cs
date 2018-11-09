@@ -15,21 +15,13 @@ namespace JDI.Web.Selenium.Elements.Composite
     public class WebPage : WebBaseElement, IPage
     {
         public static bool CheckAfterOpen = false;
+        public static WebPage CurrentPage;
         private string _url;
-
-        public string Url
-        {
-            get => _url == null || _url.Contains("://") || !WebSettings.HasDomain
-                ? _url
-                : GetUrlFromUri(_url);
-            set => _url = value;
-        }
+        protected CheckPageTypes CheckTitleType = CheckPageTypes.None;
+        protected CheckPageTypes CheckUrlType = CheckPageTypes.None;
 
         public string Title;
-        protected CheckPageTypes CheckUrlType = CheckPageTypes.None;
-        protected CheckPageTypes CheckTitleType = CheckPageTypes.None;
         protected string UrlTemplate;
-        public static WebPage CurrentPage;
 
         public WebPage()
         {
@@ -39,6 +31,62 @@ namespace JDI.Web.Selenium.Elements.Composite
         {
             Url = url;
             Title = title;
+        }
+
+        public string Url
+        {
+            get => _url == null || _url.Contains("://") || !WebSettings.HasDomain
+                ? _url
+                : GetUrlFromUri(_url);
+            set => _url = value;
+        }
+
+        public void CheckOpened()
+        {
+            if (string.IsNullOrEmpty(UrlTemplate) &&
+                new[] {CheckPageTypes.None, CheckPageTypes.Equal}.Contains(CheckUrlType))
+                CheckUrl().Equal();
+            else
+                switch (CheckUrlType)
+                {
+                    case CheckPageTypes.None:
+                        JDISettings.Asserter.IsTrue(GetUrl().Contains(UrlTemplate)
+                                                    || GetUrl().Matches(UrlTemplate));
+                        break;
+                    case CheckPageTypes.Equal:
+                        CheckUrl().Equal();
+                        break;
+                    case CheckPageTypes.Match:
+                        CheckUrl().Match();
+                        break;
+                    case CheckPageTypes.Contains:
+                        CheckUrl().Contains();
+                        break;
+                }
+            switch (CheckTitleType)
+            {
+                case CheckPageTypes.None:
+                    CheckTitle().Equal();
+                    break;
+                case CheckPageTypes.Equal:
+                    CheckTitle().Equal();
+                    break;
+                case CheckPageTypes.Match:
+                    CheckTitle().Match();
+                    break;
+                case CheckPageTypes.Contains:
+                    CheckTitle().Contains();
+                    break;
+            }
+        }
+
+        public void Open()
+        {
+            Invoker.DoJAction($"Open page {Name} by url {Url}",
+                el => WebDriver.Navigate().GoToUrl(Url));
+            if (CheckAfterOpen)
+                CheckOpened();
+            CurrentPage = this;
         }
 
         public static string GetUrlFromUri(string uri)
@@ -88,53 +136,6 @@ namespace JDI.Web.Selenium.Elements.Composite
             return new StringCheckType(() => WebDriver.Title, Title, Title, "title", () => Timer);
         }
 
-        public void CheckOpened()
-        {
-            if (string.IsNullOrEmpty(UrlTemplate) && new[] {CheckPageTypes.None, CheckPageTypes.Equal}.Contains(CheckUrlType))
-                CheckUrl().Equal();
-            else
-                switch (CheckUrlType)
-                {
-                    case CheckPageTypes.None:
-                        JDISettings.Asserter.IsTrue(GetUrl().Contains(UrlTemplate)
-                                        || GetUrl().Matches(UrlTemplate));
-                        break;
-                    case CheckPageTypes.Equal:
-                        CheckUrl().Equal();
-                        break;
-                    case CheckPageTypes.Match:
-                        CheckUrl().Match();
-                        break;
-                    case CheckPageTypes.Contains:
-                        CheckUrl().Contains();
-                        break;
-                }
-            switch (CheckTitleType)
-            {
-                case CheckPageTypes.None:
-                    CheckTitle().Equal();
-                    break;
-                case CheckPageTypes.Equal:
-                    CheckTitle().Equal();
-                    break;
-                case CheckPageTypes.Match:
-                    CheckTitle().Match();
-                    break;
-                case CheckPageTypes.Contains:
-                    CheckTitle().Contains();
-                    break;
-            }
-        }
-
-        public void Open()
-        {
-            Invoker.DoJAction($"Open page {Name} by url {Url}",
-                el => WebDriver.Navigate().GoToUrl(Url));
-            if (CheckAfterOpen)
-                CheckOpened();
-            CurrentPage = this;
-        }
-
         private bool IsOnPage()
         {
             var url = WebDriver.Url;
@@ -152,6 +153,7 @@ namespace JDI.Web.Selenium.Elements.Composite
                 case CheckPageTypes.Contains:
                     return url.Contains(string.IsNullOrEmpty(UrlTemplate) ? Url : UrlTemplate);
             }
+
             return false;
         }
 
@@ -222,8 +224,8 @@ namespace JDI.Web.Selenium.Elements.Composite
             private readonly Func<string> _actual;
             private readonly string _equals;
             private readonly string _template;
-            private readonly string _what;
             private readonly Func<Timer> _timer;
+            private readonly string _what;
 
             public StringCheckType(Func<string> actual, string equals, string template, string what, Func<Timer> timer)
             {

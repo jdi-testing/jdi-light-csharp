@@ -9,7 +9,7 @@ namespace JDI.Core.Interfaces.Complex
          * Click on Button marked with annotation @OkButton or named "okButton"
          */
         //TODO[JDIAction]
-         void Ok();
+        void Ok();
 
         /**
          * Click on Button marked with annotation @CancelButton or named "cancelButton"

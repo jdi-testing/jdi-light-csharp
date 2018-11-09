@@ -22,9 +22,11 @@ namespace JDI.Web.Utils
                 var str = objString;
                 while (objString.IndexOf("#(#", StringComparison.Ordinal) > 0)
                 {
-                    values.Add(objString.Substring(objString.IndexOf("#(#", StringComparison.Ordinal) + 3, objString.IndexOf("#)#", StringComparison.Ordinal)));
+                    values.Add(objString.Substring(objString.IndexOf("#(#", StringComparison.Ordinal) + 3,
+                        objString.IndexOf("#)#", StringComparison.Ordinal)));
                     str = objString.Replace("#\\(#.*#\\)#", "#VAL" + i++);
                 }
+
                 var fields = str.Split("#;#");
                 fields.ForEach(field =>
                 {
@@ -40,16 +42,16 @@ namespace JDI.Web.Utils
         {
             if (input.Equals("#NULL#"))
                 return null;
-            return input.Matches("#VAL\\d*") 
-                ? values[int.Parse(input.Substring(4)) - 1] 
+            return input.Matches("#VAL\\d*")
+                ? values[int.Parse(input.Substring(4)) - 1]
                 : input;
         }
-        
+
         public static Dictionary<string, string> ToSetValue(this object obj)
         {
             return obj == null
-                    ? new Dictionary<string, string>()
-                    : ParseObjectAsString(PrintObject(obj));
+                ? new Dictionary<string, string>()
+                : ParseObjectAsString(PrintObject(obj));
         }
 
         private static string PrintObject(object obj)
@@ -65,7 +67,7 @@ namespace JDI.Web.Utils
                     strValue = (string) value;
                 else if (value is IConvertible)
                     strValue = value.ToString();
-                else if (ComplexAttribute.IsPresent(field) )
+                else if (ComplexAttribute.IsPresent(field))
                     strValue = "#(#" + PrintObject(value) + "#)#";
                 if (strValue != null)
                     result.Add($"{NameAttribute.GetElementName(field)}#:#{strValue}");
@@ -88,6 +90,7 @@ namespace JDI.Web.Utils
                 values.Add(str.Substring(from + 3, to - from - 3));
                 str = new Regex("#\\(#.*#\\)#").Replace(str, "#VAL" + i++);
             }
+
             var fields = str.Split("#;#");
             fields.ForEach(field =>
             {

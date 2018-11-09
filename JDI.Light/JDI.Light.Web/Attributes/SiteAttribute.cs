@@ -6,13 +6,17 @@ namespace JDI.Web.Attributes
     [AttributeUsage(AttributeTargets.All, Inherited = false)]
     public class SiteAttribute : Attribute
     {
+        public SiteAttribute()
+        {
+            IsMain = true;
+            UseCache = true;
+        }
+
         public string Domain { get; set; }
         public bool UseCache { get; set; }
         public bool IsMain { get; set; }
         public bool DemoMode { get; set; }
         public bool ScreenshotAlert { get; set; }
-
-        public SiteAttribute() { IsMain = true; UseCache = true; }
 
         public static SiteAttribute Get(FieldInfo field)
         {
@@ -23,6 +27,7 @@ namespace JDI.Web.Attributes
         {
             return obj.GetType().GetCustomAttribute<SiteAttribute>(false);
         }
+
         public static SiteAttribute Get(Type type)
         {
             return type.GetCustomAttribute<SiteAttribute>(false);

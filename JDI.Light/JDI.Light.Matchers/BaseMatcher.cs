@@ -11,11 +11,9 @@ namespace JDI.Matchers
         private static ILogger _logger;
         private static long _waitTimeout = 10;
 
-        private string _chekMessage;
-        private ScreenshotState _screenshot = ScreenshotState.Off;
+        private readonly string _chekMessage;
         private bool _ignoreCase;
-
-        protected abstract void ThrowFail(string message);
+        private ScreenshotState _screenshot = ScreenshotState.Off;
 
         protected BaseMatcher(string checkMessage) : this() // TODO: Fix it! (setting logger)
         {
@@ -28,18 +26,15 @@ namespace JDI.Matchers
             _logger = new NUnitLogger();
         }
 
+        protected abstract void ThrowFail(string message);
+
         private string getCheckMessage(string checkMessage)
         {
-            if (string.IsNullOrEmpty(checkMessage))
-            {
-                return string.Empty;
-            }
+            if (string.IsNullOrEmpty(checkMessage)) return string.Empty;
             var firstWord = checkMessage.Split(' ')[0];
             if (firstWord.Contains("check", StringComparison.OrdinalIgnoreCase) ||
                 firstWord.Contains("verify", StringComparison.OrdinalIgnoreCase))
-            {
                 return checkMessage;
-            }
             return "Check that " + checkMessage;
         }
 
@@ -61,7 +56,7 @@ namespace JDI.Matchers
 
         public void Contains(string actual, string expected, bool logOnlyFail, string failMessage)
         {
-            bool result = _ignoreCase
+            var result = _ignoreCase
                 ? actual.Contains(expected, StringComparison.OrdinalIgnoreCase)
                 : actual.Contains(expected);
             AssertAction($"Check that '{actual}' contains '{expected}'", result, logOnlyFail);
@@ -69,17 +64,10 @@ namespace JDI.Matchers
 
         private void AssertAction(string message, bool result, bool logOnlyFail = false, string failMessage = null)
         {
-            if (!logOnlyFail)
-            {
-                _logger.Info(GetBeforeMessage(message));
-            }
+            if (!logOnlyFail) _logger.Info(GetBeforeMessage(message));
             // TODO: Take screenshot
             //TakeScreenshot();
-            if (!result)
-            {
-                //TakeScreenshot();
-                AssertException(failMessage ?? message + " failed");
-            }
+            if (!result) AssertException(failMessage ?? message + " failed");
         }
 
         private string GetBeforeMessage(string message)
@@ -92,40 +80,33 @@ namespace JDI.Matchers
             _logger.Info(message);
             // TODO: Take screenshot
             //TakeScreenshot();
-            bool result = new Timer(_waitTimeout * 1000).GetResultByCondition(resultFunc, r => r);
-            if (!result)
-            {
-                //TakeScreenshot();
-                AssertException(message + " failed");
-            }
+            var result = new Timer(_waitTimeout * 1000).GetResultByCondition(resultFunc, r => r);
+            if (!result) AssertException(message + " failed");
         }
 
         private void AssertException(string failMessage, params object[] args)
         {
-            string failMsg = args.Length > 0 ? string.Format(failMessage, args) : failMessage;
+            var failMsg = args.Length > 0 ? string.Format(failMessage, args) : failMessage;
             _logger.Error(failMsg);
             ThrowFail(failMsg);
         }
 
         public void Matches(string actual, string regEx, bool logOnlyFail = false, string failMessage = null)
         {
-            bool result = _ignoreCase
+            var result = _ignoreCase
                 ? actual.ToLower().Matches(regEx.ToLower())
                 : actual.Matches(regEx);
-            AssertAction($"Check that '{actual}' matches to regular expression '{regEx}", result, logOnlyFail, failMessage);
+            AssertAction($"Check that '{actual}' matches to regular expression '{regEx}", result, logOnlyFail,
+                failMessage);
         }
 
         public void Matches(Func<string> actualFunc, string regEx)
         {
             Func<bool> resultFunc;
             if (_ignoreCase)
-            {
                 resultFunc = () => actualFunc().ToLower().Matches(regEx.ToLower());
-            }
             else
-            {
                 resultFunc = () => actualFunc().Matches(regEx);
-            }
             AssertAction($"Check that action result matches to regular expression '{regEx}'", resultFunc);
         }
 
@@ -148,37 +129,31 @@ namespace JDI.Matchers
         public void AreEquals<T>(T actual, T expected, bool logOnlyFail = false)
         {
             bool result;
-            if (typeof (T) == typeof (string))
-            {
+            if (typeof(T) == typeof(string))
                 result = _ignoreCase
                     ? actual.ToString().Equals(expected.ToString(), StringComparison.OrdinalIgnoreCase)
                     : actual.ToString().Equals(expected.ToString());
-            }
             else
-            {
                 result = actual.Equals(expected);
-            }
             AssertAction($"Check that '{actual}' equals to '{expected}'", result, logOnlyFail);
         }
 
         public void AreEquals<T>(Func<T> actualFunc, T expected)
         {
             Func<bool> resultFunc;
-            if (typeof (T) == typeof (string))
+            if (typeof(T) == typeof(string))
             {
                 if (_ignoreCase)
-                {
-                    resultFunc = () => actualFunc().ToString().Equals(expected.ToString(), StringComparison.OrdinalIgnoreCase);
-                }
+                    resultFunc = () =>
+                        actualFunc().ToString().Equals(expected.ToString(), StringComparison.OrdinalIgnoreCase);
                 else
-                {
                     resultFunc = () => actualFunc().ToString().Equals(expected.ToString());
-                }
             }
             else
             {
                 resultFunc = () => actualFunc().Equals(expected);
             }
+
             AssertAction($"Check that action result equals to '{expected}'", resultFunc);
         }
 
@@ -186,14 +161,10 @@ namespace JDI.Matchers
         {
             Func<bool> resultFunc;
             if (_ignoreCase)
-            {
                 resultFunc =
                     () => actualFunc().Contains(expected, StringComparison.OrdinalIgnoreCase);
-            }
             else
-            {
                 resultFunc = () => actualFunc().Contains(expected);
-            }
             AssertAction($"Check that action result contains '{expected}'", resultFunc);
         }
 
@@ -206,9 +177,11 @@ namespace JDI.Matchers
         {
             var first = actual as T[] ?? actual.ToArray();
             var second = expected as T[] ?? expected.ToArray();
-            bool result = first.OrderBy(i => i).SequenceEqual(second.OrderBy(i => i));
-            AssertAction($"Check that collection '{string.Join(", ", first)}' equals to '{string.Join(", ", second)}'", result);
+            var result = first.OrderBy(i => i).SequenceEqual(second.OrderBy(i => i));
+            AssertAction($"Check that collection '{string.Join(", ", first)}' equals to '{string.Join(", ", second)}'",
+                result);
         }
+
         public ListChecker<T> Each<T>(IEnumerable<T> collection)
         {
             return EachElementOf(collection);
@@ -240,16 +213,11 @@ namespace JDI.Matchers
             }
             catch (Exception e)
             {
-                if (exceptionType != null)
-                {
-                    AreEquals(e.GetType(), exceptionType);
-                }
-                if (exceptionMessage != null)
-                {
-                    AreEquals(e.Message, exceptionMessage);
-                }
+                if (exceptionType != null) AreEquals(e.GetType(), exceptionType);
+                if (exceptionMessage != null) AreEquals(e.Message, exceptionMessage);
                 return;
             }
+
             throw new Exception("Action \'action name\' throws no exceptions. Expected \'\'");
         }
 
@@ -267,16 +235,13 @@ namespace JDI.Matchers
 
         public class ListChecker<T>
         {
-            private IEnumerable<T> _list;
-            private BaseMatcher _matcher;
+            private readonly IEnumerable<T> _list;
+            private readonly BaseMatcher _matcher;
 
             internal ListChecker(BaseMatcher matcher, IEnumerable<T> list)
             {
                 _matcher = matcher;
-                if (list == null || !list.Any())
-                {
-                    _matcher.ThrowFail("The list is empty");
-                }
+                if (list == null || !list.Any()) _matcher.ThrowFail("The list is empty");
                 _list = list;
             }
 
@@ -294,8 +259,9 @@ namespace JDI.Matchers
 
             public void AreDifferent()
             {
-                bool result = _list.Distinct().Count() == _list.Count();
-                _matcher.AssertAction($"Check that all items of list '{string.Join(", ", _list)}' are different", result);
+                var result = _list.Distinct().Count() == _list.Count();
+                _matcher.AssertAction($"Check that all items of list '{string.Join(", ", _list)}' are different",
+                    result);
             }
 
             public void AreSame()
@@ -308,15 +274,17 @@ namespace JDI.Matchers
             public void IsSortedByDesc()
             {
                 var descSortedList = _list.OrderByDescending(e => e);
-                bool result = descSortedList.SequenceEqual(_list);
-                _matcher.AssertAction($"Check that collection '{string.Join(", ", _list)}' ordered by descending", result);
+                var result = descSortedList.SequenceEqual(_list);
+                _matcher.AssertAction($"Check that collection '{string.Join(", ", _list)}' ordered by descending",
+                    result);
             }
 
             public void IsSortedByAsc()
             {
                 var ascSortedList = _list.OrderBy(e => e);
-                bool result = ascSortedList.SequenceEqual(_list);
-                _matcher.AssertAction($"Check that collection '{string.Join(", ", _list)}' ordered by ascending", result);
+                var result = ascSortedList.SequenceEqual(_list);
+                _matcher.AssertAction($"Check that collection '{string.Join(", ", _list)}' ordered by ascending",
+                    result);
             }
         }
     }

@@ -8,9 +8,16 @@ namespace JDI.Web.Selenium.Elements.Common
 {
     public class Text : WebElement, IText
     {
-        public Text() : this(null) { }
+        protected Func<WebBaseElement, string> GetValueFunc = el => ((Text) el).GetTextAction(el);
+
+        public Text() : this(null)
+        {
+        }
+
         public Text(By byLocator = null, IWebElement webElement = null, WebBaseElement element = null)
-            : base(byLocator, webElement, element:element) { }
+            : base(byLocator, webElement, element)
+        {
+        }
 
         protected virtual Func<WebBaseElement, string> GetTextAction { get; set; } = el =>
         {
@@ -22,10 +29,12 @@ namespace JDI.Web.Selenium.Elements.Common
         };
 
         public string GetText => Actions.GetText(GetTextAction);
-        
-        protected Func<WebBaseElement, string> GetValueFunc = el => ((Text)el).GetTextAction(el);
-        
+
         public string Value => Actions.GetValue(GetValueFunc);
+        public string GetValue()
+        {
+            return Value;
+        }
 
         public string WaitText(string text)
         {

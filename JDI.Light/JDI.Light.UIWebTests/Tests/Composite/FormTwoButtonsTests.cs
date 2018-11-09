@@ -9,7 +9,7 @@ namespace JDI.UIWebTests.Tests.Composite
 {
     public class FormTwoButtonsTests
     {
-        private ContactFormTwoButtons _contactForm = TestSite.ContactFormPage.ContactFormTwoButtons;
+        private readonly ContactFormTwoButtons _contactForm = TestSite.ContactFormPage.ContactFormTwoButtons;
 
         [SetUp]
         public void SetUp()

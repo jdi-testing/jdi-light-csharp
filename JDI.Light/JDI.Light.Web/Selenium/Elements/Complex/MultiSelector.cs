@@ -14,7 +14,45 @@ namespace JDI.Web.Selenium.Elements.Complex
         where TEnum : IConvertible
     {
         private string _separator = ", ";
-        
+
+        public Action<MultiSelector<TEnum>> ClearAction = m =>
+        {
+            if (!m.HasLocator && m.AllLabels == null)
+                throw JDISettings.Exception("Can't clear options. No optionsNamesLocator and allLabelsLocator found");
+            if (m.Locator.ToString().Contains("{0}"))
+                throw JDISettings.Exception(
+                    "Can't clear options. Specify allLabelsLocator or fix optionsNamesLocator (should not contain '{0}')");
+            if (m.AllLabels != null)
+            {
+                m.ClearElements(m.AllLabels.WebElements);
+                return;
+            }
+
+            var elements = m.WebAvatar.SearchAll().WebElements;
+            if (elements.Count == 1 && elements[0].TagName.Equals("select"))
+                if (m.Selector.Options.Any())
+                {
+                    m.Selector.DeselectAll();
+                    return;
+                }
+                else
+                {
+                    throw JDISettings.Exception(
+                        $"<select> tag has no <option> tags. Please Clarify element locator ({m})");
+                }
+
+            if (elements.Count == 1 && elements[0].TagName.Equals("ul"))
+                elements = elements[0].FindElements(By.TagName("li")).ToList();
+            m.ClearElements(elements);
+        };
+
+        protected Action<MultiSelector<TEnum>, IList<int>> SelectListIndexesAction =
+            (m, nums) => nums.ForEach(num => m.SelectNumAction(m, num));
+
+
+        protected Action<MultiSelector<TEnum>, IList<string>> SelectListNamesAction =
+            (m, names) => names.ForEach(name => m.SelectNameAction(m, name));
+
         protected MultiSelector(By optionsNamesLocator = null, By allLabelsLocator = null)
             : base(optionsNamesLocator, allLabelsLocator)
         {
@@ -35,81 +73,8 @@ namespace JDI.Web.Selenium.Elements.Complex
             };
         }
 
-        public override Action<BaseSelector<TEnum>, string> SetValueAction => (c, value) => SelectListNamesAction(this, value.Split(_separator));
-
-        public Action<MultiSelector<TEnum>> ClearAction = m =>
-        {
-            if (!m.HasLocator && m.AllLabels == null)
-                throw JDISettings.Exception("Can't clear options. No optionsNamesLocator and allLabelsLocator found");
-            if (m.Locator.ToString().Contains("{0}"))
-                throw JDISettings.Exception(
-                    "Can't clear options. Specify allLabelsLocator or fix optionsNamesLocator (should not contain '{0}')");
-            if (m.AllLabels != null)
-            {
-                m.ClearElements(m.AllLabels.WebElements);
-                return;
-            }
-            var elements = m.WebAvatar.SearchAll().WebElements;
-            if (elements.Count == 1 && elements[0].TagName.Equals("select"))
-                if (m.Selector.Options.Any())
-                {
-                    m.Selector.DeselectAll();
-                    return;
-                }
-                else
-                    throw JDISettings.Exception($"<select> tag has no <option> tags. Please Clarify element locator ({m})");
-            if (elements.Count == 1 && elements[0].TagName.Equals("ul"))
-                elements = elements[0].FindElements(By.TagName("li")).ToList();
-            m.ClearElements(elements);
-        };
-
-        private void ClearElements(IList<IWebElement> els)
-        {
-            els.Where(el => SelectedNameAction(this, el.Text)).ForEach(el => el.Click());
-        }
-        
-        private IWebElement GetWebElement(IList<IWebElement> els, string name)
-        {
-            if (els == null)
-                throw JDISettings.Exception("Can't get option. No optionsNamesLocator and allLabelsLocator found");
-            var elements = els.Where(el => el.Text.Equals(name)).ToList();
-            if (elements.Count == 1)
-                return elements[0];
-            throw JDISettings.Exception("Can't get option. No optionsNamesLocator and allLabelsLocator found");
-        }
-
-        protected IWebElement GetWebElement(int num)
-        {
-            if (!HasLocator && AllLabels == null)
-                throw JDISettings.Exception("Can't get option. No optionsNamesLocator and allLabelsLocator found");
-            if (Locator.ToString().Contains("{0}"))
-                throw JDISettings.Exception("Can't get options. Specify allLabelsLocator or fix optionsNamesLocator (should not contain '{0}')");
-            if (AllLabels != null)
-                return GetWebElement(AllLabels.WebElements, num);
-            return GetWebElement(GetElementsFromTag(), num);
-        }
-
-        private IWebElement GetWebElement(IList<IWebElement> els, int num)
-        {
-            if (num <= 0)
-                throw JDISettings.Exception($"Can't get option with num '{num}'. Number should be 1 or more");
-            if (num > els.Count)
-                throw JDISettings.Exception($"Can't get option with num '{num}'. Found only {els.Count} options");
-            return els[num - 1];
-        }
-
-
-        protected Action<MultiSelector<TEnum>, IList<string>> SelectListNamesAction = 
-            (m, names) => names.ForEach(name => m.SelectNameAction(m, name));
-        protected Action<MultiSelector<TEnum>, IList<int>> SelectListIndexesAction =
-            (m, nums) => nums.ForEach(num => m.SelectNumAction(m, num));
-        
-        
-        public IMultiSelector<TEnum> SetValuesSeparator(string separator)
-        {
-            _separator = separator;
-            return this;
-        }
+        public override Action<BaseSelector<TEnum>, string> SetValueAction =>
+            (c, value) => SelectListNamesAction(this, value.Split(_separator));
 
         public void Select(params string[] names)
         {
@@ -189,7 +154,7 @@ namespace JDI.Web.Selenium.Elements.Complex
 
         public void WaitDeselected(params string[] names)
         {
-            Actions.WaitDeselected((m, n) => Timer.Wait(() =>SelectedNameAction(this, n)), names);
+            Actions.WaitDeselected((m, n) => Timer.Wait(() => SelectedNameAction(this, n)), names);
         }
 
         public void Clear()
@@ -201,15 +166,63 @@ namespace JDI.Web.Selenium.Elements.Complex
         {
             Options.Where(label => !SelectedNameAction(this, label)).ForEach(label => SelectNameAction(this, label));
         }
-        
-        public void SelectAll() 
+
+        public void SelectAll()
         {
             CheckAll();
         }
+
         public void UncheckAll()
         {
             Clear();
         }
 
+        private void ClearElements(IList<IWebElement> els)
+        {
+            els.Where(el => SelectedNameAction(this, el.Text)).ForEach(el => el.Click());
+        }
+
+        private IWebElement GetWebElement(IList<IWebElement> els, string name)
+        {
+            if (els == null)
+                throw JDISettings.Exception("Can't get option. No optionsNamesLocator and allLabelsLocator found");
+            var elements = els.Where(el => el.Text.Equals(name)).ToList();
+            if (elements.Count == 1)
+                return elements[0];
+            throw JDISettings.Exception("Can't get option. No optionsNamesLocator and allLabelsLocator found");
+        }
+
+        protected IWebElement GetWebElement(int num)
+        {
+            if (!HasLocator && AllLabels == null)
+                throw JDISettings.Exception("Can't get option. No optionsNamesLocator and allLabelsLocator found");
+            if (Locator.ToString().Contains("{0}"))
+                throw JDISettings.Exception(
+                    "Can't get options. Specify allLabelsLocator or fix optionsNamesLocator (should not contain '{0}')");
+            if (AllLabels != null)
+                return GetWebElement(AllLabels.WebElements, num);
+            return GetWebElement(GetElementsFromTag(), num);
+        }
+
+        private IWebElement GetWebElement(IList<IWebElement> els, int num)
+        {
+            if (num <= 0)
+                throw JDISettings.Exception($"Can't get option with num '{num}'. Number should be 1 or more");
+            if (num > els.Count)
+                throw JDISettings.Exception($"Can't get option with num '{num}'. Found only {els.Count} options");
+            return els[num - 1];
+        }
+
+
+        public IMultiSelector<TEnum> SetValuesSeparator(string separator)
+        {
+            _separator = separator;
+            return this;
+        }
+
+        public string GetValue()
+        {
+            return Value;
+        }
     }
 }

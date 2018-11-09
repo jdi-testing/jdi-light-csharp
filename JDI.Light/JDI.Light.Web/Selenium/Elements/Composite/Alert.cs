@@ -6,6 +6,7 @@ namespace JDI.Web.Selenium.Elements.Composite
     public class Alert : Popup
     {
         private IAlert _alert;
+
         private IAlert GetAlert()
         {
             return _alert ?? (_alert = new WebBaseElement().WebDriver.SwitchTo().Alert());

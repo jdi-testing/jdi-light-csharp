@@ -18,6 +18,7 @@ namespace JDI.Core.Interfaces
             JDISettings.DriverFactory.CurrentDriverName = driverName;
             PreconditionsState.IsInState(precondition);
         }
+
         public void IsInState(IPreconditions precondition, DescriptionAttribute method)
         {
             JDISettings.DriverFactory.CurrentDriverName = driverName;

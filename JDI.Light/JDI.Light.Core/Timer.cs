@@ -9,10 +9,10 @@ namespace JDI.Core
     {
         private const double DefaultTimeout = 10000;
         private const int DefaultRetryTimeout = 100;
+        private readonly int _retryTimeoutInMSec = DefaultRetryTimeout;
+        private readonly double _timeoutInMSec;
 
         private readonly Stopwatch _watch;
-        private readonly double _timeoutInMSec;
-        private readonly int _retryTimeoutInMSec = DefaultRetryTimeout;
 
         public Timer()
         {
@@ -37,6 +37,7 @@ namespace JDI.Core
                     return true;
                 Thread.Sleep(_retryTimeoutInMSec);
             }
+
             return false;
         }
 
@@ -60,12 +61,11 @@ namespace JDI.Core
                 {
                     exception = ex;
                 }
+
                 Thread.Sleep(_retryTimeoutInMSec);
             } while (!TimeoutPassed);
-            if (exception != null)
-            {
-                throw exception;
-            }
+
+            if (exception != null) throw exception;
             throw new TimeoutException("The operation has timed-out");
         }
     }

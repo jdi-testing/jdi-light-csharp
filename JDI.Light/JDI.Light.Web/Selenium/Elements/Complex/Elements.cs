@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using JDI.Core;
 using JDI.Core.Settings;
 using JDI.Core.Utils;
 using JDI.Web.Selenium.Base;
@@ -12,11 +11,16 @@ namespace JDI.Web.Selenium.Elements.Complex
 {
     public class Elements<T> : WebBaseElement, IList<T> where T : WebBaseElement
     {
-        public Elements() : this(null) { }
-        public Elements(By byLocator = null, List<IWebElement> webElements = null)
-            : base(byLocator, webElements: webElements) { }
+        private IList<T> _elements;
 
-        private IList<T> _elements; 
+        public Elements() : this(null)
+        {
+        }
+
+        public Elements(By byLocator = null, List<IWebElement> webElements = null)
+            : base(byLocator, webElements: webElements)
+        {
+        }
 
         private IList<T> ListOfElements
         {
@@ -35,7 +39,7 @@ namespace JDI.Web.Selenium.Elements.Complex
                             return element;
                         },
                         ex => "Can't instantiate list element")
-                        ).ToList();
+                    ).ToList();
             }
         }
 
@@ -78,6 +82,7 @@ namespace JDI.Web.Selenium.Elements.Complex
 
         public int Count => ListOfElements.Count;
         public bool IsReadOnly => false;
+
         public int IndexOf(T item)
         {
             return ListOfElements.IndexOf(item);
@@ -95,8 +100,11 @@ namespace JDI.Web.Selenium.Elements.Complex
 
         public T this[int index]
         {
-            get { return ListOfElements[index]; }
-            set { /* Not applicable*/ }
+            get => ListOfElements[index];
+            set
+            {
+                /* Not applicable*/
+            }
         }
     }
 }

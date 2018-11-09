@@ -21,7 +21,10 @@ namespace JDI.Web.Selenium.DriverFactory
 
                 foreach (var proc in Process.GetProcessesByName("IEDriverServer"))
                     KillProcessTree(proc.Id);
-            } catch (Exception) { }
+            }
+            catch (Exception)
+            {
+            }
         }
 
         private static string GetProcessCommandLine(int pid)
@@ -34,12 +37,14 @@ namespace JDI.Web.Selenium.DriverFactory
                         return mo["CommandLine"].ToString();
                 }
             }
+
             throw new ArgumentException("pid");
         }
 
         private static void KillProcessTree(int pid)
         {
-            using (var searcher = new ManagementObjectSearcher("Select * From Win32_Process Where ParentProcessID=" + pid))
+            using (var searcher =
+                new ManagementObjectSearcher("Select * From Win32_Process Where ParentProcessID=" + pid))
             {
                 using (var moc = searcher.Get())
                 {

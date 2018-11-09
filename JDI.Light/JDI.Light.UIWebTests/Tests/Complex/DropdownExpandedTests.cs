@@ -10,7 +10,8 @@ namespace JDI.UIWebTests.Tests.Complex
 {
     public class DropdownExpandedTests
     {
-        private static readonly IList<string> COLORS_OPTIONS = new List<string> { "Colors", "Red", "Green", "Blue", "Yellow" };
+        private static readonly IList<string> COLORS_OPTIONS = new List<string>
+            {"Colors", "Red", "Green", "Blue", "Yellow"};
 
         private IDropDown<Colors> _colors()
         {
@@ -36,15 +37,15 @@ namespace JDI.UIWebTests.Tests.Complex
             CommonActionsData.CheckAction("Colors: value changed to Blue");
         }
 
-        
+
         [Test]
         public void SelectIndexTest()
         {
-            _colors().Select(4);            
+            _colors().Select(4);
             CommonActionsData.CheckAction("Colors: value changed to Blue");
         }
 
-        
+
         [Test]
         public void SelectEnumTest()
         {
@@ -52,35 +53,35 @@ namespace JDI.UIWebTests.Tests.Complex
             CommonActionsData.CheckAction("Colors: value changed to Blue");
         }
 
-        
+
         [Test]
         public void GetOptionsTest()
         {
             new Check().CollectionEquals(_colors().Options, COLORS_OPTIONS);
         }
 
-        
+
         [Test]
         public void GetNamesTest()
         {
-            new Check().CollectionEquals(_colors().Names, COLORS_OPTIONS);            
+            new Check().CollectionEquals(_colors().Names, COLORS_OPTIONS);
         }
 
-        
+
         [Test]
         public void GetValuesTest()
         {
-            new Check().CollectionEquals(_colors().Values, COLORS_OPTIONS);                        
+            new Check().CollectionEquals(_colors().Values, COLORS_OPTIONS);
         }
 
-        
+
         [Test]
         public void GetOptionsAsTextTest()
         {
-            new Check().AreEquals(_colors().OptionsAsText, "Colors, Red, Green, Blue, Yellow");            
+            new Check().AreEquals(_colors().OptionsAsText, "Colors, Red, Green, Blue, Yellow");
         }
 
-        
+
         [Test]
         public void SetValueTest()
         {
@@ -88,18 +89,18 @@ namespace JDI.UIWebTests.Tests.Complex
             CommonActionsData.CheckAction("Colors: value changed to Blue");
         }
 
-        
+
         [Test]
         public void GetNameTest()
         {
-            new Check().AreEquals(_colors().Name, "Colors");            
+            new Check().AreEquals(_colors().Name, "Colors");
         }
 
-                
+
         [Test]
         public void GetSelectedTest()
         {
-            new Check().AreEquals(_colors().Selected(), "Colors");            
+            new Check().AreEquals(_colors().Selected(), "Colors");
         }
 
         //TO_DO
@@ -128,12 +129,11 @@ namespace JDI.UIWebTests.Tests.Complex
         }
         */
 
-        
+
         [Test]
         public void GetValueTest()
         {
-            new Check().AreEquals(_colors().Value, "Colors");            
+            new Check().AreEquals(_colors().Value, "Colors");
         }
-        
     }
 }

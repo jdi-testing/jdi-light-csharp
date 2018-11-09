@@ -11,7 +11,7 @@ namespace JDI.UIWebTests.Tests.Complex
 {
     public class DropdownTests
     {
-        private static readonly List<string> OddOptions = new List<string> { "Colors", "Red", "Green", "Blue", "Yellow" };
+        private static readonly List<string> OddOptions = new List<string> {"Colors", "Red", "Green", "Blue", "Yellow"};
         private IDropDown<Colors> ColorsControl => TestSite.MetalsColorsPage.Colors;
 
         [SetUp]
@@ -92,7 +92,8 @@ namespace JDI.UIWebTests.Tests.Complex
         [Test]
         public void GetSelectedIndexTest()
         {
-            CommonActionsData.CheckActionThrowError(() => ColorsControl.SelectedIndex(), CommonActionsData.NoElementsMessage);
+            CommonActionsData.CheckActionThrowError(() => ColorsControl.SelectedIndex(),
+                CommonActionsData.NoElementsMessage);
         }
 
         [Test]

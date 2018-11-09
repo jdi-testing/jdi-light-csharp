@@ -2,7 +2,7 @@
 
 namespace JDI.UIWebTests.UIObjects.Pages
 {
-    public class DynamicTablePage:WebPage
+    public class DynamicTablePage : WebPage
     {
     }
 }

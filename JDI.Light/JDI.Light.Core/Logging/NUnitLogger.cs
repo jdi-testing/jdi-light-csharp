@@ -27,10 +27,7 @@ namespace JDI.Core.Logging
 
         public void Debug(string message)
         {
-            if (_writeDebug)
-            {
-                TestContext.WriteLine($"[Debug: {Dt}] {message}");
-            }
+            if (_writeDebug) TestContext.WriteLine($"[Debug: {Dt}] {message}");
         }
 
         public void Info(string message)

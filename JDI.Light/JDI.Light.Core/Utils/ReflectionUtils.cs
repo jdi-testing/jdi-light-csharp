@@ -85,8 +85,14 @@ namespace JDI.Core.Utils
 
         public static object ParseOrDefault(this string value, Func<string, object> parseAction, object defaultValue)
         {
-            try { return parseAction(value); }
-            catch { return defaultValue; }
+            try
+            {
+                return parseAction(value);
+            }
+            catch
+            {
+                return defaultValue;
+            }
         }
 
         public static object ConvertStringToType(this string value, FieldInfo field)

@@ -6,7 +6,7 @@ using Assert = JDI.Matchers.NUnit.Assert;
 namespace JDI.UIWebTests.Tests.Complex.Table
 {
     [TestFixture]
-    class GetCellTests : SupportTableTestBase
+    internal class GetCellTests : SupportTableTestBase
     {
         private readonly string _cellValue = "Log4J, TestNG log, Custom";
 
@@ -17,15 +17,9 @@ namespace JDI.UIWebTests.Tests.Complex.Table
         }
 
         [Test]
-        public void GetCellStringStringTest()
+        public void GetCellParamsIntIntTest()
         {
-            Assert.AreEquals(Table.Cell("Now", "4").GetText, _cellValue);
-        }
-
-        [Test]
-        public void GetCellParamsStringStringTest()
-        {
-            Assert.AreEquals(Table.Cell(Column.column("Now"), Row.row("4")).GetText, _cellValue);
+            Assert.AreEquals(Table.Cell(Column.column(2), Row.row(4)).GetText, _cellValue);
         }
 
         [Test]
@@ -41,9 +35,15 @@ namespace JDI.UIWebTests.Tests.Complex.Table
         }
 
         [Test]
-        public void GetCellParamsIntIntTest()
+        public void GetCellParamsStringStringTest()
         {
-            Assert.AreEquals(Table.Cell(Column.column(2), Row.row(4)).GetText, _cellValue);
+            Assert.AreEquals(Table.Cell(Column.column("Now"), Row.row("4")).GetText, _cellValue);
+        }
+
+        [Test]
+        public void GetCellStringStringTest()
+        {
+            Assert.AreEquals(Table.Cell("Now", "4").GetText, _cellValue);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace JDI.UIWebTests.Tests.Composite
 {
     public class PaginationTests
     {
-        Pagination simplePagePaginator = TestSite.SimpleTablePage.Paginator;
+        private readonly Pagination simplePagePaginator = TestSite.SimpleTablePage.Paginator;
 
         [SetUp]
         public void SetUp()
@@ -23,7 +23,7 @@ namespace JDI.UIWebTests.Tests.Composite
 
         private void CheckPageOpened(int num)
         {
-            Assert.True(WebSettings.WebDriver.Url.Contains("/page" + num + ".htm"));            
+            Assert.True(WebSettings.WebDriver.Url.Contains("/page" + num + ".htm"));
         }
 
         [Test]
@@ -33,7 +33,7 @@ namespace JDI.UIWebTests.Tests.Composite
             CheckPageOpened(7);
         }
 
-        
+
         [Test]
         public void PrevTest()
         {
@@ -41,7 +41,7 @@ namespace JDI.UIWebTests.Tests.Composite
             CheckPageOpened(5);
         }
 
-        
+
         [Test]
         public void FirstTest()
         {
@@ -49,13 +49,12 @@ namespace JDI.UIWebTests.Tests.Composite
             CheckPageOpened(1);
         }
 
-        
+
         [Test]
         public void LastTest()
         {
             simplePagePaginator.Last();
             CheckPageOpened(2);
         }
-        
     }
 }

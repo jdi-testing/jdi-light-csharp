@@ -7,12 +7,6 @@ namespace JDI.Web.Selenium.Elements.Base
 {
     public class ClickableText : Clickable, IText
     {
-        public ClickableText() : this(null) { }
-        public ClickableText(By byLocator = null, IWebElement webElement = null, WebBaseElement element = null)
-            : base(byLocator, webElement, element)
-        {
-        }
-
         protected Func<WebBaseElement, string> GetTextFunc =
             el =>
             {
@@ -23,7 +17,20 @@ namespace JDI.Web.Selenium.Elements.Base
                 return getValue ?? getText;
             };
 
+        public ClickableText() : this(null)
+        {
+        }
+
+        public ClickableText(By byLocator = null, IWebElement webElement = null, WebBaseElement element = null)
+            : base(byLocator, webElement, element)
+        {
+        }
+
         public string Value => Actions.GetValue(GetTextFunc);
+        public string GetValue()
+        {
+            return Value;
+        }
 
         public string GetText => Actions.GetText(GetTextFunc);
 
@@ -32,7 +39,7 @@ namespace JDI.Web.Selenium.Elements.Base
             return Actions.WaitText(text, GetTextFunc);
         }
 
-        public  string WaitMatchText(string regEx)
+        public string WaitMatchText(string regEx)
         {
             return Actions.WaitMatchText(regEx, GetTextFunc);
         }

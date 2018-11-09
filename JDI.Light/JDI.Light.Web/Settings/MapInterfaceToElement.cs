@@ -12,6 +12,7 @@ namespace JDI.Web.Settings
         {
             _map = map;
         }
+
         public static void Update(Dictionary<Type, Type> map)
         {
             map.ForEach(pair => map[pair.Key] = pair.Value);

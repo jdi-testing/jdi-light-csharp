@@ -9,14 +9,14 @@ namespace JDI.Web.Attributes
     [AttributeUsage(AttributeTargets.All, Inherited = false)]
     public class PageAttribute : Attribute
     {
-        public string Url           = "";
-        public string UrlTemplate   = "";
-        public string Title         = "";
-        public Dictionary<string, string> UrlParams; 
-        public CheckPageTypes CheckType        = CheckPageTypes.None;
-        public CheckPageTypes UrlCheckType     = CheckPageTypes.None;
-        public CheckPageTypes TitleCheckType   = CheckPageTypes.None;
-        
+        public CheckPageTypes CheckType = CheckPageTypes.None;
+        public string Title = "";
+        public CheckPageTypes TitleCheckType = CheckPageTypes.None;
+        public string Url = "";
+        public CheckPageTypes UrlCheckType = CheckPageTypes.None;
+        public Dictionary<string, string> UrlParams;
+        public string UrlTemplate = "";
+
         public static PageAttribute Handler(FieldInfo field)
         {
             return field.GetCustomAttribute<PageAttribute>(false);
@@ -34,8 +34,8 @@ namespace JDI.Web.Attributes
             if (!WebSettings.HasDomain && parentClass != null && site != null)
                 WebSettings.Domain = site.Domain;
             url = url.Contains("://") || parentClass == null || !WebSettings.HasDomain
-                    ? url
-                    : WebPage.GetUrlFromUri(url);
+                ? url
+                : WebPage.GetUrlFromUri(url);
             var title = Title;
             var urlTemplate = UrlTemplate;
             var urlCheckType = UrlCheckType;
@@ -47,8 +47,12 @@ namespace JDI.Web.Attributes
                     : WebPage.GetMatchFromDomain(urlTemplate);
             page.UpdatePageData(url, title, urlCheckType, titleCheckType, urlTemplate);
         }
-
     }
 
-    public enum PageCheckType { NoCheck, Equal, Contains }
+    public enum PageCheckType
+    {
+        NoCheck,
+        Equal,
+        Contains
+    }
 }

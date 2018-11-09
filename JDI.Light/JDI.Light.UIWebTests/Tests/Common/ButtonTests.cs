@@ -8,7 +8,7 @@ namespace JDI.UIWebTests.Tests.Common
 {
     public class ButtonTests
     {
-        private IButton _button = TestSite.MetalsColorsPage.CalculateButton;
+        private readonly IButton _button = TestSite.MetalsColorsPage.CalculateButton;
 
         [SetUp]
         public void SetUp()
@@ -18,7 +18,7 @@ namespace JDI.UIWebTests.Tests.Common
             TestSite.MetalsColorsPage.CheckTitle();
             TestSite.MetalsColorsPage.IsOpened();
             JDISettings.Logger.Info("Setup method finished");
-            JDISettings.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);            
+            JDISettings.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         [Test]

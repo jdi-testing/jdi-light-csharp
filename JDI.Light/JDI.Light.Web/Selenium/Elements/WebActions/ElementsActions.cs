@@ -102,7 +102,8 @@ namespace JDI.Web.Selenium.Elements.WebActions
         }
 
         // Input Actions
-        public void InputLines(Action<WebBaseElement> clearAction, Action<WebBaseElement, string> inputAction, params string[] textLines)
+        public void InputLines(Action<WebBaseElement> clearAction, Action<WebBaseElement, string> inputAction,
+            params string[] textLines)
         {
             Invoker.DoJAction("Input several lines of text in textarea",
                 el =>
@@ -149,6 +150,7 @@ namespace JDI.Web.Selenium.Elements.WebActions
         {
             Invoker.DoJAction($"Select '{index}'", el => selectByIndexAction(el, index));
         }
+
         public void Hover(string name, Action<WebBaseElement, string> hoverAction)
         {
             Invoker.DoJAction($"Hover '{name}'", el => hoverAction(el, name));
@@ -181,7 +183,8 @@ namespace JDI.Web.Selenium.Elements.WebActions
             Invoker.DoJAction($"Select '{listIndexes.Print()}'", el => selectListAction(el, indexes));
         }
 
-        public List<string> AreSelected(Func<WebBaseElement, IList<string>> getNames, Func<WebBaseElement, string, bool> waitSelectedAction)
+        public List<string> AreSelected(Func<WebBaseElement, IList<string>> getNames,
+            Func<WebBaseElement, string, bool> waitSelectedAction)
         {
             return Invoker.DoJActionResult("Are selected", el =>
                 getNames(el).Where(name => waitSelectedAction(el, name)).ToList());
@@ -189,12 +192,13 @@ namespace JDI.Web.Selenium.Elements.WebActions
 
         public void WaitSelected(Func<WebBaseElement, string, bool> waitSelectedAction, params string[] names)
         {
-            var result = Invoker.DoJActionResult($"Are deselected '{names.Print()}'", 
-                el => names.All(name => waitSelectedAction(el, name)) );
+            var result = Invoker.DoJActionResult($"Are deselected '{names.Print()}'",
+                el => names.All(name => waitSelectedAction(el, name)));
             JDISettings.Asserter.IsTrue(result);
         }
 
-        public List<string> AreDeselected(Func<WebBaseElement, IList<string>> getNames, Func<string, bool> waitSelectedAction)
+        public List<string> AreDeselected(Func<WebBaseElement, IList<string>> getNames,
+            Func<string, bool> waitSelectedAction)
         {
             return Invoker.DoJActionResult("Are deselected", el =>
                 getNames(el).Where(name => !waitSelectedAction.Invoke(name)).ToList());
@@ -207,7 +211,7 @@ namespace JDI.Web.Selenium.Elements.WebActions
 
         public void WaitDeselected(Func<WebBaseElement, string, bool> waitSelectedAction, params string[] names)
         {
-            var result = Invoker.DoJActionResult($"Are deselected '{names.Print()}'", 
+            var result = Invoker.DoJActionResult($"Are deselected '{names.Print()}'",
                 el => names.All(name => !waitSelectedAction(el, name)));
             JDISettings.Asserter.IsTrue(result);
         }

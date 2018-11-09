@@ -14,7 +14,8 @@ namespace JDI.UIWebTests.Tests.Complex
 {
     public class ComboBoxTests
     {
-        private static readonly IList<string> OddOptions = new List<string> { "Col", "Gold", "Silver", "Bronze", "Selen" };
+        private static readonly IList<string> OddOptions = new List<string>
+            {"Col", "Gold", "Silver", "Bronze", "Selen"};
 
         private IComboBox<Metals> MetalsControl => TestSite.MetalsColorsPage.ComboBox;
 
@@ -92,7 +93,8 @@ namespace JDI.UIWebTests.Tests.Complex
         [Test]
         public void GetSelectedIndexTest()
         {
-            CommonActionsData.CheckActionThrowError(() => MetalsControl.SelectedIndex(), CommonActionsData.NoElementsMessage);
+            CommonActionsData.CheckActionThrowError(() => MetalsControl.SelectedIndex(),
+                CommonActionsData.NoElementsMessage);
         }
 
         [Test]
@@ -123,13 +125,13 @@ namespace JDI.UIWebTests.Tests.Complex
         [Test]
         public void WaitSelectedEnumTest()
         {
-            new Check("WaitSelected").HasNoException(() => MetalsControl.Value.ToString());
+            new Check("WaitSelected").HasNoException(() => MetalsControl.GetValue());
         }
-         
+
         [Test]
         public void GetValueTest()
         {
             Assert.AreEquals(MetalsControl.Value, "Col");
-        }        
+        }
     }
 }

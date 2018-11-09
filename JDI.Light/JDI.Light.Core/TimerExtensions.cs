@@ -6,7 +6,11 @@ namespace JDI.Core
     {
         public static bool ForceDone(this Action action)
         {
-            return new Timer().Wait(() => { action.Invoke(); return true; });
+            return new Timer().Wait(() =>
+            {
+                action.Invoke();
+                return true;
+            });
         }
 
         public static bool ForceDone(this Func<bool> func)
@@ -18,6 +22,5 @@ namespace JDI.Core
         {
             return new Timer().GetResultByCondition(getFunc, conditionFunc);
         }
-        
     }
 }

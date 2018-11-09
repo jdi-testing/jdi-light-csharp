@@ -13,43 +13,6 @@ namespace JDI.Web.Selenium.Elements.Complex
 {
     public class Tree : Selector
     {
-        public string Separator = "\\|";
-        public Tree UseSeparator(string separator)
-        {
-            Separator = separator;
-            return this;
-        }
-
-        public Tree()
-        {
-            SelectNameAction = (m, name) => ChooseItemAction(this, new [] {name});
-        }
-
-        public Tree(By optionsNamesLocatorTemplate, List<IWebElement> webElements = null) 
-            : base(optionsNamesLocatorTemplate, webElements) { }
-
-        public Tree(By optionsNamesLocatorTemplate, By allOptionsNamesLocator) 
-            : base(optionsNamesLocatorTemplate, allOptionsNamesLocator) { }
-        
-        protected Action<WebBaseElement, IWebElement> HoverAction = (m, el) =>
-        {
-            var action = new Actions(m.WebDriver);
-            action.MoveToElement(el).ClickAndHold().Build().Perform();
-        };
-        
-
-        private IList<string> SplitToList(string[] str, string separator)
-        {
-            return (str.Length == 1
-                ? Regex.Split(str[0], separator)
-                : str).ToList();
-        }
-        
-        public void Select(params string[] names)
-        {
-            Actions.Select(names.Print(), (w, n) => ChooseItemAction(this, names));
-        }
-
         protected Action<Tree, string[]> ChooseItemAction =
             (m, names) =>
             {
@@ -65,6 +28,47 @@ namespace JDI.Web.Selenium.Elements.Complex
                     ctx = element;
                 });
             };
-        
+
+        protected Action<WebBaseElement, IWebElement> HoverAction = (m, el) =>
+        {
+            var action = new Actions(m.WebDriver);
+            action.MoveToElement(el).ClickAndHold().Build().Perform();
+        };
+
+        public string Separator = "\\|";
+
+        public Tree()
+        {
+            SelectNameAction = (m, name) => ChooseItemAction(this, new[] {name});
+        }
+
+        public Tree(By optionsNamesLocatorTemplate, List<IWebElement> webElements = null)
+            : base(optionsNamesLocatorTemplate, webElements)
+        {
+        }
+
+        public Tree(By optionsNamesLocatorTemplate, By allOptionsNamesLocator)
+            : base(optionsNamesLocatorTemplate, allOptionsNamesLocator)
+        {
+        }
+
+        public Tree UseSeparator(string separator)
+        {
+            Separator = separator;
+            return this;
+        }
+
+
+        private IList<string> SplitToList(string[] str, string separator)
+        {
+            return (str.Length == 1
+                ? Regex.Split(str[0], separator)
+                : str).ToList();
+        }
+
+        public void Select(params string[] names)
+        {
+            Actions.Select(names.Print(), (w, n) => ChooseItemAction(this, names));
+        }
     }
 }

@@ -2,7 +2,7 @@
 using System.Reflection;
 
 namespace JDI.Core.Attributes
-{    
+{
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
     public class FillFromFieldAttribute : Attribute
     {

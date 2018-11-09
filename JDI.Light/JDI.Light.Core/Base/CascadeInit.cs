@@ -88,24 +88,25 @@ namespace JDI.Core.Base
         protected void SetElement(object parent, Type parentType, FieldInfo field, string driverName)
         {
             ExceptionUtils.ActionWithException(() =>
-            {
-                var type = field.FieldType;
-                var instance = typeof(IPage).IsAssignableFrom(type)
-                    ? GetInstancePage(parent, field, type, parentType)
-                    : GetInstanceElement(parent, type, parentType, field, driverName);
-                instance.SetName(field);
-                instance.Avatar.DriverName = driverName;
-                instance.TypeName = type.Name;
-                instance.Parent = parent;
-                field.SetValue(parent, instance);
-                if (typeof(IComposite).IsAssignableFrom(type))
-                    InitElements(instance, driverName);
-            },
+                {
+                    var type = field.FieldType;
+                    var instance = typeof(IPage).IsAssignableFrom(type)
+                        ? GetInstancePage(parent, field, type, parentType)
+                        : GetInstanceElement(parent, type, parentType, field, driverName);
+                    instance.SetName(field);
+                    instance.Avatar.DriverName = driverName;
+                    instance.TypeName = type.Name;
+                    instance.Parent = parent;
+                    field.SetValue(parent, instance);
+                    if (typeof(IComposite).IsAssignableFrom(type))
+                        InitElements(instance, driverName);
+                },
                 ex =>
                     $"Error in SetElement for field '{field.Name}' with parent '{parentType?.Name ?? "NULL Class" + ex.FromNewLine()}'");
         }
 
-        protected abstract IBaseElement GetElementsRules(FieldInfo field, string driverName, Type type, string fieldName);
+        protected abstract IBaseElement GetElementsRules(FieldInfo field, string driverName, Type type,
+            string fieldName);
 
         protected IBaseElement GetElementInstance(FieldInfo field, string driverName, object parent)
         {

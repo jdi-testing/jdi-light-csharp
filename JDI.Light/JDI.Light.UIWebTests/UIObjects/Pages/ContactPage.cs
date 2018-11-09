@@ -6,31 +6,24 @@ using JDI.Web.Selenium.Elements.Composite;
 
 namespace JDI.UIWebTests.UIObjects.Pages
 {
-    public class ContactPage:WebPage
+    public class ContactPage : WebPage
     {
-        [FindBy(Id = "Name")]
-        public TextField NameField;
+        [FindBy(Css = "main form")] public ContactForm ContactForm;
 
-        [FindBy(Id = "LastName")]
-        public ITextField LastNameField;
-
-        [FindBy(Id = "Description")]
-        public TextArea DescriptionField;
+        [FindBy(Css = "main form")] public ContactFormTwoButtons ContactFormTwoButtons;
 
         [FindBy(XPath = "//*[text()='Submit']")]
         public IButton ContactSubmit;
 
-        [FindBy(Css = ".epam-logo img")]
-        public IImage LogoImage;
+        [FindBy(Id = "Description")] public TextArea DescriptionField;
 
-        [FindBy(Css = ".results")]
-        public IText Result;
+        [FindBy(Id = "LastName")] public ITextField LastNameField;
 
-        [FindBy(Css = "main form")]
-        public ContactForm ContactForm;
+        [FindBy(Css = ".epam-logo img")] public IImage LogoImage;
 
-        [FindBy(Css = "main form")]
-        public ContactFormTwoButtons ContactFormTwoButtons;
+        [FindBy(Id = "Name")] public TextField NameField;
+
+        [FindBy(Css = ".results")] public IText Result;
 
         public void FillFormWithoutSubmitting(string firstName, string secondName, string description)
         {

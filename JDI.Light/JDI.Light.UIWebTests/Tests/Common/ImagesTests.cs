@@ -8,9 +8,9 @@ namespace JDI.UIWebTests.Tests.Common
 {
     public class ImagesTests
     {
-        private IImage _logoImage = TestSite.HomePage.LogoImage;
         private const string ALT = "ALT";
         private const string SRC = "https://jdi-framework.github.io/tests/images/Logo_Epam_Color.svg";
+        private readonly IImage _logoImage = TestSite.HomePage.LogoImage;
 
         [SetUp]
         public void SetUp()
@@ -28,28 +28,28 @@ namespace JDI.UIWebTests.Tests.Common
         {
             TestSite.ContactFormPage.Open();
             _logoImage.Click();
-            TestSite.HomePage.IsOpened();            
+            TestSite.HomePage.IsOpened();
         }
 
         [Test]
         public void SetAttributeTest()
         {
-            string _attributeName = "testAttr";
-            string _value = "testValue";
+            var _attributeName = "testAttr";
+            var _value = "testValue";
             _logoImage.SetAttribute(_attributeName, _value);
-            new Check().AreEquals(_logoImage.GetAttribute(_attributeName), _value);                
+            new Check().AreEquals(_logoImage.GetAttribute(_attributeName), _value);
         }
 
         [Test]
         public void GetSourceTest()
         {
-            new Check().AreEquals(_logoImage.GetSource(), SRC);            
+            new Check().AreEquals(_logoImage.GetSource(), SRC);
         }
 
         [Test]
         public void GetTipTest()
         {
-            new Check().AreEquals(_logoImage.GetAlt(), ALT);            
+            new Check().AreEquals(_logoImage.GetAlt(), ALT);
         }
     }
 }

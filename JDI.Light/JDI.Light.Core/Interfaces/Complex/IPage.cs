@@ -7,7 +7,7 @@ namespace JDI.Core.Interfaces.Complex
         /**
          * Check that page opened
          */
-         void CheckOpened();
+        void CheckOpened();
 
         /**
          * Opens url specified for page

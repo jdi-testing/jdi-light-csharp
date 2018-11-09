@@ -8,7 +8,10 @@ namespace JDI.Core.Preconditions
     public class PreconditionsState
     {
         public static bool alwaysMoveToCondition;
-        private PreconditionsState() { }
+
+        private PreconditionsState()
+        {
+        }
 
         public static void IsInState(IPreconditions condition, DescriptionAttribute method)
         {
@@ -37,7 +40,7 @@ namespace JDI.Core.Preconditions
         {
             try
             {
-                bool temp = alwaysMoveToCondition;
+                var temp = alwaysMoveToCondition;
                 alwaysMoveToCondition = true;
                 IsInState(condition, method);
                 alwaysMoveToCondition = temp;

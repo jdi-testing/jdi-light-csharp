@@ -8,33 +8,57 @@ namespace JDI.Web.Attributes
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
     public class JFindByAttribute : Attribute
     {
-        private By _locator;
-
         public string Group;
-        public string Id { set => _locator = By.Id(value);
+
+        public string Id
+        {
+            set => ByLocator = By.Id(value);
             get => "";
         }
-        public string Name { set => _locator = By.Name(value);
+
+        public string Name
+        {
+            set => ByLocator = By.Name(value);
             get => "";
         }
-        public string ClassName { set => _locator = By.ClassName(value);
+
+        public string ClassName
+        {
+            set => ByLocator = By.ClassName(value);
             get => "";
         }
-        public string Css { set => _locator = By.CssSelector(value);
+
+        public string Css
+        {
+            set => ByLocator = By.CssSelector(value);
             get => "";
         }
-        public string XPath { set => _locator = By.XPath(value);
+
+        public string XPath
+        {
+            set => ByLocator = By.XPath(value);
             get => "";
         }
-        public string Tag { set => _locator = By.TagName(value);
+
+        public string Tag
+        {
+            set => ByLocator = By.TagName(value);
             get => "";
         }
-        public string LinkText { set => _locator = By.LinkText(value);
+
+        public string LinkText
+        {
+            set => ByLocator = By.LinkText(value);
             get => "";
         }
-        public string PartialLinkText { set => _locator = By.PartialLinkText(value);
+
+        public string PartialLinkText
+        {
+            set => ByLocator = By.PartialLinkText(value);
             get => "";
         }
+
+        public By ByLocator { get; private set; }
 
         public static By GetLocatorFromFindBy(FindsByAttribute fbAttr)
         {
@@ -61,18 +85,18 @@ namespace JDI.Web.Attributes
             }
         }
 
-        public By ByLocator => _locator;
-
         public static By Locator(FieldInfo field)
         {
             var locator = field.GetCustomAttribute<JFindByAttribute>(false);
-            return locator?._locator;
+            return locator?.ByLocator;
         }
+
         public static string GroupName(FieldInfo field)
         {
             var locator = field.GetCustomAttribute<JFindByAttribute>(false);
             return locator?.Group;
         }
+
         public static void Get(FieldInfo field, out By locator, out string group)
         {
             locator = Locator(field);
@@ -82,7 +106,7 @@ namespace JDI.Web.Attributes
         public static By Locator(object obj)
         {
             var locator = obj.GetType().GetCustomAttribute<JFindByAttribute>(false);
-            return locator?._locator;
+            return locator?.ByLocator;
         }
     }
 }

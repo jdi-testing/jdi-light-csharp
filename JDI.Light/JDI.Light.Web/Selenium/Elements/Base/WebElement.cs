@@ -14,28 +14,16 @@ namespace JDI.Web.Selenium.Elements.Base
 {
     public class WebElement : WebBaseElement, IElement
     {
-        public WebElement() : this(null) { }
-        public WebElement(By byLocator = null, IWebElement webElement = null, WebBaseElement element = null)
-            : base(byLocator, webElement, element:element) { }
-        
-        public static T Copy<T>(T element, By newLocator) where T : WebElement
+        protected Func<WebBaseElement, bool> IsDisplayedAction =
+            el => el.WebAvatar.FindImmediately(() => el.WebElement.Displayed, false);
+
+        public WebElement() : this(null)
         {
-            return ExceptionUtils.ActionWithException(() => 
-            {
-                var result = (T)Activator.CreateInstance(element.GetType());
-                result.SetAvatar(element.WebAvatar, newLocator);
-                return result;
-            }, ex => $"Can't copy Element: {element}. Exception: {ex}");
         }
 
-        /**
-         * Specified Selenium Element for this Element
-         */
-
-        public IWebElement GetWebElement()
+        public WebElement(By byLocator = null, IWebElement webElement = null, WebBaseElement element = null)
+            : base(byLocator, webElement, element: element)
         {
-            return Invoker.DoJActionResult("Get web element",
-                el => WebElement ?? WebAvatar.WebElement, level: LogLevels.Debug);
         }
 
         public string GetAttribute(string name)
@@ -51,18 +39,11 @@ namespace JDI.Web.Selenium.Elements.Base
         public void SetAttribute(string attributeName, string value)
         {
             Invoker.DoJAction($"Set Attribute '{attributeName}'='{value}'",
-                            el => el.JsExecutor.ExecuteScript($"arguments[0].setAttribute('{attributeName}',arguments[1]);",
-                                        WebElement, value));
+                el => el.JsExecutor.ExecuteScript($"arguments[0].setAttribute('{attributeName}',arguments[1]);",
+                    WebElement, value));
         }
 
-        protected Func<WebBaseElement, bool> IsDisplayedAction = 
-            el => el.WebAvatar.FindImmediately(() => el.WebElement.Displayed, false);
-        
         public bool Displayed => Actions.IsDisplayed(IsDisplayedAction);
-        protected void WaitDisplayedAction()
-        {
-            Wait(el => el.Displayed);
-        }
         public bool Hidden => Actions.IsDisplayed(el => !IsDisplayedAction(el));
 
         public void WaitDisplayed()
@@ -73,6 +54,31 @@ namespace JDI.Web.Selenium.Elements.Base
         public void WaitVanished()
         {
             Actions.WaitVanished(el => Timer.Wait(() => !IsDisplayedAction(el)));
+        }
+
+        public static T Copy<T>(T element, By newLocator) where T : WebElement
+        {
+            return ExceptionUtils.ActionWithException(() =>
+            {
+                var result = (T) Activator.CreateInstance(element.GetType());
+                result.SetAvatar(element.WebAvatar, newLocator);
+                return result;
+            }, ex => $"Can't copy Element: {element}. Exception: {ex}");
+        }
+
+        /**
+         * Specified Selenium Element for this Element
+         */
+
+        public IWebElement GetWebElement()
+        {
+            return Invoker.DoJActionResult("Get web element",
+                el => WebElement ?? WebAvatar.WebElement, level: LogLevels.Debug);
+        }
+
+        protected void WaitDisplayedAction()
+        {
+            Wait(el => el.Displayed);
         }
 
         public IWebElement GetInvisibleElement()
@@ -121,7 +127,8 @@ namespace JDI.Web.Selenium.Elements.Base
         public T Wait<T>(Func<IWebElement, T> resultFunc, Func<T, bool> condition, int timeoutSec)
         {
             SetWaitTimeout(timeoutSec);
-            var result = new Timer(timeoutSec).GetResultByCondition(() => resultFunc.Invoke(GetWebElement()), condition.Invoke);
+            var result =
+                new Timer(timeoutSec).GetResultByCondition(() => resultFunc.Invoke(GetWebElement()), condition.Invoke);
             RestoreWaitTimeout();
             return result;
         }
@@ -139,18 +146,20 @@ namespace JDI.Web.Selenium.Elements.Base
         public void ClickWithKeys(params string[] keys)
         {
             Invoker.DoJAction("Ctrl click on Element",
-                    el => {
-                        var action = new Actions(WebDriver);
-                        action = keys.Aggregate(action, (current, key) => current.KeyDown(key));
-                        action = action.MoveToElement(WebElement).Click();
-                        action = keys.Aggregate(action, (current, key) => current.KeyUp(key));
-                        action.Perform();
-            });
+                el =>
+                {
+                    var action = new Actions(WebDriver);
+                    action = keys.Aggregate(action, (current, key) => current.KeyDown(key));
+                    action = action.MoveToElement(WebElement).Click();
+                    action = keys.Aggregate(action, (current, key) => current.KeyUp(key));
+                    action.Perform();
+                });
         }
 
         public void DoubleClick()
         {
-            Invoker.DoJAction("Double click on Element", el => {
+            Invoker.DoJAction("Double click on Element", el =>
+            {
                 var builder = new Actions(WebDriver);
                 builder.DoubleClick(WebElement).Perform();
             });
@@ -158,7 +167,8 @@ namespace JDI.Web.Selenium.Elements.Base
 
         public void RightClick()
         {
-            Invoker.DoJAction("Right click on Element", el => {
+            Invoker.DoJAction("Right click on Element", el =>
+            {
                 var builder = new Actions(WebDriver);
                 builder.ContextClick(WebElement).Perform();
             });
@@ -166,7 +176,8 @@ namespace JDI.Web.Selenium.Elements.Base
 
         public void ClickCenter()
         {
-            Invoker.DoJAction("Click in Center of Element", el => {
+            Invoker.DoJAction("Click in Center of Element", el =>
+            {
                 var builder = new Actions(WebDriver);
                 builder.Click(WebElement).Perform();
             });
@@ -174,7 +185,8 @@ namespace JDI.Web.Selenium.Elements.Base
 
         public void MouseOver()
         {
-            Invoker.DoJAction("Move mouse over Element", el => {
+            Invoker.DoJAction("Move mouse over Element", el =>
+            {
                 var builder = new Actions(WebDriver);
                 builder.MoveToElement(WebElement).Build().Perform();
             });
@@ -182,26 +194,27 @@ namespace JDI.Web.Selenium.Elements.Base
 
         public void Focus()
         {
-            Invoker.DoJAction("Focus on Element", el => {
-               var size = WebElement.Size;
+            Invoker.DoJAction("Focus on Element", el =>
+            {
+                var size = WebElement.Size;
                 new Actions(WebDriver).MoveToElement(WebElement, size.Width / 2, size.Height / 2).Build().Perform();
             });
         }
 
         public void SelectArea(int x1, int y1, int x2, int y2)
         {
-            Invoker.DoJAction($"Select area: from ({x1},{y1}) to ({x2},{y2})", el => {
+            Invoker.DoJAction($"Select area: from ({x1},{y1}) to ({x2},{y2})", el =>
+            {
                 var element = WebElement;
                 new Actions(WebDriver).MoveToElement(element, x1, y1).ClickAndHold()
-                        .MoveToElement(WebElement, x2, y2).Release().Build().Perform();
+                    .MoveToElement(WebElement, x2, y2).Release().Build().Perform();
             });
         }
 
         public void DragAndDrop(int x, int y)
         {
             Invoker.DoJAction($"Drag and drop Element: (x,y)=({x},{y})", el =>
-            new Actions(WebDriver).DragAndDropToOffset(WebElement, x, y).Build().Perform());
+                new Actions(WebDriver).DragAndDropToOffset(WebElement, x, y).Build().Perform());
         }
     }
-    
 }

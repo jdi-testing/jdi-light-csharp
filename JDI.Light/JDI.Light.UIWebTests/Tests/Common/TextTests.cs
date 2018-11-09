@@ -10,15 +10,6 @@ namespace JDI.UIWebTests.Tests.Common
     [TestFixture]
     public class TextTests
     {
-        private IText _textItem = TestSite.HomePage.Text;
-        private string _expectedText = ("Lorem ipsum dolor sit amet, consectetur adipisicing elit,"
-            + " sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-            + " Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"
-            + " nisi ut aliquip ex ea commodo consequat Duis aute irure dolor in"
-            + " reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.").ToUpper();
-        private string _regEx = ".* IPSUM DOLOR SIT AMET.*";
-        private string _contains = "ENIM AD MINIM VENIAM, QUIS NOSTRUD";
-
         [SetUp]
         public void SetUp()
         {
@@ -27,8 +18,21 @@ namespace JDI.UIWebTests.Tests.Common
             JDISettings.Logger.Info("Setup method finished");
         }
 
+        private readonly IText _textItem = TestSite.HomePage.Text;
+
+        private readonly string _expectedText = ("Lorem ipsum dolor sit amet, consectetur adipisicing elit,"
+                                                 + " sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                                                 + " Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"
+                                                 + " nisi ut aliquip ex ea commodo consequat Duis aute irure dolor in"
+                                                 + " reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+            ).ToUpper();
+
+        private readonly string _regEx = ".* IPSUM DOLOR SIT AMET.*";
+        private readonly string _contains = "ENIM AD MINIM VENIAM, QUIS NOSTRUD";
+
         [Test]
-        public void GetTextTest() {
+        public void GetTextTest()
+        {
             Assert.AreEquals(_textItem.GetText, _expectedText);
         }
 
@@ -37,7 +41,16 @@ namespace JDI.UIWebTests.Tests.Common
         {
             Assert.AreEquals(_textItem.Value, _expectedText);
         }
-        
+
+        [Test]
+        public void SetAttributeTest()
+        {
+            var attributeName = "testAttr";
+            var value = "testValue";
+            _textItem.SetAttribute(attributeName, value);
+            CommonActionsData.CheckText(() => _textItem.GetAttribute(attributeName), value);
+        }
+
         [Test]
         public void WaitMatchTest()
         {
@@ -64,15 +77,6 @@ namespace JDI.UIWebTests.Tests.Common
             TestSite.SupportPage.IsOpened();
             CommonActionsData.RunParallel(() => TestSite.HomePage.IsOpened());
             Assert.AreEquals(_textItem.WaitText(_contains), _expectedText);
-        }
-
-        [Test]
-        public void SetAttributeTest()
-        {
-            string attributeName = "testAttr";
-            string value = "testValue";
-            _textItem.SetAttribute(attributeName, value);
-            CommonActionsData.CheckText(() => _textItem.GetAttribute(attributeName), value);
         }
     }
 }

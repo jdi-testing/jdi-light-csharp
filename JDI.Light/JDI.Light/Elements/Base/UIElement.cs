@@ -11,9 +11,9 @@ namespace JDI.Light.Elements.Base
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class UIElement : IWebElement, IBaseElement
     {
-        private readonly IWebElement _webElement;
-        private readonly IWebDriver _webDriver;
         private readonly Js _js;
+        private readonly IWebDriver _webDriver;
+        private readonly IWebElement _webElement;
 
         public UIElement(IWebElement element, IWebDriver webDriver)
         {
@@ -87,9 +87,9 @@ namespace JDI.Light.Elements.Base
         }
 
         #endregion
-        
+
         #region IWebElement methods
-        
+
         public IWebElement FindElement(By by)
         {
             return _webElement.FindElement(by);
@@ -136,6 +136,5 @@ namespace JDI.Light.Elements.Base
         }
 
         #endregion
-
     }
 }

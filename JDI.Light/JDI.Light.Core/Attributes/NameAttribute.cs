@@ -9,7 +9,10 @@ namespace JDI.Core.Attributes
     {
         private readonly string _name;
 
-        public NameAttribute(string name) { _name = name; }
+        public NameAttribute(string name)
+        {
+            _name = name;
+        }
 
         public static string GetName(FieldInfo field)
         {

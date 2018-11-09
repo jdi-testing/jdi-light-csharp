@@ -13,14 +13,14 @@ namespace JDI.UIWebTests.Tests
     {
         [OneTimeSetUp]
         protected void SetUp()
-        {            
-            WebSettings.InitNUnitDefault();     
+        {
+            WebSettings.InitNUnitDefault();
             var logger = JDISettings.Logger;
             logger.Info("Init test run...");
             WinProcUtils.KillAllRunWebDrivers();
             WebSite.Init(typeof(TestSite));
             TestSite.HomePage.Open();
-            TestSite.LoginForm.Submit(User.DefaultUser);            
+            TestSite.LoginForm.Submit(User.DefaultUser);
             logger.Info("Run test...");
         }
 

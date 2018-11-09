@@ -15,6 +15,7 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
     public class EntityTable<TEntity, TRow> : EntityTable<TEntity>
     {
         private TRow NewRow => Activator.CreateInstance<TRow>();
+
         private TRow CastToRow(Dictionary<string, ICell> row)
         {
             var newRow = NewRow;
@@ -22,6 +23,7 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
                 SetRowField(newRow, newRow.GetFields(), pair.Key, pair.Value));
             return newRow;
         }
+
         private static void SetRowField(TRow entity, List<FieldInfo> fields, string fieldName, ICell cell)
         {
             var field = fields.FirstOrDefault(f => GetElementClass.NamesEqual(f.Name, fieldName));
@@ -30,7 +32,7 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
             var value = (WebBaseElement) Activator.CreateInstance(clazz.IsInterface
                 ? MapInterfaceToElement.ClassFromInterface(clazz)
                 : clazz);
-            value.WebAvatar = ((Cell)cell).WebAvatar;
+            value.WebAvatar = ((Cell) cell).WebAvatar;
             field.SetValue(entity, value);
         }
 
@@ -63,51 +65,17 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
         }
 
         private TEntity NewEntity => Activator.CreateInstance<TEntity>();
-        
-        private TEntity RowToEntity(Dictionary<string, ICell> row)
-        {
-            var entity = NewEntity;
-            var fields = entity.GetFields();
-            row.ForEach(pair => 
-                SetEntityField(entity, fields, pair.Key, pair.Value.GetText));
-            return entity;
-        }
-
-        private static void SetEntityField(TEntity entity, List<FieldInfo> fields, string fieldName, string value)
-        {
-            var field = fields.FirstOrDefault(f => GetElementClass.NamesEqual(f.Name, fieldName));
-            field?.SetValue(entity, value.ConvertStringToType(field));
-        }
-        
-        public IList<TEntity> Entities(params string[] colNameValues)
-        {
-            return GetRows(colNameValues).Select(r => RowToEntity(r.Value)).ToList();
-        }
-
-        public int Size()
-        {
-            return Rows.Count;
-        }
-
-        public TEntity Entity(string value, Column column)
-        {
-            return RowToEntity(Row(value, column));
-        }
-
-        public TEntity Entity(int rowNum)
-        {
-            return RowToEntity(Row(rowNum));
-        }
-
-        public TEntity Entity(string rowName)
-        {
-            return RowToEntity(Row(rowName));
-        }
 
         public IList<TEntity> All => Rows.Get().Select(r => RowToEntity(r.Value)).ToList();
 
         public TEntity First => Entity(1);
         public TEntity Last => Entity(Count);
+
+        public TEntity this[string name]
+        {
+            get => Entity(name);
+            set => throw new Exception("Not applicable");
+        }
 
         public IEnumerator<TEntity> GetEnumerator()
         {
@@ -135,7 +103,6 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
         }
 
 
-
         public bool Remove(TEntity item)
         {
             throw new Exception("Not applicable");
@@ -143,6 +110,7 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
 
         public int Count => Rows.Count;
         public bool IsReadOnly => true;
+
         public int IndexOf(TEntity item)
         {
             return All.IndexOf(item);
@@ -166,10 +134,44 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
             set => throw new Exception("Not applicable");
         }
 
-        public TEntity this[string name]
+        private TEntity RowToEntity(Dictionary<string, ICell> row)
         {
-            get => Entity(name);
-            set => throw new Exception("Not applicable");
+            var entity = NewEntity;
+            var fields = entity.GetFields();
+            row.ForEach(pair =>
+                SetEntityField(entity, fields, pair.Key, pair.Value.GetText));
+            return entity;
+        }
+
+        private static void SetEntityField(TEntity entity, List<FieldInfo> fields, string fieldName, string value)
+        {
+            var field = fields.FirstOrDefault(f => GetElementClass.NamesEqual(f.Name, fieldName));
+            field?.SetValue(entity, value.ConvertStringToType(field));
+        }
+
+        public IList<TEntity> Entities(params string[] colNameValues)
+        {
+            return GetRows(colNameValues).Select(r => RowToEntity(r.Value)).ToList();
+        }
+
+        public int Size()
+        {
+            return Rows.Count;
+        }
+
+        public TEntity Entity(string value, Column column)
+        {
+            return RowToEntity(Row(value, column));
+        }
+
+        public TEntity Entity(int rowNum)
+        {
+            return RowToEntity(Row(rowNum));
+        }
+
+        public TEntity Entity(string rowName)
+        {
+            return RowToEntity(Row(rowName));
         }
     }
 }

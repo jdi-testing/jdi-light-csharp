@@ -4,6 +4,5 @@ namespace JDI.Web.Settings
 {
     public class WebTimeoutSettings : TimeoutSettings
     {
-
     }
 }

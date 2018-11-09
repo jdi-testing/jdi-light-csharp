@@ -37,7 +37,7 @@ namespace JDI.Core
 
         public static IList<T> ListCopy<T>(this IList<T> list, int from = 0, int to = 0)
         {
-            if (from*to < 0)
+            if (from * to < 0)
                 throw new Exception($"from and to should have same sign ({from}, {to})");
             if (from < 0)
                 from = list.Count + from - 1;

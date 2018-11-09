@@ -17,10 +17,16 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
 {
     public class Table : Text, ITable
     {
-        private IList<ICell> _allCells = new List<ICell>();
         private readonly Columns _columns = new Columns();
         private readonly Rows _rows = new Rows();
+        private IList<ICell> _allCells = new List<ICell>();
         private IList<string> _footer;
+
+        public Table()
+        {
+            Columns.Table = this;
+            Rows.Table = this;
+        }
 
         private IList<ICell> AllCells
         {
@@ -38,27 +44,36 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
             set => _allCells = value;
         }
 
-        public Columns Columns
-        {
-            get => _columns;
-            set => _columns.Update(value);
-        }
-
-        public Rows Rows
-        {
-            get => _rows;
-            set => _rows.Update(value);
-        }
-
         public bool Cache { set; get; }
 
-        public By RootBy { set => WebAvatar.ByLocator = value; }
+        public By RootBy
+        {
+            set => WebAvatar.ByLocator = value;
+        }
+
         protected By CellLocatorBy { set; get; }
-        public By ColumnBy { set => Columns.LineTemplate = value; }
-        public By RowBy { set => Rows.LineTemplate = value; }
+
+        public By ColumnBy
+        {
+            set => Columns.LineTemplate = value;
+        }
+
+        public By RowBy
+        {
+            set => Rows.LineTemplate = value;
+        }
+
         public By FooterBy { get; set; } = By.XPath(".//tfoot/tr/th");
-        public By ColumnHeaderBy { set => Columns.HeadersLocator = value; }
-        public By RowHeaderBy { set => Rows.HeadersLocator = value; }
+
+        public By ColumnHeaderBy
+        {
+            set => Columns.HeadersLocator = value;
+        }
+
+        public By RowHeaderBy
+        {
+            set => Rows.HeadersLocator = value;
+        }
 
         public string[] ColumnHeaders
         {
@@ -78,8 +93,15 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
             }
         }
 
-        public int ColumnFrom { set => Columns.StartIndex = value; }
-        public int RowFrom { set => Rows.StartIndex = value; }
+        public int ColumnFrom
+        {
+            set => Columns.StartIndex = value;
+        }
+
+        public int RowFrom
+        {
+            set => Rows.StartIndex = value;
+        }
 
         public TableHeaderTypes HeaderType
         {
@@ -107,23 +129,29 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
             }
         }
 
-        public Table()
-        {
-            Columns.Table = this;
-            Rows.Table = this;
-        }
-
         protected override Func<WebBaseElement, string> GetTextAction => p =>
         {
             return "||X||" + Columns.Headers.Print("|") + "||\n"
                    +
                    Rows.Headers.Select(rowName =>
-                           "||" + rowName + "||" +
-                           GetCells().Where(cell => cell.RowName.Equals(rowName)).Select(cell => cell.Value).Print("|") +
-                           "||").Print("\n");
+                       "||" + rowName + "||" +
+                       GetCells().Where(cell => cell.RowName.Equals(rowName)).Select(cell => cell.Value).Print("|") +
+                       "||").Print("\n");
         };
 
-    public Table Copy()
+        public Columns Columns
+        {
+            get => _columns;
+            set => _columns.Update(value);
+        }
+
+        public Rows Rows
+        {
+            get => _rows;
+            set => _rows.Update(value);
+        }
+
+        public Table Copy()
         {
             return Clone();
         }
@@ -138,37 +166,9 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
             return newTable;
         }
 
-        public void SetTableSettings(TableSettings settings)
-        {
-            Rows.HasHeader = settings.RowHasHeaders;
-            Rows.Headers = settings.RowHeaders;
-            Rows.Count = settings.RowsCount;
-            Columns.HasHeader = settings.ColumnHasHeaders;
-            Columns.Headers = settings.ColumnHeaders;
-            Columns.Count = settings.ColumnsCount;
-        }
-
-        public ITable SetUp(By root, By cell, By row, By column, By footer, int colStartIndex, int rowStartIndex)
-        {
-            SetAvatar(byLocator: root);
-            CellLocatorBy = cell;
-            Rows.LineTemplate = row;
-            Columns.LineTemplate = column;
-            FooterBy = footer;
-            Columns.StartIndex = colStartIndex;
-            Rows.StartIndex = rowStartIndex;
-            return this;
-        }
-
         public ITable UseCache()
         {
             Cache = true;
-            return this;
-        }
-
-        public ITable UseCache(bool value)
-        {
-            Cache = value;
             return this;
         }
 
@@ -216,11 +216,6 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
             return Columns.GetColumnValue(colName);
         }
 
-        private Dictionary<string, ICell> Column(Column column)
-        {
-            return column.Get(Column, Column);
-        }
-
         public Dictionary<string, ICell> Row(int rowNum)
         {
             return Rows.GetRow(rowNum);
@@ -239,35 +234,6 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
         public IList<string> RowValue(string rowName)
         {
             return Rows.GetRowValue(rowName);
-        }
-
-        private Dictionary<string, ICell> Row(Row row)
-        {
-            return row.Get(Row, Row);
-        }
-
-        private IList<string> GetAllEnumNames(Type headers)
-        {
-            return typeof(Enum).IsAssignableFrom(headers) 
-                ? Enum.GetNames(headers).ToList() 
-                : headers.GetFields().ToList().Select(el => el.GetValue(null).ToString()).ToList();
-        }
-
-        public ITable SetColumnsCount(int value)
-        {
-            Columns.Count = value;
-            return this;
-        }
-
-        public ITable SetRowsCount(int value)
-        {
-            Rows.Count = value;
-            return this;
-        }
-
-        protected IList<string> GetFooterAction()
-        {
-            return WebElement.FindElements(FooterBy).Select(e => e.Text).ToList();
         }
 
 
@@ -289,22 +255,13 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
 
         public IList<string> Headers => Columns.Headers;
 
-        public IList<string> FooterInstance() // TODO method name conflict
-        {
-            if (Footer != null)
-                return Footer;
-            //_footer = invoker.doJActionResult("Get Footer", this::getFooterAction); TODO
-            if (Footer == null || Footer.Count == 0)
-                return new List<string>();
-            Columns.Count = Footer.Count;
-            return Footer;
-        }
-
         public ICell Cell(Column column, Row row)
         {
-            int colIndex = column.Get(GetColumnIndex, num => num + Columns.StartIndex - 1);
-            int rowIndex = (int) row.Get(GetRowIndex, num => num + Rows.StartIndex - 1);
-            return AddCell(colIndex, rowIndex, column.Get(name => Columns.Headers.IndexOf(name) + 1, num => num), row.Get(name => Rows.Headers.IndexOf(name) + 1, num => num), column.Get(name => name, num => ""), row.Get(name => name, num => ""));
+            var colIndex = column.Get(GetColumnIndex, num => num + Columns.StartIndex - 1);
+            var rowIndex = (int) row.Get(GetRowIndex, num => num + Rows.StartIndex - 1);
+            return AddCell(colIndex, rowIndex, column.Get(name => Columns.Headers.IndexOf(name) + 1, num => num),
+                row.Get(name => Rows.Headers.IndexOf(name) + 1, num => num), column.Get(name => name, num => ""),
+                row.Get(name => name, num => ""));
         }
 
         public ICell Cell(string columnName, string rowName)
@@ -317,16 +274,6 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
             return Cell(Complex.Table.Column.column(columnIndex), Complex.Table.Row.row(rowIndex));
         }
 
-        public ICell Cell(IWebElement webElement, Column column, Row row)
-        {
-            return AddCell(webElement, column.Get(name => Columns.Headers.IndexOf(name) + 1, num => num), row.Get(name => Rows.Headers.IndexOf(name) + 1, num => num), column.Get(name => name, num => ""), row.Get(name => name, num => ""));
-        }
-
-        private IList<ICell> Matches(Collection<ICell> list, string regex)
-        {
-            return new List<ICell>(list.Where(cell => cell.Value.Matches(regex)));
-        }
-
         public IList<ICell> Cells(string value)
         {
             return new List<ICell>(GetCells().Where(cell => cell.Value.Equals(value)));
@@ -335,13 +282,16 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
 
         public ICell Cell(string value)
         {
-            return Rows.Get().Select(row => row.Value.FirstOrDefault(pair => pair.Value.GetText.Equals(value)).Value).FirstOrDefault(result => result != null);
+            return Rows.Get().Select(row => row.Value.FirstOrDefault(pair => pair.Value.GetText.Equals(value)).Value)
+                .FirstOrDefault(result => result != null);
         }
 
         public IList<ICell> GetCells()
         {
             var rows = Rows.Get();
-            var result = (from columnName in Columns.Headers from rowName in Rows.Headers select rows[rowName][columnName]).ToList();
+            var result = (from columnName in Columns.Headers
+                from rowName in Rows.Headers
+                select rows[rowName][columnName]).ToList();
             if (Cache)
                 AllCells = result;
             return result;
@@ -367,8 +317,10 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
                         break;
                     }
                 }
+
                 if (matches) result.Add(row.Key, row.Value);
             }
+
             return result;
         }
 
@@ -393,8 +345,10 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
                         break;
                     }
                 }
+
                 if (matches) result.Add(column.Key, column.Value);
             }
+
             return result;
         }
 
@@ -415,7 +369,8 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
             {
                 WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.Zero;
                 var rowsCount = Rows.GetCount(true);
-                WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(JDISettings.Timeouts.CurrentTimeoutSec);
+                WebDriver.Manage().Timeouts().ImplicitWait =
+                    TimeSpan.FromSeconds(JDISettings.Timeouts.CurrentTimeoutSec);
                 return rowsCount == 0;
             }
         }
@@ -450,7 +405,8 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
 
         public ICell CellMatch(string regex)
         {
-            return Rows.Get().Select(row => row.Value.FirstOrDefault(pair => pair.Value.GetText.Matches(regex)).Value).FirstOrDefault(result => result != null);
+            return Rows.Get().Select(row => row.Value.FirstOrDefault(pair => pair.Value.GetText.Matches(regex)).Value)
+                .FirstOrDefault(result => result != null);
         }
 
         public IList<ICell> CellsMatch(string regex, Column column)
@@ -465,6 +421,91 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
             return columnLine.Where(v => v.Value.Value.Matches(regex)).Select(v => v.Value).ToList();
         }
 
+        public void SetTableSettings(TableSettings settings)
+        {
+            Rows.HasHeader = settings.RowHasHeaders;
+            Rows.Headers = settings.RowHeaders;
+            Rows.Count = settings.RowsCount;
+            Columns.HasHeader = settings.ColumnHasHeaders;
+            Columns.Headers = settings.ColumnHeaders;
+            Columns.Count = settings.ColumnsCount;
+        }
+
+        public ITable SetUp(By root, By cell, By row, By column, By footer, int colStartIndex, int rowStartIndex)
+        {
+            SetAvatar(byLocator: root);
+            CellLocatorBy = cell;
+            Rows.LineTemplate = row;
+            Columns.LineTemplate = column;
+            FooterBy = footer;
+            Columns.StartIndex = colStartIndex;
+            Rows.StartIndex = rowStartIndex;
+            return this;
+        }
+
+        public ITable UseCache(bool value)
+        {
+            Cache = value;
+            return this;
+        }
+
+        private Dictionary<string, ICell> Column(Column column)
+        {
+            return column.Get(Column, Column);
+        }
+
+        private Dictionary<string, ICell> Row(Row row)
+        {
+            return row.Get(Row, Row);
+        }
+
+        private IList<string> GetAllEnumNames(Type headers)
+        {
+            return typeof(Enum).IsAssignableFrom(headers)
+                ? Enum.GetNames(headers).ToList()
+                : headers.GetFields().ToList().Select(el => el.GetValue(null).ToString()).ToList();
+        }
+
+        public ITable SetColumnsCount(int value)
+        {
+            Columns.Count = value;
+            return this;
+        }
+
+        public ITable SetRowsCount(int value)
+        {
+            Rows.Count = value;
+            return this;
+        }
+
+        protected IList<string> GetFooterAction()
+        {
+            return WebElement.FindElements(FooterBy).Select(e => e.Text).ToList();
+        }
+
+        public IList<string> FooterInstance() // TODO method name conflict
+        {
+            if (Footer != null)
+                return Footer;
+            //_footer = invoker.doJActionResult("Get Footer", this::getFooterAction); TODO
+            if (Footer == null || Footer.Count == 0)
+                return new List<string>();
+            Columns.Count = Footer.Count;
+            return Footer;
+        }
+
+        public ICell Cell(IWebElement webElement, Column column, Row row)
+        {
+            return AddCell(webElement, column.Get(name => Columns.Headers.IndexOf(name) + 1, num => num),
+                row.Get(name => Rows.Headers.IndexOf(name) + 1, num => num), column.Get(name => name, num => ""),
+                row.Get(name => name, num => ""));
+        }
+
+        private IList<ICell> Matches(Collection<ICell> list, string regex)
+        {
+            return new List<ICell>(list.Where(cell => cell.Value.Matches(regex)));
+        }
+
         private int GetColumnIndex(string name)
         {
             int nameIndex;
@@ -472,7 +513,9 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
             if (headers != null && headers.Contains(name))
                 nameIndex = headers.IndexOf(name);
             else
-                throw JDISettings.Exception("Can't Get Column: '" + name + "'. " + ((headers == null) ? "ColumnHeaders is Null" : "Available ColumnHeaders: " + headers.Print(", ", "'{0}'") + ")"));
+                throw JDISettings.Exception("Can't Get Column: '" + name + "'. " + (headers == null
+                                                ? "ColumnHeaders is Null"
+                                                : "Available ColumnHeaders: " + headers.Print(", ", "'{0}'") + ")"));
             return nameIndex + Columns.StartIndex;
         }
 
@@ -483,7 +526,8 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
             if (headers != null && headers.Contains(name))
                 nameIndex = headers.IndexOf(name);
             else
-                throw JDISettings.Exception($"Can't Get Row: {name}. Available RowHeaders: {Headers.Print(", ", "'{0}'")}");
+                throw JDISettings.Exception(
+                    $"Can't Get Row: {name}. Available RowHeaders: {Headers.Print(", ", "'{0}'")}");
             return nameIndex + Rows.StartIndex;
         }
 
@@ -508,6 +552,7 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
                 cell.WebElement = webElement;
                 return cell.UpdateData(colName, rowName);
             }
+
             cell = new Cell(colNum, rowNum, colName, rowName, CellLocatorBy, this, -1, webElement: webElement);
 
             if (Cache)

@@ -12,32 +12,29 @@ namespace JDI.UIWebTests.UIObjects.Sections
 {
     public class ContactForm : Form<Contact>
     {
-        [FindBy(Css = "input#Name")]
-        [Name("FirstName")]
-        public ITextField NameField;
-
-        [FindBy(Css = "input#LastName")]
-        [Name("LastName")]
-        public ITextField LastNameField;
-
-        [FindBy(Css = "textarea#Description")]
-        [Name("Description")]
+        [FindBy(Css = "textarea#Description")] [Name("Description")]
         public ITextArea DescriptionField;
-
-        [FindBy(XPath = "//button[@type='submit' and contains(., 'Submit')]")]
-        public IButton SubmitButton;
 
         [FindBy(XPath = ".//a[@class='ui-slider-handle ui-state-default ui-corner-all' and position()=1]")]
         public Link FirstRoller;
 
+        private IJavaScriptExecutor javaScriptExecutor;
+
+        [FindBy(Css = "input#LastName")] [Name("LastName")]
+        public ITextField LastNameField;
+
+        [FindBy(Css = "input#Name")] [Name("FirstName")]
+        public ITextField NameField;
+
         [FindBy(XPath = ".//a[@class='ui-slider-handle ui-state-default ui-corner-all' and position()=2]")]
         public Link SecondRoller;
 
-        private IJavaScriptExecutor javaScriptExecutor;
+        [FindBy(XPath = "//button[@type='submit' and contains(., 'Submit')]")]
+        public IButton SubmitButton;
 
         public List<string> GetFormValue()
         {
-            List<string> fields = new List<string>();
+            var fields = new List<string>();
             fields.Add(NameField.GetText);
             fields.Add(LastNameField.GetText);
             fields.Add(DescriptionField.GetText);
@@ -53,10 +50,7 @@ namespace JDI.UIWebTests.UIObjects.Sections
 
         private IJavaScriptExecutor GetJSExecutor()
         {
-            if (javaScriptExecutor == null)
-            {
-                javaScriptExecutor = WebSettings.JSExecutor;
-            }
+            if (javaScriptExecutor == null) javaScriptExecutor = WebSettings.JSExecutor;
             return javaScriptExecutor;
         }
 

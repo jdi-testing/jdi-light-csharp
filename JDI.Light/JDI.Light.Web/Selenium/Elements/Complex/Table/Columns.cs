@@ -18,13 +18,13 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
             DefaultTemplate = By.XPath(".//tr/td[{0}]");
         }
 
+        protected override IList<IWebElement> GetFirstLine => Table.Rows.GetLineAction(1);
+
         protected new List<IWebElement> GetHeadersAction()
         {
             return Table.WebElements.FindAll(el => el.Equals(HeadersLocator));
         }
 
-        protected override IList<IWebElement> GetFirstLine => Table.Rows.GetLineAction(1);
-        
         public Dictionary<string, ICell> GetColumn(string colName)
         {
             return ExceptionUtils.ActionWithException(() =>
@@ -33,7 +33,7 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
                 var webColumn = Timer.GetResultByCondition(() => GetLineAction(colName), els => els.Count >= rowsCount);
                 if (webColumn == null)
                     throw JDISettings.Exception($"Table has only {GetLineAction(colName).Count} columns " +
-                                    $"but expected at least {rowsCount}");
+                                                $"but expected at least {rowsCount}");
 
                 var result = new Dictionary<string, ICell>();
                 if (webColumn.Count == rowsCount)
@@ -41,12 +41,14 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
                     AddRows(result, Table.Rows.Headers, webColumn, colName);
                     return result;
                 }
+
                 AddRows(result, Table.Rows.AllHeaders, webColumn, colName);
                 return result.Where(el => Table.Rows.Headers.Contains(el.Key)).ToDictionary();
             }, ex => $"Can't Get Column '{colName}'. Reason: {ex}");
         }
 
-        private void AddRows(Dictionary<string, ICell> result, IList<string> headers, IList<IWebElement> webColumn, string colName)
+        private void AddRows(Dictionary<string, ICell> result, IList<string> headers, IList<IWebElement> webColumn,
+            string colName)
         {
             for (var i = 0; i < headers.Count; i++)
             {
@@ -60,7 +62,7 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
         {
             return
                 ExceptionUtils.ActionWithException(
-                    () => GetLineAction(colName).Select(el => el.Text).ToList(), 
+                    () => GetLineAction(colName).Select(el => el.Text).ToList(),
                     ex => $"Can't Get Column '{colName}'. Reason: {ex}");
         }
 
@@ -85,19 +87,21 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
                     els => els.Count >= rowsCount);
                 if (webColumn == null)
                     throw JDISettings.Exception($"Table has only {GetLineAction(colNum).Count} columns " +
-                                    $"but expected at least {rowsCount}");
+                                                $"but expected at least {rowsCount}");
                 var result = new Dictionary<string, ICell>();
                 if (webColumn.Count == rowsCount)
                 {
                     AddRows(result, Table.Rows.Headers, webColumn, colNum);
                     return result;
                 }
+
                 AddRows(result, Table.Rows.AllHeaders, webColumn, colNum);
                 return result.Where(el => Table.Rows.Headers.Contains(el.Key)).ToDictionary();
             }, ex => $"Can't Get Column '{colNum}'. Reason: {ex}");
         }
 
-        private void AddRows(Dictionary<string, ICell> result, IList<string> headers, IList<IWebElement> webColumn, int colNum)
+        private void AddRows(Dictionary<string, ICell> result, IList<string> headers, IList<IWebElement> webColumn,
+            int colNum)
         {
             for (var i = 0; i < headers.Count; i++)
                 result.Add(headers[i], Table.Cell(webColumn[i], new Column(colNum), new Row(i + 1)));
@@ -118,8 +122,7 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
 
         public override Dictionary<string, Dictionary<string, ICell>> Get()
         {
-            return Headers.ToDictionary(key =>key, GetColumn);
+            return Headers.ToDictionary(key => key, GetColumn);
         }
-        
     }
 }

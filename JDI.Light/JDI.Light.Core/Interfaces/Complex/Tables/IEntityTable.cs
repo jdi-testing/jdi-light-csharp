@@ -2,6 +2,5 @@
 {
     public interface IEntityTable : ITable
     {
-
     }
 }

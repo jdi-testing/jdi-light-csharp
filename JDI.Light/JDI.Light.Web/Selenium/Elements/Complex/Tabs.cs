@@ -3,7 +3,12 @@ using JDI.Core.Interfaces.Complex;
 
 namespace JDI.Web.Selenium.Elements.Complex
 {
-    public class Tabs : Tabs<IConvertible>, ITabs { }
-    public class Tabs<TEnum> : Selector<TEnum>, ITabs<TEnum> 
-        where TEnum : IConvertible { }
+    public class Tabs : Tabs<IConvertible>, ITabs
+    {
+    }
+
+    public class Tabs<TEnum> : Selector<TEnum>, ITabs<TEnum>
+        where TEnum : IConvertible
+    {
+    }
 }

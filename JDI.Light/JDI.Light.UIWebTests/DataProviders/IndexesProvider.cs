@@ -2,7 +2,7 @@
 
 namespace JDI.UIWebTests.DataProviders
 {
-    class IndexesProvider
+    internal class IndexesProvider
     {
         public static IEnumerable<int> Indexes
         {
@@ -12,6 +12,6 @@ namespace JDI.UIWebTests.DataProviders
                 yield return 0;
                 yield return 10;
             }
-        } 
+        }
     }
 }

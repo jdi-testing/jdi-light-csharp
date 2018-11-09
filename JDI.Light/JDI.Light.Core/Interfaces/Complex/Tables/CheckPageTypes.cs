@@ -2,6 +2,9 @@
 {
     public enum CheckPageTypes
     {
-        NONE, EQUAL, MATCH, CONTAINS
+        NONE,
+        EQUAL,
+        MATCH,
+        CONTAINS
     }
 }

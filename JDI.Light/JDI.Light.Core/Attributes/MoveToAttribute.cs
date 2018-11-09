@@ -12,6 +12,7 @@ namespace JDI.Core.Attributes
         {
             _pageName = pageName;
         }
+
         public static string Handler(FieldInfo field)
         {
             var attr = field.GetCustomAttribute<MoveToAttribute>(false);
@@ -19,4 +20,3 @@ namespace JDI.Core.Attributes
         }
     }
 }
-

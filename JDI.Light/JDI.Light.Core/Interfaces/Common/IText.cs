@@ -4,7 +4,7 @@ namespace JDI.Core.Interfaces.Common
 {
     public interface IText : IHasValue, IElement
     {
-     /**
+        /**
      * return: Get WebElement’s text
      */
         //TODO[JDIAction]

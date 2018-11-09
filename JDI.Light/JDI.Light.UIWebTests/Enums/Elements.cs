@@ -6,6 +6,5 @@
         Earth,
         Wind,
         Fire
+    }
 }
-}
-

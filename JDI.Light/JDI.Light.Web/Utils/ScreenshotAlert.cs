@@ -1,6 +1,6 @@
 ﻿namespace JDI.Web.Utils
 {
-    public class ScreenshotAlert// : IAlert
+    public class ScreenshotAlert // : IAlert
     {
         // TODO Old code
         /*

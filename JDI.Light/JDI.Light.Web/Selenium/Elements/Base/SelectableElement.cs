@@ -7,14 +7,24 @@ namespace JDI.Web.Selenium.Elements.Base
 {
     public class SelectableElement : ClickableText, ISelect
     {
-        public SelectableElement() : this(null) { }
-        public SelectableElement(By byLocator = null, IWebElement webElement = null, WebBaseElement element = null) 
-            : base(byLocator, webElement, element:element)
+        protected Func<WebBaseElement, string> GetValueFunc = el
+            => ((SelectableElement) el).Selected + "";
+
+        protected Action<SelectableElement> SelectAction = s => s.Click();
+
+        protected Func<SelectableElement, bool> SelectedAction = s => s.WebElement.Selected;
+
+        protected Action<WebBaseElement, string> SetValueAction = (el, value)
+            => ((SelectableElement) el).Select();
+
+        public SelectableElement() : this(null)
         {
         }
 
-        protected Func<SelectableElement, bool> SelectedAction = s => s.WebElement.Selected;
-        protected Action<SelectableElement> SelectAction = s => s.Click();
+        public SelectableElement(By byLocator = null, IWebElement webElement = null, WebBaseElement element = null)
+            : base(byLocator, webElement, element)
+        {
+        }
 
         public void Select()
         {
@@ -22,12 +32,7 @@ namespace JDI.Web.Selenium.Elements.Base
         }
 
         public bool Selected => Actions.Selected(w => SelectedAction(this));
-        
-        protected Func<WebBaseElement, string> GetValueFunc = el 
-            => ((SelectableElement)el).Selected + "";
 
-        protected Action<WebBaseElement, string> SetValueAction = (el, value) 
-            => ((SelectableElement)el).Select();
         public new string Value
         {
             get => Actions.GetValue(GetValueFunc);

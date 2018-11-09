@@ -5,11 +5,11 @@ using JDI.Web.Selenium.Elements.Composite;
 
 namespace JDI.Web.Selenium.Base
 {
-    public class SiteFactory<TScope, TSite> 
-        where TSite : WebSite 
-        where TScope : class 
+    public class SiteFactory<TScope, TSite>
+        where TSite : WebSite
+        where TScope : class
     {
-        public static Dictionary<TScope, List<SiteInfo<TSite>>> Sites 
+        public static Dictionary<TScope, List<SiteInfo<TSite>>> Sites
             = new Dictionary<TScope, List<SiteInfo<TSite>>>();
 
         public static SiteInfo<TSite> Site(TScope scope)
@@ -26,9 +26,10 @@ namespace JDI.Web.Selenium.Base
                 sites.Add(siteInfo);
                 return siteInfo;
             }
+
             newSite = Activator.CreateInstance<TSite>().InitScope<TSite>(scope);
             siteInfo = new SiteInfo<TSite>(newSite);
-            Sites.Add(scope, new List<SiteInfo<TSite>> { siteInfo });
+            Sites.Add(scope, new List<SiteInfo<TSite>> {siteInfo});
             return siteInfo;
         }
     }

@@ -9,20 +9,27 @@ namespace JDI.Web.Selenium.Elements.Complex
     public class ComboBox : ComboBox<IConvertible>, IComboBox
     {
     }
+
     public class ComboBox<TEnum> : Dropdown<TEnum>, IComboBox<TEnum>
         where TEnum : IConvertible
     {
         private readonly GetElementType _textField;
 
-        public ComboBox() : this(null) { }
+        public Action<ComboBox<TEnum>, string> InputAction =
+            (c, text) => c.TextField.SendKeys(text);
 
-        public ComboBox(By selectorLocator = null, By optionsNamesLocatorTemplate = null) 
+        public ComboBox() : this(null)
+        {
+        }
+
+        public ComboBox(By selectorLocator = null, By optionsNamesLocatorTemplate = null)
             : base(selectorLocator, optionsNamesLocatorTemplate)
         {
             _textField = new GetElementType(selectorLocator);
         }
 
-        public ComboBox(By selectorLocator, By optionsNamesLocatorTemplate, By valueLocator, By allOptionsNamesLocator = null)
+        public ComboBox(By selectorLocator, By optionsNamesLocatorTemplate, By valueLocator,
+            By allOptionsNamesLocator = null)
             : base(selectorLocator, optionsNamesLocatorTemplate, allOptionsNamesLocator)
         {
             _textField = new GetElementType(valueLocator);
@@ -32,20 +39,7 @@ namespace JDI.Web.Selenium.Elements.Complex
 
         public override Action<BaseSelector<TEnum>, string> SetValueAction => (c, value) => NewInput(value);
 
-        public TextField TextField =>_textField.Get(new TextField(), WebAvatar);
-
-        public Action<ComboBox<TEnum>, string> InputAction = 
-            (c, text) => c.TextField.SendKeys(text);
-
-        public void ClearAction()
-        {
-            TextField.Clear();
-        }
-
-        public void FocusAction()
-        {
-            TextField.Focus();
-        }
+        public TextField TextField => _textField.Get(new TextField(), WebAvatar);
 
         public void Input(string text)
         {
@@ -71,6 +65,16 @@ namespace JDI.Web.Selenium.Elements.Complex
         public void Focus()
         {
             Actions.Focus(c => FocusAction());
+        }
+
+        public void ClearAction()
+        {
+            TextField.Clear();
+        }
+
+        public void FocusAction()
+        {
+            TextField.Focus();
         }
     }
 }

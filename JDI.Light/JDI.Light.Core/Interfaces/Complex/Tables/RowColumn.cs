@@ -4,8 +4,8 @@ namespace JDI.Core.Interfaces.Complex.Tables
 {
     public abstract class RowColumn
     {
-        private int num;
-        private string name;
+        private readonly string name;
+        private readonly int num;
 
         public RowColumn(int num)
         {
@@ -41,8 +41,8 @@ namespace JDI.Core.Interfaces.Complex.Tables
         {
             return HasName() ? nameAction.Invoke(name) : numAction.Invoke(num);
         }
-        
-        
+
+
         public override string ToString()
         {
             return HasName() ? name : num + "";

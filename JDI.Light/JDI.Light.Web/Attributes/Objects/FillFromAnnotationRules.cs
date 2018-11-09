@@ -10,8 +10,8 @@ namespace JDI.Web.Attributes.Objects
         public static void SetUpTable(Table table, JTableAttribute jTable)
         {
             table.SetUp(jTable.Root.ByLocator, jTable.Cell.ByLocator,
-                    jTable.Row.ByLocator, jTable.Column.ByLocator, jTable.Footer.ByLocator,
-                    jTable.ColStartIndex, jTable.RowStartIndex);
+                jTable.Row.ByLocator, jTable.Column.ByLocator, jTable.Footer.ByLocator,
+                jTable.ColStartIndex, jTable.RowStartIndex);
 
             if (jTable.Header != null)
                 table.ColumnHeaders = jTable.Header;
@@ -32,6 +32,7 @@ namespace JDI.Web.Attributes.Objects
                 table.SetColumnsCount(int.Parse(split[0]));
                 table.SetRowsCount(int.Parse(split[1]));
             }
+
             table.HeaderType = jTable.HeaderType;
             table.UseCache(jTable.UseCache);
         }
@@ -39,9 +40,10 @@ namespace JDI.Web.Attributes.Objects
         public static void SetUpDropdown(Dropdown dropdown, JDropdownAttribute jDropdown)
         {
             dropdown.SetUp(jDropdown.Root.ByLocator, jDropdown.Value.ByLocator,
-                    jDropdown.List.ByLocator, jDropdown.Expand.ByLocator,
-                    jDropdown.ElementByName.ByLocator);
+                jDropdown.List.ByLocator, jDropdown.Expand.ByLocator,
+                jDropdown.ElementByName.ByLocator);
         }
+
         public static void SetUpMenu(Menu menu, JMenuAttribute jMenu)
         {
             menu.SetUp(jMenu.LevelLocators.Select(findby => findby.ByLocator).ToList());

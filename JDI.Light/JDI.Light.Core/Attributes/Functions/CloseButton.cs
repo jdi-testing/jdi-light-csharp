@@ -12,6 +12,7 @@ namespace JDI.Core.Attributes.Functions
         {
             _pageName = pageName;
         }
+
         public static string Handler(FieldInfo field)
         {
             var attr = field.GetCustomAttribute<CloseButtonAttribute>(false);
@@ -19,4 +20,3 @@ namespace JDI.Core.Attributes.Functions
         }
     }
 }
-

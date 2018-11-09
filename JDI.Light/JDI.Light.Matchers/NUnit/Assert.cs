@@ -5,8 +5,8 @@ namespace JDI.Matchers.NUnit
 {
     public class Assert
     {
-        private static ScreenshotState _screen = ScreenshotState.OnFail;
-        private static BaseMatcher _matcher = new Check().SetScreenshot(_screen);
+        private static readonly ScreenshotState _screen = ScreenshotState.OnFail;
+        private static readonly BaseMatcher _matcher = new Check().SetScreenshot(_screen);
 
         public static void Contains(string actual, string expected)
         {
@@ -32,7 +32,7 @@ namespace JDI.Matchers.NUnit
         {
             return _matcher.IgnoreCase();
         }
-        
+
         public static BaseMatcher.ListChecker<T> Each<T>(IEnumerable<T> collection)
         {
             // TODO: Need to use interface instead of ListChecker<T> ???

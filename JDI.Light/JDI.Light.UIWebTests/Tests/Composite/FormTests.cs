@@ -12,7 +12,7 @@ namespace JDI.UIWebTests.Tests.Composite
 {
     public class FormTests
     {
-        private ContactForm _contactForm = TestSite.ContactFormPage.ContactForm;
+        private readonly ContactForm _contactForm = TestSite.ContactFormPage.ContactForm;
 
         [SetUp]
         public void SetUp()
@@ -28,15 +28,15 @@ namespace JDI.UIWebTests.Tests.Composite
         [Test]
         public void FillFormTest()
         {
-            _contactForm.Fill(Contact.DEFAULT_CONTACT);            
-            IList<string> filledFilds = _contactForm.GetFormValue();            
-            new Check().CollectionEquals(filledFilds, Contact.DEFAULT_CONTACT.ToList());            
+            _contactForm.Fill(Contact.DEFAULT_CONTACT);
+            IList<string> filledFilds = _contactForm.GetFormValue();
+            new Check().CollectionEquals(filledFilds, Contact.DEFAULT_CONTACT.ToList());
         }
 
         [Test]
         public void SubmitTest()
         {
-            _contactForm.Submit(Contact.DEFAULT_CONTACT);            
+            _contactForm.Submit(Contact.DEFAULT_CONTACT);
             CommonActionsData.CheckResult(Contact.DEFAULT_CONTACT.ToString());
         }
 
@@ -58,26 +58,24 @@ namespace JDI.UIWebTests.Tests.Composite
         public void SubmitStringTest()
         {
             _contactForm.Submit(Contact.DEFAULT_CONTACT.FirstName);
-            string s = string.Format("Summary: 3\r\nName: {0}",
-                         Contact.DEFAULT_CONTACT.FirstName);
+            var s = string.Format("Summary: 3\r\nName: {0}",
+                Contact.DEFAULT_CONTACT.FirstName);
             CommonActionsData.CheckResult(s);
         }
 
         [Test]
         public void VerifyTest()
         {
-            _contactForm.Fill(Contact.DEFAULT_CONTACT);            
-            new Check().IsTrue(_contactForm.Verify(Contact.DEFAULT_CONTACT).Count == 0);            
+            _contactForm.Fill(Contact.DEFAULT_CONTACT);
+            new Check().IsTrue(_contactForm.Verify(Contact.DEFAULT_CONTACT).Count == 0);
         }
 
- 
+
         [Test]
         public void checkTest()
         {
             _contactForm.Fill(Contact.DEFAULT_CONTACT);
-            new Check().HasNoException(() => _contactForm.Check(Contact.DEFAULT_CONTACT));            
+            new Check().HasNoException(() => _contactForm.Check(Contact.DEFAULT_CONTACT));
         }
- 
-
     }
 }

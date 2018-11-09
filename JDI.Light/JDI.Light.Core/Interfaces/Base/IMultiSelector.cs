@@ -3,9 +3,36 @@ using System.Collections.Generic;
 
 namespace JDI.Core.Interfaces.Base
 {
-    public interface IMultiSelector<in TEnum>: IBaseElement, ISetValue
-        where TEnum  : IConvertible
+    public interface IMultiSelector<in TEnum> : IBaseElement, ISetValue
+        where TEnum : IConvertible
     {
+        /**
+         * @return Get labels of all options
+         */
+        //TODO[JDIAction]
+        IList<string> Options { get; }
+
+        /**
+         * @return Get labels of all options
+         */
+        //TODO[JDIAction]
+        //TODO GetNames() was default
+        IList<string> Names { get; }
+
+        /**
+         * @return Get labels of all options
+         */
+        //TODO[JDIAction]
+        //TODO  GetValues() was default
+        IList<string> Values { get; }
+
+        /**
+         * @return Get all options labels in one string separated with “; ”
+         */
+        //TODO[JDIAction]
+        //TODO GetOptionsAsText() was default
+        string OptionsAsText { get; }
+
         /**
     * @param names Specify names
     *              Select options with name (use text) from list (change their state selected/deselected)
@@ -108,33 +135,6 @@ namespace JDI.Core.Interfaces.Base
          */
         //TODO[JDIAction]
         void WaitDeselected(params TEnum[] names);
-
-        /**
-         * @return Get labels of all options
-         */
-        //TODO[JDIAction]
-        IList<string> Options { get; }
-
-        /**
-         * @return Get labels of all options
-         */
-        //TODO[JDIAction]
-        //TODO GetNames() was default
-        IList<string> Names { get; }
-
-        /**
-         * @return Get labels of all options
-         */
-        //TODO[JDIAction]
-        //TODO  GetValues() was default
-        IList<string> Values { get; }
-
-        /**
-         * @return Get all options labels in one string separated with “; ”
-         */
-        //TODO[JDIAction]
-        //TODO GetOptionsAsText() was default
-        string OptionsAsText { get; }
 
         /**
          * Set all options checked

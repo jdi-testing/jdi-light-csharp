@@ -8,7 +8,7 @@ namespace JDI.UIWebTests.Tests.Common
 {
     public class LinkTests
     {
-        private ILink _link = TestSite.Footer.About;
+        private readonly ILink _link = TestSite.Footer.About;
 
         [SetUp]
         public void SetUp()
@@ -31,7 +31,7 @@ namespace JDI.UIWebTests.Tests.Common
         [Test]
         public void GetReferenceTest()
         {
-            new Check().AreEquals(_link.GetReference(), TestSite.SupportPage.Url);            
+            new Check().AreEquals(_link.GetReference(), TestSite.SupportPage.Url);
         }
 
         /*

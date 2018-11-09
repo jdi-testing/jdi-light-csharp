@@ -12,41 +12,39 @@ using OpenQA.Selenium;
 namespace JDI.UIWebTests.UIObjects.Pages
 {
     public class MetalsColorsPage : WebPage
-    {       
+    {
+        [FindBy(Id = "calculate-button")] public Label Calculate;
 
-        [FindBy(Id = "calculate-button")]
-        public Label Calculate;
+        [FindBy(Id = "calculate-button")] public Button CalculateButton;
 
-        [FindBy(Id = "calculate-button")]
-        public Button CalculateButton;
+        [FindBy(Id = "calculate-button")] public ILabel CalculateLabel;
 
-        [FindBy(Id = "calculate-button")]
-        public ILabel CalculateLabel;
-        
-        public IDropDown<Colors> Colors = new Dropdown<Colors>(By.CssSelector(".colors .filter-option"), By.CssSelector(".colors li span"));
-             
-        [FindBy(Css = ".summ-res")]
-        public IText CalculateText;
-        
-        [FindBy(Css = "#elements-checklist label")]
-        public CheckList<Elements> Elements;
+        [FindBy(Css = ".summ-res")] public IText CalculateText;
 
         [FindBy(XPath = "//*[@id='elements-checklist']//*[text()='Water']")]
-        public CheckBox CbWater = new CheckBox {
+        public CheckBox CbWater = new CheckBox
+        {
             IsCheckedAction = el =>
             {
                 return new WebElement(By.XPath("//*[@id='elements-checklist']//*[*[text()='Water']]/input"))
-                .GetInvisibleElement().Selected;
+                    .GetInvisibleElement().Selected;
                 //.GetAttribute("checked") != null;
             }
-        };      
+        };
+
+        public IDropDown<Colors> Colors =
+            new Dropdown<Colors>(By.CssSelector(".colors .filter-option"), By.CssSelector(".colors li span"));
 
         public ComboBox<Metals> ComboBox =
-            new ComboBox<Metals>(By.CssSelector(".metals .caret"), By.CssSelector(".metals li span"), By.CssSelector(".metals input")) {
+            new ComboBox<Metals>(By.CssSelector(".metals .caret"), By.CssSelector(".metals li span"),
+                By.CssSelector(".metals input"))
+            {
                 GetTextAction = c => new Text(By.CssSelector(".metals .filter-option")).GetText
             };
 
-        [FindBy(Id = "summary-block")]
-        public Summary SummaryBlock;
+        [FindBy(Css = "#elements-checklist label")]
+        public CheckList<Elements> Elements;
+
+        [FindBy(Id = "summary-block")] public Summary SummaryBlock;
     }
 }

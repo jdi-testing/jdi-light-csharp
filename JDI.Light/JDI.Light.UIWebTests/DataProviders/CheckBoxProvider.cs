@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace JDI.UIWebTests.DataProviders
 {
-    class CheckBoxProvider
+    internal class CheckBoxProvider
     {
         public static IEnumerable InputData
         {

@@ -6,6 +6,14 @@ namespace JDI.Core.Interfaces.Complex
     public interface ITextList : IBaseElement, IHasValue, IVisible
     {
         /**
+         * @return Return list of strings of TextList
+         */
+        //TODO[JDIAction]
+        IList<string> Texts { get; }
+
+        string this[int index] { get; set; }
+
+        /**
          * @return Returns strings count
          */
         //TODO[JDIAction]
@@ -16,13 +24,5 @@ namespace JDI.Core.Interfaces.Complex
          */
         //TODO[JDIAction]
         IList<string> WaitText(string str);
-
-        /**
-         * @return Return list of strings of TextList
-         */
-        //TODO[JDIAction]
-        IList<string> Texts { get; }
-
-        string this[int index] { get; set; }
     }
 }

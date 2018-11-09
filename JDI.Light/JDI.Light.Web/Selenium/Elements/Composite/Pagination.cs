@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using JDI.Core;
 using JDI.Core.Attributes;
 using JDI.Core.Interfaces.Base;
 using JDI.Core.Interfaces.Complex;
@@ -15,60 +14,39 @@ namespace JDI.Web.Selenium.Elements.Composite
 {
     public class Pagination : WebBaseElement, IPagination
     {
-        public By NextLocator;
-        public By PreviousLocator;
+        public Func<Pagination, Clickable> FirstAction = p =>
+        {
+            const string shortName = "first";
+            if (p.FirstLocator != null)
+                return new Clickable(p.FirstLocator);
+
+            var firstLink = p.GetClickable(shortName);
+            if (firstLink != null)
+                return firstLink;
+
+            if (p.Locator != null && p.Locator.ToString().Contains("{0}"))
+                return new Clickable(p.Locator.FillByTemplate(shortName));
+            throw JDISettings.Exception(p.CantChooseElementMsg("First", shortName, "firstAction"));
+        };
+
         public By FirstLocator;
+
+        public Func<Pagination, Clickable> LastAction = p =>
+        {
+            const string shortName = "last";
+            if (p.LastLocator != null)
+                return new Clickable(p.LastLocator);
+
+            var lastLink = p.GetClickable(shortName);
+            if (lastLink != null)
+                return lastLink;
+
+            if (p.Locator != null && p.Locator.ToString().Contains("{0}"))
+                return new Clickable(p.Locator.FillByTemplate(shortName));
+            throw JDISettings.Exception(p.CantChooseElementMsg("Last", shortName, "lastAction"));
+        };
+
         public By LastLocator;
-
-        public Pagination(By pageTemplateLocator = null, By nextLocator = null, By previousLocator = null,
-                          By firstLocator = null, By lastLocator = null)
-            : base(pageTemplateLocator)
-        {
-            NextLocator = nextLocator;
-            PreviousLocator = previousLocator;
-            FirstLocator = firstLocator;
-            LastLocator = lastLocator;
-        }
-
-        public void Next()
-        {
-            Invoker.DoJAction("Choose Next page", p => ((Pagination)p).NextAction(this).Click());
-        }
-
-        public void Previous()
-        {
-            Invoker.DoJAction("Choose Previous page", p => ((Pagination)p).PreviousAction(this).Click());
-        }
-
-        public void First()
-        {
-            Invoker.DoJAction("Choose First page", p => ((Pagination)p).FirstAction(this).Click());
-        }
-
-        public void Last()
-        {
-            Invoker.DoJAction("Choose Last page", p => ((Pagination)p).LastAction(this).Click());
-        }
-
-        public void SelectPage(int index)
-        {
-            Invoker.DoJAction($"Choose '{index}' page", p => ((Pagination)p).PageAction(this, index).Click());
-        }
-
-        private Clickable GetClickable(string name)
-        {
-            var fields = this.GetFields(typeof(IClickable));
-            var result = fields.FirstOrDefault(field => NameAttribute.GetElementName(field).ToLower().Contains(name.ToLower()));
-            return (Clickable) result?.GetValue(this);
-        }
-
-        private string CantChooseElementMsg(string actionName, string shortName, string action)
-        {
-            return $@"Can't choose {actionName} page for Element '{ToString()}'. 
-Please specify locator for this action using constructor or add Clickable Element on pageObject 
-with name '{shortName}Link' or '{shortName}Button' or use locator template with parameter '{shortName}' 
-or override {action}() in class";
-        }
 
         public Func<Pagination, Clickable> NextAction = p =>
         {
@@ -83,6 +61,20 @@ or override {action}() in class";
             if (p.Locator != null && p.Locator.ToString().Contains("{0}"))
                 return new Clickable(p.Locator.FillByTemplate(shortName));
             throw JDISettings.Exception(p.CantChooseElementMsg("Next", shortName, "nextAction"));
+        };
+
+        public By NextLocator;
+
+        public Func<Pagination, int, Clickable> PageAction = (p, index) =>
+        {
+            const string shortName = "page";
+            if (p.Locator != null && p.Locator.ToString().Contains("{0}"))
+                return new Clickable(p.Locator.FillByTemplate(index));
+
+            var pageLink = p.GetClickable(shortName);
+            if (pageLink != null)
+                return pageLink;
+            throw JDISettings.Exception(p.CantChooseElementMsg(index.ToString(), shortName, "pageAction"));
         };
 
         public Func<Pagination, Clickable> PreviousAction = p =>
@@ -100,46 +92,57 @@ or override {action}() in class";
             throw JDISettings.Exception(p.CantChooseElementMsg("Previous", shortName, "previousAction"));
         };
 
-        public Func<Pagination, Clickable> FirstAction = p =>
+        public By PreviousLocator;
+
+        public Pagination(By pageTemplateLocator = null, By nextLocator = null, By previousLocator = null,
+            By firstLocator = null, By lastLocator = null)
+            : base(pageTemplateLocator)
         {
-            const string shortName = "first";
-            if (p.FirstLocator != null)
-                return new Clickable(p.FirstLocator);
+            NextLocator = nextLocator;
+            PreviousLocator = previousLocator;
+            FirstLocator = firstLocator;
+            LastLocator = lastLocator;
+        }
 
-            var firstLink = p.GetClickable(shortName);
-            if (firstLink != null)
-                return firstLink;
-
-            if (p.Locator != null && p.Locator.ToString().Contains("{0}"))
-                return new Clickable(p.Locator.FillByTemplate(shortName));
-            throw JDISettings.Exception(p.CantChooseElementMsg("First", shortName, "firstAction"));
-        };
-
-        public Func<Pagination, Clickable> LastAction = p =>
+        public void Next()
         {
-            const string shortName = "last";
-            if (p.LastLocator != null)
-                return new Clickable(p.LastLocator);
+            Invoker.DoJAction("Choose Next page", p => ((Pagination) p).NextAction(this).Click());
+        }
 
-            var lastLink = p.GetClickable(shortName);
-            if (lastLink != null)
-                return lastLink;
-
-            if (p.Locator != null && p.Locator.ToString().Contains("{0}"))
-                return new Clickable(p.Locator.FillByTemplate(shortName));
-            throw JDISettings.Exception(p.CantChooseElementMsg("Last", shortName, "lastAction"));
-        };
-
-        public Func<Pagination, int, Clickable> PageAction = (p, index) =>
+        public void Previous()
         {
-            const string shortName = "page";
-            if (p.Locator != null && p.Locator.ToString().Contains("{0}"))
-                return new Clickable(p.Locator.FillByTemplate(index));
+            Invoker.DoJAction("Choose Previous page", p => ((Pagination) p).PreviousAction(this).Click());
+        }
 
-            var pageLink = p.GetClickable(shortName);
-            if (pageLink != null)
-                return pageLink;
-            throw JDISettings.Exception(p.CantChooseElementMsg(index.ToString(), shortName, "pageAction"));
-        };
+        public void First()
+        {
+            Invoker.DoJAction("Choose First page", p => ((Pagination) p).FirstAction(this).Click());
+        }
+
+        public void Last()
+        {
+            Invoker.DoJAction("Choose Last page", p => ((Pagination) p).LastAction(this).Click());
+        }
+
+        public void SelectPage(int index)
+        {
+            Invoker.DoJAction($"Choose '{index}' page", p => ((Pagination) p).PageAction(this, index).Click());
+        }
+
+        private Clickable GetClickable(string name)
+        {
+            var fields = this.GetFields(typeof(IClickable));
+            var result = fields.FirstOrDefault(field =>
+                NameAttribute.GetElementName(field).ToLower().Contains(name.ToLower()));
+            return (Clickable) result?.GetValue(this);
+        }
+
+        private string CantChooseElementMsg(string actionName, string shortName, string action)
+        {
+            return $@"Can't choose {actionName} page for Element '{ToString()}'. 
+Please specify locator for this action using constructor or add Clickable Element on pageObject 
+with name '{shortName}Link' or '{shortName}Button' or use locator template with parameter '{shortName}' 
+or override {action}() in class";
+        }
     }
 }

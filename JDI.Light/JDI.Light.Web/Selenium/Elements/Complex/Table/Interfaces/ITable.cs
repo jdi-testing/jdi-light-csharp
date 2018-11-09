@@ -7,6 +7,25 @@ namespace JDI.Web.Selenium.Elements.Complex.Table.Interfaces
     public interface ITable : IText
     {
         /**
+         * Indicates are any rows in table. Check immediately
+         */
+        bool Empty { get; }
+
+        Columns Columns { get; }
+
+        Rows Rows { get; }
+
+        /**
+         * Get Header
+         */
+        IList<string> Headers { get; }
+
+        /**
+         * Get Footer
+         */
+        IList<string> Footer { get; }
+
+        /**
         * Get Cell by column/row index (Int) or name(string)
         */
         ICell Cell(Column column, Row row);
@@ -64,11 +83,6 @@ namespace JDI.Web.Selenium.Elements.Complex.Table.Interfaces
         bool WaitValue(string value, Column column);
 
         /**
-         * Indicates are any rows in table. Check immediately
-         */
-        bool Empty { get; }
-
-        /**
          * Wait while at least one row appear in table
          */
         bool WaitHaveRows();
@@ -121,7 +135,7 @@ namespace JDI.Web.Selenium.Elements.Complex.Table.Interfaces
          * Each Column is map: rowName:cell
          */
         Dictionary<string, ICell> Column(string value, Row row);
-        
+
         /**
          * Get Row with index <br>
          * Each Row is map: columnName:cell
@@ -143,10 +157,6 @@ namespace JDI.Web.Selenium.Elements.Complex.Table.Interfaces
          * Get Row value
          */
         IList<string> RowValue(string colName);
-
-        Columns Columns { get; }
-
-        Rows Rows { get; }
 
         /**
          * Get Column with index <br>
@@ -178,16 +188,6 @@ namespace JDI.Web.Selenium.Elements.Complex.Table.Interfaces
         SelectableElement Header(string name);
 
         /**
-         * Get Header
-         */
-        IList<string> Headers { get; }
-
-        /**
-         * Get Footer
-         */
-        IList<string> Footer { get; }
-
-        /**
          * Get All Cells
          */
         IList<ICell> GetCells();
@@ -207,6 +207,5 @@ namespace JDI.Web.Selenium.Elements.Complex.Table.Interfaces
         Table Clone();
 
         Table Copy();
-
     }
 }

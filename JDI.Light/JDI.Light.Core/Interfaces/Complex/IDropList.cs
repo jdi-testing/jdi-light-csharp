@@ -4,7 +4,10 @@ using JDI.Core.Interfaces.Common;
 
 namespace JDI.Core.Interfaces.Complex
 {
-    public interface IDropList : IDropList<IConvertible> { }
+    public interface IDropList : IDropList<IConvertible>
+    {
+    }
+
     public interface IDropList<in TEnum> : IMultiSelector<TEnum>, IText
         where TEnum : IConvertible
     {

@@ -2,7 +2,7 @@
 
 namespace JDI.UIWebTests.UIObjects.Pages
 {
-    public class SortingTablePage:WebPage
+    public class SortingTablePage : WebPage
     {
     }
 }

@@ -4,11 +4,11 @@ namespace JDI.Web.Utils
 {
     public static class WebExtensions
     {
-
         public static string Simplify(string s)
         {
             return new Regex("[^a-z0-9]").Replace(s.ToLower(), "");
         }
+
         // TODO Old code
         /*
         public static T GetVIElement<T>(this T element) where T: IVIElement

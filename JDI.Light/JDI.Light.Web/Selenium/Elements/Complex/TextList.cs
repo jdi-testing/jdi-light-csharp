@@ -11,16 +11,20 @@ namespace JDI.Web.Selenium.Elements.Complex
 {
     public class TextList : WebBaseElement, ITextList
     {
-        public new List<IWebElement> WebElements => base.WebElements;
         private readonly Elements<Label> _texts;
-        
-        public TextList() : this(null) { }
 
-        public TextList(By locator, List<IWebElement> webElements = null) : 
+        public TextList() : this(null)
+        {
+        }
+
+        public TextList(By locator, List<IWebElement> webElements = null) :
             base(locator, webElements: webElements)
         {
             _texts = new Elements<Label>(Locator);
         }
+
+        public new List<IWebElement> WebElements => base.WebElements;
+        public IList<Label> TextElements => _texts;
 
         public int Count()
         {
@@ -35,7 +39,6 @@ namespace JDI.Web.Selenium.Elements.Complex
         }
 
         public IList<string> Texts => _texts.Select(el => el.GetText).ToList();
-        public IList<Label> TextElements => _texts;
 
         public string this[int index]
         {
@@ -44,11 +47,19 @@ namespace JDI.Web.Selenium.Elements.Complex
                 var texts = Texts;
                 return index >= 0
                     ? texts[index]
-                    : texts[texts.Count - index]; }
-            set { /* Not applicable */ }
+                    : texts[texts.Count - index];
+            }
+            set
+            {
+                /* Not applicable */
+            }
         }
 
         public string Value => Texts.Print();
+        public string GetValue()
+        {
+            return Value;
+        }
 
         public bool Displayed
         {
@@ -67,6 +78,7 @@ namespace JDI.Web.Selenium.Elements.Complex
                 return elements == null || !elements.Any() || elements.All(el => !el.Displayed);
             }
         }
+
         public void WaitDisplayed()
         {
             if (!Timer.Wait(() =>

@@ -31,6 +31,7 @@ namespace JDI.Core.Settings
                     Logger.Error(message);
                     return;
             }
+
             Logger.Info(message);
         }
 

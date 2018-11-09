@@ -7,8 +7,7 @@ using OpenQA.Selenium;
 namespace JDI.UIWebTests.Tests.Composite
 {
     public class PageTests
-    {      
-
+    {
         [SetUp]
         public void SetUp()
         {
@@ -24,23 +23,23 @@ namespace JDI.UIWebTests.Tests.Composite
         public void RefreshTest()
         {
             TestSite.ContactFormPage.ContactSubmit.Click();
-            new Check().AreEquals(TestSite.ContactFormPage.Result.GetText, "Summary: 3");            
+            new Check().AreEquals(TestSite.ContactFormPage.Result.GetText, "Summary: 3");
             TestSite.ContactFormPage.Refresh();
-            new Check().AreEquals(TestSite.ContactFormPage.Result.GetText, "");            
-            TestSite.ContactFormPage.CheckOpened();            
+            new Check().AreEquals(TestSite.ContactFormPage.Result.GetText, "");
+            TestSite.ContactFormPage.CheckOpened();
         }
 
-        
+
         [Test]
         public void BackTest()
         {
             TestSite.HomePage.Open();
             TestSite.HomePage.CheckOpened();
             TestSite.HomePage.Back();
-            TestSite.ContactFormPage.CheckOpened();            
+            TestSite.ContactFormPage.CheckOpened();
         }
 
-        
+
         [Test]
         public void ForwardTest()
         {
@@ -55,36 +54,35 @@ namespace JDI.UIWebTests.Tests.Composite
         public void AddCookieTest()
         {
             TestSite.HomePage.WebDriver.Manage().Cookies.DeleteAllCookies();
-            new Check().IsTrue(TestSite.HomePage.WebDriver.Manage().Cookies.AllCookies.Count == 0);                                 
-            Cookie cookie = new Cookie("key", "value");
+            new Check().IsTrue(TestSite.HomePage.WebDriver.Manage().Cookies.AllCookies.Count == 0);
+            var cookie = new Cookie("key", "value");
             TestSite.ContactFormPage.AddCookie(cookie);
-            new Check().AreEquals(TestSite.HomePage.WebDriver.Manage().Cookies.GetCookieNamed(cookie.Name).Value, cookie.Value);            
+            new Check().AreEquals(TestSite.HomePage.WebDriver.Manage().Cookies.GetCookieNamed(cookie.Name).Value,
+                cookie.Value);
         }
 
 
-        
         [Test]
         public void ClearCacheTest()
         {
-            Cookie cookie = new Cookie("key", "value");
+            var cookie = new Cookie("key", "value");
             TestSite.HomePage.WebDriver.Manage().Cookies.AddCookie(cookie);
-            new Check().IsFalse(TestSite.HomePage.WebDriver.Manage().Cookies.AllCookies.Count == 0);            
+            new Check().IsFalse(TestSite.HomePage.WebDriver.Manage().Cookies.AllCookies.Count == 0);
             TestSite.ContactFormPage.ClearCache();
-            new Check().IsTrue(TestSite.HomePage.WebDriver.Manage().Cookies.AllCookies.Count == 0);                                 
+            new Check().IsTrue(TestSite.HomePage.WebDriver.Manage().Cookies.AllCookies.Count == 0);
         }
-        
+
         [Test]
         public void CheckOpenedTest()
         {
             TestSite.ContactFormPage.CheckOpened();
-        }        
+        }
 
         [TearDown]
         public void TearDown()
         {
-            Cookie loginCookie = new Cookie("authUser", "true", "jdi-framework.github.io", "/", null);            
+            var loginCookie = new Cookie("authUser", "true", "jdi-framework.github.io", "/", null);
             TestSite.HomePage.WebDriver.Manage().Cookies.AddCookie(loginCookie);
-        }       
-
+        }
     }
 }

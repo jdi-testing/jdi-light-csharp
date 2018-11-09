@@ -2,6 +2,10 @@
 {
     public enum Metals
     {
-        Col, Gold, Silver, Bronze, Selen
+        Col,
+        Gold,
+        Silver,
+        Bronze,
+        Selen
     }
 }

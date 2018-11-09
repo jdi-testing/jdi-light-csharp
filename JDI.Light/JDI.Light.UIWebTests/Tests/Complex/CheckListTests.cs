@@ -13,7 +13,7 @@ namespace JDI.UIWebTests.Tests.Complex
 {
     public class CheckListTests
     {
-        private static readonly IList<string> NATURE_OPTIONS = new List<string>{"Water", "Earth", "Wind", "Fire" };           
+        private static readonly IList<string> NATURE_OPTIONS = new List<string> {"Water", "Earth", "Wind", "Fire"};
         private static readonly string ALL_VALUES = "Water, Earth, Wind, Fire";
 
         private ICheckList<Elements> _nature()
@@ -23,34 +23,32 @@ namespace JDI.UIWebTests.Tests.Complex
 
         private void _checkAllIsChecked(bool isChecked)
         {
-            IList<bool> checkedElems = TestSite.HomePage.WebDriver.
-                FindElements(By.CssSelector("#elements-checklist input")).
-                Select(e => e.GetAttribute("checked") != null).ToList();
-            new Check("Check that all checkbox elements checked = " + isChecked).
-                IsTrue(checkedElems.All(e => e == isChecked));            
+            IList<bool> checkedElems = TestSite.HomePage.WebDriver
+                .FindElements(By.CssSelector("#elements-checklist input"))
+                .Select(e => e.GetAttribute("checked") != null).ToList();
+            new Check("Check that all checkbox elements checked = " + isChecked).IsTrue(
+                checkedElems.All(e => e == isChecked));
         }
 
-        private void _clearCheckBoxBlock() {
-            IList<IWebElement> inputElems = TestSite.HomePage.WebDriver.FindElements(By.CssSelector("#elements-checklist input"));
-            IList<IWebElement> labelsElems = TestSite.HomePage.WebDriver.FindElements(By.CssSelector(".checkbox>label"));
+        private void _clearCheckBoxBlock()
+        {
+            IList<IWebElement> inputElems =
+                TestSite.HomePage.WebDriver.FindElements(By.CssSelector("#elements-checklist input"));
+            IList<IWebElement> labelsElems =
+                TestSite.HomePage.WebDriver.FindElements(By.CssSelector(".checkbox>label"));
 
-            for (int i = 0; i < inputElems.Count; i++)
-            {
-                if ((inputElems[i].GetAttribute("checked") != null) && (inputElems[i].GetAttribute("checked") == "true"))
-                {
+            for (var i = 0; i < inputElems.Count; i++)
+                if (inputElems[i].GetAttribute("checked") != null && inputElems[i].GetAttribute("checked") == "true")
                     labelsElems[i].Click();
-                }
-            }
         }
 
-        private void _cheсkAllLogMessages(IList<string> logLines) {
+        private void _cheсkAllLogMessages(IList<string> logLines)
+        {
             //TO_DO: replace with TextList.Texts when will be fixed
             //var texts = ActionsLog.Texts; 
-            IList<string> log = TestSite.HomePage.WebDriver.FindElements(By.CssSelector(".logs li")).Select(e => e.Text).ToList();            
-            for (int i = 0; i < log.Count; i++)
-            {
-                Assert.Contains(log[i], logLines[i] + ": condition changed to true");
-            }            
+            IList<string> log = TestSite.HomePage.WebDriver.FindElements(By.CssSelector(".logs li")).Select(e => e.Text)
+                .ToList();
+            for (var i = 0; i < log.Count; i++) Assert.Contains(log[i], logLines[i] + ": condition changed to true");
         }
 
         [SetUp]
@@ -89,9 +87,9 @@ namespace JDI.UIWebTests.Tests.Complex
         public void Select2StringTest()
         {
             _nature().Select("Water", "Fire");
-            CommonActionsData.CheckAction("Fire: condition changed to true");            
-            string asd = TestSite.ActionsLog.TextElements.First().Value;
-            _cheсkAllLogMessages(new List<string> { "Fire", "Water" });
+            CommonActionsData.CheckAction("Fire: condition changed to true");
+            var asd = TestSite.ActionsLog.TextElements.First().Value;
+            _cheсkAllLogMessages(new List<string> {"Fire", "Water"});
         }
 
         [Test]
@@ -99,7 +97,7 @@ namespace JDI.UIWebTests.Tests.Complex
         {
             _nature().Select(1, 4);
             CommonActionsData.CheckAction("Fire: condition changed to true");
-            _cheсkAllLogMessages(new List<string> { "Fire", "Water" });
+            _cheсkAllLogMessages(new List<string> {"Fire", "Water"});
         }
 
         [Test]
@@ -107,7 +105,7 @@ namespace JDI.UIWebTests.Tests.Complex
         {
             _nature().Select(Elements.Water, Elements.Fire);
             CommonActionsData.CheckAction("Fire: condition changed to true");
-            _cheсkAllLogMessages(new List<string> { "Fire", "Water" });
+            _cheсkAllLogMessages(new List<string> {"Fire", "Water"});
         }
 
         [Test]
@@ -136,7 +134,7 @@ namespace JDI.UIWebTests.Tests.Complex
         {
             _nature().Check("Water", "Fire");
             CommonActionsData.CheckAction("Fire: condition changed to true");
-            _cheсkAllLogMessages(new List<string> { "Fire", "Water" });
+            _cheсkAllLogMessages(new List<string> {"Fire", "Water"});
         }
 
         [Test]
@@ -144,7 +142,7 @@ namespace JDI.UIWebTests.Tests.Complex
         {
             _nature().Check(1, 4);
             CommonActionsData.CheckAction("Fire: condition changed to true");
-            _cheсkAllLogMessages(new List<string> { "Fire", "Water" });
+            _cheсkAllLogMessages(new List<string> {"Fire", "Water"});
         }
 
         [Test]
@@ -152,23 +150,22 @@ namespace JDI.UIWebTests.Tests.Complex
         {
             _nature().Check(Elements.Water, Elements.Fire);
             CommonActionsData.CheckAction("Fire: condition changed to true");
-            _cheсkAllLogMessages(new List<string> { "Fire", "Water" });
+            _cheсkAllLogMessages(new List<string> {"Fire", "Water"});
         }
 
         [Test]
         public void SelectAllTest()
         {
-            _nature().SelectAll();            
-            _cheсkAllLogMessages(new List<string> { "Fire", "Wind", "Earth", "Water" });
-            _checkAllIsChecked(true);         
-
+            _nature().SelectAll();
+            _cheсkAllLogMessages(new List<string> {"Fire", "Wind", "Earth", "Water"});
+            _checkAllIsChecked(true);
         }
 
         [Test]
         public void CheckAllTest()
         {
             _nature().CheckAll();
-            _cheсkAllLogMessages(new List<string> { "Fire", "Wind", "Earth", "Water" });
+            _cheсkAllLogMessages(new List<string> {"Fire", "Wind", "Earth", "Water"});
             _checkAllIsChecked(true);
         }
 
@@ -176,15 +173,15 @@ namespace JDI.UIWebTests.Tests.Complex
         public void ClearAllTest()
         {
             _nature().CheckAll();
-            _checkAllIsChecked(true);            
-            _clearCheckBoxBlock();            
-            _checkAllIsChecked(false);  
+            _checkAllIsChecked(true);
+            _clearCheckBoxBlock();
+            _checkAllIsChecked(false);
         }
 
         [Test]
         public void GetOptionsTest()
         {
-            new Check().CollectionEquals(_nature().Options, NATURE_OPTIONS);            
+            new Check().CollectionEquals(_nature().Options, NATURE_OPTIONS);
         }
 
         [Test]
@@ -202,20 +199,20 @@ namespace JDI.UIWebTests.Tests.Complex
         [Test]
         public void GetOptionsAsTextTest()
         {
-            new Check().AreEquals(_nature().OptionsAsText, ALL_VALUES);            
+            new Check().AreEquals(_nature().OptionsAsText, ALL_VALUES);
         }
 
         [Test]
         public void SetValueTest()
         {
-            _nature().Value = "Fire";                
+            _nature().Value = "Fire";
             CommonActionsData.CheckAction("Fire: condition changed to true");
         }
 
         [Test]
         public void GetNameTest()
-        {            
-            new Check().AreEquals(_nature().Name, "Elements");            
+        {
+            new Check().AreEquals(_nature().Name, "Elements");
         }
 
         // TODO: fix incorrect work of AreSelected method. It is always return empty collection
@@ -238,7 +235,7 @@ namespace JDI.UIWebTests.Tests.Complex
         [Test]
         public void GetValueTest()
         {
-            new Check().AreEquals(_nature().Value, "");                  
+            new Check().AreEquals(_nature().Value, "");
         }
     }
 }

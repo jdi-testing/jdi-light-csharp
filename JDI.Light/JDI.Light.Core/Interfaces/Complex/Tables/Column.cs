@@ -4,12 +4,10 @@
     {
         public Column(int num) : base(num)
         {
-
         }
 
         public Column(string name) : base(name)
         {
-
         }
 
         public static Column column(int num)
@@ -21,6 +19,7 @@
         {
             return new Column(name);
         }
+
         public static Column InColumn(int num)
         {
             return new Column(num);

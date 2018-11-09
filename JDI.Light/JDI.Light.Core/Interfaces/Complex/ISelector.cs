@@ -4,11 +4,32 @@ using JDI.Core.Interfaces.Base;
 
 namespace JDI.Core.Interfaces.Complex
 {
-    public interface ISelector : ISelector<IConvertible> { }
+    public interface ISelector : ISelector<IConvertible>
+    {
+    }
 
     public interface ISelector<in TEnum> : IBaseElement, ISetValue
         where TEnum : IConvertible
     {
+        /**
+         * @return Get labels of all options
+         */
+        //TODO[JDIAction]
+        IList<string> Options { get; }
+
+        //TODO GetName() was default
+        IList<string> Names { get; }
+
+        //TODO GetValues() was default 
+        IList<string> Values { get; }
+
+        /**
+         * @return Get all options labels in one string separated with “; ”
+         */
+        //TODO[JDIAction]
+        //TODO GetOptionsAsText() was default
+        string OptionsAsText { get; }
+
         /**
      * @param name Specify name using string
      *             Select WebElement with name (use text) from list
@@ -35,6 +56,7 @@ namespace JDI.Core.Interfaces.Complex
          */
         //TODO[JDIAction]
         string Selected();
+
         /**
          * @return Get index of the selected WebElement
          */
@@ -68,24 +90,5 @@ namespace JDI.Core.Interfaces.Complex
          */
         //TODO[JDIAction]
         void WaitSelected(TEnum name);
-
-        /**
-         * @return Get labels of all options
-         */
-        //TODO[JDIAction]
-        IList<string> Options { get; }
-
-        //TODO GetName() was default
-        IList<string> Names { get; }
-
-        //TODO GetValues() was default 
-        IList<string> Values { get; }
-
-        /**
-         * @return Get all options labels in one string separated with “; ”
-         */
-        //TODO[JDIAction]
-        //TODO GetOptionsAsText() was default
-        string OptionsAsText { get; }
     }
 }

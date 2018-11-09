@@ -23,6 +23,7 @@ namespace JDI.Web.Selenium.Attributes
         {
             return WebExtensions.Simplify(name1).Equals(WebExtensions.Simplify(name2));
         }
+
         private static string ToButton(string buttonName)
         {
             return buttonName.ToLower().Contains("button") ? buttonName : buttonName + "Button";
@@ -36,13 +37,14 @@ namespace JDI.Web.Selenium.Attributes
                 case 0:
                     throw JDISettings.Exception($"Can't find ny buttons on form {ToString()}'");
                 case 1:
-                    return (Button)fields[0].GetValue(_element);
+                    return (Button) fields[0].GetValue(_element);
                 default:
-                    var buttons = fields.Select(f => (Button)f.GetValue(_element)).ToList();
+                    var buttons = fields.Select(f => (Button) f.GetValue(_element)).ToList();
                     var button = buttons.FirstOrDefault(b => NamesEqual(ToButton(b.Name), ToButton(buttonName)));
                     if (button == null)
                         throw JDISettings.Exception($"Can't find button '{buttonName}' for Element '{ToString()}'." +
-                                        $"(Found following buttons: {buttons.Select(el => el.Name).Print()}).".FromNewLine());
+                                                    $"(Found following buttons: {buttons.Select(el => el.Name).Print()})."
+                                                        .FromNewLine());
                     return button;
             }
         }

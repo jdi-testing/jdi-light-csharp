@@ -20,6 +20,11 @@ namespace JDI.Matchers
             return new Exception(message);
         }
 
+        public void IsTrue(bool actual)
+        {
+            Assert.IsTrue(actual);
+        }
+
         public void AreEqual<T>(T actual, T expected)
         {
             Assert.AreEqual(actual, expected);
@@ -33,11 +38,6 @@ namespace JDI.Matchers
         public void Contains(string actual, string expected)
         {
             IsTrue(actual.Contains(expected));
-        }
-
-        public void IsTrue(bool actual)
-        {
-            Assert.IsTrue(actual);
         }
 
         public void IsTrue(Func<bool> actual)

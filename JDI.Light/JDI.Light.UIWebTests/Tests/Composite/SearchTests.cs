@@ -6,7 +6,6 @@ namespace JDI.UIWebTests.Tests.Composite
 {
     public class SearchTests
     {
-
         [SetUp]
         public void SetUp()
         {
@@ -26,6 +25,5 @@ namespace JDI.UIWebTests.Tests.Composite
             TestSite.Header.Search.SearchButtonActive.Click();
             TestSite.SupportPage.CheckOpened();
         }
-
     }
 }

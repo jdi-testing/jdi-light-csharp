@@ -5,8 +5,10 @@ namespace JDI.Core.Interfaces.Complex
 {
     public interface IGroup<out TType> : IGroup<IConvertible, TType>
         where TType : IElement
-    { }
-    public interface IGroup<in TEnum, out TType> : IBaseElement 
+    {
+    }
+
+    public interface IGroup<in TEnum, out TType> : IBaseElement
         where TEnum : IConvertible
         where TType : IElement
     {

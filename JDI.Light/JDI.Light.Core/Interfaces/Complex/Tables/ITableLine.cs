@@ -17,7 +17,7 @@ namespace JDI.Core.Interfaces.Complex.Tables
         /**
          * Get Columns/Rows headers
          */
-            List<string> Headers();
+        List<string> Headers();
 
         /**
          * Get Columns/Rows in following format <br>
@@ -29,18 +29,18 @@ namespace JDI.Core.Interfaces.Complex.Tables
          * cell("Name, "5")
          * myTable.columns().count()
          */
-            Dictionary<string, Dictionary<string, ICell>> get();
+        Dictionary<string, Dictionary<string, ICell>> get();
 
-            Dictionary<string, Dictionary<string, string>> getAsText();
+        Dictionary<string, Dictionary<string, string>> getAsText();
 
-            Dictionary<string, ISelect> header();
-            ISelect header(string name);
-            void RemoveHeaders(string names);
-            void AddHeaders(string names);
-            void clean();
+        Dictionary<string, ISelect> header();
+        ISelect header(string name);
+        void RemoveHeaders(string names);
+        void AddHeaders(string names);
+        void clean();
 
-            void setCount(int value);
+        void setCount(int value);
 
-            int getStartIndex();
+        int getStartIndex();
     }
 }

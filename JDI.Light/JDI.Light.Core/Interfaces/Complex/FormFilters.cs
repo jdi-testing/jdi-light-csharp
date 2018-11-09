@@ -1,6 +1,6 @@
 ﻿namespace JDI.Core.Interfaces.Complex
 {
-     public enum FormFilters
+    public enum FormFilters
     {
         MANDATORY,
         OPTIONAL,

@@ -20,6 +20,7 @@ namespace JDI.Core.Interfaces.Common
         //TODO [JDIAction]
         //TODO SendKeys() was default
         void SendKeys(string text);
+
         /**
          * @param text Specify text to input to TextField
          *             Clear and input text in textfield

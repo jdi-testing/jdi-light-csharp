@@ -7,85 +7,9 @@ using NUnit.Framework;
 
 namespace JDI.UIWebTests.Tests.Complex.Table
 {
-    [TestFixture]    
+    [TestFixture]
     public class SearchCellsTests : SupportTableTestBase
     {
-        [Test]
-        public void CellsEqualsTest()
-        {
-            CheckCells(Table.Cells("MSTest, NUnit, Epam"));
-        }
-
-        [Test]
-        public void CellsMatchTest()
-        {
-            CheckCells(Table.CellsMatch(".*Test, NUnit, Epam"));
-        }
-
-        [Test]
-        public void CellEqualsTest()
-        {
-            CheckCell(Table.Cell("MSTest, NUnit, Epam"));
-        }
-
-        [Test]
-        public void CellMatchTest()
-        {
-            CheckCell(Table.CellMatch(".*Test, NUnit, Epam"));
-        }
-
-        [Test]
-        public void CellInColumnNumEqualsTest()
-        {
-            CheckCell(Table.Cell("MSTest, NUnit, Epam", Column.column(3)));
-        }
-
-        [Test]
-        public void CellInColumnNameEqualsTest()
-        {
-            CheckCell(Table.Cell("MSTest, NUnit, Epam", Column.column("Plans")));
-        }
-
-        [Test]
-        public void CellInRowNumEqualsTest()
-        {
-            CheckCell(Table.Cell("MSTest, NUnit, Epam", Row.row(2)));
-        }
-
-        [Test]
-        public void CellInRowNameEqualsTest()
-        {
-            CheckCell(Table.Cell("MSTest, NUnit, Epam", Row.row("2")));
-        }
-
-        [Test]
-        public void CellsMatchInColumnNumEqualsTest()
-        {
-            CheckCells(Table.CellsMatch(".*Test, NUnit, Epam", Column.column(3)));
-        }
-
-        [Test]
-        public void CellsMatchInColumnNameEqualsTest()
-        {
-            CheckCells(Table.CellsMatch(".*MSTest, NUnit, Epam", Column.column("Plans")));
-        }
-
-        [Test]
-        public void CellsMatchInRowNumEqualsTest()
-        {
-            var cells = Table.CellsMatch(".*MSTest, NUnit, Epam", Row.row(2));
-            new Check().AreEquals(cells.Count, 1);
-            CheckCell(cells[0]);
-        }
-
-        [Test]
-        public void CellsMatchInRowNameEqualsTest()
-        {
-            var cells = Table.CellsMatch(".*MSTest, NUnit, Epam", Row.row("2"));
-            new Check().AreEquals(cells.Count, 1);
-            CheckCell(cells[0]);
-        }
-
         private void CheckCell(ICell cell)
         {
             new Check().AreEquals(
@@ -95,7 +19,7 @@ namespace JDI.UIWebTests.Tests.Complex.Table
         }
 
         private void CheckCells(IList<ICell> cells)
-        { 
+        {
             new Check("Cells size").AreEquals(cells.Count, 2);
 
             new Check("Cell 1 coordinates").AreEquals(
@@ -107,6 +31,82 @@ namespace JDI.UIWebTests.Tests.Complex.Table
                 $"Value: {cells[1].Value}; " +
                 $"{cells[1].ColumnName}/{cells[1].RowName}; " +
                 $"{cells[1].ColumnNum}/{cells[1].RowNum}", "Value: MSTest, NUnit, Epam; Plans/3; 3/3");
+        }
+
+        [Test]
+        public void CellEqualsTest()
+        {
+            CheckCell(Table.Cell("MSTest, NUnit, Epam"));
+        }
+
+        [Test]
+        public void CellInColumnNameEqualsTest()
+        {
+            CheckCell(Table.Cell("MSTest, NUnit, Epam", Column.column("Plans")));
+        }
+
+        [Test]
+        public void CellInColumnNumEqualsTest()
+        {
+            CheckCell(Table.Cell("MSTest, NUnit, Epam", Column.column(3)));
+        }
+
+        [Test]
+        public void CellInRowNameEqualsTest()
+        {
+            CheckCell(Table.Cell("MSTest, NUnit, Epam", Row.row("2")));
+        }
+
+        [Test]
+        public void CellInRowNumEqualsTest()
+        {
+            CheckCell(Table.Cell("MSTest, NUnit, Epam", Row.row(2)));
+        }
+
+        [Test]
+        public void CellMatchTest()
+        {
+            CheckCell(Table.CellMatch(".*Test, NUnit, Epam"));
+        }
+
+        [Test]
+        public void CellsEqualsTest()
+        {
+            CheckCells(Table.Cells("MSTest, NUnit, Epam"));
+        }
+
+        [Test]
+        public void CellsMatchInColumnNameEqualsTest()
+        {
+            CheckCells(Table.CellsMatch(".*MSTest, NUnit, Epam", Column.column("Plans")));
+        }
+
+        [Test]
+        public void CellsMatchInColumnNumEqualsTest()
+        {
+            CheckCells(Table.CellsMatch(".*Test, NUnit, Epam", Column.column(3)));
+        }
+
+        [Test]
+        public void CellsMatchInRowNameEqualsTest()
+        {
+            var cells = Table.CellsMatch(".*MSTest, NUnit, Epam", Row.row("2"));
+            new Check().AreEquals(cells.Count, 1);
+            CheckCell(cells[0]);
+        }
+
+        [Test]
+        public void CellsMatchInRowNumEqualsTest()
+        {
+            var cells = Table.CellsMatch(".*MSTest, NUnit, Epam", Row.row(2));
+            new Check().AreEquals(cells.Count, 1);
+            CheckCell(cells[0]);
+        }
+
+        [Test]
+        public void CellsMatchTest()
+        {
+            CheckCells(Table.CellsMatch(".*Test, NUnit, Epam"));
         }
     }
 }

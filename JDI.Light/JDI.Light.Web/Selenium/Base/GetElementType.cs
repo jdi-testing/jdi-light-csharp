@@ -12,11 +12,13 @@ namespace JDI.Web.Selenium.Base
         {
             _locator = locator;
         }
+
         public GetElementType(By locator, WebBaseElement element)
         {
             _locator = locator;
             _avatar = element.WebAvatar;
         }
+
         public T Get<T>(T element, GetElementModule avatar) where T : WebBaseElement
         {
             try
@@ -25,7 +27,10 @@ namespace JDI.Web.Selenium.Base
                     ? null
                     : (T) element.SetAvatar(avatar, _locator);
             }
-            catch { return null; }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

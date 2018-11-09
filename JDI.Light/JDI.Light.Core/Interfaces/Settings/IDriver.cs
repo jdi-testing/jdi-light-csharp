@@ -5,6 +5,8 @@ namespace JDI.Core.Interfaces.Settings
 {
     public interface IDriver<out T>
     {
+        string CurrentDriverName { get; set; }
+        string DriverPath { get; set; }
         string RegisterDriver(string driverName);
 
         void SetRunType(string runType);
@@ -15,13 +17,10 @@ namespace JDI.Core.Interfaces.Settings
 
         bool HasRunDrivers();
 
-        string CurrentDriverName { get; set; }
-
         T GetDriver(string name);
 
         void Highlight(IElement element);
 
         void Highlight(IElement element, HighlightSettings highlightSettings);
-        string DriverPath { get; set; }
     }
 }

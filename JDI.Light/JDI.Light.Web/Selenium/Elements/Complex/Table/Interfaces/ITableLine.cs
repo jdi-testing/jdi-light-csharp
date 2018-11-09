@@ -5,12 +5,14 @@ namespace JDI.Web.Selenium.Elements.Complex.Table.Interfaces
 {
     public interface ITableLine
     {
-        int Count { get;  }
+        int Count { get; }
 
         /**
          * Get Columns/Rows headers
          */
         IList<string> Headers { get; }
+
+        Dictionary<string, Dictionary<string, string>> AsText { get; }
 
         /**
          * Get Columns/Rows in following format <br>
@@ -24,12 +26,9 @@ namespace JDI.Web.Selenium.Elements.Complex.Table.Interfaces
          */
         Dictionary<string, Dictionary<string, ICell>> Get();
 
-        Dictionary<string, Dictionary<string, string>> AsText { get; }
-
         Dictionary<string, SelectableElement> Header();
 
         SelectableElement Header(string name);
         void AddHeaders(IList<string> headers);
-
     }
 }

@@ -10,7 +10,6 @@ namespace JDI.Core.Interfaces.Complex
 
     public interface IForm<in T> : IForm
     {
-        
         /**
          * @param entity Specify entity
          *               Fills all elements on the form which implements SetValue interface and can be matched with fields in input entity
@@ -27,7 +26,7 @@ namespace JDI.Core.Interfaces.Complex
         //TODO Fill() was default
         void Fill(Dictionary<string, string> map);
 
-        
+
         /**
          * @param entity Specify entity
          *               Verify that form filled correctly. If not returns list of keys where verification fails
@@ -44,7 +43,7 @@ namespace JDI.Core.Interfaces.Complex
         //TODO Verify was default
         IList<string> Verify(Dictionary<string, string> map);
 
-       
+
         /**
          * @param entity Specify entity
          *               Verify that form filled correctly. If not returns list of keys where verification fails
@@ -52,6 +51,7 @@ namespace JDI.Core.Interfaces.Complex
         //TODO[JDIAction]
         //TODO Check() was default
         void Check(T entity);
+
         /**
          * @param map Specify entity as map
          *            Fills all elements on the form which implements SetValue interface and can be matched with fields in input entity

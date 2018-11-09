@@ -6,7 +6,6 @@ namespace JDI.UIWebTests.UIObjects.Pages
 {
     public class SupportPage : WebPage
     {
-        [FindBy(Css = ".uui-table")]
-        public ITable SupportTable;
+        [FindBy(Css = ".uui-table")] public ITable SupportTable;
     }
 }

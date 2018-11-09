@@ -6,9 +6,14 @@ namespace JDI.Web.Selenium.Elements.Common
 {
     public class TextArea : TextField, ITextArea
     {
-        public TextArea() : this(null) { }
+        public TextArea() : this(null)
+        {
+        }
+
         public TextArea(By byLocator = null, IWebElement webElement = null, WebBaseElement element = null)
-            : base(byLocator, webElement, element:element) { }
+            : base(byLocator, webElement, element)
+        {
+        }
 
         public void InputLines(params string[] textLines)
         {
@@ -19,6 +24,7 @@ namespace JDI.Web.Selenium.Elements.Common
         {
             Actions.AddNewLine(textLine, InputAction);
         }
+
         public string[] GetLines()
         {
             return Actions.GetLines(GetTextFunc);

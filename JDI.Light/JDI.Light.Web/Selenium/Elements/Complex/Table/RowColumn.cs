@@ -4,14 +4,14 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
 {
     public class RowColumn
     {
-        public int Num { get; set; }
-        public string Name { get; set; }
-
         public RowColumn(int num, string name)
         {
             Num = num;
             Name = name;
         }
+
+        public int Num { get; set; }
+        public string Name { get; set; }
 
         public bool HasName => !string.IsNullOrEmpty(Name);
 
@@ -19,6 +19,7 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
         {
             return action.Invoke(this);
         }
+
         public T Get<T>(Func<string, T> nameAction, Func<int, T> numAction)
         {
             return HasName ? nameAction.Invoke(Name) : numAction.Invoke(Num);

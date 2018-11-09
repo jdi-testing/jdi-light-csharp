@@ -9,7 +9,7 @@ namespace JDI.UIWebTests.Tests.Complex
     [Ignore("Exception in CascadeInit due to oddNumberSelectors")]
     public class SelectorTests
     {
-        private static readonly IList<string> OddOptions = new List<string> { "1", "3", "5", "7" };
+        private static readonly IList<string> OddOptions = new List<string> {"1", "3", "5", "7"};
         //private ISelector<Odds> OddNumbersSelector => MetalsColorsPage.SummaryBlock.OddNumbersSelector;
 
         [SetUp]

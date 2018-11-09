@@ -8,41 +8,61 @@ using OpenQA.Selenium;
 
 namespace JDI.Web.Selenium.Elements.Complex.Table
 {
-    public enum ElementIndexType { Nums, Names }
+    public enum ElementIndexType
+    {
+        Nums,
+        Names
+    }
+
     public abstract class TableLine : WebBaseElement, ITableLine
     {
+        private int _count;
+
+        private IList<string> _headers;
         public bool HasHeader { set; get; }
         public Table Table { get; set; }
+        public int StartIndex { set; get; } = 1;
+        public By HeadersLocator { set; get; }
+        protected By DefaultTemplate { set; get; }
+        public By LineTemplate { set; get; }
+        public ElementIndexType ElementIndex { set; get; }
 
-        private int _count;
+        protected abstract IList<IWebElement> GetFirstLine { get; }
+
+        public IList<string> AllHeaders => GetHeadersAction.Where(el => el.Displayed)
+            .Select(el => el.Text).ToList();
+
+        protected IList<IWebElement> GetHeadersAction
+            => Table.WebElement.FindElements(HeadersLocator);
 
         public int Count
         {
             get => GetCount(false);
-            set { if (Table.Cache)
-                    _count = value; }
+            set
+            {
+                if (Table.Cache)
+                    _count = value;
+            }
         }
-        
-        private IList<string> _headers;
 
         public void AddHeaders(IList<string> headers)
         {
             _headers = headers;
         }
-        
+
         public IList<string> Headers
         {
             set
             {
-                if(Table.Cache)
+                if (Table.Cache)
                     _headers = new List<string>(value);
             }
             get
             {
                 if (_headers != null)
                     return _headers;
-                var localHeaders = HasHeader 
-                    ? Timer.GetResult(() => AllHeaders) 
+                var localHeaders = HasHeader
+                    ? Timer.GetResult(() => AllHeaders)
                     : GetNumList(Count);
                 if (localHeaders == null || localHeaders.Count == 0)
                     return new List<string>();
@@ -53,6 +73,7 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
                         temp.Add(localHeaders[i]);
                     localHeaders = temp;
                 }
+
                 Headers = localHeaders;
                 Count = localHeaders.Count;
                 return localHeaders;
@@ -61,16 +82,18 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
 
         public abstract Dictionary<string, Dictionary<string, ICell>> Get();
 
-        public Dictionary<string, Dictionary<string, string>> AsText {
+        public Dictionary<string, Dictionary<string, string>> AsText
+        {
             get
             {
-                return Get().ToDictionary(line => line.Key, line 
+                return Get().ToDictionary(line => line.Key, line
                     => line.Value.ToDictionary(el => el.Key, el => el.Value.GetText));
             }
         }
+
         public Dictionary<string, SelectableElement> Header()
         {
-            return GetHeadersAction.ToDictionary(key => key.Text, 
+            return GetHeadersAction.ToDictionary(key => key.Text,
                 value => new SelectableElement(webElement: value));
         }
 
@@ -88,14 +111,10 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
         {
             var result = new List<string>();
             for (var i = from; i < count + from; i++)
-               result.Add(i.ToString());
+                result.Add(i.ToString());
             return result;
         }
-        public int StartIndex { set; get; } = 1;
-        public By HeadersLocator { set; get; }
-        protected By DefaultTemplate { set; get; }
-        public By LineTemplate { set; get; }
-        public ElementIndexType ElementIndex { set; get; }
+
         public T Clone<T>(T newLine, Table newTable) where T : TableLine
         {
             newLine.HasHeader = HasHeader;
@@ -114,13 +133,14 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
         {
             return GetElementsByTemplate(colNum + StartIndex - 1);
         }
+
         protected IList<IWebElement> GetLineAction(string lineName)
         {
             if (LineTemplate != null && LineTemplate.GetByLocator().Contains("{0}"))
                 return GetElementsByTemplate(lineName);
-            var num = Headers.IndexOf(lineName) + 1; 
-            return LineTemplate == null 
-                ? GetLineAction(num) 
+            var num = Headers.IndexOf(lineName) + 1;
+            return LineTemplate == null
+                ? GetLineAction(num)
                 : GetElementsByTemplate(num);
         }
 
@@ -129,8 +149,6 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
             var locator = (LineTemplate ?? DefaultTemplate).FillByTemplate(value);
             return Table.WebElement.FindElements(locator).Where(el => el.Displayed).ToList();
         }
-
-        protected abstract IList<IWebElement> GetFirstLine { get; }
 
         public int GetCount(bool acceptEmpty)
         {
@@ -147,17 +165,16 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
                 var tempElements = elements;
                 elements = Timer.GetResultByCondition(() => tempElements, el => el != null && el.Count > 0);
             }
+
             return elements?.Count(el => el.Displayed) ?? 0;
         }
+
         public void Clean()
         {
             Headers = null;
             Count = 0;
         }
 
-        public IList<string> AllHeaders => GetHeadersAction.Where(el => el.Displayed)
-            .Select(el => el.Text).ToList();
-        
         public void Update(TableLine tableLine)
         {
             if (tableLine.Count > 0)
@@ -166,15 +183,12 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
                 StartIndex = tableLine.StartIndex;
             if (tableLine.Headers != null && tableLine.Headers.Count > 0)
                 Headers = tableLine.Headers;
-            if ((tableLine.GetType().IsAssignableFrom(typeof(Columns)) && !tableLine.HasHeader) ||
-                (tableLine.GetType().IsAssignableFrom(typeof(Row)) && tableLine.HasHeader))
-                    HasHeader = tableLine.HasHeader;
+            if (tableLine.GetType().IsAssignableFrom(typeof(Columns)) && !tableLine.HasHeader ||
+                tableLine.GetType().IsAssignableFrom(typeof(Row)) && tableLine.HasHeader)
+                HasHeader = tableLine.HasHeader;
 
             if (tableLine.ElementIndex != ElementIndexType.Nums)
                 ElementIndex = tableLine.ElementIndex;
         }
-
-        protected IList<IWebElement> GetHeadersAction 
-            => Table.WebElement.FindElements(HeadersLocator);
     }
 }

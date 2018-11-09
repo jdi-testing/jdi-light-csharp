@@ -25,18 +25,18 @@ namespace JDI.Web.Selenium.Base
 {
     public class WebCascadeInit : CascadeInit
     {
-        protected override Type[] StopTypes => new []
-            {
-                typeof(object),
-                typeof(WebPage),
-                typeof(Section),
-                typeof(WebElement)
-            };
-        
+        protected override Type[] StopTypes => new[]
+        {
+            typeof(object),
+            typeof(WebPage),
+            typeof(Section),
+            typeof(WebElement)
+        };
+
         protected override void FillPageFromAnnotation(FieldInfo field, IBaseElement instance, Type parentType)
         {
             var pageAttribute = field.GetAttribute<PageAttribute>();
-            pageAttribute?.FillPage((WebPage)instance, parentType);
+            pageAttribute?.FillPage((WebPage) instance, parentType);
         }
 
         protected override IBaseElement FillInstance(IBaseElement instance, FieldInfo field)
@@ -46,6 +46,7 @@ namespace JDI.Web.Selenium.Base
                 element.Avatar = new GetElementModule(element, GetNewLocator(field));
             return element;
         }
+
         protected override IBaseElement FillFromJDIAttribute(IBaseElement instance, FieldInfo field)
         {
             var element = (WebBaseElement) instance;
@@ -63,21 +64,24 @@ namespace JDI.Web.Selenium.Base
             By template;
             var form = element.Parent as Form;
             if (form != null && !element.HasLocator
-                && (template = form.LocatorTemplate) != null)
+                             && (template = form.LocatorTemplate) != null)
                 element.WebAvatar.ByLocator = template.FillByTemplate(field.Name);
             return element;
         }
-        protected override IBaseElement GetElementsRules(FieldInfo field, string driverName, Type type, string fieldName)
+
+        protected override IBaseElement GetElementsRules(FieldInfo field, string driverName, Type type,
+            string fieldName)
         {
             var newLocator = GetNewLocator(field);
             WebBaseElement instance = null;
             if (type == typeof(List<>))
-                throw JDISettings.Exception($"Can't init element {fieldName} with type 'List<>'. Please use 'IList<>' or 'Elements<>' instead");
+                throw JDISettings.Exception(
+                    $"Can't init element {fieldName} with type 'List<>'. Please use 'IList<>' or 'Elements<>' instead");
             if (typeof(IList).IsAssignableFrom(type))
             {
                 var elementClass = type.GetGenericArguments()[0];
                 if (elementClass != null)
-                    instance = (WebBaseElement)Activator.CreateInstance(typeof(Elements<>)
+                    instance = (WebBaseElement) Activator.CreateInstance(typeof(Elements<>)
                         .MakeGenericType(elementClass));
             }
             else
@@ -86,14 +90,15 @@ namespace JDI.Web.Selenium.Base
                     type = MapInterfaceToElement.ClassFromInterface(type);
                 if (type != null)
                 {
-                    instance = (WebBaseElement)Activator.CreateInstance(type);
+                    instance = (WebBaseElement) Activator.CreateInstance(type);
                     if (newLocator != null)
                         instance.WebAvatar.ByLocator = newLocator;
                 }
             }
+
             if (instance == null)
                 throw JDISettings.Exception("Unknown interface: " + type +
-                                ". Add relation interface -> class in VIElement.InterfaceTypeMap");
+                                            ". Add relation interface -> class in VIElement.InterfaceTypeMap");
             instance.Avatar.DriverName = driverName;
             return instance;
         }
@@ -103,6 +108,7 @@ namespace JDI.Web.Selenium.Base
             return EUtils.ActionWithException(() => GetNewLocatorFromField(field),
                 ex => $"Error in get locator for type '{field.Name + ex.FromNewLine()}'");
         }
+
         protected By GetNewLocatorFromField(FieldInfo field)
         {
             By byLocator = null;
@@ -127,7 +133,7 @@ namespace JDI.Web.Selenium.Base
             var jTable = field.GetAttribute<JTableAttribute>();
             if (jTable == null || !typeof(ITable).IsAssignableFrom(field.FieldType))
                 return;
-            FillFromAnnotationRules.SetUpTable((Table)instance, jTable);
+            FillFromAnnotationRules.SetUpTable((Table) instance, jTable);
         }
 
         private static void SetUpMenuFromAnnotation(WebBaseElement instance, FieldInfo field)
@@ -135,15 +141,15 @@ namespace JDI.Web.Selenium.Base
             var jDropdown = field.GetAttribute<JDropdownAttribute>();
             if (jDropdown == null || !typeof(IDropDown).IsAssignableFrom(field.FieldType))
                 return;
-            FillFromAnnotationRules.SetUpDropdown((Dropdown)instance, jDropdown);
+            FillFromAnnotationRules.SetUpDropdown((Dropdown) instance, jDropdown);
         }
+
         private static void SetUpDropdownFromAnnotation(WebBaseElement instance, FieldInfo field)
         {
             var jMenu = field.GetAttribute<JMenuAttribute>();
             if (jMenu == null || !typeof(IMenu).IsAssignableFrom(field.FieldType))
                 return;
-            FillFromAnnotationRules.SetUpMenu((Menu)instance, jMenu);
+            FillFromAnnotationRules.SetUpMenu((Menu) instance, jMenu);
         }
-        
     }
 }

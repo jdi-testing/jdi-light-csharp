@@ -8,30 +8,24 @@ using Assert = JDI.Matchers.NUnit.Assert;
 namespace JDI.UIWebTests.Tests.Complex.Table
 {
     [TestFixture]
-    class WaiterTests : SupportTableTestBase
+    internal class WaiterTests : SupportTableTestBase
     {
         [Test]
-        public void WaitExpectedRowsValueTest()
+        public void CellWaitMatchTextTest()
         {
-            new Check("Find value").IsTrue(Table.WaitValue("Cucumber, Jbehave, Thucydides, SpecFlow", Row.row(6)));
+            TestSite.HomePage.IsOpened();
+            CommonActionsData.RunParallel(() => TestSite.SupportPage.IsOpened());
+            CommonActionsData.CheckText(() => Table.Cell(2, 2).WaitMatchText("[a-zA-Z, ]*JUnit,[a-zA-Z ]*"),
+                "TestNG, JUnit, Custom");
         }
 
         [Test]
-        public void WaitUnexpectedRowsValueTest()
+        public void CellWaitTextTest()
         {
-            new Check("Do not find value").IsFalse(Table.WaitValue("Cucumber, Jbehave, Thucydides, SpecFlow Unexepected", Row.row(6)));
-        }
-
-        [Test]
-        public void WaitExpectedColumnsValueTest()
-        {
-            new Check("Find value").IsTrue(Table.WaitValue("Custom", Column.column(2)));
-        }
-
-        [Test]
-        public void WaitUnexpectedColumnsValueTest()
-        {
-            new Check("Do not find value").IsFalse(Table.WaitValue("Custom Unexepected", Column.column(2)));
+            TestSite.HomePage.IsOpened();
+            CommonActionsData.RunParallel(() => TestSite.SupportPage.IsOpened());
+            CommonActionsData.CheckText(() => Table.Cell(2, 2).WaitText("TestNG, JUnit, Custom"),
+                "TestNG, JUnit, Custom");
         }
 
         [Test]
@@ -41,19 +35,15 @@ namespace JDI.UIWebTests.Tests.Complex.Table
         }
 
         [Test]
-        public void CellWaitTextTest()
+        public void WaitExpectedColumnsValueTest()
         {
-            TestSite.HomePage.IsOpened();
-            CommonActionsData.RunParallel(() => TestSite.SupportPage.IsOpened());
-            CommonActionsData.CheckText(() => Table.Cell(2, 2).WaitText("TestNG, JUnit, Custom"), "TestNG, JUnit, Custom");
+            new Check("Find value").IsTrue(Table.WaitValue("Custom", Column.column(2)));
         }
 
         [Test]
-        public void CellWaitMatchTextTest()
+        public void WaitExpectedRowsValueTest()
         {
-            TestSite.HomePage.IsOpened();
-            CommonActionsData.RunParallel(() => TestSite.SupportPage.IsOpened());
-            CommonActionsData.CheckText(() => Table.Cell(2, 2).WaitMatchText("[a-zA-Z, ]*JUnit,[a-zA-Z ]*"), "TestNG, JUnit, Custom");
+            new Check("Find value").IsTrue(Table.WaitValue("Cucumber, Jbehave, Thucydides, SpecFlow", Row.row(6)));
         }
 
         [Test]
@@ -78,6 +68,19 @@ namespace JDI.UIWebTests.Tests.Complex.Table
             TestSite.HomePage.IsOpened();
             CommonActionsData.RunParallel(() => TestSite.SupportPage.IsOpened());
             Assert.IsFalse(Table.WaitRows(7));
+        }
+
+        [Test]
+        public void WaitUnexpectedColumnsValueTest()
+        {
+            new Check("Do not find value").IsFalse(Table.WaitValue("Custom Unexepected", Column.column(2)));
+        }
+
+        [Test]
+        public void WaitUnexpectedRowsValueTest()
+        {
+            new Check("Do not find value").IsFalse(
+                Table.WaitValue("Cucumber, Jbehave, Thucydides, SpecFlow Unexepected", Row.row(6)));
         }
     }
 }

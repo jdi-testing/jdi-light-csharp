@@ -19,37 +19,6 @@ namespace JDI.Web.Selenium.Base
 {
     public class WebBaseElement : IBaseElement
     {
-        public By Locator => WebAvatar.ByLocator;
-        public By FrameLocator => WebAvatar.FrameLocator;
-        private readonly IWebElement _webElement;
-
-        public object Parent { get; set; }
-
-        public WebBaseElement(By byLocator = null, IWebElement webElement = null,
-            List<IWebElement> webElements = null, WebBaseElement element = null)
-        {
-            Invoker = new ActionInvoker(this);
-            GetElementClass = new GetElementClass(this);
-            Actions = new ElementsActions(this);
-            WebAvatar = new GetElementModule(this, byLocator) { WebElement = webElement, WebElements = webElements };
-            _webElement = webElement;
-            if (element != null)
-            {
-                WebAvatar.DriverName = element.WebAvatar.DriverName;
-                Parent = element.Parent;
-            }
-        }
-
-        public WebElement GetHighLightElement()
-        {
-            return Avatar.GetFirstValue<WebElement>();
-        }
-
-        public static ActionScenarios ActionScenrios
-        {
-            set => ActionInvoker.ActionScenarios = value;
-        }
-
         public static Action<string, Action<string>> DoActionRule = (text, action) =>
         {
             if (text == null) return;
@@ -62,14 +31,38 @@ namespace JDI.Web.Selenium.Base
             action.Invoke(text.Equals("#CLEAR#") ? "" : text);
         };
 
-        public Functions Function = Functions.None;
+        private readonly IWebElement _webElement;
+        private string _typeName;
+        private string _varName;
+        public ElementsActions Actions;
 
-        public void SetFunction(Functions function)
+        public Functions Function = Functions.None;
+        protected GetElementClass GetElementClass;
+
+        public ActionInvoker Invoker;
+
+        public WebBaseElement(By byLocator = null, IWebElement webElement = null,
+            List<IWebElement> webElements = null, WebBaseElement element = null)
         {
-            Function = function;
+            Invoker = new ActionInvoker(this);
+            GetElementClass = new GetElementClass(this);
+            Actions = new ElementsActions(this);
+            WebAvatar = new GetElementModule(this, byLocator) {WebElement = webElement, WebElements = webElements};
+            _webElement = webElement;
+            if (element != null)
+            {
+                WebAvatar.DriverName = element.WebAvatar.DriverName;
+                Parent = element.Parent;
+            }
         }
 
-        public IAvatar Avatar { get; set; }
+        public By Locator => WebAvatar.ByLocator;
+        public By FrameLocator => WebAvatar.FrameLocator;
+
+        public static ActionScenarios ActionScenrios
+        {
+            set => ActionInvoker.ActionScenarios = value;
+        }
 
         public GetElementModule WebAvatar
         {
@@ -77,28 +70,10 @@ namespace JDI.Web.Selenium.Base
             set => Avatar = value;
         }
 
-        public ActionInvoker Invoker;
-        public string Name { get; set; }
-        public string ParentTypeName => Parent?.GetType().Name ?? "";
-        protected GetElementClass GetElementClass;
-        public ElementsActions Actions;
-        private string _varName;
         private string VarName => _varName ?? Name;
-        private string _typeName;
-
-        public string TypeName
-        {
-            get => _typeName ?? GetType().Name;
-            set => _typeName = value;
-        }
 
         protected Timer Timer => WebAvatar.Timer;
 
-        public void FillLocatorTemplate(string name)
-        {
-            WebAvatar.ByLocator = Locator.FillByTemplate(name);
-        }
-        
         public IWebDriver WebDriver => WebAvatar.WebDriver;
 
         public IWebElement WebElement
@@ -115,10 +90,39 @@ namespace JDI.Web.Selenium.Base
 
         public bool HasLocator => WebAvatar.HasLocator;
 
+        public IJavaScriptExecutor JsExecutor => (IJavaScriptExecutor) WebDriver;
+
+        public object Parent { get; set; }
+
+        public void SetFunction(Functions function)
+        {
+            Function = function;
+        }
+
+        public IAvatar Avatar { get; set; }
+        public string Name { get; set; }
+        public string ParentTypeName => Parent?.GetType().Name ?? "";
+
+        public string TypeName
+        {
+            get => _typeName ?? GetType().Name;
+            set => _typeName = value;
+        }
+
         public void SetName(FieldInfo field)
         {
             Name = NameAttribute.GetElementName(field);
             _varName = field.Name;
+        }
+
+        public WebElement GetHighLightElement()
+        {
+            return Avatar.GetFirstValue<WebElement>();
+        }
+
+        public void FillLocatorTemplate(string name)
+        {
+            WebAvatar.ByLocator = Locator.FillByTemplate(name);
         }
 
         public WebBaseElement SetAvatar(GetElementModule avatar = null, By byLocator = null)
@@ -131,7 +135,7 @@ namespace JDI.Web.Selenium.Base
         {
             JDISettings.Logger.Debug("Set wait timeout to " + mSeconds);
             WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(mSeconds);
-            JDISettings.Timeouts.CurrentTimeoutSec = (int) (mSeconds/1000);
+            JDISettings.Timeouts.CurrentTimeoutSec = (int) (mSeconds / 1000);
         }
 
         public void RestoreWaitTimeout()
@@ -153,8 +157,6 @@ namespace JDI.Web.Selenium.Base
             logResult?.Invoke(res);
         }
 
-        public IJavaScriptExecutor JsExecutor => (IJavaScriptExecutor) WebDriver;
-
         public void LogAction(string actionName, LogLevels level)
         {
             JDISettings.ToLog(string.Format(JDISettings.ShortLogMessagesFormat
@@ -175,4 +177,3 @@ namespace JDI.Web.Selenium.Base
         }
     }
 }
-

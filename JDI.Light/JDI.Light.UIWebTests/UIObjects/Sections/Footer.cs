@@ -4,9 +4,8 @@ using JDI.Web.Selenium.Elements.Composite;
 
 namespace JDI.UIWebTests.UIObjects.Sections
 {
-    public class Footer:Section
+    public class Footer : Section
     {
-        [FindBy(PartialLinkText = "About")]            
-        public Link About;
+        [FindBy(PartialLinkText = "About")] public Link About;
     }
 }

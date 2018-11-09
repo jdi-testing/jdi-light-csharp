@@ -2,32 +2,34 @@
 {
     public class HighlightSettings
     {
-        private string _bgColor;
-        public string BgColor => _bgColor;
-        private string _frameColor;
-        public string FrameColor => _frameColor;
-        private int _timeoutInSec;
-        public int TimeoutInSec => _timeoutInSec;
-        
         public HighlightSettings(string bgColor = "yellow", string frameColor = "red", int timeoutInSec = 2)
         {
-            _bgColor = bgColor;
-            _frameColor = frameColor;
-            _timeoutInSec = timeoutInSec;
+            BgColor = bgColor;
+            FrameColor = frameColor;
+            TimeoutInSec = timeoutInSec;
         }
+
+        public string BgColor { get; private set; }
+
+        public string FrameColor { get; private set; }
+
+        public int TimeoutInSec { get; private set; }
+
         public HighlightSettings SetBgColor(string bgColor)
         {
-            _bgColor = bgColor;
+            BgColor = bgColor;
             return this;
         }
+
         public HighlightSettings SetFrameColor(string frameColor)
         {
-            _frameColor = frameColor;
+            FrameColor = frameColor;
             return this;
         }
+
         public HighlightSettings SetTimeoutInSec(int timeoutInSec)
         {
-            _timeoutInSec = timeoutInSec;
+            TimeoutInSec = timeoutInSec;
             return this;
         }
     }

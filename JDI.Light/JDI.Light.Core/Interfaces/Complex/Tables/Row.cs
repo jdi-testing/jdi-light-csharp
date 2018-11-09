@@ -4,12 +4,10 @@
     {
         public Row(int num) : base(num)
         {
-
         }
 
         public Row(string name) : base(name)
         {
-
         }
 
         public static Row row(int num)

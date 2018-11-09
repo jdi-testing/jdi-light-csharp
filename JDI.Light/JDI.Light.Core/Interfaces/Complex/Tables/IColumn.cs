@@ -6,13 +6,14 @@ namespace JDI.Core.Interfaces.Complex.Tables
     public interface IColumn
     {
         int Count();
+
         int Count(bool acceptEmpty);
         //int Size() { return Count(); }
 
         /**
          * Get Columns/Rows headers
          */
-            List<string> Headers();
+        List<string> Headers();
 
         /**
          * Get Columns/Rows in following format <br>
@@ -24,19 +25,19 @@ namespace JDI.Core.Interfaces.Complex.Tables
          * cell("Name, "5")
          * myTable.columns().count()
          */
-            Dictionary<string, Dictionary<string, ICell>> Get();
+        Dictionary<string, Dictionary<string, ICell>> Get();
 
-            Dictionary<string, Dictionary<string, string>> GetAsText();
+        Dictionary<string, Dictionary<string, string>> GetAsText();
 
-            Dictionary<string, ISelect> Header();
+        Dictionary<string, ISelect> Header();
 
-            ISelect Header(string name);
-            void RemoveHeaders(string names);
-            void AddHeaders(string names);
-            void Clean();
+        ISelect Header(string name);
+        void RemoveHeaders(string names);
+        void AddHeaders(string names);
+        void Clean();
 
-            void SetCount(int value);
+        void SetCount(int value);
 
-            int GetStartIndex();
+        int GetStartIndex();
     }
 }

@@ -12,23 +12,7 @@ namespace JDI.Core.Interfaces.Settings
         }
 
 
-
         public void SetRunType(string runType)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetDriverPath(string driverPath)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetCurrentDriver(string driverName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string GetDriverPath()
         {
             throw new NotImplementedException();
         }
@@ -65,5 +49,20 @@ namespace JDI.Core.Interfaces.Settings
 
         public string CurrentDriverName { get; set; } = "NO DRIVER";
         public string DriverPath { get; set; } = "DEFAULT DRIVER";
+
+        public void SetDriverPath(string driverPath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetCurrentDriver(string driverName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetDriverPath()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
