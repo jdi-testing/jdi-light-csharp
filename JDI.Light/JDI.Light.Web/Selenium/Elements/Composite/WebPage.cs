@@ -4,11 +4,11 @@ using System.Text.RegularExpressions;
 using JDI.Core;
 using JDI.Core.Interfaces.Complex;
 using JDI.Core.Settings;
+using JDI.Core.Utils;
 using JDI.Matchers;
 using JDI.Web.Selenium.Base;
 using JDI.Web.Settings;
 using OpenQA.Selenium;
-using ExceptionUtils = JDI.Core.ExceptionUtils;
 
 namespace JDI.Web.Selenium.Elements.Composite
 {

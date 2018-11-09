@@ -4,11 +4,11 @@ using JDI.Core;
 using JDI.Core.Interfaces.Base;
 using JDI.Core.Logging;
 using JDI.Core.Settings;
+using JDI.Core.Utils;
 using JDI.Web.Selenium.Base;
 using JDI.Web.Settings;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-using ExceptionUtils = JDI.Core.ExceptionUtils;
 
 namespace JDI.Web.Selenium.Elements.Base
 {

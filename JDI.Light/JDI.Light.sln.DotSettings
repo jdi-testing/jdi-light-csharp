@@ -2,4 +2,5 @@
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/Abbreviations/=IE/@EntryIndexedValue">IE</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/Abbreviations/=JDI/@EntryIndexedValue">JDI</s:String>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Asserter/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=Paginator/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Selen/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>

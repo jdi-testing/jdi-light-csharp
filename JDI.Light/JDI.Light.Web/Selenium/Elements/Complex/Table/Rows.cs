@@ -2,10 +2,10 @@
 using System.Linq;
 using JDI.Core;
 using JDI.Core.Settings;
+using JDI.Core.Utils;
 using JDI.Web.Selenium.Elements.Complex.Table.Interfaces;
 using JDI.Web.Utils;
 using OpenQA.Selenium;
-using ExceptionUtils = JDI.Core.ExceptionUtils;
 
 namespace JDI.Web.Selenium.Elements.Complex.Table
 {
@@ -25,8 +25,6 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
         {
             return Headers.ToDictionary(key => key, GetRow);
         }
-
-        ///
 
         public IList<string> GetRowValue(string rowName)
         {
@@ -65,9 +63,10 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
                 }
                 AddCols(result, Table.Columns.AllHeaders, webRow, rowNum);
                 var simplifiedHeaders = Table.Columns.Headers.Select(WebExtensions.Simplify);
-                return CommonExtensions.ToDictionary(result.Where(el => simplifiedHeaders.Contains(WebExtensions.Simplify(el.Key))));
+                return result.Where(el => simplifiedHeaders.Contains(WebExtensions.Simplify(el.Key))).ToDictionary();
             }, ex => $"Can't Get Row '{rowNum}'. Reason: {ex}");
         }
+
         private void AddCols(Dictionary<string, ICell> result, IList<string> headers, IList<IWebElement> webRow, int rowNum)
         {
             for (var i = 0; i < headers.Count; i++)
@@ -110,6 +109,7 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
                 return CommonExtensions.ToDictionary(result.Where(el => Table.Columns.Headers.Contains(el.Key)));
             }, ex => $"Can't Get Row '{rowName}'. Reason: {ex}");
         }
+
         private void AddCols(Dictionary<string, ICell> result, IList<string> headers, IList<IWebElement> webRow, string rowName)
         {
             for (var i = 0; i < headers.Count; i++)

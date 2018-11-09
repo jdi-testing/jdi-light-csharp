@@ -10,22 +10,22 @@ namespace JDI.UIWebTests.UIObjects.Sections
     public class LoginForm : Form<User>
     {
         [FindBy(Css = "a>div.profile-photo")]
-        private IClickable profile;
+        private IClickable _profile;
 
         [FindBy(Css = "button.btn-login")]
-        private IButton loginButton;
+        private IButton _loginButton;
 
         [FindBy(Id = "Login")]
         [Name("Login")]
-        private ITextField loginField;
+        private ITextField _loginField;
 
         [FindBy(Id = "Password")]
         [Name("Password")]
-        private ITextField passwordField;
+        private ITextField _passwordField;
 
-        public void Submit(User user)
+        public new void Submit(User user)
         {
-            profile.Click();
+            _profile.Click();
             base.Submit(user);
         }
     }

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using JDI.Core;
 using JDI.Core.Attributes;
+using JDI.Core.Utils;
 using JDI.Matchers;
-using ExceptionUtils = JDI.Core.ExceptionUtils;
 
 namespace JDI.Web.Utils
 {
@@ -20,9 +20,9 @@ namespace JDI.Web.Utils
                 var values = new List<string>();
                 var i = 1;
                 var str = objString;
-                while (objString.IndexOf("#(#") > 0)
+                while (objString.IndexOf("#(#", StringComparison.Ordinal) > 0)
                 {
-                    values.Add(objString.Substring(objString.IndexOf("#(#") + 3, objString.IndexOf("#)#")));
+                    values.Add(objString.Substring(objString.IndexOf("#(#", StringComparison.Ordinal) + 3, objString.IndexOf("#)#", StringComparison.Ordinal)));
                     str = objString.Replace("#\\(#.*#\\)#", "#VAL" + i++);
                 }
                 var fields = str.Split("#;#");
@@ -35,6 +35,7 @@ namespace JDI.Web.Utils
                 return result;
             }, ex => $"Can't parse string '{objString}' to Object");
         }
+
         public static string ProcessValue(string input, IList<string> values)
         {
             if (input.Equals("#NULL#"))
@@ -43,14 +44,14 @@ namespace JDI.Web.Utils
                 ? values[int.Parse(input.Substring(4)) - 1] 
                 : input;
         }
-
-
+        
         public static Dictionary<string, string> ToSetValue(this object obj)
         {
             return obj == null
                     ? new Dictionary<string, string>()
                     : ParseObjectAsString(PrintObject(obj));
         }
+
         private static string PrintObject(object obj)
         {
             var result = new List<string>();
@@ -81,9 +82,9 @@ namespace JDI.Web.Utils
             var i = 1;
             var str = objString;
             int from;
-            while ((from = str.IndexOf("#(#")) > 0)
+            while ((from = str.IndexOf("#(#", StringComparison.Ordinal)) > 0)
             {
-                var to = str.IndexOf("#)#");
+                var to = str.IndexOf("#)#", StringComparison.Ordinal);
                 values.Add(str.Substring(from + 3, to - from - 3));
                 str = new Regex("#\\(#.*#\\)#").Replace(str, "#VAL" + i++);
             }

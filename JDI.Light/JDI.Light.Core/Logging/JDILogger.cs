@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.IO;
 using System.Linq;
+using JDI.Core.Utils;
 
 namespace JDI.Core.Logging
 {

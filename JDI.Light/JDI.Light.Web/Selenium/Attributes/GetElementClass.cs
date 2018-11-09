@@ -3,6 +3,7 @@ using JDI.Core;
 using JDI.Core.Attributes.Functions;
 using JDI.Core.Interfaces.Common;
 using JDI.Core.Settings;
+using JDI.Core.Utils;
 using JDI.Web.Selenium.Base;
 using JDI.Web.Selenium.Elements.Common;
 using JDI.Web.Utils;

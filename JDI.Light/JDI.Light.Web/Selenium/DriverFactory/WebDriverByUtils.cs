@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using JDI.Core;
 using OpenQA.Selenium;
-using ExceptionUtils = JDI.Core.ExceptionUtils;
+using ExceptionUtils = JDI.Core.Utils.ExceptionUtils;
 
 namespace JDI.Web.Selenium.DriverFactory
 {

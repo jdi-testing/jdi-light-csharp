@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using JDI.Core;
 using JDI.Core.Settings;
+using JDI.Core.Utils;
 using JDI.Web.Selenium.Base;
 using OpenQA.Selenium;
 

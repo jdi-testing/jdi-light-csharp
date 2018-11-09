@@ -2,16 +2,16 @@
 using JDI.Core;
 using JDI.Core.Logging;
 using JDI.Core.Settings;
+using JDI.Core.Utils;
 using JDI.Web.Selenium.Base;
 using JDI.Web.Selenium.Elements.Base;
-using ExceptionUtils = JDI.Core.ExceptionUtils;
 
 namespace JDI.Web.Selenium.Elements.WebActions
 {
     public class ActionInvoker
     {
         private readonly WebBaseElement _element;
-        public static ActionScenarios ActionScenrios = new ActionScenarios();
+        public static ActionScenarios ActionScenarios = new ActionScenarios();
 
         public ActionInvoker(WebBaseElement element)
         {
@@ -25,7 +25,7 @@ namespace JDI.Web.Selenium.Elements.WebActions
             return ExceptionUtils.ActionWithException(() =>
             {
                 ProcessDemoMode();
-                return ActionScenrios.SetElement(_element).ResultScenario(actionName, action, logResult, level);
+                return ActionScenarios.SetElement(_element).ResultScenario(actionName, action, logResult, level);
             }, ex => $"Failed to do '{actionName}' action. Reason: {ex}");
         }
         
@@ -33,7 +33,7 @@ namespace JDI.Web.Selenium.Elements.WebActions
         {
             TimerExtensions.ForceDone(() => {
                 ProcessDemoMode();
-                ActionScenrios.SetElement(_element).ActionScenario(actionName, action, level);
+                ActionScenarios.SetElement(_element).ActionScenario(actionName, action, level);
             });
         }
 

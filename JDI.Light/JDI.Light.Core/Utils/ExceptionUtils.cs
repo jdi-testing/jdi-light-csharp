@@ -1,7 +1,7 @@
 ﻿using System;
 using JDI.Core.Settings;
 
-namespace JDI.Core
+namespace JDI.Core.Utils
 {
     public static class ExceptionUtils
     {

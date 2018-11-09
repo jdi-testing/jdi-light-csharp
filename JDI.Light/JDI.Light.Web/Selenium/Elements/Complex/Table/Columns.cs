@@ -2,9 +2,9 @@
 using System.Linq;
 using JDI.Core;
 using JDI.Core.Settings;
+using JDI.Core.Utils;
 using JDI.Web.Selenium.Elements.Complex.Table.Interfaces;
 using OpenQA.Selenium;
-using ExceptionUtils = JDI.Core.ExceptionUtils;
 
 namespace JDI.Web.Selenium.Elements.Complex.Table
 {
@@ -18,7 +18,7 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
             DefaultTemplate = By.XPath(".//tr/td[{0}]");
         }
 
-        protected List<IWebElement> GetHeadersAction()
+        protected new List<IWebElement> GetHeadersAction()
         {
             return Table.WebElements.FindAll(el => el.Equals(HeadersLocator));
         }
@@ -96,15 +96,6 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
                 return result.Where(el => Table.Rows.Headers.Contains(el.Key)).ToDictionary();
             }, ex => $"Can't Get Column '{colNum}'. Reason: {ex}");
         }
-
-        /*private Dictionary<string, Dictionary<string, ICell>> WithValueByRule(
-            Row row, JFuncTTREx<string, string, bool> func)
-        {
-            List<string> rowNames = row.HasName
-                ? Table.Rows.GetRowAsText(row.Name).where(func).keys()
-                : Table.Rows.GetRowAsText(row.Name).where(func).keys();
-            return new Dictionary<>(rowNames, key=>key, this::getColumn);
-        }*/
 
         private void AddRows(Dictionary<string, ICell> result, IList<string> headers, IList<IWebElement> webColumn, int colNum)
         {

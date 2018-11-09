@@ -7,6 +7,7 @@ using JDI.Core.Attributes.Functions;
 using JDI.Core.Interfaces.Base;
 using JDI.Core.Logging;
 using JDI.Core.Settings;
+using JDI.Core.Utils;
 using JDI.Web.Selenium.Attributes;
 using JDI.Web.Selenium.DriverFactory;
 using JDI.Web.Selenium.Elements.APIInteract;
@@ -46,7 +47,7 @@ namespace JDI.Web.Selenium.Base
 
         public static ActionScenarios ActionScenrios
         {
-            set => ActionInvoker.ActionScenrios = value;
+            set => ActionInvoker.ActionScenarios = value;
         }
 
         public static Action<string, Action<string>> DoActionRule = (text, action) =>

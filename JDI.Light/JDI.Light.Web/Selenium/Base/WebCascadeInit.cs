@@ -19,7 +19,7 @@ using JDI.Web.Selenium.Elements.Composite;
 using JDI.Web.Settings;
 using OpenQA.Selenium;
 using RestSharp.Extensions;
-using EUtils = JDI.Core.ExceptionUtils;
+using EUtils = JDI.Core.Utils.ExceptionUtils;
 
 namespace JDI.Web.Selenium.Base
 {

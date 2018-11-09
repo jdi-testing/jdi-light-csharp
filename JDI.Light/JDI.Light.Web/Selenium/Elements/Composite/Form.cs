@@ -6,6 +6,7 @@ using JDI.Core.Attributes;
 using JDI.Core.Interfaces.Base;
 using JDI.Core.Interfaces.Complex;
 using JDI.Core.Settings;
+using JDI.Core.Utils;
 using JDI.Web.Selenium.Attributes;
 using JDI.Web.Selenium.Elements.Base;
 using JDI.Web.Utils;

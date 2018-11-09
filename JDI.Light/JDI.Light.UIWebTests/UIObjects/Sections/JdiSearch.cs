@@ -10,9 +10,9 @@ namespace JDI.UIWebTests.UIObjects.Sections
         public ITextField SearchInput;
 
         [FindBy(Css = ".search>.icon-search")]
-        public IButton SearchButton;
+        public new IButton SearchButton;
 
         [FindBy(Css = ".icon-search.active")]
-        public IButton SearchButonActive;
+        public IButton SearchButtonActive;
     }
 }

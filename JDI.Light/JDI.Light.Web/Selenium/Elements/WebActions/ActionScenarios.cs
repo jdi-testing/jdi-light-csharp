@@ -3,8 +3,8 @@ using JDI.Core;
 using JDI.Core.Logging;
 using JDI.Core.Reporting;
 using JDI.Core.Settings;
+using JDI.Core.Utils;
 using JDI.Web.Selenium.Base;
-using ExceptionUtils = JDI.Core.ExceptionUtils;
 
 namespace JDI.Web.Selenium.Elements.WebActions
 {
@@ -45,7 +45,7 @@ namespace JDI.Web.Selenium.Elements.WebActions
                     : logResult.Invoke(result);
             var timePassed = timer.TimePassed.TotalMilliseconds;
             PerformanceStatistic.AddStatistic(timer.TimePassed.TotalMilliseconds);
-            JDISettings.ToLog($"Get result '{stringResult}' in {(timePassed / 1000).ToString("F")} seconds", level);
+            JDISettings.ToLog($"Get result '{stringResult}' in {timePassed / 1000:F} seconds", level);
             return result;
         }
     }

@@ -61,7 +61,7 @@
     <Compile Include="Base\Application.cs" />
     <Compile Include="Base\CascadeInit.cs" />
     <Compile Include="CommonExtensions.cs" />
-    <Compile Include="ExceptionUtils.cs" />
+    <Compile Include="Utils\ExceptionUtils.cs" />
     <Compile Include="Interfaces\Application.cs" />
     <Compile Include="Interfaces\Base\IAvatar.cs" />
     <Compile Include="Interfaces\Base\IBaseElement.cs" />
@@ -131,7 +131,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="ReflectionUtils.cs" />
+    <Compile Include="Utils\ReflectionUtils.cs" />
     <Compile Include="Reporting\ActionsType.cs" />
     <Compile Include="Reporting\PerformanceStatistic.cs" />
     <Compile Include="Settings\HighlightSettings.cs" />
@@ -143,7 +143,7 @@
     <Compile Include="TimerExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="JDI Core.nuspec" />
+    <None Include="JDI.Core.nuspec" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
