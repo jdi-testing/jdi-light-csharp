@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using JDI.Commons;
+using JDI.Core;
 using JDI.Core.Attributes;
 using JDI.Matchers;
 using ExceptionUtils = JDI.Core.ExceptionUtils;

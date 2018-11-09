@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using JDI.Commons;
+using JDI.Core;
 using JDI.Core.Attributes;
 using JDI.Core.Interfaces.Base;
 using JDI.Core.Interfaces.Complex;

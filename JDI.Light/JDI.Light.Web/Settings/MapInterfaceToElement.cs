@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using JDI.Commons;
+using JDI.Core;
 
 namespace JDI.Web.Settings
 {

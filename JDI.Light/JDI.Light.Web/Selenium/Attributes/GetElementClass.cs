@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using JDI.Commons;
+using JDI.Core;
 using JDI.Core.Attributes.Functions;
 using JDI.Core.Interfaces.Common;
 using JDI.Core.Settings;

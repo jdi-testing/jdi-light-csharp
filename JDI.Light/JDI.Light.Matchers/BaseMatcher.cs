@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using JDI.Commons;
+using JDI.Core;
 using JDI.Core.Logging;
 
 namespace JDI.Matchers

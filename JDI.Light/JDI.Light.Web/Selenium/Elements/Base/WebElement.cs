@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using JDI.Commons;
+using JDI.Core;
 using JDI.Core.Interfaces.Base;
 using JDI.Core.Logging;
 using JDI.Core.Settings;

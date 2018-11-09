@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
-using JDI.Commons;
+using JDI.Core;
 using JDI.Core.Base;
 using JDI.Core.Interfaces.Base;
 using JDI.Core.Interfaces.Complex;

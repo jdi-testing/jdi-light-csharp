@@ -18,14 +18,14 @@ namespace JDI.Core.Logging
 
         private static string GetLogRecord(string typeName, string msg)
         {
-            return string.Format(LogRecordTemplate, typeName, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.ffff"), msg);
+            return string.Format(LogRecordTemplate, typeName, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"), msg);
         }
 
         public JDILogger()
         {
             var logRoot =
                 GetValidUrl(
-                    Commons.ExceptionUtils.AvoidExceptions(() => Properties.Settings.Default["log.path"].ToString()));
+                    ExceptionUtils.AvoidExceptions(() => Properties.Settings.Default["log.path"].ToString()));
             if (!string.IsNullOrEmpty(logRoot))
                 LogDirectoryRoot = () => logRoot;
         }

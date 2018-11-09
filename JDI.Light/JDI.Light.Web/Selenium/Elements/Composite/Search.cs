@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using JDI.Commons;
+using JDI.Core;
 using JDI.Core.Interfaces.Common;
 using JDI.Core.Interfaces.Complex;
 using JDI.Core.Settings;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text.RegularExpressions;
-using JDI.Commons;
+using JDI.Core;
 using JDI.Core.Interfaces.Complex;
 using JDI.Core.Settings;
 using JDI.Matchers;

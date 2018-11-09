@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using JDI.Commons;
+using JDI.Core;
 using JDI.Core.Attributes;
 using JDI.Core.Attributes.Functions;
 using JDI.Core.Interfaces.Base;

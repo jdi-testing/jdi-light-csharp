@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using JDI.Commons;
+using JDI.Core;
 using JDI.Matchers.NUnit;
 using JDI.UIWebTests.Tests.Complex.Table.Base;
 using NUnit.Framework;

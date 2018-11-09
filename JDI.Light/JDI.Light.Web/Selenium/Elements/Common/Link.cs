@@ -1,5 +1,5 @@
 ﻿using System;
-using JDI.Commons;
+using JDI.Core;
 using JDI.Core.Interfaces.Common;
 using JDI.Matchers;
 using JDI.Web.Selenium.Base;

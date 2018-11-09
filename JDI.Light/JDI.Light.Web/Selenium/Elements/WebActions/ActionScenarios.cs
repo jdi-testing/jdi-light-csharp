@@ -1,5 +1,5 @@
 ﻿using System;
-using JDI.Commons;
+using JDI.Core;
 using JDI.Core.Logging;
 using JDI.Core.Reporting;
 using JDI.Core.Settings;

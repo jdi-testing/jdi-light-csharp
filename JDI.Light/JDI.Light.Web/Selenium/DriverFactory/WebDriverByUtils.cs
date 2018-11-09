@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using JDI.Commons;
+using JDI.Core;
 using OpenQA.Selenium;
 using ExceptionUtils = JDI.Core.ExceptionUtils;
 
