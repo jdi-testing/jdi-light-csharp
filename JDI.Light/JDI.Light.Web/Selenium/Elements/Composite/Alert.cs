@@ -5,32 +5,30 @@ namespace JDI.Web.Selenium.Elements.Composite
 {
     public class Alert : Popup
     {
-        private IAlert alert;
+        private IAlert _alert;
         private IAlert GetAlert()
         {
-            if (alert == null)
-                alert = new WebBaseElement().WebDriver.SwitchTo().Alert();
-            return alert;
+            return _alert ?? (_alert = new WebBaseElement().WebDriver.SwitchTo().Alert());
         }
 
         protected void OkAction()
         {
-            alert.Accept();
+            _alert.Accept();
         }
 
-        protected void cancelAction()
+        protected void CancelAction()
         {
-            alert.Dismiss();
+            _alert.Dismiss();
         }
 
-        protected void closeAction()
+        protected void CloseAction()
         {
-            alert.Dismiss();
+            _alert.Dismiss();
         }
 
-        protected string GetTextAction()
+        protected new string GetTextAction()
         {
-            return alert.Text;
+            return _alert.Text;
         }
     }
 }

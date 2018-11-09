@@ -17,25 +17,7 @@ namespace JDI.Commons
             return " " + Environment.NewLine + s;
         }
 
-        public static string LineBreak(this string s)
-        {
-            return s + " " + Environment.NewLine;
-        }
-
-        public static string CutTestData(this string str)
-        {
-            var index = str.IndexOf('(');
-            return index > 0
-                ? str.Substring(0, index)
-                : str;
-        }
-
         public static string Print(this IEnumerable<string> list, string separator = ", ", string format = "{0}")
-        {
-            return list != null ? string.Join(separator, list.Select(el => string.Format(format, el))) : "";
-        }
-
-        public static string ToString(this IEnumerable<string> list, string separator = ", ", string format = "{0}")
         {
             return list != null ? string.Join(separator, list.Select(el => string.Format(format, el))) : "";
         }
@@ -48,45 +30,9 @@ namespace JDI.Commons
                 : "";
         }
 
-
-        public static object GetFieldByName(this object obj, string fieldName)
-        {
-            var fieldsQueue = new Queue<string>(fieldName.Split('.'));
-            var result = obj;
-            while (fieldsQueue.Any() && result != null)
-            {
-                var fieldsName = fieldsQueue.Dequeue();
-                var fieldInfo = result.GetType().GetField(fieldsName);
-                if (fieldInfo != null)
-                {
-                    result = fieldInfo.GetValue(result);
-                    continue;
-                }
-                var propInfo = result.GetType().GetProperty(fieldsName);
-                result = propInfo?.GetValue(result);
-            }
-            return result;
-        }
-
-
-        public static int FirstIndex<T>(this IList<T> list, Func<T, bool> func)
-        {
-            if (list == null)
-                return -1;
-            for (var i = 0; i < list.Count; i++)
-                if (func(list[i]))
-                    return i;
-            return -1;
-        }
-
         public static IList<string> Split(this string s, string separator)
         {
             return s.Split(new[] {separator}, StringSplitOptions.None);
-        }
-
-        public static IList<string> SplitTrim(this string s, string separator)
-        {
-            return s.Split(new[] {separator}, StringSplitOptions.RemoveEmptyEntries);
         }
 
         public static IList<T> ListCopy<T>(this IList<T> list, int from = 0, int to = 0)
