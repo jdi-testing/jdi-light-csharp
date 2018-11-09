@@ -68,9 +68,6 @@
     <Compile Include="CommonExtensions.cs" />
     <Compile Include="EnumExtensions.cs" />
     <Compile Include="ExceptionUtils.cs" />
-    <Compile Include="Pairs\Pair.cs" />
-    <Compile Include="Pairs\Pairs.cs" />
-    <Compile Include="Pairs\PairsExtentions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReflectionUtils.cs" />
     <Compile Include="Timer.cs" />
