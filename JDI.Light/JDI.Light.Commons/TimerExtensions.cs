@@ -8,6 +8,7 @@ namespace JDI.Commons
         {
             return new Timer().Wait(() => { action.Invoke(); return true; });
         }
+
         public static bool ForceDone(this Func<bool> func)
         {
             return new Timer().Wait(func);

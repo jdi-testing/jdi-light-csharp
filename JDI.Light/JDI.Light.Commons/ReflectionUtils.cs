@@ -31,14 +31,11 @@ namespace JDI.Commons
             }
         }
 
-        public static bool ContainsType(this Type[] types, FieldInfo field)
-        {
-            return types.Contains(field.FieldType);
-        }
         public static bool ContainsFieldType(this Type[] types, FieldInfo field)
         {
             return types.Any(type => type.IsAssignableFrom(field.FieldType));
         }
+
         public static List<FieldInfo> GetFieldsDeep(this Type type, params Type[] types)
         {
             if (types.Contains(type))
@@ -52,6 +49,7 @@ namespace JDI.Commons
         {
             return GetFields(obj, types, typeof(object));
         }
+
         public static List<FieldInfo> GetFields(this object obj, Type[] types, params Type[] stopTypes)
         {
             return GetFields(GetFieldsDeep(obj.GetType(), stopTypes), types);
@@ -63,6 +61,7 @@ namespace JDI.Commons
                 ? fields
                 : fields.Where(field => types.Any(t => t.IsAssignableFrom(field.FieldType))).ToList();
         }
+
         public static FieldInfo GetFirstField(this object obj, params Type[] types)
         {
             var fields = obj.GetType().GetFieldsList();
@@ -78,6 +77,7 @@ namespace JDI.Commons
                 ? fields[0].GetValue(obj)
                 : fields.FirstOrDefault(types.ContainsFieldType)?.GetValue(obj));
         }
+
         public static string GetClassName(this object obj)
         {
             return obj?.GetType().Name ?? "NULL Class";
@@ -120,6 +120,5 @@ namespace JDI.Commons
                 return value.ParseOrDefault(s => long.Parse(s), null);
             throw new Exception($"Can't parse field {field.Name} type is unsupported");
         }
-
     }
 }

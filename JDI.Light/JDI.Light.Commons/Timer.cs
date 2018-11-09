@@ -19,9 +19,9 @@ namespace JDI.Commons
             _watch = Stopwatch.StartNew();
         }
 
-        public Timer(double timoutInMsec = DefaultTimeout, int retryTimeoutInMSec = DefaultRetryTimeout) : this()
+        public Timer(double timeoutInMSec = DefaultTimeout, int retryTimeoutInMSec = DefaultRetryTimeout) : this()
         {
-            _timeoutInMSec = timoutInMsec;
+            _timeoutInMSec = timeoutInMSec;
             _retryTimeoutInMSec = retryTimeoutInMSec;
         }
 
