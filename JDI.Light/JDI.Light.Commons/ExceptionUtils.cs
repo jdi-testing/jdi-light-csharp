@@ -9,16 +9,5 @@ namespace JDI.Commons
             try { return waitFunc(); }
             catch { return default(T); }
         }
-
-        public static void AvoidExceptions(this Action action)
-        {
-            try { action(); }
-            catch { /* ignored */ }
-        }
-
-        public static string AvoidExceptions(Func<object> p)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
