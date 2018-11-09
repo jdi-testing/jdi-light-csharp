@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using JDI.Core;
 using JDI.Core.Base;
+using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Base;
 using JDI.Core.Interfaces.Complex;
 using JDI.Core.Settings;

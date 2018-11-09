@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using JDI.Core;
+using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Base;
 using JDI.Core.Settings;
 using JDI.Web.Selenium.Base;

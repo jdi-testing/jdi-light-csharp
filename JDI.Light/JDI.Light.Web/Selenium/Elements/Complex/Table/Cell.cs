@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using JDI.Core;
+using JDI.Core.Extensions;
 using JDI.Core.Settings;
 using JDI.Web.Selenium.Base;
 using JDI.Web.Selenium.DriverFactory;

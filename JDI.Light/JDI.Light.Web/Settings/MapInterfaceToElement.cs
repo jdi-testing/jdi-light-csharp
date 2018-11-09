@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using JDI.Core;
+using JDI.Core.Extensions;
 
 namespace JDI.Web.Settings
 {

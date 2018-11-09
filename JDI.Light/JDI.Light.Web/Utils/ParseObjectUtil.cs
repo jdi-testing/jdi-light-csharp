@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using JDI.Core;
 using JDI.Core.Attributes;
+using JDI.Core.Extensions;
 using JDI.Core.Utils;
 using JDI.Matchers;
 

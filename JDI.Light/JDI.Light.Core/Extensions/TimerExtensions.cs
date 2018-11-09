@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JDI.Core
+namespace JDI.Core.Extensions
 {
     public static class TimerExtensions
     {

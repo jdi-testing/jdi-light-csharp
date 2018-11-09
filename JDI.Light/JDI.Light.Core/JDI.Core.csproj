@@ -60,7 +60,7 @@
     <Compile Include="Attributes\NameAttribute.cs" />
     <Compile Include="Base\Application.cs" />
     <Compile Include="Base\CascadeInit.cs" />
-    <Compile Include="CommonExtensions.cs" />
+    <Compile Include="Extensions\CommonExtensions.cs" />
     <Compile Include="Utils\ExceptionUtils.cs" />
     <Compile Include="Interfaces\Application.cs" />
     <Compile Include="Interfaces\Base\IAvatar.cs" />
@@ -140,7 +140,7 @@
     <Compile Include="Settings\JDISettings.cs" />
     <Compile Include="Settings\TimeoutSettings.cs" />
     <Compile Include="Timer.cs" />
-    <Compile Include="TimerExtensions.cs" />
+    <Compile Include="Extensions\TimerExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="JDI.Core.nuspec" />

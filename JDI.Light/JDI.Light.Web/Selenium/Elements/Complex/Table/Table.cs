@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using JDI.Core;
+using JDI.Core.Extensions;
 using JDI.Core.Settings;
 using JDI.Matchers;
 using JDI.Web.Attributes.Objects;
