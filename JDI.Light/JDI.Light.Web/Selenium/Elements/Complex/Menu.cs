@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
-using JDI.Core;
 using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Complex;
 using JDI.Core.Settings;
