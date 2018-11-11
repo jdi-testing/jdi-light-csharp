@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using JDI.Core.Matchers;
 
 namespace JDI.Matchers.NUnit
 {

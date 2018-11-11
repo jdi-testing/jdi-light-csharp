@@ -76,12 +76,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="NUnitMatcher.cs" />
-    <Compile Include="NUnit\Assert.cs" />
-    <Compile Include="BaseMatcher.cs" />
-    <Compile Include="NUnit\Check.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScreenshotState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -93,6 +88,9 @@
       <Project>{99ee5894-9f49-43e2-a129-7916d924d49c}</Project>
       <Name>JDI.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="NUnit\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

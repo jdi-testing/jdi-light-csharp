@@ -65,6 +65,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Asserts\Assert.cs" />
+    <Compile Include="Asserts\Check.cs" />
+    <Compile Include="Asserts\NUnitMatcher.cs" />
     <Compile Include="DataProviders\CheckBoxProvider.cs" />
     <Compile Include="DataProviders\IndexesProvider.cs" />
     <Compile Include="Entities\Contact.cs" />
@@ -130,11 +133,6 @@
     <ProjectReference Include="..\JDI.Light.Core\JDI.Core.csproj">
       <Project>{99EE5894-9F49-43E2-A129-7916D924D49C}</Project>
       <Name>JDI.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\JDI.Light.Matchers\JDI.Matchers.csproj">
-      <Project>{822C29A7-C835-40EF-9E83-AE5388BE9A1C}</Project>
-      <Project>{822c29a7-c835-40ef-9e83-ae5388be9a1c}</Project>
-      <Name>JDI.Matchers</Name>
     </ProjectReference>
     <ProjectReference Include="..\JDI.Light.Web\JDI.Web.csproj">
       <Project>{48A9B353-CB6B-4A15-84B4-B062B1C9BACC}</Project>

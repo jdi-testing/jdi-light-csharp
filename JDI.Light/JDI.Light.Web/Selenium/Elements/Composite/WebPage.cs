@@ -6,7 +6,6 @@ using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Complex;
 using JDI.Core.Settings;
 using JDI.Core.Utils;
-using JDI.Matchers;
 using JDI.Web.Selenium.Base;
 using JDI.Web.Settings;
 using OpenQA.Selenium;

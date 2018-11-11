@@ -8,7 +8,6 @@ using JDI.Core.Interfaces.Complex;
 using JDI.Core.Interfaces.Settings;
 using JDI.Core.Logging;
 using JDI.Core.Settings;
-using JDI.Web.Selenium.Base;
 using JDI.Web.Selenium.DriverFactory;
 using JDI.Web.Selenium.Elements.Base;
 using JDI.Web.Selenium.Elements.Common;
@@ -72,11 +71,11 @@ namespace JDI.Web.Settings
             return WebDriverFactory.RegisterDriver(driver);
         }
 
-        public static void Init(ILogger logger = null, IAssert assert = null,
+        public static void Init(ILogger logger, IAssert assert,
             TimeoutSettings timeouts = null, IDriver<IWebDriver> driverFactory = null)
         {
             DriverFactory = driverFactory ?? new WebDriverFactory();
-            Asserter = assert ?? new WebAssert();
+            Asserter = assert;
             Timeouts = timeouts ?? new WebTimeoutSettings();
             Logger = logger ?? new LogAgregator(new NUnitLogger(), new Log4Net());
             MapInterfaceToElement.Init(DefaultInterfacesMap);
@@ -84,7 +83,7 @@ namespace JDI.Web.Settings
 
         public static void InitNUnitDefault()
         {
-            InitFromProperties();
+            InitFromProperties();//TODO: Init assert correctly
         }
 
         public static void InitMsTestDefault()

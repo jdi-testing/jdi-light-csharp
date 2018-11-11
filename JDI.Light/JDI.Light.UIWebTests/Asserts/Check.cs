@@ -1,4 +1,6 @@
-﻿namespace JDI.Matchers.NUnit
+﻿using JDI.Core.Matchers;
+
+namespace JDI.Matchers.NUnit
 {
     public class Check : BaseMatcher
     {

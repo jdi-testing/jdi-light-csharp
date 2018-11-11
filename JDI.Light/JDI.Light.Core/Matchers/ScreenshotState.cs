@@ -1,4 +1,4 @@
-﻿namespace JDI.Matchers
+﻿namespace JDI.Core.Matchers
 {
     public enum ScreenshotState
     {
