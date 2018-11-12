@@ -83,25 +83,25 @@ namespace JDI.Web.Selenium.DriverManager
             var binaryName = "";
             var url = "";
             var latestVersionNumber = version == "" ? GetLatestVersionNumber(type) : version;
-            var currnetArchitecture = ArchitectureHelper.GetArchitecture();
+            var currentArchitecture = ArchitectureHelper.GetArchitecture();
             switch (type)
             {
                 case DriverTypes.Chrome:
                     var cConfig = new ChromeConfig();
                     binaryName = cConfig.GetBinaryName();
-                    url = currnetArchitecture == Architecture.X32 ? cConfig.GetUrl32() : cConfig.GetUrl64();
+                    url = currentArchitecture == Architecture.X32 ? cConfig.GetUrl32() : cConfig.GetUrl64();
                     url = UrlHelper.BuildUrl(url, latestVersionNumber);
                     break;
                 case DriverTypes.Firefox:
                     var fConfig = new FirefoxConfig();
                     binaryName = fConfig.GetBinaryName();
-                    url = currnetArchitecture == Architecture.X32 ? fConfig.GetUrl32() : fConfig.GetUrl64();
+                    url = currentArchitecture == Architecture.X32 ? fConfig.GetUrl32() : fConfig.GetUrl64();
                     url = UrlHelper.BuildUrl(url, latestVersionNumber);
                     break;
                 case DriverTypes.IE:
                     var ieConfig = new InternetExplorerConfig();
                     binaryName = ieConfig.GetBinaryName();
-                    url = currnetArchitecture == Architecture.X32 ? ieConfig.GetUrl32() : ieConfig.GetUrl64();
+                    url = currentArchitecture == Architecture.X32 ? ieConfig.GetUrl32() : ieConfig.GetUrl64();
                     url = UrlHelper.BuildUrl(url, latestVersionNumber);
                     break;
             }
