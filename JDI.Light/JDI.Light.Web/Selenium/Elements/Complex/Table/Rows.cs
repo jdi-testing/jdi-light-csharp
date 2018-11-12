@@ -4,7 +4,6 @@ using JDI.Core.Extensions;
 using JDI.Core.Settings;
 using JDI.Core.Utils;
 using JDI.Web.Selenium.Elements.Complex.Table.Interfaces;
-using JDI.Web.Utils;
 using OpenQA.Selenium;
 
 namespace JDI.Web.Selenium.Elements.Complex.Table
@@ -63,8 +62,8 @@ namespace JDI.Web.Selenium.Elements.Complex.Table
                 }
 
                 AddCols(result, Table.Columns.AllHeaders, webRow, rowNum);
-                var simplifiedHeaders = Table.Columns.Headers.Select(WebExtensions.Simplify);
-                return result.Where(el => simplifiedHeaders.Contains(WebExtensions.Simplify(el.Key))).ToDictionary();
+                var simplifiedHeaders = Table.Columns.Headers.Select(StringExtensions.Simplify);
+                return result.Where(el => simplifiedHeaders.Contains(el.Key.Simplify())).ToDictionary();
             }, ex => $"Can't Get Row '{rowNum}'. Reason: {ex}");
         }
 

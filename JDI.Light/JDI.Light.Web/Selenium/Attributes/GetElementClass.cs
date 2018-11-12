@@ -6,7 +6,6 @@ using JDI.Core.Settings;
 using JDI.Core.Utils;
 using JDI.Web.Selenium.Base;
 using JDI.Web.Selenium.Elements.Common;
-using JDI.Web.Utils;
 
 namespace JDI.Web.Selenium.Attributes
 {
@@ -21,7 +20,7 @@ namespace JDI.Web.Selenium.Attributes
 
         public static bool NamesEqual(string name1, string name2)
         {
-            return WebExtensions.Simplify(name1).Equals(WebExtensions.Simplify(name2));
+            return name1.Simplify().Equals(name2.Simplify());
         }
 
         private static string ToButton(string buttonName)

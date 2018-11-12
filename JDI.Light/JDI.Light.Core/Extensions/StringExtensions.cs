@@ -14,5 +14,10 @@ namespace JDI.Core.Extensions
         {
             return Regex.IsMatch(input, pattern);
         }
+
+        public static string Simplify(this string s)
+        {
+            return new Regex("[^a-z0-9]").Replace(s.ToLower(), "");
+        }
     }
 }
