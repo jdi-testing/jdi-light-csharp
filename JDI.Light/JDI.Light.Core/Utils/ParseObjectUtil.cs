@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using JDI.Core.Attributes;
 using JDI.Core.Extensions;
-using JDI.Core.Utils;
 
-namespace JDI.Web.Utils
+namespace JDI.Core.Utils
 {
     public static class ParseObjectUtil
     {

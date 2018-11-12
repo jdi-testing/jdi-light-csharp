@@ -9,7 +9,6 @@ using JDI.Core.Settings;
 using JDI.Core.Utils;
 using JDI.Web.Selenium.Attributes;
 using JDI.Web.Selenium.Elements.Base;
-using JDI.Web.Utils;
 using OpenQA.Selenium;
 
 namespace JDI.Web.Selenium.Elements.Composite

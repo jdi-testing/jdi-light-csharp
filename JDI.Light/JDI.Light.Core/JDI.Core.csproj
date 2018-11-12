@@ -127,6 +127,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Utils\ParseObjectUtil.cs" />
     <Compile Include="Utils\ReflectionUtils.cs" />
     <Compile Include="Reporting\ActionsType.cs" />
     <Compile Include="Reporting\PerformanceStatistic.cs" />
