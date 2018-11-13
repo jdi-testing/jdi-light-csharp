@@ -2,13 +2,13 @@
 {
     public static class JDIData
     {
-        public static string FRAMEWORK_NAME = "JDI";
+        public static string FrameworkName = "JDI";
 
         //CHECKSTYLE OFF
-        public static string APP_VERSION = "DEFAULT";
+        public static string AppVersion = "DEFAULT";
 
         //CHECKSTYLE ON
-        public static string testName;
+        public static string TestName;
 
         static JDIData()
         {

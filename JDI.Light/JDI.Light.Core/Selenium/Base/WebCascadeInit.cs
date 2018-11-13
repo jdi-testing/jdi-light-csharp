@@ -16,9 +16,9 @@ using JDI.Core.Selenium.Elements.Complex.Table;
 using JDI.Core.Selenium.Elements.Complex.Table.Interfaces;
 using JDI.Core.Selenium.Elements.Composite;
 using JDI.Core.Settings;
+using JDI.Core.Utils;
 using OpenQA.Selenium;
 using RestSharp.Extensions;
-using EUtils = JDI.Core.Utils.ExceptionUtils;
 
 namespace JDI.Core.Selenium.Base
 {
@@ -104,14 +104,14 @@ namespace JDI.Core.Selenium.Base
 
         protected By GetNewLocator(FieldInfo field)
         {
-            return EUtils.ActionWithException(() => GetNewLocatorFromField(field),
+            return ExceptionUtils.ActionWithException(() => GetNewLocatorFromField(field),
                 ex => $"Error in get locator for type '{field.Name + ex.FromNewLine()}'");
         }
 
         protected By GetNewLocatorFromField(FieldInfo field)
         {
             By byLocator = null;
-            var locatorGroup = JDIData.APP_VERSION;
+            var locatorGroup = JDIData.AppVersion;
             if (locatorGroup == null)
                 return FindByAttribute.Locator(field) ?? field.GetFindsBy();
             var jFindBy = field.GetAttribute<JFindByAttribute>();
