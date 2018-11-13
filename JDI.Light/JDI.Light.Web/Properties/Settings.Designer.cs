@@ -27,17 +27,5 @@ namespace JDI.Web.Properties {
                 return defaultInstance;
             }
         }
-        
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("http://10.11.129.28:4444/wd/hub")]
-        public string remote_url {
-            get {
-                return ((string)(this["remote_url"]));
-            }
-            set {
-                this["remote_url"] = value;
-            }
-        }
     }
 }

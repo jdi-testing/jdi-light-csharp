@@ -45,18 +45,102 @@
     <Compile Include="Attributes\AttributesUtil.cs" />
     <Compile Include="Attributes\ComplexAttribute.cs" />
     <Compile Include="Attributes\FillFromFieldAttribute.cs" />
+    <Compile Include="Attributes\FindByAttribute.cs" />
+    <Compile Include="Attributes\FindsByExtension.cs" />
+    <Compile Include="Attributes\FrameAttribute.cs" />
     <Compile Include="Attributes\Functions\CancelButton.cs" />
     <Compile Include="Attributes\Functions\CloseButton.cs" />
     <Compile Include="Attributes\Functions\Functions.cs" />
     <Compile Include="Attributes\Functions\OkButton.cs" />
+    <Compile Include="Attributes\JFindByAttribute.cs" />
     <Compile Include="Attributes\MoveToAttribute.cs" />
     <Compile Include="Attributes\NameAttribute.cs" />
+    <Compile Include="Attributes\Objects\FillFromAnnotationRules.cs" />
+    <Compile Include="Attributes\Objects\JDropdownAttribute.cs" />
+    <Compile Include="Attributes\Objects\JMenuAttribute.cs" />
+    <Compile Include="Attributes\Objects\JTableAttribute.cs" />
+    <Compile Include="Attributes\Objects\TableHeaderTypes.cs" />
+    <Compile Include="Attributes\PageAttribute.cs" />
+    <Compile Include="Attributes\SiteAttribute.cs" />
     <Compile Include="Base\Application.cs" />
     <Compile Include="Base\CascadeInit.cs" />
     <Compile Include="Extensions\CommonExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Matchers\BaseMatcher.cs" />
     <Compile Include="Matchers\ScreenshotState.cs" />
+    <Compile Include="Selenium\Attributes\GetElementClass.cs" />
+    <Compile Include="Selenium\Base\GetElementType.cs" />
+    <Compile Include="Selenium\Base\SiteFactory.cs" />
+    <Compile Include="Selenium\Base\SiteInfo.cs" />
+    <Compile Include="Selenium\Base\WebBaseElement.cs" />
+    <Compile Include="Selenium\Base\WebCascadeInit.cs" />
+    <Compile Include="Selenium\DriverFactory\WebDriverByUtils.cs" />
+    <Compile Include="Selenium\DriverFactory\WebDriverFactory.cs" />
+    <Compile Include="Selenium\DriverFactory\WinProcUtils.cs" />
+    <Compile Include="Selenium\DriverManager\WebDriverManager.cs" />
+    <Compile Include="Selenium\DriverManager\WebDriverManagerHelper.cs" />
+    <Compile Include="Selenium\Elements\APIInteract\ContextType.cs" />
+    <Compile Include="Selenium\Elements\APIInteract\GetElementModule.cs" />
+    <Compile Include="Selenium\Elements\Base\Clickable.cs" />
+    <Compile Include="Selenium\Elements\Base\ClickableText.cs" />
+    <Compile Include="Selenium\Elements\Base\SelectableElement.cs" />
+    <Compile Include="Selenium\Elements\Base\WebElement.cs" />
+    <Compile Include="Selenium\Elements\Common\Button.cs" />
+    <Compile Include="Selenium\Elements\Common\CheckBox.cs" />
+    <Compile Include="Selenium\Elements\Common\DatePicker.cs" />
+    <Compile Include="Selenium\Elements\Common\FileInput.cs" />
+    <Compile Include="Selenium\Elements\Common\Image.cs" />
+    <Compile Include="Selenium\Elements\Common\Input.cs" />
+    <Compile Include="Selenium\Elements\Common\Label.cs" />
+    <Compile Include="Selenium\Elements\Common\Link.cs" />
+    <Compile Include="Selenium\Elements\Common\Text.cs" />
+    <Compile Include="Selenium\Elements\Common\TextArea.cs" />
+    <Compile Include="Selenium\Elements\Common\TextField.cs" />
+    <Compile Include="Selenium\Elements\Complex\BaseSelector.cs" />
+    <Compile Include="Selenium\Elements\Complex\CheckList.cs" />
+    <Compile Include="Selenium\Elements\Complex\ComboBox.cs" />
+    <Compile Include="Selenium\Elements\Complex\Dropdown.cs" />
+    <Compile Include="Selenium\Elements\Complex\DropList.cs" />
+    <Compile Include="Selenium\Elements\Complex\Elements.cs" />
+    <Compile Include="Selenium\Elements\Complex\Menu.cs" />
+    <Compile Include="Selenium\Elements\Complex\MultiSelector.cs" />
+    <Compile Include="Selenium\Elements\Complex\RadioButtons.cs" />
+    <Compile Include="Selenium\Elements\Complex\Selector.cs" />
+    <Compile Include="Selenium\Elements\Complex\Table\Cell.cs" />
+    <Compile Include="Selenium\Elements\Complex\Table\Column.cs" />
+    <Compile Include="Selenium\Elements\Complex\Table\Columns.cs" />
+    <Compile Include="Selenium\Elements\Complex\Table\DynamicTable.cs" />
+    <Compile Include="Selenium\Elements\Complex\Table\EntityTable.cs" />
+    <Compile Include="Selenium\Elements\Complex\Table\FilterDsl.cs" />
+    <Compile Include="Selenium\Elements\Complex\Table\Interfaces\ICell.cs" />
+    <Compile Include="Selenium\Elements\Complex\Table\Interfaces\ITable.cs" />
+    <Compile Include="Selenium\Elements\Complex\Table\Interfaces\ITableLine.cs" />
+    <Compile Include="Selenium\Elements\Complex\Table\Row.cs" />
+    <Compile Include="Selenium\Elements\Complex\Table\RowColumn.cs" />
+    <Compile Include="Selenium\Elements\Complex\Table\Rows.cs" />
+    <Compile Include="Selenium\Elements\Complex\Table\Table.cs" />
+    <Compile Include="Selenium\Elements\Complex\Table\TableLine.cs" />
+    <Compile Include="Selenium\Elements\Complex\Table\TableSettings.cs" />
+    <Compile Include="Selenium\Elements\Complex\Tabs.cs" />
+    <Compile Include="Selenium\Elements\Complex\TextList.cs" />
+    <Compile Include="Selenium\Elements\Complex\Tree.cs" />
+    <Compile Include="Selenium\Elements\Composite\Alert.cs" />
+    <Compile Include="Selenium\Elements\Composite\CheckPageTypes .cs" />
+    <Compile Include="Selenium\Elements\Composite\Form.cs" />
+    <Compile Include="Selenium\Elements\Composite\NavigationPane.cs" />
+    <Compile Include="Selenium\Elements\Composite\Pagination.cs" />
+    <Compile Include="Selenium\Elements\Composite\Popup.cs" />
+    <Compile Include="Selenium\Elements\Composite\PopupForm.cs" />
+    <Compile Include="Selenium\Elements\Composite\Search.cs" />
+    <Compile Include="Selenium\Elements\Composite\Section.cs" />
+    <Compile Include="Selenium\Elements\Composite\WebPage.cs" />
+    <Compile Include="Selenium\Elements\Composite\WebSite.cs" />
+    <Compile Include="Selenium\Elements\WebActions\ActionInvoker.cs" />
+    <Compile Include="Selenium\Elements\WebActions\ActionScenarios.cs" />
+    <Compile Include="Selenium\Elements\WebActions\ElementsActions.cs" />
+    <Compile Include="Settings\MapInterfaceToElement.cs" />
+    <Compile Include="Settings\WebSettings.cs" />
+    <Compile Include="Settings\WebTimeoutSettings.cs" />
     <Compile Include="Utils\ExceptionUtils.cs" />
     <Compile Include="Interfaces\Application.cs" />
     <Compile Include="Interfaces\Base\IAvatar.cs" />
@@ -96,7 +180,6 @@
     <Compile Include="Interfaces\Complex\ISelector.cs" />
     <Compile Include="Interfaces\Complex\ITabs.cs" />
     <Compile Include="Interfaces\Complex\ITextList.cs" />
-    <Compile Include="Interfaces\Complex\Tables\CheckPageTypes.cs" />
     <Compile Include="Interfaces\Complex\Tables\Column.cs" />
     <Compile Include="Interfaces\Complex\Tables\ElementIndexType.cs" />
     <Compile Include="Interfaces\Complex\Tables\ICell.cs" />
@@ -148,6 +231,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="AngleSharp, Version=0.9.9.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
+      <HintPath>..\packages\AngleSharp.0.9.10\lib\net45\AngleSharp.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
@@ -172,6 +258,7 @@
     <Reference Include="System.IO.Compression">
       <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.IO.Compression.dll</HintPath>
     </Reference>
+    <Reference Include="System.Management" />
     <Reference Include="System.Runtime.Serialization">
       <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Runtime.Serialization.dll</HintPath>
     </Reference>
@@ -190,6 +277,9 @@
     </Reference>
     <Reference Include="WebDriver.Support, Version=3.141.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Selenium.Support.3.141.0\lib\net45\WebDriver.Support.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriverManager, Version=2.2.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebDriverManager.2.2.7\lib\net452\WebDriverManager.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup />

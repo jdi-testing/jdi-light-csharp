@@ -10,6 +10,7 @@
 
 using System.CodeDom.Compiler;
 using System.Configuration;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
 namespace JDI.Core.Properties {
@@ -24,6 +25,21 @@ namespace JDI.Core.Properties {
         public static Settings Default {
             get {
                 return defaultInstance;
+            }
+        }
+
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("http://10.11.129.28:4444/wd/hub")]
+        public string remote_url
+        {
+            get
+            {
+                return ((string)(this["remote_url"]));
+            }
+            set
+            {
+                this["remote_url"] = value;
             }
         }
     }

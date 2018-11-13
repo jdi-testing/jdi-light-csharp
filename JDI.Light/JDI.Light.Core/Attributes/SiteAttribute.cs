@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace JDI.Web.Attributes
+namespace JDI.Core.Attributes
 {
     [AttributeUsage(AttributeTargets.All, Inherited = false)]
     public class SiteAttribute : Attribute

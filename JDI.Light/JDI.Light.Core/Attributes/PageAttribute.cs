@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using JDI.Core.Attributes;
 using JDI.Web.Selenium.Elements.Composite;
 using JDI.Web.Settings;
 
@@ -47,12 +48,5 @@ namespace JDI.Web.Attributes
                     : WebPage.GetMatchFromDomain(urlTemplate);
             page.UpdatePageData(url, title, urlCheckType, titleCheckType, urlTemplate);
         }
-    }
-
-    public enum PageCheckType
-    {
-        NoCheck,
-        Equal,
-        Contains
     }
 }

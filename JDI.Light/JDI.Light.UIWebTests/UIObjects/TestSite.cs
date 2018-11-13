@@ -1,4 +1,5 @@
-﻿using JDI.UIWebTests.UIObjects.Pages;
+﻿using JDI.Core.Attributes;
+using JDI.UIWebTests.UIObjects.Pages;
 using JDI.UIWebTests.UIObjects.Sections;
 using JDI.Web.Attributes;
 using JDI.Web.Selenium.Elements.Complex;

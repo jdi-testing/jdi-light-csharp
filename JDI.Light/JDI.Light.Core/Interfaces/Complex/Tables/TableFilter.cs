@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using JDI.Web.Selenium.Elements.Composite;
 
 namespace JDI.Core.Interfaces.Complex.Tables
 {
@@ -18,7 +19,7 @@ namespace JDI.Core.Interfaces.Complex.Tables
                 split = template.Split(new[] {"\\*="}, StringSplitOptions.None);
                 name = split[0];
                 value = split[1];
-                type = CheckPageTypes.MATCH;
+                type = CheckPageTypes.Match;
                 return;
             }
 
@@ -27,7 +28,7 @@ namespace JDI.Core.Interfaces.Complex.Tables
                 split = template.Split(new[] {"~="}, StringSplitOptions.None);
                 name = split[0];
                 value = split[1];
-                type = CheckPageTypes.CONTAINS;
+                type = CheckPageTypes.Contains;
                 return;
             }
 
@@ -36,7 +37,7 @@ namespace JDI.Core.Interfaces.Complex.Tables
                 split = template.Split(new[] {"="}, StringSplitOptions.None);
                 name = split[0];
                 value = split[1];
-                type = CheckPageTypes.EQUAL;
+                type = CheckPageTypes.Equal;
                 return;
             }
 

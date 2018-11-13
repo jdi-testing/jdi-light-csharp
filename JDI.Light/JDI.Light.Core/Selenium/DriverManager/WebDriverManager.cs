@@ -3,7 +3,6 @@ using System.IO;
 using JDI.Web.Selenium.DriverFactory;
 using WebDriverManager.DriverConfigs.Impl;
 using WebDriverManager.Helpers;
-using Manager = WebDriverManager;
 
 namespace JDI.Web.Selenium.DriverManager
 {
@@ -116,7 +115,7 @@ namespace JDI.Web.Selenium.DriverManager
                 if (File.Exists(driverFullPath))
                     File.Delete(driverFullPath);
 
-                new Manager.DriverManager().SetUpDriver(url, driverFullPath, binaryName);
+                new global::WebDriverManager.DriverManager().SetUpDriver(url, driverFullPath, binaryName);
             }
 
             return driverLocationPath;

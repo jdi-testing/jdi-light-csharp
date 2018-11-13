@@ -278,7 +278,7 @@ namespace JDI.Web.Selenium.DriverFactory
             });
 
             return RegisterDriver("Remote_" + _driverNamesDictionary[driverType],
-                () => new RemoteWebDriver(new Uri(Properties.Settings.Default.remote_url), capabilities));
+                () => new RemoteWebDriver(new Uri(Core.Properties.Settings.Default.remote_url), capabilities));
         }
 
         public void SwitchToDriver(string driverName)
