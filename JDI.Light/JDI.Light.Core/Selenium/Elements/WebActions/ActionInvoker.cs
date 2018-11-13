@@ -1,12 +1,12 @@
 ﻿using System;
 using JDI.Core.Extensions;
 using JDI.Core.Logging;
+using JDI.Core.Selenium.Base;
+using JDI.Core.Selenium.Elements.Base;
 using JDI.Core.Settings;
 using JDI.Core.Utils;
-using JDI.Web.Selenium.Base;
-using JDI.Web.Selenium.Elements.Base;
 
-namespace JDI.Web.Selenium.Elements.WebActions
+namespace JDI.Core.Selenium.Elements.WebActions
 {
     public class ActionInvoker
     {

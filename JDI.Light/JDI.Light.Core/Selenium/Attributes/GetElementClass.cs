@@ -2,12 +2,12 @@
 using JDI.Core.Attributes.Functions;
 using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Common;
+using JDI.Core.Selenium.Base;
+using JDI.Core.Selenium.Elements.Common;
 using JDI.Core.Settings;
 using JDI.Core.Utils;
-using JDI.Web.Selenium.Base;
-using JDI.Web.Selenium.Elements.Common;
 
-namespace JDI.Web.Selenium.Attributes
+namespace JDI.Core.Selenium.Attributes
 {
     public class GetElementClass
     {

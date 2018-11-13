@@ -1,9 +1,9 @@
 ﻿using System.Linq;
+using JDI.Core.Selenium.Elements.Complex;
+using JDI.Core.Selenium.Elements.Complex.Table;
 using JDI.Core.Settings;
-using JDI.Web.Selenium.Elements.Complex;
-using JDI.Web.Selenium.Elements.Complex.Table;
 
-namespace JDI.Web.Attributes.Objects
+namespace JDI.Core.Attributes.Objects
 {
     public class FillFromAnnotationRules
     {

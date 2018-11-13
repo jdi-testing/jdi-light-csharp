@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using JDI.Core.Attributes.Objects;
 using JDI.Core.Extensions;
+using JDI.Core.Selenium.Base;
+using JDI.Core.Selenium.Elements.APIInteract;
+using JDI.Core.Selenium.Elements.Base;
+using JDI.Core.Selenium.Elements.Common;
+using JDI.Core.Selenium.Elements.Complex.Table.Interfaces;
 using JDI.Core.Settings;
-using JDI.Web.Attributes.Objects;
-using JDI.Web.Selenium.Base;
-using JDI.Web.Selenium.Elements.APIInteract;
-using JDI.Web.Selenium.Elements.Base;
-using JDI.Web.Selenium.Elements.Common;
-using JDI.Web.Selenium.Elements.Complex.Table.Interfaces;
 using OpenQA.Selenium;
 
-namespace JDI.Web.Selenium.Elements.Complex.Table
+namespace JDI.Core.Selenium.Elements.Complex.Table
 {
     public class Table : Text, ITable
     {

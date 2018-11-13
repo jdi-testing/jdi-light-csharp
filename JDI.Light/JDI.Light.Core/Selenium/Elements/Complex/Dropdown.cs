@@ -1,12 +1,12 @@
 ﻿using System;
 using JDI.Core.Interfaces.Complex;
-using JDI.Web.Selenium.Base;
-using JDI.Web.Selenium.Elements.Base;
-using JDI.Web.Selenium.Elements.Common;
+using JDI.Core.Selenium.Base;
+using JDI.Core.Selenium.Elements.Base;
+using JDI.Core.Selenium.Elements.Common;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
-namespace JDI.Web.Selenium.Elements.Complex
+namespace JDI.Core.Selenium.Elements.Complex
 {
     public class Dropdown : Dropdown<IConvertible>, IDropDown
     {

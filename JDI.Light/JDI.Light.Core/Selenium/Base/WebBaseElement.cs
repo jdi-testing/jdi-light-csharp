@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using JDI.Core;
 using JDI.Core.Attributes;
 using JDI.Core.Attributes.Functions;
 using JDI.Core.Interfaces.Base;
 using JDI.Core.Logging;
+using JDI.Core.Selenium.Attributes;
+using JDI.Core.Selenium.DriverFactory;
+using JDI.Core.Selenium.Elements.APIInteract;
+using JDI.Core.Selenium.Elements.Base;
+using JDI.Core.Selenium.Elements.WebActions;
 using JDI.Core.Settings;
 using JDI.Core.Utils;
-using JDI.Web.Selenium.Attributes;
-using JDI.Web.Selenium.DriverFactory;
-using JDI.Web.Selenium.Elements.APIInteract;
-using JDI.Web.Selenium.Elements.Base;
-using JDI.Web.Selenium.Elements.WebActions;
 using OpenQA.Selenium;
 
-namespace JDI.Web.Selenium.Base
+namespace JDI.Core.Selenium.Base
 {
     public class WebBaseElement : IBaseElement
     {

@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using JDI.Core.Extensions;
+using JDI.Core.Selenium.Attributes;
+using JDI.Core.Selenium.Base;
+using JDI.Core.Selenium.Elements.Complex.Table.Interfaces;
+using JDI.Core.Settings;
 using JDI.Core.Utils;
-using JDI.Web.Selenium.Attributes;
-using JDI.Web.Selenium.Base;
-using JDI.Web.Selenium.Elements.Complex.Table.Interfaces;
-using JDI.Web.Settings;
 
-namespace JDI.Web.Selenium.Elements.Complex.Table
+namespace JDI.Core.Selenium.Elements.Complex.Table
 {
     public class EntityTable<TEntity, TRow> : EntityTable<TEntity>
     {

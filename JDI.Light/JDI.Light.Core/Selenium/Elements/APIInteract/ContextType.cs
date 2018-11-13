@@ -1,4 +1,4 @@
-﻿namespace JDI.Web.Selenium.Elements.APIInteract
+﻿namespace JDI.Core.Selenium.Elements.APIInteract
 {
     public enum ContextType
     {

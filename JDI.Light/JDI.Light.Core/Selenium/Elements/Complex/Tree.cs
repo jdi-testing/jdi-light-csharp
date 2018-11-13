@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using JDI.Core.Extensions;
+using JDI.Core.Selenium.Base;
+using JDI.Core.Selenium.DriverFactory;
 using JDI.Core.Settings;
-using JDI.Web.Selenium.Base;
-using JDI.Web.Selenium.DriverFactory;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 
-namespace JDI.Web.Selenium.Elements.Complex
+namespace JDI.Core.Selenium.Elements.Complex
 {
     public class Tree : Selector
     {

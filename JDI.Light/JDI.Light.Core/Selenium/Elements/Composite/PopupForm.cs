@@ -4,7 +4,7 @@ using JDI.Core.Attributes.Functions;
 using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Complex;
 
-namespace JDI.Web.Selenium.Elements.Composite
+namespace JDI.Core.Selenium.Elements.Composite
 {
     public class PopupForm<T> : Form<T>, IPopup
     {

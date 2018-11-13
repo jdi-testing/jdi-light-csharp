@@ -2,12 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using JDI.Core.Selenium.Base;
 using JDI.Core.Settings;
 using JDI.Core.Utils;
-using JDI.Web.Selenium.Base;
 using OpenQA.Selenium;
 
-namespace JDI.Web.Selenium.Elements.Complex
+namespace JDI.Core.Selenium.Elements.Complex
 {
     public class Elements<T> : WebBaseElement, IList<T> where T : WebBaseElement
     {

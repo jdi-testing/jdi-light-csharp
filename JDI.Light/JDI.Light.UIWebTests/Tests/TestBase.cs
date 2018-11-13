@@ -1,9 +1,8 @@
-﻿using JDI.Core.Settings;
+﻿using JDI.Core.Selenium.DriverFactory;
+using JDI.Core.Selenium.Elements.Composite;
+using JDI.Core.Settings;
 using JDI.UIWebTests.Entities;
 using JDI.UIWebTests.UIObjects;
-using JDI.Web.Selenium.DriverFactory;
-using JDI.Web.Selenium.Elements.Composite;
-using JDI.Web.Settings;
 using NUnit.Framework;
 
 namespace JDI.UIWebTests.Tests

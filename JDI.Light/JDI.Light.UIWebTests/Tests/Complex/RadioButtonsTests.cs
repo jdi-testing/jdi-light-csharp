@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using JDI.Core.Selenium.Elements.Complex;
 using JDI.Core.Settings;
 using JDI.UIWebTests.Enums;
 using JDI.UIWebTests.UIObjects;
-using JDI.Web.Selenium.Elements.Complex;
 using NUnit.Framework;
 using Assert = JDI.Matchers.NUnit.Assert;
 

@@ -1,4 +1,4 @@
-﻿namespace JDI.Web.Attributes.Objects
+﻿namespace JDI.Core.Attributes.Objects
 {
     public enum TableHeaderTypes
     {

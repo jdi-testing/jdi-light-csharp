@@ -1,6 +1,6 @@
-﻿using JDI.Core.Settings;
+﻿using JDI.Core.Selenium.Elements.Complex.Table.Interfaces;
+using JDI.Core.Settings;
 using JDI.UIWebTests.UIObjects;
-using JDI.Web.Selenium.Elements.Complex.Table.Interfaces;
 using NUnit.Framework;
 
 namespace JDI.UIWebTests.Tests.Complex.Table.Base

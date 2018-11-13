@@ -1,11 +1,11 @@
 ﻿using System;
 using JDI.Core.Interfaces.Common;
+using JDI.Core.Selenium.Base;
+using JDI.Core.Selenium.Elements.Base;
 using JDI.Core.Settings;
-using JDI.Web.Selenium.Base;
-using JDI.Web.Selenium.Elements.Base;
 using OpenQA.Selenium;
 
-namespace JDI.Web.Selenium.Elements.Common
+namespace JDI.Core.Selenium.Elements.Common
 {
     public class CheckBox : Clickable, ICheckBox
     {

@@ -1,10 +1,10 @@
 ﻿using System;
 using JDI.Core.Interfaces.Base;
-using JDI.Web.Selenium.Base;
+using JDI.Core.Selenium.Base;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 
-namespace JDI.Web.Selenium.Elements.Base
+namespace JDI.Core.Selenium.Elements.Base
 {
     public class Clickable : WebElement, IClickable
     {

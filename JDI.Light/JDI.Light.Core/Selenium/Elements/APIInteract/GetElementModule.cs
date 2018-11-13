@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using JDI.Core;
 using JDI.Core.Interfaces.Base;
+using JDI.Core.Selenium.Base;
+using JDI.Core.Selenium.DriverFactory;
+using JDI.Core.Selenium.Elements.Base;
 using JDI.Core.Settings;
-using JDI.Web.Selenium.Base;
-using JDI.Web.Selenium.DriverFactory;
-using JDI.Web.Selenium.Elements.Base;
-using JDI.Web.Settings;
 using OpenQA.Selenium;
 
-namespace JDI.Web.Selenium.Elements.APIInteract
+namespace JDI.Core.Selenium.Elements.APIInteract
 {
     public class GetElementModule : IAvatar
     {

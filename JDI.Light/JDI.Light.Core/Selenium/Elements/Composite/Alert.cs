@@ -1,7 +1,7 @@
-﻿using JDI.Web.Selenium.Base;
+﻿using JDI.Core.Selenium.Base;
 using OpenQA.Selenium;
 
-namespace JDI.Web.Selenium.Elements.Composite
+namespace JDI.Core.Selenium.Elements.Composite
 {
     public class Alert : Popup
     {

@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Linq;
 using System.Text.RegularExpressions;
-using JDI.Core;
 using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Complex;
+using JDI.Core.Selenium.Base;
 using JDI.Core.Settings;
 using JDI.Core.Utils;
-using JDI.Web.Selenium.Base;
-using JDI.Web.Settings;
 using OpenQA.Selenium;
 
-namespace JDI.Web.Selenium.Elements.Composite
+namespace JDI.Core.Selenium.Elements.Composite
 {
     public class WebPage : WebBaseElement, IPage
     {

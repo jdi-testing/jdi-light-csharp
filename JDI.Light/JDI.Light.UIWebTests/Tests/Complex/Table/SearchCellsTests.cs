@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using JDI.Core.Selenium.Elements.Complex.Table;
+using JDI.Core.Selenium.Elements.Complex.Table.Interfaces;
 using JDI.Matchers.NUnit;
 using JDI.UIWebTests.Tests.Complex.Table.Base;
-using JDI.Web.Selenium.Elements.Complex.Table;
-using JDI.Web.Selenium.Elements.Complex.Table.Interfaces;
 using NUnit.Framework;
 
 namespace JDI.UIWebTests.Tests.Complex.Table

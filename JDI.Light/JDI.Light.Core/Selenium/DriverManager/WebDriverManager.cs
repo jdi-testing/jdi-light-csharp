@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO;
-using JDI.Web.Selenium.DriverFactory;
+using JDI.Core.Selenium.DriverFactory;
 using WebDriverManager.DriverConfigs.Impl;
 using WebDriverManager.Helpers;
 
-namespace JDI.Web.Selenium.DriverManager
+namespace JDI.Core.Selenium.DriverManager
 {
     public class WebDriverManager
     {

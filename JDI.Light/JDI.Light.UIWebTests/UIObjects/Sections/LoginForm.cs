@@ -1,9 +1,8 @@
 ﻿using JDI.Core.Attributes;
 using JDI.Core.Interfaces.Base;
 using JDI.Core.Interfaces.Common;
+using JDI.Core.Selenium.Elements.Composite;
 using JDI.UIWebTests.Entities;
-using JDI.Web.Attributes;
-using JDI.Web.Selenium.Elements.Composite;
 
 namespace JDI.UIWebTests.UIObjects.Sections
 {

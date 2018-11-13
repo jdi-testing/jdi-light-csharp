@@ -7,19 +7,18 @@ using JDI.Core.Interfaces.Common;
 using JDI.Core.Interfaces.Complex;
 using JDI.Core.Interfaces.Settings;
 using JDI.Core.Logging;
-using JDI.Core.Settings;
-using JDI.Web.Selenium.DriverFactory;
-using JDI.Web.Selenium.Elements.Base;
-using JDI.Web.Selenium.Elements.Common;
-using JDI.Web.Selenium.Elements.Complex;
-using JDI.Web.Selenium.Elements.Complex.Table;
-using JDI.Web.Selenium.Elements.Complex.Table.Interfaces;
+using JDI.Core.Selenium.DriverFactory;
+using JDI.Core.Selenium.Elements.Base;
+using JDI.Core.Selenium.Elements.Common;
+using JDI.Core.Selenium.Elements.Complex;
+using JDI.Core.Selenium.Elements.Complex.Table;
+using JDI.Core.Selenium.Elements.Complex.Table.Interfaces;
 using OpenQA.Selenium;
-using Image = JDI.Web.Selenium.Elements.Common.Image;
+using Image = JDI.Core.Selenium.Elements.Common.Image;
 
 // ReSharper disable InconsistentNaming
 
-namespace JDI.Web.Settings
+namespace JDI.Core.Settings
 {
     public class WebSettings : JDISettings
     {

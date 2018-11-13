@@ -134,10 +134,6 @@
       <Project>{99EE5894-9F49-43E2-A129-7916D924D49C}</Project>
       <Name>JDI.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\JDI.Light.Web\JDI.Web.csproj">
-      <Project>{48A9B353-CB6B-4A15-84B4-B062B1C9BACC}</Project>
-      <Name>JDI.Web</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UIObjects\Forms\" />

@@ -1,6 +1,4 @@
-﻿using JDI.Core.Settings;
-
-namespace JDI.Web.Settings
+﻿namespace JDI.Core.Settings
 {
     public class WebTimeoutSettings : TimeoutSettings
     {

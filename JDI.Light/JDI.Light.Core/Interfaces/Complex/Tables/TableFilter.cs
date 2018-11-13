@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using JDI.Web.Selenium.Elements.Composite;
+using JDI.Core.Selenium.Elements.Composite;
 
 namespace JDI.Core.Interfaces.Complex.Tables
 {

@@ -1,5 +1,5 @@
-﻿using JDI.UIWebTests.Entities;
-using JDI.Web.Selenium.Elements.Composite;
+﻿using JDI.Core.Selenium.Elements.Composite;
+using JDI.UIWebTests.Entities;
 
 namespace JDI.UIWebTests.UIObjects.Pages
 {

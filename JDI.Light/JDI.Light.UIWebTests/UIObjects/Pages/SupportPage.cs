@@ -1,6 +1,6 @@
-﻿using JDI.Web.Attributes;
-using JDI.Web.Selenium.Elements.Complex.Table.Interfaces;
-using JDI.Web.Selenium.Elements.Composite;
+﻿using JDI.Core.Attributes;
+using JDI.Core.Selenium.Elements.Complex.Table.Interfaces;
+using JDI.Core.Selenium.Elements.Composite;
 
 namespace JDI.UIWebTests.UIObjects.Pages
 {

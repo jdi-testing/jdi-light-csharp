@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using JDI.Core.Interfaces.Common;
 using JDI.Core.Interfaces.Complex;
+using JDI.Core.Selenium.DriverFactory;
+using JDI.Core.Selenium.Elements.Base;
+using JDI.Core.Selenium.Elements.Common;
+using JDI.Core.Selenium.Elements.Complex;
 using JDI.Core.Settings;
 using JDI.Core.Utils;
-using JDI.Web.Selenium.DriverFactory;
-using JDI.Web.Selenium.Elements.Base;
-using JDI.Web.Selenium.Elements.Common;
-using JDI.Web.Selenium.Elements.Complex;
 using OpenQA.Selenium;
 
-namespace JDI.Web.Selenium.Elements.Composite
+namespace JDI.Core.Selenium.Elements.Composite
 {
     public class Search : TextField, ISearch
     {

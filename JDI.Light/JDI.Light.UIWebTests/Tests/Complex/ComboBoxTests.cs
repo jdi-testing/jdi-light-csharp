@@ -5,7 +5,6 @@ using JDI.Core.Settings;
 using JDI.Matchers.NUnit;
 using JDI.UIWebTests.Enums;
 using JDI.UIWebTests.UIObjects;
-using JDI.Web.Settings;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using Assert = JDI.Matchers.NUnit.Assert;

@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using JDI.Web.Selenium.Base;
-using JDI.Web.Selenium.DriverFactory;
-using JDI.Web.Selenium.Elements.Base;
-using JDI.Web.Selenium.Elements.Complex.Table.Interfaces;
+using JDI.Core.Selenium.Base;
+using JDI.Core.Selenium.DriverFactory;
+using JDI.Core.Selenium.Elements.Base;
+using JDI.Core.Selenium.Elements.Complex.Table.Interfaces;
 using OpenQA.Selenium;
 
-namespace JDI.Web.Selenium.Elements.Complex.Table
+namespace JDI.Core.Selenium.Elements.Complex.Table
 {
     public enum ElementIndexType
     {

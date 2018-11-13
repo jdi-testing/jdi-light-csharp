@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace JDI.Web.Selenium.Elements.Complex.Table
+namespace JDI.Core.Selenium.Elements.Complex.Table
 {
     public class TableSettings
     {

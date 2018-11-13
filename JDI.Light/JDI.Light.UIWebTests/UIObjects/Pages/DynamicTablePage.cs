@@ -1,4 +1,4 @@
-﻿using JDI.Web.Selenium.Elements.Composite;
+﻿using JDI.Core.Selenium.Elements.Composite;
 
 namespace JDI.UIWebTests.UIObjects.Pages
 {

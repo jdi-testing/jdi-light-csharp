@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using JDI.Core.Attributes;
 using JDI.Core.Interfaces.Common;
+using JDI.Core.Selenium.Elements.Common;
+using JDI.Core.Selenium.Elements.Composite;
+using JDI.Core.Settings;
 using JDI.UIWebTests.Entities;
-using JDI.Web.Attributes;
-using JDI.Web.Selenium.Elements.Common;
-using JDI.Web.Selenium.Elements.Composite;
-using JDI.Web.Settings;
 using OpenQA.Selenium;
 
 namespace JDI.UIWebTests.UIObjects.Sections

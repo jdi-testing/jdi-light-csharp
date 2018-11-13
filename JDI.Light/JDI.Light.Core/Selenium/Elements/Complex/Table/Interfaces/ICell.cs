@@ -1,9 +1,9 @@
 ﻿using System;
 using JDI.Core.Interfaces.Base;
-using JDI.Web.Selenium.Base;
-using JDI.Web.Selenium.Elements.Base;
+using JDI.Core.Selenium.Base;
+using JDI.Core.Selenium.Elements.Base;
 
-namespace JDI.Web.Selenium.Elements.Complex.Table.Interfaces
+namespace JDI.Core.Selenium.Elements.Complex.Table.Interfaces
 {
     public interface ICell : ISelect
     {

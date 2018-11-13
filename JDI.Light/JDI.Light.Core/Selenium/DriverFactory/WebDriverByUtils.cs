@@ -6,7 +6,7 @@ using JDI.Core.Extensions;
 using JDI.Core.Utils;
 using OpenQA.Selenium;
 
-namespace JDI.Web.Selenium.DriverFactory
+namespace JDI.Core.Selenium.DriverFactory
 {
     public static class WebDriverByUtils
     {

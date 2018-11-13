@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using JDI.Core.Extensions;
 
-namespace JDI.Web.Settings
+namespace JDI.Core.Settings
 {
     public static class MapInterfaceToElement
     {

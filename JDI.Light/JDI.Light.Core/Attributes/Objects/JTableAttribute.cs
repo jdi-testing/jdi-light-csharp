@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JDI.Web.Attributes.Objects
+namespace JDI.Core.Attributes.Objects
 {
     [AttributeUsage(AttributeTargets.All, Inherited = false)]
     public class JTableAttribute : Attribute

@@ -3,14 +3,14 @@ using System.Linq;
 using JDI.Core.Attributes;
 using JDI.Core.Interfaces.Base;
 using JDI.Core.Interfaces.Complex;
+using JDI.Core.Selenium.Base;
+using JDI.Core.Selenium.DriverFactory;
+using JDI.Core.Selenium.Elements.Base;
 using JDI.Core.Settings;
 using JDI.Core.Utils;
-using JDI.Web.Selenium.Base;
-using JDI.Web.Selenium.DriverFactory;
-using JDI.Web.Selenium.Elements.Base;
 using OpenQA.Selenium;
 
-namespace JDI.Web.Selenium.Elements.Composite
+namespace JDI.Core.Selenium.Elements.Composite
 {
     public class Pagination : WebBaseElement, IPagination
     {

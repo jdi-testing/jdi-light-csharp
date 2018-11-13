@@ -5,13 +5,13 @@ using JDI.Core.Attributes;
 using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Base;
 using JDI.Core.Interfaces.Complex;
+using JDI.Core.Selenium.Attributes;
+using JDI.Core.Selenium.Elements.Base;
 using JDI.Core.Settings;
 using JDI.Core.Utils;
-using JDI.Web.Selenium.Attributes;
-using JDI.Web.Selenium.Elements.Base;
 using OpenQA.Selenium;
 
-namespace JDI.Web.Selenium.Elements.Composite
+namespace JDI.Core.Selenium.Elements.Composite
 {
     public class Form : WebElement, IForm
     {

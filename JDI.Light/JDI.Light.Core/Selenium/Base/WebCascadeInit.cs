@@ -2,26 +2,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using JDI.Core.Attributes;
+using JDI.Core.Attributes.Objects;
 using JDI.Core.Base;
 using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Base;
 using JDI.Core.Interfaces.Complex;
+using JDI.Core.Selenium.DriverFactory;
+using JDI.Core.Selenium.Elements.APIInteract;
+using JDI.Core.Selenium.Elements.Base;
+using JDI.Core.Selenium.Elements.Complex;
+using JDI.Core.Selenium.Elements.Complex.Table;
+using JDI.Core.Selenium.Elements.Complex.Table.Interfaces;
+using JDI.Core.Selenium.Elements.Composite;
 using JDI.Core.Settings;
-using JDI.Web.Attributes;
-using JDI.Web.Attributes.Objects;
-using JDI.Web.Selenium.DriverFactory;
-using JDI.Web.Selenium.Elements.APIInteract;
-using JDI.Web.Selenium.Elements.Base;
-using JDI.Web.Selenium.Elements.Complex;
-using JDI.Web.Selenium.Elements.Complex.Table;
-using JDI.Web.Selenium.Elements.Complex.Table.Interfaces;
-using JDI.Web.Selenium.Elements.Composite;
-using JDI.Web.Settings;
 using OpenQA.Selenium;
 using RestSharp.Extensions;
 using EUtils = JDI.Core.Utils.ExceptionUtils;
 
-namespace JDI.Web.Selenium.Base
+namespace JDI.Core.Selenium.Base
 {
     public class WebCascadeInit : CascadeInit
     {

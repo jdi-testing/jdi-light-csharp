@@ -1,8 +1,8 @@
 ﻿using JDI.Core.Interfaces.Common;
-using JDI.Web.Selenium.Base;
+using JDI.Core.Selenium.Base;
 using OpenQA.Selenium;
 
-namespace JDI.Web.Selenium.Elements.Common
+namespace JDI.Core.Selenium.Elements.Common
 {
     public class DatePicker : TextField, IDatePicker
     {

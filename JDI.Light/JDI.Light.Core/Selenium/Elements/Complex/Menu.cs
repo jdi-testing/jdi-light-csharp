@@ -9,7 +9,7 @@ using JDI.Core.Settings;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 
-namespace JDI.Web.Selenium.Elements.Complex
+namespace JDI.Core.Selenium.Elements.Complex
 {
     public class Menu : Menu<IConvertible>, IMenu
     {

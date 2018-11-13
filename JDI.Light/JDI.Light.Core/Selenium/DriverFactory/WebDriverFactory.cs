@@ -5,16 +5,15 @@ using System.Linq;
 using System.Threading;
 using JDI.Core.Interfaces.Base;
 using JDI.Core.Interfaces.Settings;
+using JDI.Core.Selenium.Elements.Base;
 using JDI.Core.Settings;
-using JDI.Web.Selenium.Elements.Base;
-using JDI.Web.Settings;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Remote;
 
-namespace JDI.Web.Selenium.DriverFactory
+namespace JDI.Core.Selenium.DriverFactory
 {
     public enum RunTypes
     {

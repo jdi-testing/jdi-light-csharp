@@ -1,5 +1,5 @@
-﻿using JDI.UIWebTests.Tests.Complex.Table.Base;
-using JDI.Web.Selenium.Elements.Complex.Table;
+﻿using JDI.Core.Selenium.Elements.Complex.Table;
+using JDI.UIWebTests.Tests.Complex.Table.Base;
 using NUnit.Framework;
 using Assert = JDI.Matchers.NUnit.Assert;
 

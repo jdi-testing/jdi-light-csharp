@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using JDI.Core.Extensions;
+using JDI.Core.Selenium.Base;
 using JDI.Core.Settings;
-using JDI.Web.Selenium.Base;
 
-namespace JDI.Web.Selenium.Elements.WebActions
+namespace JDI.Core.Selenium.Elements.WebActions
 {
     public class ElementsActions
     {

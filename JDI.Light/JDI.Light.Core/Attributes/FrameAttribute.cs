@@ -2,7 +2,7 @@
 using System.Reflection;
 using OpenQA.Selenium;
 
-namespace JDI.Web.Attributes
+namespace JDI.Core.Attributes
 {
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
     public class FrameAttribute : Attribute

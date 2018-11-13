@@ -1,6 +1,6 @@
-﻿using JDI.Web.Selenium.Elements.Composite;
+﻿using JDI.Core.Selenium.Elements.Composite;
 
-namespace JDI.Web.Selenium.Base
+namespace JDI.Core.Selenium.Base
 {
     public class SiteInfo<TSite> where TSite : WebSite
     {

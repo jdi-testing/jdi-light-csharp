@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Base;
+using JDI.Core.Selenium.DriverFactory;
+using JDI.Core.Selenium.Elements.APIInteract;
 using JDI.Core.Settings;
-using JDI.Web.Selenium.DriverFactory;
-using JDI.Web.Selenium.Elements.APIInteract;
 using OpenQA.Selenium;
 
-namespace JDI.Web.Selenium.Elements.Complex
+namespace JDI.Core.Selenium.Elements.Complex
 {
     public abstract class MultiSelector<TEnum> : BaseSelector<TEnum>, IMultiSelector<TEnum>
         where TEnum : IConvertible

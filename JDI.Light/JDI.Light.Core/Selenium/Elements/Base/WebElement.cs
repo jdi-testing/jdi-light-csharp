@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Linq;
-using JDI.Core;
 using JDI.Core.Interfaces.Base;
 using JDI.Core.Logging;
+using JDI.Core.Selenium.Base;
 using JDI.Core.Settings;
 using JDI.Core.Utils;
-using JDI.Web.Selenium.Base;
-using JDI.Web.Settings;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 
-namespace JDI.Web.Selenium.Elements.Base
+namespace JDI.Core.Selenium.Elements.Base
 {
     public class WebElement : WebBaseElement, IElement
     {

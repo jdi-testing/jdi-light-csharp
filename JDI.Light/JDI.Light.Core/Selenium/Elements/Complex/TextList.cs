@@ -2,12 +2,12 @@
 using System.Linq;
 using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Complex;
+using JDI.Core.Selenium.Base;
+using JDI.Core.Selenium.Elements.Common;
 using JDI.Core.Settings;
-using JDI.Web.Selenium.Base;
-using JDI.Web.Selenium.Elements.Common;
 using OpenQA.Selenium;
 
-namespace JDI.Web.Selenium.Elements.Complex
+namespace JDI.Core.Selenium.Elements.Complex
 {
     public class TextList : WebBaseElement, ITextList
     {
