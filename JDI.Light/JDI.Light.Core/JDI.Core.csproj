@@ -66,6 +66,7 @@
     <Compile Include="Base\CascadeInit.cs" />
     <Compile Include="Extensions\CommonExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Matchers\BaseMatcher.cs" />
     <Compile Include="Matchers\ScreenshotState.cs" />
     <Compile Include="Selenium\Attributes\GetElementClass.cs" />
@@ -197,9 +198,6 @@
     <Compile Include="Interfaces\Settings\ITestRunner.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\JDILogger.cs" />
-    <Compile Include="Logging\LogAgregator.cs" />
-    <Compile Include="Logging\NUnitLogger.cs" />
-    <Compile Include="Logging\Log4Net.cs" />
     <Compile Include="Logging\LogLevels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">

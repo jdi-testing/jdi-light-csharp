@@ -76,18 +76,8 @@ namespace JDI.Core.Settings
             DriverFactory = driverFactory ?? new WebDriverFactory();
             Asserter = assert;
             Timeouts = timeouts ?? new WebTimeoutSettings();
-            Logger = logger ?? new LogAgregator(new NUnitLogger(), new Log4Net());
+            Logger = logger ?? new ConsoleLogger();
             MapInterfaceToElement.Init(DefaultInterfacesMap);
-        }
-
-        public static void InitNUnitDefault()
-        {
-            InitFromProperties();//TODO: Init assert correctly
-        }
-
-        public static void InitMsTestDefault()
-        {
-            InitFromProperties(new Log4Net());
         }
 
         public static void InitFromProperties(ILogger logger = null, IAssert assert = null,

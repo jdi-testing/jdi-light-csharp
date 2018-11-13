@@ -22,7 +22,7 @@ namespace JDI.Core.Matchers
         protected BaseMatcher()
         {
             // TODO: Fix it!
-            _logger = new NUnitLogger();
+            _logger = new ConsoleLogger();
         }
 
         protected abstract void ThrowFail(string message);

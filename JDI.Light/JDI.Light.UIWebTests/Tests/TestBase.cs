@@ -13,7 +13,7 @@ namespace JDI.UIWebTests.Tests
         [OneTimeSetUp]
         protected void SetUp()
         {
-            WebSettings.InitNUnitDefault();
+            WebSettings.InitFromProperties();
             var logger = JDISettings.Logger;
             logger.Info("Init test run...");
             WinProcUtils.KillAllRunWebDrivers();
