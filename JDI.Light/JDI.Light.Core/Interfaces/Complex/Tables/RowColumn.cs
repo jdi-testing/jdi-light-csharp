@@ -42,7 +42,6 @@ namespace JDI.Core.Interfaces.Complex.Tables
             return HasName() ? nameAction.Invoke(name) : numAction.Invoke(num);
         }
 
-
         public override string ToString()
         {
             return HasName() ? name : num + "";

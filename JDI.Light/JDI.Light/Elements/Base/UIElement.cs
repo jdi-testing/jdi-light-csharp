@@ -134,6 +134,7 @@ namespace JDI.Light.Elements.Base
         {
             return _webElement.GetCssValue(propertyName);
         }
+
         #endregion
     }
 }

@@ -13,8 +13,7 @@ namespace JDI.Core.Selenium.Elements.Complex.Table
     public class Cell : SelectableElement, ICell
     {
         private readonly By _cellLocatorTemplate = By.XPath(".//tr[{1}]/td[{0}]");
-
-
+        
         public Cell(int columnNum, int rowNum, string colName, string rowName,
             By cellLocatorTemplate, Table table, int columnIndex = -1, int rowIndex = -1, IWebElement webElement = null)
         {

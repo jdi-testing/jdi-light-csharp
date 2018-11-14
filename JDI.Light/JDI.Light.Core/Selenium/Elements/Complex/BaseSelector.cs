@@ -169,8 +169,7 @@ namespace JDI.Core.Selenium.Elements.Complex
         }
 
         public TextList AllLabels => _allLabels?.Get(new TextList(), WebAvatar);
-
-
+        
         public virtual Action<BaseSelector<TEnum>, string> SetValueAction { get; set; } =
             (s, value) => s.SelectNameAction(s, value);
 

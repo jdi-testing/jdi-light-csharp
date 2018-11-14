@@ -42,8 +42,7 @@ namespace JDI.Core.Selenium.Elements.Complex
                     ).ToList();
             }
         }
-
-
+        
         public IEnumerator<T> GetEnumerator()
         {
             return ListOfElements.GetEnumerator();

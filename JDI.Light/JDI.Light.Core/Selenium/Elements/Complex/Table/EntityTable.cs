@@ -101,8 +101,7 @@ namespace JDI.Core.Selenium.Elements.Complex.Table
         {
             All.CopyTo(array, arrayIndex);
         }
-
-
+        
         public bool Remove(TEntity item)
         {
             throw new Exception("Not applicable");

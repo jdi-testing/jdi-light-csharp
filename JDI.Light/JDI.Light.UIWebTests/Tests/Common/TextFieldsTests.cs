@@ -28,16 +28,14 @@ namespace JDI.UIWebTests.Tests.Common
             JDISettings.Logger.Info("Setup method finished");
             JDISettings.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
-
-
+        
         [Test]
         public void InputTest()
         {
             TestSite.ContactFormPage.NameField.Input(TO_ADD_TEXT);
             new Check().AreEquals(TestSite.ContactFormPage.NameField.GetText, DEFAULT_TEXT + TO_ADD_TEXT);
         }
-
-
+        
         [Test]
         public void SendKeyTest()
         {
@@ -65,14 +63,5 @@ namespace JDI.UIWebTests.Tests.Common
             foreach (var letter in TO_ADD_TEXT) TestSite.ContactFormPage.NameField.SendKeys(letter.ToString());
             new Check().AreEquals(TestSite.ContactFormPage.NameField.GetText, DEFAULT_TEXT + TO_ADD_TEXT);
         }
-
-        //TO_DO
-        /*
-        [Test]
-        public void FocusTest()
-        {
-
-        }
-        */
     }
 }

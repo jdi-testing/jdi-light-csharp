@@ -185,7 +185,6 @@ namespace JDI.Core.Selenium.Elements.Composite
                 el => WebDriver.Navigate().Back());
         }
 
-
         /**
          * Go forward to next page
          */

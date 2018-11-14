@@ -31,7 +31,6 @@ namespace JDI.Core.Selenium.Elements.Complex
         protected GetElementType _elementByName;
         protected GetElementType _expander;
 
-
         public Action<Dropdown<TEnum>, string> ExpandNameAction = (d, name) =>
         {
             //WebAvatar.context.clear();

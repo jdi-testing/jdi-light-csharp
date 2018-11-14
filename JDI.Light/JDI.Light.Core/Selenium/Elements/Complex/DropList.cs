@@ -66,8 +66,7 @@ namespace JDI.Core.Selenium.Elements.Complex
             WebAvatar = {DriverName = WebAvatar.DriverName},
             Parent = Parent
         }.WebElement;
-
-
+        
         public new void WaitDisplayed()
         {
             Button.WaitDisplayed();
