@@ -25,8 +25,7 @@ namespace JDI.Core.Interfaces.Complex
         //TODO[JDIAction]
         //TODO Fill() was default
         void Fill(Dictionary<string, string> map);
-
-
+        
         /**
          * @param entity Specify entity
          *               Verify that form filled correctly. If not returns list of keys where verification fails
@@ -77,8 +76,7 @@ namespace JDI.Core.Interfaces.Complex
          */
         //TODO[JDIAction]
         void Submit(string text, string buttonName);
-
-
+        
         /**
          * @param text Specify text
          *             Fill first setable field with value and click on Button “login” or ”loginButton” <br>

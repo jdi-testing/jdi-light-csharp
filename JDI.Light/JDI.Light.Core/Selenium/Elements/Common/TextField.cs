@@ -12,8 +12,7 @@ namespace JDI.Core.Selenium.Elements.Common
 
         protected Func<WebBaseElement, string> GetTextFunc =
             el => el.WebAvatar.FindImmediately(() => el.WebElement.GetAttribute("value"), "");
-
-
+        
         protected Action<WebBaseElement, string> InputAction =
             (el, text) => el.WebElement.SendKeys(text);
 

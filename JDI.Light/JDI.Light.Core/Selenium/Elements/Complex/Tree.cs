@@ -57,8 +57,7 @@ namespace JDI.Core.Selenium.Elements.Complex
             Separator = separator;
             return this;
         }
-
-
+        
         private IList<string> SplitToList(string[] str, string separator)
         {
             return (str.Length == 1

@@ -7,7 +7,7 @@ namespace JDI.UIWebTests.Tests.Composite
 {
     public class PaginationTests
     {
-        private readonly Pagination simplePagePaginator = TestSite.SimpleTablePage.Paginator;
+        private readonly Pagination _simplePagePaginator = TestSite.SimpleTablePage.Paginator;
 
         [SetUp]
         public void SetUp()
@@ -28,31 +28,28 @@ namespace JDI.UIWebTests.Tests.Composite
         [Test]
         public void NextTest()
         {
-            simplePagePaginator.Next();
+            _simplePagePaginator.Next();
             CheckPageOpened(7);
         }
-
-
+        
         [Test]
         public void PrevTest()
         {
-            simplePagePaginator.Previous();
+            _simplePagePaginator.Previous();
             CheckPageOpened(5);
         }
-
-
+        
         [Test]
         public void FirstTest()
         {
-            simplePagePaginator.First();
+            _simplePagePaginator.First();
             CheckPageOpened(1);
         }
-
-
+        
         [Test]
         public void LastTest()
         {
-            simplePagePaginator.Last();
+            _simplePagePaginator.Last();
             CheckPageOpened(2);
         }
     }

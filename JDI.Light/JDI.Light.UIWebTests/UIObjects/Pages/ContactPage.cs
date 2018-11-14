@@ -35,8 +35,7 @@ namespace JDI.UIWebTests.UIObjects.Pages
             FillForm(firstName, secondName, description);
             ContactSubmit.Click();
         }
-
-
+        
         private void FillForm(string firstName, string secondName, string description)
         {
             NameField.NewInput(firstName);

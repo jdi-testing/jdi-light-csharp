@@ -70,7 +70,6 @@ namespace JDI.UIWebTests.Tests.Composite
             new Check().IsTrue(_contactForm.Verify(Contact.DEFAULT_CONTACT).Count == 0);
         }
 
-
         [Test]
         public void checkTest()
         {

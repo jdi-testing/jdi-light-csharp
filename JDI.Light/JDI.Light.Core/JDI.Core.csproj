@@ -180,12 +180,6 @@
     <Compile Include="Interfaces\Complex\ISelector.cs" />
     <Compile Include="Interfaces\Complex\ITabs.cs" />
     <Compile Include="Interfaces\Complex\ITextList.cs" />
-    <Compile Include="Interfaces\Complex\Tables\Column.cs" />
-    <Compile Include="Interfaces\Complex\Tables\ElementIndexType.cs" />
-    <Compile Include="Interfaces\Complex\Tables\ICell.cs" />
-    <Compile Include="Interfaces\Complex\Tables\IColumn.cs" />
-    <Compile Include="Interfaces\Complex\Tables\Row.cs" />
-    <Compile Include="Interfaces\Complex\Tables\RowColumn.cs" />
     <Compile Include="Interfaces\Complex\Tables\TableFilter.cs" />
     <Compile Include="Interfaces\Complex\Tables\WithValue.cs" />
     <Compile Include="Interfaces\IComplex.cs" />
