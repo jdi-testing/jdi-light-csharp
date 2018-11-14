@@ -41,7 +41,7 @@ namespace JDI.Core.Selenium.Elements.APIInteract
             get
             {
                 JDISettings.Logger.Debug($"Get Web Element: {Element}");
-                var element = Timer.GetResultByCondition(GetWebElemetAction, el => el != null);
+                var element = Timer.GetResultByCondition(GetWebElementAction, el => el != null);
                 JDISettings.Logger.Debug("OneElement found");
                 return element;
             }
@@ -53,7 +53,7 @@ namespace JDI.Core.Selenium.Elements.APIInteract
             get
             {
                 JDISettings.Logger.Debug($"Get Web Elements: {Element}");
-                var elements = GetWebElemetsAction();
+                var elements = GetWebElementsAction();
                 JDISettings.Logger.Debug($"Found {elements.Count} elements");
                 return elements;
             }
@@ -105,12 +105,12 @@ namespace JDI.Core.Selenium.Elements.APIInteract
             return result;
         }
 
-        private IWebElement GetWebElemetAction()
+        private IWebElement GetWebElementAction()
         {
             if (_webElement != null)
                 return _webElement;
             var timeout = JDISettings.Timeouts.CurrentTimeoutSec;
-            var result = GetWebElemetsAction();
+            var result = GetWebElementsAction();
             switch (result.Count)
             {
                 case 0:
@@ -125,7 +125,7 @@ namespace JDI.Core.Selenium.Elements.APIInteract
             }
         }
 
-        private List<IWebElement> GetWebElemetsAction()
+        private List<IWebElement> GetWebElementsAction()
         {
             if (_webElements != null)
                 return _webElements;

@@ -19,25 +19,25 @@ namespace JDI.UIWebTests.Tests.Complex.Table
         [Test]
         public void GetCellParamsIntIntTest()
         {
-            Assert.AreEquals(Table.Cell(Column.column(2), Row.row(4)).GetText, _cellValue);
+            Assert.AreEquals(Table.Cell(Column.column(2), Row.CreateRow(4)).GetText, _cellValue);
         }
 
         [Test]
         public void GetCellParamsIntStringTest()
         {
-            Assert.AreEquals(Table.Cell(Column.column(2), Row.row("4")).GetText, _cellValue);
+            Assert.AreEquals(Table.Cell(Column.column(2), Row.CreateRow("4")).GetText, _cellValue);
         }
 
         [Test]
         public void GetCellParamsStringIntTest()
         {
-            Assert.AreEquals(Table.Cell(Column.column("Now"), Row.row(4)).GetText, _cellValue);
+            Assert.AreEquals(Table.Cell(Column.column("Now"), Row.CreateRow(4)).GetText, _cellValue);
         }
 
         [Test]
         public void GetCellParamsStringStringTest()
         {
-            Assert.AreEquals(Table.Cell(Column.column("Now"), Row.row("4")).GetText, _cellValue);
+            Assert.AreEquals(Table.Cell(Column.column("Now"), Row.CreateRow("4")).GetText, _cellValue);
         }
 
         [Test]

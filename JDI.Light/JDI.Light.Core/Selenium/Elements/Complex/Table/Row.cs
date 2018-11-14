@@ -8,19 +8,19 @@ namespace JDI.Core.Selenium.Elements.Complex.Table
         {
         }
 
-        public static Row row(int num)
+        public static Row CreateRow(int num)
         {
             return new Row(num);
         }
 
-        public static Row row(string name)
+        public static Row CreateRow(string name)
         {
             return new Row(name: name);
         }
 
-        public static Row row(Enum name)
+        public static Row CreateRow(Enum name)
         {
-            return row(name.ToString());
+            return CreateRow(name.ToString());
         }
     }
 }

@@ -43,7 +43,7 @@ namespace JDI.UIWebTests.Tests.Complex.Table
         [Test]
         public void WaitExpectedRowsValueTest()
         {
-            new Check("Find value").IsTrue(Table.WaitValue("Cucumber, Jbehave, Thucydides, SpecFlow", Row.row(6)));
+            new Check("Find value").IsTrue(Table.WaitValue("Cucumber, Jbehave, Thucydides, SpecFlow", Row.CreateRow(6)));
         }
 
         [Test]
@@ -80,7 +80,7 @@ namespace JDI.UIWebTests.Tests.Complex.Table
         public void WaitUnexpectedRowsValueTest()
         {
             new Check("Do not find value").IsFalse(
-                Table.WaitValue("Cucumber, Jbehave, Thucydides, SpecFlow Unexepected", Row.row(6)));
+                Table.WaitValue("Cucumber, Jbehave, Thucydides, SpecFlow Unexepected", Row.CreateRow(6)));
         }
     }
 }

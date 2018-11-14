@@ -18,18 +18,6 @@ namespace JDI.Core.Selenium.Base
 {
     public class WebBaseElement : IBaseElement
     {
-        public static Action<string, Action<string>> DoActionRule = (text, action) =>
-        {
-            if (text == null) return;
-            action.Invoke(text);
-        };
-
-        public static Action<string, Action<string>> SetValueEmptyAction = (text, action) =>
-        {
-            if (string.IsNullOrEmpty(text)) return;
-            action.Invoke(text.Equals("#CLEAR#") ? "" : text);
-        };
-
         private readonly IWebElement _webElement;
         private string _typeName;
         private string _varName;
@@ -57,11 +45,6 @@ namespace JDI.Core.Selenium.Base
 
         public By Locator => WebAvatar.ByLocator;
         public By FrameLocator => WebAvatar.FrameLocator;
-
-        public static ActionScenarios ActionScenarios
-        {
-            set => ActionInvoker.ActionScenarios = value;
-        }
 
         public GetElementModule WebAvatar
         {
@@ -140,20 +123,6 @@ namespace JDI.Core.Selenium.Base
         public void RestoreWaitTimeout()
         {
             SetWaitTimeout(JDISettings.Timeouts.WaitElementSec);
-        }
-
-        public void DoAction(string actionName, Action action, LogLevels logLevels = LogLevels.Info)
-        {
-            LogAction(actionName, logLevels);
-            action.Invoke();
-        }
-
-        public void DoActionResult<TResult>(string actionName, Func<TResult> action,
-            Func<TResult, string> logResult = null, LogLevels logLevels = LogLevels.Info)
-        {
-            LogAction(actionName, logLevels);
-            var res = action.Invoke();
-            logResult?.Invoke(res);
         }
 
         public void LogAction(string actionName, LogLevels level)

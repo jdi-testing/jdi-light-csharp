@@ -264,12 +264,12 @@ namespace JDI.Core.Selenium.Elements.Complex.Table
 
         public ICell Cell(string columnName, string rowName)
         {
-            return Cell(Complex.Table.Column.column(columnName), Complex.Table.Row.row(rowName));
+            return Cell(Complex.Table.Column.column(columnName), Complex.Table.Row.CreateRow(rowName));
         }
 
         public ICell Cell(int columnIndex, int rowIndex)
         {
-            return Cell(Complex.Table.Column.column(columnIndex), Complex.Table.Row.row(rowIndex));
+            return Cell(Complex.Table.Column.column(columnIndex), Complex.Table.Row.CreateRow(rowIndex));
         }
 
         public IList<ICell> Cells(string value)
@@ -331,7 +331,7 @@ namespace JDI.Core.Selenium.Elements.Complex.Table
                 foreach (var rowNameValue in rowNameValues)
                 {
                     if (!rowNameValue.Matches("[^=]+=[^=]*"))
-                        throw JDISettings.Exception($"Wrong searchCritaria for Cells: {rowNameValue}");
+                        throw JDISettings.Exception($"Wrong searchCriteria for Cells: {rowNameValue}");
                     var splitted = rowNameValue.Split(Convert.ToChar("="));
                     var rowName = splitted[0];
                     var rowValue = splitted[1];

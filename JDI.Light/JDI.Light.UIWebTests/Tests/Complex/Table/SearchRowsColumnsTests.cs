@@ -44,7 +44,7 @@ namespace JDI.UIWebTests.Tests.Complex.Table
         [Test]
         public void ColumnByCriteriaIntTest()
         {
-            var column = Table.Column("TestNG, JUnit, Custom", Row.row(3))
+            var column = Table.Column("TestNG, JUnit, Custom", Row.CreateRow(3))
                 .Select(pair => $"{pair.Key}:{pair.Value.GetText}");
             new Check().AreEquals(column.Print(), _expectedColumn2);
         }
@@ -52,7 +52,7 @@ namespace JDI.UIWebTests.Tests.Complex.Table
         [Test]
         public void ColumnByCriteriaStringTest()
         {
-            var column = Table.Column("TestNG, JUnit, Custom", Row.row("3"))
+            var column = Table.Column("TestNG, JUnit, Custom", Row.CreateRow("3"))
                 .Select(pair => $"{pair.Key}:{pair.Value.GetText}");
             new Check().AreEquals(column.Print(), _expectedColumn2);
         }

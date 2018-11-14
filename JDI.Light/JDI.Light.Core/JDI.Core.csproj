@@ -80,7 +80,6 @@
     <Compile Include="Selenium\DriverFactory\WinProcUtils.cs" />
     <Compile Include="Selenium\DriverManager\WebDriverManager.cs" />
     <Compile Include="Selenium\DriverManager\WebDriverManagerHelper.cs" />
-    <Compile Include="Selenium\Elements\APIInteract\ContextType.cs" />
     <Compile Include="Selenium\Elements\APIInteract\GetElementModule.cs" />
     <Compile Include="Selenium\Elements\Base\Clickable.cs" />
     <Compile Include="Selenium\Elements\Base\ClickableText.cs" />
@@ -111,8 +110,6 @@
     <Compile Include="Selenium\Elements\Complex\Table\Column.cs" />
     <Compile Include="Selenium\Elements\Complex\Table\Columns.cs" />
     <Compile Include="Selenium\Elements\Complex\Table\DynamicTable.cs" />
-    <Compile Include="Selenium\Elements\Complex\Table\EntityTable.cs" />
-    <Compile Include="Selenium\Elements\Complex\Table\FilterDsl.cs" />
     <Compile Include="Selenium\Elements\Complex\Table\Interfaces\ICell.cs" />
     <Compile Include="Selenium\Elements\Complex\Table\Interfaces\ITable.cs" />
     <Compile Include="Selenium\Elements\Complex\Table\Interfaces\ITableLine.cs" />

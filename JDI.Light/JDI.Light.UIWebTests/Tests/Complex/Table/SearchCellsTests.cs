@@ -54,13 +54,13 @@ namespace JDI.UIWebTests.Tests.Complex.Table
         [Test]
         public void CellInRowNameEqualsTest()
         {
-            CheckCell(Table.Cell("MSTest, NUnit, Epam", Row.row("2")));
+            CheckCell(Table.Cell("MSTest, NUnit, Epam", Row.CreateRow("2")));
         }
 
         [Test]
         public void CellInRowNumEqualsTest()
         {
-            CheckCell(Table.Cell("MSTest, NUnit, Epam", Row.row(2)));
+            CheckCell(Table.Cell("MSTest, NUnit, Epam", Row.CreateRow(2)));
         }
 
         [Test]
@@ -90,7 +90,7 @@ namespace JDI.UIWebTests.Tests.Complex.Table
         [Test]
         public void CellsMatchInRowNameEqualsTest()
         {
-            var cells = Table.CellsMatch(".*MSTest, NUnit, Epam", Row.row("2"));
+            var cells = Table.CellsMatch(".*MSTest, NUnit, Epam", Row.CreateRow("2"));
             new Check().AreEquals(cells.Count, 1);
             CheckCell(cells[0]);
         }
@@ -98,7 +98,7 @@ namespace JDI.UIWebTests.Tests.Complex.Table
         [Test]
         public void CellsMatchInRowNumEqualsTest()
         {
-            var cells = Table.CellsMatch(".*MSTest, NUnit, Epam", Row.row(2));
+            var cells = Table.CellsMatch(".*MSTest, NUnit, Epam", Row.CreateRow(2));
             new Check().AreEquals(cells.Count, 1);
             CheckCell(cells[0]);
         }

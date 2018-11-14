@@ -20,9 +20,6 @@ namespace JDI.Core.Selenium.Elements.Composite
 
         public By LocatorTemplate;
 
-        protected Action<Form, string, ISetValue> SetFieldValueAction =
-            (f, text, element) => element.Value = text;
-
         protected Func<Form, string> GetValueAction =>
             f => this.GetFields(typeof(IHasValue)).Select(field => ((IHasValue) field.GetValue(this)).Value).Print();
 
@@ -48,7 +45,7 @@ namespace JDI.Core.Selenium.Elements.Composite
                     GetElementClass.NamesEqual(pair.Key, NameAttribute.GetElementName(element))).Value;
                 if (fieldValue == null) return;
                 var setValueElement = (ISetValue) element.GetValue(this);
-                DoActionRule(fieldValue, val => SetFieldValueAction(this, val, setValueElement));
+                setValueElement.Value = fieldValue;
             });
         }
 
@@ -62,7 +59,7 @@ namespace JDI.Core.Selenium.Elements.Composite
         {
             var field = this.GetFields(typeof(ISetValue))[0];
             var setValueElement = (ISetValue) field.GetValue(this);
-            DoActionRule(text, val => SetFieldValueAction(this, val, setValueElement));
+            setValueElement.Value = text;
         }
 
         public void Submit(string text)
@@ -141,12 +138,11 @@ namespace JDI.Core.Selenium.Elements.Composite
                     GetElementClass.NamesEqual(pair.Key, NameAttribute.GetElementName(field))).Value;
                 if (fieldValue == null) return;
                 var valueField = (IHasValue) field.GetValue(this);
-                DoActionRule(fieldValue, expected =>
+                var actual = GetFieldValueAction(this, valueField).Trim();
+                if (!actual.Equals(fieldValue))
                 {
-                    var actual = GetFieldValueAction(this, valueField).Trim();
-                    if (actual.Equals(expected)) return;
-                    compareFalse.Add($"Field '{field.Name}' (Actual: '{actual}' <> Expected: '{expected}')");
-                });
+                    compareFalse.Add($"Field '{field.Name}' (Actual: '{actual}' <> Expected: '{fieldValue}')");
+                }
             });
             return compareFalse;
         }
