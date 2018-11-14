@@ -58,7 +58,7 @@ namespace JDI.Core.Selenium.Base
         public By Locator => WebAvatar.ByLocator;
         public By FrameLocator => WebAvatar.FrameLocator;
 
-        public static ActionScenarios ActionScenrios
+        public static ActionScenarios ActionScenarios
         {
             set => ActionInvoker.ActionScenarios = value;
         }
