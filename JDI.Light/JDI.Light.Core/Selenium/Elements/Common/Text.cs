@@ -31,6 +31,7 @@ namespace JDI.Core.Selenium.Elements.Common
         public string GetText => Actions.GetText(GetTextAction);
 
         public string Value => Actions.GetValue(GetValueFunc);
+
         public string GetValue()
         {
             return Value;

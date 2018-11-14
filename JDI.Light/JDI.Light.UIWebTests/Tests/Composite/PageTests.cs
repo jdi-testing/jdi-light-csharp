@@ -28,7 +28,7 @@ namespace JDI.UIWebTests.Tests.Composite
             new Check().AreEquals(TestSite.ContactFormPage.Result.GetText, "");
             TestSite.ContactFormPage.CheckOpened();
         }
-        
+
         [Test]
         public void BackTest()
         {

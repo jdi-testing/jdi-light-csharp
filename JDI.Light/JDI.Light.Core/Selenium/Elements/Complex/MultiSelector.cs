@@ -48,7 +48,7 @@ namespace JDI.Core.Selenium.Elements.Complex
 
         protected Action<MultiSelector<TEnum>, IList<int>> SelectListIndexesAction =
             (m, nums) => nums.ForEach(num => m.SelectNumAction(m, num));
-        
+
         protected Action<MultiSelector<TEnum>, IList<string>> SelectListNamesAction =
             (m, names) => names.ForEach(name => m.SelectNameAction(m, name));
 
@@ -176,6 +176,11 @@ namespace JDI.Core.Selenium.Elements.Complex
             Clear();
         }
 
+        public string GetValue()
+        {
+            return Value;
+        }
+
         private void ClearElements(IList<IWebElement> els)
         {
             els.Where(el => SelectedNameAction(this, el.Text)).ForEach(el => el.Click());
@@ -216,11 +221,6 @@ namespace JDI.Core.Selenium.Elements.Complex
         {
             _separator = separator;
             return this;
-        }
-
-        public string GetValue()
-        {
-            return Value;
         }
     }
 }

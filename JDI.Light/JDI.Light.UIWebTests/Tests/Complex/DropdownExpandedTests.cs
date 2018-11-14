@@ -36,14 +36,14 @@ namespace JDI.UIWebTests.Tests.Complex
             _colors().Select("Blue");
             CommonActionsData.CheckAction("Colors: value changed to Blue");
         }
-        
+
         [Test]
         public void SelectIndexTest()
         {
             _colors().Select(4);
             CommonActionsData.CheckAction("Colors: value changed to Blue");
         }
-        
+
         [Test]
         public void SelectEnumTest()
         {

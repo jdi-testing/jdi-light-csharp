@@ -133,7 +133,8 @@ namespace JDI.UIWebTests.Tests.Complex
         [Test]
         public void GetValueTest()
         {
-            CommonActionsData.CheckActionThrowError(() => OddNumbersControl.GetValue(), CommonActionsData.NoElementsMessage);
+            CommonActionsData.CheckActionThrowError(() => OddNumbersControl.GetValue(),
+                CommonActionsData.NoElementsMessage);
         }
     }
 }

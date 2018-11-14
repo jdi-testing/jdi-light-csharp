@@ -56,6 +56,7 @@ namespace JDI.Core.Selenium.Elements.Complex
         }
 
         public string Value => Texts.Print();
+
         public string GetValue()
         {
             return Value;

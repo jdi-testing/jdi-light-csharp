@@ -234,7 +234,7 @@ namespace JDI.Core.Selenium.Elements.Complex.Table
         {
             return Rows.GetRowValue(rowName);
         }
-        
+
         public IList<string> Footer
         {
             get => new List<string>(_footer);
@@ -276,7 +276,7 @@ namespace JDI.Core.Selenium.Elements.Complex.Table
         {
             return new List<ICell>(GetCells().Where(cell => cell.Value.Equals(value)));
         }
-        
+
         public ICell Cell(string value)
         {
             return Rows.Get().Select(row => row.Value.FirstOrDefault(pair => pair.Value.GetText.Equals(value)).Value)
@@ -348,7 +348,7 @@ namespace JDI.Core.Selenium.Elements.Complex.Table
 
             return result;
         }
-        
+
         public bool WaitValue(string value, Row row)
         {
             return Timer.Wait(() => Column(value, row) != null);

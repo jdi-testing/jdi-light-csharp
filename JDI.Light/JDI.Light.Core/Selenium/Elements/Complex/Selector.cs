@@ -81,6 +81,11 @@ namespace JDI.Core.Selenium.Elements.Complex
             return Actions.SelectedIndex(s => SelectedIndexAction(this));
         }
 
+        public string GetValue()
+        {
+            return Value;
+        }
+
         public string Selected(IList<IWebElement> els)
         {
             var element = els.FirstOrDefault(el => SelectedElementAction(this, el));
@@ -97,11 +102,6 @@ namespace JDI.Core.Selenium.Elements.Complex
                 throw JDISettings.Exception(
                     "No elements selected. Override getSelectedAction or place locator to <select> tag");
             return num;
-        }
-
-        public string GetValue()
-        {
-            return Value;
         }
     }
 }
