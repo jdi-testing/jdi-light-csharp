@@ -41,8 +41,7 @@ namespace JDI.Core.Interfaces.Complex
         //TODO[JDIAction]
         //TODO Verify was default
         IList<string> Verify(Dictionary<string, string> map);
-
-
+        
         /**
          * @param entity Specify entity
          *               Verify that form filled correctly. If not returns list of keys where verification fails
