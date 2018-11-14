@@ -2,13 +2,13 @@
   branches:
     only:
     - nuget
-  
+
   image: Visual Studio 2017
-  
+
   before_build:
     - nuget restore JDI.Light/JDI.Light.sln
 
-  build_script: 
+  build_script:
     - msbuild JDI.Light/JDI.Light.sln /p:Configuration=Release /t:Rebuild
 
   after_build:
@@ -20,31 +20,31 @@
 
   deploy:
     provider: NuGet
-    server: 
+    server:
     api_key:
       secure: <ADD_HERE_BEFORE_PUBLISH>
     skip_symbols: false
     artifact: nupkg
- 
+
   test:
     assemblies:
       - '**\*Tests.dll'
-        
+
 -
   branches:
     except:
     - nuget
-  
+
   image: Visual Studio 2017
-  
+
   environment:
     COVERALLS_REPO_TOKEN:
       secure: Lc7yX8JRxQdRZ8yYUPMuxrp22UkAIXLlkQK6H890Sh1GASFiKG4GkjwqbM9zy9O6
-    
+
   before_build:
     - nuget restore JDI.Light/JDI.Light.sln
 
-  build_script: 
+  build_script:
     - msbuild JDI.Light/JDI.Light.sln /p:Configuration=Release /t:Rebuild
 
   test_script:
