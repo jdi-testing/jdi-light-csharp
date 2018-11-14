@@ -48,8 +48,7 @@ namespace JDI.Core.Selenium.Elements.Complex
 
         protected Action<MultiSelector<TEnum>, IList<int>> SelectListIndexesAction =
             (m, nums) => nums.ForEach(num => m.SelectNumAction(m, num));
-
-
+        
         protected Action<MultiSelector<TEnum>, IList<string>> SelectListNamesAction =
             (m, names) => names.ForEach(name => m.SelectNameAction(m, name));
 
@@ -212,7 +211,6 @@ namespace JDI.Core.Selenium.Elements.Complex
                 throw JDISettings.Exception($"Can't get option with num '{num}'. Found only {els.Count} options");
             return els[num - 1];
         }
-
 
         public IMultiSelector<TEnum> SetValuesSeparator(string separator)
         {

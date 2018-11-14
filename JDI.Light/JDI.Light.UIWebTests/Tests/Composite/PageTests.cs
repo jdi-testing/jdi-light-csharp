@@ -28,8 +28,7 @@ namespace JDI.UIWebTests.Tests.Composite
             new Check().AreEquals(TestSite.ContactFormPage.Result.GetText, "");
             TestSite.ContactFormPage.CheckOpened();
         }
-
-
+        
         [Test]
         public void BackTest()
         {
@@ -38,7 +37,6 @@ namespace JDI.UIWebTests.Tests.Composite
             TestSite.HomePage.Back();
             TestSite.ContactFormPage.CheckOpened();
         }
-
 
         [Test]
         public void ForwardTest()
@@ -60,7 +58,6 @@ namespace JDI.UIWebTests.Tests.Composite
             new Check().AreEquals(TestSite.HomePage.WebDriver.Manage().Cookies.GetCookieNamed(cookie.Name).Value,
                 cookie.Value);
         }
-
 
         [Test]
         public void ClearCacheTest()

@@ -184,10 +184,6 @@
     <Compile Include="Interfaces\Complex\Tables\ElementIndexType.cs" />
     <Compile Include="Interfaces\Complex\Tables\ICell.cs" />
     <Compile Include="Interfaces\Complex\Tables\IColumn.cs" />
-    <Compile Include="Interfaces\Complex\Tables\IEntityTable.cs" />
-    <Compile Include="Interfaces\Complex\Tables\IRow.cs" />
-    <Compile Include="Interfaces\Complex\Tables\ITable.cs" />
-    <Compile Include="Interfaces\Complex\Tables\ITableLine.cs" />
     <Compile Include="Interfaces\Complex\Tables\Row.cs" />
     <Compile Include="Interfaces\Complex\Tables\RowColumn.cs" />
     <Compile Include="Interfaces\Complex\Tables\TableFilter.cs" />
