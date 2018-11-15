@@ -64,7 +64,7 @@ namespace JDI.Core.Selenium.Elements.Complex
                 if (!ms.HasLocator && ms.AllLabels == null)
                     throw JDISettings.Exception("Can't get option. No optionsNamesLocator and allLabelsLocator found");
                 if (ms.Locator.ToString().Contains("{0}"))
-                    return new GetElementModule(ms, ms.Locator.FillByTemplate(name))
+                    return new WebAvatar(ms, ms.Locator.FillByTemplate(name))
                         .WebElements[0];
                 if (ms.AllLabels != null)
                     return ms.GetWebElement(AllLabels.WebElements, name);

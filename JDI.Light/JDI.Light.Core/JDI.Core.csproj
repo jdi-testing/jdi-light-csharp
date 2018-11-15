@@ -78,7 +78,7 @@
     <Compile Include="Selenium\DriverFactory\WinProcUtils.cs" />
     <Compile Include="Selenium\DriverManager\WebDriverManager.cs" />
     <Compile Include="Selenium\DriverManager\WebDriverManagerHelper.cs" />
-    <Compile Include="Selenium\Elements\APIInteract\GetElementModule.cs" />
+    <Compile Include="Selenium\Elements\APIInteract\WebAvatar.cs" />
     <Compile Include="Selenium\Elements\Base\Clickable.cs" />
     <Compile Include="Selenium\Elements\Base\ClickableText.cs" />
     <Compile Include="Selenium\Elements\Base\SelectableElement.cs" />

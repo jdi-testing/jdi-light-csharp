@@ -160,7 +160,7 @@ namespace JDI.Core.Selenium.Elements.Complex.Table
             var newTable = new Table();
             newTable.Rows = Rows.Clone(new Rows(), newTable);
             newTable.Columns = Columns.Clone(new Columns(), newTable);
-            newTable.WebAvatar = new GetElementModule(newTable, Locator);
+            newTable.WebAvatar = new WebAvatar(newTable, Locator);
             newTable.Parent = Parent;
             return newTable;
         }

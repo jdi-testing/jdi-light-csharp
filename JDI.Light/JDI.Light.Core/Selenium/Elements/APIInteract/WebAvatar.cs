@@ -9,7 +9,7 @@ using OpenQA.Selenium;
 
 namespace JDI.Core.Selenium.Elements.APIInteract
 {
-    public class GetElementModule
+    public class WebAvatar
     {
         private IWebElement _webElement;
         private List<IWebElement> _webElements;
@@ -18,7 +18,7 @@ namespace JDI.Core.Selenium.Elements.APIInteract
         public Func<IWebElement, bool> LocalElementSearchCriteria;
         public WebBaseElement RootElement;
 
-        public GetElementModule(WebBaseElement element, By byLocator = null)
+        public WebAvatar(WebBaseElement element, By byLocator = null)
         {
             Element = element;
             ByLocator = byLocator;
@@ -66,9 +66,9 @@ namespace JDI.Core.Selenium.Elements.APIInteract
 
         public string DriverName { get; set; }
 
-        public GetElementModule Copy(By byLocator)
+        public WebAvatar Copy(By byLocator)
         {
-            var clone = new GetElementModule(Element, byLocator)
+            var clone = new WebAvatar(Element, byLocator)
             {
                 LocalElementSearchCriteria = LocalElementSearchCriteria,
                 FrameLocator = FrameLocator,
@@ -158,7 +158,7 @@ namespace JDI.Core.Selenium.Elements.APIInteract
                 : searchContext;
         }
 
-        public GetElementModule SearchAll()
+        public WebAvatar SearchAll()
         {
             LocalElementSearchCriteria = el => el != null;
             return this;

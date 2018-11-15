@@ -9,7 +9,7 @@ namespace JDI.Core.Interfaces.Base
         string Name { get; set; }
         string TypeName { get; set; }
         object Parent { set; get; }
-        GetElementModule WebAvatar { get; set; }
+        WebAvatar WebAvatar { get; set; }
         void SetName(FieldInfo field);
         void SetFunction(Functions function);
     }

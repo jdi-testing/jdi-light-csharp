@@ -34,7 +34,7 @@ namespace JDI.Core.Selenium.Base
         {
             Invoker = new ActionInvoker(this);
             Actions = new ElementsActions(this);
-            WebAvatar = new GetElementModule(this, byLocator) {WebElement = webElement, WebElements = webElements};
+            WebAvatar = new WebAvatar(this, byLocator) {WebElement = webElement, WebElements = webElements};
             _webElement = webElement;
             if (element != null)
             {
@@ -46,7 +46,7 @@ namespace JDI.Core.Selenium.Base
         public By Locator => WebAvatar.ByLocator;
         public By FrameLocator => WebAvatar.FrameLocator;
 
-        public GetElementModule WebAvatar { get; set; }
+        public WebAvatar WebAvatar { get; set; }
 
         private string VarName => _varName ?? Name;
 
@@ -97,7 +97,7 @@ namespace JDI.Core.Selenium.Base
             WebAvatar.ByLocator = Locator.FillByTemplate(name);
         }
 
-        public WebBaseElement SetAvatar(GetElementModule avatar = null, By byLocator = null)
+        public WebBaseElement SetAvatar(WebAvatar avatar = null, By byLocator = null)
         {
             WebAvatar = (avatar ?? WebAvatar).Copy(byLocator);
             return this;

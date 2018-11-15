@@ -42,7 +42,7 @@ namespace JDI.Core.Selenium.Base
         {
             var element = (WebBaseElement) instance;
             if (!element.HasLocator)
-                element.WebAvatar = new GetElementModule(element, GetNewLocator(field));
+                element.WebAvatar = new WebAvatar(element, GetNewLocator(field));
             return element;
         }
 
