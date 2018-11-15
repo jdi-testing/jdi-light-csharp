@@ -4,7 +4,7 @@ using JDI.Core.Interfaces.Common;
 
 namespace JDI.Core.Interfaces.Complex
 {
-    public interface ISearch : ITextField, IComposite
+    public interface ISearch : ITextField
     {
         /**
          * @param text        Specify Text to search

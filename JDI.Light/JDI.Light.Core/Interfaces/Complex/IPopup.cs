@@ -3,7 +3,7 @@ using JDI.Core.Interfaces.Common;
 
 namespace JDI.Core.Interfaces.Complex
 {
-    public interface IPopup : IText, IComposite
+    public interface IPopup : IText
     {
         /**
          * Click on Button marked with annotation @OkButton or named "okButton"

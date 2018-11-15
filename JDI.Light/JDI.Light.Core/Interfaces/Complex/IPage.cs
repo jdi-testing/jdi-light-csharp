@@ -1,8 +1,6 @@
-﻿using JDI.Core.Interfaces.Base;
-
-namespace JDI.Core.Interfaces.Complex
+﻿namespace JDI.Core.Interfaces.Complex
 {
-    public interface IPage : IComposite
+    public interface IPage
     {
         /**
          * Check that page opened

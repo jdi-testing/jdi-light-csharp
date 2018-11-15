@@ -143,7 +143,6 @@
     <Compile Include="Interfaces\Base\IAvatar.cs" />
     <Compile Include="Interfaces\Base\IBaseElement.cs" />
     <Compile Include="Interfaces\Base\IClickable.cs" />
-    <Compile Include="Interfaces\Base\IComposite.cs" />
     <Compile Include="Interfaces\Base\IElement.cs" />
     <Compile Include="Interfaces\Base\IHasParent.cs" />
     <Compile Include="Interfaces\Base\IHasValue.cs" />

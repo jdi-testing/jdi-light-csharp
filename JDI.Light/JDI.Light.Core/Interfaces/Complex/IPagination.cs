@@ -2,7 +2,7 @@
 
 namespace JDI.Core.Interfaces.Complex
 {
-    public interface IPagination : IBaseElement, IComposite
+    public interface IPagination : IBaseElement
     {
         /**
          * Choose Next page
