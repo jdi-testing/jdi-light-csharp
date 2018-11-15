@@ -5,7 +5,6 @@ using JDI.Core.Attributes;
 using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Base;
 using JDI.Core.Interfaces.Complex;
-using JDI.Core.Selenium.Attributes;
 using JDI.Core.Selenium.Elements.Base;
 using JDI.Core.Settings;
 using JDI.Core.Utils;
@@ -52,7 +51,7 @@ namespace JDI.Core.Selenium.Elements.Composite
         public void Submit(Dictionary<string, string> objStrings)
         {
             Fill(objStrings);
-            GetElementClass.GetButton("Submit").Click();
+            GetButton("Submit").Click();
         }
 
         private void SetText(string text)
@@ -65,13 +64,13 @@ namespace JDI.Core.Selenium.Elements.Composite
         public void Submit(string text)
         {
             SetText(text);
-            GetElementClass.GetButton("Submit").Click();
+            GetButton("Submit").Click();
         }
 
         public void Submit(string text, string buttonName)
         {
             SetText(text);
-            GetElementClass.GetButton(buttonName).Click();
+            GetButton(buttonName).Click();
         }
 
         public void Login(string text)
@@ -175,7 +174,7 @@ namespace JDI.Core.Selenium.Elements.Composite
         public void Submit(T entity, string buttonName)
         {
             Fill(entity.ToSetValue());
-            GetElementClass.GetButton(buttonName).Click();
+            GetButton(buttonName).Click();
         }
 
         public void Submit(T entity)
@@ -236,7 +235,7 @@ namespace JDI.Core.Selenium.Elements.Composite
         public void Submit(T entity, Enum buttonName)
         {
             Fill(entity.ToSetValue());
-            GetElementClass.GetButton(buttonName.ToString().ToLower()).Click();
+            GetButton(buttonName.ToString().ToLower()).Click();
         }
 
         public void Check(T entity)

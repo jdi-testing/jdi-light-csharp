@@ -7,7 +7,6 @@ namespace JDI.Core.Interfaces.Base
     {
         string Name { get; set; }
         string TypeName { get; set; }
-        string ParentTypeName { get; }
         IAvatar Avatar { get; set; }
         object Parent { set; get; }
         void SetName(FieldInfo field);

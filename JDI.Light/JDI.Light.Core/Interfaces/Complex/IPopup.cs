@@ -1,5 +1,4 @@
-﻿using JDI.Core.Interfaces.Base;
-using JDI.Core.Interfaces.Common;
+﻿using JDI.Core.Interfaces.Common;
 
 namespace JDI.Core.Interfaces.Complex
 {

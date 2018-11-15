@@ -12,17 +12,17 @@ namespace JDI.Core.Selenium.Elements.Composite
 
         public void Ok()
         {
-            GetElementClass.GetButton(Functions.Ok).Click();
+            GetButton(Functions.Ok).Click();
         }
 
         public void Cancel()
         {
-            GetElementClass.GetButton(Functions.Cancel).Click();
+            GetButton(Functions.Cancel).Click();
         }
 
         public void Close()
         {
-            GetElementClass.GetButton(Functions.Close).Click();
+            GetButton(Functions.Close).Click();
         }
 
         public string GetText => Invoker.DoJActionResult("Get text", pf => ((PopupForm<T>) pf).GetTextAction(this));

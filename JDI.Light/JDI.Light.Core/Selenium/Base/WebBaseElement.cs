@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using JDI.Core.Attributes;
 using JDI.Core.Attributes.Functions;
+using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Base;
+using JDI.Core.Interfaces.Common;
 using JDI.Core.Logging;
-using JDI.Core.Selenium.Attributes;
 using JDI.Core.Selenium.DriverFactory;
 using JDI.Core.Selenium.Elements.APIInteract;
 using JDI.Core.Selenium.Elements.Base;
+using JDI.Core.Selenium.Elements.Common;
 using JDI.Core.Selenium.Elements.WebActions;
 using JDI.Core.Settings;
 using JDI.Core.Utils;
@@ -24,7 +27,6 @@ namespace JDI.Core.Selenium.Base
         public ElementsActions Actions;
 
         public Functions Function = Functions.None;
-        protected GetElementClass GetElementClass;
 
         public ActionInvoker Invoker;
 
@@ -32,7 +34,6 @@ namespace JDI.Core.Selenium.Base
             List<IWebElement> webElements = null, WebBaseElement element = null)
         {
             Invoker = new ActionInvoker(this);
-            GetElementClass = new GetElementClass(this);
             Actions = new ElementsActions(this);
             WebAvatar = new GetElementModule(this, byLocator) {WebElement = webElement, WebElements = webElements};
             _webElement = webElement;
@@ -142,6 +143,54 @@ namespace JDI.Core.Selenium.Base
             return JDISettings.ShortLogMessagesFormat
                 ? $"{TypeName} '{Name}' ({ParentTypeName}.{VarName}; {Avatar})"
                 : $"Name: '{Name}', Type: '{TypeName}' In: '{ParentTypeName}', {Avatar}";
+        }
+
+        private string ToButton(string buttonName)
+        {
+            return buttonName.ToLower().Contains("button") ? buttonName : buttonName + "Button";
+        }
+
+        public Button GetButton(string buttonName)
+        {
+            var fields = _webElement.GetFields(typeof(IButton));
+            switch (fields.Count)
+            {
+                case 0:
+                    throw JDISettings.Exception($"Can't find ny buttons on form {ToString()}'");
+                case 1:
+                    return (Button)fields[0].GetValue(_webElement);
+                default:
+                    var buttons = fields.Select(f => (Button)f.GetValue(_webElement)).ToList();
+                    var button = buttons.FirstOrDefault(b => ToButton(b.Name).SimplifiedEqual(ToButton(buttonName)));
+                    if (button == null)
+                        throw JDISettings.Exception($"Can't find button '{buttonName}' for Element '{ToString()}'." +
+                                                    $"(Found following buttons: {buttons.Select(el => el.Name).Print()})."
+                                                        .FromNewLine());
+                    return button;
+            }
+        }
+
+        public Button GetButton(Functions funcName)
+        {
+            var fields = _webElement.GetFields(typeof(IButton));
+            if (fields.Count == 1)
+                return (Button)fields[0].GetValue(_webElement);
+            var buttons = fields.Select(f => (Button)f.GetValue(_webElement)).ToList();
+            var button = buttons.FirstOrDefault(b => b.Function.Equals(funcName));
+            if (button != null) return button;
+            var name = funcName.ToString();
+            button = buttons.FirstOrDefault(b => ToButton(b.Name).SimplifiedEqual(ToButton(name)));
+            if (button == null)
+                throw JDISettings.Exception($"Can't find button '{name}' for Element '{ToString()}'");
+            return button;
+        }
+
+        public Text GetTextElement()
+        {
+            var textField = this.GetFirstField(typeof(Text), typeof(IText));
+            if (textField == null)
+                throw JDISettings.Exception($"Can't find Text Element '{ToString()}'");
+            return (Text)textField.GetValue(_webElement);
         }
     }
 }

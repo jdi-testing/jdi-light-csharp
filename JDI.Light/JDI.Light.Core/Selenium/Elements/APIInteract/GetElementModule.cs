@@ -65,11 +65,6 @@ namespace JDI.Core.Selenium.Elements.APIInteract
 
         public string DriverName { get; set; }
 
-        public GetElementModule Copy()
-        {
-            return Copy(ByLocator);
-        }
-
         public GetElementModule Copy(By byLocator)
         {
             var clone = new GetElementModule(Element, byLocator)
