@@ -9,12 +9,11 @@ namespace JDI.Core.Selenium.Elements.WebActions
 {
     public class ActionScenarios
     {
-        private WebBaseElement _element;
+        private readonly WebBaseElement _element;
 
-        public ActionScenarios SetElement(WebBaseElement element)
+        public ActionScenarios(WebBaseElement element)
         {
             _element = element;
-            return this;
         }
 
         public void ActionScenario(string actionName, Action<WebBaseElement> action, LogLevels logSettings)

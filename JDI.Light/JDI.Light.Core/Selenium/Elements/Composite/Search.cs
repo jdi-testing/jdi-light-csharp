@@ -34,7 +34,7 @@ namespace JDI.Core.Selenium.Elements.Composite
             s.SearchButton.Click();
         };
 
-        protected Func<Search, string, IList<string>> GetSuggesionsAction = (s, text) =>
+        protected Func<Search, string, IList<string>> GetSuggestionsAction = (s, text) =>
         {
             s.SearchField.Input(text);
             return s.Suggestions.Texts;
@@ -116,10 +116,10 @@ namespace JDI.Core.Selenium.Elements.Composite
                 s => ChooseSuggestionIndexAction(this, text, selectIndex));
         }
 
-        public IList<string> GetSuggesions(string text)
+        public IList<string> GetSuggestions(string text)
         {
             return Invoker.DoJActionResult($"Get all suggestions for input '{text}'",
-                s => GetSuggesionsAction(this, text));
+                s => GetSuggestionsAction(this, text));
         }
 
         private Clickable GetElement(string name)

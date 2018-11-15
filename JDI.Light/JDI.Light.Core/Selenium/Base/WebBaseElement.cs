@@ -33,7 +33,7 @@ namespace JDI.Core.Selenium.Base
             List<IWebElement> webElements = null, WebBaseElement element = null)
         {
             Invoker = new ActionInvoker(this);
-            Actions = new ElementsActions(this);
+            Actions = new ElementsActions(Invoker);
             WebAvatar = new WebAvatar(this, byLocator) {WebElement = webElement, WebElements = webElements};
             _webElement = webElement;
             if (element != null)

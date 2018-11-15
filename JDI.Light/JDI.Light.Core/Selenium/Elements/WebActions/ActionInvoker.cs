@@ -10,13 +10,14 @@ namespace JDI.Core.Selenium.Elements.WebActions
 {
     public class ActionInvoker
     {
-        public static ActionScenarios ActionScenarios = new ActionScenarios();
+        private static ActionScenarios _actionScenarios;
         private readonly WebBaseElement _element;
 
         public ActionInvoker(WebBaseElement element)
         {
             JDISettings.NewTest();
             _element = element;
+            _actionScenarios = new ActionScenarios(element);
         }
 
         public TResult DoJActionResult<TResult>(string actionName, Func<WebBaseElement, TResult> action,
@@ -25,7 +26,7 @@ namespace JDI.Core.Selenium.Elements.WebActions
             return ExceptionUtils.ActionWithException(() =>
             {
                 ProcessDemoMode();
-                return ActionScenarios.SetElement(_element).ResultScenario(actionName, action, logResult, level);
+                return _actionScenarios.ResultScenario(actionName, action, logResult, level);
             }, ex => $"Failed to do '{actionName}' action. Reason: {ex}");
         }
 
@@ -34,7 +35,7 @@ namespace JDI.Core.Selenium.Elements.WebActions
             TimerExtensions.ForceDone(() =>
             {
                 ProcessDemoMode();
-                ActionScenarios.SetElement(_element).ActionScenario(actionName, action, level);
+                _actionScenarios.ActionScenario(actionName, action, level);
             });
         }
 

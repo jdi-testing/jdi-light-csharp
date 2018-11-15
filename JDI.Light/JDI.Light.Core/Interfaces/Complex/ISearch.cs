@@ -33,6 +33,6 @@ namespace JDI.Core.Interfaces.Complex
          * @return Select all suggestions for text
          */
         //TODO[JDIAction]
-        IList<string> GetSuggesions(string text);
+        IList<string> GetSuggestions(string text);
     }
 }
