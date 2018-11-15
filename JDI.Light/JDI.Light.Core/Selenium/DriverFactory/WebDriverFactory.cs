@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
+using JDI.Core.Interfaces;
 using JDI.Core.Interfaces.Base;
-using JDI.Core.Interfaces.Settings;
 using JDI.Core.Selenium.Elements.Base;
 using JDI.Core.Settings;
 using OpenQA.Selenium;
@@ -28,7 +28,7 @@ namespace JDI.Core.Selenium.DriverFactory
         IE
     }
 
-    public class WebDriverFactory : IDriver<IWebDriver>
+    public class WebDriverFactory : IDriverFactory<IWebDriver>
     {
         public static bool OnlyOneElementAllowedInSearch = true;
 

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using JDI.Core.Interfaces;
 using JDI.Core.Interfaces.Base;
 using JDI.Core.Interfaces.Common;
 using JDI.Core.Interfaces.Complex;
-using JDI.Core.Interfaces.Settings;
 using JDI.Core.Logging;
 using JDI.Core.Selenium.DriverFactory;
 using JDI.Core.Selenium.Elements.Base;
@@ -71,7 +71,7 @@ namespace JDI.Core.Settings
         }
 
         public static void Init(ILogger logger, IAssert assert,
-            TimeoutSettings timeouts = null, IDriver<IWebDriver> driverFactory = null)
+            TimeoutSettings timeouts = null, IDriverFactory<IWebDriver> driverFactory = null)
         {
             DriverFactory = driverFactory ?? new WebDriverFactory();
             Asserter = assert;
@@ -81,7 +81,7 @@ namespace JDI.Core.Settings
         }
 
         public static void InitFromProperties(ILogger logger = null, IAssert assert = null,
-            TimeoutSettings timeouts = null, IDriver<IWebDriver> driverFactory = null)
+            TimeoutSettings timeouts = null, IDriverFactory<IWebDriver> driverFactory = null)
         {
             Init(logger, assert, timeouts, driverFactory);
             JDISettings.InitFromProperties();

@@ -1,5 +1,5 @@
 ﻿using System;
-using JDI.Core.Interfaces.Settings;
+using JDI.Core.Interfaces;
 using JDI.Core.Logging;
 using JDI.Core.Utils;
 
@@ -17,7 +17,7 @@ namespace JDI.Core.Settings
         public static bool ShortLogMessagesFormat = true;
         public static string JDISettingsPath = "test.properties";
         public static bool ExceptionThrown;
-        public static IDriver<IDisposable> DriverFactory;
+        public static IDriverFactory<IDisposable> DriverFactory;
         public static bool UseCache;
 
         public static void ToLog(string message, LogLevels level)

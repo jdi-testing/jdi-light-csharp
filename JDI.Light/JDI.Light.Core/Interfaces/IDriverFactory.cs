@@ -1,9 +1,9 @@
 ﻿using JDI.Core.Interfaces.Base;
 using JDI.Core.Settings;
 
-namespace JDI.Core.Interfaces.Settings
+namespace JDI.Core.Interfaces
 {
-    public interface IDriver<out T>
+    public interface IDriverFactory<out T>
     {
         string CurrentDriverName { get; set; }
         string DriverPath { get; set; }

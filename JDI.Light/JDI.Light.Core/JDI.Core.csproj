@@ -144,7 +144,6 @@
     <Compile Include="Interfaces\Base\IBaseElement.cs" />
     <Compile Include="Interfaces\Base\IClickable.cs" />
     <Compile Include="Interfaces\Base\IElement.cs" />
-    <Compile Include="Interfaces\Base\IHasParent.cs" />
     <Compile Include="Interfaces\Base\IHasValue.cs" />
     <Compile Include="Interfaces\Base\IMultiSelector.cs" />
     <Compile Include="Interfaces\Base\ISelect.cs" />
@@ -176,9 +175,7 @@
     <Compile Include="Interfaces\Complex\ISelector.cs" />
     <Compile Include="Interfaces\Complex\ITabs.cs" />
     <Compile Include="Interfaces\Complex\ITextList.cs" />
-    <Compile Include="Interfaces\IComplex.cs" />
-    <Compile Include="Interfaces\Settings\IDriver.cs" />
-    <Compile Include="Interfaces\Settings\ITestRunner.cs" />
+    <Compile Include="Interfaces\IDriverFactory.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\JDILogger.cs" />
     <Compile Include="Logging\LogLevels.cs" />
