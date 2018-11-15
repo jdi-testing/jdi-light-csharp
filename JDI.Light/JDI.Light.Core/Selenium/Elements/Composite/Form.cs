@@ -42,7 +42,7 @@ namespace JDI.Core.Selenium.Elements.Composite
             this.GetFields(typeof(ISetValue)).ForEach(element =>
             {
                 var fieldValue = map.FirstOrDefault(pair =>
-                    GetElementClass.NamesEqual(pair.Key, NameAttribute.GetElementName(element))).Value;
+                    pair.Key.SimplifiedEqual(NameAttribute.GetElementName(element))).Value;
                 if (fieldValue == null) return;
                 var setValueElement = (ISetValue) element.GetValue(this);
                 setValueElement.Value = fieldValue;
@@ -135,7 +135,7 @@ namespace JDI.Core.Selenium.Elements.Composite
             this.GetFields(typeof(IHasValue)).ForEach(field =>
             {
                 var fieldValue = objStrings.FirstOrDefault(pair =>
-                    GetElementClass.NamesEqual(pair.Key, NameAttribute.GetElementName(field))).Value;
+                    pair.Key.SimplifiedEqual(NameAttribute.GetElementName(field))).Value;
                 if (fieldValue == null) return;
                 var valueField = (IHasValue) field.GetValue(this);
                 var actual = GetFieldValueAction(this, valueField).Trim();

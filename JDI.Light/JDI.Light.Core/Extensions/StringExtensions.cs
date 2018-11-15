@@ -19,5 +19,10 @@ namespace JDI.Core.Extensions
         {
             return new Regex("[^a-z0-9]").Replace(s.ToLower(), "");
         }
+
+        public static bool SimplifiedEqual(this string s1, string s2)
+        {
+            return s1.Simplify().Equals(s2.Simplify());
+        }
     }
 }

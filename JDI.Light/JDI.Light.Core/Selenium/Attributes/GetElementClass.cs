@@ -18,11 +18,6 @@ namespace JDI.Core.Selenium.Attributes
             _element = element;
         }
 
-        public static bool NamesEqual(string name1, string name2)
-        {
-            return name1.Simplify().Equals(name2.Simplify());
-        }
-
         private static string ToButton(string buttonName)
         {
             return buttonName.ToLower().Contains("button") ? buttonName : buttonName + "Button";
@@ -39,7 +34,7 @@ namespace JDI.Core.Selenium.Attributes
                     return (Button) fields[0].GetValue(_element);
                 default:
                     var buttons = fields.Select(f => (Button) f.GetValue(_element)).ToList();
-                    var button = buttons.FirstOrDefault(b => NamesEqual(ToButton(b.Name), ToButton(buttonName)));
+                    var button = buttons.FirstOrDefault(b => ToButton(b.Name).SimplifiedEqual(ToButton(buttonName)));
                     if (button == null)
                         throw JDISettings.Exception($"Can't find button '{buttonName}' for Element '{ToString()}'." +
                                                     $"(Found following buttons: {buttons.Select(el => el.Name).Print()})."
@@ -57,7 +52,7 @@ namespace JDI.Core.Selenium.Attributes
             var button = buttons.FirstOrDefault(b => b.Function.Equals(funcName));
             if (button != null) return button;
             var name = funcName.ToString();
-            button = buttons.FirstOrDefault(b => NamesEqual(ToButton(b.Name), ToButton(name)));
+            button = buttons.FirstOrDefault(b => ToButton(b.Name).SimplifiedEqual(ToButton(name)));
             if (button == null)
                 throw JDISettings.Exception($"Can't find button '{name}' for Element '{ToString()}'");
             return button;
