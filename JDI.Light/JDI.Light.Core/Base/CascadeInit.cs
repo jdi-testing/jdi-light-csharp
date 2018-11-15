@@ -99,8 +99,7 @@ namespace JDI.Core.Base
                     instance.TypeName = type.Name;
                     instance.Parent = parent;
                     field.SetValue(parent, instance);
-                    if (typeof(IComposite).IsAssignableFrom(type))
-                        InitElements(instance, driverName);
+                    InitElements(instance, driverName);
                 },
                 ex =>
                     $"Error in SetElement for field '{field.Name}' with parent '{parentType?.Name ?? "NULL Class" + ex.FromNewLine()}'");

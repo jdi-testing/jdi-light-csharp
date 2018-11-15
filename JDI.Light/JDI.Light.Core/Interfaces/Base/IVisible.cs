@@ -3,8 +3,8 @@
     public interface IVisible
     {
         /**
-    *  Check is WebElement visible
-    */
+        *  Check is WebElement visible
+        */
         //TODO:[JDIAction]
         bool Displayed { get; }
 

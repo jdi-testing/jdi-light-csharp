@@ -3,11 +3,11 @@
     public interface IElement : IBaseElement, IVisible
     {
         /**
-    * Get element attribute
-    *
-    * param 'name' - Specify name for attribute
-    * return - Returns chosen attribute
-    */
+         * Get element attribute
+         *
+         * param 'name' - Specify name for attribute
+         * return - Returns chosen attribute
+         */
         //TODO:[JDIAction]
         string GetAttribute(string name);
 
