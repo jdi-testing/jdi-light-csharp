@@ -154,7 +154,7 @@ namespace JDI.Core.Selenium.Elements.Complex
             WebBaseElement element = null)
             : base(optionsNamesLocator, webElements: webElements, element: element)
         {
-            AllLabels = (TextList) new TextList().SetAvatar(WebAvatar, allLabelsLocator);
+            AllLabels = (TextList) new TextList(allLabelsLocator).SetAvatar(WebAvatar, allLabelsLocator);
         }
 
         protected SelectElement Selector

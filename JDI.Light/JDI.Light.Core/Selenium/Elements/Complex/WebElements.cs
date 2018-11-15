@@ -9,15 +9,11 @@ using OpenQA.Selenium;
 
 namespace JDI.Core.Selenium.Elements.Complex
 {
-    public class Elements<T> : WebBaseElement, IList<T> where T : WebBaseElement
+    public class WebElements<T> : WebBaseElement, IList<T> where T : WebBaseElement
     {
         private IList<T> _elements;
 
-        public Elements() : this(null)
-        {
-        }
-
-        public Elements(By byLocator = null, List<IWebElement> webElements = null)
+        public WebElements(By byLocator = null, List<IWebElement> webElements = null)
             : base(byLocator, webElements: webElements)
         {
         }

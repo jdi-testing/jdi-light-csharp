@@ -80,7 +80,7 @@ namespace JDI.Core.Selenium.Base
             {
                 var elementClass = type.GetGenericArguments()[0];
                 if (elementClass != null)
-                    instance = (WebBaseElement) Activator.CreateInstance(typeof(Elements<>)
+                    instance = (WebBaseElement) Activator.CreateInstance(typeof(WebElements<>)
                         .MakeGenericType(elementClass));
             }
             else

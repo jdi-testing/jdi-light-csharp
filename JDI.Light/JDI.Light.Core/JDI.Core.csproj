@@ -99,7 +99,7 @@
     <Compile Include="Selenium\Elements\Complex\ComboBox.cs" />
     <Compile Include="Selenium\Elements\Complex\Dropdown.cs" />
     <Compile Include="Selenium\Elements\Complex\DropList.cs" />
-    <Compile Include="Selenium\Elements\Complex\Elements.cs" />
+    <Compile Include="Selenium\Elements\Complex\WebElements.cs" />
     <Compile Include="Selenium\Elements\Complex\Menu.cs" />
     <Compile Include="Selenium\Elements\Complex\MultiSelector.cs" />
     <Compile Include="Selenium\Elements\Complex\RadioButtons.cs" />

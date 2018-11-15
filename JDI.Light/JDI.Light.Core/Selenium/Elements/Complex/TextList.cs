@@ -11,16 +11,12 @@ namespace JDI.Core.Selenium.Elements.Complex
 {
     public class TextList : WebBaseElement, ITextList
     {
-        private readonly Elements<Label> _texts;
-
-        public TextList() : this(null)
-        {
-        }
+        private readonly WebElements<Label> _texts;
 
         public TextList(By locator, List<IWebElement> webElements = null) :
             base(locator, webElements: webElements)
         {
-            _texts = new Elements<Label>(Locator);
+            _texts = new WebElements<Label>(Locator);
         }
 
         public new List<IWebElement> WebElements => base.WebElements;

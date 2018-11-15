@@ -63,19 +63,6 @@ namespace JDI.Core.Selenium.DriverFactory
             return GetByFunc(by)(byLocator);
         }
 
-        public static By CopyBy(By by)
-        {
-            var byLocator = GetByLocator(by);
-            return GetByFunc(by)(byLocator);
-        }
-
-        /*public static string GetByName(By by)
-        {
-            Matcher m = Pattern.compile("By\\.(?<locator>.*):.*").matcher(by.ToString());
-            if (m.find())
-                return m.group("locator");
-            throw new RuntimeException("Can't get By name for: " + by);
-        }*/
         public static string GetByLocator(this By by)
         {
             var byAsString = by.ToString();

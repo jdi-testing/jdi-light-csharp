@@ -13,17 +13,17 @@ namespace JDI.Core.Selenium.Elements.Composite
         public string Url => WebDriver.Url;
         public string BaseUrl => new Uri(WebDriver.Url).GetLeftPart(UriPartial.Authority);
         public string Title => WebDriver.Title;
-        private static WebCascadeInit CascadeInit => new WebCascadeInit();
+        private static WebCascadeInit WebCascadeInit => new WebCascadeInit();
 
         public static void Init(Type siteType)
         {
-            CascadeInit.InitStaticPages(siteType, WebSettings.WebDriverFactory.CurrentDriverName);
+            WebCascadeInit.InitStaticPages(siteType, WebSettings.WebDriverFactory.CurrentDriverName);
             CurrentSite = siteType;
         }
 
         public static T Init<T>(Type siteType, string driverName) where T : Application
         {
-            return CascadeInit.InitPages<T>(siteType, driverName);
+            return WebCascadeInit.InitPages<T>(siteType, driverName);
         }
 
         public static T Init<T>(Type siteType, DriverTypes driverType = DriverTypes.Chrome) where T : Application

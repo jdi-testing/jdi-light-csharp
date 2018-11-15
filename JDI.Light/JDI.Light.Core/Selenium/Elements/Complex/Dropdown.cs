@@ -172,7 +172,7 @@ namespace JDI.Core.Selenium.Elements.Complex
 
             if (list != null)
             {
-                AllLabels = (TextList) new TextList().SetAvatar(WebAvatar, list);
+                AllLabels = (TextList) new TextList(list).SetAvatar(WebAvatar, list);
             }
         }
 

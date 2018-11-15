@@ -7,11 +7,11 @@ namespace JDI.Core.Utils
 {
     public static class ReflectionUtils
     {
-        public static List<FieldInfo> GetFieldsList(this Type type)
+        public static List<FieldInfo> InstanceFields(this Type type)
         {
             return type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).ToList();
         }
-
+        
         public static List<FieldInfo> StaticFields(this Type type)
         {
             return type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static).ToList();
@@ -40,7 +40,7 @@ namespace JDI.Core.Utils
         {
             if (types.Contains(type))
                 return new List<FieldInfo>();
-            var result = type.GetFieldsList();
+            var result = type.InstanceFields();
             result.AddRange(GetFieldsDeep(type.BaseType, types));
             return result;
         }
@@ -64,18 +64,10 @@ namespace JDI.Core.Utils
 
         public static FieldInfo GetFirstField(this object obj, params Type[] types)
         {
-            var fields = obj.GetType().GetFieldsList();
+            var fields = obj.GetType().InstanceFields();
             return types.Length == 0
                 ? fields[0]
                 : fields.FirstOrDefault(types.ContainsFieldType);
-        }
-
-        public static T GetFirstValue<T>(this object obj, params Type[] types)
-        {
-            var fields = obj.GetType().GetFieldsList();
-            return (T) (types.Length == 0
-                ? fields[0].GetValue(obj)
-                : fields.FirstOrDefault(types.ContainsFieldType)?.GetValue(obj));
         }
 
         public static string GetClassName(this object obj)
