@@ -139,7 +139,6 @@
     <Compile Include="Settings\WebSettings.cs" />
     <Compile Include="Settings\WebTimeoutSettings.cs" />
     <Compile Include="Utils\ExceptionUtils.cs" />
-    <Compile Include="Interfaces\Base\IAvatar.cs" />
     <Compile Include="Interfaces\Base\IBaseElement.cs" />
     <Compile Include="Interfaces\Base\IClickable.cs" />
     <Compile Include="Interfaces\Base\IElement.cs" />

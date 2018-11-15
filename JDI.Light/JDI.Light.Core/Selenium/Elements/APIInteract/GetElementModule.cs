@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using JDI.Core.Interfaces.Base;
 using JDI.Core.Selenium.Base;
 using JDI.Core.Selenium.DriverFactory;
 using JDI.Core.Selenium.Elements.Base;
@@ -10,7 +9,7 @@ using OpenQA.Selenium;
 
 namespace JDI.Core.Selenium.Elements.APIInteract
 {
-    public class GetElementModule : IAvatar
+    public class GetElementModule
     {
         private IWebElement _webElement;
         private List<IWebElement> _webElements;

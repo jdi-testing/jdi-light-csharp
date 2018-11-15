@@ -10,7 +10,6 @@ using JDI.Core.Interfaces.Common;
 using JDI.Core.Logging;
 using JDI.Core.Selenium.DriverFactory;
 using JDI.Core.Selenium.Elements.APIInteract;
-using JDI.Core.Selenium.Elements.Base;
 using JDI.Core.Selenium.Elements.Common;
 using JDI.Core.Selenium.Elements.WebActions;
 using JDI.Core.Settings;
