@@ -25,6 +25,7 @@ namespace JDI.Core.Selenium.Elements.APIInteract
             if (string.IsNullOrEmpty(DriverName) && WebSettings.WebDriverFactory != null &&
                 !string.IsNullOrEmpty(WebSettings.WebDriverFactory.CurrentDriverName))
                 DriverName = WebSettings.WebDriverFactory.CurrentDriverName;
+            Timer = new Timer(JDISettings.Timeouts.CurrentTimeoutSec * 1000);
         }
 
         public WebBaseElement Element { get; set; }
@@ -32,7 +33,8 @@ namespace JDI.Core.Selenium.Elements.APIInteract
         public IWebDriver WebDriver
             => WebSettings.WebDriverFactory.GetDriver(DriverName);
 
-        public Timer Timer => new Timer(JDISettings.Timeouts.CurrentTimeoutSec * 1000);
+        public Timer Timer { get; set; }
+
         public bool HasLocator => ByLocator != null;
 
         public IWebElement WebElement

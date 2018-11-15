@@ -1,7 +1,6 @@
 ﻿using System;
 using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Complex;
-using JDI.Core.Selenium.Base;
 using JDI.Core.Selenium.Elements.Base;
 using OpenQA.Selenium;
 
@@ -26,8 +25,6 @@ namespace JDI.Core.Selenium.Elements.Complex
     public class DropList<TEnum> : MultiSelector<TEnum>, IDropList<TEnum>
         where TEnum : IConvertible
     {
-        private readonly GetElementType _button = new GetElementType();
-
         protected Action<DropList<TEnum>, string> ExpandNameAction = (d, name) =>
         {
             if (!d.DisplayedNameAction(d, name))
@@ -56,10 +53,10 @@ namespace JDI.Core.Selenium.Elements.Complex
             : base(optionsNamesLocator, allOptionsNamesLocator)
         {
             InitActions();
-            _button = new GetElementType(valueLocator);
+            Button = (Clickable) new Clickable().SetAvatar(WebAvatar, valueLocator);
         }
 
-        protected Clickable Button => _button.Get(new Clickable(), WebAvatar);
+        protected Clickable Button { get; set; }
 
         public new IWebElement WebElement => new WebElement(Locator)
         {

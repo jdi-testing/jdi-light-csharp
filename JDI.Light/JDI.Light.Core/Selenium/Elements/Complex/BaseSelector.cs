@@ -15,8 +15,6 @@ namespace JDI.Core.Selenium.Elements.Complex
     public abstract class BaseSelector<TEnum> : WebBaseElement, IVisible
         where TEnum : IConvertible
     {
-        protected GetElementType _allLabels;
-
         public Func<BaseSelector<TEnum>, bool> DisplayedAction = s =>
         {
             var els = s.WebAvatar.FindImmediately(() => s.Elements, null);
@@ -156,7 +154,7 @@ namespace JDI.Core.Selenium.Elements.Complex
             WebBaseElement element = null)
             : base(optionsNamesLocator, webElements: webElements, element: element)
         {
-            _allLabels = new GetElementType(allLabelsLocator);
+            AllLabels = (TextList) new TextList().SetAvatar(WebAvatar, allLabelsLocator);
         }
 
         protected SelectElement Selector
@@ -168,8 +166,8 @@ namespace JDI.Core.Selenium.Elements.Complex
             }
         }
 
-        public TextList AllLabels => _allLabels?.Get(new TextList(), WebAvatar);
-        
+        public TextList AllLabels { get; set; }
+
         public virtual Action<BaseSelector<TEnum>, string> SetValueAction { get; set; } =
             (s, value) => s.SelectNameAction(s, value);
 

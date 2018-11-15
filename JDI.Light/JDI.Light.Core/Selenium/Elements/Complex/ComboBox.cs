@@ -1,6 +1,5 @@
 ﻿using System;
 using JDI.Core.Interfaces.Complex;
-using JDI.Core.Selenium.Base;
 using JDI.Core.Selenium.Elements.Common;
 using OpenQA.Selenium;
 
@@ -13,8 +12,6 @@ namespace JDI.Core.Selenium.Elements.Complex
     public class ComboBox<TEnum> : Dropdown<TEnum>, IComboBox<TEnum>
         where TEnum : IConvertible
     {
-        private readonly GetElementType _textField;
-
         public Action<ComboBox<TEnum>, string> InputAction =
             (c, text) => c.TextField.SendKeys(text);
 
@@ -25,21 +22,20 @@ namespace JDI.Core.Selenium.Elements.Complex
         public ComboBox(By selectorLocator = null, By optionsNamesLocatorTemplate = null)
             : base(selectorLocator, optionsNamesLocatorTemplate)
         {
-            _textField = new GetElementType(selectorLocator);
         }
 
         public ComboBox(By selectorLocator, By optionsNamesLocatorTemplate, By valueLocator,
             By allOptionsNamesLocator = null)
             : base(selectorLocator, optionsNamesLocatorTemplate, allOptionsNamesLocator)
         {
-            _textField = new GetElementType(valueLocator);
+            TextField = (TextField) new TextField().SetAvatar(WebAvatar, valueLocator);
         }
 
         public override Func<Dropdown<TEnum>, string> GetTextAction => c => TextField.GetText;
 
         public override Action<BaseSelector<TEnum>, string> SetValueAction => (c, value) => NewInput(value);
 
-        public TextField TextField => _textField.Get(new TextField(), WebAvatar);
+        public TextField TextField { get; set; }
 
         public void Input(string text)
         {

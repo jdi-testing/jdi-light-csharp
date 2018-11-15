@@ -1,6 +1,5 @@
 ﻿using System;
 using JDI.Core.Interfaces.Complex;
-using JDI.Core.Selenium.Base;
 using JDI.Core.Selenium.Elements.Base;
 using JDI.Core.Selenium.Elements.Common;
 using OpenQA.Selenium;
@@ -27,13 +26,8 @@ namespace JDI.Core.Selenium.Elements.Complex
     public class Dropdown<TEnum> : Selector<TEnum>, IDropDown<TEnum>
         where TEnum : IConvertible
     {
-        protected GetElementType _element;
-        protected GetElementType _elementByName;
-        protected GetElementType _expander;
-
         public Action<Dropdown<TEnum>, string> ExpandNameAction = (d, name) =>
         {
-            //WebAvatar.context.clear();
             if (!d.Element.Displayed) return;
             d.SetWaitTimeout(0);
             if (!d.DisplayedNameAction(d, name)) d.Element.Click();
@@ -42,7 +36,6 @@ namespace JDI.Core.Selenium.Elements.Complex
 
         public Action<Dropdown<TEnum>, int> ExpandNumAction = (d, index) =>
         {
-            //WebAvatar.context.clear();
             if (!d.DisplayedNumAction(d, index))
                 d.Element.Click();
         };
@@ -95,10 +88,10 @@ namespace JDI.Core.Selenium.Elements.Complex
                 if (!isExpanded) Element.Click();
                 return result;
             };
-            _element = new GetElementType(selectLocator);
+            Element = (Label) new Label().SetAvatar(WebAvatar, selectLocator);
         }
 
-        protected Label Element => _element.Get(new Label(), WebAvatar);
+        protected Label Element { get; set; }
 
         public virtual Action<Dropdown<TEnum>> ClickAction { get; set; } = d => d.Element.Click();
         public virtual Func<Dropdown<TEnum>, string> GetTextAction { get; set; } = d => d.Element.GetText;
@@ -163,7 +156,10 @@ namespace JDI.Core.Selenium.Elements.Complex
             {
                 var el = new WebElement(root)
                 {
-                    WebAvatar = {DriverName = WebAvatar.DriverName},
+                    WebAvatar =
+                    {
+                        DriverName = WebAvatar.DriverName
+                    },
                     Parent = Parent
                 };
                 Parent = el;
@@ -171,20 +167,13 @@ namespace JDI.Core.Selenium.Elements.Complex
 
             if (value != null)
             {
-                _element = new GetElementType(value);
-                if (_expander == null) _expander = _element;
+                Element = (Label)new Label().SetAvatar(WebAvatar, value);
             }
 
             if (list != null)
-                _allLabels = new GetElementType(list);
-            if (expand != null)
             {
-                _expander = new GetElementType(expand);
-                if (_element == null) _element = _expander;
+                AllLabels = (TextList) new TextList().SetAvatar(WebAvatar, list);
             }
-
-            if (elementByName != null)
-                _elementByName = new GetElementType(elementByName);
         }
 
         public void Wait(Func<IWebElement, bool> resultFunc)
