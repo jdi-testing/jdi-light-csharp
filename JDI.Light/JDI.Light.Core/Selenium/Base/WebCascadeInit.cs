@@ -42,7 +42,7 @@ namespace JDI.Core.Selenium.Base
         {
             var element = (WebBaseElement) instance;
             if (!element.HasLocator)
-                element.Avatar = new GetElementModule(element, GetNewLocator(field));
+                element.WebAvatar = new GetElementModule(element, GetNewLocator(field));
             return element;
         }
 
@@ -98,7 +98,7 @@ namespace JDI.Core.Selenium.Base
             if (instance == null)
                 throw JDISettings.Exception("Unknown interface: " + type +
                                             ". Add relation interface -> class in VIElement.InterfaceTypeMap");
-            instance.Avatar.DriverName = driverName;
+            instance.WebAvatar.DriverName = driverName;
             return instance;
         }
 

@@ -47,11 +47,7 @@ namespace JDI.Core.Selenium.Base
         public By Locator => WebAvatar.ByLocator;
         public By FrameLocator => WebAvatar.FrameLocator;
 
-        public GetElementModule WebAvatar
-        {
-            get => (GetElementModule) Avatar;
-            set => Avatar = value;
-        }
+        public GetElementModule WebAvatar { get; set; }
 
         private string VarName => _varName ?? Name;
 
@@ -82,7 +78,6 @@ namespace JDI.Core.Selenium.Base
             Function = function;
         }
 
-        public IAvatar Avatar { get; set; }
         public string Name { get; set; }
         public string ParentTypeName => Parent?.GetType().Name ?? "";
 
@@ -96,11 +91,6 @@ namespace JDI.Core.Selenium.Base
         {
             Name = NameAttribute.GetElementName(field);
             _varName = field.Name;
-        }
-
-        public WebElement GetHighLightElement()
-        {
-            return Avatar.GetFirstValue<WebElement>();
         }
 
         public void FillLocatorTemplate(string name)
@@ -141,8 +131,8 @@ namespace JDI.Core.Selenium.Base
         public new string ToString()
         {
             return JDISettings.ShortLogMessagesFormat
-                ? $"{TypeName} '{Name}' ({ParentTypeName}.{VarName}; {Avatar})"
-                : $"Name: '{Name}', Type: '{TypeName}' In: '{ParentTypeName}', {Avatar}";
+                ? $"{TypeName} '{Name}' ({ParentTypeName}.{VarName};)"
+                : $"Name: '{Name}', Type: '{TypeName}' In: '{ParentTypeName}'";
         }
 
         private string ToButton(string buttonName)

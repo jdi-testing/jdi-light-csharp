@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using JDI.Core.Attributes.Functions;
+using JDI.Core.Selenium.Elements.APIInteract;
 
 namespace JDI.Core.Interfaces.Base
 {
@@ -7,8 +8,8 @@ namespace JDI.Core.Interfaces.Base
     {
         string Name { get; set; }
         string TypeName { get; set; }
-        IAvatar Avatar { get; set; }
         object Parent { set; get; }
+        GetElementModule WebAvatar { get; set; }
         void SetName(FieldInfo field);
         void SetFunction(Functions function);
     }

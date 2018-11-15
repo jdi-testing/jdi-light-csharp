@@ -156,7 +156,7 @@ namespace JDI.Core.Selenium.Elements.Complex
             WebBaseElement element = null)
             : base(optionsNamesLocator, webElements: webElements, element: element)
         {
-            _allLabels = new GetElementType(allLabelsLocator, this);
+            _allLabels = new GetElementType(allLabelsLocator);
         }
 
         protected SelectElement Selector

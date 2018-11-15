@@ -171,20 +171,20 @@ namespace JDI.Core.Selenium.Elements.Complex
 
             if (value != null)
             {
-                _element = new GetElementType(value, this);
+                _element = new GetElementType(value);
                 if (_expander == null) _expander = _element;
             }
 
             if (list != null)
-                _allLabels = new GetElementType(list, this);
+                _allLabels = new GetElementType(list);
             if (expand != null)
             {
-                _expander = new GetElementType(expand, this);
+                _expander = new GetElementType(expand);
                 if (_element == null) _element = _expander;
             }
 
             if (elementByName != null)
-                _elementByName = new GetElementType(elementByName, this);
+                _elementByName = new GetElementType(elementByName);
         }
 
         public void Wait(Func<IWebElement, bool> resultFunc)

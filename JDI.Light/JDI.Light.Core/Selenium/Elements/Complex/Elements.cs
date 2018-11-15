@@ -35,7 +35,7 @@ namespace JDI.Core.Selenium.Elements.Complex
                             var element = (T) Activator.CreateInstance(typeof(T), el);
                             element.WebElement = el;
                             element.Parent = this;
-                            new WebCascadeInit().InitElements(element, Avatar.DriverName);
+                            new WebCascadeInit().InitElements(element, WebAvatar.DriverName);
                             return element;
                         },
                         ex => "Can't instantiate list element")

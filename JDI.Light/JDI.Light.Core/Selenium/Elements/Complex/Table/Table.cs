@@ -533,7 +533,7 @@ namespace JDI.Core.Selenium.Elements.Complex.Table
             if (cell != null)
                 return cell.UpdateData(colName, rowName);
             cell = new Cell(colNum, rowNum, colName, rowName, CellLocatorBy, this, colIndex, rowIndex);
-            cell.SetAvatar((GetElementModule) cell.Get().Avatar);
+            cell.SetAvatar(cell.Get().WebAvatar);
 
             if (Cache)
                 AllCells.Add(cell);

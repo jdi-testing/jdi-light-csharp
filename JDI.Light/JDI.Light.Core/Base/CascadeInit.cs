@@ -95,7 +95,7 @@ namespace JDI.Core.Base
                         ? GetInstancePage(parent, field, type, parentType)
                         : GetInstanceElement(parent, type, parentType, field, driverName);
                     instance.SetName(field);
-                    instance.Avatar.DriverName = driverName;
+                    instance.WebAvatar.DriverName = driverName;
                     instance.TypeName = type.Name;
                     instance.Parent = parent;
                     field.SetValue(parent, instance);
