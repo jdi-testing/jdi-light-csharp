@@ -12,11 +12,6 @@ namespace JDI.Core.Extensions
                 action(element);
         }
 
-        public static string FromNewLine(this string s)
-        {
-            return " " + Environment.NewLine + s;
-        }
-
         public static string Print(this IEnumerable<string> list, string separator = ", ", string format = "{0}")
         {
             return list != null ? string.Join(separator, list.Select(el => string.Format(format, el))) : "";
@@ -28,11 +23,6 @@ namespace JDI.Core.Extensions
             return collection != null
                 ? string.Join(separator, collection.Select(pair => string.Format(pairFormat, pair.Key, pair.Value)))
                 : "";
-        }
-
-        public static IList<string> Split(this string s, string separator)
-        {
-            return s.Split(new[] {separator}, StringSplitOptions.None);
         }
 
         public static IList<T> ListCopy<T>(this IList<T> list, int from = 0, int to = 0)

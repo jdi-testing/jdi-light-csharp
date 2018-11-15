@@ -32,7 +32,6 @@ namespace JDI.Core.Selenium.Elements.Base
             Invoker.DoJAction($"Click on Element with coordinates (x,y) = ({x},{y})",
                 el =>
                 {
-                    var element = WebElement;
                     new Actions(WebDriver).MoveToElement(WebElement, x, y).Click().Build().Perform();
                 }
             );

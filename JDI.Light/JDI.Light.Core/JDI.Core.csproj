@@ -120,7 +120,6 @@
     <Compile Include="Selenium\Elements\Complex\Tabs.cs" />
     <Compile Include="Selenium\Elements\Complex\TextList.cs" />
     <Compile Include="Selenium\Elements\Complex\Tree.cs" />
-    <Compile Include="Selenium\Elements\Composite\Alert.cs" />
     <Compile Include="Selenium\Elements\Composite\CheckPageTypes .cs" />
     <Compile Include="Selenium\Elements\Composite\Form.cs" />
     <Compile Include="Selenium\Elements\Composite\NavigationPane.cs" />

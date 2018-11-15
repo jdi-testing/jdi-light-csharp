@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace JDI.Core.Extensions
@@ -23,6 +24,16 @@ namespace JDI.Core.Extensions
         public static bool SimplifiedEqual(this string s1, string s2)
         {
             return s1.Simplify().Equals(s2.Simplify());
+        }
+
+        public static string FromNewLine(this string s)
+        {
+            return " " + Environment.NewLine + s;
+        }
+
+        public static IList<string> Split(this string s, string separator)
+        {
+            return s.Split(new[] { separator }, StringSplitOptions.None);
         }
     }
 }
