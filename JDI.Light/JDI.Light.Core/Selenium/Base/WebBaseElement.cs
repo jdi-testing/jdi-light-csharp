@@ -106,6 +106,32 @@ namespace JDI.Core.Selenium.Base
         {
             return Timer.GetResultByCondition(() => resultFunc.Invoke(GetWebElement()), condition.Invoke);
         }
+        
+        /**
+         * @param resultFunc Specify expected function result
+         * @param timeoutSec Specify timeout
+         * Waits while condition with WebElement happens during specified timeout and returns wait result
+         */
+        public void Wait(Func<IWebElement, bool> resultFunc, int timeoutSec)
+        {
+            var result = Wait(resultFunc, r => r, timeoutSec);
+            JDISettings.Asserter.IsTrue(result);
+        }
+
+        /**
+         * @param resultFunc Specify expected function result
+         * @param timeoutSec Specify timeout
+         * @param condition  Specify expected function condition
+         * @return Waits while condition with WebElement and returns wait result
+         */
+        public T Wait<T>(Func<IWebElement, T> resultFunc, Func<T, bool> condition, int timeoutSec)
+        {
+            SetWaitTimeout(timeoutSec);
+            var result =
+                new Timer(timeoutSec).GetResultByCondition(() => resultFunc.Invoke(GetWebElement()), condition.Invoke);
+            RestoreWaitTimeout();
+            return result;
+        }
 
         public void SetAttribute(string attributeName, string value)
         {
@@ -239,6 +265,16 @@ namespace JDI.Core.Selenium.Base
         public void WaitVanished()
         {
             Actions.WaitVanished(el => Timer.Wait(() => !IsDisplayedAction(el)));
+        }
+
+        public void Highlight()
+        {
+            WebSettings.WebDriverFactory.Highlight(this);
+        }
+
+        public void Highlight(HighlightSettings highlightSettings)
+        {
+            WebSettings.WebDriverFactory.Highlight(this, highlightSettings);
         }
     }
 }

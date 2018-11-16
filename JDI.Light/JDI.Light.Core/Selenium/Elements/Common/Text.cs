@@ -1,12 +1,11 @@
 ﻿using System;
 using JDI.Core.Interfaces.Common;
 using JDI.Core.Selenium.Base;
-using JDI.Core.Selenium.Elements.Base;
 using OpenQA.Selenium;
 
 namespace JDI.Core.Selenium.Elements.Common
 {
-    public class Text : WebElement, IText
+    public class Text : WebBaseElement, IText
     {
         protected Func<WebBaseElement, string> GetValueFunc = el => ((Text) el).GetTextAction(el);
 
@@ -15,7 +14,7 @@ namespace JDI.Core.Selenium.Elements.Common
         }
 
         public Text(By byLocator = null, IWebElement webElement = null, WebBaseElement element = null)
-            : base(byLocator, webElement, element)
+            : base(byLocator, webElement, element: element)
         {
         }
 

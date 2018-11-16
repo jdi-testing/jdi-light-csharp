@@ -42,8 +42,8 @@ namespace JDI.Core.Selenium.Elements.WebActions
         public void ProcessDemoMode()
         {
             if (!JDISettings.IsDemoMode) return;
-            if (_element is WebElement)
-                ((WebElement) _element).Highlight(JDISettings.HighlightSettings);
+            if (_element is WebBaseElement)
+                ((WebBaseElement) _element).Highlight(JDISettings.HighlightSettings);
         }
     }
 }

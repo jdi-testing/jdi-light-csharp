@@ -1,6 +1,6 @@
 ﻿using System;
 using JDI.Core.Interfaces.Complex;
-using JDI.Core.Selenium.Elements.Base;
+using JDI.Core.Selenium.Base;
 using JDI.Core.Selenium.Elements.Common;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
@@ -96,7 +96,7 @@ namespace JDI.Core.Selenium.Elements.Complex
         public virtual Action<Dropdown<TEnum>> ClickAction { get; set; } = d => d.Element.Click();
         public virtual Func<Dropdown<TEnum>, string> GetTextAction { get; set; } = d => d.Element.GetText;
 
-        public new IWebElement WebElement => new WebElement(Locator, element: this).WebElement;
+        public new IWebElement WebElement => new WebBaseElement(Locator, element: this).WebElement;
 
         public new void WaitDisplayed()
         {
@@ -154,7 +154,7 @@ namespace JDI.Core.Selenium.Elements.Complex
         {
             if (root != null)
             {
-                var el = new WebElement(root)
+                var el = new WebBaseElement(root)
                 {
                     WebAvatar =
                     {

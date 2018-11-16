@@ -6,7 +6,7 @@ using OpenQA.Selenium.Interactions;
 
 namespace JDI.Core.Selenium.Elements.Base
 {
-    public class Clickable : WebElement, IClickable
+    public class Clickable : WebBaseElement, IClickable
     {
         public Action<WebBaseElement> ClickAction = cl => cl.WebElement.Click();
 
@@ -18,7 +18,7 @@ namespace JDI.Core.Selenium.Elements.Base
         }
 
         public Clickable(By byLocator = null, IWebElement webElement = null, WebBaseElement element = null)
-            : base(byLocator, webElement, element)
+            : base(byLocator, webElement, element: element)
         {
         }
 

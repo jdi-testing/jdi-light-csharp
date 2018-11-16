@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using JDI.Core.Interfaces.Common;
 using JDI.Core.Interfaces.Complex;
-using JDI.Core.Selenium.DriverFactory;
 using JDI.Core.Selenium.Elements.Base;
 using JDI.Core.Selenium.Elements.Common;
 using JDI.Core.Selenium.Elements.Complex;
@@ -20,12 +19,6 @@ namespace JDI.Core.Selenium.Elements.Composite
         {
             s.SearchField.Input(text);
             s.Suggestions.TextElements[selectIndex].Click();
-        };
-
-        protected Action<Search, string, string> ChooseSuggestionNameAction = (s, text, selectValue) =>
-        {
-            s.SearchField.Input(text);
-            s.GetElement(selectValue).Click();
         };
 
         protected Action<Search, string> FindAction = (s, text) =>
@@ -104,12 +97,6 @@ namespace JDI.Core.Selenium.Elements.Composite
             Invoker.DoJAction($"Search text '{text}'", s => FindAction(this, text));
         }
 
-        public void ChooseSuggestion(string text, string selectValue)
-        {
-            Invoker.DoJAction($"Search for text '{text}' and choose suggestion '{selectValue}'",
-                s => ChooseSuggestionNameAction(this, text, selectValue));
-        }
-
         public void ChooseSuggestion(string text, int selectIndex)
         {
             Invoker.DoJAction($"Search for text '{text}' and choose suggestion '{selectIndex}'",
@@ -120,13 +107,6 @@ namespace JDI.Core.Selenium.Elements.Composite
         {
             return Invoker.DoJActionResult($"Get all suggestions for input '{text}'",
                 s => GetSuggestionsAction(this, text));
-        }
-
-        private Clickable GetElement(string name)
-        {
-            if (Select != null)
-                return Copy(Select, Locator.FillByTemplate(name));
-            throw JDISettings.Exception("Select locator not specified for search. Use accordance constructor");
         }
     }
 }

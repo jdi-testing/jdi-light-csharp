@@ -1,8 +1,8 @@
-﻿using JDI.Core.Selenium.Elements.Base;
+﻿using JDI.Core.Selenium.Base;
 
 namespace JDI.Core.Selenium.Elements.Composite
 {
-    public class Section : WebElement
+    public class Section : WebBaseElement
     {
     }
 }

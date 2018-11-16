@@ -10,7 +10,6 @@ using JDI.Core.Interfaces.Base;
 using JDI.Core.Interfaces.Complex;
 using JDI.Core.Selenium.DriverFactory;
 using JDI.Core.Selenium.Elements.APIInteract;
-using JDI.Core.Selenium.Elements.Base;
 using JDI.Core.Selenium.Elements.Complex;
 using JDI.Core.Selenium.Elements.Complex.Table;
 using JDI.Core.Selenium.Elements.Complex.Table.Interfaces;
@@ -29,7 +28,7 @@ namespace JDI.Core.Selenium.Base
             typeof(object),
             typeof(WebPage),
             typeof(Section),
-            typeof(WebElement)
+            typeof(WebBaseElement)
         };
 
         protected override void FillPageFromAnnotation(FieldInfo field, IBaseElement instance, Type parentType)

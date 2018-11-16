@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using JDI.Core.Interfaces;
 using JDI.Core.Interfaces.Base;
+using JDI.Core.Selenium.Base;
 using JDI.Core.Selenium.Elements.Base;
 using JDI.Core.Settings;
 using OpenQA.Selenium;
@@ -196,7 +197,7 @@ namespace JDI.Core.Selenium.DriverFactory
         {
             if (highlightSettings == null)
                 highlightSettings = new HighlightSettings();
-            var orig = ((WebElement) element).GetWebElement().GetAttribute("style");
+            var orig = ((WebBaseElement) element).GetWebElement().GetAttribute("style");
             element.SetAttribute("style",
                 $"border: 3px solid {highlightSettings.FrameColor}; background-color: {highlightSettings.BgColor};");
             Thread.Sleep(highlightSettings.TimeoutInSec * 1000);

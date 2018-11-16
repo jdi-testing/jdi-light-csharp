@@ -1,6 +1,7 @@
 ﻿using System;
 using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Complex;
+using JDI.Core.Selenium.Base;
 using JDI.Core.Selenium.Elements.Base;
 using OpenQA.Selenium;
 
@@ -58,7 +59,7 @@ namespace JDI.Core.Selenium.Elements.Complex
 
         protected Clickable Button { get; set; }
 
-        public new IWebElement WebElement => new WebElement(Locator)
+        public new IWebElement WebElement => new WebBaseElement(Locator)
         {
             WebAvatar = {DriverName = WebAvatar.DriverName},
             Parent = Parent

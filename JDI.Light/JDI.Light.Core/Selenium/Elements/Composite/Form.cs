@@ -5,14 +5,14 @@ using JDI.Core.Attributes;
 using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Base;
 using JDI.Core.Interfaces.Complex;
-using JDI.Core.Selenium.Elements.Base;
+using JDI.Core.Selenium.Base;
 using JDI.Core.Settings;
 using JDI.Core.Utils;
 using OpenQA.Selenium;
 
 namespace JDI.Core.Selenium.Elements.Composite
 {
-    public class Form : WebElement, IForm
+    public class Form : WebBaseElement, IForm
     {
         protected Func<Form, IHasValue, string> GetFieldValueAction =
             (f, element) => element.Value;

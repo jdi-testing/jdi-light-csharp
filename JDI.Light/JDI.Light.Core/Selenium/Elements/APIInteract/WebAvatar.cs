@@ -140,7 +140,7 @@ namespace JDI.Core.Selenium.Elements.APIInteract
             if (element == null || (el = element as WebBaseElement) == null
                                 || el.Parent == null && el.FrameLocator == null)
                 return WebDriver.SwitchTo().DefaultContent();
-            var elem = element as WebElement;
+            var elem = element as WebBaseElement;
             if (elem?.WebAvatar._webElement != null)
                 return elem.WebElement;
             var locator = el.Locator;

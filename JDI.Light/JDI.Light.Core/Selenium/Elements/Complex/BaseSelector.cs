@@ -40,7 +40,7 @@ namespace JDI.Core.Selenium.Elements.Complex
             if (!s.HasLocator)
                 throw JDISettings.Exception("Element has no locators");
             return s.Locator.ToString().Contains("{0}")
-                ? new WebElement(s.Locator.FillByTemplate(name))
+                ? new WebBaseElement(s.Locator.FillByTemplate(name))
                 {
                     WebAvatar = {DriverName = s.WebAvatar.DriverName},
                     Parent = s.Parent

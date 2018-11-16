@@ -1,7 +1,7 @@
 ﻿using JDI.Core.Attributes;
 using JDI.Core.Interfaces.Common;
 using JDI.Core.Interfaces.Complex;
-using JDI.Core.Selenium.Elements.Base;
+using JDI.Core.Selenium.Base;
 using JDI.Core.Selenium.Elements.Common;
 using JDI.Core.Selenium.Elements.Complex;
 using JDI.Core.Selenium.Elements.Composite;
@@ -13,23 +13,22 @@ namespace JDI.UIWebTests.UIObjects.Pages
 {
     public class MetalsColorsPage : WebPage
     {
-        [FindBy(Id = "calculate-button")] public Label Calculate;
+        [FindBy(Id = "calculate-button")]
+        public Label Calculate;
 
-        [FindBy(Id = "calculate-button")] public Button CalculateButton;
+        [FindBy(Id = "calculate-button")]
+        public Button CalculateButton;
 
-        [FindBy(Id = "calculate-button")] public ILabel CalculateLabel;
+        [FindBy(Id = "calculate-button")]
+        public ILabel CalculateLabel;
 
-        [FindBy(Css = ".summ-res")] public IText CalculateText;
+        [FindBy(Css = ".summ-res")]
+        public IText CalculateText;
 
         [FindBy(XPath = "//*[@id='elements-checklist']//*[text()='Water']")]
         public CheckBox CbWater = new CheckBox
         {
-            IsCheckedAction = el =>
-            {
-                return new WebElement(By.XPath("//*[@id='elements-checklist']//*[*[text()='Water']]/input"))
-                    .GetInvisibleElement().Selected;
-                //.GetAttribute("checked") != null;
-            }
+            IsCheckedAction = el => new WebBaseElement(By.XPath("//*[@id='elements-checklist']//*[*[text()='Water']]/input")).WebElement.Selected
         };
 
         public IDropDown<Colors> Colors =
@@ -45,6 +44,7 @@ namespace JDI.UIWebTests.UIObjects.Pages
         [FindBy(Css = "#elements-checklist label")]
         public CheckList<Elements> Elements;
 
-        [FindBy(Id = "summary-block")] public Summary SummaryBlock;
+        [FindBy(Id = "summary-block")]
+        public Summary SummaryBlock;
     }
 }

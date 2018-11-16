@@ -82,7 +82,6 @@
     <Compile Include="Selenium\Elements\Base\Clickable.cs" />
     <Compile Include="Selenium\Elements\Base\ClickableText.cs" />
     <Compile Include="Selenium\Elements\Base\SelectableElement.cs" />
-    <Compile Include="Selenium\Elements\Base\WebElement.cs" />
     <Compile Include="Selenium\Elements\Common\Button.cs" />
     <Compile Include="Selenium\Elements\Common\CheckBox.cs" />
     <Compile Include="Selenium\Elements\Common\DatePicker.cs" />
