@@ -7,6 +7,7 @@ using JDI.Core.Interfaces.Base;
 using JDI.Core.Interfaces.Common;
 using JDI.Core.Interfaces.Complex;
 using JDI.Core.Logging;
+using JDI.Core.Selenium.Base;
 using JDI.Core.Selenium.DriverFactory;
 using JDI.Core.Selenium.Elements.Base;
 using JDI.Core.Selenium.Elements.Common;
@@ -28,7 +29,7 @@ namespace JDI.Core.Settings
 
         private static readonly Dictionary<Type, Type> DefaultInterfacesMap = new Dictionary<Type, Type>
         {
-            {typeof(IElement), typeof(WebElement)},
+            {typeof(IBaseElement), typeof(WebBaseElement)},
             {typeof(IButton), typeof(Button)},
             {typeof(IClickable), typeof(Clickable)},
             {typeof(IComboBox), typeof(ComboBox)},

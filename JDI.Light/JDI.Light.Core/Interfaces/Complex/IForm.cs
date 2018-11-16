@@ -4,7 +4,7 @@ using JDI.Core.Interfaces.Base;
 
 namespace JDI.Core.Interfaces.Complex
 {
-    public interface IForm : ISetValue, IElement
+    public interface IForm : ISetValue, IBaseElement
     {
     }
 

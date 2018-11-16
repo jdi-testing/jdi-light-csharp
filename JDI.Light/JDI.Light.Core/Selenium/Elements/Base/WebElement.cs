@@ -10,7 +10,7 @@ using OpenQA.Selenium.Interactions;
 
 namespace JDI.Core.Selenium.Elements.Base
 {
-    public class WebElement : WebBaseElement, IElement
+    public class WebElement : WebBaseElement, IVisible
     {
         protected Func<WebBaseElement, bool> IsDisplayedAction =
             el => el.WebAvatar.FindImmediately(() => el.WebElement.Displayed, false);

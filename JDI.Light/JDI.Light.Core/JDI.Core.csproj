@@ -139,7 +139,6 @@
     <Compile Include="Utils\ExceptionUtils.cs" />
     <Compile Include="Interfaces\Base\IBaseElement.cs" />
     <Compile Include="Interfaces\Base\IClickable.cs" />
-    <Compile Include="Interfaces\Base\IElement.cs" />
     <Compile Include="Interfaces\Base\IHasValue.cs" />
     <Compile Include="Interfaces\Base\IMultiSelector.cs" />
     <Compile Include="Interfaces\Base\ISelect.cs" />

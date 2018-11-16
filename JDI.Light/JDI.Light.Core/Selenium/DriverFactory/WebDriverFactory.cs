@@ -187,12 +187,12 @@ namespace JDI.Core.Selenium.DriverFactory
             return RunDrivers.Value != null && RunDrivers.Value.Any();
         }
 
-        public void Highlight(IElement element)
+        public void Highlight(IBaseElement element)
         {
             Highlight(element, HighlightSettings);
         }
 
-        public void Highlight(IElement element, HighlightSettings highlightSettings)
+        public void Highlight(IBaseElement element, HighlightSettings highlightSettings)
         {
             if (highlightSettings == null)
                 highlightSettings = new HighlightSettings();

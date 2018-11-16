@@ -12,5 +12,8 @@ namespace JDI.Core.Interfaces.Base
         WebAvatar WebAvatar { get; set; }
         void SetName(FieldInfo field);
         void SetFunction(Functions function);
+        void WaitAttribute(string name, string value);
+        string GetAttribute(string name);
+        void SetAttribute(string attributeName, string value);
     }
 }

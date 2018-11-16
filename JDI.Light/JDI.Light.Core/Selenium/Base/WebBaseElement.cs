@@ -18,7 +18,7 @@ using OpenQA.Selenium;
 
 namespace JDI.Core.Selenium.Base
 {
-    public class WebBaseElement : IBaseElement
+    public class WebBaseElement : IBaseElement, IVisible
     {
         private readonly IWebElement _webElement;
         private string _typeName;
@@ -75,6 +75,49 @@ namespace JDI.Core.Selenium.Base
         public void SetFunction(Functions function)
         {
             Function = function;
+        }
+
+        public string GetAttribute(string name)
+        {
+            return GetWebElement().GetAttribute(name);
+        }
+
+        public void WaitAttribute(string name, string value)
+        {
+            Wait(el => el.GetAttribute(name).Equals(value));
+        }
+
+        /**
+         * @param resultFunc Specify expected function result
+         * Waits while condition with WebElement happens during specified timeout and returns result using resultFunc
+         */
+        public void Wait(Func<IWebElement, bool> resultFunc)
+        {
+            var result = Wait(resultFunc, r => r);
+            JDISettings.Asserter.IsTrue(result);
+        }
+
+        /**
+         * @param resultFunc Specify expected function result
+         * @param condition  Specify expected function condition
+         * @return Waits while condition with WebElement happens and returns result using resultFunc
+         */
+        public T Wait<T>(Func<IWebElement, T> resultFunc, Func<T, bool> condition)
+        {
+            return Timer.GetResultByCondition(() => resultFunc.Invoke(GetWebElement()), condition.Invoke);
+        }
+
+        public void SetAttribute(string attributeName, string value)
+        {
+            Invoker.DoJAction($"Set Attribute '{attributeName}'='{value}'",
+                el => el.JsExecutor.ExecuteScript($"arguments[0].setAttribute('{attributeName}',arguments[1]);",
+                    WebElement, value));
+        }
+
+        public IWebElement GetWebElement()
+        {
+            return Invoker.DoJActionResult("Get web element",
+                el => WebElement ?? WebAvatar.WebElement, level: LogLevels.Debug);
         }
 
         public string Name { get; set; }
@@ -180,6 +223,22 @@ namespace JDI.Core.Selenium.Base
             if (textField == null)
                 throw JDISettings.Exception($"Can't find Text Element '{ToString()}'");
             return (Text)textField.GetValue(_webElement);
+        }
+
+        protected Func<WebBaseElement, bool> IsDisplayedAction =
+            el => el.WebAvatar.FindImmediately(() => el.WebElement.Displayed, false);
+
+        public bool Displayed => Actions.IsDisplayed(IsDisplayedAction);
+        public bool Hidden => Actions.IsDisplayed(el => !IsDisplayedAction(el));
+
+        public void WaitDisplayed()
+        {
+            Actions.WaitDisplayed(el => WebElement.Displayed);
+        }
+
+        public void WaitVanished()
+        {
+            Actions.WaitVanished(el => Timer.Wait(() => !IsDisplayedAction(el)));
         }
     }
 }
