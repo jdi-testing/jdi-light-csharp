@@ -58,7 +58,7 @@ namespace JDI.Core.Selenium.Elements.Complex
             return Value;
         }
 
-        public bool Displayed
+        public new bool Displayed
         {
             get
             {
@@ -67,7 +67,7 @@ namespace JDI.Core.Selenium.Elements.Complex
             }
         }
 
-        public bool Hidden
+        public new bool Hidden
         {
             get
             {
@@ -76,7 +76,7 @@ namespace JDI.Core.Selenium.Elements.Complex
             }
         }
 
-        public void WaitDisplayed()
+        public new void WaitDisplayed()
         {
             if (!Timer.Wait(() =>
             {
@@ -86,7 +86,7 @@ namespace JDI.Core.Selenium.Elements.Complex
                 throw JDISettings.Exception($"Wait displayed failed ({ToString()})");
         }
 
-        public void WaitVanished()
+        public new void WaitVanished()
         {
             if (!Timer.Wait(() =>
             {

@@ -199,16 +199,16 @@ namespace JDI.Core.Selenium.Elements.Complex
             }
         }
 
-        public bool Displayed => Actions.IsDisplayed(s => DisplayedAction(this));
+        public new bool Displayed => Actions.IsDisplayed(s => DisplayedAction(this));
 
-        public bool Hidden => Actions.IsDisplayed(s => !DisplayedAction(this));
+        public new bool Hidden => Actions.IsDisplayed(s => !DisplayedAction(this));
 
-        public void WaitDisplayed()
+        public new void WaitDisplayed()
         {
             Actions.WaitDisplayed(s => WaitDisplayedAction(this));
         }
 
-        public void WaitVanished()
+        public new void WaitVanished()
         {
             Actions.WaitVanished(s => Timer.Wait(() => !DisplayedAction(this)));
         }

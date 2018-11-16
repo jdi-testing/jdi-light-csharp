@@ -34,7 +34,7 @@ namespace JDI.Core.Selenium.Elements.Complex
 
         public Func<Selector<TEnum>, int> SelectedIndexAction = s => s.SelectedIndex(s.Elements);
 
-        protected Selector() : this(null, webElements: null)
+        protected Selector() : this(null)
         {
         }
 

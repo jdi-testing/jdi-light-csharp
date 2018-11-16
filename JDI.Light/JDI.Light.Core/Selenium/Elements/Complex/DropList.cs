@@ -75,7 +75,7 @@ namespace JDI.Core.Selenium.Elements.Complex
             Button.WaitVanished();
         }
 
-        public void SetAttribute(string attributeName, string value)
+        public new void SetAttribute(string attributeName, string value)
         {
             Button.SetAttribute(attributeName, value);
         }
@@ -92,12 +92,12 @@ namespace JDI.Core.Selenium.Elements.Complex
             return Actions.WaitMatchText(regEx, d => GetTextAction(this));
         }
 
-        public string GetAttribute(string name)
+        public new string GetAttribute(string name)
         {
             return Button.GetAttribute(name);
         }
 
-        public void WaitAttribute(string name, string value)
+        public new void WaitAttribute(string name, string value)
         {
             Button.WaitAttribute(name, value);
         }
@@ -139,26 +139,6 @@ namespace JDI.Core.Selenium.Elements.Complex
                 ClearAction(this);
             };
             GetValueAction = d => GetTextAction(this);
-        }
-
-        public void Wait(Func<IWebElement, bool> resultFunc)
-        {
-            Button.Wait(resultFunc);
-        }
-
-        public T Wait<T>(Func<IWebElement, T> resultFunc, Func<T, bool> condition)
-        {
-            return Button.Wait(resultFunc, condition);
-        }
-
-        public void Wait(Func<IWebElement, bool> resultFunc, int timeoutSec)
-        {
-            Button.Wait(resultFunc, timeoutSec);
-        }
-
-        public T Wait<T>(Func<IWebElement, T> resultFunc, Func<T, bool> condition, int timeoutSec)
-        {
-            return Button.Wait(resultFunc, condition, timeoutSec);
         }
     }
 }

@@ -44,7 +44,7 @@ namespace JDI.Core.Selenium.Elements.Complex
         {
         }
 
-        public Dropdown(By selectLocator) : base(selectLocator, webElements: null)
+        public Dropdown(By selectLocator) : base(selectLocator)
         {
         }
 
@@ -97,17 +97,7 @@ namespace JDI.Core.Selenium.Elements.Complex
         public virtual Func<Dropdown<TEnum>, string> GetTextAction { get; set; } = d => d.Element.GetText;
 
         public new IWebElement WebElement => new WebBaseElement(Locator, element: this).WebElement;
-
-        public new void WaitDisplayed()
-        {
-            Element.WaitDisplayed();
-        }
-
-        public new void WaitVanished()
-        {
-            Element.WaitVanished();
-        }
-
+        
         public void Expand()
         {
             if (!DisplayedNumAction(this, 1)) Element.Click();
@@ -135,17 +125,17 @@ namespace JDI.Core.Selenium.Elements.Complex
             return Actions.WaitMatchText(regEx, d => GetTextAction(this));
         }
 
-        public void SetAttribute(string attributeName, string value)
+        public new void SetAttribute(string attributeName, string value)
         {
             Element.SetAttribute(attributeName, value);
         }
 
-        public string GetAttribute(string name)
+        public new string GetAttribute(string name)
         {
             return Element.GetAttribute(name);
         }
 
-        public void WaitAttribute(string name, string value)
+        public new void WaitAttribute(string name, string value)
         {
             Element.WaitAttribute(name, value);
         }
@@ -174,26 +164,6 @@ namespace JDI.Core.Selenium.Elements.Complex
             {
                 AllLabels = (TextList) new TextList(list).SetAvatar(WebAvatar, list);
             }
-        }
-
-        public void Wait(Func<IWebElement, bool> resultFunc)
-        {
-            Element.Wait(resultFunc);
-        }
-
-        public T Wait<T>(Func<IWebElement, T> resultFunc, Func<T, bool> condition)
-        {
-            return Element.Wait(resultFunc, condition);
-        }
-
-        public void Wait(Func<IWebElement, bool> resultFunc, int timeoutSec)
-        {
-            Element.Wait(resultFunc, timeoutSec);
-        }
-
-        public T Wait<T>(Func<IWebElement, T> resultFunc, Func<T, bool> condition, int timeoutSec)
-        {
-            return Element.Wait(resultFunc, condition, timeoutSec);
         }
     }
 }

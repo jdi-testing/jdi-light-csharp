@@ -55,7 +55,7 @@ namespace JDI.Core.Selenium.Elements.Common
             Actions.Clear(ClearAction);
         }
 
-        public new void Focus()
+        public void Focus()
         {
             Actions.Focus(FocusAction);
         }
