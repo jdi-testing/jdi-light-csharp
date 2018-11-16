@@ -49,7 +49,7 @@ namespace JDI.UIWebTests.UIObjects.Sections
 
         private IJavaScriptExecutor GetJSExecutor()
         {
-            if (javaScriptExecutor == null) javaScriptExecutor = WebSettings.JSExecutor;
+            if (javaScriptExecutor == null) javaScriptExecutor = WebSettings.JsExecutor;
             return javaScriptExecutor;
         }
 

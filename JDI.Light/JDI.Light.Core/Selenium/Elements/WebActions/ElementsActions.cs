@@ -10,12 +10,12 @@ namespace JDI.Core.Selenium.Elements.WebActions
 {
     public class ElementsActions
     {
-        public ElementsActions(ActionInvoker invoker)
+        public ElementsActions(ActionInvoker<WebBaseElement> invoker)
         {
             Invoker = invoker;
         }
 
-        public ActionInvoker Invoker { get; set; }
+        public ActionInvoker<WebBaseElement> Invoker { get; set; }
 
         // Element Actions
         public bool IsDisplayed(Func<WebBaseElement, bool> isDisplayed)

@@ -16,6 +16,10 @@ namespace JDI.Core.Selenium.Elements.Complex.Table
 
     public abstract class TableLine : WebBaseElement, ITableLine
     {
+        protected TableLine(By byLocator, IWebElement webElement = null, List<IWebElement> webElements = null, WebBaseElement element = null) 
+            : base(byLocator, webElement, webElements, element)
+        {
+        }
         private int _count;
 
         private IList<string> _headers;

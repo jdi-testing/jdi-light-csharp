@@ -10,7 +10,7 @@ namespace JDI.Core.Selenium.Elements.Complex.Table
 {
     public class Rows : TableLine
     {
-        public Rows()
+        public Rows() : base(By.XPath(".//tr[{0}]/td"))
         {
             HasHeader = false;
             ElementIndex = ElementIndexType.Nums;

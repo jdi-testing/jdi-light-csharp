@@ -17,8 +17,6 @@ using JDI.Core.Selenium.Elements.Complex.Table.Interfaces;
 using OpenQA.Selenium;
 using Image = JDI.Core.Selenium.Elements.Common.Image;
 
-// ReSharper disable InconsistentNaming
-
 namespace JDI.Core.Settings
 {
     public class WebSettings : JDISettings
@@ -59,7 +57,7 @@ namespace JDI.Core.Settings
         public static WebDriverFactory WebDriverFactory =>
             _webDriverFactory ?? (_webDriverFactory = new WebDriverFactory());
 
-        public static IJavaScriptExecutor JSExecutor => DriverFactory.GetDriver() as IJavaScriptExecutor;
+        public static IJavaScriptExecutor JsExecutor => DriverFactory.GetDriver() as IJavaScriptExecutor;
 
         public static string UseDriver(DriverTypes driverName = DriverTypes.Firefox)
         {

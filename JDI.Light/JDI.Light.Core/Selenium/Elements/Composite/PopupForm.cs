@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using JDI.Core.Attributes.Functions;
 using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Complex;
+using JDI.Core.Selenium.Base;
+using OpenQA.Selenium;
 
 namespace JDI.Core.Selenium.Elements.Composite
 {

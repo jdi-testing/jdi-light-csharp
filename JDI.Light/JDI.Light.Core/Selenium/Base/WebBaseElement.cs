@@ -27,12 +27,12 @@ namespace JDI.Core.Selenium.Base
 
         public Functions Function = Functions.None;
 
-        public ActionInvoker Invoker;
+        public ActionInvoker<WebBaseElement> Invoker;
 
         public WebBaseElement(By byLocator = null, IWebElement webElement = null,
             List<IWebElement> webElements = null, WebBaseElement element = null)
         {
-            Invoker = new ActionInvoker(this);
+            Invoker = new ActionInvoker<WebBaseElement>(this);
             Actions = new ElementsActions(Invoker);
             WebAvatar = new WebAvatar(this, byLocator) {WebElement = webElement, WebElements = webElements};
             _webElement = webElement;
@@ -182,18 +182,6 @@ namespace JDI.Core.Selenium.Base
         public void RestoreWaitTimeout()
         {
             SetWaitTimeout(JDISettings.Timeouts.WaitElementSec);
-        }
-
-        public void LogAction(string actionName, LogLevels level)
-        {
-            JDISettings.ToLog(string.Format(JDISettings.ShortLogMessagesFormat
-                ? "{0} for {1}"
-                : "Perform action '{0}' with WebElement ({1})", actionName, ToString()), level);
-        }
-
-        public void LogAction(string actionName)
-        {
-            LogAction(actionName, LogLevels.Info);
         }
 
         public new string ToString()

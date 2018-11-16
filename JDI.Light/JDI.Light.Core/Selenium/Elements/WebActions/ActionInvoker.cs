@@ -2,25 +2,24 @@
 using JDI.Core.Extensions;
 using JDI.Core.Logging;
 using JDI.Core.Selenium.Base;
-using JDI.Core.Selenium.Elements.Base;
 using JDI.Core.Settings;
 using JDI.Core.Utils;
 
 namespace JDI.Core.Selenium.Elements.WebActions
 {
-    public class ActionInvoker
+    public class ActionInvoker<T>
     {
-        private static ActionScenarios _actionScenarios;
-        private readonly WebBaseElement _element;
+        private static ActionScenarios<T> _actionScenarios;
+        private readonly T _element;
 
-        public ActionInvoker(WebBaseElement element)
+        public ActionInvoker(T element)
         {
             JDISettings.NewTest();
             _element = element;
-            _actionScenarios = new ActionScenarios(element);
+            _actionScenarios = new ActionScenarios<T>(element);
         }
 
-        public TResult DoJActionResult<TResult>(string actionName, Func<WebBaseElement, TResult> action,
+        public TResult DoJActionResult<TResult>(string actionName, Func<T, TResult> action,
             Func<TResult, string> logResult = null, LogLevels level = LogLevels.Info)
         {
             return ExceptionUtils.ActionWithException(() =>
@@ -30,7 +29,7 @@ namespace JDI.Core.Selenium.Elements.WebActions
             }, ex => $"Failed to do '{actionName}' action. Reason: {ex}");
         }
 
-        public void DoJAction(string actionName, Action<WebBaseElement> action, LogLevels level = LogLevels.Info)
+        public void DoJAction(string actionName, Action<T> action, LogLevels level = LogLevels.Info)
         {
             TimerExtensions.ForceDone(() =>
             {
@@ -42,8 +41,7 @@ namespace JDI.Core.Selenium.Elements.WebActions
         public void ProcessDemoMode()
         {
             if (!JDISettings.IsDemoMode) return;
-            if (_element is WebBaseElement)
-                ((WebBaseElement) _element).Highlight(JDISettings.HighlightSettings);
+            (_element as WebBaseElement)?.Highlight(JDISettings.HighlightSettings);
         }
     }
 }

@@ -3,14 +3,14 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Complex;
-using JDI.Core.Selenium.Base;
+using JDI.Core.Selenium.Elements.WebActions;
 using JDI.Core.Settings;
 using JDI.Core.Utils;
 using OpenQA.Selenium;
 
 namespace JDI.Core.Selenium.Elements.Composite
 {
-    public class WebPage : WebBaseElement, IPage
+    public class WebPage : IPage
     {
         public static bool CheckAfterOpen = false;
         public static WebPage CurrentPage;
@@ -21,14 +21,19 @@ namespace JDI.Core.Selenium.Elements.Composite
         public string Title;
         protected string UrlTemplate;
 
-        public WebPage()
-        {
-        }
+        public ActionInvoker<WebPage> Invoker { get; set; }
+        public string Name { get; set; }
+        public IWebDriver WebDriver { get; set; }
+        public Timer Timer { get; set; }
 
         public WebPage(string url = null, string title = null)
         {
             Url = url;
             Title = title;
+            Invoker = new ActionInvoker<WebPage>(this);
+            Name = $"{Title} ({Url})";
+            WebDriver = WebSettings.WebDriverFactory.GetDriver();
+            Timer = new Timer(JDISettings.Timeouts.CurrentTimeoutSec * 1000);
         }
 
         public string Url
