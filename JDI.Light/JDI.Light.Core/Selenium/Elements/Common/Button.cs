@@ -9,7 +9,7 @@ namespace JDI.Core.Selenium.Elements.Common
     public class Button : ClickableText, IButton
     {
         protected new Func<WebBaseElement, string> GetTextFunc =
-            el => el.WebAvatar.FindImmediately(() => el.WebElement.GetAttribute("value"), "");
+            el => el.FindImmediately(() => el.WebElement.GetAttribute("value"), "");
 
         public Button() : this(null)
         {

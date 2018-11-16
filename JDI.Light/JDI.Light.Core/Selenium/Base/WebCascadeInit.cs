@@ -9,7 +9,6 @@ using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Base;
 using JDI.Core.Interfaces.Complex;
 using JDI.Core.Selenium.DriverFactory;
-using JDI.Core.Selenium.Elements.APIInteract;
 using JDI.Core.Selenium.Elements.Complex;
 using JDI.Core.Selenium.Elements.Complex.Table;
 using JDI.Core.Selenium.Elements.Complex.Table.Interfaces;
@@ -41,7 +40,7 @@ namespace JDI.Core.Selenium.Base
         {
             var element = (WebBaseElement) instance;
             if (!element.HasLocator)
-                element.WebAvatar = new WebAvatar(element, GetNewLocator(field));
+                element.Locator = GetNewLocator(field);
             return element;
         }
 
@@ -58,12 +57,12 @@ namespace JDI.Core.Selenium.Base
             if (parent != null && type == null) return element;
             var frameBy = FrameAttribute.GetFrame(field);
             if (frameBy != null)
-                element.WebAvatar.FrameLocator = frameBy;
+                element.FrameLocator = frameBy;
             By template;
             var form = element.Parent as Form;
             if (form != null && !element.HasLocator
                              && (template = form.LocatorTemplate) != null)
-                element.WebAvatar.ByLocator = template.FillByTemplate(field.Name);
+                element.Locator = template.FillByTemplate(field.Name);
             return element;
         }
 
@@ -90,14 +89,14 @@ namespace JDI.Core.Selenium.Base
                 {
                     instance = (WebBaseElement) Activator.CreateInstance(type);
                     if (newLocator != null)
-                        instance.WebAvatar.ByLocator = newLocator;
+                        instance.Locator = newLocator;
                 }
             }
 
             if (instance == null)
                 throw JDISettings.Exception("Unknown interface: " + type +
                                             ". Add relation interface -> class in VIElement.InterfaceTypeMap");
-            instance.WebAvatar.DriverName = driverName;
+            instance.DriverName = driverName;
             return instance;
         }
 

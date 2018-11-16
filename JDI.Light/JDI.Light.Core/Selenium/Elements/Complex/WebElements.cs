@@ -24,14 +24,14 @@ namespace JDI.Core.Selenium.Elements.Complex
             {
                 if (JDISettings.UseCache && _elements != null && _elements.Any())
                     return _elements;
-                return _elements = WebAvatar.SearchAll().WebElements
+                return _elements = SearchAll().WebElements
                     .Select(el => ExceptionUtils.ActionWithException(
                         () =>
                         {
                             var element = (T) Activator.CreateInstance(typeof(T), el);
                             element.WebElement = el;
                             element.Parent = this;
-                            new WebCascadeInit().InitElements(element, WebAvatar.DriverName);
+                            new WebCascadeInit().InitElements(element, DriverName);
                             return element;
                         },
                         ex => "Can't instantiate list element")

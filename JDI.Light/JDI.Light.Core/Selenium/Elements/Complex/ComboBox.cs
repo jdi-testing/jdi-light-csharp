@@ -28,7 +28,7 @@ namespace JDI.Core.Selenium.Elements.Complex
             By allOptionsNamesLocator = null)
             : base(selectorLocator, optionsNamesLocatorTemplate, allOptionsNamesLocator)
         {
-            TextField = (TextField) new TextField().SetAvatar(WebAvatar, valueLocator);
+            TextField = new TextField(valueLocator);
         }
 
         public override Func<Dropdown<TEnum>, string> GetTextAction => c => TextField.GetText;

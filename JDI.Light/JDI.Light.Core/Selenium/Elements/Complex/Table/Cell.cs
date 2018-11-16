@@ -86,7 +86,7 @@ namespace JDI.Core.Selenium.Elements.Complex.Table
             if (!locator.ToString().Contains("{0}") || !locator.ToString().Contains("{1}"))
                 throw JDISettings.Exception("Can't create cell with locator template " + cell.Locator
                                                                                        + ". Template for Cell should contains '{0}' - for column and '{1}' - for row indexes.");
-            cell.WebAvatar.ByLocator = locator.FillByTemplate(RowIndex, ColumnIndex);
+            cell.Locator = locator.FillByTemplate(RowIndex, ColumnIndex);
             cell.Parent = Table;
             return cell;
         }

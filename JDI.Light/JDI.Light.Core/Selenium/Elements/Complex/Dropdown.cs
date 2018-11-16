@@ -88,7 +88,7 @@ namespace JDI.Core.Selenium.Elements.Complex
                 if (!isExpanded) Element.Click();
                 return result;
             };
-            Element = (Label) new Label().SetAvatar(WebAvatar, selectLocator);
+            Element = new Label(selectLocator);
         }
 
         protected Label Element { get; set; }
@@ -146,10 +146,7 @@ namespace JDI.Core.Selenium.Elements.Complex
             {
                 var el = new WebBaseElement(root)
                 {
-                    WebAvatar =
-                    {
-                        DriverName = WebAvatar.DriverName
-                    },
+                    DriverName = DriverName,
                     Parent = Parent
                 };
                 Parent = el;
@@ -157,12 +154,12 @@ namespace JDI.Core.Selenium.Elements.Complex
 
             if (value != null)
             {
-                Element = (Label)new Label().SetAvatar(WebAvatar, value);
+                Element = new Label(value);
             }
 
             if (list != null)
             {
-                AllLabels = (TextList) new TextList(list).SetAvatar(WebAvatar, list);
+                AllLabels = new TextList(list);
             }
         }
     }

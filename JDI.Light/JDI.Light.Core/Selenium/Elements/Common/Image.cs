@@ -9,10 +9,10 @@ namespace JDI.Core.Selenium.Elements.Common
     public class Image : Clickable, IImage
     {
         protected Func<WebBaseElement, string> GetAltFunc =
-            el => el.WebAvatar.FindImmediately(() => el.WebElement.GetAttribute("alt"), "");
+            el => el.FindImmediately(() => el.WebElement.GetAttribute("alt"), "");
 
         protected Func<WebBaseElement, string> GetSourceFunc =
-            el => el.WebAvatar.FindImmediately(() => el.WebElement.GetAttribute("src"), "");
+            el => el.FindImmediately(() => el.WebElement.GetAttribute("src"), "");
 
         public Image() : this(null)
         {

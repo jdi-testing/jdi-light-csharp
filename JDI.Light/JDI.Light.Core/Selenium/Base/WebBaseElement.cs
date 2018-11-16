@@ -9,7 +9,6 @@ using JDI.Core.Interfaces.Base;
 using JDI.Core.Interfaces.Common;
 using JDI.Core.Logging;
 using JDI.Core.Selenium.DriverFactory;
-using JDI.Core.Selenium.Elements.APIInteract;
 using JDI.Core.Selenium.Elements.Common;
 using JDI.Core.Selenium.Elements.WebActions;
 using JDI.Core.Settings;
@@ -20,10 +19,12 @@ namespace JDI.Core.Selenium.Base
 {
     public class WebBaseElement : IBaseElement, IVisible
     {
-        private readonly IWebElement _webElement;
+        private IWebElement _webElement;
+        private List<IWebElement> _webElements;
         private string _typeName;
         private string _varName;
         public ElementsActions Actions;
+        public By FrameLocator;
 
         public Functions Function = Functions.None;
 
@@ -34,39 +35,154 @@ namespace JDI.Core.Selenium.Base
         {
             Invoker = new ActionInvoker<WebBaseElement>(this);
             Actions = new ElementsActions(Invoker);
-            WebAvatar = new WebAvatar(this, byLocator) {WebElement = webElement, WebElements = webElements};
             _webElement = webElement;
+            _webElements = webElements;
+            Locator = byLocator;
             if (element != null)
             {
-                WebAvatar.DriverName = element.WebAvatar.DriverName;
                 Parent = element.Parent;
             }
+            Timer = new Timer(JDISettings.Timeouts.CurrentTimeoutSec * 1000);
+            if (string.IsNullOrEmpty(DriverName) && WebSettings.WebDriverFactory != null &&
+                !string.IsNullOrEmpty(WebSettings.WebDriverFactory.CurrentDriverName))
+                DriverName = WebSettings.WebDriverFactory.CurrentDriverName;
         }
 
-        public By Locator => WebAvatar.ByLocator;
-        public By FrameLocator => WebAvatar.FrameLocator;
+        public Timer Timer { get; set; }
 
-        public WebAvatar WebAvatar { get; set; }
+        public By Locator;
 
         private string VarName => _varName ?? Name;
 
-        protected Timer Timer => WebAvatar.Timer;
+        public IWebDriver WebDriver
+            => WebSettings.WebDriverFactory.GetDriver(DriverName);
 
-        public IWebDriver WebDriver => WebAvatar.WebDriver;
+        public string DriverName { get; set; }
 
         public IWebElement WebElement
         {
-            get => _webElement ?? WebAvatar.WebElement;
-            set => WebAvatar.WebElement = value;
+            get
+            {
+                JDISettings.Logger.Debug($"Get Web Element: {this}");
+                var element = Timer.GetResultByCondition(GetWebElementAction, el => el != null);
+                JDISettings.Logger.Debug("OneElement found");
+                return element;
+            }
+            set => _webElement = value;
+        }
+
+        public WebBaseElement SearchAll()
+        {
+            LocalElementSearchCriteria = el => el != null;
+            return this;
+        }
+
+        private IWebElement GetWebElementAction()
+        {
+            if (_webElement != null)
+                return _webElement;
+            var timeout = JDISettings.Timeouts.CurrentTimeoutSec;
+            var result = GetWebElementsAction();
+            switch (result.Count)
+            {
+                case 0:
+                    throw JDISettings.Exception($"Can't find Element '{this}' during {timeout} seconds");
+                case 1:
+                    return result[0];
+                default:
+                    if (WebDriverFactory.OnlyOneElementAllowedInSearch)
+                        throw JDISettings.Exception(
+                            $"Find {result.Count} elements instead of one for Element '{this}' during {timeout} seconds");
+                    return result[0];
+            }
+        }
+
+        public Func<IWebElement, bool> LocalElementSearchCriteria;
+
+        private Func<IWebElement, bool> GetSearchCriteria
+            => LocalElementSearchCriteria ?? WebSettings.WebDriverFactory.ElementSearchCriteria;
+
+        public T FindImmediately<T>(Func<T> func, T ifError)
+        {
+            SetWaitTimeout(0);
+            var temp = LocalElementSearchCriteria;
+            LocalElementSearchCriteria = el => true;
+            T result;
+            try
+            {
+                result = func.Invoke();
+            }
+            catch
+            {
+                result = ifError;
+            }
+
+            LocalElementSearchCriteria = temp;
+            RestoreWaitTimeout();
+            return result;
+        }
+
+        private List<IWebElement> GetWebElementsAction()
+        {
+            if (_webElements != null)
+                return _webElements;
+            var result = Timer.GetResultByCondition(
+                SearchElements,
+                els => els.Count(GetSearchCriteria) > 0);
+            JDISettings.Timeouts.DropTimeouts();
+            if (result == null)
+                throw JDISettings.Exception("Can't get Web Elements");
+            return result.Where(GetSearchCriteria).ToList();
+        }
+        
+        private List<IWebElement> SearchElements()
+        {
+            var searchContext = Locator.ContainsRoot()
+                ? WebDriver.SwitchTo().DefaultContent()
+                : SearchContext(this.Parent);
+            var locator = Locator.ContainsRoot()
+                ? Locator.TrimRoot()
+                : Locator;
+            return searchContext.FindElements(locator.CorrectXPath()).ToList();
+        }
+        
+        private ISearchContext SearchContext(object element)
+        {
+            WebBaseElement el;
+            if (element == null || (el = element as WebBaseElement) == null
+                                || el.Parent == null && el.FrameLocator == null)
+                return WebDriver.SwitchTo().DefaultContent();
+            var elem = element as WebBaseElement;
+            if (_webElement != null)
+                return elem.WebElement;
+            var locator = el.Locator;
+            var searchContext = locator.ContainsRoot()
+                ? WebDriver.SwitchTo().DefaultContent()
+                : SearchContext(el.Parent);
+            locator = locator.ContainsRoot()
+                ? locator.TrimRoot()
+                : locator;
+            var frame = el.FrameLocator;
+            if (frame != null)
+                WebDriver.SwitchTo().Frame(WebDriver.FindElement(frame));
+            return locator != null
+                ? searchContext.FindElement(locator.CorrectXPath())
+                : searchContext;
         }
 
         public List<IWebElement> WebElements
         {
-            get => WebAvatar.WebElements;
-            set => WebAvatar.WebElements = value;
+            get
+            {
+                JDISettings.Logger.Debug($"Get Web Elements: {this}");
+                var elements = GetWebElementsAction();
+                JDISettings.Logger.Debug($"Found {elements.Count} elements");
+                return elements;
+            }
+            set => _webElements = value;
         }
 
-        public bool HasLocator => WebAvatar.HasLocator;
+        public bool HasLocator => Locator != null;
 
         public IJavaScriptExecutor JsExecutor => (IJavaScriptExecutor) WebDriver;
 
@@ -143,7 +259,7 @@ namespace JDI.Core.Selenium.Base
         public IWebElement GetWebElement()
         {
             return Invoker.DoJActionResult("Get web element",
-                el => WebElement ?? WebAvatar.WebElement, level: LogLevels.Debug);
+                el => WebElement, level: LogLevels.Debug);
         }
 
         public string Name { get; set; }
@@ -163,13 +279,7 @@ namespace JDI.Core.Selenium.Base
 
         public void FillLocatorTemplate(string name)
         {
-            WebAvatar.ByLocator = Locator.FillByTemplate(name);
-        }
-
-        public WebBaseElement SetAvatar(WebAvatar avatar = null, By byLocator = null)
-        {
-            WebAvatar = (avatar ?? WebAvatar).Copy(byLocator);
-            return this;
+            Locator = Locator.FillByTemplate(name);
         }
 
         public void SetWaitTimeout(long mSeconds)
@@ -240,7 +350,7 @@ namespace JDI.Core.Selenium.Base
         }
 
         protected Func<WebBaseElement, bool> IsDisplayedAction =
-            el => el.WebAvatar.FindImmediately(() => el.WebElement.Displayed, false);
+            el => el.FindImmediately(() => el.WebElement.Displayed, false);
 
         public bool Displayed => Actions.IsDisplayed(IsDisplayedAction);
         public bool Hidden => Actions.IsDisplayed(el => !IsDisplayedAction(el));

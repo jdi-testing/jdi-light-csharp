@@ -5,7 +5,6 @@ using System.Linq;
 using JDI.Core.Attributes.Objects;
 using JDI.Core.Extensions;
 using JDI.Core.Selenium.Base;
-using JDI.Core.Selenium.Elements.APIInteract;
 using JDI.Core.Selenium.Elements.Base;
 using JDI.Core.Selenium.Elements.Common;
 using JDI.Core.Selenium.Elements.Complex.Table.Interfaces;
@@ -47,7 +46,7 @@ namespace JDI.Core.Selenium.Elements.Complex.Table
 
         public By RootBy
         {
-            set => WebAvatar.ByLocator = value;
+            set => Locator = value;
         }
 
         protected By CellLocatorBy { set; get; }
@@ -160,7 +159,6 @@ namespace JDI.Core.Selenium.Elements.Complex.Table
             var newTable = new Table();
             newTable.Rows = Rows.Clone(new Rows(), newTable);
             newTable.Columns = Columns.Clone(new Columns(), newTable);
-            newTable.WebAvatar = new WebAvatar(newTable, Locator);
             newTable.Parent = Parent;
             return newTable;
         }
@@ -429,7 +427,6 @@ namespace JDI.Core.Selenium.Elements.Complex.Table
 
         public ITable SetUp(By root, By cell, By row, By column, By footer, int colStartIndex, int rowStartIndex)
         {
-            SetAvatar(byLocator: root);
             CellLocatorBy = cell;
             Rows.LineTemplate = row;
             Columns.LineTemplate = column;
@@ -533,7 +530,6 @@ namespace JDI.Core.Selenium.Elements.Complex.Table
             if (cell != null)
                 return cell.UpdateData(colName, rowName);
             cell = new Cell(colNum, rowNum, colName, rowName, CellLocatorBy, this, colIndex, rowIndex);
-            cell.SetAvatar(cell.Get().WebAvatar);
 
             if (Cache)
                 AllCells.Add(cell);

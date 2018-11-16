@@ -54,14 +54,14 @@ namespace JDI.Core.Selenium.Elements.Complex
             : base(optionsNamesLocator, allOptionsNamesLocator)
         {
             InitActions();
-            Button = (Clickable) new Clickable().SetAvatar(WebAvatar, valueLocator);
+            Button = new Clickable(valueLocator);
         }
 
         protected Clickable Button { get; set; }
 
         public new IWebElement WebElement => new WebBaseElement(Locator)
         {
-            WebAvatar = {DriverName = WebAvatar.DriverName},
+            DriverName = DriverName,
             Parent = Parent
         }.WebElement;
         

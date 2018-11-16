@@ -17,7 +17,7 @@ namespace JDI.Core.Selenium.Elements.Complex
     {
         public Func<BaseSelector<TEnum>, bool> DisplayedAction = s =>
         {
-            var els = s.WebAvatar.FindImmediately(() => s.Elements, null);
+            var els = s.FindImmediately(() => s.Elements, null);
             return els != null && els.Any() && els[0].Displayed;
         };
 
@@ -42,7 +42,7 @@ namespace JDI.Core.Selenium.Elements.Complex
             return s.Locator.ToString().Contains("{0}")
                 ? new WebBaseElement(s.Locator.FillByTemplate(name))
                 {
-                    WebAvatar = {DriverName = s.WebAvatar.DriverName},
+                    DriverName = s.DriverName,
                     Parent = s.Parent
                 }.WebElement
                 : s.Elements.FirstOrDefault(el => el.Text.Equals(name));
@@ -78,7 +78,7 @@ namespace JDI.Core.Selenium.Elements.Complex
                 return;
             }
 
-            var elements = s.WebAvatar.SearchAll().WebElements;
+            var elements = s.SearchAll().WebElements;
             var selector = GetSelectElement(elements);
             if (selector != null)
                 if (selector.Options.Any())
@@ -114,7 +114,7 @@ namespace JDI.Core.Selenium.Elements.Complex
                 return;
             }
 
-            var elements = s.WebAvatar.SearchAll().WebElements;
+            var elements = s.SearchAll().WebElements;
             if (elements.Count == 1 && elements[0].TagName.Equals("select"))
                 if (s.Selector.Options.Any())
                 {
@@ -154,7 +154,8 @@ namespace JDI.Core.Selenium.Elements.Complex
             WebBaseElement element = null)
             : base(optionsNamesLocator, webElements: webElements, element: element)
         {
-            AllLabels = (TextList) new TextList(allLabelsLocator).SetAvatar(WebAvatar, allLabelsLocator);
+            var tl = new TextList(allLabelsLocator);
+            AllLabels = tl;
         }
 
         protected SelectElement Selector
@@ -268,7 +269,7 @@ namespace JDI.Core.Selenium.Elements.Complex
             IList<IWebElement> elements;
             try
             {
-                elements = WebAvatar.SearchAll().WebElements;
+                elements = SearchAll().WebElements;
             }
             catch
             {

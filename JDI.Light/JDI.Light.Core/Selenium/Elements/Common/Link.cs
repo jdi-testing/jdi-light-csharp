@@ -10,10 +10,10 @@ namespace JDI.Core.Selenium.Elements.Common
     public class Link : ClickableText, ILink
     {
         protected Func<WebBaseElement, string> GetReferenceFunc =
-            el => el.WebAvatar.FindImmediately(() => el.WebElement.GetAttribute("href"), "");
+            el => el.FindImmediately(() => el.WebElement.GetAttribute("href"), "");
 
         protected Func<WebBaseElement, string> GetTooltipFunc =
-            el => el.WebAvatar.FindImmediately(() => el.WebElement.GetAttribute("title"), "");
+            el => el.FindImmediately(() => el.WebElement.GetAttribute("title"), "");
 
         public Link() : this(null)
         {

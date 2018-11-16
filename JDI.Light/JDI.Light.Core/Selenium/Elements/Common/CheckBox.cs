@@ -23,10 +23,10 @@ namespace JDI.Core.Selenium.Elements.Common
             el => el.IsSelected(el) || el.IsCheckedByAttribute(el);
 
         public Func<WebBaseElement, bool> IsCheckedByAttribute =
-            el => el.WebAvatar.FindImmediately(() => el.WebElement.GetAttribute("checked") != null, false);
+            el => el.FindImmediately(() => el.WebElement.GetAttribute("checked") != null, false);
 
         public Func<WebBaseElement, bool> IsSelected =
-            el => el.WebAvatar.FindImmediately(() => el.WebElement.Selected, false);
+            el => el.FindImmediately(() => el.WebElement.Selected, false);
 
         protected Action<WebBaseElement, string> SetValueAction = (el, value) =>
         {
