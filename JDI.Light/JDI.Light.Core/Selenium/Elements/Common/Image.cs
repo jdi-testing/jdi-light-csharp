@@ -8,17 +8,17 @@ namespace JDI.Core.Selenium.Elements.Common
 {
     public class Image : Clickable, IImage
     {
-        protected Func<WebBaseElement, string> GetAltFunc =
+        protected Func<UIElement, string> GetAltFunc =
             el => el.FindImmediately(() => el.WebElement.GetAttribute("alt"), "");
 
-        protected Func<WebBaseElement, string> GetSourceFunc =
+        protected Func<UIElement, string> GetSourceFunc =
             el => el.FindImmediately(() => el.WebElement.GetAttribute("src"), "");
 
         public Image() : this(null)
         {
         }
 
-        public Image(By byLocator = null, IWebElement webElement = null, WebBaseElement element = null)
+        public Image(By byLocator = null, IWebElement webElement = null, UIElement element = null)
             : base(byLocator, webElement, element)
         {
         }

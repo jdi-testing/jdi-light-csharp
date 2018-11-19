@@ -14,9 +14,9 @@ namespace JDI.Core.Selenium.Elements.Complex.Table
         Names
     }
 
-    public abstract class TableLine : WebBaseElement, ITableLine
+    public abstract class TableLine : UIElement, ITableLine
     {
-        protected TableLine(By byLocator, IWebElement webElement = null, List<IWebElement> webElements = null, WebBaseElement element = null) 
+        protected TableLine(By byLocator, IWebElement webElement = null, List<IWebElement> webElements = null, UIElement element = null) 
             : base(byLocator, webElement, webElements, element)
         {
         }

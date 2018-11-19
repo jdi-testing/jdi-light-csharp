@@ -197,7 +197,7 @@ namespace JDI.Core.Selenium.DriverFactory
         {
             if (highlightSettings == null)
                 highlightSettings = new HighlightSettings();
-            var orig = ((WebBaseElement) element).GetWebElement().GetAttribute("style");
+            var orig = ((UIElement) element).GetWebElement().GetAttribute("style");
             element.SetAttribute("style",
                 $"border: 3px solid {highlightSettings.FrameColor}; background-color: {highlightSettings.BgColor};");
             Thread.Sleep(highlightSettings.TimeoutInSec * 1000);

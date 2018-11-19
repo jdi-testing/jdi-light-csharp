@@ -9,7 +9,7 @@ using OpenQA.Selenium;
 
 namespace JDI.Core.Selenium.Elements.Complex
 {
-    public class WebElements<T> : WebBaseElement, IList<T> where T : WebBaseElement
+    public class WebElements<T> : UIElement, IList<T> where T : UIElement
     {
         private IList<T> _elements;
 

@@ -30,7 +30,7 @@ namespace JDI.Core.Selenium.Base
             typeof(object),
             typeof(WebPage),
             typeof(Section),
-            typeof(WebBaseElement)
+            typeof(UIElement)
         };
 
         public void InitElements(object parent, string driverName)
@@ -72,7 +72,7 @@ namespace JDI.Core.Selenium.Base
             string driverName)
         {
             var instance = (IBaseElement)field.GetValue(parent);
-            var element = (WebBaseElement)instance;
+            var element = (UIElement)instance;
             if (instance == null)
             {
                 instance = ExceptionUtils.ActionWithException(
@@ -101,7 +101,7 @@ namespace JDI.Core.Selenium.Base
             {
                 FillFromAnnotationRules.SetUpMenu((Menu)instance, jMenu);
             }
-            element = (WebBaseElement)instance;
+            element = (UIElement)instance;
             if (parent == null || type != null)
             {
                 var frameBy = FrameAttribute.GetFrame(field);
@@ -149,7 +149,7 @@ namespace JDI.Core.Selenium.Base
             string fieldName)
         {
             var newLocator = GetNewLocator(field);
-            WebBaseElement instance = null;
+            UIElement instance = null;
             if (type == typeof(List<>))
                 throw JDISettings.Exception(
                     $"Can't init element {fieldName} with type 'List<>'. Please use 'IList<>' or 'Elements<>' instead");
@@ -157,7 +157,7 @@ namespace JDI.Core.Selenium.Base
             {
                 var elementClass = type.GetGenericArguments()[0];
                 if (elementClass != null)
-                    instance = (WebBaseElement) Activator.CreateInstance(typeof(WebElements<>)
+                    instance = (UIElement) Activator.CreateInstance(typeof(WebElements<>)
                         .MakeGenericType(elementClass));
             }
             else
@@ -166,7 +166,7 @@ namespace JDI.Core.Selenium.Base
                     type = MapInterfaceToElement.ClassFromInterface(type);
                 if (type != null)
                 {
-                    instance = (WebBaseElement) Activator.CreateInstance(type);
+                    instance = (UIElement) Activator.CreateInstance(type);
                     if (newLocator != null)
                         instance.Locator = newLocator;
                 }

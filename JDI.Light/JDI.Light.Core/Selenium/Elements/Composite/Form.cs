@@ -12,7 +12,7 @@ using OpenQA.Selenium;
 
 namespace JDI.Core.Selenium.Elements.Composite
 {
-    public class Form : WebBaseElement, IForm
+    public class Form : UIElement, IForm
     {
         protected Func<Form, IHasValue, string> GetFieldValueAction =
             (f, element) => element.Value;

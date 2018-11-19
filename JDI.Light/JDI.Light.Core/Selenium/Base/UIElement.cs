@@ -17,7 +17,7 @@ using OpenQA.Selenium;
 
 namespace JDI.Core.Selenium.Base
 {
-    public class WebBaseElement : IBaseElement, IVisible
+    public class UIElement : IBaseElement, IVisible
     {
         private IWebElement _webElement;
         private List<IWebElement> _webElements;
@@ -28,12 +28,12 @@ namespace JDI.Core.Selenium.Base
 
         public Functions Function = Functions.None;
 
-        public ActionInvoker<WebBaseElement> Invoker;
+        public ActionInvoker<UIElement> Invoker;
 
-        public WebBaseElement(By byLocator = null, IWebElement webElement = null,
-            List<IWebElement> webElements = null, WebBaseElement element = null)
+        public UIElement(By byLocator = null, IWebElement webElement = null,
+            List<IWebElement> webElements = null, UIElement element = null)
         {
-            Invoker = new ActionInvoker<WebBaseElement>(this);
+            Invoker = new ActionInvoker<UIElement>(this);
             Actions = new ElementsActions(Invoker);
             _webElement = webElement;
             _webElements = webElements;
@@ -71,7 +71,7 @@ namespace JDI.Core.Selenium.Base
             set => _webElement = value;
         }
 
-        public WebBaseElement SearchAll()
+        public UIElement SearchAll()
         {
             LocalElementSearchCriteria = el => el != null;
             return this;
@@ -148,11 +148,11 @@ namespace JDI.Core.Selenium.Base
         
         private ISearchContext SearchContext(object element)
         {
-            WebBaseElement el;
-            if (element == null || (el = element as WebBaseElement) == null
+            UIElement el;
+            if (element == null || (el = element as UIElement) == null
                                 || el.Parent == null && el.FrameLocator == null)
                 return WebDriver.SwitchTo().DefaultContent();
-            var elem = element as WebBaseElement;
+            var elem = element as UIElement;
             if (_webElement != null)
                 return elem.WebElement;
             var locator = el.Locator;
@@ -349,7 +349,7 @@ namespace JDI.Core.Selenium.Base
             return (Text)textField.GetValue(_webElement);
         }
 
-        protected Func<WebBaseElement, bool> IsDisplayedAction =
+        protected Func<UIElement, bool> IsDisplayedAction =
             el => el.FindImmediately(() => el.WebElement.Displayed, false);
 
         public bool Displayed => Actions.IsDisplayed(IsDisplayedAction);

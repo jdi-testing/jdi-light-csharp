@@ -11,7 +11,7 @@ namespace JDI.Core.Selenium.Elements.Common
         {
         }
 
-        public Label(By byLocator = null, IWebElement webElement = null, WebBaseElement element = null)
+        public Label(By byLocator = null, IWebElement webElement = null, UIElement element = null)
             : base(byLocator, webElement, element)
         {
         }

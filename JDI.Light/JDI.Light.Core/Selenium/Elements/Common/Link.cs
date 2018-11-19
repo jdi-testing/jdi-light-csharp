@@ -9,17 +9,17 @@ namespace JDI.Core.Selenium.Elements.Common
 {
     public class Link : ClickableText, ILink
     {
-        protected Func<WebBaseElement, string> GetReferenceFunc =
+        protected Func<UIElement, string> GetReferenceFunc =
             el => el.FindImmediately(() => el.WebElement.GetAttribute("href"), "");
 
-        protected Func<WebBaseElement, string> GetTooltipFunc =
+        protected Func<UIElement, string> GetTooltipFunc =
             el => el.FindImmediately(() => el.WebElement.GetAttribute("title"), "");
 
         public Link() : this(null)
         {
         }
 
-        public Link(By byLocator = null, IWebElement webElement = null, WebBaseElement element = null)
+        public Link(By byLocator = null, IWebElement webElement = null, UIElement element = null)
             : base(byLocator, webElement, element)
         {
         }
@@ -32,7 +32,7 @@ namespace JDI.Core.Selenium.Elements.Common
 
         public string WaitReferenceContains(string text)
         {
-            Func<WebBaseElement, Func<string>> textFunc = el => () => GetReferenceFunc(el);
+            Func<UIElement, Func<string>> textFunc = el => () => GetReferenceFunc(el);
             return Invoker.DoJActionResult(
                 $"Wait link contains '{text}'",
                 el => textFunc(el).GetByCondition(t => t.Contains(text))
@@ -41,7 +41,7 @@ namespace JDI.Core.Selenium.Elements.Common
 
         public string WaitMatchReference(string regEx)
         {
-            Func<WebBaseElement, Func<string>> textFunc = el => () => GetReferenceFunc(el);
+            Func<UIElement, Func<string>> textFunc = el => () => GetReferenceFunc(el);
             return Invoker.DoJActionResult(
                 $"Wait link match regex '{regEx}'",
                 el => textFunc(el).GetByCondition(t => t.Matches(regEx))

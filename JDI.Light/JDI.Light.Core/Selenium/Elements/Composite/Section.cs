@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 
 namespace JDI.Core.Selenium.Elements.Composite
 {
-    public class Section : WebBaseElement
+    public class Section : UIElement
     {
     }
 }

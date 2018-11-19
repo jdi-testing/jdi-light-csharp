@@ -15,13 +15,13 @@ namespace JDI.Core.Selenium.Elements.Complex
         }
 
         public Selector(By optionsNamesLocatorTemplate, List<IWebElement> webElements = null,
-            WebBaseElement element = null)
+            UIElement element = null)
             : base(optionsNamesLocatorTemplate, webElements, element)
         {
         }
 
         public Selector(By optionsNamesLocatorTemplate, By allOptionsNamesLocator, List<IWebElement> webElements = null,
-            WebBaseElement element = null)
+            UIElement element = null)
             : base(optionsNamesLocatorTemplate, allOptionsNamesLocator, webElements, element)
         {
         }
@@ -39,7 +39,7 @@ namespace JDI.Core.Selenium.Elements.Complex
         }
 
         public Selector(By optionsNamesLocatorTemplate, List<IWebElement> webElements = null,
-            WebBaseElement element = null) :
+            UIElement element = null) :
             base(optionsNamesLocatorTemplate, webElements, element)
         {
             // TODO: need to initialize in each constructor ??? (exclude to separate method)
@@ -48,7 +48,7 @@ namespace JDI.Core.Selenium.Elements.Complex
         }
 
         public Selector(By optionsNamesLocatorTemplate, By allOptionsNamesLocator, List<IWebElement> webElements = null,
-            WebBaseElement element = null)
+            UIElement element = null)
             : base(optionsNamesLocatorTemplate, allOptionsNamesLocator, webElements, element)
         {
             SelectedNameAction = (s, name) => ((Selector<TEnum>) s).SelectedAction(this).Equals(name);

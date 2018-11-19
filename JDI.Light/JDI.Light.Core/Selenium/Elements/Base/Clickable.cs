@@ -6,18 +6,18 @@ using OpenQA.Selenium.Interactions;
 
 namespace JDI.Core.Selenium.Elements.Base
 {
-    public class Clickable : WebBaseElement, IClickable
+    public class Clickable : UIElement, IClickable
     {
-        public Action<WebBaseElement> ClickAction = cl => cl.WebElement.Click();
+        public Action<UIElement> ClickAction = cl => cl.WebElement.Click();
 
-        protected Action<WebBaseElement> ClickJsAction =
+        protected Action<UIElement> ClickJsAction =
             cl => cl.JsExecutor.ExecuteScript("arguments[0].click();", cl.WebElement);
 
         public Clickable() : this(null)
         {
         }
 
-        public Clickable(By byLocator = null, IWebElement webElement = null, WebBaseElement element = null)
+        public Clickable(By byLocator = null, IWebElement webElement = null, UIElement element = null)
             : base(byLocator, webElement, element: element)
         {
         }

@@ -70,7 +70,7 @@
     <Compile Include="Matchers\ScreenshotState.cs" />
     <Compile Include="Selenium\Base\SiteFactory.cs" />
     <Compile Include="Selenium\Base\SiteInfo.cs" />
-    <Compile Include="Selenium\Base\WebBaseElement.cs" />
+    <Compile Include="Selenium\Base\UIElement.cs" />
     <Compile Include="Selenium\Base\WebCascadeInit.cs" />
     <Compile Include="Selenium\DriverFactory\WebDriverByUtils.cs" />
     <Compile Include="Selenium\DriverFactory\WebDriverFactory.cs" />

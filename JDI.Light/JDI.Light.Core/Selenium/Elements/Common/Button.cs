@@ -8,14 +8,14 @@ namespace JDI.Core.Selenium.Elements.Common
 {
     public class Button : ClickableText, IButton
     {
-        protected new Func<WebBaseElement, string> GetTextFunc =
+        protected new Func<UIElement, string> GetTextFunc =
             el => el.FindImmediately(() => el.WebElement.GetAttribute("value"), "");
 
         public Button() : this(null)
         {
         }
 
-        public Button(By byLocator = null, IWebElement webElement = null, WebBaseElement element = null)
+        public Button(By byLocator = null, IWebElement webElement = null, UIElement element = null)
             : base(byLocator, webElement, element)
         {
         }

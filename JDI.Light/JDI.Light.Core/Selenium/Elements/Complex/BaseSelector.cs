@@ -12,7 +12,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace JDI.Core.Selenium.Elements.Complex
 {
-    public abstract class BaseSelector<TEnum> : WebBaseElement, IVisible
+    public abstract class BaseSelector<TEnum> : UIElement, IVisible
         where TEnum : IConvertible
     {
         public Func<BaseSelector<TEnum>, bool> DisplayedAction = s =>
@@ -40,7 +40,7 @@ namespace JDI.Core.Selenium.Elements.Complex
             if (!s.HasLocator)
                 throw JDISettings.Exception("Element has no locators");
             return s.Locator.ToString().Contains("{0}")
-                ? new WebBaseElement(s.Locator.FillByTemplate(name))
+                ? new UIElement(s.Locator.FillByTemplate(name))
                 {
                     DriverName = s.DriverName,
                     Parent = s.Parent
@@ -145,13 +145,13 @@ namespace JDI.Core.Selenium.Elements.Complex
             s => s.Timer.Wait(() => !s.DisplayedAction(s));
 
         protected BaseSelector(By optionsNamesLocator, List<IWebElement> webElements = null,
-            WebBaseElement element = null) :
+            UIElement element = null) :
             base(optionsNamesLocator, webElements: webElements, element: element)
         {
         }
 
         protected BaseSelector(By optionsNamesLocator, By allLabelsLocator, List<IWebElement> webElements = null,
-            WebBaseElement element = null)
+            UIElement element = null)
             : base(optionsNamesLocator, webElements: webElements, element: element)
         {
             var tl = new TextList(allLabelsLocator);

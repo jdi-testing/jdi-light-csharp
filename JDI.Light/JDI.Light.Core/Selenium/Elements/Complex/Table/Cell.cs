@@ -60,7 +60,7 @@ namespace JDI.Core.Selenium.Elements.Complex.Table
                 : new SelectableElement(_cellLocatorTemplate.FillByTemplate(ColumnIndex, RowIndex));
         }
 
-        public T Get<T>(Type clazz) where T : WebBaseElement
+        public T Get<T>(Type clazz) where T : UIElement
         {
             T instance;
             try
@@ -78,7 +78,7 @@ namespace JDI.Core.Selenium.Elements.Complex.Table
             return Get(instance);
         }
 
-        public T Get<T>(T cell) where T : WebBaseElement
+        public T Get<T>(T cell) where T : UIElement
         {
             var locator = cell.Locator;
             if (locator == null || locator.ToString().Equals(""))

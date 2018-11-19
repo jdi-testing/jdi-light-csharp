@@ -5,20 +5,20 @@ using OpenQA.Selenium;
 
 namespace JDI.Core.Selenium.Elements.Common
 {
-    public class Text : WebBaseElement, IText
+    public class Text : UIElement, IText
     {
-        protected Func<WebBaseElement, string> GetValueFunc = el => ((Text) el).GetTextAction(el);
+        protected Func<UIElement, string> GetValueFunc = el => ((Text) el).GetTextAction(el);
 
         public Text() : this(null)
         {
         }
 
-        public Text(By byLocator = null, IWebElement webElement = null, WebBaseElement element = null)
+        public Text(By byLocator = null, IWebElement webElement = null, UIElement element = null)
             : base(byLocator, webElement, element: element)
         {
         }
 
-        protected virtual Func<WebBaseElement, string> GetTextAction { get; set; } = el =>
+        protected virtual Func<UIElement, string> GetTextAction { get; set; } = el =>
         {
             var getText = el.WebElement.Text ?? "";
             if (!getText.Equals(""))

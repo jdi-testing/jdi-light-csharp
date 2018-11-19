@@ -7,7 +7,7 @@ namespace JDI.Core.Selenium.Elements.Base
 {
     public class ClickableText : Clickable, IText
     {
-        protected Func<WebBaseElement, string> GetTextFunc =
+        protected Func<UIElement, string> GetTextFunc =
             el =>
             {
                 var getText = el.WebElement.Text ?? "";
@@ -17,7 +17,7 @@ namespace JDI.Core.Selenium.Elements.Base
                 return getValue ?? getText;
             };
 
-        public ClickableText(By byLocator = null, IWebElement webElement = null, WebBaseElement element = null)
+        public ClickableText(By byLocator = null, IWebElement webElement = null, UIElement element = null)
             : base(byLocator, webElement, element)
         {
         }

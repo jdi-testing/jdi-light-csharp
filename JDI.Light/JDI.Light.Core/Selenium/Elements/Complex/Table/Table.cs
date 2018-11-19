@@ -127,7 +127,7 @@ namespace JDI.Core.Selenium.Elements.Complex.Table
             }
         }
 
-        protected override Func<WebBaseElement, string> GetTextAction => p =>
+        protected override Func<UIElement, string> GetTextAction => p =>
         {
             return "||X||" + Columns.Headers.Print("|") + "||\n"
                    +

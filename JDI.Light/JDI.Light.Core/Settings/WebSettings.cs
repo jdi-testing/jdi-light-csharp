@@ -27,7 +27,7 @@ namespace JDI.Core.Settings
 
         private static readonly Dictionary<Type, Type> DefaultInterfacesMap = new Dictionary<Type, Type>
         {
-            {typeof(IBaseElement), typeof(WebBaseElement)},
+            {typeof(IBaseElement), typeof(UIElement)},
             {typeof(IButton), typeof(Button)},
             {typeof(IClickable), typeof(Clickable)},
             {typeof(IComboBox), typeof(ComboBox)},

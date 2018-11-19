@@ -9,7 +9,7 @@ using OpenQA.Selenium;
 
 namespace JDI.Core.Selenium.Elements.Complex
 {
-    public class TextList : WebBaseElement, ITextList
+    public class TextList : UIElement, ITextList
     {
         private readonly WebElements<Label> _texts;
 

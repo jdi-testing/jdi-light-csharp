@@ -28,7 +28,7 @@ namespace JDI.UIWebTests.UIObjects.Pages
         [FindBy(XPath = "//*[@id='elements-checklist']//*[text()='Water']")]
         public CheckBox CbWater = new CheckBox
         {
-            IsCheckedAction = el => new WebBaseElement(By.XPath("//*[@id='elements-checklist']//*[*[text()='Water']]/input")).WebElement.Selected
+            IsCheckedAction = el => new UIElement(By.XPath("//*[@id='elements-checklist']//*[*[text()='Water']]/input")).WebElement.Selected
         };
 
         public IDropDown<Colors> Colors =

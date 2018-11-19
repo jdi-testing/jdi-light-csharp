@@ -96,7 +96,7 @@ namespace JDI.Core.Selenium.Elements.Complex
         public virtual Action<Dropdown<TEnum>> ClickAction { get; set; } = d => d.Element.Click();
         public virtual Func<Dropdown<TEnum>, string> GetTextAction { get; set; } = d => d.Element.GetText;
 
-        public new IWebElement WebElement => new WebBaseElement(Locator, element: this).WebElement;
+        public new IWebElement WebElement => new UIElement(Locator, element: this).WebElement;
         
         public void Expand()
         {
@@ -144,7 +144,7 @@ namespace JDI.Core.Selenium.Elements.Complex
         {
             if (root != null)
             {
-                var el = new WebBaseElement(root)
+                var el = new UIElement(root)
                 {
                     DriverName = DriverName,
                     Parent = Parent

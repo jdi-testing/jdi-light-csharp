@@ -59,7 +59,7 @@ namespace JDI.Core.Selenium.Elements.Complex
 
         protected Clickable Button { get; set; }
 
-        public new IWebElement WebElement => new WebBaseElement(Locator)
+        public new IWebElement WebElement => new UIElement(Locator)
         {
             DriverName = DriverName,
             Parent = Parent

@@ -29,7 +29,7 @@ namespace JDI.Core.Selenium.Elements.Complex
                 });
             };
 
-        protected Action<WebBaseElement, IWebElement> HoverAction = (m, el) =>
+        protected Action<UIElement, IWebElement> HoverAction = (m, el) =>
         {
             var action = new Actions(m.WebDriver);
             action.MoveToElement(el).ClickAndHold().Build().Perform();

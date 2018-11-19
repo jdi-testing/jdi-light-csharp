@@ -7,21 +7,21 @@ namespace JDI.Core.Selenium.Elements.Base
 {
     public class SelectableElement : ClickableText, ISelect
     {
-        protected Func<WebBaseElement, string> GetValueFunc = el
+        protected Func<UIElement, string> GetValueFunc = el
             => ((SelectableElement) el).Selected + "";
 
         protected Action<SelectableElement> SelectAction = s => s.Click();
 
         protected Func<SelectableElement, bool> SelectedAction = s => s.WebElement.Selected;
 
-        protected Action<WebBaseElement, string> SetValueAction = (el, value)
+        protected Action<UIElement, string> SetValueAction = (el, value)
             => ((SelectableElement) el).Select();
 
         public SelectableElement() : this(null)
         {
         }
 
-        public SelectableElement(By byLocator = null, IWebElement webElement = null, WebBaseElement element = null)
+        public SelectableElement(By byLocator = null, IWebElement webElement = null, UIElement element = null)
             : base(byLocator, webElement, element)
         {
         }

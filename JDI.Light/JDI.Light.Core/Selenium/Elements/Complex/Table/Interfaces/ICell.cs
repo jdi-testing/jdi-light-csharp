@@ -12,7 +12,7 @@ namespace JDI.Core.Selenium.Elements.Complex.Table.Interfaces
         string ColumnName { get; }
         string RowName { get; }
         SelectableElement Get();
-        T Get<T>(T element) where T : WebBaseElement;
-        T Get<T>(Type clazz) where T : WebBaseElement;
+        T Get<T>(T element) where T : UIElement;
+        T Get<T>(Type clazz) where T : UIElement;
     }
 }

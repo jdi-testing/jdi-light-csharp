@@ -7,23 +7,23 @@ namespace JDI.Core.Selenium.Elements.Common
 {
     public class TextField : Text, ITextField
     {
-        protected Action<WebBaseElement> ClearAction = cl => cl.WebElement.Clear();
-        protected Action<WebBaseElement> FocusAction = fa => fa.WebElement.Click();
+        protected Action<UIElement> ClearAction = cl => cl.WebElement.Clear();
+        protected Action<UIElement> FocusAction = fa => fa.WebElement.Click();
 
-        protected Func<WebBaseElement, string> GetTextFunc =
+        protected Func<UIElement, string> GetTextFunc =
             el => el.FindImmediately(() => el.WebElement.GetAttribute("value"), "");
         
-        protected Action<WebBaseElement, string> InputAction =
+        protected Action<UIElement, string> InputAction =
             (el, text) => el.WebElement.SendKeys(text);
 
-        protected Action<WebBaseElement, string> SetValueAction = (el, val) =>
+        protected Action<UIElement, string> SetValueAction = (el, val) =>
             ((TextField) el).NewInput(val);
 
         public TextField() : this(null)
         {
         }
 
-        public TextField(By byLocator = null, IWebElement webElement = null, WebBaseElement element = null)
+        public TextField(By byLocator = null, IWebElement webElement = null, UIElement element = null)
             : base(byLocator, webElement, element)
         {
         }

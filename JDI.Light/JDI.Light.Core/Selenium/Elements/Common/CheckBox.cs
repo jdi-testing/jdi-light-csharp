@@ -17,18 +17,18 @@ namespace JDI.Core.Selenium.Elements.Common
                 throw JDISettings.Exception("Can't check element. Verify locator for click or isCheckedAction");
         };
 
-        protected Func<WebBaseElement, string> GetValueFunc = el => ((CheckBox) el).IsChecked() + "";
+        protected Func<UIElement, string> GetValueFunc = el => ((CheckBox) el).IsChecked() + "";
 
         public Func<CheckBox, bool> IsCheckedAction =
             el => el.IsSelected(el) || el.IsCheckedByAttribute(el);
 
-        public Func<WebBaseElement, bool> IsCheckedByAttribute =
+        public Func<UIElement, bool> IsCheckedByAttribute =
             el => el.FindImmediately(() => el.WebElement.GetAttribute("checked") != null, false);
 
-        public Func<WebBaseElement, bool> IsSelected =
+        public Func<UIElement, bool> IsSelected =
             el => el.FindImmediately(() => el.WebElement.Selected, false);
 
-        protected Action<WebBaseElement, string> SetValueAction = (el, value) =>
+        protected Action<UIElement, string> SetValueAction = (el, value) =>
         {
             switch (value.ToLower())
             {
@@ -52,7 +52,7 @@ namespace JDI.Core.Selenium.Elements.Common
         {
         }
 
-        public CheckBox(By byLocator = null, IWebElement webElement = null, WebBaseElement element = null)
+        public CheckBox(By byLocator = null, IWebElement webElement = null, UIElement element = null)
             : base(byLocator, webElement, element)
         {
         }
@@ -83,7 +83,7 @@ namespace JDI.Core.Selenium.Elements.Common
             return Value;
         }
 
-        protected void UncheckAction(WebBaseElement el)
+        protected void UncheckAction(UIElement el)
         {
             if (IsCheckedAction((CheckBox) el))
                 ClickAction(el);
