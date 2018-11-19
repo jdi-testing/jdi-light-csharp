@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using JDI.Core.Attributes.Functions;
 
 namespace JDI.Core.Attributes
@@ -15,20 +14,6 @@ namespace JDI.Core.Attributes
             if (field.GetCustomAttribute<CancelButtonAttribute>(false) != null)
                 return Functions.Functions.Cancel;
             return Functions.Functions.None;
-        }
-
-        private static string SplitCamelCase(string camel)
-        {
-            var result = (camel.ElementAt(0) + "").ToUpper();
-            for (var i = 1; i < camel.Length - 1; i++)
-                result += (IsCapital(camel.ElementAt(i)) && !IsCapital(camel.ElementAt(i - 1)) ? " " : "") +
-                          camel.ElementAt(i);
-            return result + camel.ElementAt(camel.Length - 1);
-        }
-
-        private static bool IsCapital(char ch)
-        {
-            return 'A' < ch && ch < 'Z';
         }
     }
 }

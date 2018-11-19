@@ -63,7 +63,6 @@
     <Compile Include="Attributes\PageAttribute.cs" />
     <Compile Include="Attributes\SiteAttribute.cs" />
     <Compile Include="Base\Application.cs" />
-    <Compile Include="Base\CascadeInit.cs" />
     <Compile Include="Extensions\CommonExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />

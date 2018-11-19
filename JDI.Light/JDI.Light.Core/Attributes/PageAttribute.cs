@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reflection;
 using JDI.Core.Selenium.Elements.Composite;
 using JDI.Core.Settings;
@@ -9,31 +8,19 @@ namespace JDI.Core.Attributes
     [AttributeUsage(AttributeTargets.All, Inherited = false)]
     public class PageAttribute : Attribute
     {
-        public CheckPageTypes CheckType = CheckPageTypes.None;
         public string Title = "";
         public CheckPageTypes TitleCheckType = CheckPageTypes.None;
         public string Url = "";
         public CheckPageTypes UrlCheckType = CheckPageTypes.None;
-        public Dictionary<string, string> UrlParams;
         public string UrlTemplate = "";
-
-        public static PageAttribute Handler(FieldInfo field)
-        {
-            return field.GetCustomAttribute<PageAttribute>(false);
-        }
-
-        public static PageAttribute Handler(object obj)
-        {
-            return obj.GetType().GetCustomAttribute<PageAttribute>(false);
-        }
 
         public void FillPage(WebPage page, Type parentClass)
         {
             var url = Url;
-            var site = SiteAttribute.Get(parentClass);
-            if (!WebSettings.HasDomain && parentClass != null && site != null)
+            var site = parentClass.GetCustomAttribute<SiteAttribute>(false);
+            if (!WebSettings.HasDomain && site != null)
                 WebSettings.Domain = site.Domain;
-            url = url.Contains("://") || parentClass == null || !WebSettings.HasDomain
+            url = url.Contains("://") || !WebSettings.HasDomain
                 ? url
                 : WebPage.GetUrlFromUri(url);
             var title = Title;
@@ -41,7 +28,7 @@ namespace JDI.Core.Attributes
             var urlCheckType = UrlCheckType;
             var titleCheckType = TitleCheckType;
             if (!string.IsNullOrEmpty(urlTemplate))
-                urlTemplate = urlTemplate.Contains("://") || parentClass == null || !WebSettings.HasDomain ||
+                urlTemplate = urlTemplate.Contains("://") || !WebSettings.HasDomain ||
                               urlCheckType != CheckPageTypes.Match
                     ? urlTemplate
                     : WebPage.GetMatchFromDomain(urlTemplate);
