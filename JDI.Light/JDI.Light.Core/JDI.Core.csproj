@@ -112,6 +112,7 @@
     <Compile Include="Selenium\Elements\Complex\TextList.cs" />
     <Compile Include="Selenium\Elements\Complex\Tree.cs" />
     <Compile Include="Selenium\Elements\Composite\CheckPageTypes .cs" />
+    <Compile Include="Selenium\Elements\Composite\CompositeUIElement.cs" />
     <Compile Include="Selenium\Elements\Composite\Form.cs" />
     <Compile Include="Selenium\Elements\Composite\NavigationPane.cs" />
     <Compile Include="Selenium\Elements\Composite\Pagination.cs" />

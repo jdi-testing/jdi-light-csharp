@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Base;
-using JDI.Core.Interfaces.Common;
 using JDI.Core.Logging;
 using JDI.Core.Selenium.DriverFactory;
-using JDI.Core.Selenium.Elements.Common;
 using JDI.Core.Selenium.Elements.WebActions;
 using JDI.Core.Settings;
-using JDI.Core.Utils;
 using OpenQA.Selenium;
 
 namespace JDI.Core.Selenium.Base
@@ -21,8 +17,7 @@ namespace JDI.Core.Selenium.Base
         private string _typeName;
         public ElementsActions Actions;
         public By FrameLocator;
-
-
+        
         public ActionInvoker<UIElement> Invoker;
 
         public UIElement(By byLocator = null, IWebElement webElement = null,
@@ -232,40 +227,7 @@ namespace JDI.Core.Selenium.Base
                 ? $"{TypeName} '{Name}' ({ParentTypeName}.{Name};)"
                 : $"Name: '{Name}', Type: '{TypeName}' In: '{ParentTypeName}'";
         }
-
-        private string ToButton(string buttonName)
-        {
-            return buttonName.ToLower().Contains("button") ? buttonName : buttonName + "Button";
-        }
-
-        public Button GetButton(string buttonName)
-        {
-            var fields = _webElement.GetFields(typeof(IButton));
-            switch (fields.Count)
-            {
-                case 0:
-                    throw JDISettings.Exception($"Can't find ny buttons on form {ToString()}'");
-                case 1:
-                    return (Button)fields[0].GetValue(_webElement);
-                default:
-                    var buttons = fields.Select(f => (Button)f.GetValue(_webElement)).ToList();
-                    var button = buttons.FirstOrDefault(b => ToButton(b.Name).SimplifiedEqual(ToButton(buttonName)));
-                    if (button == null)
-                        throw JDISettings.Exception($"Can't find button '{buttonName}' for Element '{ToString()}'." +
-                                                    $"(Found following buttons: {buttons.Select(el => el.Name).Print()})."
-                                                        .FromNewLine());
-                    return button;
-            }
-        }
-
-        public Text GetTextElement()
-        {
-            var textField = this.GetFirstField(typeof(Text), typeof(IText));
-            if (textField == null)
-                throw JDISettings.Exception($"Can't find Text Element '{ToString()}'");
-            return (Text)textField.GetValue(_webElement);
-        }
-
+        
         protected Func<UIElement, bool> IsDisplayedAction =
             el => el.FindImmediately(() => el.WebElement.Displayed, false);
 
