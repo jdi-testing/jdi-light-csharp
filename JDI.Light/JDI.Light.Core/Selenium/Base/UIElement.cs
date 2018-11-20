@@ -106,11 +106,7 @@ namespace JDI.Core.Selenium.Base
 
         private List<IWebElement> GetWebElementsAction()
         {
-            if (_webElements != null)
-                return _webElements;
-            var result = Timer.GetResultByCondition(
-                SearchElements,
-                els => els.Count(GetSearchCriteria) > 0);
+            var result = Timer.GetResultByCondition(SearchElements, els => els.Count(GetSearchCriteria) > 0);
             JDISettings.Timeouts.DropTimeouts();
             if (result == null)
                 throw JDISettings.Exception("Can't get Web Elements");
@@ -119,12 +115,8 @@ namespace JDI.Core.Selenium.Base
         
         private List<IWebElement> SearchElements()
         {
-            var searchContext = Locator.ContainsRoot()
-                ? WebDriver.SwitchTo().DefaultContent()
-                : SearchContext(Parent);
-            var locator = Locator.ContainsRoot()
-                ? Locator.TrimRoot()
-                : Locator;
+            var searchContext = Locator.ContainsRoot() ? WebDriver.SwitchTo().DefaultContent() : SearchContext(Parent);
+            var locator = Locator.ContainsRoot() ? Locator.TrimRoot(): Locator;
             return searchContext.FindElements(locator.CorrectXPath()).ToList();
         }
         
