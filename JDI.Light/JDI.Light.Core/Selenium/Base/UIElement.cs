@@ -195,20 +195,10 @@ namespace JDI.Core.Selenium.Base
 
         public void WaitAttribute(string name, string value)
         {
-            Wait(el => el.GetAttribute(name).Equals(value));
-        }
-
-        public void Wait(Func<IWebElement, bool> resultFunc)
-        {
-            var result = Wait(resultFunc, r => r);
+            var result = Timer.GetResultByCondition(() => GetWebElement().GetAttribute(name).Equals(value), r => r);
             JDISettings.Asserter.IsTrue(result);
         }
 
-        public T Wait<T>(Func<IWebElement, T> resultFunc, Func<T, bool> condition)
-        {
-            return Timer.GetResultByCondition(() => resultFunc.Invoke(GetWebElement()), condition.Invoke);
-        }
-        
         public void SetAttribute(string attributeName, string value)
         {
             Invoker.DoJAction($"Set Attribute '{attributeName}'='{value}'",
