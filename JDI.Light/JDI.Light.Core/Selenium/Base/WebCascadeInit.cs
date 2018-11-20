@@ -125,7 +125,7 @@ namespace JDI.Core.Selenium.Base
                 var instance = typeof(IPage).IsAssignableFrom(type)
                     ? GetInstancePage(parent, field, type, parentType)
                     : GetInstanceElement(parent, type, parentType, field, driverName);
-                instance.SetName(field);
+                instance.Name = NameAttribute.GetElementName(field);
                 instance.DriverName = driverName;
                 instance.TypeName = type.Name;
                 instance.Parent = parent;

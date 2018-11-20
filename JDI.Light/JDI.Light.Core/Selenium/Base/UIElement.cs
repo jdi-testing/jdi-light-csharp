@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using JDI.Core.Attributes;
 using JDI.Core.Attributes.Functions;
 using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Base;
@@ -22,7 +20,6 @@ namespace JDI.Core.Selenium.Base
         private IWebElement _webElement;
         private List<IWebElement> _webElements;
         private string _typeName;
-        private string _varName;
         public ElementsActions Actions;
         public By FrameLocator;
 
@@ -51,9 +48,7 @@ namespace JDI.Core.Selenium.Base
         public Timer Timer { get; set; }
 
         public By Locator;
-
-        private string VarName => _varName ?? Name;
-
+        
         public IWebDriver WebDriver
             => WebSettings.WebDriverFactory.GetDriver(DriverName);
 
@@ -203,52 +198,17 @@ namespace JDI.Core.Selenium.Base
             Wait(el => el.GetAttribute(name).Equals(value));
         }
 
-        /**
-         * @param resultFunc Specify expected function result
-         * Waits while condition with WebElement happens during specified timeout and returns result using resultFunc
-         */
         public void Wait(Func<IWebElement, bool> resultFunc)
         {
             var result = Wait(resultFunc, r => r);
             JDISettings.Asserter.IsTrue(result);
         }
 
-        /**
-         * @param resultFunc Specify expected function result
-         * @param condition  Specify expected function condition
-         * @return Waits while condition with WebElement happens and returns result using resultFunc
-         */
         public T Wait<T>(Func<IWebElement, T> resultFunc, Func<T, bool> condition)
         {
             return Timer.GetResultByCondition(() => resultFunc.Invoke(GetWebElement()), condition.Invoke);
         }
         
-        /**
-         * @param resultFunc Specify expected function result
-         * @param timeoutSec Specify timeout
-         * Waits while condition with WebElement happens during specified timeout and returns wait result
-         */
-        public void Wait(Func<IWebElement, bool> resultFunc, int timeoutSec)
-        {
-            var result = Wait(resultFunc, r => r, timeoutSec);
-            JDISettings.Asserter.IsTrue(result);
-        }
-
-        /**
-         * @param resultFunc Specify expected function result
-         * @param timeoutSec Specify timeout
-         * @param condition  Specify expected function condition
-         * @return Waits while condition with WebElement and returns wait result
-         */
-        public T Wait<T>(Func<IWebElement, T> resultFunc, Func<T, bool> condition, int timeoutSec)
-        {
-            SetWaitTimeout(timeoutSec);
-            var result =
-                new Timer(timeoutSec).GetResultByCondition(() => resultFunc.Invoke(GetWebElement()), condition.Invoke);
-            RestoreWaitTimeout();
-            return result;
-        }
-
         public void SetAttribute(string attributeName, string value)
         {
             Invoker.DoJAction($"Set Attribute '{attributeName}'='{value}'",
@@ -271,17 +231,6 @@ namespace JDI.Core.Selenium.Base
             set => _typeName = value;
         }
 
-        public void SetName(FieldInfo field)
-        {
-            Name = NameAttribute.GetElementName(field);
-            _varName = field.Name;
-        }
-
-        public void FillLocatorTemplate(string name)
-        {
-            Locator = Locator.FillByTemplate(name);
-        }
-
         public void SetWaitTimeout(long mSeconds)
         {
             JDISettings.Logger.Debug("Set wait timeout to " + mSeconds);
@@ -297,7 +246,7 @@ namespace JDI.Core.Selenium.Base
         public new string ToString()
         {
             return JDISettings.ShortLogMessagesFormat
-                ? $"{TypeName} '{Name}' ({ParentTypeName}.{VarName};)"
+                ? $"{TypeName} '{Name}' ({ParentTypeName}.{Name};)"
                 : $"Name: '{Name}', Type: '{TypeName}' In: '{ParentTypeName}'";
         }
 
