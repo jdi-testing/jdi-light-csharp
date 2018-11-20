@@ -11,13 +11,14 @@ using JDI.Core.Interfaces.Base;
 using JDI.Core.Interfaces.Complex;
 using JDI.Core.Selenium.DriverFactory;
 using JDI.Core.Selenium.Elements.Complex;
-using JDI.Core.Selenium.Elements.Complex.Table;
 using JDI.Core.Selenium.Elements.Complex.Table.Interfaces;
 using JDI.Core.Selenium.Elements.Composite;
 using JDI.Core.Settings;
 using JDI.Core.Utils;
 using OpenQA.Selenium;
 using RestSharp.Extensions;
+using Menu = JDI.Core.Selenium.Elements.Complex.Menu;
+using Table = JDI.Core.Selenium.Elements.Complex.Table.Table;
 
 namespace JDI.Core.Selenium.Base
 {
@@ -113,7 +114,6 @@ namespace JDI.Core.Selenium.Base
                     element.Locator = template.FillByTemplate(field.Name);
             }
 
-            instance.SetFunction(AttributesUtil.GetFunction(field));
             return element;
         }
         

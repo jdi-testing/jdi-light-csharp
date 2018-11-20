@@ -41,17 +41,11 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="Attributes\AnnotaionsUtil.cs" />
-    <Compile Include="Attributes\AttributesUtil.cs" />
     <Compile Include="Attributes\ComplexAttribute.cs" />
     <Compile Include="Attributes\FillFromFieldAttribute.cs" />
     <Compile Include="Attributes\FindByAttribute.cs" />
     <Compile Include="Attributes\FindsByExtension.cs" />
     <Compile Include="Attributes\FrameAttribute.cs" />
-    <Compile Include="Attributes\Functions\CancelButton.cs" />
-    <Compile Include="Attributes\Functions\CloseButton.cs" />
-    <Compile Include="Attributes\Functions\Functions.cs" />
-    <Compile Include="Attributes\Functions\OkButton.cs" />
     <Compile Include="Attributes\JFindByAttribute.cs" />
     <Compile Include="Attributes\MoveToAttribute.cs" />
     <Compile Include="Attributes\NameAttribute.cs" />
@@ -121,8 +115,6 @@
     <Compile Include="Selenium\Elements\Composite\Form.cs" />
     <Compile Include="Selenium\Elements\Composite\NavigationPane.cs" />
     <Compile Include="Selenium\Elements\Composite\Pagination.cs" />
-    <Compile Include="Selenium\Elements\Composite\Popup.cs" />
-    <Compile Include="Selenium\Elements\Composite\PopupForm.cs" />
     <Compile Include="Selenium\Elements\Composite\Search.cs" />
     <Compile Include="Selenium\Elements\Composite\Section.cs" />
     <Compile Include="Selenium\Elements\Composite\WebPage.cs" />
@@ -160,7 +152,6 @@
     <Compile Include="Interfaces\Complex\IMenu.cs" />
     <Compile Include="Interfaces\Complex\IPage.cs" />
     <Compile Include="Interfaces\Complex\IPagination.cs" />
-    <Compile Include="Interfaces\Complex\IPopup.cs" />
     <Compile Include="Interfaces\Complex\IRadioButtons.cs" />
     <Compile Include="Interfaces\Complex\ISearch.cs" />
     <Compile Include="Interfaces\Complex\ISelector.cs" />

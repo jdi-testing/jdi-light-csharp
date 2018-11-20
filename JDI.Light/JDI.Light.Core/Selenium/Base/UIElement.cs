@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using JDI.Core.Attributes.Functions;
 using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Base;
 using JDI.Core.Interfaces.Common;
@@ -23,7 +22,6 @@ namespace JDI.Core.Selenium.Base
         public ElementsActions Actions;
         public By FrameLocator;
 
-        public Functions Function = Functions.None;
 
         public ActionInvoker<UIElement> Invoker;
 
@@ -183,11 +181,6 @@ namespace JDI.Core.Selenium.Base
 
         public object Parent { get; set; }
 
-        public void SetFunction(Functions function)
-        {
-            Function = function;
-        }
-
         public string GetAttribute(string name)
         {
             return GetWebElement().GetAttribute(name);
@@ -263,21 +256,6 @@ namespace JDI.Core.Selenium.Base
                                                         .FromNewLine());
                     return button;
             }
-        }
-
-        public Button GetButton(Functions funcName)
-        {
-            var fields = _webElement.GetFields(typeof(IButton));
-            if (fields.Count == 1)
-                return (Button)fields[0].GetValue(_webElement);
-            var buttons = fields.Select(f => (Button)f.GetValue(_webElement)).ToList();
-            var button = buttons.FirstOrDefault(b => b.Function.Equals(funcName));
-            if (button != null) return button;
-            var name = funcName.ToString();
-            button = buttons.FirstOrDefault(b => ToButton(b.Name).SimplifiedEqual(ToButton(name)));
-            if (button == null)
-                throw JDISettings.Exception($"Can't find button '{name}' for Element '{ToString()}'");
-            return button;
         }
 
         public Text GetTextElement()
