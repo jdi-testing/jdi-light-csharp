@@ -21,8 +21,8 @@ namespace JDI.Core.Selenium.Elements.Base
         {
         }
 
-        public SelectableElement(By byLocator = null, IWebElement webElement = null, UIElement element = null)
-            : base(byLocator, webElement, element)
+        public SelectableElement(By byLocator = null, IWebElement webElement = null)
+            : base(byLocator, webElement)
         {
         }
 

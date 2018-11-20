@@ -19,17 +19,13 @@ namespace JDI.Core.Selenium.Base
         public ActionInvoker<UIElement> Invoker;
 
         public UIElement(By byLocator = null, IWebElement webElement = null,
-            List<IWebElement> webElements = null, UIElement element = null)
+            List<IWebElement> webElements = null)
         {
             Invoker = new ActionInvoker<UIElement>(this);
             Actions = new ElementsActions(Invoker);
             _webElement = webElement;
             _webElements = webElements;
             Locator = byLocator;
-            if (element != null)
-            {
-                Parent = element.Parent;
-            }
             Timer = new Timer(JDISettings.Timeouts.CurrentTimeoutSec * 1000);
             if (string.IsNullOrEmpty(DriverName) && WebSettings.WebDriverFactory != null &&
                 !string.IsNullOrEmpty(WebSettings.WebDriverFactory.CurrentDriverName))
@@ -125,7 +121,7 @@ namespace JDI.Core.Selenium.Base
         {
             var searchContext = Locator.ContainsRoot()
                 ? WebDriver.SwitchTo().DefaultContent()
-                : SearchContext(this.Parent);
+                : SearchContext(Parent);
             var locator = Locator.ContainsRoot()
                 ? Locator.TrimRoot()
                 : Locator;

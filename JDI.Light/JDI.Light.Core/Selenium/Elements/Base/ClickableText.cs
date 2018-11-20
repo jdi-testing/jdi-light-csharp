@@ -17,8 +17,8 @@ namespace JDI.Core.Selenium.Elements.Base
                 return getValue ?? getText;
             };
 
-        public ClickableText(By byLocator = null, IWebElement webElement = null, UIElement element = null)
-            : base(byLocator, webElement, element)
+        public ClickableText(By byLocator = null, IWebElement webElement = null)
+            : base(byLocator, webElement)
         {
         }
 

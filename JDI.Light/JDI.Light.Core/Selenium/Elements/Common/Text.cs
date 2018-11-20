@@ -13,8 +13,8 @@ namespace JDI.Core.Selenium.Elements.Common
         {
         }
 
-        public Text(By byLocator = null, IWebElement webElement = null, UIElement element = null)
-            : base(byLocator, webElement, element: element)
+        public Text(By byLocator = null, IWebElement webElement = null)
+            : base(byLocator, webElement)
         {
         }
 

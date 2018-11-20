@@ -53,7 +53,7 @@ namespace JDI.Core.Selenium.Elements.Complex
         {
             SelectNameAction = (s, name) =>
             {
-                var selector = new Selector(optionsNamesLocator, allOptionsNamesLocator, element: s);
+                var selector = new Selector(optionsNamesLocator, allOptionsNamesLocator);
                 if (Element != null)
                 {
                     ExpandNameAction(this, name);
@@ -66,7 +66,7 @@ namespace JDI.Core.Selenium.Elements.Complex
             };
             SelectNumAction = (s, index) =>
             {
-                var selector = new Selector(optionsNamesLocator, allOptionsNamesLocator, element: s);
+                var selector = new Selector(optionsNamesLocator, allOptionsNamesLocator);
                 if (Element != null)
                 {
                     ExpandNumAction(this, index);
@@ -81,7 +81,7 @@ namespace JDI.Core.Selenium.Elements.Complex
             SelectedAction = s => GetTextAction(this);
             GetOptionsAction = d =>
             {
-                var selector = new Selector(optionsNamesLocator, allOptionsNamesLocator, element: d);
+                var selector = new Selector(optionsNamesLocator, allOptionsNamesLocator);
                 var isExpanded = DisplayedNumAction(this, 1);
                 if (!isExpanded) Element.Click();
                 var result = selector.GetOptionsAction(selector);
@@ -96,7 +96,7 @@ namespace JDI.Core.Selenium.Elements.Complex
         public virtual Action<Dropdown<TEnum>> ClickAction { get; set; } = d => d.Element.Click();
         public virtual Func<Dropdown<TEnum>, string> GetTextAction { get; set; } = d => d.Element.GetText;
 
-        public new IWebElement WebElement => new UIElement(Locator, element: this).WebElement;
+        public new IWebElement WebElement => new UIElement(Locator).WebElement;
         
         public void Expand()
         {

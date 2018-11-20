@@ -13,8 +13,8 @@ namespace JDI.Core.Selenium.Elements.Common
         {
         }
 
-        public FileInput(By byLocator = null, IWebElement webElement = null, UIElement element = null)
-            : base(byLocator, webElement, element)
+        public FileInput(By byLocator = null, IWebElement webElement = null)
+            : base(byLocator, webElement)
         {
         }
     }

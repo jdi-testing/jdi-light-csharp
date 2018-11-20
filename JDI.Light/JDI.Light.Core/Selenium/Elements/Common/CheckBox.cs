@@ -52,8 +52,8 @@ namespace JDI.Core.Selenium.Elements.Common
         {
         }
 
-        public CheckBox(By byLocator = null, IWebElement webElement = null, UIElement element = null)
-            : base(byLocator, webElement, element)
+        public CheckBox(By byLocator = null, IWebElement webElement = null)
+            : base(byLocator, webElement)
         {
         }
 

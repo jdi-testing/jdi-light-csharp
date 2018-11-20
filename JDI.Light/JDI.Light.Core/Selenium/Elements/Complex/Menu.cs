@@ -28,7 +28,7 @@ namespace JDI.Core.Selenium.Elements.Complex
                 for (var i = 0; i < nodes.Count; i++)
                 {
                     var value = nodes[i];
-                    var elements = new Selector(m.MenuLevelsLocators[i], element: m).Elements;
+                    var elements = new Selector(m.MenuLevelsLocators[i]).Elements;
                     var element = elements.FirstOrDefault(el => el.Text.Equals(value));
                     if (element == null)
                         throw JDISettings.Exception("Can't choose element:" + value);
@@ -147,7 +147,7 @@ namespace JDI.Core.Selenium.Elements.Complex
 
         private void Select(By locator, string name)
         {
-            new Selector(locator, element: this).Select(name);
+            new Selector(locator).Select(name);
         }
 
         public void SetUp(List<By> menuLevelsLocators)

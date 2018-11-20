@@ -19,12 +19,8 @@ namespace JDI.Core.Selenium.Elements.Common
         protected Action<UIElement, string> SetValueAction = (el, val) =>
             ((TextField) el).NewInput(val);
 
-        public TextField() : this(null)
-        {
-        }
-
-        public TextField(By byLocator = null, IWebElement webElement = null, UIElement element = null)
-            : base(byLocator, webElement, element)
+        public TextField(By byLocator = null, IWebElement webElement = null)
+            : base(byLocator, webElement)
         {
         }
 

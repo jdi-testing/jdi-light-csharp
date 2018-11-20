@@ -68,7 +68,7 @@ namespace JDI.Core.Selenium.Elements.Complex
                     $"Can't find option '{name}'. No optionsNamesLocator and _allLabelsLocator found");
             if (s.Locator.ToString().Contains("{0}"))
             {
-                new Clickable(s.Locator.FillByTemplate(name), element: s).Click();
+                new Clickable(s.Locator.FillByTemplate(name)).Click();
                 return;
             }
 
@@ -144,15 +144,13 @@ namespace JDI.Core.Selenium.Elements.Complex
         public Func<BaseSelector<TEnum>, bool> WaitVanishedAction =
             s => s.Timer.Wait(() => !s.DisplayedAction(s));
 
-        protected BaseSelector(By optionsNamesLocator, List<IWebElement> webElements = null,
-            UIElement element = null) :
-            base(optionsNamesLocator, webElements: webElements, element: element)
+        protected BaseSelector(By optionsNamesLocator, List<IWebElement> webElements = null) 
+            : base(optionsNamesLocator, webElements: webElements)
         {
         }
 
-        protected BaseSelector(By optionsNamesLocator, By allLabelsLocator, List<IWebElement> webElements = null,
-            UIElement element = null)
-            : base(optionsNamesLocator, webElements: webElements, element: element)
+        protected BaseSelector(By optionsNamesLocator, By allLabelsLocator, List<IWebElement> webElements = null) 
+            : base(optionsNamesLocator, webElements: webElements)
         {
             var tl = new TextList(allLabelsLocator);
             AllLabels = tl;
