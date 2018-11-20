@@ -14,10 +14,8 @@ namespace JDI.Core.Selenium.Base
     {
         private IWebElement _webElement;
         private List<IWebElement> _webElements;
-        private string _typeName;
         public ElementsActions Actions;
         public By FrameLocator;
-        
         public ActionInvoker<UIElement> Invoker;
 
         public UIElement(By byLocator = null, IWebElement webElement = null,
@@ -203,11 +201,7 @@ namespace JDI.Core.Selenium.Base
         public string Name { get; set; }
         public string ParentTypeName => Parent?.GetType().Name ?? "";
 
-        public string TypeName
-        {
-            get => _typeName ?? GetType().Name;
-            set => _typeName = value;
-        }
+        public string TypeName => GetType().Name;
 
         public void SetWaitTimeout(long mSeconds)
         {

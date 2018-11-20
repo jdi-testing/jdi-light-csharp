@@ -127,7 +127,6 @@ namespace JDI.Core.Selenium.Base
                     : GetInstanceElement(parent, type, parentType, field, driverName);
                 instance.Name = NameAttribute.GetElementName(field);
                 instance.DriverName = driverName;
-                instance.TypeName = type.Name;
                 instance.Parent = parent;
                 field.SetValue(parent, instance);
                 InitElements(instance, driverName);
