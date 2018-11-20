@@ -13,7 +13,6 @@ namespace JDI.Core.Selenium.Base
     public class UIElement : IBaseElement, IVisible
     {
         private IWebElement _webElement;
-        private List<IWebElement> _webElements;
         public ElementsActions Actions;
         public By FrameLocator;
         public ActionInvoker<UIElement> Invoker;
@@ -24,7 +23,6 @@ namespace JDI.Core.Selenium.Base
             Invoker = new ActionInvoker<UIElement>(this);
             Actions = new ElementsActions(Invoker);
             _webElement = webElement;
-            _webElements = webElements;
             Locator = byLocator;
             Timer = new Timer(JDISettings.Timeouts.CurrentTimeoutSec * 1000);
             if (string.IsNullOrEmpty(DriverName) && WebSettings.WebDriverFactory != null &&
@@ -153,7 +151,6 @@ namespace JDI.Core.Selenium.Base
                 JDISettings.Logger.Debug($"Found {elements.Count} elements");
                 return elements;
             }
-            set => _webElements = value;
         }
 
         public bool HasLocator => Locator != null;
