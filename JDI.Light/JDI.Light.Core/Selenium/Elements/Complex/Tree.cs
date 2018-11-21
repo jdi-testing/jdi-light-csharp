@@ -42,8 +42,8 @@ namespace JDI.Core.Selenium.Elements.Complex
             SelectNameAction = (m, name) => ChooseItemAction(this, new[] {name});
         }
 
-        public Tree(By optionsNamesLocatorTemplate, List<IWebElement> webElements = null)
-            : base(optionsNamesLocatorTemplate, webElements)
+        public Tree(By optionsNamesLocatorTemplate)
+            : base(optionsNamesLocatorTemplate)
         {
         }
 

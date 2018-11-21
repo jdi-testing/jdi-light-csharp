@@ -74,8 +74,8 @@ namespace JDI.Core.Selenium.Elements.Complex
             SelectNameAction = (m, name) => ChooseItemAction(this, new[] {name}, (w, el) => el.Click());
         }
 
-        public Menu(By optionsNamesLocatorTemplate, List<IWebElement> webElements = null)
-            : base(optionsNamesLocatorTemplate, webElements)
+        public Menu(By optionsNamesLocatorTemplate)
+            : base(optionsNamesLocatorTemplate)
         {
             MenuLevelsLocators.Add(optionsNamesLocatorTemplate);
         }

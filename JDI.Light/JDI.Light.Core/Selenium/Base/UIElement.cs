@@ -17,8 +17,7 @@ namespace JDI.Core.Selenium.Base
         public By FrameLocator;
         public ActionInvoker<UIElement> Invoker;
 
-        public UIElement(By byLocator = null, IWebElement webElement = null,
-            List<IWebElement> webElements = null)
+        public UIElement(By byLocator = null, IWebElement webElement = null)
         {
             Invoker = new ActionInvoker<UIElement>(this);
             Actions = new ElementsActions(Invoker);
@@ -49,12 +48,6 @@ namespace JDI.Core.Selenium.Base
                 return element;
             }
             set => _webElement = value;
-        }
-
-        public UIElement SearchAll()
-        {
-            LocalElementSearchCriteria = el => el != null;
-            return this;
         }
 
         private IWebElement GetWebElementAction()
@@ -102,7 +95,7 @@ namespace JDI.Core.Selenium.Base
             return result;
         }
 
-        private List<IWebElement> GetWebElementsAction()
+        protected List<IWebElement> GetWebElementsAction()
         {
             var result = Timer.GetResultByCondition(SearchElements, els => els.Count(GetSearchCriteria) > 0);
             JDISettings.Timeouts.DropTimeouts();
@@ -140,17 +133,6 @@ namespace JDI.Core.Selenium.Base
             return locator != null
                 ? searchContext.FindElement(locator.CorrectXPath())
                 : searchContext;
-        }
-
-        public List<IWebElement> WebElements
-        {
-            get
-            {
-                JDISettings.Logger.Debug($"Get Web Elements: {this}");
-                var elements = GetWebElementsAction();
-                JDISettings.Logger.Debug($"Found {elements.Count} elements");
-                return elements;
-            }
         }
 
         public bool HasLocator => Locator != null;

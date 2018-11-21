@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using JDI.Core.Interfaces.Common;
 using JDI.Core.Selenium.Elements.Base;
 
 namespace JDI.Core.Selenium.Elements.Complex.Table.Interfaces
 {
-    public interface ITable : IText
+    public interface ITable
     {
         /**
          * Indicates are any rows in table. Check immediately

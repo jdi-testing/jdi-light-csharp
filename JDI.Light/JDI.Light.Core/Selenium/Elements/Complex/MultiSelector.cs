@@ -5,6 +5,7 @@ using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Base;
 using JDI.Core.Selenium.Base;
 using JDI.Core.Selenium.DriverFactory;
+using JDI.Core.Selenium.Elements.Composite;
 using JDI.Core.Settings;
 using OpenQA.Selenium;
 
@@ -28,7 +29,7 @@ namespace JDI.Core.Selenium.Elements.Complex
                 return;
             }
 
-            var elements = m.SearchAll().WebElements;
+            var elements = m.WebElements;
             if (elements.Count == 1 && elements[0].TagName.Equals("select"))
                 if (m.Selector.Options.Any())
                 {
@@ -64,7 +65,7 @@ namespace JDI.Core.Selenium.Elements.Complex
                 if (!ms.HasLocator && ms.AllLabels == null)
                     throw JDISettings.Exception("Can't get option. No optionsNamesLocator and allLabelsLocator found");
                 if (ms.Locator.ToString().Contains("{0}"))
-                    return new UIElement(ms.Locator.FillByTemplate(name))
+                    return new CompositeUIElement(ms.Locator.FillByTemplate(name))
                         .WebElements[0];
                 if (ms.AllLabels != null)
                     return ms.GetWebElement(AllLabels.WebElements, name);

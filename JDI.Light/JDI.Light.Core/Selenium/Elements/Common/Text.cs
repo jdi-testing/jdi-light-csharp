@@ -7,8 +7,6 @@ namespace JDI.Core.Selenium.Elements.Common
 {
     public class Text : UIElement, IText
     {
-        protected Func<UIElement, string> GetValueFunc = el => ((Text) el).GetTextAction(el);
-
         public Text() : this(null)
         {
         }
@@ -29,7 +27,7 @@ namespace JDI.Core.Selenium.Elements.Common
 
         public string GetText => Actions.GetText(GetTextAction);
 
-        public string Value => Actions.GetValue(GetValueFunc);
+        public string Value => Actions.GetValue(el => ((Text)el).GetTextAction(el));
 
         public string GetValue()
         {

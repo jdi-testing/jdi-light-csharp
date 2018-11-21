@@ -3,18 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using JDI.Core.Selenium.Base;
+using JDI.Core.Selenium.Elements.Composite;
 using JDI.Core.Settings;
 using JDI.Core.Utils;
 using OpenQA.Selenium;
 
 namespace JDI.Core.Selenium.Elements.Complex
 {
-    public class WebElements<T> : UIElement, IList<T> where T : UIElement
+    public class WebElements<T> : CompositeUIElement, IList<T> where T : UIElement
     {
         private IList<T> _elements;
 
-        public WebElements(By byLocator = null, List<IWebElement> webElements = null)
-            : base(byLocator, webElements: webElements)
+        public WebElements(By byLocator = null)
+            : base(byLocator)
         {
         }
 
@@ -24,7 +25,7 @@ namespace JDI.Core.Selenium.Elements.Complex
             {
                 if (JDISettings.UseCache && _elements != null && _elements.Any())
                     return _elements;
-                return _elements = SearchAll().WebElements
+                return _elements = WebElements
                     .Select(el => ExceptionUtils.ActionWithException(
                         () =>
                         {

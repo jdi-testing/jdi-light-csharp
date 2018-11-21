@@ -6,13 +6,14 @@ using JDI.Core.Interfaces.Base;
 using JDI.Core.Selenium.Base;
 using JDI.Core.Selenium.DriverFactory;
 using JDI.Core.Selenium.Elements.Base;
+using JDI.Core.Selenium.Elements.Composite;
 using JDI.Core.Settings;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
 namespace JDI.Core.Selenium.Elements.Complex
 {
-    public abstract class BaseSelector<TEnum> : UIElement, IVisible
+    public abstract class BaseSelector<TEnum> : CompositeUIElement, IVisible
         where TEnum : IConvertible
     {
         public Func<BaseSelector<TEnum>, bool> DisplayedAction = s =>
@@ -78,7 +79,7 @@ namespace JDI.Core.Selenium.Elements.Complex
                 return;
             }
 
-            var elements = s.SearchAll().WebElements;
+            var elements = s.WebElements;
             var selector = GetSelectElement(elements);
             if (selector != null)
                 if (selector.Options.Any())
@@ -114,7 +115,7 @@ namespace JDI.Core.Selenium.Elements.Complex
                 return;
             }
 
-            var elements = s.SearchAll().WebElements;
+            var elements = s.WebElements;
             if (elements.Count == 1 && elements[0].TagName.Equals("select"))
                 if (s.Selector.Options.Any())
                 {
@@ -141,16 +142,13 @@ namespace JDI.Core.Selenium.Elements.Complex
             });
         };
 
-        public Func<BaseSelector<TEnum>, bool> WaitVanishedAction =
-            s => s.Timer.Wait(() => !s.DisplayedAction(s));
-
-        protected BaseSelector(By optionsNamesLocator, List<IWebElement> webElements = null) 
-            : base(optionsNamesLocator, webElements: webElements)
+        protected BaseSelector(By optionsNamesLocator) 
+            : base(optionsNamesLocator)
         {
         }
 
-        protected BaseSelector(By optionsNamesLocator, By allLabelsLocator, List<IWebElement> webElements = null) 
-            : base(optionsNamesLocator, webElements: webElements)
+        protected BaseSelector(By optionsNamesLocator, By allLabelsLocator) 
+            : base(optionsNamesLocator)
         {
             var tl = new TextList(allLabelsLocator);
             AllLabels = tl;
@@ -267,7 +265,7 @@ namespace JDI.Core.Selenium.Elements.Complex
             IList<IWebElement> elements;
             try
             {
-                elements = SearchAll().WebElements;
+                elements = WebElements;
             }
             catch
             {

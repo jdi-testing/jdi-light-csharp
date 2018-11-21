@@ -22,9 +22,9 @@ namespace JDI.Core.Selenium.Elements.WebActions
                 : "Perform action '{0}' with WebElement ({1})", actionName, ToString()), level);
         }
 
-        public void ActionScenario(string actionName, Action<T> action, LogLevels logSettings)
+        public void ActionScenario(string actionName, Action<T> action, LogLevels level)
         {
-            LogAction(actionName, logSettings);
+            LogAction(actionName, level);
             var timer = new Timer();
             new Timer(JDISettings.Timeouts.CurrentTimeoutSec).Wait(() =>
             {

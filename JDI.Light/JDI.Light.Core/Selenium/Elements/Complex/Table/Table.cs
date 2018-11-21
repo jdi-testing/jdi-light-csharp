@@ -4,16 +4,15 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using JDI.Core.Attributes.Objects;
 using JDI.Core.Extensions;
-using JDI.Core.Selenium.Base;
 using JDI.Core.Selenium.Elements.Base;
-using JDI.Core.Selenium.Elements.Common;
 using JDI.Core.Selenium.Elements.Complex.Table.Interfaces;
+using JDI.Core.Selenium.Elements.Composite;
 using JDI.Core.Settings;
 using OpenQA.Selenium;
 
 namespace JDI.Core.Selenium.Elements.Complex.Table
 {
-    public class Table : Text, ITable
+    public class Table : CompositeUIElement, ITable
     {
         private readonly Columns _columns = new Columns();
         private readonly Rows _rows = new Rows();
@@ -126,16 +125,6 @@ namespace JDI.Core.Selenium.Elements.Complex.Table
                 }
             }
         }
-
-        protected override Func<UIElement, string> GetTextAction => p =>
-        {
-            return "||X||" + Columns.Headers.Print("|") + "||\n"
-                   +
-                   Rows.Headers.Select(rowName =>
-                       "||" + rowName + "||" +
-                       GetCells().Where(cell => cell.RowName.Equals(rowName)).Select(cell => cell.Value).Print("|") +
-                       "||").Print("\n");
-        };
 
         public Columns Columns
         {

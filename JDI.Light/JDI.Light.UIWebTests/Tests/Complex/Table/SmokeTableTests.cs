@@ -9,26 +9,6 @@ namespace JDI.UIWebTests.Tests.Complex.Table
     [TestFixture]
     internal class SmokeTableTests : SupportTableTestBase
     {
-        private readonly string _tableAsText = "||X||Type|Now|Plans||\n" +
-                                               "||1||Drivers|Selenium, Custom|JavaScript, Appium, WinAPI, Sikuli||\n" +
-                                               "||2||Test Runner|TestNG, JUnit, Custom|MSTest, NUnit, Epam||\n" +
-                                               "||3||Asserter|TestNG, JUnit, Custom|MSTest, NUnit, Epam||\n" +
-                                               "||4||Logger|Log4J, TestNG log, Custom|Epam, XML/Json logging, Hyper logging||\n" +
-                                               "||5||Reporter|Jenkins, Allure, Custom|EPAM Report portal, Serenity, TimCity, Hudson||\n" +
-                                               "||6||BDD/DSL|Custom|Cucumber, Jbehave, Thucydides, SpecFlow||";
-
-        [Test]
-        public void GetTextTest()
-        {
-            new Check("Table print").AreEquals(Table.GetText, _tableAsText);
-        }
-
-        [Test]
-        public void GetValueTest()
-        {
-            new Check("Table print").AreEquals(Table.Value, _tableAsText);
-        }
-
         [Test]
         public void TableColumnHeadersTest()
         {

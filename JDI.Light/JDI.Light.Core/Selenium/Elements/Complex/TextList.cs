@@ -2,24 +2,23 @@
 using System.Linq;
 using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Complex;
-using JDI.Core.Selenium.Base;
 using JDI.Core.Selenium.Elements.Common;
+using JDI.Core.Selenium.Elements.Composite;
 using JDI.Core.Settings;
 using OpenQA.Selenium;
 
 namespace JDI.Core.Selenium.Elements.Complex
 {
-    public class TextList : UIElement, ITextList
+    public class TextList : CompositeUIElement, ITextList
     {
         private readonly WebElements<Label> _texts;
 
-        public TextList(By locator, List<IWebElement> webElements = null) :
-            base(locator, webElements: webElements)
+        public TextList(By locator) :
+            base(locator)
         {
             _texts = new WebElements<Label>(Locator);
         }
 
-        public new List<IWebElement> WebElements => base.WebElements;
         public IList<Label> TextElements => _texts;
 
         public int Count()
