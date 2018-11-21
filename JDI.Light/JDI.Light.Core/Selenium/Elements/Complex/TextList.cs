@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using JDI.Core.Extensions;
-using JDI.Core.Interfaces.Complex;
 using JDI.Core.Selenium.Elements.Common;
 using JDI.Core.Selenium.Elements.Composite;
 using JDI.Core.Settings;
@@ -9,17 +8,18 @@ using OpenQA.Selenium;
 
 namespace JDI.Core.Selenium.Elements.Complex
 {
-    public class TextList : CompositeUIElement, ITextList
+    public class TextList : CompositeUIElement
     {
-        private readonly WebElements<Label> _texts;
+        private readonly List<Label> _texts;
 
         public TextList(By locator) :
             base(locator)
         {
-            _texts = new WebElements<Label>(Locator);
+            _texts = new List<Label>();
         }
 
-        public IList<Label> TextElements => _texts;
+        //TODO: Create correct Init for this
+        public IList<Label> TextElements => WebElements.Select(e => (Label)e).ToList();
 
         public int Count()
         {

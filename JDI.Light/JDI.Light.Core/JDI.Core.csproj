@@ -90,7 +90,6 @@
     <Compile Include="Selenium\Elements\Complex\ComboBox.cs" />
     <Compile Include="Selenium\Elements\Complex\Dropdown.cs" />
     <Compile Include="Selenium\Elements\Complex\DropList.cs" />
-    <Compile Include="Selenium\Elements\Complex\WebElements.cs" />
     <Compile Include="Selenium\Elements\Complex\Menu.cs" />
     <Compile Include="Selenium\Elements\Complex\MultiSelector.cs" />
     <Compile Include="Selenium\Elements\Complex\RadioButtons.cs" />
@@ -157,7 +156,6 @@
     <Compile Include="Interfaces\Complex\ISearch.cs" />
     <Compile Include="Interfaces\Complex\ISelector.cs" />
     <Compile Include="Interfaces\Complex\ITabs.cs" />
-    <Compile Include="Interfaces\Complex\ITextList.cs" />
     <Compile Include="Interfaces\IDriverFactory.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\JDILogger.cs" />

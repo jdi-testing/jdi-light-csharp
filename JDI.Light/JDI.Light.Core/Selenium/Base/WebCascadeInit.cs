@@ -152,25 +152,15 @@ namespace JDI.Core.Selenium.Base
             if (type == typeof(List<>))
                 throw JDISettings.Exception(
                     $"Can't init element {fieldName} with type 'List<>'. Please use 'IList<>' or 'Elements<>' instead");
-            if (typeof(IList).IsAssignableFrom(type))
+            
+            if (type.IsInterface)
+                type = MapInterfaceToElement.ClassFromInterface(type);
+            if (type != null)
             {
-                var elementClass = type.GetGenericArguments()[0];
-                if (elementClass != null)
-                    instance = (UIElement) Activator.CreateInstance(typeof(WebElements<>)
-                        .MakeGenericType(elementClass));
+                instance = (UIElement) Activator.CreateInstance(type);
+                if (newLocator != null)
+                    instance.Locator = newLocator;
             }
-            else
-            {
-                if (type.IsInterface)
-                    type = MapInterfaceToElement.ClassFromInterface(type);
-                if (type != null)
-                {
-                    instance = (UIElement) Activator.CreateInstance(type);
-                    if (newLocator != null)
-                        instance.Locator = newLocator;
-                }
-            }
-
             if (instance == null)
                 throw JDISettings.Exception("Unknown interface: " + type +
                                             ". Add relation interface -> class in VIElement.InterfaceTypeMap");

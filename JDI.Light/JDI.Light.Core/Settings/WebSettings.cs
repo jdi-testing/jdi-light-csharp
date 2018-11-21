@@ -43,7 +43,6 @@ namespace JDI.Core.Settings
             {typeof(ICheckBox), typeof(CheckBox)},
             {typeof(IRadioButtons), typeof(RadioButtons)},
             {typeof(ICheckList), typeof(CheckList)},
-            {typeof(ITextList), typeof(TextList)},
             {typeof(ITabs), typeof(Tabs)},
             {typeof(IMenu), typeof(Menu)},
             {typeof(IFileInput), typeof(FileInput)},
