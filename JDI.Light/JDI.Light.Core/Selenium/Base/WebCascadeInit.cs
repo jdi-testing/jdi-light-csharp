@@ -24,9 +24,9 @@ namespace JDI.Core.Selenium.Base
 {
     public class WebCascadeInit
     {
-        protected Type[] Decorators = { typeof(IBaseElement), typeof(IList) };
+        protected static Type[] Decorators = { typeof(IBaseElement), typeof(IList) };
 
-        protected Type[] StopTypes => new[]
+        protected static Type[] StopTypes => new[]
         {
             typeof(object),
             typeof(WebPage),
@@ -34,32 +34,24 @@ namespace JDI.Core.Selenium.Base
             typeof(UIElement)
         };
         
-        public void InitStaticPages(Type parentType, string driverName)
+        public static void InitStaticPages(Type parentType, string driverName)
         {
             SetFields(null,
                 parentType.StaticFields().GetFields(Decorators), parentType, driverName);
         }
 
-        public T InitPages<T>(Type site, string driverName) where T : Application
-        {
-            var instance = (T)Activator.CreateInstance(site);
-            instance.DriverName = driverName;
-            InitElements(instance, driverName);
-            return instance;
-        }
-
-        private void InitElements(object parent, string driverName)
+        private static void InitElements(object parent, string driverName)
         {
             SetFields(parent, parent.GetFields(Decorators, StopTypes), parent.GetType(), driverName);
         }
 
-        private void SetFields(object parent, List<FieldInfo> fields, Type parentType, string driverName)
+        private static void SetFields(object parent, List<FieldInfo> fields, Type parentType, string driverName)
         {
             fields.Where(field => Decorators.ToList().Any(type => type.IsAssignableFrom(field.FieldType))).ToList()
                 .ForEach(field => SetElement(parent, parentType, field, driverName));
         }
         
-        protected IBaseElement GetInstancePage(object parent, FieldInfo field, Type type, Type parentType)
+        protected static IBaseElement GetInstancePage(object parent, FieldInfo field, Type type, Type parentType)
         {
             var instance = (IBaseElement)(field.GetValue(parent)
                                            ?? Activator.CreateInstance(type));
@@ -69,7 +61,7 @@ namespace JDI.Core.Selenium.Base
             return instance;
         }
 
-        protected IBaseElement GetInstanceElement(object parent, Type type, Type parentType, FieldInfo field,
+        protected static IBaseElement GetInstanceElement(object parent, Type type, Type parentType, FieldInfo field,
             string driverName)
         {
             var instance = (IBaseElement)field.GetValue(parent);
@@ -117,7 +109,7 @@ namespace JDI.Core.Selenium.Base
             return element;
         }
         
-        protected void SetElement(object parent, Type parentType, FieldInfo field, string driverName)
+        protected static void SetElement(object parent, Type parentType, FieldInfo field, string driverName)
         {
             ExceptionUtils.ActionWithException(() =>
             {
@@ -135,55 +127,50 @@ namespace JDI.Core.Selenium.Base
                     $"Error in SetElement for field '{field.Name}' with parent '{parentType?.Name ?? "NULL Class" + ex.FromNewLine()}'");
         }
 
-        protected IBaseElement GetElementInstance(FieldInfo field, string driverName, object parent)
+        protected static IBaseElement GetElementInstance(FieldInfo field, string driverName, object parent)
         {
             var type = field.FieldType;
             var fieldName = field.Name;
-            return ExceptionUtils.ActionWithException(() => GetElementsRules(field, driverName, type, fieldName),
+            return ExceptionUtils.ActionWithException(() =>
+                {
+                    var newLocator = GetNewLocator(field);
+                    UIElement instance = null;
+                    if (type == typeof(List<>))
+                        throw JDISettings.Exception(
+                            $"Can't init element {fieldName} with type 'List<>'. Please use 'IList<>' or 'Elements<>' instead");
+
+                    if (type.IsInterface)
+                        type = MapInterfaceToElement.ClassFromInterface(type);
+                    if (type != null)
+                    {
+                        instance = (UIElement)Activator.CreateInstance(type);
+                        if (newLocator != null)
+                            instance.Locator = newLocator;
+                    }
+                    if (instance == null)
+                        throw JDISettings.Exception("Unknown interface: " + type +
+                                                    ". Add relation interface -> class in VIElement.InterfaceTypeMap");
+                    instance.DriverName = driverName;
+                    return instance;
+                },
                 ex =>
                     $"Error in GetElementInstance for field '{fieldName}'{(parent != null ? "in " + parent.GetClassName() : "")} with type '{type.Name + ex.FromNewLine()}'");
         }
-
-        protected IBaseElement GetElementsRules(FieldInfo field, string driverName, Type type,
-            string fieldName)
+        
+        protected static By GetNewLocator(FieldInfo field)
         {
-            var newLocator = GetNewLocator(field);
-            UIElement instance = null;
-            if (type == typeof(List<>))
-                throw JDISettings.Exception(
-                    $"Can't init element {fieldName} with type 'List<>'. Please use 'IList<>' or 'Elements<>' instead");
-            
-            if (type.IsInterface)
-                type = MapInterfaceToElement.ClassFromInterface(type);
-            if (type != null)
-            {
-                instance = (UIElement) Activator.CreateInstance(type);
-                if (newLocator != null)
-                    instance.Locator = newLocator;
-            }
-            if (instance == null)
-                throw JDISettings.Exception("Unknown interface: " + type +
-                                            ". Add relation interface -> class in VIElement.InterfaceTypeMap");
-            instance.DriverName = driverName;
-            return instance;
-        }
-
-        protected By GetNewLocator(FieldInfo field)
-        {
-            return ExceptionUtils.ActionWithException(() => GetNewLocatorFromField(field),
+            return ExceptionUtils.ActionWithException(() =>
+                {
+                    By byLocator = null;
+                    var locatorGroup = JDIData.AppVersion;
+                    if (locatorGroup == null)
+                        return FindByAttribute.Locator(field) ?? field.GetFindsBy();
+                    var jFindBy = field.GetAttribute<JFindByAttribute>();
+                    if (jFindBy != null && locatorGroup.Equals(jFindBy.Group))
+                        byLocator = jFindBy.ByLocator;
+                    return byLocator ?? FindByAttribute.Locator(field) ?? field.GetFindsBy();
+                },
                 ex => $"Error in get locator for type '{field.Name + ex.FromNewLine()}'");
-        }
-
-        protected By GetNewLocatorFromField(FieldInfo field)
-        {
-            By byLocator = null;
-            var locatorGroup = JDIData.AppVersion;
-            if (locatorGroup == null)
-                return FindByAttribute.Locator(field) ?? field.GetFindsBy();
-            var jFindBy = field.GetAttribute<JFindByAttribute>();
-            if (jFindBy != null && locatorGroup.Equals(jFindBy.Group))
-                byLocator = jFindBy.ByLocator;
-            return byLocator ?? FindByAttribute.Locator(field) ?? field.GetFindsBy();
         }
     }
 }

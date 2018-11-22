@@ -1,7 +1,6 @@
 ﻿using System;
 using JDI.Core.Base;
 using JDI.Core.Selenium.Base;
-using JDI.Core.Selenium.DriverFactory;
 using JDI.Core.Settings;
 using OpenQA.Selenium;
 
@@ -13,7 +12,6 @@ namespace JDI.Core.Selenium.Elements.Composite
         public string Url => WebDriver.Url;
         public string BaseUrl => new Uri(WebDriver.Url).GetLeftPart(UriPartial.Authority);
         public string Title => WebDriver.Title;
-        private static WebCascadeInit WebCascadeInit => new WebCascadeInit();
 
         public static void Init(Type siteType)
         {
@@ -21,25 +19,9 @@ namespace JDI.Core.Selenium.Elements.Composite
             CurrentSite = siteType;
         }
 
-        public static T Init<T>(Type siteType, string driverName) where T : Application
+        public void Open()
         {
-            return WebCascadeInit.InitPages<T>(siteType, driverName);
-        }
-
-        public static T Init<T>(Type siteType, DriverTypes driverType = DriverTypes.Chrome) where T : Application
-        {
-            return Init<T>(siteType, WebSettings.UseDriver(driverType));
-        }
-
-        public T Init<T>(string driverName) where T : Application
-        {
-            DriverName = driverName;
-            return Init<T>(GetType(), driverName);
-        }
-
-        public static void Open()
-        {
-            WebSettings.WebDriver.Navigate().GoToUrl(WebSettings.Domain);
+            WebDriver.Navigate().GoToUrl(WebSettings.Domain);
         }
 
         public void OpenUrl(string url)
