@@ -13,16 +13,28 @@ namespace JDI.Core.Selenium.Elements.Composite
     public class WebPage : IPage
     {
         public static bool CheckAfterOpen = false;
-        public static WebPage CurrentPage;
         private string _url;
-        protected CheckPageTypes CheckTitleType = CheckPageTypes.None;
-        protected CheckPageTypes CheckUrlType = CheckPageTypes.None;
+        public CheckPageTypes CheckTitleType { get; set; } = CheckPageTypes.None;
+        public CheckPageTypes CheckUrlType { get; set; } = CheckPageTypes.None;
 
-        public string Title;
-        public string UrlTemplate;
+        public string Title { get; set; }
+        public string UrlTemplate { get; set; }
 
         public ActionInvoker<WebPage> Invoker { get; set; }
+        public string DriverName { get; set; }
         public string Name { get; set; }
+        public object Parent { get; set; }
+
+        public string GetAttribute(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetAttribute(string attributeName, string value)
+        {
+            throw new NotImplementedException();
+        }
+
         public IWebDriver WebDriver { get; set; }
         public Timer Timer { get; set; }
 
@@ -89,7 +101,6 @@ namespace JDI.Core.Selenium.Elements.Composite
                 el => WebDriver.Navigate().GoToUrl(Url));
             if (CheckAfterOpen)
                 CheckOpened();
-            CurrentPage = this;
         }
 
         public static string GetUrlFromUri(string uri)

@@ -2,7 +2,7 @@
 
 namespace JDI.Core.Interfaces.Common
 {
-    public interface IText : IHasValue, IBaseElement
+    public interface IText : IHasValue, IBaseUIElement
     {
         /**
      * return: Get WebElement’s text

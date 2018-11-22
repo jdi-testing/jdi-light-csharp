@@ -10,7 +10,7 @@ using OpenQA.Selenium;
 
 namespace JDI.Core.Selenium.Base
 {
-    public class UIElement : IBaseElement, IVisible
+    public class UIElement : IBaseUIElement, IVisible
     {
         private IWebElement _webElement;
         public ElementsActions Actions;

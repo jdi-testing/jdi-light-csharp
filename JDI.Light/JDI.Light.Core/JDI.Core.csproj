@@ -42,6 +42,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Attributes\FindByAttribute.cs" />
+    <Compile Include="Enums\DriverType.cs" />
+    <Compile Include="Enums\RunType.cs" />
     <Compile Include="Extensions\FieldInfoExtensions.cs" />
     <Compile Include="Attributes\FrameAttribute.cs" />
     <Compile Include="Attributes\JFindByAttribute.cs" />
@@ -55,6 +57,7 @@
     <Compile Include="Base\Application.cs" />
     <Compile Include="Extensions\CommonExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Interfaces\Base\IBaseUIElement.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Matchers\BaseMatcher.cs" />
     <Compile Include="Matchers\ScreenshotState.cs" />

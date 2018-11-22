@@ -42,12 +42,28 @@ namespace JDI.Core.Selenium.Base
         private static void SetFields(object parent, List<FieldInfo> fields, Type parentType, string driverName)
         {
             fields.Where(field => Decorators.ToList().Any(type => type.IsAssignableFrom(field.FieldType))).ToList()
-                .ForEach(field => SetElement(parent, parentType, field, driverName));
+                .ForEach(field =>
+                {
+                    ExceptionUtils.ActionWithException(() =>
+                        {
+                            var type = field.FieldType;
+                            var instance = typeof(IPage).IsAssignableFrom(type)
+                                ? GetInstancePage(parent, field, type, parentType)
+                                : GetInstanceElement(parent, type, parentType, field, driverName);
+                            instance.Name = field.GetElementName();
+                            instance.DriverName = driverName;
+                            instance.Parent = parent;
+                            field.SetValue(parent, instance);
+                            SetFields(parent, parent.GetFields(Decorators, StopTypes), parent.GetType(), driverName);
+                        },
+                        ex =>
+                            $"Error in SetElement for field '{field.Name}' with parent '{parentType?.Name ?? "NULL Class" + ex.FromNewLine()}'");
+                });
         }
         
-        protected static IBaseElement GetInstancePage(object parent, FieldInfo field, Type type, Type parentType)
+        protected static IPage GetInstancePage(object parent, FieldInfo field, Type type, Type parentType)
         {
-            var instance = (IBaseElement)(field.GetValue(parent)
+            var instance = (IPage)(field.GetValue(parent)
                                            ?? Activator.CreateInstance(type));
             var pageAttribute = field.GetAttribute<PageAttribute>();
             var page = (WebPage) instance;
@@ -153,24 +169,6 @@ namespace JDI.Core.Selenium.Base
             return element;
         }
         
-        protected static void SetElement(object parent, Type parentType, FieldInfo field, string driverName)
-        {
-            ExceptionUtils.ActionWithException(() =>
-            {
-                var type = field.FieldType;
-                var instance = typeof(IPage).IsAssignableFrom(type)
-                    ? GetInstancePage(parent, field, type, parentType)
-                    : GetInstanceElement(parent, type, parentType, field, driverName);
-                instance.Name = field.GetElementName();
-                instance.DriverName = driverName;
-                instance.Parent = parent;
-                field.SetValue(parent, instance);
-                SetFields(parent, parent.GetFields(Decorators, StopTypes), parent.GetType(), driverName);
-            },
-                ex =>
-                    $"Error in SetElement for field '{field.Name}' with parent '{parentType?.Name ?? "NULL Class" + ex.FromNewLine()}'");
-        }
-
         protected static IBaseElement GetElementInstance(FieldInfo field, string driverName, object parent)
         {
             var type = field.FieldType;

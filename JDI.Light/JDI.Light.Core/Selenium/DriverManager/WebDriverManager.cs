@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using JDI.Core.Selenium.DriverFactory;
+using JDI.Core.Enums;
 using WebDriverManager.DriverConfigs.Impl;
 using WebDriverManager.Helpers;
 
@@ -18,24 +18,24 @@ namespace JDI.Core.Selenium.DriverManager
         ///     repo
         /// </param>
         /// <returns>True - drivers version is same, else false</returns>
-        public static bool IsLocalVersionLatestVersion(DriverTypes type, string executingPath, string version = "")
+        public static bool IsLocalVersionLatestVersion(DriverType type, string executingPath, string version = "")
         {
             var result = false;
             var latestVersion = version == "" ? GetLatestVersionNumber(type) : version;
             var driverBinaryName = "";
             switch (type)
             {
-                case DriverTypes.Chrome:
+                case DriverType.Chrome:
                     driverBinaryName = new ChromeConfig().GetBinaryName();
                     result = WebDriverManagerHelper.CheckDriverVersionFromExe(
                         Path.Combine(executingPath, driverBinaryName), latestVersion);
                     break;
-                case DriverTypes.Firefox:
+                case DriverType.Firefox:
                     driverBinaryName = new FirefoxConfig().GetBinaryName();
                     result = WebDriverManagerHelper.CheckDriverVersionFromExe(
                         Path.Combine(executingPath, driverBinaryName), latestVersion);
                     break;
-                case DriverTypes.IE:
+                case DriverType.IE:
                     driverBinaryName = new InternetExplorerConfig().GetBinaryName();
                     result = WebDriverManagerHelper.CheckDriverVerionFormExeAttributes(
                         Path.Combine(executingPath, driverBinaryName), latestVersion);
@@ -50,18 +50,18 @@ namespace JDI.Core.Selenium.DriverManager
         /// </summary>
         /// <param name="type">Driver type</param>
         /// <returns>Version number</returns>
-        private static string GetLatestVersionNumber(DriverTypes type)
+        private static string GetLatestVersionNumber(DriverType type)
         {
             var latestVersion = "";
             switch (type)
             {
-                case DriverTypes.Chrome:
+                case DriverType.Chrome:
                     latestVersion = new ChromeConfig().GetLatestVersion();
                     break;
-                case DriverTypes.Firefox:
+                case DriverType.Firefox:
                     latestVersion = new FirefoxConfig().GetLatestVersion();
                     break;
-                case DriverTypes.IE:
+                case DriverType.IE:
                     latestVersion = new InternetExplorerConfig().GetLatestVersion();
                     break;
             }
@@ -75,7 +75,7 @@ namespace JDI.Core.Selenium.DriverManager
         /// <param name="type">Driver type</param>
         /// <param name="version">Version number</param>
         /// <returns>Path of driver location</returns>
-        private static string GetDriverVersion(DriverTypes type, string version = "")
+        private static string GetDriverVersion(DriverType type, string version = "")
         {
             var driverFullPath = "";
             var executingPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory);
@@ -85,19 +85,19 @@ namespace JDI.Core.Selenium.DriverManager
             var currentArchitecture = ArchitectureHelper.GetArchitecture();
             switch (type)
             {
-                case DriverTypes.Chrome:
+                case DriverType.Chrome:
                     var cConfig = new ChromeConfig();
                     binaryName = cConfig.GetBinaryName();
                     url = currentArchitecture == Architecture.X32 ? cConfig.GetUrl32() : cConfig.GetUrl64();
                     url = UrlHelper.BuildUrl(url, latestVersionNumber);
                     break;
-                case DriverTypes.Firefox:
+                case DriverType.Firefox:
                     var fConfig = new FirefoxConfig();
                     binaryName = fConfig.GetBinaryName();
                     url = currentArchitecture == Architecture.X32 ? fConfig.GetUrl32() : fConfig.GetUrl64();
                     url = UrlHelper.BuildUrl(url, latestVersionNumber);
                     break;
-                case DriverTypes.IE:
+                case DriverType.IE:
                     var ieConfig = new InternetExplorerConfig();
                     binaryName = ieConfig.GetBinaryName();
                     url = currentArchitecture == Architecture.X32 ? ieConfig.GetUrl32() : ieConfig.GetUrl64();
@@ -127,7 +127,7 @@ namespace JDI.Core.Selenium.DriverManager
         /// <param name="type">Driver Type</param>
         /// <param name="version">Version Number</param>
         /// <returns>Path of driver location</returns>
-        public static string GetSpecifiedVersion(DriverTypes type, string version)
+        public static string GetSpecifiedVersion(DriverType type, string version)
         {
             return GetDriverVersion(type, version);
         }
@@ -137,7 +137,7 @@ namespace JDI.Core.Selenium.DriverManager
         /// </summary>
         /// <param name="type">Driver type</param>
         /// <returns>Path of driver location</returns>
-        public static string GetLatestVersion(DriverTypes type)
+        public static string GetLatestVersion(DriverType type)
         {
             return GetDriverVersion(type);
         }

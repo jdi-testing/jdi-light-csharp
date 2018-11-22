@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using JDI.Core.Enums;
 using JDI.Core.Interfaces;
 using JDI.Core.Interfaces.Base;
 using JDI.Core.Interfaces.Common;
@@ -58,7 +59,7 @@ namespace JDI.Core.Settings
 
         public static IJavaScriptExecutor JsExecutor => DriverFactory.GetDriver() as IJavaScriptExecutor;
 
-        public static string UseDriver(DriverTypes driverName = DriverTypes.Firefox)
+        public static string UseDriver(DriverType driverName = DriverType.Firefox)
         {
             return WebDriverFactory.RegisterDriver(driverName);
         }

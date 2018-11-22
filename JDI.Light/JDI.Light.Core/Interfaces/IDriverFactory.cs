@@ -19,8 +19,8 @@ namespace JDI.Core.Interfaces
 
         T GetDriver(string name);
 
-        void Highlight(IBaseElement element);
+        void Highlight(IBaseUIElement element);
 
-        void Highlight(IBaseElement element, HighlightSettings highlightSettings);
+        void Highlight(IBaseUIElement element, HighlightSettings highlightSettings);
     }
 }

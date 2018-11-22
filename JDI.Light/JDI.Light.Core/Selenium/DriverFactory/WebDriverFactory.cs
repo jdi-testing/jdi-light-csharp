@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
+using JDI.Core.Enums;
 using JDI.Core.Interfaces;
 using JDI.Core.Interfaces.Base;
 using JDI.Core.Selenium.Base;
-using JDI.Core.Selenium.Elements.Base;
 using JDI.Core.Settings;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -16,39 +16,26 @@ using OpenQA.Selenium.Remote;
 
 namespace JDI.Core.Selenium.DriverFactory
 {
-    public enum RunTypes
-    {
-        Local,
-        Remote
-    }
-
-    public enum DriverTypes
-    {
-        Chrome,
-        Firefox,
-        IE
-    }
-
     public class WebDriverFactory : IDriverFactory<IWebDriver>
     {
         public static bool OnlyOneElementAllowedInSearch = true;
 
         public static Size BrowserSize = new Size();
 
-        private readonly Dictionary<DriverTypes, string> _driverNamesDictionary = new Dictionary<DriverTypes, string>
+        private readonly Dictionary<DriverType, string> _driverNamesDictionary = new Dictionary<DriverType, string>
         {
-            {DriverTypes.Chrome, "chrome"},
-            {DriverTypes.Firefox, "firefox"},
-            {DriverTypes.IE, "internet explorer"}
+            {DriverType.Chrome, "chrome"},
+            {DriverType.Firefox, "firefox"},
+            {DriverType.IE, "internet explorer"}
         };
 
-        private readonly Dictionary<DriverTypes, Func<string, IWebDriver>> _driversDictionary = new Dictionary
-            <DriverTypes, Func<string, IWebDriver>>
+        private readonly Dictionary<DriverType, Func<string, IWebDriver>> _driversDictionary = new Dictionary
+            <DriverType, Func<string, IWebDriver>>
             {
-                {DriverTypes.Chrome, path => string.IsNullOrEmpty(path) ? new ChromeDriver() : new ChromeDriver(path)},
-                {DriverTypes.Firefox, path => new FirefoxDriver()},
+                {DriverType.Chrome, path => string.IsNullOrEmpty(path) ? new ChromeDriver() : new ChromeDriver(path)},
+                {DriverType.Firefox, path => new FirefoxDriver()},
                 {
-                    DriverTypes.IE,
+                    DriverType.IE,
                     path => string.IsNullOrEmpty(path)
                         ? new InternetExplorerDriver()
                         : new InternetExplorerDriver(path)
@@ -76,13 +63,13 @@ namespace JDI.Core.Selenium.DriverFactory
             Drivers = new Dictionary<string, Func<IWebDriver>>();
             RunDrivers = new ThreadLocal<Dictionary<string, IWebDriver>>(() => new Dictionary<string, IWebDriver>());
             DriverPath = AppDomain.CurrentDomain.BaseDirectory;
-            RunType = RunTypes.Local;
+            RunType = RunType.Local;
         }
 
         private Dictionary<string, Func<IWebDriver>> Drivers { get; }
 
         private ThreadLocal<Dictionary<string, IWebDriver>> RunDrivers { get; }
-        public RunTypes RunType { get; set; }
+        public RunType RunType { get; set; }
 
         public string CurrentDriverName
         {
@@ -90,8 +77,8 @@ namespace JDI.Core.Selenium.DriverFactory
             {
                 if (string.IsNullOrEmpty(_currentDriverName))
                 {
-                    _currentDriverName = _driverNamesDictionary[DriverTypes.Chrome];
-                    RegisterLocalDriver(DriverTypes.Chrome);
+                    _currentDriverName = _driverNamesDictionary[DriverType.Chrome];
+                    RegisterLocalDriver(DriverType.Chrome);
                 }
 
                 return _currentDriverName;
@@ -107,8 +94,8 @@ namespace JDI.Core.Selenium.DriverFactory
             {
                 if (!string.IsNullOrEmpty(CurrentDriverName))
                     return GetDriver(CurrentDriverName);
-                RegisterDriver(DriverTypes.Chrome);
-                return GetDriver(DriverTypes.Chrome);
+                RegisterDriver(DriverType.Chrome);
+                return GetDriver(DriverType.Chrome);
             }
             catch
             {
@@ -168,14 +155,14 @@ namespace JDI.Core.Selenium.DriverFactory
             switch (runType)
             {
                 case "local":
-                    RunType = RunTypes.Local;
+                    RunType = RunType.Local;
                     return;
                 case "remote":
-                    RunType = RunTypes.Remote;
+                    RunType = RunType.Remote;
                     return;
             }
 
-            RunType = RunTypes.Local;
+            RunType = RunType.Local;
         }
 
         public bool HasDrivers()
@@ -188,12 +175,12 @@ namespace JDI.Core.Selenium.DriverFactory
             return RunDrivers.Value != null && RunDrivers.Value.Any();
         }
 
-        public void Highlight(IBaseElement element)
+        public void Highlight(IBaseUIElement element)
         {
             Highlight(element, HighlightSettings);
         }
 
-        public void Highlight(IBaseElement element, HighlightSettings highlightSettings)
+        public void Highlight(IBaseUIElement element, HighlightSettings highlightSettings)
         {
             if (highlightSettings == null)
                 highlightSettings = new HighlightSettings();
@@ -204,7 +191,7 @@ namespace JDI.Core.Selenium.DriverFactory
             element.SetAttribute("style", orig);
         }
 
-        private string RegisterLocalDriver(DriverTypes driverType)
+        private string RegisterLocalDriver(DriverType driverType)
         {
             if (WebSettings.GetLatestDriver)
                 if (!DriverManager.WebDriverManager.IsLocalVersionLatestVersion(driverType, DriverPath))
@@ -250,25 +237,25 @@ namespace JDI.Core.Selenium.DriverFactory
             return RegisterDriver("Driver" + (Drivers.Count + 1), driver);
         }
 
-        public IWebDriver GetDriver(DriverTypes driverType)
+        public IWebDriver GetDriver(DriverType driverType)
         {
             return GetDriver(_driverNamesDictionary[driverType]);
         }
 
-        public string RegisterDriver(DriverTypes driverType)
+        public string RegisterDriver(DriverType driverType)
         {
             switch (RunType)
             {
-                case RunTypes.Local:
+                case RunType.Local:
                     return RegisterLocalDriver(driverType);
-                case RunTypes.Remote:
+                case RunType.Remote:
                     return RegisterRemoteDriver(driverType);
             }
 
             throw new Exception(); // TODO
         }
 
-        private string RegisterRemoteDriver(DriverTypes driverType)
+        private string RegisterRemoteDriver(DriverType driverType)
         {
             var capabilities = new DesiredCapabilities(new Dictionary<string, object>
             {

@@ -1,8 +1,7 @@
 ﻿namespace JDI.Core.Interfaces.Base
 {
-    public interface IClickable : IBaseElement
+    public interface IClickable : IBaseUIElement
     {
-        //TODO:[JDIAction]
         void Click();
     }
 }
