@@ -1,6 +1,5 @@
 ﻿using System;
 using JDI.Core.Interfaces.Base;
-using JDI.Core.Selenium.Base;
 using JDI.Core.Selenium.Elements.Base;
 
 namespace JDI.Core.Selenium.Elements.Complex.Table.Interfaces

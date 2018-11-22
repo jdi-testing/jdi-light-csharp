@@ -8,7 +8,7 @@ using JDI.Core.Settings;
 using OpenQA.Selenium;
 using LogLevel = JDI.Core.Logging.LogLevel;
 
-namespace JDI.Core.Selenium.Base
+namespace JDI.Core.Selenium.Elements.Base
 {
     public class UIElement : IBaseUIElement, IVisible
     {

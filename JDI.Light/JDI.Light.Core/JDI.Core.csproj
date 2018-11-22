@@ -62,8 +62,8 @@
     <Compile Include="Interfaces\Base\IBaseUIElement.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Matchers\BaseMatcher.cs" />
-    <Compile Include="Selenium\Base\UIElement.cs" />
-    <Compile Include="Selenium\Base\WebCascadeInit.cs" />
+    <Compile Include="Selenium\Elements\Base\UIElement.cs" />
+    <Compile Include="Selenium\Elements\WebCascadeInit.cs" />
     <Compile Include="Selenium\DriverFactory\WebDriverByUtils.cs" />
     <Compile Include="Selenium\DriverFactory\WebDriverFactory.cs" />
     <Compile Include="Selenium\DriverFactory\WinProcUtils.cs" />

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using JDI.Core.Extensions;
-using JDI.Core.Selenium.Base;
 using JDI.Core.Selenium.DriverFactory;
 using JDI.Core.Selenium.Elements.Base;
 using JDI.Core.Selenium.Elements.Complex.Table.Interfaces;

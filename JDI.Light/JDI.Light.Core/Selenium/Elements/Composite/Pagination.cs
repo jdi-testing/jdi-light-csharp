@@ -4,7 +4,6 @@ using JDI.Core.Attributes;
 using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Base;
 using JDI.Core.Interfaces.Complex;
-using JDI.Core.Selenium.Base;
 using JDI.Core.Selenium.DriverFactory;
 using JDI.Core.Selenium.Elements.Base;
 using JDI.Core.Settings;

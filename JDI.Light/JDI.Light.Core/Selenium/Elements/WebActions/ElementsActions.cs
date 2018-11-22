@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using JDI.Core.Extensions;
-using JDI.Core.Selenium.Base;
+using JDI.Core.Selenium.Elements.Base;
 using JDI.Core.Settings;
 
 namespace JDI.Core.Selenium.Elements.WebActions

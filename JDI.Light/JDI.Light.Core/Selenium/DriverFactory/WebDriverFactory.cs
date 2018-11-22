@@ -6,7 +6,7 @@ using System.Threading;
 using JDI.Core.Enums;
 using JDI.Core.Interfaces;
 using JDI.Core.Interfaces.Base;
-using JDI.Core.Selenium.Base;
+using JDI.Core.Selenium.Elements.Base;
 using JDI.Core.Settings;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;

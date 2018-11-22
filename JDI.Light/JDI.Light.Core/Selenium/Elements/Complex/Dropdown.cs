@@ -1,6 +1,6 @@
 ﻿using System;
 using JDI.Core.Interfaces.Complex;
-using JDI.Core.Selenium.Base;
+using JDI.Core.Selenium.Elements.Base;
 using JDI.Core.Selenium.Elements.Common;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;

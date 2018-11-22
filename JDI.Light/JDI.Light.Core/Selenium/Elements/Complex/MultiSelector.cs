@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Base;
-using JDI.Core.Selenium.Base;
 using JDI.Core.Selenium.DriverFactory;
 using JDI.Core.Selenium.Elements.Composite;
 using JDI.Core.Settings;

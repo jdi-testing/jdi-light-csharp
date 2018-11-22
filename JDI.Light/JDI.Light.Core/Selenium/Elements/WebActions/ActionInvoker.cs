@@ -1,7 +1,7 @@
 ﻿using System;
 using JDI.Core.Extensions;
 using JDI.Core.Logging;
-using JDI.Core.Selenium.Base;
+using JDI.Core.Selenium.Elements.Base;
 using JDI.Core.Settings;
 using JDI.Core.Utils;
 

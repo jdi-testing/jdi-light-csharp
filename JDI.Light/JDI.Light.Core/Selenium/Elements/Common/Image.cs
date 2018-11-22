@@ -1,6 +1,5 @@
 ﻿using System;
 using JDI.Core.Interfaces.Common;
-using JDI.Core.Selenium.Base;
 using JDI.Core.Selenium.Elements.Base;
 using OpenQA.Selenium;
 
