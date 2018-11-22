@@ -40,11 +40,6 @@ namespace JDI.Core.Selenium.Base
                 parentType.StaticFields().GetFields(Decorators), parentType, driverName);
         }
 
-        private static void InitElements(object parent, string driverName)
-        {
-            SetFields(parent, parent.GetFields(Decorators, StopTypes), parent.GetType(), driverName);
-        }
-
         private static void SetFields(object parent, List<FieldInfo> fields, Type parentType, string driverName)
         {
             fields.Where(field => Decorators.ToList().Any(type => type.IsAssignableFrom(field.FieldType))).ToList()
@@ -56,8 +51,26 @@ namespace JDI.Core.Selenium.Base
             var instance = (IBaseElement)(field.GetValue(parent)
                                            ?? Activator.CreateInstance(type));
             var pageAttribute = field.GetAttribute<PageAttribute>();
-            pageAttribute?.FillPage((WebPage)instance, parentType);
-
+            var page = (WebPage) instance;
+            var url = pageAttribute.Url;
+            var site = parentType.GetCustomAttribute<SiteAttribute>(false);
+            if (!WebSettings.HasDomain && site != null)
+                WebSettings.Domain = site.Domain;
+            url = url.Contains("://") || !WebSettings.HasDomain
+                ? url
+                : WebPage.GetUrlFromUri(url);
+            var title = pageAttribute.Title;
+            var urlTemplate = pageAttribute.UrlTemplate;
+            var urlCheckType = pageAttribute.UrlCheckType;
+            var titleCheckType = pageAttribute.TitleCheckType;
+            if (!string.IsNullOrEmpty(urlTemplate))
+            {
+                urlTemplate = urlTemplate.Contains("://") || !WebSettings.HasDomain ||
+                              urlCheckType != CheckPageTypes.Match
+                    ? urlTemplate
+                    : WebPage.GetMatchFromDomain(urlTemplate);
+            }
+            page.UpdatePageData(url, title, urlCheckType, titleCheckType, urlTemplate);
             return instance;
         }
 
@@ -97,7 +110,7 @@ namespace JDI.Core.Selenium.Base
             element = (UIElement)instance;
             if (parent == null || type != null)
             {
-                var frameBy = FrameAttribute.GetFrame(field);
+                var frameBy = field.GetCustomAttribute<FrameAttribute>(false)?.FrameLocator;
                 if (frameBy != null)
                     element.FrameLocator = frameBy;
                 By template;
@@ -117,11 +130,11 @@ namespace JDI.Core.Selenium.Base
                 var instance = typeof(IPage).IsAssignableFrom(type)
                     ? GetInstancePage(parent, field, type, parentType)
                     : GetInstanceElement(parent, type, parentType, field, driverName);
-                instance.Name = NameAttribute.GetElementName(field);
+                instance.Name = field.GetElementName();
                 instance.DriverName = driverName;
                 instance.Parent = parent;
                 field.SetValue(parent, instance);
-                InitElements(instance, driverName);
+                SetFields(parent, parent.GetFields(Decorators, StopTypes), parent.GetType(), driverName);
             },
                 ex =>
                     $"Error in SetElement for field '{field.Name}' with parent '{parentType?.Name ?? "NULL Class" + ex.FromNewLine()}'");
@@ -164,11 +177,11 @@ namespace JDI.Core.Selenium.Base
                     By byLocator = null;
                     var locatorGroup = JDIData.AppVersion;
                     if (locatorGroup == null)
-                        return FindByAttribute.Locator(field) ?? field.GetFindsBy();
+                        return field.GetCustomAttribute<FindByAttribute>(false)?.ByLocator ?? field.GetFindsBy();
                     var jFindBy = field.GetAttribute<JFindByAttribute>();
                     if (jFindBy != null && locatorGroup.Equals(jFindBy.Group))
                         byLocator = jFindBy.ByLocator;
-                    return byLocator ?? FindByAttribute.Locator(field) ?? field.GetFindsBy();
+                    return byLocator ?? field.GetCustomAttribute<FindByAttribute>(false)?.ByLocator ?? field.GetFindsBy();
                 },
                 ex => $"Error in get locator for type '{field.Name + ex.FromNewLine()}'");
         }

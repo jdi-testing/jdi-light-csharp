@@ -41,13 +41,10 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="Attributes\ComplexAttribute.cs" />
-    <Compile Include="Attributes\FillFromFieldAttribute.cs" />
     <Compile Include="Attributes\FindByAttribute.cs" />
-    <Compile Include="Attributes\FindsByExtension.cs" />
+    <Compile Include="Extensions\FieldInfoExtensions.cs" />
     <Compile Include="Attributes\FrameAttribute.cs" />
     <Compile Include="Attributes\JFindByAttribute.cs" />
-    <Compile Include="Attributes\MoveToAttribute.cs" />
     <Compile Include="Attributes\NameAttribute.cs" />
     <Compile Include="Attributes\Objects\FillFromAnnotationRules.cs" />
     <Compile Include="Attributes\Objects\JDropdownAttribute.cs" />

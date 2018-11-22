@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using OpenQA.Selenium;
 
 namespace JDI.Core.Attributes
@@ -56,11 +55,5 @@ namespace JDI.Core.Attributes
         }
 
         public By ByLocator { get; private set; }
-
-        public static By Locator(FieldInfo field)
-        {
-            var locator = field.GetCustomAttribute<FindByAttribute>(false);
-            return locator?.ByLocator;
-        }
     }
 }

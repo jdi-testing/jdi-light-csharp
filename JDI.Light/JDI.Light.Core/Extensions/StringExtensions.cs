@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace JDI.Core.Extensions
@@ -34,6 +35,14 @@ namespace JDI.Core.Extensions
         public static IList<string> Split(this string s, string separator)
         {
             return s.Split(new[] { separator }, StringSplitOptions.None);
+        }
+
+        public static string SplitCamelCase(this string camel)
+        {
+            var result = camel.ToUpper().FirstOrDefault().ToString();
+            for (var i = 1; i < camel.Length - 1; i++)
+                result += (char.IsUpper(camel[i]) && !char.IsUpper(camel[i - 1]) ? " " : "") + camel[i];
+            return result + camel[camel.Length - 1];
         }
     }
 }

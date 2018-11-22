@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using JDI.Core.Attributes;
 using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Base;
 using JDI.Core.Interfaces.Complex;
@@ -37,12 +36,12 @@ namespace JDI.Core.Selenium.Elements.Composite
 
         public void Fill(Dictionary<string, string> map)
         {
-            this.GetFields(typeof(ISetValue)).ForEach(element =>
+            this.GetFields(typeof(ISetValue)).ForEach(fieldInfo =>
             {
                 var fieldValue = map.FirstOrDefault(pair =>
-                    pair.Key.SimplifiedEqual(NameAttribute.GetElementName(element))).Value;
+                    pair.Key.SimplifiedEqual(fieldInfo.GetElementName())).Value;
                 if (fieldValue == null) return;
-                var setValueElement = (ISetValue) element.GetValue(this);
+                var setValueElement = (ISetValue) fieldInfo.GetValue(this);
                 setValueElement.Value = fieldValue;
             });
         }
@@ -133,7 +132,7 @@ namespace JDI.Core.Selenium.Elements.Composite
             this.GetFields(typeof(IHasValue)).ForEach(field =>
             {
                 var fieldValue = objStrings.FirstOrDefault(pair =>
-                    pair.Key.SimplifiedEqual(NameAttribute.GetElementName(field))).Value;
+                    pair.Key.SimplifiedEqual(field.GetElementName())).Value;
                 if (fieldValue == null) return;
                 var valueField = (IHasValue) field.GetValue(this);
                 var actual = GetFieldValueAction(this, valueField).Trim();

@@ -1,11 +1,17 @@
 ﻿using System.Reflection;
+using JDI.Core.Attributes;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace JDI.Core.Attributes
+namespace JDI.Core.Extensions
 {
-    public static class FindsByExtension
+    public static class FieldInfoExtensions
     {
+        public static string GetElementName(this FieldInfo field)
+        {
+            return field.GetCustomAttribute<NameAttribute>(false)?.Name.SplitCamelCase() ?? "";
+        }
+
         public static By GetFindsBy(this FieldInfo field)
         {
             var findBy = field.GetCustomAttribute<FindsByAttribute>(false);

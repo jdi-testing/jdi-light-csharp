@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using JDI.Core.Attributes;
+using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Base;
 using JDI.Core.Interfaces.Complex;
 using JDI.Core.Selenium.Base;
@@ -133,7 +134,7 @@ namespace JDI.Core.Selenium.Elements.Composite
         {
             var fields = this.GetFields(typeof(IClickable));
             var result = fields.FirstOrDefault(field =>
-                NameAttribute.GetElementName(field).ToLower().Contains(name.ToLower()));
+                field.GetElementName().ToLower().Contains(name.ToLower()));
             return (Clickable) result?.GetValue(this);
         }
 

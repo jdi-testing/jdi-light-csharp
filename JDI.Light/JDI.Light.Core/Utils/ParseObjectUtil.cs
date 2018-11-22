@@ -61,14 +61,12 @@ namespace JDI.Core.Utils
                 string strValue = null;
                 if (value == null)
                     strValue = "#NULL#";
-                else if (value is string)
-                    strValue = (string) value;
+                else if (value is string s)
+                    strValue = s;
                 else if (value is IConvertible)
                     strValue = value.ToString();
-                else if (ComplexAttribute.IsPresent(field))
-                    strValue = "#(#" + PrintObject(value) + "#)#";
                 if (strValue != null)
-                    result.Add($"{NameAttribute.GetElementName(field)}#:#{strValue}");
+                    result.Add($"{field.GetElementName()}#:#{strValue}");
             });
             return result.Print("#;#");
         }

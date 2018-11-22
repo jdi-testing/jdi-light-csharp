@@ -19,7 +19,7 @@ namespace JDI.Core.Selenium.Elements.Composite
         protected CheckPageTypes CheckUrlType = CheckPageTypes.None;
 
         public string Title;
-        protected string UrlTemplate;
+        public string UrlTemplate;
 
         public ActionInvoker<WebPage> Invoker { get; set; }
         public string Name { get; set; }
