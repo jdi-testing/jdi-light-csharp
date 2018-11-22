@@ -1,6 +1,7 @@
 ﻿using System;
+using JDI.Core.Enums;
 
-namespace JDI.Core.Attributes.Objects
+namespace JDI.Core.Attributes.JAttributes
 {
     [AttributeUsage(AttributeTargets.All, Inherited = false)]
     public class JTableAttribute : Attribute
@@ -11,7 +12,7 @@ namespace JDI.Core.Attributes.Objects
         public FindByAttribute Footer = null;
         public string[] Header = null;
 
-        public TableHeaderTypes HeaderType = TableHeaderTypes.ColumnsHeaders;
+        public TableHeaderType HeaderType = TableHeaderType.ColumnsHeaders;
 
         public int Height = -1;
         public FindByAttribute Root = null;

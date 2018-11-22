@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using JDI.Core.Attributes;
-using JDI.Core.Attributes.Objects;
-using JDI.Core.Base;
+using JDI.Core.Attributes.JAttributes;
 using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Base;
 using JDI.Core.Interfaces.Complex;
@@ -95,17 +94,49 @@ namespace JDI.Core.Selenium.Base
             var jTable = field.GetAttribute<JTableAttribute>();
             if (jTable != null && typeof(ITable).IsAssignableFrom(field.FieldType))
             {
-                FillFromAnnotationRules.SetUpTable((Table)instance, jTable);
+                var table = (Table) instance;
+                table.SetUp(jTable.Root.ByLocator, jTable.Cell.ByLocator,
+                    jTable.Row.ByLocator, jTable.Column.ByLocator, jTable.Footer.ByLocator,
+                    jTable.ColStartIndex, jTable.RowStartIndex);
+
+                if (jTable.Header != null)
+                    table.ColumnHeaders = jTable.Header;
+                if (jTable.RowsHeader != null)
+                    table.RowHeaders = jTable.RowsHeader;
+
+                if (jTable.Height > 0)
+                    table.SetColumnsCount(jTable.Height);
+                if (jTable.Width > 0)
+                    table.SetRowsCount(jTable.Width);
+                if (!jTable.Size.Equals(""))
+                {
+                    var split = jTable.Size.Split('x');
+                    if (split.Length == 1)
+                        split = jTable.Size.Split('X');
+                    if (split.Length != 2)
+                        throw JDISettings.Exception("Can't setup Table from attribute. Bad size: " + jTable.Size);
+                    table.SetColumnsCount(int.Parse(split[0]));
+                    table.SetRowsCount(int.Parse(split[1]));
+                }
+
+                table.HeaderType = jTable.HeaderType;
+                table.UseCache(jTable.UseCache);
             }
             var jDropdown = field.GetAttribute<JDropdownAttribute>();
             if (jDropdown != null && typeof(IDropDown).IsAssignableFrom(field.FieldType))
             {
-                FillFromAnnotationRules.SetUpDropdown((Dropdown)instance, jDropdown);
+                var dropdown = (Dropdown) instance;
+                dropdown.SetUp(jDropdown.Root.ByLocator, jDropdown.Value.ByLocator,
+                    jDropdown.List.ByLocator, jDropdown.Expand.ByLocator,
+                    jDropdown.ElementByName.ByLocator);
             }
             var jMenu = field.GetAttribute<JMenuAttribute>();
             if (jMenu != null && typeof(IMenu).IsAssignableFrom(field.FieldType))
             {
-                FillFromAnnotationRules.SetUpMenu((Menu)instance, jMenu);
+                var menu = (Menu) instance;
+                menu.SetUp(jMenu.LevelLocators.Select(findby => findby.ByLocator).ToList());
+                if (!jMenu.Separator.Equals(""))
+                    menu.UseSeparator(jMenu.Separator);
             }
             element = (UIElement)instance;
             if (parent == null || type != null)

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JDI.Core.Attributes.Objects
+namespace JDI.Core.Attributes.JAttributes
 {
     [AttributeUsage(AttributeTargets.All, Inherited = false)]
     public class JMenuAttribute : Attribute

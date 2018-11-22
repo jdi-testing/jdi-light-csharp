@@ -46,11 +46,10 @@
     <Compile Include="Attributes\FrameAttribute.cs" />
     <Compile Include="Attributes\JFindByAttribute.cs" />
     <Compile Include="Attributes\NameAttribute.cs" />
-    <Compile Include="Attributes\Objects\FillFromAnnotationRules.cs" />
-    <Compile Include="Attributes\Objects\JDropdownAttribute.cs" />
-    <Compile Include="Attributes\Objects\JMenuAttribute.cs" />
-    <Compile Include="Attributes\Objects\JTableAttribute.cs" />
-    <Compile Include="Attributes\Objects\TableHeaderTypes.cs" />
+    <Compile Include="Attributes\JAttributes\JDropdownAttribute.cs" />
+    <Compile Include="Attributes\JAttributes\JMenuAttribute.cs" />
+    <Compile Include="Attributes\JAttributes\JTableAttribute.cs" />
+    <Compile Include="Enums\TableHeaderType.cs" />
     <Compile Include="Attributes\PageAttribute.cs" />
     <Compile Include="Attributes\SiteAttribute.cs" />
     <Compile Include="Base\Application.cs" />

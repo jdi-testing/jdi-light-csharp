@@ -1,6 +1,6 @@
-﻿namespace JDI.Core.Attributes.Objects
+﻿namespace JDI.Core.Enums
 {
-    public enum TableHeaderTypes
+    public enum TableHeaderType
     {
         AllHeaders,
         NoHeaders,

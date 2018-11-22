@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using JDI.Core.Attributes.Objects;
+using JDI.Core.Enums;
 using JDI.Core.Extensions;
 using JDI.Core.Selenium.Elements.Base;
 using JDI.Core.Selenium.Elements.Complex.Table.Interfaces;
@@ -100,25 +100,25 @@ namespace JDI.Core.Selenium.Elements.Complex.Table
             set => Rows.StartIndex = value;
         }
 
-        public TableHeaderTypes HeaderType
+        public TableHeaderType HeaderType
         {
             set
             {
                 switch (value)
                 {
-                    case TableHeaderTypes.AllHeaders:
+                    case TableHeaderType.AllHeaders:
                         Columns.HasHeader = true;
                         Rows.HasHeader = true;
                         break;
-                    case TableHeaderTypes.NoHeaders:
+                    case TableHeaderType.NoHeaders:
                         Columns.HasHeader = false;
                         Rows.HasHeader = false;
                         break;
-                    case TableHeaderTypes.ColumnsHeaders:
+                    case TableHeaderType.ColumnsHeaders:
                         Columns.HasHeader = true;
                         Rows.HasHeader = false;
                         break;
-                    case TableHeaderTypes.RowsHeaders:
+                    case TableHeaderType.RowsHeaders:
                         Columns.HasHeader = false;
                         Rows.HasHeader = true;
                         break;
