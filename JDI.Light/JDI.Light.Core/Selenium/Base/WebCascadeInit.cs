@@ -33,22 +33,11 @@ namespace JDI.Core.Selenium.Base
             typeof(Section),
             typeof(UIElement)
         };
-
-        public void InitElements(object parent, string driverName)
-        {
-            SetFields(parent, parent.GetFields(Decorators, StopTypes), parent.GetType(), driverName);
-        }
-
+        
         public void InitStaticPages(Type parentType, string driverName)
         {
             SetFields(null,
                 parentType.StaticFields().GetFields(Decorators), parentType, driverName);
-        }
-
-        private void SetFields(object parent, List<FieldInfo> fields, Type parentType, string driverName)
-        {
-            fields.Where(field => Decorators.ToList().Any(type => type.IsAssignableFrom(field.FieldType))).ToList()
-                .ForEach(field => SetElement(parent, parentType, field, driverName));
         }
 
         public T InitPages<T>(Type site, string driverName) where T : Application
@@ -59,6 +48,17 @@ namespace JDI.Core.Selenium.Base
             return instance;
         }
 
+        private void InitElements(object parent, string driverName)
+        {
+            SetFields(parent, parent.GetFields(Decorators, StopTypes), parent.GetType(), driverName);
+        }
+
+        private void SetFields(object parent, List<FieldInfo> fields, Type parentType, string driverName)
+        {
+            fields.Where(field => Decorators.ToList().Any(type => type.IsAssignableFrom(field.FieldType))).ToList()
+                .ForEach(field => SetElement(parent, parentType, field, driverName));
+        }
+        
         protected IBaseElement GetInstancePage(object parent, FieldInfo field, Type type, Type parentType)
         {
             var instance = (IBaseElement)(field.GetValue(parent)

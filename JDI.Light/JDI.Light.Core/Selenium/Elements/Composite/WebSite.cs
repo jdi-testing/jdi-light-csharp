@@ -37,17 +37,6 @@ namespace JDI.Core.Selenium.Elements.Composite
             return Init<T>(GetType(), driverName);
         }
 
-        public T Init<T>(DriverTypes driverType = DriverTypes.Chrome) where T : Application
-        {
-            DriverName = WebSettings.UseDriver(driverType);
-            return Init<T>(DriverName);
-        }
-
-        public T InitScope<T>(object scope) where T : Application
-        {
-            return Init<T>(GetType());
-        }
-
         public static void Open()
         {
             WebSettings.WebDriver.Navigate().GoToUrl(WebSettings.Domain);
