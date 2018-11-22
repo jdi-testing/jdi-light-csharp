@@ -1,6 +1,6 @@
 ﻿namespace JDI.Core.Logging
 {
-    public enum LogLevels
+    public enum LogLevel
     {
         Off = -1,
         Fatal = 0,

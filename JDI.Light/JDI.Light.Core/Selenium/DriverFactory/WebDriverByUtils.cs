@@ -66,7 +66,7 @@ namespace JDI.Core.Selenium.DriverFactory
         public static string GetByLocator(this By by)
         {
             var byAsString = by.ToString();
-            var index = byAsString.IndexOf(": ") + 2;
+            var index = byAsString.IndexOf(": ", StringComparison.Ordinal) + 2;
             return byAsString.Substring(index);
         }
     }

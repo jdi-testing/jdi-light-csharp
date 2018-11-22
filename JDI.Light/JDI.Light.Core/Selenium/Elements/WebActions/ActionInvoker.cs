@@ -20,7 +20,7 @@ namespace JDI.Core.Selenium.Elements.WebActions
         }
 
         public TResult DoJActionResult<TResult>(string actionName, Func<T, TResult> action,
-            Func<TResult, string> logResult = null, LogLevels level = LogLevels.Info)
+            Func<TResult, string> logResult = null, LogLevel level = LogLevel.Info)
         {
             return ExceptionUtils.ActionWithException(() =>
             {
@@ -29,7 +29,7 @@ namespace JDI.Core.Selenium.Elements.WebActions
             }, ex => $"Failed to do '{actionName}' action. Reason: {ex}");
         }
 
-        public void DoJAction(string actionName, Action<T> action, LogLevels level = LogLevels.Info)
+        public void DoJAction(string actionName, Action<T> action, LogLevel level = LogLevel.Info)
         {
             TimerExtensions.ForceDone(() =>
             {

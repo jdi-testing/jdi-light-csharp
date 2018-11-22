@@ -70,7 +70,7 @@ namespace JDI.Core.Settings
         }
 
         public static void Init(ILogger logger, IAssert assert,
-            TimeoutSettings timeouts = null, IDriverFactory<IWebDriver> driverFactory = null)
+            WebTimeoutSettings timeouts = null, IDriverFactory<IWebDriver> driverFactory = null)
         {
             DriverFactory = driverFactory ?? new WebDriverFactory();
             Asserter = assert;
@@ -80,7 +80,7 @@ namespace JDI.Core.Settings
         }
 
         public static void InitFromProperties(ILogger logger = null, IAssert assert = null,
-            TimeoutSettings timeouts = null, IDriverFactory<IWebDriver> driverFactory = null)
+            WebTimeoutSettings timeouts = null, IDriverFactory<IWebDriver> driverFactory = null)
         {
             Init(logger, assert, timeouts, driverFactory);
             JDISettings.InitFromProperties();

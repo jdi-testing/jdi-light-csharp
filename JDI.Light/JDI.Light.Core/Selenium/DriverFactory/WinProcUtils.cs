@@ -37,20 +37,19 @@ namespace JDI.Core.Selenium.DriverFactory
                         return mo["CommandLine"].ToString();
                 }
             }
-
             throw new ArgumentException("pid");
         }
 
         private static void KillProcessTree(int pid)
         {
-            using (var searcher =
-                new ManagementObjectSearcher("Select * From Win32_Process Where ParentProcessID=" + pid))
+            using (var searcher = new ManagementObjectSearcher("Select * From Win32_Process Where ParentProcessID=" + pid))
             {
                 using (var moc = searcher.Get())
                 {
                     foreach (var mo in moc)
-
+                    {
                         KillProcessTree(Convert.ToInt32(mo["ProcessID"]));
+                    }
                     try
                     {
                         var proc = Process.GetProcessById(pid);

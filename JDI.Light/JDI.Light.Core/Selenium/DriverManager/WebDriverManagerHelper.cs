@@ -28,10 +28,10 @@ namespace JDI.Core.Selenium.DriverManager
         /// <summary>
         ///     Checks driver version by parsing binary attributes
         /// </summary>
-        /// <param name="path">Path to driver binar</param>
+        /// <param name="path">Path to driver binary</param>
         /// <param name="version">Version to check</param>
         /// <returns>True - if versions are equals, else false</returns>
-        public static bool CheckDriverVerionFormExeAttributes(string path, string version)
+        public static bool CheckDriverVersionFormExeAttributes(string path, string version)
         {
             var result = false;
             if (File.Exists(path))

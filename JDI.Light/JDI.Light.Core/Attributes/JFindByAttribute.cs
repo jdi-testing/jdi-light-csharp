@@ -6,8 +6,6 @@ namespace JDI.Core.Attributes
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
     public class JFindByAttribute : Attribute
     {
-        public string Group;
-
         public string Id
         {
             set => ByLocator = By.Id(value);

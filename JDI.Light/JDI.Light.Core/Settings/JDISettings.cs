@@ -11,7 +11,7 @@ namespace JDI.Core.Settings
     {
         public static ILogger Logger;
         public static IAssert Asserter;
-        public static TimeoutSettings Timeouts = new TimeoutSettings();
+        public static WebTimeoutSettings Timeouts = new WebTimeoutSettings();
         public static bool IsDemoMode;
         public static HighlightSettings HighlightSettings = new HighlightSettings();
         public static bool ShortLogMessagesFormat = true;
@@ -20,14 +20,14 @@ namespace JDI.Core.Settings
         public static IDriverFactory<IDisposable> DriverFactory;
         public static bool UseCache;
 
-        public static void ToLog(string message, LogLevels level)
+        public static void ToLog(string message, LogLevel level)
         {
             switch (level)
             {
-                case LogLevels.Debug:
+                case LogLevel.Debug:
                     Logger.Debug(message);
                     return;
-                case LogLevels.Error:
+                case LogLevel.Error:
                     Logger.Error(message);
                     return;
             }

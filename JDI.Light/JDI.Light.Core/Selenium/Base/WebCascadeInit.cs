@@ -202,17 +202,10 @@ namespace JDI.Core.Selenium.Base
         
         protected static By GetNewLocator(FieldInfo field)
         {
-            return ExceptionUtils.ActionWithException(() =>
-                {
-                    By byLocator = null;
-                    var locatorGroup = JDIData.AppVersion;
-                    if (locatorGroup == null)
-                        return field.GetCustomAttribute<FindByAttribute>(false)?.ByLocator ?? field.GetFindsBy();
-                    var jFindBy = field.GetAttribute<JFindByAttribute>();
-                    if (jFindBy != null && locatorGroup.Equals(jFindBy.Group))
-                        byLocator = jFindBy.ByLocator;
-                    return byLocator ?? field.GetCustomAttribute<FindByAttribute>(false)?.ByLocator ?? field.GetFindsBy();
-                },
+            return ExceptionUtils.ActionWithException(() => 
+                    field.GetAttribute<JFindByAttribute>()?.ByLocator 
+                    ?? field.GetCustomAttribute<FindByAttribute>(false)?.ByLocator 
+                    ?? field.GetFindsBy(),
                 ex => $"Error in get locator for type '{field.Name + ex.FromNewLine()}'");
         }
     }

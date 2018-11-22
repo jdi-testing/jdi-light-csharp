@@ -37,7 +37,7 @@ namespace JDI.Core.Selenium.DriverManager
                     break;
                 case DriverType.IE:
                     driverBinaryName = new InternetExplorerConfig().GetBinaryName();
-                    result = WebDriverManagerHelper.CheckDriverVerionFormExeAttributes(
+                    result = WebDriverManagerHelper.CheckDriverVersionFormExeAttributes(
                         Path.Combine(executingPath, driverBinaryName), latestVersion);
                     break;
             }

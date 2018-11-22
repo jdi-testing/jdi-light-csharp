@@ -15,14 +15,14 @@ namespace JDI.Core.Selenium.Elements.WebActions
             _targetElement = element;
         }
 
-        private void LogAction(string actionName, LogLevels level)
+        private void LogAction(string actionName, LogLevel level)
         {
             JDISettings.ToLog(string.Format(JDISettings.ShortLogMessagesFormat
                 ? "{0} for {1}"
                 : "Perform action '{0}' with WebElement ({1})", actionName, ToString()), level);
         }
 
-        public void ActionScenario(string actionName, Action<T> action, LogLevels level)
+        public void ActionScenario(string actionName, Action<T> action, LogLevel level)
         {
             LogAction(actionName, level);
             var timer = new Timer();
@@ -36,7 +36,7 @@ namespace JDI.Core.Selenium.Elements.WebActions
         }
 
         public TResult ResultScenario<TResult>(string actionName, Func<T, TResult> action,
-            Func<TResult, string> logResult, LogLevels level)
+            Func<TResult, string> logResult, LogLevel level)
         {
             LogAction(actionName, level);
             var timer = new Timer();

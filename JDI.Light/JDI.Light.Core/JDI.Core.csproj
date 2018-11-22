@@ -169,9 +169,7 @@
     <Compile Include="Reporting\PerformanceStatistic.cs" />
     <Compile Include="Settings\HighlightSettings.cs" />
     <Compile Include="Settings\IAssert.cs" />
-    <Compile Include="Settings\JDIData.cs" />
     <Compile Include="Settings\JDISettings.cs" />
-    <Compile Include="Settings\TimeoutSettings.cs" />
     <Compile Include="Timer.cs" />
     <Compile Include="Extensions\TimerExtensions.cs" />
   </ItemGroup>

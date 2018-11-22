@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using JDI.Core.Extensions;
 
 namespace JDI.Core.Settings
 {
@@ -11,11 +10,6 @@ namespace JDI.Core.Settings
         public static void Init(Dictionary<Type, Type> map)
         {
             _map = map;
-        }
-
-        public static void Update(Dictionary<Type, Type> map)
-        {
-            map.ForEach(pair => map[pair.Key] = pair.Value);
         }
 
         public static Type ClassFromInterface(Type clazz)

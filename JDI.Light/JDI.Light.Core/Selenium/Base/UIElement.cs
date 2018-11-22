@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using JDI.Core.Interfaces.Base;
-using JDI.Core.Logging;
 using JDI.Core.Selenium.DriverFactory;
 using JDI.Core.Selenium.Elements.WebActions;
 using JDI.Core.Settings;
 using OpenQA.Selenium;
+using LogLevel = JDI.Core.Logging.LogLevel;
 
 namespace JDI.Core.Selenium.Base
 {
@@ -162,7 +162,7 @@ namespace JDI.Core.Selenium.Base
         public IWebElement GetWebElement()
         {
             return Invoker.DoJActionResult("Get web element",
-                el => WebElement, level: LogLevels.Debug);
+                el => WebElement, level: LogLevel.Debug);
         }
 
         public string Name { get; set; }
