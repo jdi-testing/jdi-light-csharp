@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using JDI.Core.Enums;
 using JDI.Core.Extensions;
 using JDI.Core.Selenium.Elements.Complex.Table.Interfaces;
 using JDI.Core.Settings;

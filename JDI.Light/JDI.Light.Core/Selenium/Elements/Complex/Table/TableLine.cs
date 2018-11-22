@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using JDI.Core.Enums;
 using JDI.Core.Selenium.Base;
 using JDI.Core.Selenium.DriverFactory;
 using JDI.Core.Selenium.Elements.Base;
@@ -8,12 +9,6 @@ using OpenQA.Selenium;
 
 namespace JDI.Core.Selenium.Elements.Complex.Table
 {
-    public enum ElementIndexType
-    {
-        Nums,
-        Names
-    }
-
     public abstract class TableLine : UIElement, ITableLine
     {
         protected TableLine(By byLocator, IWebElement webElement = null) 

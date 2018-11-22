@@ -1,4 +1,5 @@
 ﻿using System;
+using JDI.Core.Enums;
 using JDI.Core.Selenium.Elements.Composite;
 
 namespace JDI.Core.Attributes
@@ -7,9 +8,9 @@ namespace JDI.Core.Attributes
     public class PageAttribute : Attribute
     {
         public string Title = "";
-        public CheckPageTypes TitleCheckType = CheckPageTypes.None;
+        public CheckPageType TitleCheckType = CheckPageType.None;
         public string Url = "";
-        public CheckPageTypes UrlCheckType = CheckPageTypes.None;
+        public CheckPageType UrlCheckType = CheckPageType.None;
         public string UrlTemplate = "";
     }
 }

@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using JDI.Core.Settings;
 using JDI.Matchers.NUnit;
+using JDI.UIWebTests.Asserts;
 using JDI.UIWebTests.UIObjects;
 using OpenQA.Selenium;
 

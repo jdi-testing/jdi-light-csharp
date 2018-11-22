@@ -1,4 +1,5 @@
-﻿using JDI.Core.Interfaces.Base;
+﻿using JDI.Core.Enums;
+using JDI.Core.Interfaces.Base;
 using JDI.Core.Selenium.Elements.Composite;
 using JDI.Core.Selenium.Elements.WebActions;
 using OpenQA.Selenium;
@@ -7,8 +8,8 @@ namespace JDI.Core.Interfaces.Complex
 {
     public interface IPage : IBaseElement
     {
-        CheckPageTypes CheckTitleType { get; set; }
-        CheckPageTypes CheckUrlType { get; set; }
+        CheckPageType CheckTitleType { get; set; }
+        CheckPageType CheckUrlType { get; set; }
 
         string Title { get; set; }
         string UrlTemplate { get; set; }

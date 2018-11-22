@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text.RegularExpressions;
+using JDI.Core.Enums;
 using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Complex;
 using JDI.Core.Selenium.Elements.WebActions;
@@ -14,8 +15,8 @@ namespace JDI.Core.Selenium.Elements.Composite
     {
         public static bool CheckAfterOpen = false;
         private string _url;
-        public CheckPageTypes CheckTitleType { get; set; } = CheckPageTypes.None;
-        public CheckPageTypes CheckUrlType { get; set; } = CheckPageTypes.None;
+        public CheckPageType CheckTitleType { get; set; } = CheckPageType.None;
+        public CheckPageType CheckUrlType { get; set; } = CheckPageType.None;
 
         public string Title { get; set; }
         public string UrlTemplate { get; set; }
@@ -24,16 +25,6 @@ namespace JDI.Core.Selenium.Elements.Composite
         public string DriverName { get; set; }
         public string Name { get; set; }
         public object Parent { get; set; }
-
-        public string GetAttribute(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetAttribute(string attributeName, string value)
-        {
-            throw new NotImplementedException();
-        }
 
         public IWebDriver WebDriver { get; set; }
         public Timer Timer { get; set; }
@@ -59,37 +50,37 @@ namespace JDI.Core.Selenium.Elements.Composite
         public void CheckOpened()
         {
             if (string.IsNullOrEmpty(UrlTemplate) &&
-                new[] {CheckPageTypes.None, CheckPageTypes.Equal}.Contains(CheckUrlType))
+                new[] {CheckPageType.None, CheckPageType.Equal}.Contains(CheckUrlType))
                 CheckUrl().Equal();
             else
                 switch (CheckUrlType)
                 {
-                    case CheckPageTypes.None:
+                    case CheckPageType.None:
                         JDISettings.Asserter.IsTrue(GetUrl().Contains(UrlTemplate)
                                                     || GetUrl().Matches(UrlTemplate));
                         break;
-                    case CheckPageTypes.Equal:
+                    case CheckPageType.Equal:
                         CheckUrl().Equal();
                         break;
-                    case CheckPageTypes.Match:
+                    case CheckPageType.Match:
                         CheckUrl().Match();
                         break;
-                    case CheckPageTypes.Contains:
+                    case CheckPageType.Contains:
                         CheckUrl().Contains();
                         break;
                 }
             switch (CheckTitleType)
             {
-                case CheckPageTypes.None:
+                case CheckPageType.None:
                     CheckTitle().Equal();
                     break;
-                case CheckPageTypes.Equal:
+                case CheckPageType.Equal:
                     CheckTitle().Equal();
                     break;
-                case CheckPageTypes.Match:
+                case CheckPageType.Match:
                     CheckTitle().Match();
                     break;
-                case CheckPageTypes.Contains:
+                case CheckPageType.Contains:
                     CheckTitle().Contains();
                     break;
             }
@@ -128,7 +119,7 @@ namespace JDI.Core.Selenium.Elements.Composite
             return WebSettings.WebDriver.Title;
         }
 
-        public void UpdatePageData(string url, string title, CheckPageTypes checkUrlType, CheckPageTypes checkTitleType,
+        public void UpdatePageData(string url, string title, CheckPageType checkUrlType, CheckPageType checkTitleType,
             string urlTemplate)
         {
             if (_url == null)
@@ -154,17 +145,17 @@ namespace JDI.Core.Selenium.Elements.Composite
         {
             var url = WebDriver.Url;
             if (string.IsNullOrEmpty(UrlTemplate)
-                && new[] {CheckPageTypes.None, CheckPageTypes.Equal}.Contains(CheckUrlType))
+                && new[] {CheckPageType.None, CheckPageType.Equal}.Contains(CheckUrlType))
                 return url.Equals(Url);
             switch (CheckUrlType)
             {
-                case CheckPageTypes.None:
+                case CheckPageType.None:
                     return url.Contains(UrlTemplate) || url.Matches(UrlTemplate);
-                case CheckPageTypes.Equal:
+                case CheckPageType.Equal:
                     return url.Equals(Url);
-                case CheckPageTypes.Match:
+                case CheckPageType.Match:
                     return url.Matches(UrlTemplate);
-                case CheckPageTypes.Contains:
+                case CheckPageType.Contains:
                     return url.Contains(string.IsNullOrEmpty(UrlTemplate) ? Url : UrlTemplate);
             }
 

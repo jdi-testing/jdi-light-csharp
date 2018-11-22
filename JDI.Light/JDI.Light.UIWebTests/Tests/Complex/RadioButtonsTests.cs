@@ -4,7 +4,7 @@ using JDI.Core.Settings;
 using JDI.UIWebTests.Enums;
 using JDI.UIWebTests.UIObjects;
 using NUnit.Framework;
-using Assert = JDI.Matchers.NUnit.Assert;
+using Assert = JDI.UIWebTests.Asserts.Assert;
 
 namespace JDI.UIWebTests.Tests.Complex
 {

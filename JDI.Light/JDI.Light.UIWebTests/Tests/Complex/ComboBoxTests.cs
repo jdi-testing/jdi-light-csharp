@@ -7,7 +7,7 @@ using JDI.UIWebTests.Enums;
 using JDI.UIWebTests.UIObjects;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using Assert = JDI.Matchers.NUnit.Assert;
+using Assert = JDI.UIWebTests.Asserts.Assert;
 
 namespace JDI.UIWebTests.Tests.Complex
 {

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using JDI.Core.Attributes;
 using JDI.Core.Attributes.JAttributes;
+using JDI.Core.Enums;
 using JDI.Core.Extensions;
 using JDI.Core.Interfaces.Base;
 using JDI.Core.Interfaces.Complex;
@@ -81,7 +82,7 @@ namespace JDI.Core.Selenium.Base
             if (!string.IsNullOrEmpty(urlTemplate))
             {
                 urlTemplate = urlTemplate.Contains("://") || !WebSettings.HasDomain ||
-                              urlCheckType != CheckPageTypes.Match
+                              urlCheckType != CheckPageType.Match
                     ? urlTemplate
                     : WebPage.GetMatchFromDomain(urlTemplate);
             }
