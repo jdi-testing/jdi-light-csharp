@@ -40,32 +40,71 @@ namespace JDI.Core.Selenium.Elements.Base
         {
             get
             {
-                JDISettings.Logger.Debug($"Get Web Element: {this}");
-                var element = Timer.GetResultByCondition(GetWebElementAction, el => el != null);
+                JDISettings.Logger.Debug($"Get Web Element: {ToString()}");
+                var element = Timer.GetResultByCondition(() =>
+                {
+                    if (_webElement != null)
+                        return _webElement;
+                    var timeout = JDISettings.Timeouts.CurrentTimeoutSec;
+                    var result = GetWebElementsAction();
+                    switch (result.Count)
+                    {
+                        case 0:
+                            throw JDISettings.Exception($"Can't find Element '{this}' during {timeout} seconds");
+                        case 1:
+                            return result[0];
+                        default:
+                            if (WebDriverFactory.OnlyOneElementAllowedInSearch)
+                                throw JDISettings.Exception(
+                                    $"Find {result.Count} elements instead of one for Element '{this}' during {timeout} seconds");
+                            return result[0];
+                    }
+                }, el => el != null);
                 JDISettings.Logger.Debug("One Web Element found");
                 return element;
             }
             set => _webElement = value;
         }
 
-        private IWebElement GetWebElementAction()
+        protected List<IWebElement> GetWebElementsAction()
         {
-            if (_webElement != null)
-                return _webElement;
-            var timeout = JDISettings.Timeouts.CurrentTimeoutSec;
-            var result = GetWebElementsAction();
-            switch (result.Count)
+            var result = Timer.GetResultByCondition(() =>
             {
-                case 0:
-                    throw JDISettings.Exception($"Can't find Element '{this}' during {timeout} seconds");
-                case 1:
-                    return result[0];
-                default:
-                    if (WebDriverFactory.OnlyOneElementAllowedInSearch)
-                        throw JDISettings.Exception(
-                            $"Find {result.Count} elements instead of one for Element '{this}' during {timeout} seconds");
-                    return result[0];
-            }
+                var locator = Locator.ContainsRoot() ? Locator.TrimRoot() : Locator;
+                return SearchContext.FindElements(locator.CorrectXPath()).ToList();
+            }, els => els.Count(GetSearchCriteria) > 0);
+            JDISettings.Timeouts.DropTimeouts();
+            if (result == null)
+                throw JDISettings.Exception("Can't get Web Elements");
+            return result.Where(GetSearchCriteria).ToList();
+        }
+
+        public ISearchContext SearchContext => Locator.ContainsRoot() 
+            ? WebDriver.SwitchTo().DefaultContent() 
+            : GetSearchContext(Parent);
+
+        private ISearchContext GetSearchContext(IBaseElement element)
+        {
+            UIElement el;
+            if (element == null || (el = element as UIElement) == null
+                                || el.Parent == null && el.FrameLocator == null)
+                return WebDriver.SwitchTo().DefaultContent();
+            var uiElement = (UIElement) element;
+            if (_webElement != null)
+                return uiElement.WebElement;
+            var locator = el.Locator;
+            var searchContext = locator.ContainsRoot()
+                ? WebDriver.SwitchTo().DefaultContent()
+                : GetSearchContext(el.Parent);
+            locator = locator.ContainsRoot()
+                ? locator.TrimRoot()
+                : locator;
+            var frame = el.FrameLocator;
+            if (frame != null)
+                WebDriver.SwitchTo().Frame(WebDriver.FindElement(frame));
+            return locator != null
+                ? searchContext.FindElement(locator.CorrectXPath())
+                : searchContext;
         }
 
         public Func<IWebElement, bool> LocalElementSearchCriteria;
@@ -93,44 +132,6 @@ namespace JDI.Core.Selenium.Elements.Base
             return result;
         }
 
-        protected List<IWebElement> GetWebElementsAction()
-        {
-            var result = Timer.GetResultByCondition(() =>
-            {
-                var searchContext = Locator.ContainsRoot() ? WebDriver.SwitchTo().DefaultContent() : SearchContext(Parent);
-                var locator = Locator.ContainsRoot() ? Locator.TrimRoot() : Locator;
-                return searchContext.FindElements(locator.CorrectXPath()).ToList();
-            }, els => els.Count(GetSearchCriteria) > 0);
-            JDISettings.Timeouts.DropTimeouts();
-            if (result == null)
-                throw JDISettings.Exception("Can't get Web Elements");
-            return result.Where(GetSearchCriteria).ToList();
-        }
-        
-        private ISearchContext SearchContext(object element)
-        {
-            UIElement el;
-            if (element == null || (el = element as UIElement) == null
-                                || el.Parent == null && el.FrameLocator == null)
-                return WebDriver.SwitchTo().DefaultContent();
-            var elem = element as UIElement;
-            if (_webElement != null)
-                return elem.WebElement;
-            var locator = el.Locator;
-            var searchContext = locator.ContainsRoot()
-                ? WebDriver.SwitchTo().DefaultContent()
-                : SearchContext(el.Parent);
-            locator = locator.ContainsRoot()
-                ? locator.TrimRoot()
-                : locator;
-            var frame = el.FrameLocator;
-            if (frame != null)
-                WebDriver.SwitchTo().Frame(WebDriver.FindElement(frame));
-            return locator != null
-                ? searchContext.FindElement(locator.CorrectXPath())
-                : searchContext;
-        }
-
         public bool HasLocator => Locator != null;
 
         public IJavaScriptExecutor JsExecutor => (IJavaScriptExecutor) WebDriver;
@@ -156,7 +157,6 @@ namespace JDI.Core.Selenium.Elements.Base
         }
 
         public string Name { get; set; }
-        public string ParentTypeName => Parent?.GetType().Name ?? "";
 
         public string TypeName => GetType().Name;
 
@@ -170,8 +170,8 @@ namespace JDI.Core.Selenium.Elements.Base
         public new string ToString()
         {
             return JDISettings.ShortLogMessagesFormat
-                ? $"{TypeName} '{Name}' ({ParentTypeName}.{Name};)"
-                : $"Name: '{Name}', Type: '{TypeName}' In: '{ParentTypeName}'";
+                ? $"{TypeName} '{Name}' ({Parent?.GetType().Name ?? ""}.{Name};)"
+                : $"Name: '{Name}', Type: '{TypeName}' In: '{Parent?.GetType().Name ?? ""}'";
         }
         
         protected Func<UIElement, bool> IsDisplayedAction =
