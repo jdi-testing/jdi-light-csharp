@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using JDI.Core.Enums;
 using JDI.Core.Extensions;
+using JDI.Core.Interfaces.Base;
 using JDI.Core.Interfaces.Complex;
 using JDI.Core.Selenium.Elements.WebActions;
 using JDI.Core.Settings;
@@ -24,7 +25,7 @@ namespace JDI.Core.Selenium.Elements.Composite
         public ActionInvoker<WebPage> Invoker { get; set; }
         public string DriverName { get; set; }
         public string Name { get; set; }
-        public object Parent { get; set; }
+        public IBaseElement Parent { get; set; }
 
         public IWebDriver WebDriver { get; set; }
         public Timer Timer { get; set; }

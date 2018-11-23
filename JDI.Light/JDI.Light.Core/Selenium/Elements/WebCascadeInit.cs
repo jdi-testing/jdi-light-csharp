@@ -41,7 +41,7 @@ namespace JDI.Core.Selenium.Elements
                 parentType.StaticFields().GetFields(Decorators), parentType, driverName);
         }
 
-        private static void SetFields(object parent, List<FieldInfo> fields, Type parentType, string driverName)
+        private static void SetFields(IBaseElement parent, List<FieldInfo> fields, Type parentType, string driverName)
         {
             fields.Where(field => Decorators.ToList().Any(type => type.IsAssignableFrom(field.FieldType))).ToList()
                 .ForEach(field =>
@@ -91,7 +91,7 @@ namespace JDI.Core.Selenium.Elements
             return instance;
         }
 
-        protected static IBaseElement GetInstanceElement(object parent, Type type, Type parentType, FieldInfo field,
+        protected static IBaseElement GetInstanceElement(IBaseElement parent, Type type, Type parentType, FieldInfo field,
             string driverName)
         {
             var instance = (IBaseElement)field.GetValue(parent);

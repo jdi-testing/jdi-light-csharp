@@ -4,6 +4,6 @@
     {
         string DriverName { get; set; }
         string Name { get; set; }
-        object Parent { set; get; }
+        IBaseElement Parent { set; get; }
     }
 }

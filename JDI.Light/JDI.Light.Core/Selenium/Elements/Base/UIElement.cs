@@ -135,7 +135,7 @@ namespace JDI.Core.Selenium.Elements.Base
 
         public IJavaScriptExecutor JsExecutor => (IJavaScriptExecutor) WebDriver;
 
-        public object Parent { get; set; }
+        public IBaseElement Parent { get; set; }
 
         public string GetAttribute(string name)
         {
