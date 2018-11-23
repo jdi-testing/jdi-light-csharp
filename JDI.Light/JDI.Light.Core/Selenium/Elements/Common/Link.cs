@@ -18,8 +18,8 @@ namespace JDI.Core.Selenium.Elements.Common
         {
         }
 
-        public Link(By byLocator = null, IWebElement webElement = null)
-            : base(byLocator, webElement)
+        public Link(By byLocator = null)
+            : base(byLocator)
         {
         }
 

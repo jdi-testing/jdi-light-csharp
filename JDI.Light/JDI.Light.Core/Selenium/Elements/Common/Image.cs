@@ -17,8 +17,8 @@ namespace JDI.Core.Selenium.Elements.Common
         {
         }
 
-        public Image(By byLocator = null, IWebElement webElement = null)
-            : base(byLocator, webElement)
+        public Image(By byLocator = null)
+            : base(byLocator)
         {
         }
 

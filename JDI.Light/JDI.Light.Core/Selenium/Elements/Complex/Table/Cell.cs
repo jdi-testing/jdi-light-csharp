@@ -54,9 +54,12 @@ namespace JDI.Core.Selenium.Elements.Complex.Table
 
         public SelectableElement Get()
         {
-            return WebElement != null
-                ? new SelectableElement(webElement: WebElement)
-                : new SelectableElement(_cellLocatorTemplate.FillByTemplate(ColumnIndex, RowIndex));
+            if (WebElement != null)
+            {
+                var se = new SelectableElement {WebElement = WebElement};
+                return se;
+            }
+            return new SelectableElement(_cellLocatorTemplate.FillByTemplate(ColumnIndex, RowIndex));
         }
 
         public T Get<T>(Type clazz) where T : UIElement

@@ -11,8 +11,8 @@ namespace JDI.Core.Selenium.Elements.Common
         {
         }
 
-        public Text(By byLocator = null, IWebElement webElement = null)
-            : base(byLocator, webElement)
+        public Text(By byLocator = null)
+            : base(byLocator)
         {
         }
 

@@ -16,8 +16,8 @@ namespace JDI.Core.Selenium.Elements.Base
         {
         }
 
-        public Clickable(By byLocator = null, IWebElement webElement = null)
-            : base(byLocator, webElement)
+        public Clickable(By byLocator = null)
+            : base(byLocator)
         {
         }
 

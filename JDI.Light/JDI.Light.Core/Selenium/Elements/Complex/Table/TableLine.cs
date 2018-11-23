@@ -10,8 +10,8 @@ namespace JDI.Core.Selenium.Elements.Complex.Table
 {
     public abstract class TableLine : UIElement, ITableLine
     {
-        protected TableLine(By byLocator, IWebElement webElement = null) 
-            : base(byLocator, webElement)
+        protected TableLine(By byLocator) 
+            : base(byLocator)
         {
         }
 
@@ -93,7 +93,11 @@ namespace JDI.Core.Selenium.Elements.Complex.Table
         public Dictionary<string, SelectableElement> Header()
         {
             return GetHeadersAction.ToDictionary(key => key.Text,
-                value => new SelectableElement(webElement: value));
+                value =>
+                {
+                    var se = new SelectableElement {WebElement = value};
+                    return se;
+                });
         }
 
         public SelectableElement Header(string name)

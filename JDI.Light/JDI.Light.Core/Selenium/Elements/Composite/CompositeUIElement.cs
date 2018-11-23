@@ -12,15 +12,11 @@ namespace JDI.Core.Selenium.Elements.Composite
 {
     public class CompositeUIElement : UIElement
     {
-        public CompositeUIElement() : base()
+        public CompositeUIElement() : base(null)
         {
         }
 
         public CompositeUIElement(By locator) : base(locator)
-        {
-        }
-
-        public CompositeUIElement(By locator, IWebElement webElement) : base(locator, webElement)
         {
         }
 

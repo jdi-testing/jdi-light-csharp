@@ -17,11 +17,10 @@ namespace JDI.Core.Selenium.Elements.Base
         public By FrameLocator;
         public ActionInvoker<UIElement> Invoker;
 
-        public UIElement(By byLocator = null, IWebElement webElement = null)
+        public UIElement(By byLocator = null)
         {
             Invoker = new ActionInvoker<UIElement>(this);
             Actions = new ElementsActions(Invoker);
-            _webElement = webElement;
             Locator = byLocator;
             Timer = new Timer(JDISettings.Timeouts.CurrentTimeoutSec * 1000);
             if (string.IsNullOrEmpty(DriverName) && WebSettings.WebDriverFactory != null &&

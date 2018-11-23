@@ -10,8 +10,8 @@ namespace JDI.Core.Selenium.Elements.Common
         {
         }
 
-        public Label(By byLocator = null, IWebElement webElement = null)
-            : base(byLocator, webElement)
+        public Label(By byLocator = null)
+            : base(byLocator)
         {
         }
     }

@@ -9,8 +9,8 @@ namespace JDI.Core.Selenium.Elements.Common
         {
         }
 
-        public TextArea(By byLocator = null, IWebElement webElement = null)
-            : base(byLocator, webElement)
+        public TextArea(By byLocator = null)
+            : base(byLocator)
         {
         }
 

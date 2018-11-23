@@ -9,8 +9,8 @@ namespace JDI.Core.Selenium.Elements.Common
         {
         }
 
-        public DatePicker(By byLocator = null, IWebElement webElement = null)
-            : base(byLocator, webElement)
+        public DatePicker(By byLocator = null)
+            : base(byLocator)
         {
         }
     }
