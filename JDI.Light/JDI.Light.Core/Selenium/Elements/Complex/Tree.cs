@@ -22,7 +22,7 @@ namespace JDI.Core.Selenium.Elements.Complex
                 {
                     var elements = ctx.FindElements(m.Locator.FillByTemplate(node));
                     if (elements == null || elements.Count != 0)
-                        throw JDISettings.Exception($"Can't select element by path '{names.Print(m.Separator)}'");
+                        throw JDISettings.Exception($"Can't select element by path '{names.FormattedJoin(m.Separator)}'");
                     var element = elements.First();
                     element.Click();
                     ctx = element;
@@ -67,7 +67,7 @@ namespace JDI.Core.Selenium.Elements.Complex
 
         public void Select(params string[] names)
         {
-            Actions.Select(names.Print(), (w, n) => ChooseItemAction(this, names));
+            Actions.Select(names.FormattedJoin(), (w, n) => ChooseItemAction(this, names));
         }
     }
 }

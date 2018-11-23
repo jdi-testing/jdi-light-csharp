@@ -18,13 +18,19 @@ namespace JDI.UIWebTests.Tests.Complex.Table
         [Test]
         public void IllegalHeaderIndexTest()
         {
-            Assert.Throws<KeyNotFoundException>(() => Table.Rows.Header("Row_illegal").GetWebElement());
+            Assert.Throws<KeyNotFoundException>(() =>
+            {
+                var e = Table.Rows.Header("Row_illegal").WebElement;
+            });
         }
 
         [Test]
         public void IllegalHeaderNameTest()
         {
-            Assert.Throws<KeyNotFoundException>(() => Table.Header("Column_illegal").GetWebElement());
+            Assert.Throws<KeyNotFoundException>(() =>
+            {
+                var e = Table.Header("Column_illegal").WebElement;
+            });
         }
 
         [Test]

@@ -12,7 +12,7 @@ namespace JDI.UIWebTests.Tests.Complex.Table
         [Test]
         public void TableColumnHeadersTest()
         {
-            new Check("Column headers").AreEquals("Type, Now, Plans", Table.Columns.Headers.Print());
+            new Check("Column headers").AreEquals("Type, Now, Plans", Table.Columns.Headers.FormattedJoin());
         }
 
         [Test]
@@ -25,13 +25,13 @@ namespace JDI.UIWebTests.Tests.Complex.Table
         public void TableHeadersAsTextTest()
         {
             new Check("Table header as text").AreEquals("Type, Now, Plans",
-                Table.Header().Select(p => p.Value.GetText).Print());
+                Table.Header().Select(p => p.Value.GetText).FormattedJoin());
         }
 
         [Test]
         public void TableHeadersTest()
         {
-            new Check("Table headers").AreEquals("Type, Now, Plans", Table.Headers.Print());
+            new Check("Table headers").AreEquals("Type, Now, Plans", Table.Headers.FormattedJoin());
         }
 
         [Test]
@@ -43,7 +43,7 @@ namespace JDI.UIWebTests.Tests.Complex.Table
         [Test]
         public void TableRowHeadersTest()
         {
-            new Check("Row headers").AreEquals("1, 2, 3, 4, 5, 6", Table.Rows.Headers.Print());
+            new Check("Row headers").AreEquals("1, 2, 3, 4, 5, 6", Table.Rows.Headers.FormattedJoin());
         }
     }
 }

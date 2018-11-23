@@ -50,7 +50,7 @@ namespace JDI.Core.Selenium.Elements.Composite
                     var button = buttons.FirstOrDefault(b => ToButton(b.Name).SimplifiedEqual(ToButton(buttonName)));
                     if (button == null)
                         throw JDISettings.Exception($"Can't find button '{buttonName}' for Element '{ToString()}'." +
-                                                    $"(Found following buttons: {buttons.Select(el => el.Name).Print()})."
+                                                    $"(Found following buttons: {buttons.Select(el => el.Name).FormattedJoin()})."
                                                         .FromNewLine());
                     return button;
             }

@@ -29,8 +29,7 @@ namespace JDI.Core.Selenium.DriverFactory
 
         private static string GetBadLocatorMsg(this string byLocator, params object[] args)
         {
-            return "Bad locator template '" + byLocator + "'. Args: " +
-                   args.Select(el => el.ToString()).Print(", ", "'{0}'") + ".";
+            return $"Bad locator template '{byLocator}'. Args: {args.Select(el => el.ToString()).FormattedJoin(", ", "'{0}'")}.";
         }
 
         public static By FillByTemplate(this By by, params object[] args)

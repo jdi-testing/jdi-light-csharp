@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using JDI.Core.Attributes;
 using JDI.Core.Extensions;
 
 namespace JDI.Core.Utils
@@ -68,7 +67,7 @@ namespace JDI.Core.Utils
                 if (strValue != null)
                     result.Add($"{field.GetElementName()}#:#{strValue}");
             });
-            return result.Print("#;#");
+            return result.FormattedJoin("#;#");
         }
 
         private static Dictionary<string, string> ParseObjectAsString(string objString)

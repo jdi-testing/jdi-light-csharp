@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using JDI.Core.Selenium.Elements.Base;
-using OpenQA.Selenium;
+﻿using JDI.Core.Selenium.Elements.Base;
 
 namespace JDI.Core.Selenium.Elements.Composite
 {

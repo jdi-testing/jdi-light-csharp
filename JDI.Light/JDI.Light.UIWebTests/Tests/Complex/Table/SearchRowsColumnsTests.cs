@@ -46,7 +46,7 @@ namespace JDI.UIWebTests.Tests.Complex.Table
         {
             var column = Table.Column("TestNG, JUnit, Custom", Row.CreateRow(3))
                 .Select(pair => $"{pair.Key}:{pair.Value.GetText}");
-            new Check().AreEquals(column.Print(), _expectedColumn2);
+            new Check().AreEquals(column.FormattedJoin(), _expectedColumn2);
         }
 
         [Test]
@@ -54,21 +54,21 @@ namespace JDI.UIWebTests.Tests.Complex.Table
         {
             var column = Table.Column("TestNG, JUnit, Custom", Row.CreateRow("3"))
                 .Select(pair => $"{pair.Key}:{pair.Value.GetText}");
-            new Check().AreEquals(column.Print(), _expectedColumn2);
+            new Check().AreEquals(column.FormattedJoin(), _expectedColumn2);
         }
 
         [Test]
         public void ColumnByNameTest()
         {
             var column = Table.Column("Now").Select(pair => $"{pair.Key}:{pair.Value.GetText}");
-            new Check().AreEquals(column.Print(), _expectedColumn2);
+            new Check().AreEquals(column.FormattedJoin(), _expectedColumn2);
         }
 
         [Test]
         public void ColumnByNumTest()
         {
             var column = Table.Column(2).Select(pair => $"{pair.Key}:{pair.Value.GetText}");
-            new Check().AreEquals(column.Print(), _expectedColumn2);
+            new Check().AreEquals(column.FormattedJoin(), _expectedColumn2);
         }
 
         [Test]
@@ -77,8 +77,8 @@ namespace JDI.UIWebTests.Tests.Complex.Table
             var columns = Table.Columns.AsText;
             new Check("Columns count").AreEquals(columns.Count, 3);
             var stringColumns = columns.Select(
-                    pair => $"{pair.Key}:[{pair.Value.Select(pair2 => $"{pair2.Key}:{pair2.Value}").Print()}]")
-                .Print();
+                    pair => $"{pair.Key}:[{pair.Value.Select(pair2 => $"{pair2.Key}:{pair2.Value}").FormattedJoin()}]")
+                .FormattedJoin();
             new Check("Columns content").AreEquals(
                 stringColumns,
                 "Type:[1:Drivers, " +
@@ -109,8 +109,8 @@ namespace JDI.UIWebTests.Tests.Complex.Table
             var stringColumns =
                 columns.Select(
                         pair =>
-                            $"{pair.Key}:[{pair.Value.Select(pair2 => $"{pair2.Key}:{pair2.Value.GetText}").Print()}]")
-                    .Print();
+                            $"{pair.Key}:[{pair.Value.Select(pair2 => $"{pair2.Key}:{pair2.Value.GetText}").FormattedJoin()}]")
+                    .FormattedJoin();
             new Check("Columns content").AreEquals(
                 stringColumns,
                 "Now:[1:Selenium, Custom, " +
@@ -129,8 +129,8 @@ namespace JDI.UIWebTests.Tests.Complex.Table
             var stringColumns =
                 columns.Select(
                         pair =>
-                            $"{pair.Key}:[{pair.Value.Select(pair2 => $"{pair2.Key}:{pair2.Value.GetText}").Print()}]")
-                    .Print();
+                            $"{pair.Key}:[{pair.Value.Select(pair2 => $"{pair2.Key}:{pair2.Value.GetText}").FormattedJoin()}]")
+                    .FormattedJoin();
             new Check("Columns content").AreEquals(
                 stringColumns,
                 "Type:[1:Drivers, " +
@@ -146,7 +146,7 @@ namespace JDI.UIWebTests.Tests.Complex.Table
         {
             var column = Table.Columns.GetColumnAsText("Now");
             new Check("Column content").AreEquals(
-                column.Select(pair => $"{pair.Key}:{pair.Value}").Print(),
+                column.Select(pair => $"{pair.Key}:{pair.Value}").FormattedJoin(),
                 _expectedColumn2);
         }
 
@@ -155,7 +155,7 @@ namespace JDI.UIWebTests.Tests.Complex.Table
         {
             var column = Table.Columns.GetColumn("Now");
             new Check("Column content").AreEquals(
-                column.Select(pair => $"{pair.Key}:{pair.Value.Value}").Print(),
+                column.Select(pair => $"{pair.Key}:{pair.Value.Value}").FormattedJoin(),
                 _expectedColumn2);
         }
 
@@ -164,7 +164,7 @@ namespace JDI.UIWebTests.Tests.Complex.Table
         {
             var column = Table.Columns.GetColumnAsText(2);
             new Check("Column content").AreEquals(
-                column.Select(pair => $"{pair.Key}:{pair.Value}").Print(),
+                column.Select(pair => $"{pair.Key}:{pair.Value}").FormattedJoin(),
                 _expectedColumn2);
         }
 
@@ -173,7 +173,7 @@ namespace JDI.UIWebTests.Tests.Complex.Table
         {
             var column = Table.Columns.GetColumn(2);
             new Check("Column content").AreEquals(
-                column.Select(pair => $"{pair.Key}:{pair.Value.Value}").Print(),
+                column.Select(pair => $"{pair.Key}:{pair.Value.Value}").FormattedJoin(),
                 _expectedColumn2);
         }
 
@@ -183,8 +183,8 @@ namespace JDI.UIWebTests.Tests.Complex.Table
             var columns = Table.Columns.Get();
             new Check("Columns count").AreEquals(columns.Count, 3);
             var stringColumns = columns.Select(
-                    pair => $"{pair.Key}:[{pair.Value.Select(pair2 => $"{pair2.Key}:{pair2.Value.GetText}").Print()}]")
-                .Print();
+                    pair => $"{pair.Key}:[{pair.Value.Select(pair2 => $"{pair2.Key}:{pair2.Value.GetText}").FormattedJoin()}]")
+                .FormattedJoin();
             new Check("Columns content").AreEquals(
                 stringColumns,
                 "Type:[1:Drivers, " +
@@ -234,7 +234,7 @@ namespace JDI.UIWebTests.Tests.Complex.Table
         {
             var row = Table.Row("MSTest, NUnit, Epam", Column.column(3))
                 .Select(pair => $"{pair.Key}:{pair.Value.GetText}");
-            new Check().AreEquals(row.Print(), _expectedRow2);
+            new Check().AreEquals(row.FormattedJoin(), _expectedRow2);
         }
 
         [Test]
@@ -242,21 +242,21 @@ namespace JDI.UIWebTests.Tests.Complex.Table
         {
             var row = Table.Row("MSTest, NUnit, Epam", Column.column("Plans"))
                 .Select(pair => $"{pair.Key}:{pair.Value.GetText}");
-            new Check().AreEquals(row.Print(), _expectedRow2);
+            new Check().AreEquals(row.FormattedJoin(), _expectedRow2);
         }
 
         [Test]
         public void RowByNameTest()
         {
             var row = Table.Row("2").Select(pair => $"{pair.Key}:{pair.Value.GetText}");
-            new Check().AreEquals(row.Print(), _expectedRow2);
+            new Check().AreEquals(row.FormattedJoin(), _expectedRow2);
         }
 
         [Test]
         public void RowByNumTest()
         {
             var row = Table.Row(2).Select(pair => $"{pair.Key}:{pair.Value.GetText}");
-            new Check().AreEquals(row.Print(), _expectedRow2);
+            new Check().AreEquals(row.FormattedJoin(), _expectedRow2);
         }
 
         [Test]
@@ -267,8 +267,8 @@ namespace JDI.UIWebTests.Tests.Complex.Table
             var stringRow =
                 rows.Select(
                         pair =>
-                            $"{pair.Key}:[{pair.Value.Select(pair2 => $"{pair2.Key}:{pair2.Value.GetText}").Print()}]")
-                    .Print();
+                            $"{pair.Key}:[{pair.Value.Select(pair2 => $"{pair2.Key}:{pair2.Value.GetText}").FormattedJoin()}]")
+                    .FormattedJoin();
             new Check("Rows content").AreEquals(
                 stringRow,
                 "2:[Type:Test Runner, Now:TestNG, JUnit, Custom, Plans:MSTest, NUnit, Epam], " +
@@ -283,8 +283,8 @@ namespace JDI.UIWebTests.Tests.Complex.Table
             var stringRow =
                 rows.Select(
                         pair =>
-                            $"{pair.Key}:[{pair.Value.Select(pair2 => $"{pair2.Key}:{pair2.Value.GetText}").Print()}]")
-                    .Print();
+                            $"{pair.Key}:[{pair.Value.Select(pair2 => $"{pair2.Key}:{pair2.Value.GetText}").FormattedJoin()}]")
+                    .FormattedJoin();
             new Check("Rows content").AreEquals(
                 stringRow,
                 "3:[Type:Asserter, Now:TestNG, JUnit, Custom, Plans:MSTest, NUnit, Epam]");
@@ -297,8 +297,8 @@ namespace JDI.UIWebTests.Tests.Complex.Table
             new Check("Rows count").AreEquals(rows.Count, 6);
             new Check("Rows content").AreEquals(
                 rows.Select(
-                        pair => $"{pair.Key}:[{pair.Value.Select(pair2 => $"{pair2.Key}:{pair2.Value}").Print()}]")
-                    .Print(),
+                        pair => $"{pair.Key}:[{pair.Value.Select(pair2 => $"{pair2.Key}:{pair2.Value}").FormattedJoin()}]")
+                    .FormattedJoin(),
                 "1:[Type:Drivers, " +
                 "Now:Selenium, Custom, " +
                 "Plans:JavaScript, Appium, WinAPI, Sikuli], " +
@@ -324,7 +324,7 @@ namespace JDI.UIWebTests.Tests.Complex.Table
         {
             var row = Table.Rows.GetRowAsText("3");
             new Check("Row content").AreEquals(
-                row.Select(pair => $"{pair.Key}:{pair.Value}").Print(),
+                row.Select(pair => $"{pair.Key}:{pair.Value}").FormattedJoin(),
                 "Type:Asserter, Now:TestNG, JUnit, Custom, Plans:MSTest, NUnit, Epam");
         }
 
@@ -333,7 +333,7 @@ namespace JDI.UIWebTests.Tests.Complex.Table
         {
             var row = Table.Rows.GetRow("3");
             new Check("Row content").AreEquals(
-                row.Select(pair => $"{pair.Key}:{pair.Value.Value}").Print(),
+                row.Select(pair => $"{pair.Key}:{pair.Value.Value}").FormattedJoin(),
                 "Type:Asserter, Now:TestNG, JUnit, Custom, Plans:MSTest, NUnit, Epam");
         }
 
@@ -342,7 +342,7 @@ namespace JDI.UIWebTests.Tests.Complex.Table
         {
             var row = Table.Rows.GetRowAsText(3);
             new Check("Row content").AreEquals(
-                row.Select(pair => $"{pair.Key}:{pair.Value}").Print(),
+                row.Select(pair => $"{pair.Key}:{pair.Value}").FormattedJoin(),
                 "Type:Asserter, Now:TestNG, JUnit, Custom, Plans:MSTest, NUnit, Epam");
         }
 
@@ -351,7 +351,7 @@ namespace JDI.UIWebTests.Tests.Complex.Table
         {
             var row = Table.Rows.GetRow(3);
             new Check("Row content").AreEquals(
-                row.Select(pair => $"{pair.Key}:{pair.Value.Value}").Print(),
+                row.Select(pair => $"{pair.Key}:{pair.Value.Value}").FormattedJoin(),
                 "Type:Asserter, Now:TestNG, JUnit, Custom, Plans:MSTest, NUnit, Epam");
         }
 
@@ -363,8 +363,8 @@ namespace JDI.UIWebTests.Tests.Complex.Table
             new Check("Rows content").AreEquals(
                 rows.Select(
                         pair =>
-                            $"{pair.Key}:[{pair.Value.Select(pair2 => $"{pair2.Key}:{pair2.Value.GetText}").Print()}]")
-                    .Print(),
+                            $"{pair.Key}:[{pair.Value.Select(pair2 => $"{pair2.Key}:{pair2.Value.GetText}").FormattedJoin()}]")
+                    .FormattedJoin(),
                 "1:[Type:Drivers, " +
                 "Now:Selenium, Custom, " +
                 "Plans:JavaScript, Appium, WinAPI, Sikuli], " +

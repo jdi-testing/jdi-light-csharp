@@ -1,6 +1,5 @@
 ﻿using System;
 using JDI.Core.Enums;
-using JDI.Core.Selenium.Elements.Composite;
 
 namespace JDI.Core.Attributes
 {

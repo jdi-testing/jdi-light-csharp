@@ -12,7 +12,7 @@ namespace JDI.Core.Extensions
                 action(element);
         }
 
-        public static string Print(this IEnumerable<string> list, string separator = ", ", string format = "{0}")
+        public static string FormattedJoin(this IEnumerable<string> list, string separator = ", ", string format = "{0}")
         {
             return list != null ? string.Join(separator, list.Select(el => string.Format(format, el))) : "";
         }

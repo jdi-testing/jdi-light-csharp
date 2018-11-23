@@ -57,7 +57,7 @@ namespace JDI.Core.Selenium.Elements.Complex
         {
             SelectedNameAction = (m, name) => SelectedElementAction(this, GetWebElement(name));
             SelectedNumAction = (m, num) => SelectedElementAction(this, GetWebElement(num));
-            GetValueAction = m => AreSelected().Print();
+            GetValueAction = m => AreSelected().FormattedJoin();
             GetWebElementFunc = (s, name) =>
             {
                 var ms = (MultiSelector<TEnum>) s;

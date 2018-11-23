@@ -497,7 +497,7 @@ namespace JDI.Core.Selenium.Elements.Complex.Table
             else
                 throw JDISettings.Exception("Can't Get Column: '" + name + "'. " + (headers == null
                                                 ? "ColumnHeaders is Null"
-                                                : "Available ColumnHeaders: " + headers.Print(", ", "'{0}'") + ")"));
+                                                : "Available ColumnHeaders: " + headers.FormattedJoin(", ", "'{0}'") + ")"));
             return nameIndex + Columns.StartIndex;
         }
 
@@ -509,7 +509,7 @@ namespace JDI.Core.Selenium.Elements.Complex.Table
                 nameIndex = headers.IndexOf(name);
             else
                 throw JDISettings.Exception(
-                    $"Can't Get Row: {name}. Available RowHeaders: {Headers.Print(", ", "'{0}'")}");
+                    $"Can't Get Row: {name}. Available RowHeaders: {Headers.FormattedJoin(", ", "'{0}'")}");
             return nameIndex + Rows.StartIndex;
         }
 

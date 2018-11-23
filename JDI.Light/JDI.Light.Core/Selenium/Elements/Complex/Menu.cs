@@ -59,7 +59,7 @@ namespace JDI.Core.Selenium.Elements.Complex
 
             if (split.Count > m.MenuLevelsLocators.Count)
                 throw JDISettings.Exception(
-                    $"Can't hover and click on element ({m}) by value: {names.Print(m.Separator)}. Amount of locators ({m.MenuLevelsLocators.Count}) less than select path length ({split.Count})");
+                    $"Can't hover and click on element ({m}) by value: {names.FormattedJoin(m.Separator)}. Amount of locators ({m.MenuLevelsLocators.Count}) less than select path length ({split.Count})");
             m.Hover(split.ListCopy(to: -1).ToArray());
             var lastIndex = split.Count - 1;
             if (m.Delay > 0) Thread.Sleep(m.Delay);
@@ -95,7 +95,7 @@ namespace JDI.Core.Selenium.Elements.Complex
         {
             if (names == null || names.Length == 0)
                 return;
-            Actions.Hover(names.Print(Separator), (w, n) =>
+            Actions.Hover(names.FormattedJoin(Separator), (w, n) =>
             {
                 var m = (Menu<TEnum>) w;
                 m.ChooseItemAction(m, names, HoverAction);
@@ -114,7 +114,7 @@ namespace JDI.Core.Selenium.Elements.Complex
 
         public void HoverAndClick(params string[] names)
         {
-            Actions.Select(names.Print(Separator), (m, n) => HoverAndClickAction(this, names));
+            Actions.Select(names.FormattedJoin(Separator), (m, n) => HoverAndClickAction(this, names));
         }
 
         public void HoverAndClick(TEnum name)

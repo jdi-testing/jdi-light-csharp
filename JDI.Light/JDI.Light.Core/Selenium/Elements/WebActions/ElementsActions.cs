@@ -171,13 +171,13 @@ namespace JDI.Core.Selenium.Elements.WebActions
         //MultiSelector
         public void Select(Action<UIElement, IList<string>> selectListAction, params string[] names)
         {
-            Invoker.DoJAction($"Select '{names.Print()}'", el => selectListAction(el, names));
+            Invoker.DoJAction($"Select '{names.FormattedJoin()}'", el => selectListAction(el, names));
         }
 
         public void Select(Action<UIElement, IList<int>> selectListAction, int[] indexes)
         {
             var listIndexes = indexes.Select(i => i.ToString()).ToList();
-            Invoker.DoJAction($"Select '{listIndexes.Print()}'", el => selectListAction(el, indexes));
+            Invoker.DoJAction($"Select '{listIndexes.FormattedJoin()}'", el => selectListAction(el, indexes));
         }
 
         public List<string> AreSelected(Func<UIElement, IList<string>> getNames,
@@ -189,7 +189,7 @@ namespace JDI.Core.Selenium.Elements.WebActions
 
         public void WaitSelected(Func<UIElement, string, bool> waitSelectedAction, params string[] names)
         {
-            var result = Invoker.DoJActionResult($"Are deselected '{names.Print()}'",
+            var result = Invoker.DoJActionResult($"Are deselected '{names.FormattedJoin()}'",
                 el => names.All(name => waitSelectedAction(el, name)));
             JDISettings.Asserter.IsTrue(result);
         }
@@ -208,7 +208,7 @@ namespace JDI.Core.Selenium.Elements.WebActions
 
         public void WaitDeselected(Func<UIElement, string, bool> waitSelectedAction, params string[] names)
         {
-            var result = Invoker.DoJActionResult($"Are deselected '{names.Print()}'",
+            var result = Invoker.DoJActionResult($"Are deselected '{names.FormattedJoin()}'",
                 el => names.All(name => !waitSelectedAction(el, name)));
             JDISettings.Asserter.IsTrue(result);
         }

@@ -50,7 +50,7 @@ namespace JDI.Core.Selenium.Elements.Complex
             }
         }
 
-        public string Value => Texts.Print();
+        public string Value => Texts.FormattedJoin();
 
         public string GetValue()
         {

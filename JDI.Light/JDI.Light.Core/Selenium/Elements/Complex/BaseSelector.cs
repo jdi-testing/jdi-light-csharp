@@ -177,7 +177,7 @@ namespace JDI.Core.Selenium.Elements.Complex
         public IList<string> Names => Options;
         public IList<string> Values => Options;
 
-        public string OptionsAsText => Options.Print();
+        public string OptionsAsText => Options.FormattedJoin();
 
         public IList<IWebElement> Elements
         {

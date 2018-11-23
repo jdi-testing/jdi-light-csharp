@@ -18,7 +18,7 @@ namespace JDI.Core.Selenium.Elements.Composite
         public By LocatorTemplate;
 
         protected Func<Form, string> GetValueAction =>
-            f => this.GetFields(typeof(IHasValue)).Select(field => ((IHasValue) field.GetValue(this)).Value).Print();
+            f => this.GetFields(typeof(IHasValue)).Select(field => ((IHasValue) field.GetValue(this)).Value).FormattedJoin();
 
         protected Action<Form, string> SetValueAction =>
             (f, value) => Submit(value.ParseAsString());
@@ -148,7 +148,7 @@ namespace JDI.Core.Selenium.Elements.Composite
         {
             var result = Verify(objStrings);
             if (result.Count > 0)
-                throw JDISettings.Exception("Check form failed:" + result.Print("".FromNewLine()).FromNewLine());
+                throw JDISettings.Exception("Check form failed:" + result.FormattedJoin("".FromNewLine()).FromNewLine());
         }
     }
 

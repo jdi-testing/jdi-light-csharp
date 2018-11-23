@@ -6,7 +6,6 @@ using JDI.Core.Selenium.DriverFactory;
 using JDI.Core.Selenium.Elements.WebActions;
 using JDI.Core.Settings;
 using OpenQA.Selenium;
-using LogLevel = JDI.Core.Logging.LogLevel;
 
 namespace JDI.Core.Selenium.Elements.Base
 {
@@ -43,7 +42,7 @@ namespace JDI.Core.Selenium.Elements.Base
             {
                 JDISettings.Logger.Debug($"Get Web Element: {this}");
                 var element = Timer.GetResultByCondition(GetWebElementAction, el => el != null);
-                JDISettings.Logger.Debug("OneElement found");
+                JDISettings.Logger.Debug("One Web Element found");
                 return element;
             }
             set => _webElement = value;
@@ -90,24 +89,22 @@ namespace JDI.Core.Selenium.Elements.Base
             }
 
             LocalElementSearchCriteria = temp;
-            RestoreWaitTimeout();
+            SetWaitTimeout(JDISettings.Timeouts.WaitElementSec);
             return result;
         }
 
         protected List<IWebElement> GetWebElementsAction()
         {
-            var result = Timer.GetResultByCondition(SearchElements, els => els.Count(GetSearchCriteria) > 0);
+            var result = Timer.GetResultByCondition(() =>
+            {
+                var searchContext = Locator.ContainsRoot() ? WebDriver.SwitchTo().DefaultContent() : SearchContext(Parent);
+                var locator = Locator.ContainsRoot() ? Locator.TrimRoot() : Locator;
+                return searchContext.FindElements(locator.CorrectXPath()).ToList();
+            }, els => els.Count(GetSearchCriteria) > 0);
             JDISettings.Timeouts.DropTimeouts();
             if (result == null)
                 throw JDISettings.Exception("Can't get Web Elements");
             return result.Where(GetSearchCriteria).ToList();
-        }
-        
-        private List<IWebElement> SearchElements()
-        {
-            var searchContext = Locator.ContainsRoot() ? WebDriver.SwitchTo().DefaultContent() : SearchContext(Parent);
-            var locator = Locator.ContainsRoot() ? Locator.TrimRoot(): Locator;
-            return searchContext.FindElements(locator.CorrectXPath()).ToList();
         }
         
         private ISearchContext SearchContext(object element)
@@ -142,12 +139,12 @@ namespace JDI.Core.Selenium.Elements.Base
 
         public string GetAttribute(string name)
         {
-            return GetWebElement().GetAttribute(name);
+            return WebElement.GetAttribute(name);
         }
 
         public void WaitAttribute(string name, string value)
         {
-            var result = Timer.GetResultByCondition(() => GetWebElement().GetAttribute(name).Equals(value), r => r);
+            var result = Timer.GetResultByCondition(() => WebElement.GetAttribute(name).Equals(value), r => r);
             JDISettings.Asserter.IsTrue(result);
         }
 
@@ -156,12 +153,6 @@ namespace JDI.Core.Selenium.Elements.Base
             Invoker.DoJAction($"Set Attribute '{attributeName}'='{value}'",
                 el => el.JsExecutor.ExecuteScript($"arguments[0].setAttribute('{attributeName}',arguments[1]);",
                     WebElement, value));
-        }
-
-        public IWebElement GetWebElement()
-        {
-            return Invoker.DoJActionResult("Get web element",
-                el => WebElement, level: LogLevel.Debug);
         }
 
         public string Name { get; set; }
@@ -174,11 +165,6 @@ namespace JDI.Core.Selenium.Elements.Base
             JDISettings.Logger.Debug("Set wait timeout to " + mSeconds);
             WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(mSeconds);
             JDISettings.Timeouts.CurrentTimeoutSec = (int) (mSeconds / 1000);
-        }
-
-        public void RestoreWaitTimeout()
-        {
-            SetWaitTimeout(JDISettings.Timeouts.WaitElementSec);
         }
 
         public new string ToString()
