@@ -14,7 +14,6 @@ namespace JDI.Light.Selenium.Elements.WebActions
 
         public ActionInvoker(T element)
         {
-            JDISettings.NewTest();
             _element = element;
             _actionScenarios = new ActionScenarios<T>(element);
         }

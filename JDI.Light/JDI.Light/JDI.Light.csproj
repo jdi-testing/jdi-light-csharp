@@ -124,7 +124,7 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Reporting\PerformanceStatistic.cs" />
+    <Compile Include="Reporting\PerformanceStatistics.cs" />
     <Compile Include="Selenium\DriverFactory\WebDriverByUtils.cs" />
     <Compile Include="Selenium\DriverFactory\WebDriverFactory.cs" />
     <Compile Include="Selenium\DriverFactory\WinProcUtils.cs" />

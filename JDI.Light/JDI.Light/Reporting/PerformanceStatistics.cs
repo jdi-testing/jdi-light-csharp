@@ -4,7 +4,7 @@ using JDI.Light.Extensions;
 
 namespace JDI.Light.Reporting
 {
-    public static class PerformanceStatistic
+    public static class PerformanceStatistics
     {
         private static readonly Dictionary<string, List<double>> Statistic = new Dictionary<string, List<double>>();
 

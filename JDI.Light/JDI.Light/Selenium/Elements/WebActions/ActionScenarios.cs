@@ -32,7 +32,7 @@ namespace JDI.Light.Selenium.Elements.WebActions
                 return true;
             });
             JDISettings.Logger.Info(actionName + " done");
-            PerformanceStatistic.AddStatistic(timer.TimePassed.TotalMilliseconds);
+            PerformanceStatistics.AddStatistic(timer.TimePassed.TotalMilliseconds);
         }
 
         public TResult ResultScenario<TResult>(string actionName, Func<T, TResult> action,
@@ -50,7 +50,7 @@ namespace JDI.Light.Selenium.Elements.WebActions
                 ? result.ToString()
                 : logResult.Invoke(result);
             var timePassed = timer.TimePassed.TotalMilliseconds;
-            PerformanceStatistic.AddStatistic(timer.TimePassed.TotalMilliseconds);
+            PerformanceStatistics.AddStatistic(timer.TimePassed.TotalMilliseconds);
             JDISettings.ToLog($"Get result '{stringResult}' in {timePassed / 1000:F} seconds", level);
             return result;
         }

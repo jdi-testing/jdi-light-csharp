@@ -3,8 +3,6 @@ using JDI.Light.Interfaces;
 using JDI.Light.Logging;
 using JDI.Light.Utils;
 
-// ReSharper disable InconsistentNaming
-
 namespace JDI.Light.Settings
 {
     public class JDISettings
@@ -15,8 +13,6 @@ namespace JDI.Light.Settings
         public static bool IsDemoMode;
         public static HighlightSettings HighlightSettings = new HighlightSettings();
         public static bool ShortLogMessagesFormat = true;
-        public static string JDISettingsPath = "test.properties";
-        public static bool ExceptionThrown;
         public static IDriverFactory<IDisposable> DriverFactory;
         public static bool UseCache;
 
@@ -35,11 +31,6 @@ namespace JDI.Light.Settings
             Logger.Info(message);
         }
 
-        public static string UseDriver(string driverName)
-        {
-            return DriverFactory.RegisterDriver(driverName);
-        }
-
         public static void InitFromProperties()
         {
             FillFromSettings(p => DriverFactory.RegisterDriver(p), "Driver");
@@ -55,31 +46,16 @@ namespace JDI.Light.Settings
 
         protected static void FillFromSettings(Action<string> action, string name)
         {
-            //var b = System.Configuration.ConfigurationManager.AppSettings["DriversFolder"];
-            //var a = Properties.Settings.Default["DriversFolder"];
             ExceptionUtils.AvoidExceptions(() => action.Invoke(Properties.Settings.Default[name].ToString()));
-        }
-
-        public static void InitFromProperties(string propertyPath)
-        {
-            JDISettingsPath = propertyPath;
-            InitFromProperties();
-        }
-
-        public static void NewTest()
-        {
-            ExceptionThrown = false;
         }
 
         public static Exception Exception(string msg, Exception ex)
         {
-            ExceptionThrown = true;
             return Asserter.Exception(msg, ex);
         }
 
         public static Exception Exception(string msg)
         {
-            ExceptionThrown = true;
             return Asserter.Exception(msg);
         }
     }

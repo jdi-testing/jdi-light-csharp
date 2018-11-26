@@ -23,7 +23,7 @@ namespace JDI.Light.Selenium.DriverManager
         {
             var result = false;
             var latestVersion = version == "" ? GetLatestVersionNumber(type) : version;
-            var driverBinaryName = "";
+            string driverBinaryName;
             switch (type)
             {
                 case DriverType.Chrome:
@@ -75,7 +75,6 @@ namespace JDI.Light.Selenium.DriverManager
         /// <returns>Path of driver location</returns>
         private static string GetDriverVersion(DriverType type, string version = "")
         {
-            var driverFullPath = "";
             var executingPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory);
             var binaryName = "";
             var url = "";
@@ -106,7 +105,8 @@ namespace JDI.Light.Selenium.DriverManager
             var driverLocationPath = version == ""
                 ? Path.Combine(executingPath, type.ToString())
                 : Path.Combine(Path.Combine(executingPath, type.ToString()), version);
-            driverFullPath = Path.Combine(driverLocationPath, binaryName);
+
+            var driverFullPath = Path.Combine(driverLocationPath, binaryName);
 
             if (!IsLocalVersionLatestVersion(type, driverLocationPath, version))
             {
