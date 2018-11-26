@@ -86,10 +86,6 @@ namespace JDI.Light.Settings
             FillFromSettings(p => Domain = p, "Domain");
             FillFromSettings(p => DriverFactory.DriverPath = p, "DriversFolder");
             FillFromSettings(p => GetLatestDriver = p.ToLower().Equals("true") || p.ToLower().Equals("1"), "GetLatest");
-            // FillFromSettings(p => DriverFactory.DriverVersion = p, "DriversVersion");
-            // fillAction(p->getDriverFactory().getLatestDriver =
-            //        p.toLowerCase().equals("true") || p.toLowerCase().equals("1"), "driver.getLatest");
-            // fillAction(p->asserter.doScreenshot(p), "screenshot.strategy");
             FillFromSettings(p =>
             {
                 p = p.ToLower();

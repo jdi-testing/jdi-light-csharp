@@ -19,7 +19,9 @@ namespace JDI.Light.Selenium.Elements.Base
 
         public UIElement(By byLocator = null)
         {
-            Invoker = new ActionInvoker<UIElement>(this);
+            //TODO: Correctly add logger instance
+            var logger = JDISettings.Logger;
+            Invoker = new ActionInvoker<UIElement>(this, logger);
             Actions = new ElementsActions(Invoker);
             Locator = byLocator;
             Timer = new Timer(JDISettings.Timeouts.CurrentTimeoutSec * 1000);

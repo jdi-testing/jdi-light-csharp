@@ -1,7 +1,7 @@
 ﻿using System;
 using JDI.Light.Enums;
 using JDI.Light.Extensions;
-using JDI.Light.Logging;
+using JDI.Light.Interfaces;
 using JDI.Light.Selenium.Elements.Base;
 using JDI.Light.Settings;
 using JDI.Light.Utils;
@@ -13,10 +13,10 @@ namespace JDI.Light.Selenium.Elements.WebActions
         private static ActionScenarios<T> _actionScenarios;
         private readonly T _element;
 
-        public ActionInvoker(T element)
+        public ActionInvoker(T element, ILogger logger)
         {
             _element = element;
-            _actionScenarios = new ActionScenarios<T>(element);
+            _actionScenarios = new ActionScenarios<T>(element, logger);
         }
 
         public TResult DoJActionResult<TResult>(string actionName, Func<T, TResult> action,

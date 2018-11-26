@@ -1,7 +1,6 @@
 ﻿using System;
 using JDI.Light.Enums;
 using JDI.Light.Interfaces;
-using JDI.Light.Logging;
 using JDI.Light.Utils;
 
 namespace JDI.Light.Settings

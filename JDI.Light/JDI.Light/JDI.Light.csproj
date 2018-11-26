@@ -114,8 +114,7 @@
     <Compile Include="Interfaces\Complex\ITabs.cs" />
     <Compile Include="Interfaces\IDriverFactory.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
-    <Compile Include="Logging\ILogger.cs" />
-    <Compile Include="Logging\JDILogger.cs" />
+    <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Enums\LogLevels.cs" />
     <Compile Include="Matchers\BaseMatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

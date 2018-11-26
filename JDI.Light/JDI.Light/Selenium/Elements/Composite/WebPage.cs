@@ -32,9 +32,11 @@ namespace JDI.Light.Selenium.Elements.Composite
 
         public WebPage(string url = null, string title = null)
         {
+            //TODO: Correctly add logger instance
+            var logger = JDISettings.Logger;
             Url = url;
             Title = title;
-            Invoker = new ActionInvoker<WebPage>(this);
+            Invoker = new ActionInvoker<WebPage>(this, logger);
             Name = $"{Title} ({Url})";
             WebDriver = WebSettings.WebDriverFactory.GetDriver();
             Timer = new Timer(JDISettings.Timeouts.CurrentTimeoutSec * 1000);

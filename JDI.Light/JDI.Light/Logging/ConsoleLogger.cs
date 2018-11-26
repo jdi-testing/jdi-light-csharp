@@ -1,47 +1,54 @@
 ﻿using System;
+using JDI.Light.Enums;
+using JDI.Light.Interfaces;
 
 namespace JDI.Light.Logging
 {
     public class ConsoleLogger : ILogger
     {
+        private void Log(string message, LogLevel logLevel)
+        {
+            Console.WriteLine($"{DateTime.Now:dd.MM.yyyy_HH:mm:ss.fff} {logLevel} {message}");
+        }
+
         public void Exception(Exception ex)
         {
-            Console.WriteLine($"Exception: {ex.Message}");
+            Log($"Exception: {ex.Message}", LogLevel.Error);
         }
 
         public void Trace(string message)
         {
-            Console.WriteLine(message);
+            Log($"{message}", LogLevel.Trace);
         }
 
         public void Debug(string message)
         {
-            Console.WriteLine(message);
+            Log($"{message}", LogLevel.Debug);
         }
 
         public void Info(string message)
         {
-            Console.WriteLine(message);
+            Log($"{message}", LogLevel.Info);
         }
 
         public void Error(string message)
         {
-            Console.WriteLine(message);
+            Log($"{message}", LogLevel.Error);
         }
 
         public void Step(string message)
         {
-            Console.WriteLine(message);
+            Log($"{message}", LogLevel.Info);
         }
 
         public void TestDescription(string message)
         {
-            Console.WriteLine(message);
+            Log($"{message}", LogLevel.Info);
         }
 
         public void TestSuit(string message)
         {
-            Console.WriteLine(message);
+            Log($"{message}", LogLevel.Info);
         }
     }
 }
