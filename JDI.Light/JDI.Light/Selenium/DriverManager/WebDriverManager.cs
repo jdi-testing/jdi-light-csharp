@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using JDI.Light.Enums;
+using JDI.Light.Extensions;
 using WebDriverManager.DriverConfigs.Impl;
 using WebDriverManager.Helpers;
 
@@ -27,18 +28,15 @@ namespace JDI.Light.Selenium.DriverManager
             {
                 case DriverType.Chrome:
                     driverBinaryName = new ChromeConfig().GetBinaryName();
-                    result = WebDriverManagerHelper.CheckDriverVersionFromExe(
-                        Path.Combine(executingPath, driverBinaryName), latestVersion);
+                    result = Path.Combine(executingPath, driverBinaryName).CheckDriverVersionFromExe(latestVersion);
                     break;
                 case DriverType.Firefox:
                     driverBinaryName = new FirefoxConfig().GetBinaryName();
-                    result = WebDriverManagerHelper.CheckDriverVersionFromExe(
-                        Path.Combine(executingPath, driverBinaryName), latestVersion);
+                    result = Path.Combine(executingPath, driverBinaryName).CheckDriverVersionFromExe(latestVersion);
                     break;
                 case DriverType.IE:
                     driverBinaryName = new InternetExplorerConfig().GetBinaryName();
-                    result = WebDriverManagerHelper.CheckDriverVersionFormExeAttributes(
-                        Path.Combine(executingPath, driverBinaryName), latestVersion);
+                    result = Path.Combine(executingPath, driverBinaryName).CheckDriverVersionFormExeAttributes(latestVersion);
                     break;
             }
 
