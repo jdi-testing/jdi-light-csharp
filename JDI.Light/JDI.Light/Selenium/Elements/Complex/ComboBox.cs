@@ -1,9 +1,9 @@
 ﻿using System;
-using JDI.Core.Interfaces.Complex;
-using JDI.Core.Selenium.Elements.Common;
+using JDI.Light.Interfaces.Complex;
+using JDI.Light.Selenium.Elements.Common;
 using OpenQA.Selenium;
 
-namespace JDI.Core.Selenium.Elements.Complex
+namespace JDI.Light.Selenium.Elements.Complex
 {
     public class ComboBox : ComboBox<IConvertible>, IComboBox
     {

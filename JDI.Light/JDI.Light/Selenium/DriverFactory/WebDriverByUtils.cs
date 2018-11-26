@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using JDI.Core.Extensions;
-using JDI.Core.Utils;
+using JDI.Light.Extensions;
+using JDI.Light.Utils;
 using OpenQA.Selenium;
 
-namespace JDI.Core.Selenium.DriverFactory
+namespace JDI.Light.Selenium.DriverFactory
 {
     public static class WebDriverByUtils
     {

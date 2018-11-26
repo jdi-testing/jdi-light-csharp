@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JDI.Core.Selenium.Elements.Complex.Table
+namespace JDI.Light.Selenium.Elements.Complex.Table
 {
     public class RowColumn
     {

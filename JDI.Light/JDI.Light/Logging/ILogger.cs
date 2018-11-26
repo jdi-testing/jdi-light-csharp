@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JDI.Core.Logging
+namespace JDI.Light.Logging
 {
     public interface ILogger
     {

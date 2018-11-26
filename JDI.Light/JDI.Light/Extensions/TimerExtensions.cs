@@ -1,7 +1,7 @@
 ﻿using System;
-using JDI.Core.Utils;
+using JDI.Light.Utils;
 
-namespace JDI.Core.Extensions
+namespace JDI.Light.Extensions
 {
     public static class TimerExtensions
     {

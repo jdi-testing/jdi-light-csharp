@@ -3,25 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using JDI.Core.Attributes;
-using JDI.Core.Attributes.JAttributes;
-using JDI.Core.Enums;
-using JDI.Core.Extensions;
-using JDI.Core.Interfaces.Base;
-using JDI.Core.Interfaces.Complex;
-using JDI.Core.Selenium.DriverFactory;
-using JDI.Core.Selenium.Elements.Base;
-using JDI.Core.Selenium.Elements.Complex;
-using JDI.Core.Selenium.Elements.Complex.Table.Interfaces;
-using JDI.Core.Selenium.Elements.Composite;
-using JDI.Core.Settings;
-using JDI.Core.Utils;
+using JDI.Light.Attributes;
+using JDI.Light.Attributes.JAttributes;
+using JDI.Light.Enums;
+using JDI.Light.Extensions;
+using JDI.Light.Interfaces.Base;
+using JDI.Light.Interfaces.Complex;
+using JDI.Light.Selenium.DriverFactory;
+using JDI.Light.Selenium.Elements.Base;
+using JDI.Light.Selenium.Elements.Complex;
+using JDI.Light.Selenium.Elements.Complex.Table.Interfaces;
+using JDI.Light.Selenium.Elements.Composite;
+using JDI.Light.Settings;
+using JDI.Light.Utils;
 using OpenQA.Selenium;
 using RestSharp.Extensions;
-using Menu = JDI.Core.Selenium.Elements.Complex.Menu;
-using Table = JDI.Core.Selenium.Elements.Complex.Table.Table;
+using Menu = JDI.Light.Selenium.Elements.Complex.Menu;
+using Table = JDI.Light.Selenium.Elements.Complex.Table.Table;
 
-namespace JDI.Core.Selenium.Elements
+namespace JDI.Light.Selenium.Elements
 {
     public class WebCascadeInit
     {

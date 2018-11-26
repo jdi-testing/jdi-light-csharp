@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JDI.Core.Base
+namespace JDI.Light.Base
 {
     public class Application
     {

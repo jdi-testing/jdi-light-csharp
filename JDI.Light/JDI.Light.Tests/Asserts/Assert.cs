@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using JDI.Core.Enums;
-using JDI.Core.Matchers;
+using JDI.Light.Enums;
+using JDI.Light.Matchers;
 
 namespace JDI.Light.Tests.Asserts
 {

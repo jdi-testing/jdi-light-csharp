@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using JDI.Core.Extensions;
+using JDI.Light.Extensions;
 
-namespace JDI.Core.Utils
+namespace JDI.Light.Utils
 {
     public static class ParseObjectUtil
     {

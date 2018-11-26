@@ -1,6 +1,6 @@
-﻿using JDI.Core.Interfaces.Base;
+﻿using JDI.Light.Interfaces.Base;
 
-namespace JDI.Core.Interfaces.Common
+namespace JDI.Light.Interfaces.Common
 {
     public interface ICheckBox : IClickable, ISetValue
     {

@@ -13,7 +13,7 @@ using System.Configuration;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
-namespace JDI.Core.Properties {
+namespace JDI.Light.Properties {
     
     
     [CompilerGenerated()]

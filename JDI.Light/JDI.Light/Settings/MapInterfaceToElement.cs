@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace JDI.Core.Settings
+namespace JDI.Light.Settings
 {
     public static class MapInterfaceToElement
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using JDI.Core.Selenium.Elements.Complex.Table;
-using JDI.Core.Selenium.Elements.Complex.Table.Interfaces;
+using JDI.Light.Selenium.Elements.Complex.Table;
+using JDI.Light.Selenium.Elements.Complex.Table.Interfaces;
 using JDI.Light.Tests.Asserts;
 using JDI.Light.Tests.Tests.Complex.Table.Base;
 using NUnit.Framework;

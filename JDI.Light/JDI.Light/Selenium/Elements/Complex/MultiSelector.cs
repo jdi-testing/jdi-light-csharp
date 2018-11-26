@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using JDI.Core.Extensions;
-using JDI.Core.Interfaces.Base;
-using JDI.Core.Selenium.DriverFactory;
-using JDI.Core.Selenium.Elements.Composite;
-using JDI.Core.Settings;
+using JDI.Light.Extensions;
+using JDI.Light.Interfaces.Base;
+using JDI.Light.Selenium.DriverFactory;
+using JDI.Light.Selenium.Elements.Composite;
+using JDI.Light.Settings;
 using OpenQA.Selenium;
 
-namespace JDI.Core.Selenium.Elements.Complex
+namespace JDI.Light.Selenium.Elements.Complex
 {
     public abstract class MultiSelector<TEnum> : BaseSelector<TEnum>, IMultiSelector<TEnum>
         where TEnum : IConvertible

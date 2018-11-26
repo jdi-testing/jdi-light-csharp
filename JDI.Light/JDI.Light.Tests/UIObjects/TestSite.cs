@@ -1,6 +1,6 @@
-﻿using JDI.Core.Attributes;
-using JDI.Core.Selenium.Elements.Complex;
-using JDI.Core.Selenium.Elements.Composite;
+﻿using JDI.Light.Attributes;
+using JDI.Light.Selenium.Elements.Complex;
+using JDI.Light.Selenium.Elements.Composite;
 using JDI.Light.Tests.UIObjects.Pages;
 using JDI.Light.Tests.UIObjects.Sections;
 

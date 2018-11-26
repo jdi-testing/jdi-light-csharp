@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using JDI.Core.Extensions;
-using JDI.Core.Selenium.Elements.Common;
-using JDI.Core.Selenium.Elements.Composite;
-using JDI.Core.Settings;
+using JDI.Light.Extensions;
+using JDI.Light.Selenium.Elements.Common;
+using JDI.Light.Selenium.Elements.Composite;
+using JDI.Light.Settings;
 using OpenQA.Selenium;
 
-namespace JDI.Core.Selenium.Elements.Complex
+namespace JDI.Light.Selenium.Elements.Complex
 {
     public class TextList : CompositeUIElement
     {

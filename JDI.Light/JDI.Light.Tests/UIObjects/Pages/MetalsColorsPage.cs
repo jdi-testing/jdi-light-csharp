@@ -1,10 +1,10 @@
-﻿using JDI.Core.Attributes;
-using JDI.Core.Interfaces.Common;
-using JDI.Core.Interfaces.Complex;
-using JDI.Core.Selenium.Elements.Base;
-using JDI.Core.Selenium.Elements.Common;
-using JDI.Core.Selenium.Elements.Complex;
-using JDI.Core.Selenium.Elements.Composite;
+﻿using JDI.Light.Attributes;
+using JDI.Light.Interfaces.Common;
+using JDI.Light.Interfaces.Complex;
+using JDI.Light.Selenium.Elements.Base;
+using JDI.Light.Selenium.Elements.Common;
+using JDI.Light.Selenium.Elements.Complex;
+using JDI.Light.Selenium.Elements.Composite;
 using JDI.Light.Tests.Enums;
 using JDI.Light.Tests.UIObjects.Sections;
 using OpenQA.Selenium;

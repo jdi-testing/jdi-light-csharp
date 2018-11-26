@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace JDI.Core.Extensions
+namespace JDI.Light.Extensions
 {
     public static class StringExtensions
     {

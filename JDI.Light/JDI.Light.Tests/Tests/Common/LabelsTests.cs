@@ -1,4 +1,4 @@
-﻿using JDI.Core.Settings;
+﻿using JDI.Light.Settings;
 using JDI.Light.Tests.Tests.Complex;
 using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using JDI.Core.Enums;
-using JDI.Core.Extensions;
-using JDI.Core.Logging;
-using JDI.Core.Utils;
+using JDI.Light.Enums;
+using JDI.Light.Extensions;
+using JDI.Light.Logging;
+using JDI.Light.Utils;
 
-namespace JDI.Core.Matchers
+namespace JDI.Light.Matchers
 {
     public abstract class BaseMatcher
     {

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using JDI.Core.Interfaces.Complex;
-using JDI.Core.Settings;
+using JDI.Light.Interfaces.Complex;
+using JDI.Light.Settings;
 using OpenQA.Selenium;
 
-namespace JDI.Core.Selenium.Elements.Complex
+namespace JDI.Light.Selenium.Elements.Complex
 {
     public class Selector : Selector<IConvertible>, ISelector
     {

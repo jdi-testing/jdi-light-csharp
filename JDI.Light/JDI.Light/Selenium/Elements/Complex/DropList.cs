@@ -1,10 +1,10 @@
 ﻿using System;
-using JDI.Core.Extensions;
-using JDI.Core.Interfaces.Complex;
-using JDI.Core.Selenium.Elements.Base;
+using JDI.Light.Extensions;
+using JDI.Light.Interfaces.Complex;
+using JDI.Light.Selenium.Elements.Base;
 using OpenQA.Selenium;
 
-namespace JDI.Core.Selenium.Elements.Complex
+namespace JDI.Light.Selenium.Elements.Complex
 {
     public class DropList : DropList<IConvertible>, IDropList
     {

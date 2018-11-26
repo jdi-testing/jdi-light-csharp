@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
-using JDI.Core.Enums;
-using JDI.Core.Interfaces;
-using JDI.Core.Interfaces.Base;
-using JDI.Core.Selenium.Elements.Base;
-using JDI.Core.Settings;
+using JDI.Light.Enums;
+using JDI.Light.Interfaces;
+using JDI.Light.Interfaces.Base;
+using JDI.Light.Selenium.Elements.Base;
+using JDI.Light.Settings;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Remote;
 
-namespace JDI.Core.Selenium.DriverFactory
+namespace JDI.Light.Selenium.DriverFactory
 {
     public class WebDriverFactory : IDriverFactory<IWebDriver>
     {

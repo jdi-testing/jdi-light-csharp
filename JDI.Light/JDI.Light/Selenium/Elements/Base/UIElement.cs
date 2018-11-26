@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using JDI.Core.Interfaces.Base;
-using JDI.Core.Selenium.DriverFactory;
-using JDI.Core.Selenium.Elements.WebActions;
-using JDI.Core.Settings;
-using JDI.Core.Utils;
+using JDI.Light.Interfaces.Base;
+using JDI.Light.Selenium.DriverFactory;
+using JDI.Light.Selenium.Elements.WebActions;
+using JDI.Light.Settings;
+using JDI.Light.Utils;
 using OpenQA.Selenium;
 
-namespace JDI.Core.Selenium.Elements.Base
+namespace JDI.Light.Selenium.Elements.Base
 {
     public class UIElement : IBaseUIElement, IVisible
     {

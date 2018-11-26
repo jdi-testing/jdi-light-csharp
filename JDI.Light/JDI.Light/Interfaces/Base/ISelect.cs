@@ -1,6 +1,6 @@
-﻿using JDI.Core.Interfaces.Common;
+﻿using JDI.Light.Interfaces.Common;
 
-namespace JDI.Core.Interfaces.Base
+namespace JDI.Light.Interfaces.Base
 {
     public interface ISelect : IClickable, IText, ISetValue
     {

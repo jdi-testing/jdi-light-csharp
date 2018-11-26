@@ -1,8 +1,8 @@
 ﻿using System;
-using JDI.Core.Interfaces.Complex;
+using JDI.Light.Interfaces.Complex;
 using OpenQA.Selenium;
 
-namespace JDI.Core.Selenium.Elements.Complex
+namespace JDI.Light.Selenium.Elements.Complex
 {
     public class CheckList : CheckList<IConvertible>, ICheckList
     {

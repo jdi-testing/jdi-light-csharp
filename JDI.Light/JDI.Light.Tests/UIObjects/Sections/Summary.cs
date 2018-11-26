@@ -1,7 +1,7 @@
-﻿using JDI.Core.Attributes;
-using JDI.Core.Interfaces.Common;
-using JDI.Core.Selenium.Elements.Complex;
-using JDI.Core.Selenium.Elements.Composite;
+﻿using JDI.Light.Attributes;
+using JDI.Light.Interfaces.Common;
+using JDI.Light.Selenium.Elements.Complex;
+using JDI.Light.Selenium.Elements.Composite;
 using JDI.Light.Tests.Enums;
 
 namespace JDI.Light.Tests.UIObjects.Sections

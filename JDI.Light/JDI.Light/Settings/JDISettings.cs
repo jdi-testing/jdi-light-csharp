@@ -1,11 +1,11 @@
 ﻿using System;
-using JDI.Core.Interfaces;
-using JDI.Core.Logging;
-using JDI.Core.Utils;
+using JDI.Light.Interfaces;
+using JDI.Light.Logging;
+using JDI.Light.Utils;
 
 // ReSharper disable InconsistentNaming
 
-namespace JDI.Core.Settings
+namespace JDI.Light.Settings
 {
     public class JDISettings
     {

@@ -1,8 +1,8 @@
-﻿using JDI.Core.Interfaces.Base;
+﻿using JDI.Light.Interfaces.Base;
 
 //using System.IComparable instead of interface CharSequence
 
-namespace JDI.Core.Interfaces.Common
+namespace JDI.Light.Interfaces.Common
 {
     public interface ITextField : ISetValue, IText
     {

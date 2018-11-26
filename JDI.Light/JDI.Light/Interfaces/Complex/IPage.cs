@@ -1,11 +1,11 @@
-﻿using JDI.Core.Enums;
-using JDI.Core.Interfaces.Base;
-using JDI.Core.Selenium.Elements.Composite;
-using JDI.Core.Selenium.Elements.WebActions;
-using JDI.Core.Utils;
+﻿using JDI.Light.Enums;
+using JDI.Light.Interfaces.Base;
+using JDI.Light.Selenium.Elements.Composite;
+using JDI.Light.Selenium.Elements.WebActions;
+using JDI.Light.Utils;
 using OpenQA.Selenium;
 
-namespace JDI.Core.Interfaces.Complex
+namespace JDI.Light.Interfaces.Complex
 {
     public interface IPage : IBaseElement
     {

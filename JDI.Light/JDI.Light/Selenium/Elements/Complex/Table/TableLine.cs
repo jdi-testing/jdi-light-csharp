@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using JDI.Core.Enums;
-using JDI.Core.Selenium.DriverFactory;
-using JDI.Core.Selenium.Elements.Base;
-using JDI.Core.Selenium.Elements.Complex.Table.Interfaces;
+using JDI.Light.Enums;
+using JDI.Light.Selenium.DriverFactory;
+using JDI.Light.Selenium.Elements.Base;
+using JDI.Light.Selenium.Elements.Complex.Table.Interfaces;
 using OpenQA.Selenium;
 
-namespace JDI.Core.Selenium.Elements.Complex.Table
+namespace JDI.Light.Selenium.Elements.Complex.Table
 {
     public abstract class TableLine : UIElement, ITableLine
     {

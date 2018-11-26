@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Linq;
-using JDI.Core.Extensions;
-using JDI.Core.Selenium.DriverFactory;
-using JDI.Core.Selenium.Elements.Base;
-using JDI.Core.Selenium.Elements.Complex.Table.Interfaces;
-using JDI.Core.Settings;
+using JDI.Light.Extensions;
+using JDI.Light.Selenium.DriverFactory;
+using JDI.Light.Selenium.Elements.Base;
+using JDI.Light.Selenium.Elements.Complex.Table.Interfaces;
+using JDI.Light.Settings;
 using OpenQA.Selenium;
 
-namespace JDI.Core.Selenium.Elements.Complex.Table
+namespace JDI.Light.Selenium.Elements.Complex.Table
 {
     public class Cell : SelectableElement, ICell
     {

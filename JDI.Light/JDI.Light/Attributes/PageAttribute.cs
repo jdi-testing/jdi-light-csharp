@@ -1,7 +1,7 @@
 ﻿using System;
-using JDI.Core.Enums;
+using JDI.Light.Enums;
 
-namespace JDI.Core.Attributes
+namespace JDI.Light.Attributes
 {
     [AttributeUsage(AttributeTargets.All, Inherited = false)]
     public class PageAttribute : Attribute

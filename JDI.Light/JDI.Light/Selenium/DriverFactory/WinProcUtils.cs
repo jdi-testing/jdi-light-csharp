@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Management;
 
-namespace JDI.Core.Selenium.DriverFactory
+namespace JDI.Light.Selenium.DriverFactory
 {
     public static class WinProcUtils
     {

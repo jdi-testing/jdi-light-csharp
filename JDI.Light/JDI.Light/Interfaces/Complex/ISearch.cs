@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using JDI.Core.Interfaces.Common;
+using JDI.Light.Interfaces.Common;
 
-namespace JDI.Core.Interfaces.Complex
+namespace JDI.Light.Interfaces.Complex
 {
     public interface ISearch : ITextField
     {

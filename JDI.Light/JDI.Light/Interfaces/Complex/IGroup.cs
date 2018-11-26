@@ -1,7 +1,7 @@
 ﻿using System;
-using JDI.Core.Interfaces.Base;
+using JDI.Light.Interfaces.Base;
 
-namespace JDI.Core.Interfaces.Complex
+namespace JDI.Light.Interfaces.Complex
 {
     public interface IGroup<out TType> : IGroup<IConvertible, TType>
         where TType : IBaseElement

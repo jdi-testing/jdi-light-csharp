@@ -1,5 +1,5 @@
 ﻿using System;
-using JDI.Core.Settings;
+using JDI.Light.Settings;
 
 namespace JDI.Light.Tests.Asserts
 {

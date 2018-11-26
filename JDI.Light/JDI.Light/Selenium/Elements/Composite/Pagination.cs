@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Linq;
-using JDI.Core.Extensions;
-using JDI.Core.Interfaces.Base;
-using JDI.Core.Interfaces.Complex;
-using JDI.Core.Selenium.DriverFactory;
-using JDI.Core.Selenium.Elements.Base;
-using JDI.Core.Settings;
-using JDI.Core.Utils;
+using JDI.Light.Extensions;
+using JDI.Light.Interfaces.Base;
+using JDI.Light.Interfaces.Complex;
+using JDI.Light.Selenium.DriverFactory;
+using JDI.Light.Selenium.Elements.Base;
+using JDI.Light.Settings;
+using JDI.Light.Utils;
 using OpenQA.Selenium;
 
-namespace JDI.Core.Selenium.Elements.Composite
+namespace JDI.Light.Selenium.Elements.Composite
 {
     public class Pagination : UIElement, IPagination
     {

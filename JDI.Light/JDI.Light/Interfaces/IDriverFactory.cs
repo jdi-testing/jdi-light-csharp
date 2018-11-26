@@ -1,7 +1,7 @@
-﻿using JDI.Core.Interfaces.Base;
-using JDI.Core.Settings;
+﻿using JDI.Light.Interfaces.Base;
+using JDI.Light.Settings;
 
-namespace JDI.Core.Interfaces
+namespace JDI.Light.Interfaces
 {
     public interface IDriverFactory<out T>
     {

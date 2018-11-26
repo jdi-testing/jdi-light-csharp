@@ -1,9 +1,9 @@
 ﻿using System;
-using JDI.Core.Interfaces.Base;
+using JDI.Light.Interfaces.Base;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 
-namespace JDI.Core.Selenium.Elements.Base
+namespace JDI.Light.Selenium.Elements.Base
 {
     public class Clickable : UIElement, IClickable
     {

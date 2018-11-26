@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using JDI.Core.Enums;
-using JDI.Core.Extensions;
-using JDI.Core.Selenium.Elements.Base;
-using JDI.Core.Selenium.Elements.Complex.Table.Interfaces;
-using JDI.Core.Selenium.Elements.Composite;
-using JDI.Core.Settings;
+using JDI.Light.Enums;
+using JDI.Light.Extensions;
+using JDI.Light.Selenium.Elements.Base;
+using JDI.Light.Selenium.Elements.Complex.Table.Interfaces;
+using JDI.Light.Selenium.Elements.Composite;
+using JDI.Light.Settings;
 using OpenQA.Selenium;
 
-namespace JDI.Core.Selenium.Elements.Complex.Table
+namespace JDI.Light.Selenium.Elements.Complex.Table
 {
     public class Table : CompositeUIElement, ITable
     {

@@ -1,8 +1,8 @@
-﻿using JDI.Core.Interfaces.Common;
-using JDI.Core.Selenium.Elements.Base;
+﻿using JDI.Light.Interfaces.Common;
+using JDI.Light.Selenium.Elements.Base;
 using OpenQA.Selenium;
 
-namespace JDI.Core.Selenium.Elements.Common
+namespace JDI.Light.Selenium.Elements.Common
 {
     public class Label : ClickableText, ILabel
     {

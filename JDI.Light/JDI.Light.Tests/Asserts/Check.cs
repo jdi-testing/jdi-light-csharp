@@ -1,4 +1,4 @@
-﻿using JDI.Core.Matchers;
+﻿using JDI.Light.Matchers;
 
 namespace JDI.Light.Tests.Asserts
 {

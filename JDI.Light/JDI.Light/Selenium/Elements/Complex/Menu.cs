@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
-using JDI.Core.Extensions;
-using JDI.Core.Interfaces.Complex;
-using JDI.Core.Settings;
+using JDI.Light.Extensions;
+using JDI.Light.Interfaces.Complex;
+using JDI.Light.Settings;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 
-namespace JDI.Core.Selenium.Elements.Complex
+namespace JDI.Light.Selenium.Elements.Complex
 {
     public class Menu : Menu<IConvertible>, IMenu
     {

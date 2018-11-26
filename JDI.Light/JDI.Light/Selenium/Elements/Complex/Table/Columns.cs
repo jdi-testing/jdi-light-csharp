@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using JDI.Core.Enums;
-using JDI.Core.Extensions;
-using JDI.Core.Selenium.Elements.Complex.Table.Interfaces;
-using JDI.Core.Settings;
-using JDI.Core.Utils;
+using JDI.Light.Enums;
+using JDI.Light.Extensions;
+using JDI.Light.Selenium.Elements.Complex.Table.Interfaces;
+using JDI.Light.Settings;
+using JDI.Light.Utils;
 using OpenQA.Selenium;
 
-namespace JDI.Core.Selenium.Elements.Complex.Table
+namespace JDI.Light.Selenium.Elements.Complex.Table
 {
     public class Columns : TableLine
     {

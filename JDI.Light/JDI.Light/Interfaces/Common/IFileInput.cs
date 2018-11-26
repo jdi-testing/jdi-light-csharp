@@ -1,4 +1,4 @@
-﻿namespace JDI.Core.Interfaces.Common
+﻿namespace JDI.Light.Interfaces.Common
 {
     public interface IFileInput : ITextField
     {

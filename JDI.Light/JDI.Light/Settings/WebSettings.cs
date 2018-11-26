@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using JDI.Core.Enums;
-using JDI.Core.Interfaces;
-using JDI.Core.Interfaces.Base;
-using JDI.Core.Interfaces.Common;
-using JDI.Core.Interfaces.Complex;
-using JDI.Core.Logging;
-using JDI.Core.Selenium.DriverFactory;
-using JDI.Core.Selenium.Elements.Base;
-using JDI.Core.Selenium.Elements.Common;
-using JDI.Core.Selenium.Elements.Complex;
-using JDI.Core.Selenium.Elements.Complex.Table;
-using JDI.Core.Selenium.Elements.Complex.Table.Interfaces;
+using JDI.Light.Enums;
+using JDI.Light.Interfaces;
+using JDI.Light.Interfaces.Base;
+using JDI.Light.Interfaces.Common;
+using JDI.Light.Interfaces.Complex;
+using JDI.Light.Logging;
+using JDI.Light.Selenium.DriverFactory;
+using JDI.Light.Selenium.Elements.Base;
+using JDI.Light.Selenium.Elements.Common;
+using JDI.Light.Selenium.Elements.Complex;
+using JDI.Light.Selenium.Elements.Complex.Table;
+using JDI.Light.Selenium.Elements.Complex.Table.Interfaces;
 using OpenQA.Selenium;
-using Image = JDI.Core.Selenium.Elements.Common.Image;
+using Image = JDI.Light.Selenium.Elements.Common.Image;
 
-namespace JDI.Core.Settings
+namespace JDI.Light.Settings
 {
     public class WebSettings : JDISettings
     {

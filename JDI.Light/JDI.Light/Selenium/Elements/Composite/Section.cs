@@ -1,6 +1,6 @@
-﻿using JDI.Core.Selenium.Elements.Base;
+﻿using JDI.Light.Selenium.Elements.Base;
 
-namespace JDI.Core.Selenium.Elements.Composite
+namespace JDI.Light.Selenium.Elements.Composite
 {
     public class Section : UIElement
     {

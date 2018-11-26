@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO;
-using JDI.Core.Enums;
+using JDI.Light.Enums;
 using WebDriverManager.DriverConfigs.Impl;
 using WebDriverManager.Helpers;
 
-namespace JDI.Core.Selenium.DriverManager
+namespace JDI.Light.Selenium.DriverManager
 {
     public class WebDriverManager
     {

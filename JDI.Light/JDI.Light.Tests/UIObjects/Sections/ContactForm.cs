@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using JDI.Core.Attributes;
-using JDI.Core.Interfaces.Common;
-using JDI.Core.Selenium.Elements.Common;
-using JDI.Core.Selenium.Elements.Composite;
-using JDI.Core.Settings;
+using JDI.Light.Attributes;
+using JDI.Light.Interfaces.Common;
+using JDI.Light.Selenium.Elements.Common;
+using JDI.Light.Selenium.Elements.Composite;
+using JDI.Light.Settings;
 using JDI.Light.Tests.Entities;
 using OpenQA.Selenium;
 

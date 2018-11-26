@@ -1,8 +1,8 @@
 ﻿using System;
-using JDI.Core.Interfaces.Common;
+using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
 
-namespace JDI.Core.Selenium.Elements.Base
+namespace JDI.Light.Selenium.Elements.Base
 {
     public class ClickableText : Clickable, IText
     {

@@ -1,9 +1,9 @@
 ﻿using System.Reflection;
-using JDI.Core.Attributes;
+using JDI.Light.Attributes;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace JDI.Core.Extensions
+namespace JDI.Light.Extensions
 {
     public static class FieldInfoExtensions
     {

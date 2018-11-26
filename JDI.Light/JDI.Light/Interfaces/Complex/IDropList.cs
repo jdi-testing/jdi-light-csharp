@@ -1,8 +1,8 @@
 ﻿using System;
-using JDI.Core.Interfaces.Base;
-using JDI.Core.Interfaces.Common;
+using JDI.Light.Interfaces.Base;
+using JDI.Light.Interfaces.Common;
 
-namespace JDI.Core.Interfaces.Complex
+namespace JDI.Light.Interfaces.Complex
 {
     public interface IDropList : IDropList<IConvertible>
     {

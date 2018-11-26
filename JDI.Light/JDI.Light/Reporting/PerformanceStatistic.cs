@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using JDI.Core.Extensions;
+using JDI.Light.Extensions;
 
-namespace JDI.Core.Reporting
+namespace JDI.Light.Reporting
 {
     public static class PerformanceStatistic
     {

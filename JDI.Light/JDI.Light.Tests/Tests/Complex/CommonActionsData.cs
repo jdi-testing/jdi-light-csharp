@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using JDI.Core.Settings;
+using JDI.Light.Settings;
 using JDI.Light.Tests.Asserts;
 using JDI.Light.Tests.UIObjects;
 using OpenQA.Selenium;

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using JDI.Core.Interfaces.Complex;
-using JDI.Core.Settings;
+using JDI.Light.Interfaces.Complex;
+using JDI.Light.Settings;
 using JDI.Light.Tests.Asserts;
 using JDI.Light.Tests.Enums;
 using JDI.Light.Tests.UIObjects;

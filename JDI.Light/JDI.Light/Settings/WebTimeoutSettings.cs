@@ -1,4 +1,4 @@
-﻿namespace JDI.Core.Settings
+﻿namespace JDI.Light.Settings
 {
     public class WebTimeoutSettings
     {

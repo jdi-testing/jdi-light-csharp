@@ -1,7 +1,7 @@
 ﻿using System;
 using OpenQA.Selenium;
 
-namespace JDI.Core.Attributes
+namespace JDI.Light.Attributes
 {
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
     public class FindByAttribute : Attribute

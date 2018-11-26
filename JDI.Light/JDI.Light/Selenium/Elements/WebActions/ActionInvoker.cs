@@ -1,11 +1,11 @@
 ﻿using System;
-using JDI.Core.Extensions;
-using JDI.Core.Logging;
-using JDI.Core.Selenium.Elements.Base;
-using JDI.Core.Settings;
-using JDI.Core.Utils;
+using JDI.Light.Extensions;
+using JDI.Light.Logging;
+using JDI.Light.Selenium.Elements.Base;
+using JDI.Light.Settings;
+using JDI.Light.Utils;
 
-namespace JDI.Core.Selenium.Elements.WebActions
+namespace JDI.Light.Selenium.Elements.WebActions
 {
     public class ActionInvoker<T>
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JDI.Core.Interfaces.Complex
+namespace JDI.Light.Interfaces.Complex
 {
     public interface ITabs : ITabs<IConvertible>
     {

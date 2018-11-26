@@ -1,6 +1,6 @@
-﻿using JDI.Core.Selenium.DriverFactory;
-using JDI.Core.Selenium.Elements.Composite;
-using JDI.Core.Settings;
+﻿using JDI.Light.Selenium.DriverFactory;
+using JDI.Light.Selenium.Elements.Composite;
+using JDI.Light.Settings;
 using JDI.Light.Tests.Entities;
 using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;

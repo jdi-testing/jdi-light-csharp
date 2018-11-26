@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.IO;
 
-namespace JDI.Core.Selenium.DriverManager
+namespace JDI.Light.Selenium.DriverManager
 {
     public static class WebDriverManagerHelper
     {

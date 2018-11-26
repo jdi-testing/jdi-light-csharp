@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JDI.Core.Attributes
+namespace JDI.Light.Attributes
 {
     [AttributeUsage(AttributeTargets.All, Inherited = false)]
     public class NameAttribute : Attribute

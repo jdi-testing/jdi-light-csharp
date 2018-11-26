@@ -1,7 +1,7 @@
 ﻿using System;
-using JDI.Core.Enums;
+using JDI.Light.Enums;
 
-namespace JDI.Core.Attributes.JAttributes
+namespace JDI.Light.Attributes.JAttributes
 {
     [AttributeUsage(AttributeTargets.All, Inherited = false)]
     public class JTableAttribute : Attribute

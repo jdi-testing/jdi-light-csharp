@@ -1,10 +1,10 @@
 ﻿using System;
-using JDI.Core.Logging;
-using JDI.Core.Reporting;
-using JDI.Core.Settings;
-using JDI.Core.Utils;
+using JDI.Light.Logging;
+using JDI.Light.Reporting;
+using JDI.Light.Settings;
+using JDI.Light.Utils;
 
-namespace JDI.Core.Selenium.Elements.WebActions
+namespace JDI.Light.Selenium.Elements.WebActions
 {
     public class ActionScenarios<T>
     {

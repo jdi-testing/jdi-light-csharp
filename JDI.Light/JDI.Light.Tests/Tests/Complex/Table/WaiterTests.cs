@@ -1,4 +1,4 @@
-﻿using JDI.Core.Selenium.Elements.Complex.Table;
+﻿using JDI.Light.Selenium.Elements.Complex.Table;
 using JDI.Light.Tests.Asserts;
 using JDI.Light.Tests.Tests.Complex.Table.Base;
 using JDI.Light.Tests.UIObjects;

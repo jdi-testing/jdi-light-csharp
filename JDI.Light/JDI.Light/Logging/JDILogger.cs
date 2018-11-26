@@ -2,9 +2,9 @@
 using System.Collections.Concurrent;
 using System.IO;
 using System.Linq;
-using JDI.Core.Utils;
+using JDI.Light.Utils;
 
-namespace JDI.Core.Logging
+namespace JDI.Light.Logging
 {
     public class JDILogger : ILogger
     {

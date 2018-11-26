@@ -1,4 +1,4 @@
-﻿using JDI.Core.Attributes;
+﻿using JDI.Light.Attributes;
 
 namespace JDI.Light.Tests.Entities
 {

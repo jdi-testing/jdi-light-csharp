@@ -1,9 +1,9 @@
 ﻿using System;
-using JDI.Core.Base;
-using JDI.Core.Settings;
+using JDI.Light.Base;
+using JDI.Light.Settings;
 using OpenQA.Selenium;
 
-namespace JDI.Core.Selenium.Elements.Composite
+namespace JDI.Light.Selenium.Elements.Composite
 {
     public class WebSite : Application
     {

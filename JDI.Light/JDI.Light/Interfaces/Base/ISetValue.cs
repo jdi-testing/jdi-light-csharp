@@ -1,4 +1,4 @@
-﻿namespace JDI.Core.Interfaces.Base
+﻿namespace JDI.Light.Interfaces.Base
 {
     public interface ISetValue : IHasValue
     {

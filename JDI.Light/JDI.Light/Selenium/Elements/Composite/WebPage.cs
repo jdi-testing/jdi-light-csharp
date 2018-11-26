@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Linq;
 using System.Text.RegularExpressions;
-using JDI.Core.Enums;
-using JDI.Core.Extensions;
-using JDI.Core.Interfaces.Base;
-using JDI.Core.Interfaces.Complex;
-using JDI.Core.Selenium.Elements.WebActions;
-using JDI.Core.Settings;
-using JDI.Core.Utils;
+using JDI.Light.Enums;
+using JDI.Light.Extensions;
+using JDI.Light.Interfaces.Base;
+using JDI.Light.Interfaces.Complex;
+using JDI.Light.Selenium.Elements.WebActions;
+using JDI.Light.Settings;
+using JDI.Light.Utils;
 using OpenQA.Selenium;
 
-namespace JDI.Core.Selenium.Elements.Composite
+namespace JDI.Light.Selenium.Elements.Composite
 {
     public class WebPage : IPage
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using JDI.Core.Selenium.Elements.Base;
+using JDI.Light.Selenium.Elements.Base;
 
-namespace JDI.Core.Selenium.Elements.Complex.Table.Interfaces
+namespace JDI.Light.Selenium.Elements.Complex.Table.Interfaces
 {
     public interface ITable
     {

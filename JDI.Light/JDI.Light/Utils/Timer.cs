@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Threading;
 
-namespace JDI.Core.Utils
+namespace JDI.Light.Utils
 {
     public class Timer
     {

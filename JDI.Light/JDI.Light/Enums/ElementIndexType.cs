@@ -1,4 +1,4 @@
-﻿namespace JDI.Core.Enums
+﻿namespace JDI.Light.Enums
 {
     public enum ElementIndexType
     {
