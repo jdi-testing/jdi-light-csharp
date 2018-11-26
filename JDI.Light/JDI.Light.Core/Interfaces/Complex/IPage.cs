@@ -2,6 +2,7 @@
 using JDI.Core.Interfaces.Base;
 using JDI.Core.Selenium.Elements.Composite;
 using JDI.Core.Selenium.Elements.WebActions;
+using JDI.Core.Utils;
 using OpenQA.Selenium;
 
 namespace JDI.Core.Interfaces.Complex

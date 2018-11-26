@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading;
-using JDI.Core.Utils;
 
-namespace JDI.Core
+namespace JDI.Core.Utils
 {
     public class Timer
     {

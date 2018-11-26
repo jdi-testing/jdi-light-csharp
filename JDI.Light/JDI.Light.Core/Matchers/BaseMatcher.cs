@@ -4,6 +4,7 @@ using System.Linq;
 using JDI.Core.Enums;
 using JDI.Core.Extensions;
 using JDI.Core.Logging;
+using JDI.Core.Utils;
 
 namespace JDI.Core.Matchers
 {

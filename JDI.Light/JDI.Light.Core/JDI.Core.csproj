@@ -170,11 +170,11 @@
     <Compile Include="Settings\HighlightSettings.cs" />
     <Compile Include="Settings\IAssert.cs" />
     <Compile Include="Settings\JDISettings.cs" />
-    <Compile Include="Timer.cs" />
+    <Compile Include="Utils\Timer.cs" />
     <Compile Include="Extensions\TimerExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="JDI.Core.nuspec" />
+    <None Include="JDI.Light.nuspec" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
