@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
-using JDI.Light.Enums;
 using JDI.Light.Matchers;
 
 namespace JDI.Light.Tests.Asserts
 {
     public class Assert
     {
-        private static readonly ScreenshotState Screen = ScreenshotState.OnFail;
-        private static readonly BaseMatcher Matcher = new Check().SetScreenshot(Screen);
+        private static readonly BaseMatcher Matcher = new Check();
 
         public static void Contains(string actual, string expected)
         {

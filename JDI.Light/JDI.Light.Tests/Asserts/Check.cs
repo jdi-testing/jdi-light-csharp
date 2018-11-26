@@ -14,7 +14,7 @@ namespace JDI.Light.Tests.Asserts
 
         protected override void ThrowFail(string message)
         {
-            global::NUnit.Framework.Assert.Fail(message);
+            NUnit.Framework.Assert.Fail(message);
         }
     }
 }

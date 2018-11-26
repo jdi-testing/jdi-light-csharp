@@ -1,30 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using JDI.Light.Enums;
 using JDI.Light.Extensions;
 using JDI.Light.Interfaces;
-using JDI.Light.Logging;
+using JDI.Light.Settings;
 
 namespace JDI.Light.Matchers
 {
     public abstract class BaseMatcher
     {
         private static ILogger _logger;
-        private static long _waitTimeout = 10;
 
         private readonly string _checkMessage;
-        private bool _ignoreCase;
 
-        protected BaseMatcher(string checkMessage) : this() // TODO: Fix it! (setting logger)
+        protected BaseMatcher(string checkMessage) : this()
         {
             _checkMessage = GetCheckMessage(checkMessage);
         }
 
         protected BaseMatcher()
         {
-            // TODO: Fix it!
-            _logger = new ConsoleLogger();
+            _logger = JDISettings.Logger;
         }
 
         protected abstract void ThrowFail(string message);
@@ -39,11 +35,6 @@ namespace JDI.Light.Matchers
             return "Check that " + checkMessage;
         }
 
-        public BaseMatcher SetScreenshot(ScreenshotState screenshot)
-        {
-            return this;
-        }
-
         public void Contains(string actual, string expected)
         {
             Contains(actual, expected, false);
@@ -56,9 +47,7 @@ namespace JDI.Light.Matchers
 
         public void Contains(string actual, string expected, bool logOnlyFail, string failMessage)
         {
-            var result = _ignoreCase
-                ? actual.Contains(expected, StringComparison.OrdinalIgnoreCase)
-                : actual.Contains(expected);
+            var result = actual.Contains(expected);
             AssertAction($"Check that '{actual}' contains '{expected}'", result, logOnlyFail);
         }
 
@@ -94,13 +83,7 @@ namespace JDI.Light.Matchers
 
         public void AreEquals<T>(T actual, T expected, bool logOnlyFail = false)
         {
-            bool result;
-            if (typeof(T) == typeof(string))
-                result = _ignoreCase
-                    ? actual.ToString().Equals(expected.ToString(), StringComparison.OrdinalIgnoreCase)
-                    : actual.ToString().Equals(expected.ToString());
-            else
-                result = actual.Equals(expected);
+            var result = typeof(T) == typeof(string) ? actual.ToString().Equals(expected.ToString()) : actual.Equals(expected);
             AssertAction($"Check that '{actual}' equals to '{expected}'", result, logOnlyFail);
         }
 
