@@ -1,4 +1,5 @@
 ﻿using System;
+using JDI.Light.Enums;
 using JDI.Light.Extensions;
 using JDI.Light.Logging;
 using JDI.Light.Selenium.Elements.Base;

@@ -1,4 +1,5 @@
 ﻿using System;
+using JDI.Light.Enums;
 using JDI.Light.Logging;
 using JDI.Light.Reporting;
 using JDI.Light.Settings;

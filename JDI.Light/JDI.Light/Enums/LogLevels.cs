@@ -1,4 +1,4 @@
-﻿namespace JDI.Light.Logging
+﻿namespace JDI.Light.Enums
 {
     public enum LogLevel
     {
