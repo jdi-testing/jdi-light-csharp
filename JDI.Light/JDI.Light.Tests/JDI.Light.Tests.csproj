@@ -120,9 +120,9 @@
     <Folder Include="UIObjects\Forms\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\JDI.Light.Core\JDI.Core.csproj">
-      <Project>{99ee5894-9f49-43e2-a129-7916d924d49c}</Project>
-      <Name>JDI.Core</Name>
+    <ProjectReference Include="..\JDI.Light\JDI.Light.csproj">
+      <Project>{abaf27b0-bfde-4fec-b93e-15b595fa77aa}</Project>
+      <Name>JDI.Light</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

@@ -1,12 +1,9 @@
-﻿namespace JDI.Light.Enums
+﻿namespace JDI.Core.Enums
 {
     public enum DriverType
     {
         Chrome,
         Firefox,
-        IE,
-        PhantomJs,
-        Opera,
-        Edge
+        IE
     }
 }
