@@ -2,7 +2,7 @@
 using JDI.Core.Interfaces.Common;
 using JDI.Core.Selenium.Elements.Composite;
 
-namespace JDI.UIWebTests.UIObjects.Sections
+namespace JDI.Light.Tests.UIObjects.Sections
 {
     public sealed class JdiSearch : Search
     {

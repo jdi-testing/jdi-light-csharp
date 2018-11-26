@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace JDI.UIWebTests.Entities
+namespace JDI.Light.Tests.Entities
 {
     public class Contact
     {

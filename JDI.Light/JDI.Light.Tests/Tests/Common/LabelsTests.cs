@@ -1,9 +1,9 @@
 ﻿using JDI.Core.Settings;
-using JDI.UIWebTests.Tests.Complex;
-using JDI.UIWebTests.UIObjects;
+using JDI.Light.Tests.Tests.Complex;
+using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 
-namespace JDI.UIWebTests.Tests.Common
+namespace JDI.Light.Tests.Tests.Common
 {
     [TestFixture]
     public class LabelsTests

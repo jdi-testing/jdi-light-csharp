@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using JDI.Core.Settings;
-using JDI.Matchers.NUnit;
-using JDI.UIWebTests.Asserts;
-using JDI.UIWebTests.UIObjects;
+using JDI.Light.Tests.Asserts;
+using JDI.Light.Tests.UIObjects;
 using OpenQA.Selenium;
 
-namespace JDI.UIWebTests.Tests.Complex
+namespace JDI.Light.Tests.Tests.Complex
 {
     public class CommonActionsData
     {

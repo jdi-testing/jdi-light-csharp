@@ -1,11 +1,11 @@
 ﻿using JDI.Core.Selenium.DriverFactory;
 using JDI.Core.Selenium.Elements.Composite;
 using JDI.Core.Settings;
-using JDI.UIWebTests.Entities;
-using JDI.UIWebTests.UIObjects;
+using JDI.Light.Tests.Entities;
+using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 
-namespace JDI.UIWebTests.Tests
+namespace JDI.Light.Tests.Tests
 {
     [SetUpFixture]
     public class TestBase

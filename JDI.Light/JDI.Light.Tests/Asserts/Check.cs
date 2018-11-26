@@ -1,6 +1,6 @@
 ﻿using JDI.Core.Matchers;
 
-namespace JDI.Matchers.NUnit
+namespace JDI.Light.Tests.Asserts
 {
     public class Check : BaseMatcher
     {

@@ -1,10 +1,10 @@
 ﻿using JDI.Core.Interfaces.Common;
 using JDI.Core.Settings;
-using JDI.Matchers.NUnit;
-using JDI.UIWebTests.UIObjects;
+using JDI.Light.Tests.Asserts;
+using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 
-namespace JDI.UIWebTests.Tests.Common
+namespace JDI.Light.Tests.Tests.Common
 {
     public class DatePickerTests
     {

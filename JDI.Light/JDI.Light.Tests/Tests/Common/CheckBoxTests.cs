@@ -1,12 +1,12 @@
 ﻿using JDI.Core.Interfaces.Common;
 using JDI.Core.Settings;
-using JDI.UIWebTests.DataProviders;
-using JDI.UIWebTests.Tests.Complex;
-using JDI.UIWebTests.UIObjects;
+using JDI.Light.Tests.DataProviders;
+using JDI.Light.Tests.Tests.Complex;
+using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
-using Assert = JDI.UIWebTests.Asserts.Assert;
+using Assert = JDI.Light.Tests.Asserts.Assert;
 
-namespace JDI.UIWebTests.Tests.Common
+namespace JDI.Light.Tests.Tests.Common
 {
     public class CheckBoxTests
     {

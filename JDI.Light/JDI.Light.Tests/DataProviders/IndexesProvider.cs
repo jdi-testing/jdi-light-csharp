@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace JDI.UIWebTests.DataProviders
+namespace JDI.Light.Tests.DataProviders
 {
     internal class IndexesProvider
     {

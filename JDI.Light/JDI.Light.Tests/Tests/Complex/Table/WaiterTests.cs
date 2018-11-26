@@ -1,11 +1,11 @@
 ﻿using JDI.Core.Selenium.Elements.Complex.Table;
-using JDI.Matchers.NUnit;
-using JDI.UIWebTests.Tests.Complex.Table.Base;
-using JDI.UIWebTests.UIObjects;
+using JDI.Light.Tests.Asserts;
+using JDI.Light.Tests.Tests.Complex.Table.Base;
+using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
-using Assert = JDI.UIWebTests.Asserts.Assert;
+using Assert = JDI.Light.Tests.Asserts.Assert;
 
-namespace JDI.UIWebTests.Tests.Complex.Table
+namespace JDI.Light.Tests.Tests.Complex.Table
 {
     [TestFixture]
     internal class WaiterTests : SupportTableTestBase

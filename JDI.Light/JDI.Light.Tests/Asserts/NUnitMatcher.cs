@@ -1,8 +1,7 @@
 ﻿using System;
 using JDI.Core.Settings;
-using NUnit.Framework;
 
-namespace JDI.Matchers
+namespace JDI.Light.Tests.Asserts
 {
     public class NUnitMatcher : IAssert
     {
@@ -15,13 +14,13 @@ namespace JDI.Matchers
         public Exception Exception(string message)
         {
             JDISettings.Logger.Error(message);
-            Assert.Fail(message);
+            NUnit.Framework.Assert.Fail(message);
             return new Exception(message);
         }
 
         public void IsTrue(bool actual)
         {
-            Assert.IsTrue(actual);
+            NUnit.Framework.Assert.IsTrue(actual);
         }
     }
 }

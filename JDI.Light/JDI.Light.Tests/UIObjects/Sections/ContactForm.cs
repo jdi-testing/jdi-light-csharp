@@ -4,10 +4,10 @@ using JDI.Core.Interfaces.Common;
 using JDI.Core.Selenium.Elements.Common;
 using JDI.Core.Selenium.Elements.Composite;
 using JDI.Core.Settings;
-using JDI.UIWebTests.Entities;
+using JDI.Light.Tests.Entities;
 using OpenQA.Selenium;
 
-namespace JDI.UIWebTests.UIObjects.Sections
+namespace JDI.Light.Tests.UIObjects.Sections
 {
     public class ContactForm : Form<Contact>
     {

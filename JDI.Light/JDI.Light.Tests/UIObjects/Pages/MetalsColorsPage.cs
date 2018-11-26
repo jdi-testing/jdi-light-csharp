@@ -5,11 +5,11 @@ using JDI.Core.Selenium.Elements.Base;
 using JDI.Core.Selenium.Elements.Common;
 using JDI.Core.Selenium.Elements.Complex;
 using JDI.Core.Selenium.Elements.Composite;
-using JDI.UIWebTests.Enums;
-using JDI.UIWebTests.UIObjects.Sections;
+using JDI.Light.Tests.Enums;
+using JDI.Light.Tests.UIObjects.Sections;
 using OpenQA.Selenium;
 
-namespace JDI.UIWebTests.UIObjects.Pages
+namespace JDI.Light.Tests.UIObjects.Pages
 {
     public class MetalsColorsPage : WebPage
     {

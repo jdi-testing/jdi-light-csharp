@@ -2,9 +2,9 @@
 using JDI.Core.Interfaces.Common;
 using JDI.Core.Selenium.Elements.Complex;
 using JDI.Core.Selenium.Elements.Composite;
-using JDI.UIWebTests.Enums;
+using JDI.Light.Tests.Enums;
 
-namespace JDI.UIWebTests.UIObjects.Sections
+namespace JDI.Light.Tests.UIObjects.Sections
 {
     public class Summary : Section
     {

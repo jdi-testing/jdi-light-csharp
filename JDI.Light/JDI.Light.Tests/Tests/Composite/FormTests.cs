@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using JDI.Core.Settings;
-using JDI.Matchers.NUnit;
-using JDI.UIWebTests.Entities;
-using JDI.UIWebTests.Enums;
-using JDI.UIWebTests.Tests.Complex;
-using JDI.UIWebTests.UIObjects;
-using JDI.UIWebTests.UIObjects.Sections;
+using JDI.Light.Tests.Asserts;
+using JDI.Light.Tests.Entities;
+using JDI.Light.Tests.Enums;
+using JDI.Light.Tests.Tests.Complex;
+using JDI.Light.Tests.UIObjects;
+using JDI.Light.Tests.UIObjects.Sections;
 using NUnit.Framework;
 
-namespace JDI.UIWebTests.Tests.Composite
+namespace JDI.Light.Tests.Tests.Composite
 {
     public class FormTests
     {

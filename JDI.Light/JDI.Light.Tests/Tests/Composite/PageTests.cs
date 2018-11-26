@@ -1,10 +1,10 @@
 ﻿using JDI.Core.Settings;
-using JDI.Matchers.NUnit;
-using JDI.UIWebTests.UIObjects;
+using JDI.Light.Tests.Asserts;
+using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
-namespace JDI.UIWebTests.Tests.Composite
+namespace JDI.Light.Tests.Tests.Composite
 {
     public class PageTests
     {

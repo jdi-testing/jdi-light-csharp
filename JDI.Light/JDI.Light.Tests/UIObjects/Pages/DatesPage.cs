@@ -2,9 +2,9 @@
 using JDI.Core.Interfaces.Common;
 using JDI.Core.Selenium.Elements.Common;
 using JDI.Core.Selenium.Elements.Composite;
-using JDI.UIWebTests.UIObjects.Sections;
+using JDI.Light.Tests.UIObjects.Sections;
 
-namespace JDI.UIWebTests.UIObjects.Pages
+namespace JDI.Light.Tests.UIObjects.Pages
 {
     public class DatesPage : WebPage
     {

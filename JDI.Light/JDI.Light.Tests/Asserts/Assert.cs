@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using JDI.Core.Enums;
 using JDI.Core.Matchers;
-using JDI.Matchers.NUnit;
 
-namespace JDI.UIWebTests.Asserts
+namespace JDI.Light.Tests.Asserts
 {
     public class Assert
     {

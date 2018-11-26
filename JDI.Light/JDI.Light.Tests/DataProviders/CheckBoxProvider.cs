@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 
-namespace JDI.UIWebTests.DataProviders
+namespace JDI.Light.Tests.DataProviders
 {
     internal class CheckBoxProvider
     {

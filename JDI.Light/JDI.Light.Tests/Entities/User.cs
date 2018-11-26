@@ -1,6 +1,6 @@
 ﻿using JDI.Core.Attributes;
 
-namespace JDI.UIWebTests.Entities
+namespace JDI.Light.Tests.Entities
 {
     public class User
     {

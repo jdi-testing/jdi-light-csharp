@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using JDI.Core.Settings;
-using JDI.UIWebTests.UIObjects;
+using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 
-namespace JDI.UIWebTests.Tests.Complex
+namespace JDI.Light.Tests.Tests.Complex
 {
     // TODO: Selector tests are not compleated
     [Ignore("Exception in CascadeInit due to oddNumberSelectors")]

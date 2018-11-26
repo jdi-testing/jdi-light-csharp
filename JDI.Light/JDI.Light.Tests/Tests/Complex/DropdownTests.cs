@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using JDI.Core.Interfaces.Complex;
 using JDI.Core.Settings;
-using JDI.Matchers.NUnit;
-using JDI.UIWebTests.Enums;
-using JDI.UIWebTests.UIObjects;
+using JDI.Light.Tests.Asserts;
+using JDI.Light.Tests.Enums;
+using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
-using Assert = JDI.UIWebTests.Asserts.Assert;
+using Assert = JDI.Light.Tests.Asserts.Assert;
 
-namespace JDI.UIWebTests.Tests.Complex
+namespace JDI.Light.Tests.Tests.Complex
 {
     public class DropdownTests
     {

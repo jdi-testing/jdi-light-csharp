@@ -1,9 +1,9 @@
 ﻿using JDI.Core.Selenium.Elements.Composite;
 using JDI.Core.Settings;
-using JDI.UIWebTests.UIObjects;
+using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 
-namespace JDI.UIWebTests.Tests.Composite
+namespace JDI.Light.Tests.Tests.Composite
 {
     public class PaginationTests
     {

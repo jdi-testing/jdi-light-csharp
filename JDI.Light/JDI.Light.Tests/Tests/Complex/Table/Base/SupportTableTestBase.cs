@@ -1,9 +1,9 @@
 ﻿using JDI.Core.Selenium.Elements.Complex.Table.Interfaces;
 using JDI.Core.Settings;
-using JDI.UIWebTests.UIObjects;
+using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 
-namespace JDI.UIWebTests.Tests.Complex.Table.Base
+namespace JDI.Light.Tests.Tests.Complex.Table.Base
 {
     public class SupportTableTestBase // TODO: fix TestBase (consider InitTests from Java)
     {

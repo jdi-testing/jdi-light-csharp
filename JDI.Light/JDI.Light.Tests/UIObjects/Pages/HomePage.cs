@@ -3,7 +3,7 @@ using JDI.Core.Interfaces.Common;
 using JDI.Core.Selenium.Elements.Common;
 using JDI.Core.Selenium.Elements.Composite;
 
-namespace JDI.UIWebTests.UIObjects.Pages
+namespace JDI.Light.Tests.UIObjects.Pages
 {
     public class HomePage : WebPage
     {

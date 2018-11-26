@@ -2,9 +2,9 @@
 using JDI.Core.Interfaces.Common;
 using JDI.Core.Selenium.Elements.Common;
 using JDI.Core.Selenium.Elements.Composite;
-using JDI.UIWebTests.Entities;
+using JDI.Light.Tests.Entities;
 
-namespace JDI.UIWebTests.UIObjects.Sections
+namespace JDI.Light.Tests.UIObjects.Sections
 {
     public class ContactFormTwoButtons : Form<Contact>
     {

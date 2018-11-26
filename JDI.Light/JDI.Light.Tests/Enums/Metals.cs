@@ -1,4 +1,4 @@
-﻿namespace JDI.UIWebTests.Enums
+﻿namespace JDI.Light.Tests.Enums
 {
     public enum Metals
     {

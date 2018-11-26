@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using JDI.Core.Selenium.Elements.Complex;
 using JDI.Core.Settings;
-using JDI.UIWebTests.Enums;
-using JDI.UIWebTests.UIObjects;
+using JDI.Light.Tests.Enums;
+using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
-using Assert = JDI.UIWebTests.Asserts.Assert;
+using Assert = JDI.Light.Tests.Asserts.Assert;
 
-namespace JDI.UIWebTests.Tests.Complex
+namespace JDI.Light.Tests.Tests.Complex
 {
     public class RadioButtonsTests
     {
