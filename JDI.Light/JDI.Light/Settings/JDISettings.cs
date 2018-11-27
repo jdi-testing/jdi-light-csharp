@@ -48,15 +48,5 @@ namespace JDI.Light.Settings
         {
             ExceptionUtils.AvoidExceptions(() => action.Invoke(Properties.Settings.Default[name].ToString()));
         }
-
-        public static Exception Exception(string msg, Exception ex)
-        {
-            return Asserter.Exception(msg, ex);
-        }
-
-        public static Exception Exception(string msg)
-        {
-            return Asserter.Exception(msg);
-        }
     }
 }

@@ -14,7 +14,7 @@ namespace JDI.Light.Utils
             catch (Exception ex)
             {
                 var msg = getExceptionMsg.Invoke(ex.Message);
-                throw JDISettings.Exception(msg, ex);
+                throw JDISettings.Asserter.Exception(msg, ex);
             }
         }
 
@@ -28,7 +28,7 @@ namespace JDI.Light.Utils
             catch (Exception ex)
             {
                 var msg = getExceptionMsg.Invoke(ex.Message);
-                throw JDISettings.Exception(msg, ex);
+                throw JDISettings.Asserter.Exception(msg, ex);
             }
         }
 

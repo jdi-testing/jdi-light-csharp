@@ -1,4 +1,5 @@
 ﻿using System;
+using JDI.Light.Interfaces;
 using JDI.Light.Settings;
 
 namespace JDI.Light.Tests.Asserts

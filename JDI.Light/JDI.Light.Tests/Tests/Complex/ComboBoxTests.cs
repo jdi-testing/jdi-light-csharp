@@ -117,7 +117,7 @@ namespace JDI.Light.Tests.Tests.Complex
             }
             catch (Exception)
             {
-                throw JDISettings.Exception("WaitSelected throws exception");
+                throw JDISettings.Asserter.Exception("WaitSelected throws exception");
             }
         }
 

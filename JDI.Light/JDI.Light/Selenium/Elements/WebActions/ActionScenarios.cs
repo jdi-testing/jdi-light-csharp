@@ -45,7 +45,7 @@ namespace JDI.Light.Selenium.Elements.WebActions
                         .GetResultByCondition(() => action.Invoke(_targetElement), res => true),
                     ex => $"Do action {actionName} failed. Can't got result. Reason: {ex}");
             if (result == null)
-                throw JDISettings.Exception($"Do action {actionName} failed. Can't got result");
+                throw JDISettings.Asserter.Exception($"Do action {actionName} failed. Can't got result");
             var stringResult = logResult == null
                 ? result.ToString()
                 : logResult.Invoke(result);

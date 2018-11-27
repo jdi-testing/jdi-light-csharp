@@ -53,7 +53,7 @@ namespace JDI.Light.Tests.Tests.Complex
                 return;
             }
 
-            throw JDISettings.Exception("Exception not thrown");
+            throw JDISettings.Asserter.Exception("Exception not thrown");
         }
 
         public static void RunParallel(Action action)

@@ -42,14 +42,14 @@ namespace JDI.Light.Selenium.Elements.Composite
             switch (fields.Count)
             {
                 case 0:
-                    throw JDISettings.Exception($"Can't find ny buttons on form {ToString()}'");
+                    throw JDISettings.Asserter.Exception($"Can't find ny buttons on form {ToString()}'");
                 case 1:
                     return (Button)fields[0].GetValue(WebElement);
                 default:
                     var buttons = fields.Select(f => (Button)f.GetValue(WebElement)).ToList();
                     var button = buttons.FirstOrDefault(b => ToButton(b.Name).SimplifiedEqual(ToButton(buttonName)));
                     if (button == null)
-                        throw JDISettings.Exception($"Can't find button '{buttonName}' for Element '{ToString()}'." +
+                        throw JDISettings.Asserter.Exception($"Can't find button '{buttonName}' for Element '{ToString()}'." +
                                                     $"(Found following buttons: {buttons.Select(el => el.Name).FormattedJoin()})."
                                                         .FromNewLine());
                     return button;

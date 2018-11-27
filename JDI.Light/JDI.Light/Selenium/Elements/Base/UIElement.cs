@@ -53,12 +53,12 @@ namespace JDI.Light.Selenium.Elements.Base
                     switch (result.Count)
                     {
                         case 0:
-                            throw JDISettings.Exception($"Can't find Element '{this}' during {timeout} seconds");
+                            throw JDISettings.Asserter.Exception($"Can't find Element '{this}' during {timeout} seconds");
                         case 1:
                             return result[0];
                         default:
                             if (WebDriverFactory.OnlyOneElementAllowedInSearch)
-                                throw JDISettings.Exception(
+                                throw JDISettings.Asserter.Exception(
                                     $"Find {result.Count} elements instead of one for Element '{this}' during {timeout} seconds");
                             return result[0];
                     }
@@ -78,7 +78,7 @@ namespace JDI.Light.Selenium.Elements.Base
             }, els => els.Count(GetSearchCriteria) > 0);
             JDISettings.Timeouts.DropTimeouts();
             if (result == null)
-                throw JDISettings.Exception("Can't get Web Elements");
+                throw JDISettings.Asserter.Exception("Can't get Web Elements");
             return result.Where(GetSearchCriteria).ToList();
         }
 

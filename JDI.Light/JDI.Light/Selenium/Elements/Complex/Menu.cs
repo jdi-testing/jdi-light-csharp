@@ -31,7 +31,7 @@ namespace JDI.Light.Selenium.Elements.Complex
                     var elements = new Selector(m.MenuLevelsLocators[i]).Elements;
                     var element = elements.FirstOrDefault(el => el.Text.Equals(value));
                     if (element == null)
-                        throw JDISettings.Exception("Can't choose element:" + value);
+                        throw JDISettings.Asserter.Exception("Can't choose element:" + value);
                     if (m.Delay > 0) Thread.Sleep(m.Delay);
                     action(m.WebDriver, element);
                 }
@@ -58,8 +58,9 @@ namespace JDI.Light.Selenium.Elements.Complex
             }
 
             if (split.Count > m.MenuLevelsLocators.Count)
-                throw JDISettings.Exception(
-                    $"Can't hover and click on element ({m}) by value: {names.FormattedJoin(m.Separator)}. Amount of locators ({m.MenuLevelsLocators.Count}) less than select path length ({split.Count})");
+                throw JDISettings.Asserter.Exception(
+                    $"Can't hover and click on element ({m}) by value: {names.FormattedJoin(m.Separator)}. " +
+                    $"Amount of locators ({m.MenuLevelsLocators.Count}) less than select path length ({split.Count})");
             m.Hover(split.ListCopy(to: -1).ToArray());
             var lastIndex = split.Count - 1;
             if (m.Delay > 0) Thread.Sleep(m.Delay);

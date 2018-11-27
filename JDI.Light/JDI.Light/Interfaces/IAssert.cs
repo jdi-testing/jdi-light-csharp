@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JDI.Light.Settings
+namespace JDI.Light.Interfaces
 {
     public interface IAssert
     {

@@ -20,10 +20,6 @@ namespace JDI.Light.Settings
 {
     public class WebSettings : JDISettings
     {
-        public static bool GetLatestDriver = true;
-        public static string Domain;
-        private static WebDriverFactory _webDriverFactory;
-
         private static readonly Dictionary<Type, Type> DefaultInterfacesMap = new Dictionary<Type, Type>
         {
             {typeof(IBaseElement), typeof(UIElement)},
@@ -48,13 +44,14 @@ namespace JDI.Light.Settings
             {typeof(IDatePicker), typeof(DatePicker)},
             {typeof(ILink), typeof(Link)}
         };
+        private static WebDriverFactory _webDriverFactory;
 
+        public static bool GetLatestDriver = true;
+        public static string Domain;
         public static bool HasDomain => Domain != null && Domain.Contains("://");
         public static IWebDriver WebDriver => WebDriverFactory.GetDriver();
-
         public static WebDriverFactory WebDriverFactory =>
             _webDriverFactory ?? (_webDriverFactory = new WebDriverFactory());
-
         public static IJavaScriptExecutor JsExecutor => DriverFactory.GetDriver() as IJavaScriptExecutor;
 
         public static void Init(ILogger logger, IAssert assert,

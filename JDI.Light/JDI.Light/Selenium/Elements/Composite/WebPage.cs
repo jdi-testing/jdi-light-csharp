@@ -18,15 +18,12 @@ namespace JDI.Light.Selenium.Elements.Composite
         private string _url;
         public CheckPageType CheckTitleType { get; set; } = CheckPageType.None;
         public CheckPageType CheckUrlType { get; set; } = CheckPageType.None;
-
         public string Title { get; set; }
         public string UrlTemplate { get; set; }
-
         public ActionInvoker<WebPage> Invoker { get; set; }
         public string DriverName { get; set; }
         public string Name { get; set; }
         public IBaseElement Parent { get; set; }
-
         public IWebDriver WebDriver { get; set; }
         public Timer Timer { get; set; }
 
