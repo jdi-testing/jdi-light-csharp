@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using JDI.Light.Attributes;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
@@ -7,6 +8,11 @@ namespace JDI.Light.Extensions
 {
     public static class FieldInfoExtensions
     {
+        public static T GetAttribute<T>(this FieldInfo prop) where T : Attribute
+        {
+            return Attribute.GetCustomAttribute(prop, typeof(T)) as T;
+        }
+
         public static string GetElementName(this FieldInfo field)
         {
             return field.GetCustomAttribute<NameAttribute>(false)?.Name.SplitCamelCase() ?? "";

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using JDI.Light.Enums;
 using JDI.Light.Interfaces;
 using JDI.Light.Interfaces.Base;
 using JDI.Light.Interfaces.Common;
@@ -57,16 +56,6 @@ namespace JDI.Light.Settings
             _webDriverFactory ?? (_webDriverFactory = new WebDriverFactory());
 
         public static IJavaScriptExecutor JsExecutor => DriverFactory.GetDriver() as IJavaScriptExecutor;
-
-        public static string UseDriver(DriverType driverName = DriverType.Firefox)
-        {
-            return WebDriverFactory.RegisterDriver(driverName);
-        }
-
-        public static string UseDriver(Func<IWebDriver> driver)
-        {
-            return WebDriverFactory.RegisterDriver(driver);
-        }
 
         public static void Init(ILogger logger, IAssert assert,
             WebTimeoutSettings timeouts = null, IDriverFactory<IWebDriver> driverFactory = null)

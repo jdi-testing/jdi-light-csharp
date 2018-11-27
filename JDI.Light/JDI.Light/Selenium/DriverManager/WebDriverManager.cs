@@ -125,7 +125,7 @@ namespace JDI.Light.Selenium.DriverManager
         /// <param name="type">Driver Type</param>
         /// <param name="version">Version Number</param>
         /// <returns>Path of driver location</returns>
-        public static string GetSpecifiedVersion(DriverType type, string version)
+        public static string GetSpecifiedVersion(DriverType type, string version = "")
         {
             return GetDriverVersion(type, version);
         }
