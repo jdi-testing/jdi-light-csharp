@@ -8,7 +8,7 @@ namespace JDI.Light.Settings
     public class JDISettings
     {
         public static ILogger Logger;
-        public static IAssert Asserter;
+        public static IAssert Assert;
         public static WebTimeoutSettings Timeouts = new WebTimeoutSettings();
         public static bool IsDemoMode;
         public static HighlightSettings HighlightSettings = new HighlightSettings();

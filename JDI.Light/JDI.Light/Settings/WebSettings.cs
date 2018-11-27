@@ -58,7 +58,7 @@ namespace JDI.Light.Settings
             WebTimeoutSettings timeouts = null, IDriverFactory<IWebDriver> driverFactory = null)
         {
             DriverFactory = driverFactory ?? new WebDriverFactory();
-            Asserter = assert;
+            Assert = assert;
             Timeouts = timeouts ?? new WebTimeoutSettings();
             Logger = logger ?? new ConsoleLogger();
             MapInterfaceToElement.Init(DefaultInterfacesMap);

@@ -31,7 +31,7 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void GetReferenceTest()
         {
-            new Check().AreEquals(_link.GetReference(), TestSite.SupportPage.Url);
+            new NUnitAsserter().AreEquals(_link.GetReference(), TestSite.SupportPage.Url);
         }
 
         /*

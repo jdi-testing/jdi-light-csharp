@@ -12,7 +12,7 @@ namespace JDI.Light.Tests.Tests.Complex.Table
     {
         private void CheckCell(ICell cell)
         {
-            new Check().AreEquals(
+            new NUnitAsserter().AreEquals(
                 $"Value: {cell.Value}; " +
                 $"Text: {cell.GetText}; {cell.ColumnName}/{cell.RowName}; {cell.ColumnNum}/{cell.RowNum}",
                 "Value: MSTest, NUnit, Epam; Text: MSTest, NUnit, Epam; Plans/2; 3/2");
@@ -20,14 +20,14 @@ namespace JDI.Light.Tests.Tests.Complex.Table
 
         private void CheckCells(IList<ICell> cells)
         {
-            new Check("Cells size").AreEquals(cells.Count, 2);
+            new NUnitAsserter("Cells size").AreEquals(cells.Count, 2);
 
-            new Check("Cell 1 coordinates").AreEquals(
+            new NUnitAsserter("Cell 1 coordinates").AreEquals(
                 $"Value: {cells[0].Value}; " +
                 $"{cells[0].ColumnName}/{cells[0].RowName}; " +
                 $"{cells[0].ColumnNum}/{cells[0].RowNum}", "Value: MSTest, NUnit, Epam; Plans/2; 3/2");
 
-            new Check("Cell 2 coordinates").AreEquals(
+            new NUnitAsserter("Cell 2 coordinates").AreEquals(
                 $"Value: {cells[1].Value}; " +
                 $"{cells[1].ColumnName}/{cells[1].RowName}; " +
                 $"{cells[1].ColumnNum}/{cells[1].RowNum}", "Value: MSTest, NUnit, Epam; Plans/3; 3/3");
@@ -91,7 +91,7 @@ namespace JDI.Light.Tests.Tests.Complex.Table
         public void CellsMatchInRowNameEqualsTest()
         {
             var cells = Table.CellsMatch(".*MSTest, NUnit, Epam", Row.CreateRow("2"));
-            new Check().AreEquals(cells.Count, 1);
+            new NUnitAsserter().AreEquals(cells.Count, 1);
             CheckCell(cells[0]);
         }
 
@@ -99,7 +99,7 @@ namespace JDI.Light.Tests.Tests.Complex.Table
         public void CellsMatchInRowNumEqualsTest()
         {
             var cells = Table.CellsMatch(".*MSTest, NUnit, Epam", Row.CreateRow(2));
-            new Check().AreEquals(cells.Count, 1);
+            new NUnitAsserter().AreEquals(cells.Count, 1);
             CheckCell(cells[0]);
         }
 

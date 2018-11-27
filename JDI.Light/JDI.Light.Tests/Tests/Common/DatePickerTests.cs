@@ -30,14 +30,14 @@ namespace JDI.Light.Tests.Tests.Common
         public void InputDatePickerTest()
         {
             _datePicker.Input(DEFAULT_DATE);
-            new Check().AreEquals(_datePicker.GetText, DEFAULT_DATE);
+            new NUnitAsserter().AreEquals(_datePicker.GetText, DEFAULT_DATE);
         }
 
         [Test]
         public void SendKeysDatePickerTest()
         {
             _datePicker.SendKeys(DEFAULT_DATE);
-            new Check().AreEquals(_datePicker.GetText, DEFAULT_DATE);
+            new NUnitAsserter().AreEquals(_datePicker.GetText, DEFAULT_DATE);
         }
 
         [Test]
@@ -45,7 +45,7 @@ namespace JDI.Light.Tests.Tests.Common
         {
             _datePicker.SendKeys(CHECK_DATE);
             _datePicker.NewInput(DEFAULT_DATE);
-            new Check().AreEquals(_datePicker.GetText, DEFAULT_DATE);
+            new NUnitAsserter().AreEquals(_datePicker.GetText, DEFAULT_DATE);
         }
 
         [Test]
@@ -53,14 +53,14 @@ namespace JDI.Light.Tests.Tests.Common
         {
             _datePicker.SendKeys(DEFAULT_DATE);
             _datePicker.Clear();
-            new Check().AreEquals(_datePicker.GetText, "");
+            new NUnitAsserter().AreEquals(_datePicker.GetText, "");
         }
 
         [Test]
         public void MultiKeyTest()
         {
             foreach (var ch in DEFAULT_DATE) _datePicker.SendKeys(ch.ToString());
-            new Check().AreEquals(_datePicker.GetText, DEFAULT_DATE);
+            new NUnitAsserter().AreEquals(_datePicker.GetText, DEFAULT_DATE);
         }
 
         //TO_DO

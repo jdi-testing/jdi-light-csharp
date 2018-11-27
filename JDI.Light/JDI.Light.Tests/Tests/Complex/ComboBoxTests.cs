@@ -7,7 +7,6 @@ using JDI.Light.Tests.Enums;
 using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using Assert = JDI.Light.Tests.Asserts.Assert;
 
 namespace JDI.Light.Tests.Tests.Complex
 {
@@ -53,25 +52,25 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void GetOptionsTest()
         {
-            new Check().CollectionEquals(MetalsControl.Options, OddOptions);
+            new NUnitAsserter().CollectionEquals(MetalsControl.Options, OddOptions);
         }
 
         [Test]
         public void GetNamesTest()
         {
-            new Check().CollectionEquals(MetalsControl.Names, OddOptions);
+            new NUnitAsserter().CollectionEquals(MetalsControl.Names, OddOptions);
         }
 
         [Test]
         public void GetValuesTest()
         {
-            new Check().CollectionEquals(MetalsControl.Values, OddOptions);
+            new NUnitAsserter().CollectionEquals(MetalsControl.Values, OddOptions);
         }
 
         [Test]
         public void GetOptionsAsTextTest()
         {
-            new Check().AreEquals(MetalsControl.OptionsAsText, "Col, Gold, Silver, Bronze, Selen");
+            new NUnitAsserter().AreEquals(MetalsControl.OptionsAsText, "Col, Gold, Silver, Bronze, Selen");
         }
 
         [Test]
@@ -86,7 +85,7 @@ namespace JDI.Light.Tests.Tests.Complex
         public void GetSelectedTest()
         {
             MetalsControl.Select("Gold");
-            new Check().AreEquals(MetalsControl.Selected(), "Gold");
+            new NUnitAsserter().AreEquals(MetalsControl.Selected(), "Gold");
         }
 
         [Test]
@@ -99,13 +98,13 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void IsSelectedTest()
         {
-            Assert.AreEquals(MetalsControl.Selected("Col"), true);
+            JDISettings.Assert.AreEquals(MetalsControl.Selected("Col"), true);
         }
 
         [Test]
         public void IsSelectedEnumTest()
         {
-            Assert.AreEquals(MetalsControl.Selected(Metals.Col), true);
+            JDISettings.Assert.AreEquals(MetalsControl.Selected(Metals.Col), true);
         }
 
         [Test]
@@ -117,20 +116,20 @@ namespace JDI.Light.Tests.Tests.Complex
             }
             catch (Exception)
             {
-                throw JDISettings.Asserter.Exception("WaitSelected throws exception");
+                throw JDISettings.Assert.Exception("WaitSelected throws exception");
             }
         }
 
         [Test]
         public void WaitSelectedEnumTest()
         {
-            new Check("WaitSelected").HasNoException(() => MetalsControl.GetValue());
+            new NUnitAsserter("WaitSelected").HasNoException(() => MetalsControl.GetValue());
         }
 
         [Test]
         public void GetValueTest()
         {
-            Assert.AreEquals(MetalsControl.Value, "Col");
+            JDISettings.Assert.AreEquals(MetalsControl.Value, "Col");
         }
     }
 }

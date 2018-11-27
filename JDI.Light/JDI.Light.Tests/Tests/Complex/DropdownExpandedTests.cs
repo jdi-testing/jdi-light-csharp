@@ -54,25 +54,25 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void GetOptionsTest()
         {
-            new Check().CollectionEquals(_colors().Options, ColorsOptions);
+            new NUnitAsserter().CollectionEquals(_colors().Options, ColorsOptions);
         }
 
         [Test]
         public void GetNamesTest()
         {
-            new Check().CollectionEquals(_colors().Names, ColorsOptions);
+            new NUnitAsserter().CollectionEquals(_colors().Names, ColorsOptions);
         }
 
         [Test]
         public void GetValuesTest()
         {
-            new Check().CollectionEquals(_colors().Values, ColorsOptions);
+            new NUnitAsserter().CollectionEquals(_colors().Values, ColorsOptions);
         }
 
         [Test]
         public void GetOptionsAsTextTest()
         {
-            new Check().AreEquals(_colors().OptionsAsText, "Colors, Red, Green, Blue, Yellow");
+            new NUnitAsserter().AreEquals(_colors().OptionsAsText, "Colors, Red, Green, Blue, Yellow");
         }
 
         [Test]
@@ -85,19 +85,19 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void GetNameTest()
         {
-            new Check().AreEquals(_colors().Name, "Colors");
+            new NUnitAsserter().AreEquals(_colors().Name, "Colors");
         }
 
         [Test]
         public void GetSelectedTest()
         {
-            new Check().AreEquals(_colors().Selected(), "Colors");
+            new NUnitAsserter().AreEquals(_colors().Selected(), "Colors");
         }
 
         [Test]
         public void GetValueTest()
         {
-            new Check().AreEquals(_colors().Value, "Colors");
+            new NUnitAsserter().AreEquals(_colors().Value, "Colors");
         }
     }
 }

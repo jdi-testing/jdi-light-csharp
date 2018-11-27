@@ -7,7 +7,6 @@ using JDI.Light.Tests.Enums;
 using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using Assert = JDI.Light.Tests.Asserts.Assert;
 
 namespace JDI.Light.Tests.Tests.Complex
 {
@@ -26,7 +25,7 @@ namespace JDI.Light.Tests.Tests.Complex
             IList<bool> checkedElems = TestSite.HomePage.WebDriver
                 .FindElements(By.CssSelector("#elements-checklist input"))
                 .Select(e => e.GetAttribute("checked") != null).ToList();
-            new Check("Check that all checkbox elements checked = " + isChecked).IsTrue(
+            new NUnitAsserter("Check that all checkbox elements checked = " + isChecked).IsTrue(
                 checkedElems.All(e => e == isChecked));
         }
 
@@ -48,7 +47,7 @@ namespace JDI.Light.Tests.Tests.Complex
             //var texts = ActionsLog.Texts; 
             IList<string> log = TestSite.HomePage.WebDriver.FindElements(By.CssSelector(".logs li")).Select(e => e.Text)
                 .ToList();
-            for (var i = 0; i < log.Count; i++) Assert.Contains(log[i], logLines[i] + ": condition changed to true");
+            for (var i = 0; i < log.Count; i++) JDISettings.Assert.Contains(log[i], logLines[i] + ": condition changed to true");
         }
 
         [SetUp]
@@ -181,25 +180,25 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void GetOptionsTest()
         {
-            new Check().CollectionEquals(_nature().Options, NATURE_OPTIONS);
+            new NUnitAsserter().CollectionEquals(_nature().Options, NATURE_OPTIONS);
         }
 
         [Test]
         public void GetNamesTest()
         {
-            new Check().CollectionEquals(_nature().Names, NATURE_OPTIONS);
+            new NUnitAsserter().CollectionEquals(_nature().Names, NATURE_OPTIONS);
         }
 
         [Test]
         public void GetValuesTest()
         {
-            new Check().CollectionEquals(_nature().Values, NATURE_OPTIONS);
+            new NUnitAsserter().CollectionEquals(_nature().Values, NATURE_OPTIONS);
         }
 
         [Test]
         public void GetOptionsAsTextTest()
         {
-            new Check().AreEquals(_nature().OptionsAsText, ALL_VALUES);
+            new NUnitAsserter().AreEquals(_nature().OptionsAsText, ALL_VALUES);
         }
 
         [Test]
@@ -212,7 +211,7 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void GetNameTest()
         {
-            new Check().AreEquals(_nature().Name, "Elements");
+            new NUnitAsserter().AreEquals(_nature().Name, "Elements");
         }
 
         // TODO: fix incorrect work of AreSelected method. It is always return empty collection
@@ -220,7 +219,7 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void AreSelectedTest()
         {
-            new Check().CollectionEquals(_nature().AreSelected(), new List<string>() );
+            new NUnitAsserter().CollectionEquals(_nature().AreSelected(), new List<string>() );
         }
 
 
@@ -228,14 +227,14 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void AreDeselectedTest()
         {
-            new Check().CollectionEquals(_nature().AreDeselected(), NATURE_OPTIONS);
+            new NUnitAsserter().CollectionEquals(_nature().AreDeselected(), NATURE_OPTIONS);
         }
         */
 
         [Test]
         public void GetValueTest()
         {
-            new Check().AreEquals(_nature().Value, "");
+            new NUnitAsserter().AreEquals(_nature().Value, "");
         }
     }
 }

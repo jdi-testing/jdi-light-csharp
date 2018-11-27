@@ -5,7 +5,6 @@ using JDI.Light.Tests.Asserts;
 using JDI.Light.Tests.Enums;
 using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
-using Assert = JDI.Light.Tests.Asserts.Assert;
 
 namespace JDI.Light.Tests.Tests.Complex
 {
@@ -49,25 +48,25 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void GetOptionsTest()
         {
-            Assert.CollectionEquals(ColorsControl.Options, OddOptions);
+            JDISettings.Assert.CollectionEquals(ColorsControl.Options, OddOptions);
         }
 
         [Test]
         public void GetNamesTest()
         {
-            Assert.CollectionEquals(ColorsControl.Names, OddOptions);
+            JDISettings.Assert.CollectionEquals(ColorsControl.Names, OddOptions);
         }
 
         [Test]
         public void GetValuesTest()
         {
-            Assert.CollectionEquals(ColorsControl.Values, OddOptions);
+            JDISettings.Assert.CollectionEquals(ColorsControl.Values, OddOptions);
         }
 
         [Test]
         public void GetOptionsAsTextTest()
         {
-            Assert.AreEquals(ColorsControl.OptionsAsText, "Colors, Red, Green, Blue, Yellow");
+            JDISettings.Assert.AreEquals(ColorsControl.OptionsAsText, "Colors, Red, Green, Blue, Yellow");
         }
 
         [Test]
@@ -80,13 +79,13 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void GetNameTest()
         {
-            Assert.AreEquals(ColorsControl.Name, "Colors");
+            JDISettings.Assert.AreEquals(ColorsControl.Name, "Colors");
         }
 
         [Test]
         public void GetSelectedTest()
         {
-            Assert.AreEquals(ColorsControl.Selected(), "Colors");
+            JDISettings.Assert.AreEquals(ColorsControl.Selected(), "Colors");
         }
 
         [Test]
@@ -99,31 +98,31 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void IsSelectedTest()
         {
-            Assert.AreEquals(ColorsControl.Selected("Colors"), true);
+            JDISettings.Assert.AreEquals(ColorsControl.Selected("Colors"), true);
         }
 
         [Test]
         public void IsSelectedEnumTest()
         {
-            Assert.AreEquals(ColorsControl.Selected(Colors.Colors), true);
+            JDISettings.Assert.AreEquals(ColorsControl.Selected(Colors.Colors), true);
         }
 
         [Test]
         public void WaitSelectedTest()
         {
-            new Check("WaitSelected").HasNoException(() => ColorsControl.WaitSelected("Colors"));
+            new NUnitAsserter("WaitSelected").HasNoException(() => ColorsControl.WaitSelected("Colors"));
         }
 
         [Test]
         public void WaitSelectedEnumTest()
         {
-            new Check("WaitSelected").HasNoException(() => ColorsControl.WaitSelected(Colors.Colors));
+            new NUnitAsserter("WaitSelected").HasNoException(() => ColorsControl.WaitSelected(Colors.Colors));
         }
 
         [Test]
         public void GetValueTest()
         {
-            Assert.AreEquals(ColorsControl.Value, "Colors");
+            JDISettings.Assert.AreEquals(ColorsControl.Value, "Colors");
         }
     }
 }

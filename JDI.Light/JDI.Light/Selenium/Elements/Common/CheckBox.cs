@@ -13,7 +13,7 @@ namespace JDI.Light.Selenium.Elements.Common
             if (!el.IsCheckedAction(el))
                 el.ClickAction(el);
             if (!el.IsCheckedAction(el))
-                throw JDISettings.Asserter.Exception("Can't check element. Verify locator for click or isCheckedAction");
+                throw JDISettings.Assert.Exception("Can't check element. Verify locator for click or isCheckedAction");
         };
 
         protected Func<UIElement, string> GetValueFunc = el => ((CheckBox) el).IsChecked() + "";
@@ -42,7 +42,7 @@ namespace JDI.Light.Selenium.Elements.Common
                     ((CheckBox) el).Uncheck();
                     break;
                 default:
-                    throw JDISettings.Asserter.Exception(
+                    throw JDISettings.Assert.Exception(
                         $"SetValue not specified correctly {value}, expected: 'true','false','0','1','check','uncheck'");
             }
         };
@@ -87,7 +87,7 @@ namespace JDI.Light.Selenium.Elements.Common
             if (IsCheckedAction((CheckBox) el))
                 ClickAction(el);
             if (IsCheckedAction((CheckBox) el))
-                throw JDISettings.Asserter.Exception("Can't uncheck element. Verify locator for click or isCheckedAction");
+                throw JDISettings.Assert.Exception("Can't uncheck element. Verify locator for click or isCheckedAction");
         }
     }
 }

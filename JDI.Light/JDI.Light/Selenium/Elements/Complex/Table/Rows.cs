@@ -47,13 +47,13 @@ namespace JDI.Light.Selenium.Elements.Complex.Table
         public Dictionary<string, ICell> GetRow(int rowNum)
         {
             if (Count < 0 || Count < rowNum || rowNum <= 0)
-                throw JDISettings.Asserter.Exception($"Can't Get Row '{rowNum}'. [num] > ColumnsCount({Count}).");
+                throw JDISettings.Assert.Exception($"Can't Get Row '{rowNum}'. [num] > ColumnsCount({Count}).");
             return ExceptionUtils.ActionWithException(() =>
             {
                 var colsCount = Table.Columns.Count;
                 var webRow = Timer.GetResultByCondition(() => GetLineAction(rowNum), els => els.Count >= colsCount);
                 if (webRow == null)
-                    throw JDISettings.Asserter.Exception($"Table has only {GetLineAction(rowNum).Count} columns " +
+                    throw JDISettings.Assert.Exception($"Table has only {GetLineAction(rowNum).Count} columns " +
                                                 $"but expected at least {colsCount}");
                 var result = new Dictionary<string, ICell>();
                 if (webRow.Count == colsCount)
@@ -82,7 +82,7 @@ namespace JDI.Light.Selenium.Elements.Complex.Table
         public IList<string> GetRowValue(int rowNum)
         {
             if (Count < 0 || Count < rowNum || rowNum <= 0)
-                throw JDISettings.Asserter.Exception($"Can't Get Row '{rowNum}'. [num] > ColumnsCount({Count}).");
+                throw JDISettings.Assert.Exception($"Can't Get Row '{rowNum}'. [num] > ColumnsCount({Count}).");
             return ExceptionUtils.ActionWithException(() => GetLineAction(rowNum).Select(el => el.Text).ToList(),
                 ex => $"Can't Get Row '{rowNum}'. Reason: {ex}");
         }
@@ -99,7 +99,7 @@ namespace JDI.Light.Selenium.Elements.Complex.Table
                 var colsCount = Table.Columns.Count;
                 var webRow = Timer.GetResultByCondition(() => GetLineAction(rowName), els => els.Count >= colsCount);
                 if (webRow == null)
-                    throw JDISettings.Asserter.Exception($"Table has only {GetLineAction(rowName).Count} columns " +
+                    throw JDISettings.Assert.Exception($"Table has only {GetLineAction(rowName).Count} columns " +
                                                 $"but expected at least {colsCount}");
                 var result = new Dictionary<string, ICell>();
                 if (webRow.Count == colsCount)

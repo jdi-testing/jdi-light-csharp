@@ -23,9 +23,9 @@ namespace JDI.Light.Tests.Tests.Composite
         public void RefreshTest()
         {
             TestSite.ContactFormPage.ContactSubmit.Click();
-            new Check().AreEquals(TestSite.ContactFormPage.Result.GetText, "Summary: 3");
+            new NUnitAsserter().AreEquals(TestSite.ContactFormPage.Result.GetText, "Summary: 3");
             TestSite.ContactFormPage.Refresh();
-            new Check().AreEquals(TestSite.ContactFormPage.Result.GetText, "");
+            new NUnitAsserter().AreEquals(TestSite.ContactFormPage.Result.GetText, "");
             TestSite.ContactFormPage.CheckOpened();
         }
 
@@ -52,10 +52,10 @@ namespace JDI.Light.Tests.Tests.Composite
         public void AddCookieTest()
         {
             TestSite.HomePage.WebDriver.Manage().Cookies.DeleteAllCookies();
-            new Check().IsTrue(TestSite.HomePage.WebDriver.Manage().Cookies.AllCookies.Count == 0);
+            new NUnitAsserter().IsTrue(TestSite.HomePage.WebDriver.Manage().Cookies.AllCookies.Count == 0);
             var cookie = new Cookie("key", "value");
             TestSite.ContactFormPage.AddCookie(cookie);
-            new Check().AreEquals(TestSite.HomePage.WebDriver.Manage().Cookies.GetCookieNamed(cookie.Name).Value,
+            new NUnitAsserter().AreEquals(TestSite.HomePage.WebDriver.Manage().Cookies.GetCookieNamed(cookie.Name).Value,
                 cookie.Value);
         }
 
@@ -64,9 +64,9 @@ namespace JDI.Light.Tests.Tests.Composite
         {
             var cookie = new Cookie("key", "value");
             TestSite.HomePage.WebDriver.Manage().Cookies.AddCookie(cookie);
-            new Check().IsFalse(TestSite.HomePage.WebDriver.Manage().Cookies.AllCookies.Count == 0);
+            new NUnitAsserter().IsFalse(TestSite.HomePage.WebDriver.Manage().Cookies.AllCookies.Count == 0);
             TestSite.ContactFormPage.ClearCache();
-            new Check().IsTrue(TestSite.HomePage.WebDriver.Manage().Cookies.AllCookies.Count == 0);
+            new NUnitAsserter().IsTrue(TestSite.HomePage.WebDriver.Manage().Cookies.AllCookies.Count == 0);
         }
 
         [Test]

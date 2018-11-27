@@ -4,7 +4,6 @@ using JDI.Light.Settings;
 using JDI.Light.Tests.Enums;
 using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
-using Assert = JDI.Light.Tests.Asserts.Assert;
 
 namespace JDI.Light.Tests.Tests.Complex
 {
@@ -50,25 +49,25 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void GetOptionsTest()
         {
-            Assert.CollectionEquals(OddNumbersControl.Options, OddOptions);
+            JDISettings.Assert.CollectionEquals(OddNumbersControl.Options, OddOptions);
         }
 
         [Test]
         public void GetNamesTest()
         {
-            Assert.CollectionEquals(OddNumbersControl.Names, OddOptions);
+            JDISettings.Assert.CollectionEquals(OddNumbersControl.Names, OddOptions);
         }
 
         [Test]
         public void GetValuesTest()
         {
-            Assert.CollectionEquals(OddNumbersControl.Values, OddOptions);
+            JDISettings.Assert.CollectionEquals(OddNumbersControl.Values, OddOptions);
         }
 
         [Test]
         public void GetOptionsAsTextTest()
         {
-            Assert.AreEquals(OddNumbersControl.OptionsAsText, "1, 3, 5, 7");
+            JDISettings.Assert.AreEquals(OddNumbersControl.OptionsAsText, "1, 3, 5, 7");
         }
 
         [Test]
@@ -81,7 +80,7 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void GetNameTest()
         {
-            Assert.AreEquals(OddNumbersControl.Name, "Odd Numbers");
+            JDISettings.Assert.AreEquals(OddNumbersControl.Name, "Odd Numbers");
         }
 
         [Test]

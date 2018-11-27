@@ -30,7 +30,7 @@ namespace JDI.Light.Tests.Tests.Composite
         {
             _contactForm.Fill(Contact.DEFAULT_CONTACT);
             IList<string> filledFilds = _contactForm.GetFormValue();
-            new Check().CollectionEquals(filledFilds, Contact.DEFAULT_CONTACT.ToList());
+            new NUnitAsserter().CollectionEquals(filledFilds, Contact.DEFAULT_CONTACT.ToList());
         }
 
         [Test]
@@ -67,14 +67,14 @@ namespace JDI.Light.Tests.Tests.Composite
         public void VerifyTest()
         {
             _contactForm.Fill(Contact.DEFAULT_CONTACT);
-            new Check().IsTrue(_contactForm.Verify(Contact.DEFAULT_CONTACT).Count == 0);
+            new NUnitAsserter().IsTrue(_contactForm.Verify(Contact.DEFAULT_CONTACT).Count == 0);
         }
 
         [Test]
         public void checkTest()
         {
             _contactForm.Fill(Contact.DEFAULT_CONTACT);
-            new Check().HasNoException(() => _contactForm.Check(Contact.DEFAULT_CONTACT));
+            new NUnitAsserter().HasNoException(() => _contactForm.Check(Contact.DEFAULT_CONTACT));
         }
     }
 }

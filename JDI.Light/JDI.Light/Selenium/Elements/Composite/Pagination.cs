@@ -25,7 +25,7 @@ namespace JDI.Light.Selenium.Elements.Composite
 
             if (p.Locator != null && p.Locator.ToString().Contains("{0}"))
                 return new Clickable(p.Locator.FillByTemplate(shortName));
-            throw JDISettings.Asserter.Exception(p.CantChooseElementMsg("First", shortName, "firstAction"));
+            throw JDISettings.Assert.Exception(p.CantChooseElementMsg("First", shortName, "firstAction"));
         };
 
         public By FirstLocator;
@@ -42,7 +42,7 @@ namespace JDI.Light.Selenium.Elements.Composite
 
             if (p.Locator != null && p.Locator.ToString().Contains("{0}"))
                 return new Clickable(p.Locator.FillByTemplate(shortName));
-            throw JDISettings.Asserter.Exception(p.CantChooseElementMsg("Last", shortName, "lastAction"));
+            throw JDISettings.Assert.Exception(p.CantChooseElementMsg("Last", shortName, "lastAction"));
         };
 
         public By LastLocator;
@@ -59,7 +59,7 @@ namespace JDI.Light.Selenium.Elements.Composite
 
             if (p.Locator != null && p.Locator.ToString().Contains("{0}"))
                 return new Clickable(p.Locator.FillByTemplate(shortName));
-            throw JDISettings.Asserter.Exception(p.CantChooseElementMsg("Next", shortName, "nextAction"));
+            throw JDISettings.Assert.Exception(p.CantChooseElementMsg("Next", shortName, "nextAction"));
         };
 
         public By NextLocator;
@@ -73,7 +73,7 @@ namespace JDI.Light.Selenium.Elements.Composite
             var pageLink = p.GetClickable(shortName);
             if (pageLink != null)
                 return pageLink;
-            throw JDISettings.Asserter.Exception(p.CantChooseElementMsg(index.ToString(), shortName, "pageAction"));
+            throw JDISettings.Assert.Exception(p.CantChooseElementMsg(index.ToString(), shortName, "pageAction"));
         };
 
         public Func<Pagination, Clickable> PreviousAction = p =>
@@ -88,7 +88,7 @@ namespace JDI.Light.Selenium.Elements.Composite
 
             if (p.Locator != null && p.Locator.ToString().Contains("{0}"))
                 return new Clickable(p.Locator.FillByTemplate(shortName));
-            throw JDISettings.Asserter.Exception(p.CantChooseElementMsg("Previous", shortName, "previousAction"));
+            throw JDISettings.Assert.Exception(p.CantChooseElementMsg("Previous", shortName, "previousAction"));
         };
 
         public By PreviousLocator;

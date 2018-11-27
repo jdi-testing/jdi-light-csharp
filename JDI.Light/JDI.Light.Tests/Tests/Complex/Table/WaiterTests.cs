@@ -3,7 +3,6 @@ using JDI.Light.Tests.Asserts;
 using JDI.Light.Tests.Tests.Complex.Table.Base;
 using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
-using Assert = JDI.Light.Tests.Asserts.Assert;
 
 namespace JDI.Light.Tests.Tests.Complex.Table
 {
@@ -31,19 +30,19 @@ namespace JDI.Light.Tests.Tests.Complex.Table
         [Test]
         public void TableIsEmptyTest()
         {
-            new Check("Table not empty").IsFalse(Table.Empty);
+            new NUnitAsserter("Table not empty").IsFalse(Table.Empty);
         }
 
         [Test]
         public void WaitExpectedColumnsValueTest()
         {
-            new Check("Find value").IsTrue(Table.WaitValue("Custom", Column.column(2)));
+            new NUnitAsserter("Find value").IsTrue(Table.WaitValue("Custom", Column.column(2)));
         }
 
         [Test]
         public void WaitExpectedRowsValueTest()
         {
-            new Check("Find value").IsTrue(Table.WaitValue("Cucumber, Jbehave, Thucydides, SpecFlow", Row.CreateRow(6)));
+            new NUnitAsserter("Find value").IsTrue(Table.WaitValue("Cucumber, Jbehave, Thucydides, SpecFlow", Row.CreateRow(6)));
         }
 
         [Test]
@@ -73,13 +72,13 @@ namespace JDI.Light.Tests.Tests.Complex.Table
         [Test]
         public void WaitUnexpectedColumnsValueTest()
         {
-            new Check("Do not find value").IsFalse(Table.WaitValue("Custom Unexepected", Column.column(2)));
+            new NUnitAsserter("Do not find value").IsFalse(Table.WaitValue("Custom Unexepected", Column.column(2)));
         }
 
         [Test]
         public void WaitUnexpectedRowsValueTest()
         {
-            new Check("Do not find value").IsFalse(
+            new NUnitAsserter("Do not find value").IsFalse(
                 Table.WaitValue("Cucumber, Jbehave, Thucydides, SpecFlow Unexepected", Row.CreateRow(6)));
         }
     }

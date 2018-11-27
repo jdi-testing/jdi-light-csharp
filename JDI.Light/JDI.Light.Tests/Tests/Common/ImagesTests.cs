@@ -37,19 +37,19 @@ namespace JDI.Light.Tests.Tests.Common
             var _attributeName = "testAttr";
             var _value = "testValue";
             _logoImage.SetAttribute(_attributeName, _value);
-            new Check().AreEquals(_logoImage.GetAttribute(_attributeName), _value);
+            new NUnitAsserter().AreEquals(_logoImage.GetAttribute(_attributeName), _value);
         }
 
         [Test]
         public void GetSourceTest()
         {
-            new Check().AreEquals(_logoImage.GetSource(), SRC);
+            new NUnitAsserter().AreEquals(_logoImage.GetSource(), SRC);
         }
 
         [Test]
         public void GetTipTest()
         {
-            new Check().AreEquals(_logoImage.GetAlt(), ALT);
+            new NUnitAsserter().AreEquals(_logoImage.GetAlt(), ALT);
         }
     }
 }

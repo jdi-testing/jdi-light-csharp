@@ -3,7 +3,6 @@ using JDI.Light.Settings;
 using JDI.Light.Tests.Tests.Complex;
 using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
-using Assert = JDI.Light.Tests.Asserts.Assert;
 
 namespace JDI.Light.Tests.Tests.Common
 {
@@ -33,13 +32,13 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void GetTextTest()
         {
-            Assert.AreEquals(_textItem.GetText, _expectedText);
+            JDISettings.Assert.AreEquals(_textItem.GetText, _expectedText);
         }
 
         [Test]
         public void GetValueTest()
         {
-            Assert.AreEquals(_textItem.Value, _expectedText);
+            JDISettings.Assert.AreEquals(_textItem.Value, _expectedText);
         }
 
         [Test]
@@ -54,7 +53,7 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void WaitMatchTest()
         {
-            Assert.AreEquals(_textItem.WaitMatchText(_regEx), _expectedText);
+            JDISettings.Assert.AreEquals(_textItem.WaitMatchText(_regEx), _expectedText);
         }
 
         [Test]
@@ -62,13 +61,13 @@ namespace JDI.Light.Tests.Tests.Common
         {
             TestSite.SupportPage.IsOpened();
             CommonActionsData.RunParallel(() => TestSite.HomePage.IsOpened());
-            Assert.AreEquals(_textItem.WaitMatchText(_regEx), _expectedText);
+            JDISettings.Assert.AreEquals(_textItem.WaitMatchText(_regEx), _expectedText);
         }
 
         [Test]
         public void WaitText()
         {
-            Assert.AreEquals(_textItem.WaitText(_contains), _expectedText);
+            JDISettings.Assert.AreEquals(_textItem.WaitText(_contains), _expectedText);
         }
 
         [Test]
@@ -76,7 +75,7 @@ namespace JDI.Light.Tests.Tests.Common
         {
             TestSite.SupportPage.IsOpened();
             CommonActionsData.RunParallel(() => TestSite.HomePage.IsOpened());
-            Assert.AreEquals(_textItem.WaitText(_contains), _expectedText);
+            JDISettings.Assert.AreEquals(_textItem.WaitText(_contains), _expectedText);
         }
     }
 }

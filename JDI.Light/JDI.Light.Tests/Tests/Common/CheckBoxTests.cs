@@ -4,7 +4,6 @@ using JDI.Light.Tests.DataProviders;
 using JDI.Light.Tests.Tests.Complex;
 using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
-using Assert = JDI.Light.Tests.Asserts.Assert;
 
 namespace JDI.Light.Tests.Tests.Common
 {

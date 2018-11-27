@@ -73,7 +73,7 @@ namespace JDI.Light.Selenium.Elements.Complex.Table
             }
             catch
             {
-                throw JDISettings.Asserter.Exception("Can't get Cell from interface/class: " +
+                throw JDISettings.Assert.Exception("Can't get Cell from interface/class: " +
                                             clazz.ToString().Split("\\.").Last());
             }
 
@@ -86,7 +86,7 @@ namespace JDI.Light.Selenium.Elements.Complex.Table
             if (locator == null || locator.ToString().Equals(""))
                 locator = _cellLocatorTemplate;
             if (!locator.ToString().Contains("{0}") || !locator.ToString().Contains("{1}"))
-                throw JDISettings.Asserter.Exception($"Can't create cell with locator template {cell.Locator}. " +
+                throw JDISettings.Assert.Exception($"Can't create cell with locator template {cell.Locator}. " +
                                                      "Template for Cell should contains '{0}' - for column and '{1}' - for row indexes.");
             cell.Locator = locator.FillByTemplate(RowIndex, ColumnIndex);
             cell.Parent = Table;

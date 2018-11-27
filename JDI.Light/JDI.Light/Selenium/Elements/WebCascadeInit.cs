@@ -131,7 +131,7 @@ namespace JDI.Light.Selenium.Elements
                     if (split.Length == 1)
                         split = jTable.Size.Split('X');
                     if (split.Length != 2)
-                        throw JDISettings.Asserter.Exception("Can't setup Table from attribute. Bad size: " + jTable.Size);
+                        throw JDISettings.Assert.Exception("Can't setup Table from attribute. Bad size: " + jTable.Size);
                     table.SetColumnsCount(int.Parse(split[0]));
                     table.SetRowsCount(int.Parse(split[1]));
                 }
@@ -179,7 +179,7 @@ namespace JDI.Light.Selenium.Elements
                     var newLocator = GetNewLocator(field);
                     UIElement instance = null;
                     if (type == typeof(List<>))
-                        throw JDISettings.Asserter.Exception(
+                        throw JDISettings.Assert.Exception(
                             $"Can't init element {fieldName} with type 'List<>'. Please use 'IList<>' or 'Elements<>' instead");
 
                     if (type.IsInterface)
@@ -191,7 +191,7 @@ namespace JDI.Light.Selenium.Elements
                             instance.Locator = newLocator;
                     }
                     if (instance == null)
-                        throw JDISettings.Asserter.Exception("Unknown interface: " + type +
+                        throw JDISettings.Assert.Exception("Unknown interface: " + type +
                                                     ". Add relation interface -> class in VIElement.InterfaceTypeMap");
                     instance.DriverName = driverName;
                     return instance;

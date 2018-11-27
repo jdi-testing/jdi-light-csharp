@@ -56,7 +56,7 @@ namespace JDI.Light.Selenium.Elements.Composite
                 switch (CheckUrlType)
                 {
                     case CheckPageType.None:
-                        JDISettings.Asserter.IsTrue(GetUrl().Contains(UrlTemplate)
+                        JDISettings.Assert.IsTrue(GetUrl().Contains(UrlTemplate)
                                                     || GetUrl().Matches(UrlTemplate));
                         break;
                     case CheckPageType.Equal:
@@ -248,7 +248,7 @@ namespace JDI.Light.Selenium.Elements.Composite
             {
                 if (string.IsNullOrEmpty(_equals)) return;
                 JDISettings.Logger.Info($"Page {_what} equals to '{_equals}'");
-                JDISettings.Asserter.IsTrue(_timer().Wait(() => _actual().Equals(_equals)));
+                JDISettings.Assert.IsTrue(_timer().Wait(() => _actual().Equals(_equals)));
             }
 
             /**
@@ -259,7 +259,7 @@ namespace JDI.Light.Selenium.Elements.Composite
             {
                 if (string.IsNullOrEmpty(_template)) return;
                 JDISettings.Logger.Info($"Page {_what} matches to '{_template}'");
-                JDISettings.Asserter.IsTrue(_timer().Wait(() => _actual().Matches(_template)));
+                JDISettings.Assert.IsTrue(_timer().Wait(() => _actual().Matches(_template)));
             }
 
             /**
@@ -272,7 +272,7 @@ namespace JDI.Light.Selenium.Elements.Composite
                     ? _equals
                     : _template;
                 JDISettings.Logger.Info($"Page {_what} contains to '{url}'");
-                JDISettings.Asserter.IsTrue(_timer().Wait(() => _actual().Contains(url)));
+                JDISettings.Assert.IsTrue(_timer().Wait(() => _actual().Contains(url)));
             }
         }
     }

@@ -51,7 +51,7 @@ namespace JDI.Light.Selenium.Elements.Composite
             {
                 if (_suggestions != null)
                     return _suggestions;
-                throw JDISettings.Asserter.Exception(
+                throw JDISettings.Assert.Exception(
                     "Suggestions list locator not specified for search. Use accordance constructor");
             }
         }
@@ -64,11 +64,11 @@ namespace JDI.Light.Selenium.Elements.Composite
                 switch (fields.Count)
                 {
                     case 0:
-                        throw JDISettings.Asserter.Exception($"Can't find any buttons on form '{ToString()}'.");
+                        throw JDISettings.Assert.Exception($"Can't find any buttons on form '{ToString()}'.");
                     case 1:
                         return (ITextField) fields[0].GetValue(this);
                     default:
-                        throw JDISettings.Asserter.Exception(
+                        throw JDISettings.Assert.Exception(
                             $"Form '{ToString()}' have more than 1 button. Use submit(entity, buttonName) for this case instead");
                 }
             }
@@ -82,11 +82,11 @@ namespace JDI.Light.Selenium.Elements.Composite
                 switch (fields.Count)
                 {
                     case 0:
-                        throw JDISettings.Asserter.Exception($"Can't find any buttons on form '{ToString()}'.");
+                        throw JDISettings.Assert.Exception($"Can't find any buttons on form '{ToString()}'.");
                     case 1:
                         return (IButton) fields[0].GetValue(this);
                     default:
-                        throw JDISettings.Asserter.Exception(
+                        throw JDISettings.Assert.Exception(
                             $"Form '{ToString()}' have more than 1 button. Use submit(entity, buttonName) for this case instead");
                 }
             }

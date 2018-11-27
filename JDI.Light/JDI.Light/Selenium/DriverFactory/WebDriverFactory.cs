@@ -217,7 +217,7 @@ namespace JDI.Light.Selenium.DriverFactory
         public string RegisterDriver(string driverName, Func<IWebDriver> driver)
         {
             if (Drivers.ContainsKey(driverName))
-                throw JDISettings.Asserter.Exception(
+                throw JDISettings.Assert.Exception(
                     $"Can't register WebDriver {driverName}. Driver with the same name already registered");
             try
             {
@@ -226,7 +226,7 @@ namespace JDI.Light.Selenium.DriverFactory
             }
             catch (Exception e)
             {
-                throw JDISettings.Asserter.Exception($"Can't register WebDriver {driverName}. StackTrace: {e.StackTrace}");
+                throw JDISettings.Assert.Exception($"Can't register WebDriver {driverName}. StackTrace: {e.StackTrace}");
             }
 
             return driverName;
