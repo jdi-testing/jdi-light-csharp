@@ -2,7 +2,7 @@
 
 namespace JDI.Light.Tests.Asserts
 {
-    public class Check : BaseMatcher
+    public class Check : BaseAsserter
     {
         public Check()
         {
@@ -12,7 +12,7 @@ namespace JDI.Light.Tests.Asserts
         {
         }
 
-        protected override void ThrowFail(string message)
+        public override void ThrowFail(string message)
         {
             NUnit.Framework.Assert.Fail(message);
         }

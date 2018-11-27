@@ -7,23 +7,35 @@ using JDI.Light.Settings;
 
 namespace JDI.Light.Matchers
 {
-    public abstract class BaseMatcher
+    public class BaseAsserter : IAssert
     {
         private static ILogger _logger;
 
         private readonly string _checkMessage;
 
-        protected BaseMatcher(string checkMessage) : this()
+        protected BaseAsserter(string checkMessage) : this()
         {
             _checkMessage = GetCheckMessage(checkMessage);
         }
 
-        protected BaseMatcher()
+        protected BaseAsserter()
         {
             _logger = JDISettings.Logger;
         }
 
-        protected abstract void ThrowFail(string message);
+        public virtual void ThrowFail(string message)
+        {
+        }
+
+        public void ThrowFail(string message, Exception ex)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Exception Exception(string message)
+        {
+            throw new NotImplementedException();
+        }
 
         private string GetCheckMessage(string checkMessage)
         {
@@ -95,7 +107,7 @@ namespace JDI.Light.Matchers
             AssertAction($"Check that collection '{string.Join(", ", first)}' equals to '{string.Join(", ", second)}'",
                 result);
         }
-
+        
         public void HasNoException(Action action)
         {
             try
