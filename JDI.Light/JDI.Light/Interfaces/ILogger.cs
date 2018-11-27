@@ -1,9 +1,11 @@
 ﻿using System;
+using JDI.Light.Enums;
 
 namespace JDI.Light.Interfaces
 {
     public interface ILogger
     {
+        void Log(string message, LogLevel level);
         void Exception(Exception ex);
         void Trace(string message);
         void Debug(string message);

@@ -6,7 +6,7 @@ namespace JDI.Light.Logging
 {
     public class ConsoleLogger : ILogger
     {
-        private void Log(string message, LogLevel logLevel)
+        public void Log(string message, LogLevel logLevel)
         {
             Console.WriteLine($"{DateTime.Now:dd.MM.yyyy_HH:mm:ss.fff} {logLevel} {message}");
         }

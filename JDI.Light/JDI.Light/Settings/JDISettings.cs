@@ -1,5 +1,4 @@
 ﻿using System;
-using JDI.Light.Enums;
 using JDI.Light.Interfaces;
 using JDI.Light.Utils;
 
@@ -15,21 +14,6 @@ namespace JDI.Light.Settings
         public static bool ShortLogMessagesFormat = true;
         public static IDriverFactory<IDisposable> DriverFactory;
         public static bool UseCache;
-
-        public static void ToLog(string message, LogLevel level)
-        {
-            switch (level)
-            {
-                case LogLevel.Debug:
-                    Logger.Debug(message);
-                    return;
-                case LogLevel.Error:
-                    Logger.Error(message);
-                    return;
-            }
-
-            Logger.Info(message);
-        }
 
         public static void InitFromProperties()
         {
