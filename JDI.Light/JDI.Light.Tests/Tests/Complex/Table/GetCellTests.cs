@@ -13,37 +13,37 @@ namespace JDI.Light.Tests.Tests.Complex.Table
         [Test]
         public void GetCellIntIntTest()
         {
-            JDISettings.Assert.AreEquals(Table.Cell(2, 4).GetText, _cellValue);
+            JDI.Assert.AreEquals(Table.Cell(2, 4).GetText, _cellValue);
         }
 
         [Test]
         public void GetCellParamsIntIntTest()
         {
-            JDISettings.Assert.AreEquals(Table.Cell(Column.column(2), Row.CreateRow(4)).GetText, _cellValue);
+            JDI.Assert.AreEquals(Table.Cell(Column.column(2), Row.CreateRow(4)).GetText, _cellValue);
         }
 
         [Test]
         public void GetCellParamsIntStringTest()
         {
-            JDISettings.Assert.AreEquals(Table.Cell(Column.column(2), Row.CreateRow("4")).GetText, _cellValue);
+            JDI.Assert.AreEquals(Table.Cell(Column.column(2), Row.CreateRow("4")).GetText, _cellValue);
         }
 
         [Test]
         public void GetCellParamsStringIntTest()
         {
-            JDISettings.Assert.AreEquals(Table.Cell(Column.column("Now"), Row.CreateRow(4)).GetText, _cellValue);
+            JDI.Assert.AreEquals(Table.Cell(Column.column("Now"), Row.CreateRow(4)).GetText, _cellValue);
         }
 
         [Test]
         public void GetCellParamsStringStringTest()
         {
-            JDISettings.Assert.AreEquals(Table.Cell(Column.column("Now"), Row.CreateRow("4")).GetText, _cellValue);
+            JDI.Assert.AreEquals(Table.Cell(Column.column("Now"), Row.CreateRow("4")).GetText, _cellValue);
         }
 
         [Test]
         public void GetCellStringStringTest()
         {
-            JDISettings.Assert.AreEquals(Table.Cell("Now", "4").GetText, _cellValue);
+            JDI.Assert.AreEquals(Table.Cell("Now", "4").GetText, _cellValue);
         }
     }
 }

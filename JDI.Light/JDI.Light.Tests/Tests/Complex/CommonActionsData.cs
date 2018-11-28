@@ -27,7 +27,7 @@ namespace JDI.Light.Tests.Tests.Complex
 
         public static void CheckText(Func<string> func, string expectedAttrValue)
         {
-            JDISettings.Assert.AreEquals(func(), expectedAttrValue);
+            JDI.Assert.AreEquals(func(), expectedAttrValue);
         }
 
         public static void CheckAction(string text)
@@ -49,11 +49,11 @@ namespace JDI.Light.Tests.Tests.Complex
             }
             catch (Exception ex)
             {
-                JDISettings.Assert.Contains(ex.Message, message);
+                JDI.Assert.Contains(ex.Message, message);
                 return;
             }
 
-            throw JDISettings.Assert.Exception("Exception not thrown");
+            throw JDI.Assert.Exception("Exception not thrown");
         }
 
         public static void RunParallel(Action action)

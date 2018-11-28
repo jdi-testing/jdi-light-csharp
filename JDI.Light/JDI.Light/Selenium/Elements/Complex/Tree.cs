@@ -22,7 +22,7 @@ namespace JDI.Light.Selenium.Elements.Complex
                 {
                     var elements = ctx.FindElements(m.Locator.FillByTemplate(node));
                     if (elements == null || elements.Count != 0)
-                        throw JDISettings.Assert.Exception($"Can't select element by path '{names.FormattedJoin(m.Separator)}'");
+                        throw JDI.Assert.Exception($"Can't select element by path '{names.FormattedJoin(m.Separator)}'");
                     var element = elements.First();
                     element.Click();
                     ctx = element;

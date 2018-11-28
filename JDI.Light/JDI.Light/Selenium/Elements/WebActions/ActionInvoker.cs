@@ -40,8 +40,8 @@ namespace JDI.Light.Selenium.Elements.WebActions
 
         public void ProcessDemoMode()
         {
-            if (!JDISettings.IsDemoMode) return;
-            (_element as UIElement)?.Highlight(JDISettings.HighlightSettings);
+            if (!JDI.IsDemoMode) return;
+            (_element as UIElement)?.Highlight(JDI.HighlightSettings);
         }
     }
 }

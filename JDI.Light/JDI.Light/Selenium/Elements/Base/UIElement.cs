@@ -20,11 +20,11 @@ namespace JDI.Light.Selenium.Elements.Base
         public UIElement(By byLocator = null)
         {
             //TODO: Correctly add logger instance
-            var logger = JDISettings.Logger;
+            var logger = JDI.Logger;
             Invoker = new ActionInvoker<UIElement>(this, logger);
             Actions = new ElementsActions(Invoker);
             Locator = byLocator;
-            Timer = new Timer(JDISettings.Timeouts.CurrentTimeoutSec * 1000);
+            Timer = new Timer(JDI.Timeouts.CurrentTimeoutSec * 1000);
             if (string.IsNullOrEmpty(DriverName) && WebSettings.WebDriverFactory != null &&
                 !string.IsNullOrEmpty(WebSettings.WebDriverFactory.CurrentDriverName))
                 DriverName = WebSettings.WebDriverFactory.CurrentDriverName;
@@ -43,27 +43,27 @@ namespace JDI.Light.Selenium.Elements.Base
         {
             get
             {
-                JDISettings.Logger.Debug($"Get Web Element: {ToString()}");
+                JDI.Logger.Debug($"Get Web Element: {ToString()}");
                 var element = Timer.GetResultByCondition(() =>
                 {
                     if (_webElement != null)
                         return _webElement;
-                    var timeout = JDISettings.Timeouts.CurrentTimeoutSec;
+                    var timeout = JDI.Timeouts.CurrentTimeoutSec;
                     var result = GetWebElementsAction();
                     switch (result.Count)
                     {
                         case 0:
-                            throw JDISettings.Assert.Exception($"Can't find Element '{this}' during {timeout} seconds");
+                            throw JDI.Assert.Exception($"Can't find Element '{this}' during {timeout} seconds");
                         case 1:
                             return result[0];
                         default:
                             if (WebDriverFactory.OnlyOneElementAllowedInSearch)
-                                throw JDISettings.Assert.Exception(
+                                throw JDI.Assert.Exception(
                                     $"Find {result.Count} elements instead of one for Element '{this}' during {timeout} seconds");
                             return result[0];
                     }
                 }, el => el != null);
-                JDISettings.Logger.Debug("One Web Element found");
+                JDI.Logger.Debug("One Web Element found");
                 return element;
             }
             set => _webElement = value;
@@ -76,9 +76,9 @@ namespace JDI.Light.Selenium.Elements.Base
                 var locator = Locator.ContainsRoot() ? Locator.TrimRoot() : Locator;
                 return SearchContext.FindElements(locator.CorrectXPath()).ToList();
             }, els => els.Count(GetSearchCriteria) > 0);
-            JDISettings.Timeouts.DropTimeouts();
+            JDI.Timeouts.DropTimeouts();
             if (result == null)
-                throw JDISettings.Assert.Exception("Can't get Web Elements");
+                throw JDI.Assert.Exception("Can't get Web Elements");
             return result.Where(GetSearchCriteria).ToList();
         }
 
@@ -131,7 +131,7 @@ namespace JDI.Light.Selenium.Elements.Base
             }
 
             LocalElementSearchCriteria = temp;
-            SetWaitTimeout(JDISettings.Timeouts.WaitElementSec);
+            SetWaitTimeout(JDI.Timeouts.WaitElementSec);
             return result;
         }
 
@@ -149,7 +149,7 @@ namespace JDI.Light.Selenium.Elements.Base
         public void WaitAttribute(string name, string value)
         {
             var result = Timer.GetResultByCondition(() => WebElement.GetAttribute(name).Equals(value), r => r);
-            JDISettings.Assert.IsTrue(result);
+            JDI.Assert.IsTrue(result);
         }
 
         public void SetAttribute(string attributeName, string value)
@@ -165,14 +165,14 @@ namespace JDI.Light.Selenium.Elements.Base
 
         public void SetWaitTimeout(long mSeconds)
         {
-            JDISettings.Logger.Debug("Set wait timeout to " + mSeconds);
+            JDI.Logger.Debug("Set wait timeout to " + mSeconds);
             WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(mSeconds);
-            JDISettings.Timeouts.CurrentTimeoutSec = (int) (mSeconds / 1000);
+            JDI.Timeouts.CurrentTimeoutSec = (int) (mSeconds / 1000);
         }
 
         public new string ToString()
         {
-            return JDISettings.ShortLogMessagesFormat
+            return JDI.ShortLogMessagesFormat
                 ? $"{TypeName} '{Name}' ({Parent?.GetType().Name ?? ""}.{Name};)"
                 : $"Name: '{Name}', Type: '{TypeName}' In: '{Parent?.GetType().Name ?? ""}'";
         }

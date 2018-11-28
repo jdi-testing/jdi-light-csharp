@@ -1,10 +1,11 @@
 ﻿using System;
 using JDI.Light.Interfaces;
+using JDI.Light.Settings;
 using JDI.Light.Utils;
 
-namespace JDI.Light.Settings
+namespace JDI.Light
 {
-    public class JDISettings
+    public class JDI
     {
         public static ILogger Logger;
         public static IAssert Assert;

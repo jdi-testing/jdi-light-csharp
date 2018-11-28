@@ -13,12 +13,12 @@ namespace JDI.Light.Tests.Tests.Complex.Table.Base
         public void Setup()
         {
             // TODO: Preconditions
-            JDISettings.Logger.Info("Navigating to Support page");
+            JDI.Logger.Info("Navigating to Support page");
             TestSite.SupportPage.Open();
             TestSite.SupportPage.CheckTitle();
             TestSite.SupportPage.IsOpened();
-            JDISettings.Logger.Info("Setup method finished");
-            JDISettings.Logger.Info($"Start test: {TestContext.CurrentContext.Test.Name}");
+            JDI.Logger.Info("Setup method finished");
+            JDI.Logger.Info($"Start test: {TestContext.CurrentContext.Test.Name}");
             // End preconditions
 
             Table.Clear();

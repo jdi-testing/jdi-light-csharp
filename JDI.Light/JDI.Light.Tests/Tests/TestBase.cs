@@ -15,12 +15,12 @@ namespace JDI.Light.Tests.Tests
         protected void SetUp()
         {
             WebSettings.InitFromProperties(null, new NUnitAsserter());
-            JDISettings.Logger.Info("Init test run...");
+            JDI.Logger.Info("Init test run...");
             WinProcUtils.KillAllRunWebDrivers();
             WebSite.Init(typeof(TestSite));
             TestSite.HomePage.Open();
             TestSite.LoginForm.Submit(User.DefaultUser);
-            JDISettings.Logger.Info("Run test...");
+            JDI.Logger.Info("Run test...");
         }
 
         [OneTimeTearDown]

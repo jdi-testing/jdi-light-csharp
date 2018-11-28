@@ -17,13 +17,13 @@ namespace JDI.Light.Tests.Tests.Common
         [SetUp]
         public void SetUp()
         {
-            JDISettings.Logger.Info("Navigating to Metals and Colors page.");
+            JDI.Logger.Info("Navigating to Metals and Colors page.");
             TestSite.Dates.Open();
             TestSite.Dates.CheckTitle();
             TestSite.Dates.IsOpened();
             TestSite.Dates.Datepicker.Clear();
-            JDISettings.Logger.Info("Setup method finished");
-            JDISettings.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            JDI.Logger.Info("Setup method finished");
+            JDI.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         [Test]

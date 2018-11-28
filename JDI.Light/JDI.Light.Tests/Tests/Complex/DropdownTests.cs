@@ -16,12 +16,12 @@ namespace JDI.Light.Tests.Tests.Complex
         [SetUp]
         public void Setup()
         {
-            JDISettings.Logger.Info("Navigating to Metals and Colors page.");
+            JDI.Logger.Info("Navigating to Metals and Colors page.");
             TestSite.MetalsColorsPage.Open();
             TestSite.MetalsColorsPage.CheckTitle();
             TestSite.MetalsColorsPage.IsOpened();
-            JDISettings.Logger.Info("Setup method finished");
-            JDISettings.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            JDI.Logger.Info("Setup method finished");
+            JDI.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         [Test]
@@ -48,25 +48,25 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void GetOptionsTest()
         {
-            JDISettings.Assert.CollectionEquals(ColorsControl.Options, OddOptions);
+            JDI.Assert.CollectionEquals(ColorsControl.Options, OddOptions);
         }
 
         [Test]
         public void GetNamesTest()
         {
-            JDISettings.Assert.CollectionEquals(ColorsControl.Names, OddOptions);
+            JDI.Assert.CollectionEquals(ColorsControl.Names, OddOptions);
         }
 
         [Test]
         public void GetValuesTest()
         {
-            JDISettings.Assert.CollectionEquals(ColorsControl.Values, OddOptions);
+            JDI.Assert.CollectionEquals(ColorsControl.Values, OddOptions);
         }
 
         [Test]
         public void GetOptionsAsTextTest()
         {
-            JDISettings.Assert.AreEquals(ColorsControl.OptionsAsText, "Colors, Red, Green, Blue, Yellow");
+            JDI.Assert.AreEquals(ColorsControl.OptionsAsText, "Colors, Red, Green, Blue, Yellow");
         }
 
         [Test]
@@ -79,13 +79,13 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void GetNameTest()
         {
-            JDISettings.Assert.AreEquals(ColorsControl.Name, "Colors");
+            JDI.Assert.AreEquals(ColorsControl.Name, "Colors");
         }
 
         [Test]
         public void GetSelectedTest()
         {
-            JDISettings.Assert.AreEquals(ColorsControl.Selected(), "Colors");
+            JDI.Assert.AreEquals(ColorsControl.Selected(), "Colors");
         }
 
         [Test]
@@ -98,13 +98,13 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void IsSelectedTest()
         {
-            JDISettings.Assert.AreEquals(ColorsControl.Selected("Colors"), true);
+            JDI.Assert.AreEquals(ColorsControl.Selected("Colors"), true);
         }
 
         [Test]
         public void IsSelectedEnumTest()
         {
-            JDISettings.Assert.AreEquals(ColorsControl.Selected(Colors.Colors), true);
+            JDI.Assert.AreEquals(ColorsControl.Selected(Colors.Colors), true);
         }
 
         [Test]
@@ -122,7 +122,7 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void GetValueTest()
         {
-            JDISettings.Assert.AreEquals(ColorsControl.Value, "Colors");
+            JDI.Assert.AreEquals(ColorsControl.Value, "Colors");
         }
     }
 }

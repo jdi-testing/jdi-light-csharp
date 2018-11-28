@@ -148,7 +148,7 @@ namespace JDI.Light.Selenium.Elements.Composite
         {
             var result = Verify(objStrings);
             if (result.Count > 0)
-                throw JDISettings.Assert.Exception("Check form failed:" + result.FormattedJoin("".FromNewLine()).FromNewLine());
+                throw JDI.Assert.Exception("Check form failed:" + result.FormattedJoin("".FromNewLine()).FromNewLine());
         }
     }
 

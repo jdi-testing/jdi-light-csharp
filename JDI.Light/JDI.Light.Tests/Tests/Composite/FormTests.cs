@@ -17,12 +17,12 @@ namespace JDI.Light.Tests.Tests.Composite
         [SetUp]
         public void SetUp()
         {
-            JDISettings.Logger.Info("Navigating to Contact page.");
+            JDI.Logger.Info("Navigating to Contact page.");
             TestSite.ContactFormPage.Open();
             TestSite.ContactFormPage.CheckTitle();
             TestSite.ContactFormPage.IsOpened();
-            JDISettings.Logger.Info("Setup method finished");
-            JDISettings.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            JDI.Logger.Info("Setup method finished");
+            JDI.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         [Test]

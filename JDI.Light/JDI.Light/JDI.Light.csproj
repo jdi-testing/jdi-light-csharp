@@ -178,7 +178,7 @@
     <Compile Include="Selenium\Elements\WebCascadeInit.cs" />
     <Compile Include="Settings\HighlightSettings.cs" />
     <Compile Include="Interfaces\IAssert.cs" />
-    <Compile Include="Settings\JDISettings.cs" />
+    <Compile Include="JDI.cs" />
     <Compile Include="Settings\MapInterfaceToElement.cs" />
     <Compile Include="Settings\WebSettings.cs" />
     <Compile Include="Settings\WebTimeoutSettings.cs" />

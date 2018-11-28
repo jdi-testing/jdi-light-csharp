@@ -85,7 +85,7 @@ namespace JDI.Light.Selenium.Elements.Complex
         {
             var element = els.FirstOrDefault(el => SelectedElementAction(this, el));
             if (element == null)
-                throw JDISettings.Assert.Exception(
+                throw JDI.Assert.Exception(
                     "No elements selected. Override getSelectedAction or place locator to <select> tag");
             return element.Text;
         }
@@ -94,7 +94,7 @@ namespace JDI.Light.Selenium.Elements.Complex
         {
             var num = els.ToList().FindIndex(el => SelectedElementAction(this, el)) + 1;
             if (num == 0)
-                throw JDISettings.Assert.Exception(
+                throw JDI.Assert.Exception(
                     "No elements selected. Override getSelectedAction or place locator to <select> tag");
             return num;
         }

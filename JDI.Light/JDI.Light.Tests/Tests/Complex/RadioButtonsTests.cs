@@ -15,12 +15,12 @@ namespace JDI.Light.Tests.Tests.Complex
         [SetUp]
         public void SetUp()
         {
-            JDISettings.Logger.Info("Navigating to Metals and Colors page.");
+            JDI.Logger.Info("Navigating to Metals and Colors page.");
             TestSite.MetalsColorsPage.Open();
             TestSite.MetalsColorsPage.CheckTitle();
             TestSite.MetalsColorsPage.IsOpened();
-            JDISettings.Logger.Info("Setup method finished");
-            JDISettings.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            JDI.Logger.Info("Setup method finished");
+            JDI.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         [Test]
@@ -49,25 +49,25 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void GetOptionsTest()
         {
-            JDISettings.Assert.CollectionEquals(OddNumbersControl.Options, OddOptions);
+            JDI.Assert.CollectionEquals(OddNumbersControl.Options, OddOptions);
         }
 
         [Test]
         public void GetNamesTest()
         {
-            JDISettings.Assert.CollectionEquals(OddNumbersControl.Names, OddOptions);
+            JDI.Assert.CollectionEquals(OddNumbersControl.Names, OddOptions);
         }
 
         [Test]
         public void GetValuesTest()
         {
-            JDISettings.Assert.CollectionEquals(OddNumbersControl.Values, OddOptions);
+            JDI.Assert.CollectionEquals(OddNumbersControl.Values, OddOptions);
         }
 
         [Test]
         public void GetOptionsAsTextTest()
         {
-            JDISettings.Assert.AreEquals(OddNumbersControl.OptionsAsText, "1, 3, 5, 7");
+            JDI.Assert.AreEquals(OddNumbersControl.OptionsAsText, "1, 3, 5, 7");
         }
 
         [Test]
@@ -80,7 +80,7 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void GetNameTest()
         {
-            JDISettings.Assert.AreEquals(OddNumbersControl.Name, "Odd Numbers");
+            JDI.Assert.AreEquals(OddNumbersControl.Name, "Odd Numbers");
         }
 
         [Test]

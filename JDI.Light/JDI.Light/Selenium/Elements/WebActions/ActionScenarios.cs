@@ -19,7 +19,7 @@ namespace JDI.Light.Selenium.Elements.WebActions
 
         private void LogAction(string actionName, LogLevel level)
         {
-            JDISettings.Logger.Log(string.Format(JDISettings.ShortLogMessagesFormat
+            JDI.Logger.Log(string.Format(JDI.ShortLogMessagesFormat
                 ? "{0} for {1}"
                 : "Perform action '{0}' with WebElement ({1})", actionName, _targetElement.ToString()), level);
         }
@@ -27,12 +27,12 @@ namespace JDI.Light.Selenium.Elements.WebActions
         public void ActionScenario(string actionName, Action<T> action, LogLevel level)
         {
             LogAction(actionName, level);
-            new Timer(JDISettings.Timeouts.CurrentTimeoutSec).Wait(() =>
+            new Timer(JDI.Timeouts.CurrentTimeoutSec).Wait(() =>
             {
                 action(_targetElement);
                 return true;
             });
-            JDISettings.Logger.Info(actionName + " done");
+            JDI.Logger.Info(actionName + " done");
         }
 
         public TResult ResultScenario<TResult>(string actionName, Func<T, TResult> action,
@@ -41,16 +41,16 @@ namespace JDI.Light.Selenium.Elements.WebActions
             LogAction(actionName, level);
             var timer = new Timer();
             var result =
-                ExceptionUtils.ActionWithException(() => new Timer(JDISettings.Timeouts.CurrentTimeoutSec)
+                ExceptionUtils.ActionWithException(() => new Timer(JDI.Timeouts.CurrentTimeoutSec)
                         .GetResultByCondition(() => action.Invoke(_targetElement), res => true),
                     ex => $"Do action {actionName} failed. Can't got result. Reason: {ex}");
             if (result == null)
-                throw JDISettings.Assert.Exception($"Do action {actionName} failed. Can't got result");
+                throw JDI.Assert.Exception($"Do action {actionName} failed. Can't got result");
             var stringResult = logResult == null
                 ? result.ToString()
                 : logResult.Invoke(result);
             var timePassed = timer.TimePassed.TotalMilliseconds;
-            JDISettings.Logger.Log($"Get result '{stringResult}' in {timePassed / 1000:F} seconds", level);
+            JDI.Logger.Log($"Get result '{stringResult}' in {timePassed / 1000:F} seconds", level);
             return result;
         }
     }

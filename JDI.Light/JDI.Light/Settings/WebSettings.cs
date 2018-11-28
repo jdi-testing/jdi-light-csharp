@@ -18,7 +18,7 @@ using Image = JDI.Light.Selenium.Elements.Common.Image;
 
 namespace JDI.Light.Settings
 {
-    public class WebSettings : JDISettings
+    public class WebSettings : JDI
     {
         private static readonly Dictionary<Type, Type> DefaultInterfacesMap = new Dictionary<Type, Type>
         {
@@ -68,7 +68,7 @@ namespace JDI.Light.Settings
             WebTimeoutSettings timeouts = null, IDriverFactory<IWebDriver> driverFactory = null)
         {
             Init(logger, assert, timeouts, driverFactory);
-            JDISettings.InitFromProperties();
+            JDI.InitFromProperties();
             FillFromSettings(p => Domain = p, "Domain");
             FillFromSettings(p => DriverFactory.DriverPath = p, "DriversFolder");
             FillFromSettings(p => GetLatestDriver = p.ToLower().Equals("true") || p.ToLower().Equals("1"), "GetLatest");

@@ -20,7 +20,7 @@ namespace JDI.Light.Matchers
 
         protected BaseAsserter()
         {
-            _logger = JDISettings.Logger;
+            _logger = JDI.Logger;
         }
 
         public virtual void ThrowFail(string message)

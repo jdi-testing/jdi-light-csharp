@@ -54,7 +54,7 @@ namespace JDI.Light.Selenium.DriverFactory
                 driver.Manage().Window.Maximize();
             else
                 driver.Manage().Window.Size = BrowserSize;
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(JDISettings.Timeouts.WaitElementSec);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(JDI.Timeouts.WaitElementSec);
             return driver;
         };
 
@@ -217,7 +217,7 @@ namespace JDI.Light.Selenium.DriverFactory
         public string RegisterDriver(string driverName, Func<IWebDriver> driver)
         {
             if (Drivers.ContainsKey(driverName))
-                throw JDISettings.Assert.Exception(
+                throw JDI.Assert.Exception(
                     $"Can't register WebDriver {driverName}. Driver with the same name already registered");
             try
             {
@@ -226,7 +226,7 @@ namespace JDI.Light.Selenium.DriverFactory
             }
             catch (Exception e)
             {
-                throw JDISettings.Assert.Exception($"Can't register WebDriver {driverName}. StackTrace: {e.StackTrace}");
+                throw JDI.Assert.Exception($"Can't register WebDriver {driverName}. StackTrace: {e.StackTrace}");
             }
 
             return driverName;

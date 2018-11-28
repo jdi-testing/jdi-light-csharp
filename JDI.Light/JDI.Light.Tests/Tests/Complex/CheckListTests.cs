@@ -47,18 +47,18 @@ namespace JDI.Light.Tests.Tests.Complex
             //var texts = ActionsLog.Texts; 
             IList<string> log = TestSite.HomePage.WebDriver.FindElements(By.CssSelector(".logs li")).Select(e => e.Text)
                 .ToList();
-            for (var i = 0; i < log.Count; i++) JDISettings.Assert.Contains(log[i], logLines[i] + ": condition changed to true");
+            for (var i = 0; i < log.Count; i++) JDI.Assert.Contains(log[i], logLines[i] + ": condition changed to true");
         }
 
         [SetUp]
         public void SetUp()
         {
-            JDISettings.Logger.Info("Navigating to Metals and Colors page.");
+            JDI.Logger.Info("Navigating to Metals and Colors page.");
             TestSite.MetalsColorsPage.Open();
             TestSite.MetalsColorsPage.CheckTitle();
             TestSite.MetalsColorsPage.IsOpened();
-            JDISettings.Logger.Info("Setup method finished");
-            JDISettings.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            JDI.Logger.Info("Setup method finished");
+            JDI.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         [Test]
