@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using JDI.Light.Selenium.Elements.Complex;
-using JDI.Light.Settings;
 using JDI.Light.Tests.Enums;
 using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;

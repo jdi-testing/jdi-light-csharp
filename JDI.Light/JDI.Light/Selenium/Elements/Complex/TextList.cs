@@ -3,7 +3,6 @@ using System.Linq;
 using JDI.Light.Extensions;
 using JDI.Light.Selenium.Elements.Common;
 using JDI.Light.Selenium.Elements.Composite;
-using JDI.Light.Settings;
 using OpenQA.Selenium;
 
 namespace JDI.Light.Selenium.Elements.Complex

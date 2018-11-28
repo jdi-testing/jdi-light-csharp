@@ -3,7 +3,6 @@ using JDI.Light.Enums;
 using JDI.Light.Extensions;
 using JDI.Light.Interfaces;
 using JDI.Light.Selenium.Elements.Base;
-using JDI.Light.Settings;
 using JDI.Light.Utils;
 
 namespace JDI.Light.Selenium.Elements.WebActions

@@ -1,5 +1,4 @@
-﻿using JDI.Light.Settings;
-using JDI.Light.Tests.Asserts;
+﻿using JDI.Light.Tests.Asserts;
 using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 using OpenQA.Selenium;

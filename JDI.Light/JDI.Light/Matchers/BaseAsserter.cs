@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using JDI.Light.Extensions;
 using JDI.Light.Interfaces;
-using JDI.Light.Settings;
 
 namespace JDI.Light.Matchers
 {

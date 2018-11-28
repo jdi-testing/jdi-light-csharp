@@ -15,7 +15,7 @@ namespace JDI.Light
         public static bool ShortLogMessagesFormat = true;
         public static IDriverFactory<IDisposable> DriverFactory;
         public static bool UseCache;
-
+        
         public static void InitFromProperties()
         {
             FillFromSettings(p => DriverFactory.RegisterDriver(p), "Driver");

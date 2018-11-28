@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using JDI.Light.Settings;
 using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 

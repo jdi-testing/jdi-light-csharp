@@ -5,7 +5,6 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using JDI.Light.Extensions;
 using JDI.Light.Interfaces.Complex;
-using JDI.Light.Settings;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using JDI.Light.Settings;
 
 namespace JDI.Light.Utils
 {

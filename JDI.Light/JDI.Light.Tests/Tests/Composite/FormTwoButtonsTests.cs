@@ -1,5 +1,4 @@
-﻿using JDI.Light.Settings;
-using JDI.Light.Tests.Entities;
+﻿using JDI.Light.Tests.Entities;
 using JDI.Light.Tests.Tests.Complex;
 using JDI.Light.Tests.UIObjects;
 using JDI.Light.Tests.UIObjects.Sections;

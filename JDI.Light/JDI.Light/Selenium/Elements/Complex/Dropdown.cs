@@ -2,7 +2,6 @@
 using JDI.Light.Interfaces.Complex;
 using JDI.Light.Selenium.Elements.Base;
 using JDI.Light.Selenium.Elements.Common;
-using JDI.Light.Settings;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 

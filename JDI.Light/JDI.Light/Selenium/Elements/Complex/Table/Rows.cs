@@ -3,7 +3,6 @@ using System.Linq;
 using JDI.Light.Enums;
 using JDI.Light.Extensions;
 using JDI.Light.Selenium.Elements.Complex.Table.Interfaces;
-using JDI.Light.Settings;
 using JDI.Light.Utils;
 using OpenQA.Selenium;
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using JDI.Light.Interfaces.Common;
 using JDI.Light.Selenium.Elements.Base;
-using JDI.Light.Settings;
 using OpenQA.Selenium;
 
 namespace JDI.Light.Selenium.Elements.Common
