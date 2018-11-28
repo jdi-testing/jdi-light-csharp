@@ -1,4 +1,5 @@
 ﻿using System;
+using JDI.Light.Settings;
 
 namespace JDI.Light.Utils
 {
@@ -13,7 +14,7 @@ namespace JDI.Light.Utils
             catch (Exception ex)
             {
                 var msg = getExceptionMsg.Invoke(ex.Message);
-                JDI.Assert.ThrowFail(msg, ex);
+                WebSettings.Assert.ThrowFail(msg, ex);
             }
         }
 
@@ -27,7 +28,7 @@ namespace JDI.Light.Utils
             catch (Exception ex)
             {
                 var msg = getExceptionMsg.Invoke(ex.Message);
-                JDI.Assert.ThrowFail(msg, ex);
+                WebSettings.Assert.ThrowFail(msg, ex);
                 return default(T);
             }
         }
@@ -54,6 +55,11 @@ namespace JDI.Light.Utils
             {
                 /* ignored */
             }
+        }
+
+        public static void GetFromPropertiesAvoidExceptions(Action<string> action, string name)
+        {
+            AvoidExceptions(() => action.Invoke(Properties.Settings.Default[name].ToString()));
         }
     }
 }

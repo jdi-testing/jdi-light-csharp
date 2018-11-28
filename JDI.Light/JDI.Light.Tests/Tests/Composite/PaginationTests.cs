@@ -12,12 +12,12 @@ namespace JDI.Light.Tests.Tests.Composite
         [SetUp]
         public void SetUp()
         {
-            JDI.Logger.Info("Navigating to Simple Table page.");
+            WebSettings.Logger.Info("Navigating to Simple Table page.");
             TestSite.SimpleTablePage.Open();
             TestSite.SimpleTablePage.CheckTitle();
             TestSite.SimpleTablePage.IsOpened();
-            JDI.Logger.Info("Setup method finished");
-            JDI.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            WebSettings.Logger.Info("Setup method finished");
+            WebSettings.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         private void CheckPageOpened(int num)

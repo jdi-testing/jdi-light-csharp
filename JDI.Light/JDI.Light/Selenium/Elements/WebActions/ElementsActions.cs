@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using JDI.Light.Extensions;
 using JDI.Light.Selenium.Elements.Base;
+using JDI.Light.Settings;
 
 namespace JDI.Light.Selenium.Elements.WebActions
 {
@@ -190,7 +191,7 @@ namespace JDI.Light.Selenium.Elements.WebActions
         {
             var result = Invoker.DoJActionResult($"Are deselected '{names.FormattedJoin()}'",
                 el => names.All(name => waitSelectedAction(el, name)));
-            JDI.Assert.IsTrue(result);
+            WebSettings.Assert.IsTrue(result);
         }
 
         public List<string> AreDeselected(Func<UIElement, IList<string>> getNames,
@@ -209,7 +210,7 @@ namespace JDI.Light.Selenium.Elements.WebActions
         {
             var result = Invoker.DoJActionResult($"Are deselected '{names.FormattedJoin()}'",
                 el => names.All(name => !waitSelectedAction(el, name)));
-            JDI.Assert.IsTrue(result);
+            WebSettings.Assert.IsTrue(result);
         }
     }
 }

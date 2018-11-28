@@ -1,37 +1,39 @@
 ﻿using System;
-using JDI.Light.Interfaces;
+using JDI.Light.Selenium.Elements;
 using JDI.Light.Settings;
-using JDI.Light.Utils;
+using static JDI.Light.Utils.ExceptionUtils;
 
 namespace JDI.Light
 {
-    public class JDI
+    public static class JDI
     {
-        public static ILogger Logger;
-        public static IAssert Assert;
-        public static WebTimeoutSettings Timeouts = new WebTimeoutSettings();
         public static bool IsDemoMode;
-        public static HighlightSettings HighlightSettings = new HighlightSettings();
-        public static bool ShortLogMessagesFormat = true;
-        public static IDriverFactory<IDisposable> DriverFactory;
+        public static HighlightSettings HighlightSettings;
+        public static bool ShortLogMessagesFormat;
         public static bool UseCache;
-        
-        public static void InitFromProperties()
-        {
-            FillFromSettings(p => DriverFactory.RegisterDriver(p), "Driver");
-            FillFromSettings(p => DriverFactory.SetRunType(p), "RunType");
-            FillFromSettings(p => Timeouts.WaitElementSec = int.Parse(p), "TimeoutWaitElement");
-            FillFromSettings(p => ShortLogMessagesFormat = p.ToLower().Equals("short"), "LogMessageFormat");
-            FillFromSettings(p =>
-                UseCache = p.ToLower().Equals("true") || p.ToLower().Equals("1"), "Cache");
-            FillFromSettings(p =>
-                UseCache = p.ToLower().Equals("true") || p.ToLower().Equals("1"), "DemoMode");
-            FillFromSettings(p => HighlightSettings.SetTimeoutInSec(int.Parse(p)), "DemoDelay");
-        }
+        public static WebSettings WebSettings;
 
-        protected static void FillFromSettings(Action<string> action, string name)
+        static JDI()
         {
-            ExceptionUtils.AvoidExceptions(() => action.Invoke(Properties.Settings.Default[name].ToString()));
+            WebSettings.Timeouts = new WebTimeoutSettings();
+            HighlightSettings = new HighlightSettings();
+            ShortLogMessagesFormat = true;
+            WebSettings = new WebSettings();
+
+            GetFromPropertiesAvoidExceptions(p => WebSettings.DriverFactory.RegisterDriver(p), "Driver");
+            GetFromPropertiesAvoidExceptions(p => WebSettings.DriverFactory.SetRunType(p), "RunType");
+            GetFromPropertiesAvoidExceptions(p => WebSettings.Timeouts.WaitElementSec = int.Parse(p), "TimeoutWaitElement");
+            GetFromPropertiesAvoidExceptions(p => ShortLogMessagesFormat = p.ToLower().Equals("short"), "LogMessageFormat");
+            GetFromPropertiesAvoidExceptions(p =>
+                UseCache = p.ToLower().Equals("true") || p.ToLower().Equals("1"), "Cache");
+            GetFromPropertiesAvoidExceptions(p =>
+                UseCache = p.ToLower().Equals("true") || p.ToLower().Equals("1"), "DemoMode");
+            GetFromPropertiesAvoidExceptions(p => HighlightSettings.SetTimeoutInSec(int.Parse(p)), "DemoDelay");
+        }
+        
+        public static void Init(Type siteType)
+        {
+            WebCascadeInit.InitStaticPages(siteType, WebSettings.WebDriverFactory.CurrentDriverName);
         }
     }
 }

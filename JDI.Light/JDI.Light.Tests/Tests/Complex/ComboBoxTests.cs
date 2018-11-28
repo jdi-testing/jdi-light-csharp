@@ -20,12 +20,12 @@ namespace JDI.Light.Tests.Tests.Complex
         [SetUp]
         public void SetUp()
         {
-            JDI.Logger.Info("Navigating to Metals and Colors page.");
+            WebSettings.Logger.Info("Navigating to Metals and Colors page.");
             TestSite.MetalsColorsPage.Open();
             TestSite.MetalsColorsPage.CheckTitle();
             TestSite.MetalsColorsPage.IsOpened();
-            JDI.Logger.Info("Setup method finished");
-            JDI.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            WebSettings.Logger.Info("Setup method finished");
+            WebSettings.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         [Test]
@@ -98,13 +98,13 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void IsSelectedTest()
         {
-            JDI.Assert.AreEquals(MetalsControl.Selected("Col"), true);
+            WebSettings.Assert.AreEquals(MetalsControl.Selected("Col"), true);
         }
 
         [Test]
         public void IsSelectedEnumTest()
         {
-            JDI.Assert.AreEquals(MetalsControl.Selected(Metals.Col), true);
+            WebSettings.Assert.AreEquals(MetalsControl.Selected(Metals.Col), true);
         }
 
         [Test]
@@ -116,7 +116,7 @@ namespace JDI.Light.Tests.Tests.Complex
             }
             catch (Exception)
             {
-                throw JDI.Assert.Exception("WaitSelected throws exception");
+                throw WebSettings.Assert.Exception("WaitSelected throws exception");
             }
         }
 
@@ -129,7 +129,7 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void GetValueTest()
         {
-            JDI.Assert.AreEquals(MetalsControl.Value, "Col");
+            WebSettings.Assert.AreEquals(MetalsControl.Value, "Col");
         }
     }
 }

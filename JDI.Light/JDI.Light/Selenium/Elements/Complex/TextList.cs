@@ -3,6 +3,7 @@ using System.Linq;
 using JDI.Light.Extensions;
 using JDI.Light.Selenium.Elements.Common;
 using JDI.Light.Selenium.Elements.Composite;
+using JDI.Light.Settings;
 using OpenQA.Selenium;
 
 namespace JDI.Light.Selenium.Elements.Complex
@@ -29,7 +30,7 @@ namespace JDI.Light.Selenium.Elements.Complex
         {
             if (Timer.Wait(() => Texts.Contains(expected)))
                 return Texts;
-            throw JDI.Assert.Exception($"Wait Text '{expected}' Failed ({ToString()}");
+            throw WebSettings.Assert.Exception($"Wait Text '{expected}' Failed ({ToString()}");
         }
 
         public IList<string> Texts => _texts.Select(el => el.GetText).ToList();
@@ -81,7 +82,7 @@ namespace JDI.Light.Selenium.Elements.Complex
                 var elements = WebElements;
                 return elements != null && elements.Any() && elements.All(el => el.Displayed);
             }))
-                throw JDI.Assert.Exception($"Wait displayed failed ({ToString()})");
+                throw WebSettings.Assert.Exception($"Wait displayed failed ({ToString()})");
         }
 
         public new void WaitVanished()
@@ -91,7 +92,7 @@ namespace JDI.Light.Selenium.Elements.Complex
                 var elements = WebElements;
                 return elements == null || !elements.Any() && elements.All(el => !el.Displayed);
             }))
-                throw JDI.Assert.Exception($"Wait vanished failed ({ToString()})");
+                throw WebSettings.Assert.Exception($"Wait vanished failed ({ToString()})");
         }
     }
 }

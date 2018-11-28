@@ -1,4 +1,5 @@
 ﻿using JDI.Light.Selenium.Elements.Complex.Table.Interfaces;
+using JDI.Light.Settings;
 using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 
@@ -12,12 +13,12 @@ namespace JDI.Light.Tests.Tests.Complex.Table.Base
         public void Setup()
         {
             // TODO: Preconditions
-            JDI.Logger.Info("Navigating to Support page");
+            WebSettings.Logger.Info("Navigating to Support page");
             TestSite.SupportPage.Open();
             TestSite.SupportPage.CheckTitle();
             TestSite.SupportPage.IsOpened();
-            JDI.Logger.Info("Setup method finished");
-            JDI.Logger.Info($"Start test: {TestContext.CurrentContext.Test.Name}");
+            WebSettings.Logger.Info("Setup method finished");
+            WebSettings.Logger.Info($"Start test: {TestContext.CurrentContext.Test.Name}");
             // End preconditions
 
             Table.Clear();

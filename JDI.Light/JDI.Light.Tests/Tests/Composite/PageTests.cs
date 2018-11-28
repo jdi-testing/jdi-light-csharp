@@ -1,4 +1,5 @@
-﻿using JDI.Light.Tests.Asserts;
+﻿using JDI.Light.Settings;
+using JDI.Light.Tests.Asserts;
 using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -10,12 +11,12 @@ namespace JDI.Light.Tests.Tests.Composite
         [SetUp]
         public void SetUp()
         {
-            JDI.Logger.Info("Navigating to Contact page.");
+            WebSettings.Logger.Info("Navigating to Contact page.");
             TestSite.ContactFormPage.Open();
             TestSite.ContactFormPage.CheckTitle();
             TestSite.ContactFormPage.IsOpened();
-            JDI.Logger.Info("Setup method finished");
-            JDI.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            WebSettings.Logger.Info("Setup method finished");
+            WebSettings.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         [Test]

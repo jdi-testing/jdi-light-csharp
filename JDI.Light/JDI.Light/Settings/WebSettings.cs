@@ -15,10 +15,11 @@ using JDI.Light.Selenium.Elements.Complex.Table;
 using JDI.Light.Selenium.Elements.Complex.Table.Interfaces;
 using OpenQA.Selenium;
 using Image = JDI.Light.Selenium.Elements.Common.Image;
+using static JDI.Light.Utils.ExceptionUtils;
 
 namespace JDI.Light.Settings
 {
-    public class WebSettings : JDI
+    public class WebSettings
     {
         private static readonly Dictionary<Type, Type> DefaultInterfacesMap = new Dictionary<Type, Type>
         {
@@ -44,8 +45,13 @@ namespace JDI.Light.Settings
             {typeof(IDatePicker), typeof(DatePicker)},
             {typeof(ILink), typeof(Link)}
         };
+
         private static WebDriverFactory _webDriverFactory;
 
+        public static IDriverFactory<IDisposable> DriverFactory;
+        public static WebTimeoutSettings Timeouts;
+        public static IAssert Assert;
+        public static ILogger Logger;
         public static bool GetLatestDriver = true;
         public static string Domain;
         public static bool HasDomain => Domain != null && Domain.Contains("://");
@@ -54,7 +60,7 @@ namespace JDI.Light.Settings
             _webDriverFactory ?? (_webDriverFactory = new WebDriverFactory());
         public static IJavaScriptExecutor JsExecutor => DriverFactory.GetDriver() as IJavaScriptExecutor;
 
-        public static void Init(ILogger logger, IAssert assert,
+        public static void Init(ILogger logger = null, IAssert assert = null,
             WebTimeoutSettings timeouts = null, IDriverFactory<IWebDriver> driverFactory = null)
         {
             DriverFactory = driverFactory ?? new WebDriverFactory();
@@ -62,17 +68,11 @@ namespace JDI.Light.Settings
             Timeouts = timeouts ?? new WebTimeoutSettings();
             Logger = logger ?? new ConsoleLogger();
             MapInterfaceToElement.Init(DefaultInterfacesMap);
-        }
 
-        public static void InitFromProperties(ILogger logger = null, IAssert assert = null,
-            WebTimeoutSettings timeouts = null, IDriverFactory<IWebDriver> driverFactory = null)
-        {
-            Init(logger, assert, timeouts, driverFactory);
-            JDI.InitFromProperties();
-            FillFromSettings(p => Domain = p, "Domain");
-            FillFromSettings(p => DriverFactory.DriverPath = p, "DriversFolder");
-            FillFromSettings(p => GetLatestDriver = p.ToLower().Equals("true") || p.ToLower().Equals("1"), "GetLatest");
-            FillFromSettings(p =>
+            GetFromPropertiesAvoidExceptions(p => Domain = p, "Domain");
+            GetFromPropertiesAvoidExceptions(p => DriverFactory.DriverPath = p, "DriversFolder");
+            GetFromPropertiesAvoidExceptions(p => GetLatestDriver = p.ToLower().Equals("true") || p.ToLower().Equals("1"), "GetLatest");
+            GetFromPropertiesAvoidExceptions(p =>
             {
                 p = p.ToLower();
                 if (p.Equals("soft"))
@@ -91,7 +91,7 @@ namespace JDI.Light.Settings
                     WebDriverFactory.OnlyOneElementAllowedInSearch = false;
             }, "SearchElementStrategy");
 
-            FillFromSettings(p =>
+            GetFromPropertiesAvoidExceptions(p =>
             {
                 string[] split = null;
                 if (p.Split(',').Length == 2)

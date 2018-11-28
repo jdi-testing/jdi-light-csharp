@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using JDI.Light.Extensions;
 using JDI.Light.Interfaces;
+using JDI.Light.Settings;
 
 namespace JDI.Light.Matchers
 {
@@ -19,7 +20,7 @@ namespace JDI.Light.Matchers
 
         protected BaseAsserter()
         {
-            _logger = JDI.Logger;
+            _logger = WebSettings.Logger;
         }
 
         public virtual void ThrowFail(string message)

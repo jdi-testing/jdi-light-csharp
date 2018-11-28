@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using JDI.Light.Settings;
 using JDI.Light.Tests.Asserts;
 using JDI.Light.Tests.UIObjects;
 using OpenQA.Selenium;
@@ -26,7 +27,7 @@ namespace JDI.Light.Tests.Tests.Complex
 
         public static void CheckText(Func<string> func, string expectedAttrValue)
         {
-            JDI.Assert.AreEquals(func(), expectedAttrValue);
+            WebSettings.Assert.AreEquals(func(), expectedAttrValue);
         }
 
         public static void CheckAction(string text)
@@ -48,11 +49,11 @@ namespace JDI.Light.Tests.Tests.Complex
             }
             catch (Exception ex)
             {
-                JDI.Assert.Contains(ex.Message, message);
+                WebSettings.Assert.Contains(ex.Message, message);
                 return;
             }
 
-            throw JDI.Assert.Exception("Exception not thrown");
+            throw WebSettings.Assert.Exception("Exception not thrown");
         }
 
         public static void RunParallel(Action action)

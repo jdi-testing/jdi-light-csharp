@@ -4,6 +4,7 @@ using JDI.Light.Extensions;
 using JDI.Light.Interfaces.Common;
 using JDI.Light.Selenium.Elements.Base;
 using JDI.Light.Selenium.Elements.Common;
+using JDI.Light.Settings;
 using JDI.Light.Utils;
 using OpenQA.Selenium;
 
@@ -28,9 +29,9 @@ namespace JDI.Light.Selenium.Elements.Composite
         {
             get
             {
-                JDI.Logger.Debug($"Get Web Elements: {this}");
+                WebSettings.Logger.Debug($"Get Web Elements: {this}");
                 var elements = GetWebElementsAction();
-                JDI.Logger.Debug($"Found {elements.Count} elements");
+                WebSettings.Logger.Debug($"Found {elements.Count} elements");
                 return elements;
             }
         }
@@ -41,14 +42,14 @@ namespace JDI.Light.Selenium.Elements.Composite
             switch (fields.Count)
             {
                 case 0:
-                    throw JDI.Assert.Exception($"Can't find ny buttons on form {ToString()}'");
+                    throw WebSettings.Assert.Exception($"Can't find ny buttons on form {ToString()}'");
                 case 1:
                     return (Button)fields[0].GetValue(WebElement);
                 default:
                     var buttons = fields.Select(f => (Button)f.GetValue(WebElement)).ToList();
                     var button = buttons.FirstOrDefault(b => ToButton(b.Name).SimplifiedEqual(ToButton(buttonName)));
                     if (button == null)
-                        throw JDI.Assert.Exception($"Can't find button '{buttonName}' for Element '{ToString()}'." +
+                        throw WebSettings.Assert.Exception($"Can't find button '{buttonName}' for Element '{ToString()}'." +
                                                     $"(Found following buttons: {buttons.Select(el => el.Name).FormattedJoin()})."
                                                         .FromNewLine());
                     return button;

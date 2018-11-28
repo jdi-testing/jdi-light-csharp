@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using JDI.Light.Interfaces.Complex;
+using JDI.Light.Settings;
 using OpenQA.Selenium;
 
 namespace JDI.Light.Selenium.Elements.Complex
@@ -84,7 +85,7 @@ namespace JDI.Light.Selenium.Elements.Complex
         {
             var element = els.FirstOrDefault(el => SelectedElementAction(this, el));
             if (element == null)
-                throw JDI.Assert.Exception(
+                throw WebSettings.Assert.Exception(
                     "No elements selected. Override getSelectedAction or place locator to <select> tag");
             return element.Text;
         }
@@ -93,7 +94,7 @@ namespace JDI.Light.Selenium.Elements.Complex
         {
             var num = els.ToList().FindIndex(el => SelectedElementAction(this, el)) + 1;
             if (num == 0)
-                throw JDI.Assert.Exception(
+                throw WebSettings.Assert.Exception(
                     "No elements selected. Override getSelectedAction or place locator to <select> tag");
             return num;
         }

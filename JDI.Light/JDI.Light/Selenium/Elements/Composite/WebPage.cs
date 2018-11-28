@@ -30,13 +30,13 @@ namespace JDI.Light.Selenium.Elements.Composite
         public WebPage(string url = null, string title = null)
         {
             //TODO: Correctly add logger instance
-            var logger = JDI.Logger;
+            var logger = WebSettings.Logger;
             Url = url;
             Title = title;
             Invoker = new ActionInvoker<WebPage>(this, logger);
             Name = $"{Title} ({Url})";
             WebDriver = WebSettings.WebDriverFactory.GetDriver();
-            Timer = new Timer(JDI.Timeouts.CurrentTimeoutSec * 1000);
+            Timer = new Timer(WebSettings.Timeouts.CurrentTimeoutSec * 1000);
         }
 
         public string Url
@@ -56,7 +56,7 @@ namespace JDI.Light.Selenium.Elements.Composite
                 switch (CheckUrlType)
                 {
                     case CheckPageType.None:
-                        JDI.Assert.IsTrue(GetUrl().Contains(UrlTemplate)
+                        WebSettings.Assert.IsTrue(GetUrl().Contains(UrlTemplate)
                                                     || GetUrl().Matches(UrlTemplate));
                         break;
                     case CheckPageType.Equal:
@@ -168,7 +168,7 @@ namespace JDI.Light.Selenium.Elements.Composite
             {
                 if (!IsOnPage())
                     Open();
-                JDI.Logger.Info($"Page {Name} is opened");
+                WebSettings.Logger.Info($"Page {Name} is opened");
             }, ex => $"Can't open page {Name}. Reason: {ex}");
         }
 
@@ -247,8 +247,8 @@ namespace JDI.Light.Selenium.Elements.Composite
             public void Equal()
             {
                 if (string.IsNullOrEmpty(_equals)) return;
-                JDI.Logger.Info($"Page {_what} equals to '{_equals}'");
-                JDI.Assert.IsTrue(_timer().Wait(() => _actual().Equals(_equals)));
+                WebSettings.Logger.Info($"Page {_what} equals to '{_equals}'");
+                WebSettings.Assert.IsTrue(_timer().Wait(() => _actual().Equals(_equals)));
             }
 
             /**
@@ -258,8 +258,8 @@ namespace JDI.Light.Selenium.Elements.Composite
             public void Match()
             {
                 if (string.IsNullOrEmpty(_template)) return;
-                JDI.Logger.Info($"Page {_what} matches to '{_template}'");
-                JDI.Assert.IsTrue(_timer().Wait(() => _actual().Matches(_template)));
+                WebSettings.Logger.Info($"Page {_what} matches to '{_template}'");
+                WebSettings.Assert.IsTrue(_timer().Wait(() => _actual().Matches(_template)));
             }
 
             /**
@@ -271,8 +271,8 @@ namespace JDI.Light.Selenium.Elements.Composite
                 var url = string.IsNullOrEmpty(_template)
                     ? _equals
                     : _template;
-                JDI.Logger.Info($"Page {_what} contains to '{url}'");
-                JDI.Assert.IsTrue(_timer().Wait(() => _actual().Contains(url)));
+                WebSettings.Logger.Info($"Page {_what} contains to '{url}'");
+                WebSettings.Assert.IsTrue(_timer().Wait(() => _actual().Contains(url)));
             }
         }
     }

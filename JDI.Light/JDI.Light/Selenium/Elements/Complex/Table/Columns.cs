@@ -3,6 +3,7 @@ using System.Linq;
 using JDI.Light.Enums;
 using JDI.Light.Extensions;
 using JDI.Light.Selenium.Elements.Complex.Table.Interfaces;
+using JDI.Light.Settings;
 using JDI.Light.Utils;
 using OpenQA.Selenium;
 
@@ -32,7 +33,7 @@ namespace JDI.Light.Selenium.Elements.Complex.Table
                 var rowsCount = Table.Rows.Count;
                 var webColumn = Timer.GetResultByCondition(() => GetLineAction(colName), els => els.Count >= rowsCount);
                 if (webColumn == null)
-                    throw JDI.Assert.Exception($"Table has only {GetLineAction(colName).Count} columns " +
+                    throw WebSettings.Assert.Exception($"Table has only {GetLineAction(colName).Count} columns " +
                                                 $"but expected at least {rowsCount}");
 
                 var result = new Dictionary<string, ICell>();
@@ -79,14 +80,14 @@ namespace JDI.Light.Selenium.Elements.Complex.Table
         public Dictionary<string, ICell> GetColumn(int colNum)
         {
             if (Count < 0 || Count < colNum || colNum <= 0)
-                throw JDI.Assert.Exception($"Can't Get Column '{colNum}'. [num] > RowsCount({Count}).");
+                throw WebSettings.Assert.Exception($"Can't Get Column '{colNum}'. [num] > RowsCount({Count}).");
             return ExceptionUtils.ActionWithException(() =>
             {
                 var rowsCount = Table.Rows.Count;
                 var webColumn = Timer.GetResultByCondition(() => GetLineAction(colNum),
                     els => els.Count >= rowsCount);
                 if (webColumn == null)
-                    throw JDI.Assert.Exception($"Table has only {GetLineAction(colNum).Count} columns " +
+                    throw WebSettings.Assert.Exception($"Table has only {GetLineAction(colNum).Count} columns " +
                                                 $"but expected at least {rowsCount}");
                 var result = new Dictionary<string, ICell>();
                 if (webColumn.Count == rowsCount)
@@ -110,7 +111,7 @@ namespace JDI.Light.Selenium.Elements.Complex.Table
         public IList<string> GetColumnValue(int colNum)
         {
             if (Count < 0 || Count < colNum || colNum <= 0)
-                throw JDI.Assert.Exception($"Can't Get Column '{colNum}'. [num] > RowsCount({Count}).");
+                throw WebSettings.Assert.Exception($"Can't Get Column '{colNum}'. [num] > RowsCount({Count}).");
             return ExceptionUtils.ActionWithException(() => GetLineAction(colNum).Select(el => el.Text).ToList(),
                 ex => $"Can't Get Column '{colNum}'. Reason: {ex}");
         }

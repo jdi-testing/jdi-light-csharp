@@ -1,5 +1,4 @@
 ﻿using JDI.Light.Selenium.DriverFactory;
-using JDI.Light.Selenium.Elements.Composite;
 using JDI.Light.Settings;
 using JDI.Light.Tests.Asserts;
 using JDI.Light.Tests.Entities;
@@ -14,13 +13,13 @@ namespace JDI.Light.Tests.Tests
         [OneTimeSetUp]
         protected void SetUp()
         {
-            WebSettings.InitFromProperties(null, new NUnitAsserter());
-            JDI.Logger.Info("Init test run...");
+            WebSettings.Init(null, new NUnitAsserter());
+            WebSettings.Logger.Info("Init test run...");
             WinProcUtils.KillAllRunWebDrivers();
-            WebSite.Init(typeof(TestSite));
+            JDI.Init(typeof(TestSite));
             TestSite.HomePage.Open();
             TestSite.LoginForm.Submit(User.DefaultUser);
-            JDI.Logger.Info("Run test...");
+            WebSettings.Logger.Info("Run test...");
         }
 
         [OneTimeTearDown]

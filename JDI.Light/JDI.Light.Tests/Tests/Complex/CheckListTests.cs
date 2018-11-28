@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using JDI.Light.Interfaces.Complex;
+using JDI.Light.Settings;
 using JDI.Light.Tests.Asserts;
 using JDI.Light.Tests.Enums;
 using JDI.Light.Tests.UIObjects;
@@ -46,18 +47,18 @@ namespace JDI.Light.Tests.Tests.Complex
             //var texts = ActionsLog.Texts; 
             IList<string> log = TestSite.HomePage.WebDriver.FindElements(By.CssSelector(".logs li")).Select(e => e.Text)
                 .ToList();
-            for (var i = 0; i < log.Count; i++) JDI.Assert.Contains(log[i], logLines[i] + ": condition changed to true");
+            for (var i = 0; i < log.Count; i++) WebSettings.Assert.Contains(log[i], logLines[i] + ": condition changed to true");
         }
 
         [SetUp]
         public void SetUp()
         {
-            JDI.Logger.Info("Navigating to Metals and Colors page.");
+            WebSettings.Logger.Info("Navigating to Metals and Colors page.");
             TestSite.MetalsColorsPage.Open();
             TestSite.MetalsColorsPage.CheckTitle();
             TestSite.MetalsColorsPage.IsOpened();
-            JDI.Logger.Info("Setup method finished");
-            JDI.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            WebSettings.Logger.Info("Setup method finished");
+            WebSettings.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         [Test]

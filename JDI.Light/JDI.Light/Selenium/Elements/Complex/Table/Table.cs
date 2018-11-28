@@ -7,6 +7,7 @@ using JDI.Light.Extensions;
 using JDI.Light.Selenium.Elements.Base;
 using JDI.Light.Selenium.Elements.Complex.Table.Interfaces;
 using JDI.Light.Selenium.Elements.Composite;
+using JDI.Light.Settings;
 using OpenQA.Selenium;
 
 namespace JDI.Light.Selenium.Elements.Complex.Table
@@ -289,7 +290,7 @@ namespace JDI.Light.Selenium.Elements.Complex.Table
                 foreach (var colNameValue in colNameValues)
                 {
                     if (!colNameValue.Matches("[^=]+=[^=]*"))
-                        throw JDI.Assert.Exception($"Wrong searchCriteria for Cells: {colNameValue}");
+                        throw WebSettings.Assert.Exception($"Wrong searchCriteria for Cells: {colNameValue}");
                     var splitted = colNameValue.Split(Convert.ToChar("="));
                     var colName = splitted[0];
                     var colValue = splitted[1];
@@ -317,7 +318,7 @@ namespace JDI.Light.Selenium.Elements.Complex.Table
                 foreach (var rowNameValue in rowNameValues)
                 {
                     if (!rowNameValue.Matches("[^=]+=[^=]*"))
-                        throw JDI.Assert.Exception($"Wrong searchCriteria for Cells: {rowNameValue}");
+                        throw WebSettings.Assert.Exception($"Wrong searchCriteria for Cells: {rowNameValue}");
                     var splitted = rowNameValue.Split(Convert.ToChar("="));
                     var rowName = splitted[0];
                     var rowValue = splitted[1];
@@ -352,7 +353,7 @@ namespace JDI.Light.Selenium.Elements.Complex.Table
                 WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.Zero;
                 var rowsCount = Rows.GetCount(true);
                 WebDriver.Manage().Timeouts().ImplicitWait =
-                    TimeSpan.FromSeconds(JDI.Timeouts.CurrentTimeoutSec);
+                    TimeSpan.FromSeconds(WebSettings.Timeouts.CurrentTimeoutSec);
                 return rowsCount == 0;
             }
         }
@@ -494,7 +495,7 @@ namespace JDI.Light.Selenium.Elements.Complex.Table
             if (headers != null && headers.Contains(name))
                 nameIndex = headers.IndexOf(name);
             else
-                throw JDI.Assert.Exception("Can't Get Column: '" + name + "'. " + (headers == null
+                throw WebSettings.Assert.Exception("Can't Get Column: '" + name + "'. " + (headers == null
                                                 ? "ColumnHeaders is Null"
                                                 : "Available ColumnHeaders: " + headers.FormattedJoin(", ", "'{0}'") + ")"));
             return nameIndex + Columns.StartIndex;
@@ -507,7 +508,7 @@ namespace JDI.Light.Selenium.Elements.Complex.Table
             if (headers != null && headers.Contains(name))
                 nameIndex = headers.IndexOf(name);
             else
-                throw JDI.Assert.Exception(
+                throw WebSettings.Assert.Exception(
                     $"Can't Get Row: {name}. Available RowHeaders: {Headers.FormattedJoin(", ", "'{0}'")}");
             return nameIndex + Rows.StartIndex;
         }

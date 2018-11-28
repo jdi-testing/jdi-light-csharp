@@ -1,23 +1,17 @@
 ﻿using System;
-using JDI.Light.Base;
 using JDI.Light.Settings;
 using OpenQA.Selenium;
 
 namespace JDI.Light.Selenium.Elements.Composite
 {
-    public class WebSite : Application
+    public class WebSite
     {
+        public string DriverName { set; get; }
         public IWebDriver WebDriver => WebSettings.WebDriverFactory.GetDriver(DriverName);
         public string Url => WebDriver.Url;
         public string BaseUrl => new Uri(WebDriver.Url).GetLeftPart(UriPartial.Authority);
         public string Title => WebDriver.Title;
-
-        public static void Init(Type siteType)
-        {
-            WebCascadeInit.InitStaticPages(siteType, WebSettings.WebDriverFactory.CurrentDriverName);
-            CurrentSite = siteType;
-        }
-
+        
         public void Open()
         {
             WebDriver.Navigate().GoToUrl(WebSettings.Domain);

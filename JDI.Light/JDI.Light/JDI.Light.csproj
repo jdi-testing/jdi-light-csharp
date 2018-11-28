@@ -67,7 +67,6 @@
     <Compile Include="Attributes\NameAttribute.cs" />
     <Compile Include="Attributes\PageAttribute.cs" />
     <Compile Include="Attributes\SiteAttribute.cs" />
-    <Compile Include="Base\Application.cs" />
     <Compile Include="Enums\CheckPageType.cs" />
     <Compile Include="Enums\DriverType.cs" />
     <Compile Include="Enums\ElementIndexType.cs" />

@@ -1,4 +1,5 @@
 ﻿using JDI.Light.Matchers;
+using JDI.Light.Settings;
 
 namespace JDI.Light.Tests.Asserts
 {
@@ -14,7 +15,7 @@ namespace JDI.Light.Tests.Asserts
 
         public override void ThrowFail(string message)
         {
-            JDI.Logger.Error(message);
+            WebSettings.Logger.Error(message);
             NUnit.Framework.Assert.Fail(message);
         }
     }

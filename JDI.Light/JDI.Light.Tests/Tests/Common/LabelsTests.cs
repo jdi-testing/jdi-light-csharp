@@ -1,4 +1,5 @@
-﻿using JDI.Light.Tests.Tests.Complex;
+﻿using JDI.Light.Settings;
+using JDI.Light.Tests.Tests.Complex;
 using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 
@@ -11,9 +12,9 @@ namespace JDI.Light.Tests.Tests.Common
         public void SetUp()
         {
             TestSite.MetalsColorsPage.Open();
-            JDI.Logger.Info("Navigating to Metals and Colors page.");
+            WebSettings.Logger.Info("Navigating to Metals and Colors page.");
             TestSite.MetalsColorsPage.CheckTitle();
-            JDI.Logger.Info("Setup method finished");
+            WebSettings.Logger.Info("Setup method finished");
         }
 
         [Test]
