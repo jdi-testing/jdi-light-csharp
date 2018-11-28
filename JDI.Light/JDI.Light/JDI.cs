@@ -31,7 +31,7 @@ namespace JDI.Light
             GetFromPropertiesAvoidExceptions(p => HighlightSettings.SetTimeoutInSec(int.Parse(p)), "DemoDelay");
         }
         
-        public static void Init(Type siteType)
+        public static void InitSite(Type siteType)
         {
             WebCascadeInit.InitStaticPages(siteType, WebSettings.WebDriverFactory.CurrentDriverName);
         }

@@ -16,7 +16,7 @@ namespace JDI.Light.Tests.Tests
             WebSettings.Init(null, new NUnitAsserter());
             WebSettings.Logger.Info("Init test run...");
             WinProcUtils.KillAllRunWebDrivers();
-            JDI.Init(typeof(TestSite));
+            JDI.InitSite(typeof(TestSite));
             TestSite.HomePage.Open();
             TestSite.LoginForm.Submit(User.DefaultUser);
             WebSettings.Logger.Info("Run test...");

@@ -99,7 +99,7 @@ namespace JDI.Light.Selenium.DriverFactory
             }
             catch
             {
-                throw new Exception(); // TODO
+                throw new Exception($"Can't get driver: {CurrentDriverName}");
             }
         }
 
@@ -146,7 +146,7 @@ namespace JDI.Light.Selenium.DriverFactory
             }
             catch
             {
-                throw new Exception(); // TODO
+                throw new Exception($"Can't register driver: {driverName}");
             }
         }
 
@@ -252,7 +252,7 @@ namespace JDI.Light.Selenium.DriverFactory
                     return RegisterRemoteDriver(driverType);
             }
 
-            throw new Exception(); // TODO
+            throw new Exception($"Can't register driver: {driverType}");
         }
 
         private string RegisterRemoteDriver(DriverType driverType)
@@ -292,7 +292,7 @@ namespace JDI.Light.Selenium.DriverFactory
             }
 
             if (Drivers.ContainsKey(driverName))
-                GetDriver(); // TODO
+                GetDriver();
         }
 
         public void Close()
