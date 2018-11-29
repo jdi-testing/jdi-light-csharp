@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using JDI.Light.Interfaces;
 using JDI.Light.Interfaces.Base;
 using JDI.Light.Selenium.DriverFactory;
 using JDI.Light.Selenium.Elements.WebActions;
@@ -14,16 +15,20 @@ namespace JDI.Light.Selenium.Elements.Base
     public class UIElement : IBaseUIElement, IVisible
     {
         private IWebElement _webElement;
+
         public ElementsActions Actions;
         public By FrameLocator;
         public ActionInvoker<UIElement> Invoker;
+        public By Locator;
+
+        public IWebDriver WebDriver => WebSettings.WebDriverFactory.GetDriver(DriverName);
+
+        public ILogger Logger { get; set; }
+        public Timer Timer { get; set; }
+        public string DriverName { get; set; }
 
         public UIElement(By byLocator = null)
         {
-            //TODO: Correctly add logger instance
-            var logger = WebSettings.Logger;
-            Invoker = new ActionInvoker<UIElement>(this, logger);
-            Actions = new ElementsActions(Invoker);
             Locator = byLocator;
             Timer = new Timer(WebSettings.Timeouts.CurrentTimeoutSec * 1000);
             if (string.IsNullOrEmpty(DriverName) && WebSettings.WebDriverFactory != null &&
@@ -31,14 +36,12 @@ namespace JDI.Light.Selenium.Elements.Base
                 DriverName = WebSettings.WebDriverFactory.CurrentDriverName;
         }
 
-        public Timer Timer { get; set; }
-
-        public By Locator;
-        
-        public IWebDriver WebDriver
-            => WebSettings.WebDriverFactory.GetDriver(DriverName);
-
-        public string DriverName { get; set; }
+        public void SetUp(ILogger logger)
+        {
+            Logger = logger;
+            Invoker = new ActionInvoker<UIElement>(this, logger);
+            Actions = new ElementsActions(Invoker);
+        }
 
         public IWebElement WebElement
         {

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using JDI.Light.Enums;
 using JDI.Light.Extensions;
+using JDI.Light.Interfaces;
 using JDI.Light.Interfaces.Base;
 using JDI.Light.Interfaces.Complex;
 using JDI.Light.Selenium.Elements.WebActions;
@@ -21,19 +22,24 @@ namespace JDI.Light.Selenium.Elements.Composite
         public string Title { get; set; }
         public string UrlTemplate { get; set; }
         public ActionInvoker<WebPage> Invoker { get; set; }
+        public ILogger Logger { get; set; }
         public string DriverName { get; set; }
         public string Name { get; set; }
         public IBaseElement Parent { get; set; }
+
+        public void SetUp(ILogger logger)
+        {
+            Logger = logger;
+            Invoker = new ActionInvoker<WebPage>(this, logger);
+        }
+
         public IWebDriver WebDriver { get; set; }
         public Timer Timer { get; set; }
 
         public WebPage(string url = null, string title = null)
         {
-            //TODO: Correctly add logger instance
-            var logger = WebSettings.Logger;
             Url = url;
             Title = title;
-            Invoker = new ActionInvoker<WebPage>(this, logger);
             Name = $"{Title} ({Url})";
             WebDriver = WebSettings.WebDriverFactory.GetDriver();
             Timer = new Timer(WebSettings.Timeouts.CurrentTimeoutSec * 1000);

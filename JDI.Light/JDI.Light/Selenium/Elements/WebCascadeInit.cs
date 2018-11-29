@@ -7,6 +7,7 @@ using JDI.Light.Attributes;
 using JDI.Light.Attributes.JAttributes;
 using JDI.Light.Enums;
 using JDI.Light.Extensions;
+using JDI.Light.Interfaces;
 using JDI.Light.Interfaces.Base;
 using JDI.Light.Interfaces.Complex;
 using JDI.Light.Selenium.DriverFactory;
@@ -24,6 +25,8 @@ namespace JDI.Light.Selenium.Elements
 {
     public class WebCascadeInit
     {
+        public static ILogger Logger { get; set; } = WebSettings.Logger;
+
         protected static Type[] Decorators = { typeof(IBaseElement), typeof(IList) };
 
         protected static Type[] StopTypes => new[]
@@ -51,6 +54,7 @@ namespace JDI.Light.Selenium.Elements
                             var instance = typeof(IPage).IsAssignableFrom(type)
                                 ? GetInstancePage(parent, field, type, parentType)
                                 : GetInstanceElement(parent, type, parentType, field, driverName);
+                            instance.SetUp(Logger);
                             instance.Name = field.GetElementName();
                             instance.DriverName = driverName;
                             instance.Parent = parent;
