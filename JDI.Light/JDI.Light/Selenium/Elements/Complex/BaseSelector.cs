@@ -6,7 +6,6 @@ using JDI.Light.Interfaces.Base;
 using JDI.Light.Selenium.DriverFactory;
 using JDI.Light.Selenium.Elements.Base;
 using JDI.Light.Selenium.Elements.Composite;
-using JDI.Light.Settings;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
@@ -38,7 +37,7 @@ namespace JDI.Light.Selenium.Elements.Complex
         public Func<BaseSelector<TEnum>, string, IWebElement> GetWebElementFunc = (s, name) =>
         {
             if (!s.HasLocator)
-                throw WebSettings.Assert.Exception("Element has no locators");
+                throw JDI.Assert.Exception("Element has no locators");
             return s.Locator.ToString().Contains("{0}")
                 ? new UIElement(s.Locator.FillByTemplate(name))
                 {
@@ -64,7 +63,7 @@ namespace JDI.Light.Selenium.Elements.Complex
         public Action<BaseSelector<TEnum>, string> SelectNameAction = (s, name) =>
         {
             if (!s.HasLocator && s.AllLabels == null)
-                throw WebSettings.Assert.Exception(
+                throw JDI.Assert.Exception(
                     $"Can't find option '{name}'. No optionsNamesLocator and _allLabelsLocator found");
             if (s.Locator.ToString().Contains("{0}"))
             {
@@ -88,7 +87,7 @@ namespace JDI.Light.Selenium.Elements.Complex
                 }
                 else
                 {
-                    throw WebSettings.Assert.Exception(
+                    throw JDI.Assert.Exception(
                         $"<select> tag has no <option> tags. Please Clarify element locator ({s})");
                 }
 
@@ -100,7 +99,7 @@ namespace JDI.Light.Selenium.Elements.Complex
         public Action<BaseSelector<TEnum>, int> SelectNumAction = (s, num) =>
         {
             if (!s.HasLocator && s.AllLabels == null)
-                throw WebSettings.Assert.Exception(
+                throw JDI.Assert.Exception(
                     $"Can't find option '{num}'. No optionsNamesLocator and _allLabelsLocator found");
             if (s.AllLabels != null)
             {
@@ -123,7 +122,7 @@ namespace JDI.Light.Selenium.Elements.Complex
                 }
                 else
                 {
-                    throw WebSettings.Assert.Exception(
+                    throw JDI.Assert.Exception(
                         $"<select> tag has no <option> tags. Please Clarify element locator ({s})");
                 }
 
@@ -184,12 +183,12 @@ namespace JDI.Light.Selenium.Elements.Complex
             get
             {
                 if (!HasLocator && AllLabels == null)
-                    throw WebSettings.Assert.Exception(
+                    throw JDI.Assert.Exception(
                         "Can't check is element displayed or not. No optionsNamesLocator and allLabelsLocator found");
                 if (AllLabels != null)
                     return AllLabels.WebElements;
                 if (Locator.ToString().Contains("{0}"))
-                    throw WebSettings.Assert.Exception(
+                    throw JDI.Assert.Exception(
                         "Can't check is element displayed or not. Please specify allLabelsLocator or correct optionsNamesLocator (should not contain '{0}')");
                 return GetElementsFromTag();
             }
@@ -213,10 +212,10 @@ namespace JDI.Light.Selenium.Elements.Complex
         {
             var selector = elements.Count == 1 ? elements[0] : null;
             if (selector == null
-                && elements.Count(el => WebSettings.WebDriverFactory.ElementSearchCriteria(el)
+                && elements.Count(el => JDI.DriverFactory.ElementSearchCriteria(el)
                                         && el.TagName.Equals("select")) == 1)
                 selector = elements
-                    .First(el => WebSettings.WebDriverFactory.ElementSearchCriteria(el) && el.TagName.Equals("select"));
+                    .First(el => JDI.DriverFactory.ElementSearchCriteria(el) && el.TagName.Equals("select"));
             return selector != null ? new SelectElement(selector) : null;
         }
 
@@ -224,18 +223,18 @@ namespace JDI.Light.Selenium.Elements.Complex
         {
             var element = els.FirstOrDefault(el => el.Text.Equals(name));
             if (element == null)
-                throw WebSettings.Assert.Exception($"Can't find option '{name}'. Please fix _allLabelsLocator");
+                throw JDI.Assert.Exception($"Can't find option '{name}'. Please fix _allLabelsLocator");
             element.Click();
         }
 
         private void SelectFromList(IList<IWebElement> els, int num)
         {
             if (num <= 0)
-                throw WebSettings.Assert.Exception($"Can't get option with num '{num}'. num should be 1 or more");
+                throw JDI.Assert.Exception($"Can't get option with num '{num}'. num should be 1 or more");
             if (els == null)
-                throw WebSettings.Assert.Exception($"Can't find option with num '{num}'. Please fix _allLabelsLocator");
+                throw JDI.Assert.Exception($"Can't find option with num '{num}'. Please fix _allLabelsLocator");
             if (els.Count < num)
-                throw WebSettings.Assert.Exception($"Can't find option with num '{num}'. Find only '{els.Count}' options");
+                throw JDI.Assert.Exception($"Can't find option with num '{num}'. Find only '{els.Count}' options");
             els[num - 1].Click();
         }
 
@@ -290,11 +289,11 @@ namespace JDI.Light.Selenium.Elements.Complex
         private bool DisplayedInList(IList<IWebElement> els, int num)
         {
             if (num <= 0)
-                throw WebSettings.Assert.Exception($"Can't get option with num '{num}'. num should be 1 or more");
+                throw JDI.Assert.Exception($"Can't get option with num '{num}'. num should be 1 or more");
             if (els == null)
-                throw WebSettings.Assert.Exception($"Can't find option with num '{num}'. Please fix _allLabelsLocator");
+                throw JDI.Assert.Exception($"Can't find option with num '{num}'. Please fix _allLabelsLocator");
             if (els.Count < num)
-                throw WebSettings.Assert.Exception($"Can't find option with num '{num}'. Find '{els.Count}' options");
+                throw JDI.Assert.Exception($"Can't find option with num '{num}'. Find '{els.Count}' options");
             return els[num - 1].Displayed;
         }
     }

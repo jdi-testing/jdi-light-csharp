@@ -1,5 +1,4 @@
 ﻿using System;
-using JDI.Light.Settings;
 using JDI.Light.Tests.Asserts;
 using JDI.Light.Tests.Entities;
 using JDI.Light.Tests.UIObjects;
@@ -19,14 +18,14 @@ namespace JDI.Light.Tests.Tests.Common
         [SetUp]
         public void SetUp()
         {
-            WebSettings.Logger.Info("Navigating to Metals and Colors page.");
+            JDI.Logger.Info("Navigating to Metals and Colors page.");
             TestSite.ContactFormPage.Open();
             TestSite.ContactFormPage.CheckTitle();
             TestSite.ContactFormPage.IsOpened();
             TestSite.ContactFormPage.FillAndSubmitForm(DEFAULT_TEXT, DEFAULT_TEXT + new Random().Next(),
                 DEFAULT_TEXT + new Random().Next());
-            WebSettings.Logger.Info("Setup method finished");
-            WebSettings.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            JDI.Logger.Info("Setup method finished");
+            JDI.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
         
         [Test]

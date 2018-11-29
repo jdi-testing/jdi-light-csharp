@@ -7,7 +7,7 @@ namespace JDI.Light.Selenium.Elements.Composite
     public class WebSite
     {
         public string DriverName { set; get; }
-        public IWebDriver WebDriver => WebSettings.WebDriverFactory.GetDriver(DriverName);
+        public IWebDriver WebDriver => JDI.DriverFactory.GetDriver(DriverName);
         public string Url => WebDriver.Url;
         public string BaseUrl => new Uri(WebDriver.Url).GetLeftPart(UriPartial.Authority);
         public string Title => WebDriver.Title;

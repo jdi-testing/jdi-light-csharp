@@ -1,7 +1,11 @@
-﻿namespace JDI.Light.Interfaces
+﻿using System;
+using OpenQA.Selenium;
+
+namespace JDI.Light.Interfaces
 {
     public interface IDriverFactory<out T>
     {
+        Func<IWebElement, bool> ElementSearchCriteria { get; set; }
         string CurrentDriverName { get; set; }
         string DriverPath { get; set; }
         string RegisterDriver(string driverName);

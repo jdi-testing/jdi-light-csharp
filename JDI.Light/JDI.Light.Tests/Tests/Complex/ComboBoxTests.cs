@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using JDI.Light.Interfaces.Complex;
-using JDI.Light.Settings;
 using JDI.Light.Tests.Asserts;
 using JDI.Light.Tests.Enums;
 using JDI.Light.Tests.UIObjects;
@@ -20,12 +19,12 @@ namespace JDI.Light.Tests.Tests.Complex
         [SetUp]
         public void SetUp()
         {
-            WebSettings.Logger.Info("Navigating to Metals and Colors page.");
+            JDI.Logger.Info("Navigating to Metals and Colors page.");
             TestSite.MetalsColorsPage.Open();
             TestSite.MetalsColorsPage.CheckTitle();
             TestSite.MetalsColorsPage.IsOpened();
-            WebSettings.Logger.Info("Setup method finished");
-            WebSettings.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            JDI.Logger.Info("Setup method finished");
+            JDI.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         [Test]
@@ -77,7 +76,7 @@ namespace JDI.Light.Tests.Tests.Complex
         public void SetValueTest()
         {
             MetalsControl.Value = "Blue";
-            WebSettings.WebDriverFactory.GetDriver().FindElement(By.ClassName("footer-content")).Click();
+            JDI.DriverFactory.GetDriver().FindElement(By.ClassName("footer-content")).Click();
             CommonActionsData.CheckAction("Metals: value changed to Blue");
         }
 
@@ -98,13 +97,13 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void IsSelectedTest()
         {
-            WebSettings.Assert.AreEquals(MetalsControl.Selected("Col"), true);
+            JDI.Assert.AreEquals(MetalsControl.Selected("Col"), true);
         }
 
         [Test]
         public void IsSelectedEnumTest()
         {
-            WebSettings.Assert.AreEquals(MetalsControl.Selected(Metals.Col), true);
+            JDI.Assert.AreEquals(MetalsControl.Selected(Metals.Col), true);
         }
 
         [Test]
@@ -116,7 +115,7 @@ namespace JDI.Light.Tests.Tests.Complex
             }
             catch (Exception)
             {
-                throw WebSettings.Assert.Exception("WaitSelected throws exception");
+                throw JDI.Assert.Exception("WaitSelected throws exception");
             }
         }
 
@@ -129,7 +128,7 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void GetValueTest()
         {
-            WebSettings.Assert.AreEquals(MetalsControl.Value, "Col");
+            JDI.Assert.AreEquals(MetalsControl.Value, "Col");
         }
     }
 }

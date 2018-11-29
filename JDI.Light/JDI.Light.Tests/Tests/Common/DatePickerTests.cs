@@ -1,5 +1,4 @@
 ﻿using JDI.Light.Interfaces.Common;
-using JDI.Light.Settings;
 using JDI.Light.Tests.Asserts;
 using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
@@ -17,13 +16,13 @@ namespace JDI.Light.Tests.Tests.Common
         [SetUp]
         public void SetUp()
         {
-            WebSettings.Logger.Info("Navigating to Metals and Colors page.");
+            JDI.Logger.Info("Navigating to Metals and Colors page.");
             TestSite.Dates.Open();
             TestSite.Dates.CheckTitle();
             TestSite.Dates.IsOpened();
             TestSite.Dates.Datepicker.Clear();
-            WebSettings.Logger.Info("Setup method finished");
-            WebSettings.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            JDI.Logger.Info("Setup method finished");
+            JDI.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         [Test]

@@ -179,7 +179,7 @@
     <Compile Include="JDI.cs" />
     <Compile Include="Settings\MapInterfaceToElement.cs" />
     <Compile Include="Settings\WebSettings.cs" />
-    <Compile Include="Settings\WebTimeoutSettings.cs" />
+    <Compile Include="Settings\Timeouts.cs" />
     <Compile Include="Utils\ExceptionUtils.cs" />
     <Compile Include="Utils\ParseObjectUtil.cs" />
     <Compile Include="Utils\ReflectionUtils.cs" />

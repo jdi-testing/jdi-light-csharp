@@ -5,8 +5,6 @@ using System.Linq;
 using System.Threading;
 using JDI.Light.Enums;
 using JDI.Light.Interfaces;
-using JDI.Light.Interfaces.Base;
-using JDI.Light.Selenium.Elements.Base;
 using JDI.Light.Settings;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -45,7 +43,6 @@ namespace JDI.Light.Selenium.DriverFactory
         private readonly object _locker = new object();
 
         private string _currentDriverName;
-        public Func<IWebElement, bool> ElementSearchCriteria = el => el.Displayed;
 
         public Func<IWebDriver, IWebDriver> WebDriverSettings = driver =>
         {
@@ -53,7 +50,7 @@ namespace JDI.Light.Selenium.DriverFactory
                 driver.Manage().Window.Maximize();
             else
                 driver.Manage().Window.Size = BrowserSize;
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(WebSettings.Timeouts.WaitElementSec);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(JDI.Timeouts.WaitElementSec);
             return driver;
         };
 
@@ -69,6 +66,8 @@ namespace JDI.Light.Selenium.DriverFactory
 
         private ThreadLocal<Dictionary<string, IWebDriver>> RunDrivers { get; }
         public RunType RunType { get; set; }
+
+        public Func<IWebElement, bool> ElementSearchCriteria { get; set; } = el => el.Displayed;
 
         public string CurrentDriverName
         {
@@ -200,7 +199,7 @@ namespace JDI.Light.Selenium.DriverFactory
         public string RegisterDriver(string driverName, Func<IWebDriver> driver)
         {
             if (Drivers.ContainsKey(driverName))
-                throw WebSettings.Assert.Exception(
+                throw JDI.Assert.Exception(
                     $"Can't register WebDriver {driverName}. Driver with the same name already registered");
             try
             {
@@ -209,7 +208,7 @@ namespace JDI.Light.Selenium.DriverFactory
             }
             catch (Exception e)
             {
-                throw WebSettings.Assert.Exception($"Can't register WebDriver {driverName}. StackTrace: {e.StackTrace}");
+                throw JDI.Assert.Exception($"Can't register WebDriver {driverName}. StackTrace: {e.StackTrace}");
             }
 
             return driverName;

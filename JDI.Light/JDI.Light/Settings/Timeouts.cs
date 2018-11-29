@@ -1,6 +1,6 @@
 ﻿namespace JDI.Light.Settings
 {
-    public class WebTimeoutSettings
+    public class Timeouts
     {
         public int CurrentTimeoutSec;
         public int RetryMSec = 100;
@@ -8,7 +8,7 @@
         public int WaitElementSec = 20;
         public int WaitPageLoadSec = 20;
 
-        public WebTimeoutSettings()
+        public Timeouts()
         {
             SetCurrentTimeoutSec(WaitPageLoadSec);
         }

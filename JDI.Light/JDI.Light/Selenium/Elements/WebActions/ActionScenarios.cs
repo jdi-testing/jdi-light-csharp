@@ -1,7 +1,6 @@
 ﻿using System;
 using JDI.Light.Enums;
 using JDI.Light.Interfaces;
-using JDI.Light.Settings;
 using JDI.Light.Utils;
 
 namespace JDI.Light.Selenium.Elements.WebActions
@@ -27,7 +26,7 @@ namespace JDI.Light.Selenium.Elements.WebActions
         public void ActionScenario(string actionName, Action<T> action, LogLevel level)
         {
             LogAction(actionName, level);
-            new Timer(WebSettings.Timeouts.CurrentTimeoutSec).Wait(() =>
+            new Timer(JDI.Timeouts.CurrentTimeoutSec).Wait(() =>
             {
                 action(_targetElement);
                 return true;
@@ -41,11 +40,11 @@ namespace JDI.Light.Selenium.Elements.WebActions
             LogAction(actionName, level);
             var timer = new Timer();
             var result =
-                ExceptionUtils.ActionWithException(() => new Timer(WebSettings.Timeouts.CurrentTimeoutSec)
+                ExceptionUtils.ActionWithException(() => new Timer(JDI.Timeouts.CurrentTimeoutSec)
                         .GetResultByCondition(() => action.Invoke(_targetElement), res => true),
                     ex => $"Do action {actionName} failed. Can't got result. Reason: {ex}");
             if (result == null)
-                throw WebSettings.Assert.Exception($"Do action {actionName} failed. Can't got result");
+                throw JDI.Assert.Exception($"Do action {actionName} failed. Can't got result");
             var stringResult = logResult == null
                 ? result.ToString()
                 : logResult.Invoke(result);

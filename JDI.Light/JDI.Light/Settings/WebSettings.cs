@@ -1,19 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using JDI.Light.Interfaces;
 using JDI.Light.Interfaces.Base;
 using JDI.Light.Interfaces.Common;
 using JDI.Light.Interfaces.Complex;
-using JDI.Light.Logging;
 using JDI.Light.Selenium.DriverFactory;
 using JDI.Light.Selenium.Elements.Base;
 using JDI.Light.Selenium.Elements.Common;
 using JDI.Light.Selenium.Elements.Complex;
 using JDI.Light.Selenium.Elements.Complex.Table;
 using JDI.Light.Selenium.Elements.Complex.Table.Interfaces;
-using OpenQA.Selenium;
 using Image = JDI.Light.Selenium.Elements.Common.Image;
 using static JDI.Light.Utils.ExceptionUtils;
 
@@ -46,50 +42,16 @@ namespace JDI.Light.Settings
             {typeof(ILink), typeof(Link)}
         };
 
-        private static WebDriverFactory _webDriverFactory;
-
-        public static IDriverFactory<IDisposable> DriverFactory;
-        public static WebTimeoutSettings Timeouts;
-        public static IAssert Assert;
-        public static ILogger Logger;
         public static bool GetLatestDriver = true;
         public static string Domain;
         public static bool HasDomain => Domain != null && Domain.Contains("://");
-        public static WebDriverFactory WebDriverFactory =>
-            _webDriverFactory ?? (_webDriverFactory = new WebDriverFactory());
-        public static IJavaScriptExecutor JsExecutor => DriverFactory.GetDriver() as IJavaScriptExecutor;
 
-        public static void Init(ILogger logger = null, IAssert assert = null,
-            WebTimeoutSettings timeouts = null, IDriverFactory<IWebDriver> driverFactory = null)
+        public static void Init()
         {
-            DriverFactory = driverFactory ?? new WebDriverFactory();
-            Assert = assert;
-            Timeouts = timeouts ?? new WebTimeoutSettings();
-            Logger = logger ?? new ConsoleLogger();
             MapInterfaceToElement.Init(DefaultInterfacesMap);
 
             GetFromPropertiesAvoidExceptions(p => Domain = p, "Domain");
-            GetFromPropertiesAvoidExceptions(p => DriverFactory.DriverPath = p, "DriversFolder");
             GetFromPropertiesAvoidExceptions(p => GetLatestDriver = p.ToLower().Equals("true") || p.ToLower().Equals("1"), "GetLatest");
-            GetFromPropertiesAvoidExceptions(p =>
-            {
-                p = p.ToLower();
-                if (p.Equals("soft"))
-                    p = "any,multiple";
-                if (p.Equals("strict"))
-                    p = "visible,single";
-                if (p.Split(',').Length != 2) return;
-                var parameters = p.Split(',').ToList();
-                if (parameters.Contains("visible") || parameters.Contains("displayed"))
-                    WebDriverFactory.ElementSearchCriteria = el => el.Displayed;
-                if (parameters.Contains("any") || parameters.Contains("all"))
-                    WebDriverFactory.ElementSearchCriteria = el => el != null;
-                if (parameters.Contains("single") || parameters.Contains("displayed"))
-                    WebDriverFactory.OnlyOneElementAllowedInSearch = true;
-                if (parameters.Contains("multiple") || parameters.Contains("displayed"))
-                    WebDriverFactory.OnlyOneElementAllowedInSearch = false;
-            }, "SearchElementStrategy");
-
             GetFromPropertiesAvoidExceptions(p =>
             {
                 string[] split = null;

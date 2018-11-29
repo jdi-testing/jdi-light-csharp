@@ -5,7 +5,6 @@ using System.Text.RegularExpressions;
 using JDI.Light.Extensions;
 using JDI.Light.Selenium.DriverFactory;
 using JDI.Light.Selenium.Elements.Base;
-using JDI.Light.Settings;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 
@@ -22,7 +21,7 @@ namespace JDI.Light.Selenium.Elements.Complex
                 {
                     var elements = ctx.FindElements(m.Locator.FillByTemplate(node));
                     if (elements == null || elements.Count != 0)
-                        throw WebSettings.Assert.Exception($"Can't select element by path '{names.FormattedJoin(m.Separator)}'");
+                        throw JDI.Assert.Exception($"Can't select element by path '{names.FormattedJoin(m.Separator)}'");
                     var element = elements.First();
                     element.Click();
                     ctx = element;

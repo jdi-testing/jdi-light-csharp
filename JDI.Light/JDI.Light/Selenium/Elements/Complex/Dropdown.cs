@@ -2,7 +2,6 @@
 using JDI.Light.Interfaces.Complex;
 using JDI.Light.Selenium.Elements.Base;
 using JDI.Light.Selenium.Elements.Common;
-using JDI.Light.Settings;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
@@ -32,7 +31,7 @@ namespace JDI.Light.Selenium.Elements.Complex
             if (!d.Element.Displayed) return;
             d.SetWaitTimeout(0);
             if (!d.DisplayedNameAction(d, name)) d.Element.Click();
-            d.SetWaitTimeout(WebSettings.Timeouts.WaitElementSec);
+            d.SetWaitTimeout(JDI.Timeouts.WaitElementSec);
         };
 
         public Action<Dropdown<TEnum>, int> ExpandNumAction = (d, index) =>

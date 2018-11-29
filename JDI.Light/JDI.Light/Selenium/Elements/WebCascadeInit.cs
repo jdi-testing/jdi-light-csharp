@@ -25,11 +25,11 @@ namespace JDI.Light.Selenium.Elements
 {
     public class WebCascadeInit
     {
-        public static ILogger Logger { get; set; } = WebSettings.Logger;
+        public ILogger Logger { get; set; } = JDI.Logger;
 
-        protected static Type[] Decorators = { typeof(IBaseElement), typeof(IList) };
+        protected Type[] Decorators = { typeof(IBaseElement), typeof(IList) };
 
-        protected static Type[] StopTypes => new[]
+        protected Type[] StopTypes => new[]
         {
             typeof(object),
             typeof(WebPage),
@@ -37,13 +37,13 @@ namespace JDI.Light.Selenium.Elements
             typeof(UIElement)
         };
         
-        public static void InitStaticPages(Type parentType, string driverName)
+        public void InitStaticPages(Type parentType, string driverName)
         {
             SetFields(null,
                 parentType.StaticFields().GetFields(Decorators), parentType, driverName);
         }
 
-        private static void SetFields(IBaseElement parent, List<FieldInfo> fields, Type parentType, string driverName)
+        private void SetFields(IBaseElement parent, List<FieldInfo> fields, Type parentType, string driverName)
         {
             fields.Where(field => Decorators.ToList().Any(type => type.IsAssignableFrom(field.FieldType))).ToList()
                 .ForEach(field =>
@@ -66,7 +66,7 @@ namespace JDI.Light.Selenium.Elements
                 });
         }
         
-        protected static IPage GetInstancePage(object parent, FieldInfo field, Type type, Type parentType)
+        protected IPage GetInstancePage(object parent, FieldInfo field, Type type, Type parentType)
         {
             var instance = (IPage)(field.GetValue(parent)
                                            ?? Activator.CreateInstance(type));
@@ -94,7 +94,7 @@ namespace JDI.Light.Selenium.Elements
             return instance;
         }
 
-        protected static IBaseElement GetInstanceElement(IBaseElement parent, Type type, Type parentType, FieldInfo field,
+        protected IBaseElement GetInstanceElement(IBaseElement parent, Type type, Type parentType, FieldInfo field,
             string driverName)
         {
             var instance = (IBaseElement)field.GetValue(parent);
@@ -135,7 +135,7 @@ namespace JDI.Light.Selenium.Elements
                     if (split.Length == 1)
                         split = jTable.Size.Split('X');
                     if (split.Length != 2)
-                        throw WebSettings.Assert.Exception("Can't setup Table from attribute. Bad size: " + jTable.Size);
+                        throw JDI.Assert.Exception("Can't setup Table from attribute. Bad size: " + jTable.Size);
                     table.SetColumnsCount(int.Parse(split[0]));
                     table.SetRowsCount(int.Parse(split[1]));
                 }
@@ -174,7 +174,7 @@ namespace JDI.Light.Selenium.Elements
             return element;
         }
         
-        protected static IBaseElement GetElementInstance(FieldInfo field, string driverName, object parent)
+        protected IBaseElement GetElementInstance(FieldInfo field, string driverName, object parent)
         {
             var type = field.FieldType;
             var fieldName = field.Name;
@@ -183,7 +183,7 @@ namespace JDI.Light.Selenium.Elements
                     var newLocator = GetNewLocator(field);
                     UIElement instance = null;
                     if (type == typeof(List<>))
-                        throw WebSettings.Assert.Exception(
+                        throw JDI.Assert.Exception(
                             $"Can't init element {fieldName} with type 'List<>'. Please use 'IList<>' or 'Elements<>' instead");
 
                     if (type.IsInterface)
@@ -195,7 +195,7 @@ namespace JDI.Light.Selenium.Elements
                             instance.Locator = newLocator;
                     }
                     if (instance == null)
-                        throw WebSettings.Assert.Exception("Unknown interface: " + type +
+                        throw JDI.Assert.Exception("Unknown interface: " + type +
                                                     ". Add relation interface -> class in VIElement.InterfaceTypeMap");
                     instance.DriverName = driverName;
                     return instance;
@@ -204,7 +204,7 @@ namespace JDI.Light.Selenium.Elements
                     $"Error in GetElementInstance for field '{fieldName}'{(parent != null ? "in " + parent.GetClassName() : "")} with type '{type.Name + ex.FromNewLine()}'");
         }
         
-        protected static By GetNewLocator(FieldInfo field)
+        protected By GetNewLocator(FieldInfo field)
         {
             return ExceptionUtils.ActionWithException(() => 
                     field.GetAttribute<JFindByAttribute>()?.ByLocator 

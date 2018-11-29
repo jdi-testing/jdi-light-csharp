@@ -3,7 +3,6 @@ using JDI.Light.Attributes;
 using JDI.Light.Interfaces.Common;
 using JDI.Light.Selenium.Elements.Common;
 using JDI.Light.Selenium.Elements.Composite;
-using JDI.Light.Settings;
 using JDI.Light.Tests.Entities;
 using OpenQA.Selenium;
 
@@ -49,7 +48,7 @@ namespace JDI.Light.Tests.UIObjects.Sections
 
         private IJavaScriptExecutor GetJSExecutor()
         {
-            if (javaScriptExecutor == null) javaScriptExecutor = WebSettings.JsExecutor;
+            if (javaScriptExecutor == null) javaScriptExecutor = JDI.JsExecutor;
             return javaScriptExecutor;
         }
 

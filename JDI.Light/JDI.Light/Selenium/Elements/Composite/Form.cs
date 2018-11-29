@@ -4,7 +4,6 @@ using System.Linq;
 using JDI.Light.Extensions;
 using JDI.Light.Interfaces.Base;
 using JDI.Light.Interfaces.Complex;
-using JDI.Light.Settings;
 using JDI.Light.Utils;
 using OpenQA.Selenium;
 
@@ -148,7 +147,7 @@ namespace JDI.Light.Selenium.Elements.Composite
         {
             var result = Verify(objStrings);
             if (result.Count > 0)
-                throw WebSettings.Assert.Exception("Check form failed:" + result.FormattedJoin("".FromNewLine()).FromNewLine());
+                throw JDI.Assert.Exception("Check form failed:" + result.FormattedJoin("".FromNewLine()).FromNewLine());
         }
     }
 

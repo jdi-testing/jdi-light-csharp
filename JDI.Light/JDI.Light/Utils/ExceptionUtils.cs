@@ -1,5 +1,4 @@
 ﻿using System;
-using JDI.Light.Settings;
 
 namespace JDI.Light.Utils
 {
@@ -14,7 +13,7 @@ namespace JDI.Light.Utils
             catch (Exception ex)
             {
                 var msg = getExceptionMsg.Invoke(ex.Message);
-                WebSettings.Assert.ThrowFail(msg, ex);
+                JDI.Assert.ThrowFail(msg, ex);
             }
         }
 
@@ -28,7 +27,7 @@ namespace JDI.Light.Utils
             catch (Exception ex)
             {
                 var msg = getExceptionMsg.Invoke(ex.Message);
-                WebSettings.Assert.ThrowFail(msg, ex);
+                JDI.Assert.ThrowFail(msg, ex);
                 return default(T);
             }
         }

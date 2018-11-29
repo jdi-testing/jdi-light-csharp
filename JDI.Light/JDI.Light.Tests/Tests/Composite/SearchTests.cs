@@ -1,5 +1,4 @@
-﻿using JDI.Light.Settings;
-using JDI.Light.Tests.UIObjects;
+﻿using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 
 namespace JDI.Light.Tests.Tests.Composite
@@ -9,12 +8,12 @@ namespace JDI.Light.Tests.Tests.Composite
         [SetUp]
         public void SetUp()
         {
-            WebSettings.Logger.Info("Navigating to Home page.");
+            JDI.Logger.Info("Navigating to Home page.");
             TestSite.HomePage.Open();
             TestSite.HomePage.CheckTitle();
             TestSite.HomePage.IsOpened();
-            WebSettings.Logger.Info("Setup method finished");
-            WebSettings.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            JDI.Logger.Info("Setup method finished");
+            JDI.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         [Test]

@@ -1,5 +1,4 @@
 ﻿using JDI.Light.Selenium.Elements.Composite;
-using JDI.Light.Settings;
 using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 
@@ -12,17 +11,17 @@ namespace JDI.Light.Tests.Tests.Composite
         [SetUp]
         public void SetUp()
         {
-            WebSettings.Logger.Info("Navigating to Simple Table page.");
+            JDI.Logger.Info("Navigating to Simple Table page.");
             TestSite.SimpleTablePage.Open();
             TestSite.SimpleTablePage.CheckTitle();
             TestSite.SimpleTablePage.IsOpened();
-            WebSettings.Logger.Info("Setup method finished");
-            WebSettings.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            JDI.Logger.Info("Setup method finished");
+            JDI.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         private void CheckPageOpened(int num)
         {
-            Assert.True(WebSettings.WebDriverFactory.GetDriver().Url.Contains("/page" + num + ".htm"));
+            Assert.True(JDI.DriverFactory.GetDriver().Url.Contains("/page" + num + ".htm"));
         }
 
         [Test]
