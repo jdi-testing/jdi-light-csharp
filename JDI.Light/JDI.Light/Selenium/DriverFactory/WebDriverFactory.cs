@@ -46,7 +46,6 @@ namespace JDI.Light.Selenium.DriverFactory
 
         private string _currentDriverName;
         public Func<IWebElement, bool> ElementSearchCriteria = el => el.Displayed;
-        public HighlightSettings HighlightSettings = new HighlightSettings();
 
         public Func<IWebDriver, IWebDriver> WebDriverSettings = driver =>
         {
@@ -173,22 +172,6 @@ namespace JDI.Light.Selenium.DriverFactory
         public bool HasRunDrivers()
         {
             return RunDrivers.Value != null && RunDrivers.Value.Any();
-        }
-
-        public void Highlight(IBaseUIElement element)
-        {
-            Highlight(element, HighlightSettings);
-        }
-
-        public void Highlight(IBaseUIElement element, HighlightSettings highlightSettings)
-        {
-            if (highlightSettings == null)
-                highlightSettings = new HighlightSettings();
-            var orig = ((UIElement) element).WebElement.GetAttribute("style");
-            element.SetAttribute("style",
-                $"border: 3px solid {highlightSettings.FrameColor}; background-color: {highlightSettings.BgColor};");
-            Thread.Sleep(highlightSettings.TimeoutInSec * 1000);
-            element.SetAttribute("style", orig);
         }
 
         private string RegisterLocalDriver(DriverType driverType)

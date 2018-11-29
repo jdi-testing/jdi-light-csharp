@@ -19,7 +19,7 @@ namespace JDI.Light.Selenium.Elements.WebActions
 
         private void LogAction(string actionName, LogLevel level)
         {
-            WebSettings.Logger.Log(string.Format(JDI.ShortLogMessagesFormat
+            _logger.Log(string.Format(JDI.ShortLogMessagesFormat
                 ? "{0} for {1}"
                 : "Perform action '{0}' with WebElement ({1})", actionName, _targetElement.ToString()), level);
         }
@@ -32,7 +32,7 @@ namespace JDI.Light.Selenium.Elements.WebActions
                 action(_targetElement);
                 return true;
             });
-            WebSettings.Logger.Info(actionName + " done");
+            _logger.Info(actionName + " done");
         }
 
         public TResult ResultScenario<TResult>(string actionName, Func<T, TResult> action,
@@ -50,7 +50,7 @@ namespace JDI.Light.Selenium.Elements.WebActions
                 ? result.ToString()
                 : logResult.Invoke(result);
             var timePassed = timer.TimePassed.TotalMilliseconds;
-            WebSettings.Logger.Log($"Get result '{stringResult}' in {timePassed / 1000:F} seconds", level);
+            _logger.Log($"Get result '{stringResult}' in {timePassed / 1000:F} seconds", level);
             return result;
         }
     }

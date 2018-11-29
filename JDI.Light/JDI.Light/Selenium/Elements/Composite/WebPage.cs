@@ -111,12 +111,12 @@ namespace JDI.Light.Selenium.Elements.Composite
 
         public static string GetUrl()
         {
-            return WebSettings.WebDriver.Url;
+            return WebSettings.WebDriverFactory.GetDriver().Url;
         }
 
         public static string GetTitle()
         {
-            return WebSettings.WebDriver.Title;
+            return WebSettings.WebDriverFactory.GetDriver().Title;
         }
 
         public void UpdatePageData(string url, string title, CheckPageType checkUrlType, CheckPageType checkTitleType,

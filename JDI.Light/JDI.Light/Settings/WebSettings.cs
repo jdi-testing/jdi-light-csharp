@@ -55,7 +55,6 @@ namespace JDI.Light.Settings
         public static bool GetLatestDriver = true;
         public static string Domain;
         public static bool HasDomain => Domain != null && Domain.Contains("://");
-        public static IWebDriver WebDriver => WebDriverFactory.GetDriver();
         public static WebDriverFactory WebDriverFactory =>
             _webDriverFactory ?? (_webDriverFactory = new WebDriverFactory());
         public static IJavaScriptExecutor JsExecutor => DriverFactory.GetDriver() as IJavaScriptExecutor;

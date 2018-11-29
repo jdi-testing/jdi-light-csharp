@@ -1,7 +1,4 @@
-﻿using JDI.Light.Interfaces.Base;
-using JDI.Light.Settings;
-
-namespace JDI.Light.Interfaces
+﻿namespace JDI.Light.Interfaces
 {
     public interface IDriverFactory<out T>
     {
@@ -18,9 +15,5 @@ namespace JDI.Light.Interfaces
         bool HasRunDrivers();
 
         T GetDriver(string name);
-
-        void Highlight(IBaseUIElement element);
-
-        void Highlight(IBaseUIElement element, HighlightSettings highlightSettings);
     }
 }

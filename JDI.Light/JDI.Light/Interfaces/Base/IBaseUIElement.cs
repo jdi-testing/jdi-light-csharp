@@ -4,5 +4,6 @@
     {
         string GetAttribute(string name);
         void SetAttribute(string attributeName, string value);
+        void Highlight(string borderColor, string backgroundColor, int highlightMillisecondsTime);
     }
 }

@@ -22,7 +22,7 @@ namespace JDI.Light.Tests.Tests.Composite
 
         private void CheckPageOpened(int num)
         {
-            Assert.True(WebSettings.WebDriver.Url.Contains("/page" + num + ".htm"));
+            Assert.True(WebSettings.WebDriverFactory.GetDriver().Url.Contains("/page" + num + ".htm"));
         }
 
         [Test]

@@ -77,7 +77,7 @@ namespace JDI.Light.Tests.Tests.Complex
         public void SetValueTest()
         {
             MetalsControl.Value = "Blue";
-            WebSettings.WebDriver.FindElement(By.ClassName("footer-content")).Click();
+            WebSettings.WebDriverFactory.GetDriver().FindElement(By.ClassName("footer-content")).Click();
             CommonActionsData.CheckAction("Metals: value changed to Blue");
         }
 

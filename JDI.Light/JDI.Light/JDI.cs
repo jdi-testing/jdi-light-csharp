@@ -8,7 +8,6 @@ namespace JDI.Light
     public static class JDI
     {
         public static bool IsDemoMode;
-        public static HighlightSettings HighlightSettings;
         public static bool ShortLogMessagesFormat;
         public static bool UseCache;
         public static WebSettings WebSettings;
@@ -16,7 +15,6 @@ namespace JDI.Light
         static JDI()
         {
             WebSettings.Timeouts = new WebTimeoutSettings();
-            HighlightSettings = new HighlightSettings();
             ShortLogMessagesFormat = true;
             WebSettings = new WebSettings();
 
@@ -28,7 +26,6 @@ namespace JDI.Light
                 UseCache = p.ToLower().Equals("true") || p.ToLower().Equals("1"), "Cache");
             GetFromPropertiesAvoidExceptions(p =>
                 UseCache = p.ToLower().Equals("true") || p.ToLower().Equals("1"), "DemoMode");
-            GetFromPropertiesAvoidExceptions(p => HighlightSettings.SetTimeoutInSec(int.Parse(p)), "DemoDelay");
         }
         
         public static void InitSite(Type siteType)

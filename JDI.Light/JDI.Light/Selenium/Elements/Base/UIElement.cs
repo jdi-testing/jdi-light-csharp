@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using JDI.Light.Interfaces.Base;
 using JDI.Light.Selenium.DriverFactory;
 using JDI.Light.Selenium.Elements.WebActions;
 using JDI.Light.Settings;
-using JDI.Light.Utils;
 using OpenQA.Selenium;
+using Timer = JDI.Light.Utils.Timer;
 
 namespace JDI.Light.Selenium.Elements.Base
 {
@@ -159,6 +160,15 @@ namespace JDI.Light.Selenium.Elements.Base
                     WebElement, value));
         }
 
+        public void Highlight(string borderColor = "red", string backgroundColor = "yellow", int highlightMillisecondsTime = 1000)
+        {
+            var originalStyle = GetAttribute("style");
+            SetAttribute("style",
+                $"border: 3px solid {borderColor}; background-color: {backgroundColor};");
+            Thread.Sleep(highlightMillisecondsTime);
+            SetAttribute("style", originalStyle);
+        }
+
         public string Name { get; set; }
 
         public string TypeName => GetType().Name;
@@ -191,16 +201,6 @@ namespace JDI.Light.Selenium.Elements.Base
         public void WaitVanished()
         {
             Actions.WaitVanished(el => Timer.Wait(() => !IsDisplayedAction(el)));
-        }
-
-        public void Highlight()
-        {
-            WebSettings.WebDriverFactory.Highlight(this);
-        }
-
-        public void Highlight(HighlightSettings highlightSettings)
-        {
-            WebSettings.WebDriverFactory.Highlight(this, highlightSettings);
         }
     }
 }

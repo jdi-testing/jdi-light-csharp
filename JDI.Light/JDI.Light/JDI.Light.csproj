@@ -175,7 +175,6 @@
     <Compile Include="Selenium\Elements\WebActions\ActionScenarios.cs" />
     <Compile Include="Selenium\Elements\WebActions\ElementsActions.cs" />
     <Compile Include="Selenium\Elements\WebCascadeInit.cs" />
-    <Compile Include="Settings\HighlightSettings.cs" />
     <Compile Include="Interfaces\IAssert.cs" />
     <Compile Include="JDI.cs" />
     <Compile Include="Settings\MapInterfaceToElement.cs" />
