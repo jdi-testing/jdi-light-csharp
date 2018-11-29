@@ -12,12 +12,12 @@ namespace JDI.Light.Matchers
 
         private readonly string _checkMessage;
 
-        protected BaseAsserter(string checkMessage) : this()
+        public BaseAsserter(string checkMessage) : this()
         {
             _checkMessage = GetCheckMessage(checkMessage);
         }
 
-        protected BaseAsserter()
+        public BaseAsserter()
         {
             _logger = JDI.Logger;
         }
@@ -28,12 +28,12 @@ namespace JDI.Light.Matchers
 
         public void ThrowFail(string message, Exception ex)
         {
-            throw new NotImplementedException();
+            throw new Exception(message, ex);
         }
 
         public Exception Exception(string message)
         {
-            throw new NotImplementedException();
+            throw new Exception(message);
         }
 
         private string GetCheckMessage(string checkMessage)

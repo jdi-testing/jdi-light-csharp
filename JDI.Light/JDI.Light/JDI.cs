@@ -2,6 +2,7 @@
 using System.Linq;
 using JDI.Light.Interfaces;
 using JDI.Light.Logging;
+using JDI.Light.Matchers;
 using JDI.Light.Selenium.DriverFactory;
 using JDI.Light.Selenium.Elements;
 using JDI.Light.Settings;
@@ -63,7 +64,7 @@ namespace JDI.Light
             Timeouts timeouts = null, IDriverFactory<IWebDriver> driverFactory = null)
         {
             DriverFactory = driverFactory ?? new WebDriverFactory();
-            Assert = assert;
+            Assert = assert ?? new BaseAsserter();
             Timeouts = timeouts ?? new Timeouts();
             Logger = logger ?? new ConsoleLogger();
 
