@@ -18,7 +18,7 @@ namespace JDI.Light.Selenium.Elements.Complex.Table
         private IList<ICell> _allCells = new List<ICell>();
         private IList<string> _footer;
 
-        public Table()
+        public Table() : base(null)
         {
             Columns.Table = this;
             Rows.Table = this;
@@ -308,7 +308,6 @@ namespace JDI.Light.Selenium.Elements.Complex.Table
         }
 
         public Dictionary<string, Dictionary<string, ICell>> GetColumns(params string[] rowNameValues)
-            // TODO method name conflict
         {
             var result = new Dictionary<string, Dictionary<string, ICell>>();
             foreach (var column in Columns.Get())
@@ -464,11 +463,10 @@ namespace JDI.Light.Selenium.Elements.Complex.Table
             return WebElement.FindElements(FooterBy).Select(e => e.Text).ToList();
         }
 
-        public IList<string> FooterInstance() // TODO method name conflict
+        public IList<string> FooterInstance()
         {
             if (Footer != null)
                 return Footer;
-            //_footer = invoker.doJActionResult("Get Footer", this::getFooterAction); TODO
             if (Footer == null || Footer.Count == 0)
                 return new List<string>();
             Columns.Count = Footer.Count;

@@ -11,10 +11,6 @@ namespace JDI.Light.Selenium.Elements.Composite
 {
     public class CompositeUIElement : UIElement
     {
-        public CompositeUIElement()
-        {
-        }
-
         public CompositeUIElement(By locator) : base(locator)
         {
         }

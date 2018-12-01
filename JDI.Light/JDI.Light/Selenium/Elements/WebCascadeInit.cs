@@ -93,8 +93,7 @@ namespace JDI.Light.Selenium.Elements
         {
             var instance = (IBaseElement)field.GetValue(parent);
             type = type.IsInterface ? MapInterfaceToElement.ClassFromInterface(type) : type;
-            var element = (UIElement)instance ?? (UIElement)Activator.CreateInstance(type);
-            element.Locator = element.HasLocator ? element.Locator : field.GetFindsBy();
+            var element = (UIElement)instance ?? (UIElement)Activator.CreateInstance(type, field.GetFindsBy());
             var jTable = field.GetAttribute<JTableAttribute>();
             if (jTable != null && typeof(ITable).IsAssignableFrom(field.FieldType))
             {

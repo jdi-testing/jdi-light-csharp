@@ -12,6 +12,10 @@ namespace JDI.Light.Selenium.Elements.Composite
     public class Form : CompositeUIElement, IForm
     {
         public By LocatorTemplate;
+        
+        public Form(By locator) : base(locator)
+        {
+        }
 
         public string Value
         {
@@ -148,6 +152,14 @@ namespace JDI.Light.Selenium.Elements.Composite
 
     public class Form<T> : Form, IForm<T>
     {
+        public Form() : base(null)
+        {
+        }
+
+        public Form(By locator) : base(locator)
+        {
+        }
+
         public void Fill(T entity)
         {
             Fill(entity.ToDictionary());
