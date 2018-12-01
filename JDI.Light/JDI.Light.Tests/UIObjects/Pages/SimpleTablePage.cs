@@ -1,4 +1,4 @@
-﻿using JDI.Light.Selenium.Elements.Composite;
+﻿using JDI.Light.Elements.Composite;
 using JDI.Light.Tests.UIObjects.Sections;
 
 namespace JDI.Light.Tests.UIObjects.Pages

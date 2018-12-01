@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using JDI.Light.Elements.Base;
+using JDI.Light.Elements.Common;
+using JDI.Light.Elements.Complex;
+using JDI.Light.Elements.Complex.Table;
+using JDI.Light.Elements.Complex.Table.Interfaces;
 using JDI.Light.Factories;
 using JDI.Light.Interfaces.Base;
 using JDI.Light.Interfaces.Common;
 using JDI.Light.Interfaces.Complex;
-using JDI.Light.Selenium.Elements.Base;
-using JDI.Light.Selenium.Elements.Common;
-using JDI.Light.Selenium.Elements.Complex;
-using JDI.Light.Selenium.Elements.Complex.Table;
-using JDI.Light.Selenium.Elements.Complex.Table.Interfaces;
-using Image = JDI.Light.Selenium.Elements.Common.Image;
+using Image = JDI.Light.Elements.Common.Image;
 using static JDI.Light.Utils.ExceptionUtils;
 
 namespace JDI.Light.Settings

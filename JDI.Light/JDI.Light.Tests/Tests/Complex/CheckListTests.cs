@@ -14,7 +14,7 @@ namespace JDI.Light.Tests.Tests.Complex
         private static readonly IList<string> NATURE_OPTIONS = new List<string> {"Water", "Earth", "Wind", "Fire"};
         private static readonly string ALL_VALUES = "Water, Earth, Wind, Fire";
 
-        private ICheckList<Elements> _nature()
+        private ICheckList<Enums.Elements> _nature()
         {
             return TestSite.MetalsColorsPage.Elements;
         }
@@ -77,7 +77,7 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void SelectEnumTest()
         {
-            _nature().Select(Elements.Fire);
+            _nature().Select(Enums.Elements.Fire);
             CommonActionsData.CheckAction("Fire: condition changed to true");
         }
 
@@ -101,7 +101,7 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void Select2EnumTest()
         {
-            _nature().Select(Elements.Water, Elements.Fire);
+            _nature().Select(Enums.Elements.Water, Enums.Elements.Fire);
             CommonActionsData.CheckAction("Fire: condition changed to true");
             _cheсkAllLogMessages(new List<string> {"Fire", "Water"});
         }
@@ -123,7 +123,7 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void CheckEnumTest()
         {
-            _nature().Check(Elements.Fire);
+            _nature().Check(Enums.Elements.Fire);
             CommonActionsData.CheckAction("Fire: condition changed to true");
         }
 
@@ -146,7 +146,7 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void Check2EnumTest()
         {
-            _nature().Check(Elements.Water, Elements.Fire);
+            _nature().Check(Enums.Elements.Water, Enums.Elements.Fire);
             CommonActionsData.CheckAction("Fire: condition changed to true");
             _cheсkAllLogMessages(new List<string> {"Fire", "Water"});
         }

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
+using JDI.Light.Elements.Complex.Table;
 using JDI.Light.Extensions;
-using JDI.Light.Selenium.Elements.Complex.Table;
 using JDI.Light.Tests.Asserts;
 using JDI.Light.Tests.Tests.Complex.Table.Base;
 using NUnit.Framework;

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
+using JDI.Light.Elements;
 using JDI.Light.Factories;
 using JDI.Light.Interfaces;
 using JDI.Light.Logging;
-using JDI.Light.Selenium.Elements;
 using JDI.Light.Settings;
 using JDI.Light.Utils;
 using OpenQA.Selenium;

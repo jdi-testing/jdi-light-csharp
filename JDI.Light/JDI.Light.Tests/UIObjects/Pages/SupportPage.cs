@@ -1,6 +1,6 @@
 ﻿using JDI.Light.Attributes;
-using JDI.Light.Selenium.Elements.Complex.Table.Interfaces;
-using JDI.Light.Selenium.Elements.Composite;
+using JDI.Light.Elements.Complex.Table.Interfaces;
+using JDI.Light.Elements.Composite;
 
 namespace JDI.Light.Tests.UIObjects.Pages
 {

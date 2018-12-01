@@ -1,4 +1,4 @@
-﻿using JDI.Light.Selenium.Elements.Complex.Table.Interfaces;
+﻿using JDI.Light.Elements.Complex.Table.Interfaces;
 using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 

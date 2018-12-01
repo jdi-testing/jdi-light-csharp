@@ -1,10 +1,10 @@
 ﻿using JDI.Light.Attributes;
+using JDI.Light.Elements.Base;
+using JDI.Light.Elements.Common;
+using JDI.Light.Elements.Complex;
+using JDI.Light.Elements.Composite;
 using JDI.Light.Interfaces.Common;
 using JDI.Light.Interfaces.Complex;
-using JDI.Light.Selenium.Elements.Base;
-using JDI.Light.Selenium.Elements.Common;
-using JDI.Light.Selenium.Elements.Complex;
-using JDI.Light.Selenium.Elements.Composite;
 using JDI.Light.Tests.Enums;
 using JDI.Light.Tests.UIObjects.Sections;
 using OpenQA.Selenium;
@@ -42,7 +42,7 @@ namespace JDI.Light.Tests.UIObjects.Pages
             };
 
         [FindBy(Css = "#elements-checklist label")]
-        public CheckList<Elements> Elements;
+        public CheckList<Enums.Elements> Elements;
 
         [FindBy(Id = "summary-block")]
         public Summary SummaryBlock;

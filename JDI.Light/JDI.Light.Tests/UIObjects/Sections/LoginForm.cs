@@ -1,7 +1,7 @@
 ﻿using JDI.Light.Attributes;
+using JDI.Light.Elements.Composite;
 using JDI.Light.Interfaces.Base;
 using JDI.Light.Interfaces.Common;
-using JDI.Light.Selenium.Elements.Composite;
 using JDI.Light.Tests.Entities;
 
 namespace JDI.Light.Tests.UIObjects.Sections

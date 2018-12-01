@@ -1,7 +1,7 @@
-﻿using JDI.Light.Enums;
+﻿using JDI.Light.Elements.Composite;
+using JDI.Light.Elements.WebActions;
+using JDI.Light.Enums;
 using JDI.Light.Interfaces.Base;
-using JDI.Light.Selenium.Elements.Composite;
-using JDI.Light.Selenium.Elements.WebActions;
 using JDI.Light.Utils;
 using OpenQA.Selenium;
 

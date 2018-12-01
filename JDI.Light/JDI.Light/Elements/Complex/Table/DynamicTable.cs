@@ -1,0 +1,10 @@
+namespace JDI.Light.Elements.Complex.Table
+{
+    public class DynamicTable : Table
+    {
+        public DynamicTable()
+        {
+            Cache = false;
+        }
+    }
+}
