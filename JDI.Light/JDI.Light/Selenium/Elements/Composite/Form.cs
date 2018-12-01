@@ -13,16 +13,14 @@ namespace JDI.Light.Selenium.Elements.Composite
     {
         public By LocatorTemplate;
 
-        protected Func<Form, string> GetValueAction =>
-            f => this.GetFields(typeof(IHasValue)).Select(field => ((IHasValue) field.GetValue(this)).Value).FormattedJoin();
-
-        protected Action<Form, string> SetValueAction =>
-            (f, value) => Submit(value.ParseAsString());
-
         public string Value
         {
-            get { return Actions.GetValue(f => GetValueAction(this)); }
-            set { Actions.SetValue(value, (f, val) => SetValueAction(this, value)); }
+            get
+            {
+                return this.GetFields(typeof(IHasValue)).Select(field => ((IHasValue) field.GetValue(this)).Value)
+                    .FormattedJoin();
+            }
+            set => Submit(value.ParseAsString());
         }
 
         public string GetValue()
