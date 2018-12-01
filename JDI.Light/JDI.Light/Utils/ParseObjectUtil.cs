@@ -44,11 +44,37 @@ namespace JDI.Light.Utils
                 : input;
         }
 
-        public static Dictionary<string, string> ToSetValue(this object obj)
+        public static Dictionary<string, string> AsDictionary(this object obj)
         {
             return obj == null
                 ? new Dictionary<string, string>()
                 : ParseObjectAsString(PrintObject(obj));
+        }
+
+        public static Dictionary<string, string> ToDictionary(this object o)
+        {
+            var dict = new Dictionary<string, string>();
+            o.GetFields().ForEach(f =>
+            {
+                var v = f.GetValue(o);
+                string strValue = null;
+                switch (v)
+                {
+                    case null:
+                        strValue = "null";
+                        break;
+                    case string s:
+                        strValue = s;
+                        break;
+                    case IConvertible _:
+                        strValue = v.ToString();
+                        break;
+                }
+                var n = f.GetElementName();
+                var strKey = string.IsNullOrWhiteSpace(n) ? f.Name : n;
+                dict.Add(strKey, strValue);
+            });
+            return dict;
         }
 
         private static string PrintObject(object obj)

@@ -150,12 +150,12 @@ namespace JDI.Light.Selenium.Elements.Composite
     {
         public void Fill(T entity)
         {
-            Fill(entity.ToSetValue());
+            Fill(entity.ToDictionary());
         }
 
         public IList<string> Verify(T entity)
         {
-            return Verify(entity.ToSetValue());
+            return Verify(entity.ToDictionary());
         }
 
         public void Search(T entity)
@@ -165,7 +165,7 @@ namespace JDI.Light.Selenium.Elements.Composite
 
         public void Submit(T entity, string buttonName)
         {
-            Fill(entity.ToSetValue());
+            Fill(entity.ToDictionary());
             GetButton(buttonName).Click();
         }
 
@@ -226,13 +226,13 @@ namespace JDI.Light.Selenium.Elements.Composite
 
         public void Submit(T entity, Enum buttonName)
         {
-            Fill(entity.ToSetValue());
+            Fill(entity.ToDictionary());
             GetButton(buttonName.ToString().ToLower()).Click();
         }
 
         public void Check(T entity)
         {
-            Check(entity.ToSetValue());
+            Check(entity.ToDictionary());
         }
     }
 }
