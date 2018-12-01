@@ -9,7 +9,7 @@ namespace JDI.Light.Elements.WebActions
 {
     public class ActionInvoker<T>
     {
-        private static ActionScenarios<T> _actionScenarios;
+        private readonly ActionScenarios<T> _actionScenarios;
         private readonly T _element;
 
         public ActionInvoker(T element, ILogger logger)

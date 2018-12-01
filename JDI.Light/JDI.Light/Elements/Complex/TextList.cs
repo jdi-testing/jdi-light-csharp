@@ -9,7 +9,7 @@ namespace JDI.Light.Elements.Complex
 {
     public class TextList : CompositeUIElement
     {
-        private List<Label> _texts;
+        private IList<Label> _texts;
 
         public TextList(By locator) : base(locator)
         {
