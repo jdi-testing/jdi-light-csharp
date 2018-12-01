@@ -92,26 +92,9 @@ namespace JDI.Light.Selenium.Elements
             string driverName)
         {
             var instance = (IBaseElement)field.GetValue(parent);
-            var element = (UIElement)instance;
-            var newLocator = field.GetAttribute<JFindByAttribute>()?.ByLocator
-                             ?? field.GetCustomAttribute<FindByAttribute>(false)?.ByLocator
-                             ?? field.GetFindsBy();
-            if (element == null)
-            {
-                if (type == typeof(List<>))
-                    throw JDI.Assert.Exception(
-                        $"Can't init element {field.Name} with type 'List<>'. Please use 'IList<>' or 'Elements<>' instead");
-                if (type.IsInterface)
-                    type = MapInterfaceToElement.ClassFromInterface(type);
-                element = (UIElement)Activator.CreateInstance(type);
-                element.DriverName = driverName;
-            }
-
-            if (newLocator != null && !element.HasLocator)
-            {
-                element.Locator = newLocator;
-            }
-            element.Parent = parent;
+            type = type.IsInterface ? MapInterfaceToElement.ClassFromInterface(type) : type;
+            var element = (UIElement)instance ?? (UIElement)Activator.CreateInstance(type);
+            element.Locator = element.HasLocator ? element.Locator : field.GetFindsBy();
             var jTable = field.GetAttribute<JTableAttribute>();
             if (jTable != null && typeof(ITable).IsAssignableFrom(field.FieldType))
             {

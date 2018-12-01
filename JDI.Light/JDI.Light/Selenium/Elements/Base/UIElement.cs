@@ -26,10 +26,6 @@ namespace JDI.Light.Selenium.Elements.Base
         public Timer Timer { get; set; }
         public string DriverName { get; set; }
 
-        public UIElement()
-        {
-        }
-
         public UIElement(By byLocator)
         {
             Locator = byLocator;
