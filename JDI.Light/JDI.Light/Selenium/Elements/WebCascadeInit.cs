@@ -39,8 +39,7 @@ namespace JDI.Light.Selenium.Elements
         
         public void InitStaticPages(Type parentType, string driverName)
         {
-            SetFields(null,
-                parentType.StaticFields().GetFields(Decorators), parentType, driverName);
+            SetFields(null, parentType.StaticFields().GetFields(Decorators), parentType, driverName);
         }
 
         private void SetFields(IBaseElement parent, List<FieldInfo> fields, Type parentType, string driverName)
@@ -99,43 +98,31 @@ namespace JDI.Light.Selenium.Elements
                              ?? field.GetFindsBy();
             if (element == null)
             {
-                //instance = GetElementInstance(field, driverName, parent);
                 if (type == typeof(List<>))
                     throw JDI.Assert.Exception(
                         $"Can't init element {field.Name} with type 'List<>'. Please use 'IList<>' or 'Elements<>' instead");
-
                 if (type.IsInterface)
                     type = MapInterfaceToElement.ClassFromInterface(type);
-                if (type != null)
-                {
-                    instance = (UIElement)Activator.CreateInstance(type);
-                    if (newLocator != null)
-                        ((UIElement)instance).Locator = newLocator;
-                }
-                if (instance == null)
-                    throw JDI.Assert.Exception("Unknown interface: " + type +
-                                               ". Add relation interface -> class in VIElement.InterfaceTypeMap");
-                instance.DriverName = driverName;
+                element = (UIElement)Activator.CreateInstance(type);
+                element.DriverName = driverName;
             }
-            else
+
+            if (newLocator != null && !element.HasLocator)
             {
-                if (!element.HasLocator)
-                    element.Locator = newLocator;
+                element.Locator = newLocator;
             }
-            instance.Parent = parent;
+            element.Parent = parent;
             var jTable = field.GetAttribute<JTableAttribute>();
             if (jTable != null && typeof(ITable).IsAssignableFrom(field.FieldType))
             {
-                var table = (Table) instance;
+                var table = (Table) element;
                 table.SetUp(jTable.Root.ByLocator, jTable.Cell.ByLocator,
                     jTable.Row.ByLocator, jTable.Column.ByLocator, jTable.Footer.ByLocator,
                     jTable.ColStartIndex, jTable.RowStartIndex);
-
                 if (jTable.Header != null)
                     table.ColumnHeaders = jTable.Header;
                 if (jTable.RowsHeader != null)
                     table.RowHeaders = jTable.RowsHeader;
-
                 if (jTable.Height > 0)
                     table.SetColumnsCount(jTable.Height);
                 if (jTable.Width > 0)
@@ -150,14 +137,13 @@ namespace JDI.Light.Selenium.Elements
                     table.SetColumnsCount(int.Parse(split[0]));
                     table.SetRowsCount(int.Parse(split[1]));
                 }
-
                 table.HeaderType = jTable.HeaderType;
                 table.UseCache(jTable.UseCache);
             }
             var jDropdown = field.GetAttribute<JDropdownAttribute>();
             if (jDropdown != null && typeof(IDropDown).IsAssignableFrom(field.FieldType))
             {
-                var dropdown = (Dropdown) instance;
+                var dropdown = (Dropdown) element;
                 dropdown.SetUp(jDropdown.Root.ByLocator, jDropdown.Value.ByLocator,
                     jDropdown.List.ByLocator, jDropdown.Expand.ByLocator,
                     jDropdown.ElementByName.ByLocator);
@@ -165,12 +151,11 @@ namespace JDI.Light.Selenium.Elements
             var jMenu = field.GetAttribute<JMenuAttribute>();
             if (jMenu != null && typeof(IMenu).IsAssignableFrom(field.FieldType))
             {
-                var menu = (Menu) instance;
+                var menu = (Menu) element;
                 menu.SetUp(jMenu.LevelLocators.Select(findby => findby.ByLocator).ToList());
                 if (!jMenu.Separator.Equals(""))
                     menu.UseSeparator(jMenu.Separator);
             }
-            element = (UIElement)instance;
             if (parent == null || type != null)
             {
                 var frameBy = field.GetCustomAttribute<FrameAttribute>(false)?.FrameLocator;
@@ -181,7 +166,6 @@ namespace JDI.Light.Selenium.Elements
                                                 && (template = form.LocatorTemplate) != null)
                     element.Locator = template.FillByTemplate(field.Name);
             }
-
             return element;
         }
     }
