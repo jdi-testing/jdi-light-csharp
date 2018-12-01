@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using JDI.Light.Factories;
 using JDI.Light.Interfaces;
 using JDI.Light.Interfaces.Base;
-using JDI.Light.Selenium.DriverFactory;
 using JDI.Light.Selenium.Elements.WebActions;
 using JDI.Light.Utils;
 using OpenQA.Selenium;

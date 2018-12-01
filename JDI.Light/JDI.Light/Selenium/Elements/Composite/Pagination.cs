@@ -3,7 +3,6 @@ using System.Linq;
 using JDI.Light.Extensions;
 using JDI.Light.Interfaces.Base;
 using JDI.Light.Interfaces.Complex;
-using JDI.Light.Selenium.DriverFactory;
 using JDI.Light.Selenium.Elements.Base;
 using JDI.Light.Utils;
 using OpenQA.Selenium;

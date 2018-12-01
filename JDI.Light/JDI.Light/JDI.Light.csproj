@@ -120,9 +120,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Utils\WebDriverByUtils.cs" />
-    <Compile Include="Selenium\DriverFactory\WebDriverFactory.cs" />
+    <Compile Include="Factories\WebDriverFactory.cs" />
     <Compile Include="Utils\WinProcUtils.cs" />
-    <Compile Include="Selenium\DriverManager\WebDriverManager.cs" />
+    <Compile Include="Utils\WebDriverUtils.cs" />
     <Compile Include="Selenium\Elements\Base\Clickable.cs" />
     <Compile Include="Selenium\Elements\Base\ClickableText.cs" />
     <Compile Include="Selenium\Elements\Base\SelectableElement.cs" />
@@ -193,7 +193,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Selenium\DriverFactory\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Selenium.Chrome.WebDriver.2.43\build\Selenium.Chrome.WebDriver.targets" Condition="Exists('..\packages\Selenium.Chrome.WebDriver.2.43\build\Selenium.Chrome.WebDriver.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

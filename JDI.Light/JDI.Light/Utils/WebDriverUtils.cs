@@ -5,9 +5,9 @@ using JDI.Light.Extensions;
 using WebDriverManager.DriverConfigs.Impl;
 using WebDriverManager.Helpers;
 
-namespace JDI.Light.Selenium.DriverManager
+namespace JDI.Light.Utils
 {
-    public class WebDriverManager
+    public class WebDriverUtils
     {
         /// <summary>
         ///     Checks if local driver version is same with driver version from repo

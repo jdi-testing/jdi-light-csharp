@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using JDI.Light.Factories;
 using JDI.Light.Interfaces.Base;
 using JDI.Light.Interfaces.Common;
 using JDI.Light.Interfaces.Complex;
-using JDI.Light.Selenium.DriverFactory;
 using JDI.Light.Selenium.Elements.Base;
 using JDI.Light.Selenium.Elements.Common;
 using JDI.Light.Selenium.Elements.Complex;

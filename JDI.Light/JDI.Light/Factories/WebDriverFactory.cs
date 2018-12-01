@@ -6,13 +6,14 @@ using System.Threading;
 using JDI.Light.Enums;
 using JDI.Light.Interfaces;
 using JDI.Light.Settings;
+using JDI.Light.Utils;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Remote;
 
-namespace JDI.Light.Selenium.DriverFactory
+namespace JDI.Light.Factories
 {
     public class WebDriverFactory : IDriverFactory<IWebDriver>
     {
@@ -176,8 +177,8 @@ namespace JDI.Light.Selenium.DriverFactory
         private string RegisterLocalDriver(DriverType driverType)
         {
             if (WebSettings.GetLatestDriver)
-                if (!DriverManager.WebDriverManager.IsLocalVersionLatestVersion(driverType, DriverPath))
-                    DriverPath = DriverManager.WebDriverManager.GetLatestVersion(driverType);
+                if (!WebDriverUtils.IsLocalVersionLatestVersion(driverType, DriverPath))
+                    DriverPath = WebDriverUtils.GetLatestVersion(driverType);
             return RegisterDriver(GetDriverName(_driverNamesDictionary[driverType]),
                 () => WebDriverSettings(_driversDictionary[driverType](DriverPath)));
         }

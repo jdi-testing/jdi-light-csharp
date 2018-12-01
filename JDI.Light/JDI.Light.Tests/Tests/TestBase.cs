@@ -1,5 +1,4 @@
-﻿using JDI.Light.Selenium.DriverFactory;
-using JDI.Light.Tests.Asserts;
+﻿using JDI.Light.Tests.Asserts;
 using JDI.Light.Tests.Entities;
 using JDI.Light.Tests.UIObjects;
 using JDI.Light.Utils;
