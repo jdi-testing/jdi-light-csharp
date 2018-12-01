@@ -35,7 +35,7 @@ namespace JDI.Light.Utils
             }, ex => $"Can't parse string '{objString}' to Object");
         }
 
-        public static string ProcessValue(string input, IList<string> values)
+        private static string ProcessValue(string input, IList<string> values)
         {
             if (input.Equals("#NULL#"))
                 return null;

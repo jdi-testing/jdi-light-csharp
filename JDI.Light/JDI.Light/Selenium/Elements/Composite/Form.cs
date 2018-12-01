@@ -11,9 +11,6 @@ namespace JDI.Light.Selenium.Elements.Composite
 {
     public class Form : CompositeUIElement, IForm
     {
-        protected Func<Form, IHasValue, string> GetFieldValueAction =
-            (f, element) => element.Value;
-
         public By LocatorTemplate;
 
         protected Func<Form, string> GetValueAction =>
@@ -134,7 +131,7 @@ namespace JDI.Light.Selenium.Elements.Composite
                     pair.Key.SimplifiedEqual(field.GetElementName())).Value;
                 if (fieldValue == null) return;
                 var valueField = (IHasValue) field.GetValue(this);
-                var actual = GetFieldValueAction(this, valueField).Trim();
+                var actual = valueField.Value.Trim();
                 if (!actual.Equals(fieldValue))
                 {
                     compareFalse.Add($"Field '{field.Name}' (Actual: '{actual}' <> Expected: '{fieldValue}')");

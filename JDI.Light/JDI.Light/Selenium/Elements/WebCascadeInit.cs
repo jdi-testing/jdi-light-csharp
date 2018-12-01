@@ -59,7 +59,7 @@ namespace JDI.Light.Selenium.Elements
                             instance.DriverName = driverName;
                             instance.Parent = parent;
                             field.SetValue(parent, instance);
-                            SetFields(parent, parent.GetFields(Decorators, StopTypes), parent.GetType(), driverName);
+                            SetFields(instance, instance.GetFields(Decorators, StopTypes), instance.GetType(), driverName);
                         },
                         ex =>
                             $"Error in SetElement for field '{field.Name}' with parent '{parentType?.Name ?? "NULL Class" + ex.FromNewLine()}'");
