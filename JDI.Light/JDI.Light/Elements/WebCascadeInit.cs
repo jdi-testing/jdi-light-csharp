@@ -11,6 +11,7 @@ using JDI.Light.Elements.Complex.Table.Interfaces;
 using JDI.Light.Elements.Composite;
 using JDI.Light.Enums;
 using JDI.Light.Extensions;
+using JDI.Light.Factories;
 using JDI.Light.Interfaces;
 using JDI.Light.Interfaces.Base;
 using JDI.Light.Interfaces.Complex;
@@ -92,8 +93,7 @@ namespace JDI.Light.Elements
         {
             var instance = (IBaseElement)field.GetValue(parent);
             type = type.IsInterface ? MapInterfaceToElement.ClassFromInterface(type) : type;
-            var element = (UIElement)instance ?? (UIElement)Activator.CreateInstance(type);
-            element.Locator = field.GetFindsBy();
+            var element = (UIElement) instance ?? UIElementFactory.CreateInstance(type, field.GetFindsBy());
             var jTable = field.GetAttribute<JTableAttribute>();
             if (jTable != null && typeof(ITable).IsAssignableFrom(field.FieldType))
             {

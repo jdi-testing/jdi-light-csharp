@@ -9,16 +9,27 @@ namespace JDI.Light.Elements.Complex
 {
     public class TextList : CompositeUIElement
     {
-        private readonly List<Label> _texts;
+        private List<Label> _texts;
 
-        public TextList(By locator) :
-            base(locator)
+        public TextList(By locator) : base(locator)
         {
-            _texts = new List<Label>();
         }
 
-        //TODO: Create correct Init for this
-        public IList<Label> TextElements => WebElements.Select(e => (Label)e).ToList();
+        public IList<Label> TextElements
+        {
+            get
+            {
+                if (_texts != null)
+                {
+                    return _texts;
+                }
+                return _texts = WebElements.Select(e =>
+                {
+                    var l = new Label(Locator) {WebElement = e};
+                    return l;
+                }).ToList();
+            }
+        }
 
         public int Count()
         {

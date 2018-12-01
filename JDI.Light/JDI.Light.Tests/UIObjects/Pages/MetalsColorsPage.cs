@@ -31,7 +31,7 @@ namespace JDI.Light.Tests.UIObjects.Pages
             IsCheckedAction = el => new UIElement(By.XPath("//*[@id='elements-checklist']//*[*[text()='Water']]/input")).WebElement.Selected
         };
 
-        public IDropDown<Colors> Colors =
+        public Dropdown<Colors> Colors =
             new Dropdown<Colors>(By.CssSelector(".colors .filter-option"), By.CssSelector(".colors li span"));
 
         public ComboBox<Metals> ComboBox =

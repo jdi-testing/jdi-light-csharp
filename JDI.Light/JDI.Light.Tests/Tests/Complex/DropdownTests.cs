@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using JDI.Light.Elements.Complex;
 using JDI.Light.Interfaces.Complex;
 using JDI.Light.Tests.Asserts;
 using JDI.Light.Tests.Enums;
@@ -10,7 +11,7 @@ namespace JDI.Light.Tests.Tests.Complex
     public class DropdownTests
     {
         private static readonly List<string> OddOptions = new List<string> {"Colors", "Red", "Green", "Blue", "Yellow"};
-        private IDropDown<Colors> ColorsControl => TestSite.MetalsColorsPage.Colors;
+        private Dropdown<Colors> ColorsControl => TestSite.MetalsColorsPage.Colors;
 
         [SetUp]
         public void Setup()
