@@ -11,7 +11,7 @@ namespace JDI.Light.Selenium.Elements.Composite
 {
     public class CompositeUIElement : UIElement
     {
-        public CompositeUIElement() : base(null)
+        public CompositeUIElement()
         {
         }
 

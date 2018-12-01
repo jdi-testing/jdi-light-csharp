@@ -12,11 +12,11 @@ namespace JDI.Light.Selenium.Elements.Base
         protected Action<UIElement> ClickJsAction =
             cl => cl.JsExecutor.ExecuteScript("arguments[0].click();", cl.WebElement);
 
-        public Clickable() : this(null)
+        public Clickable()
         {
         }
 
-        public Clickable(By byLocator = null)
+        public Clickable(By byLocator)
             : base(byLocator)
         {
         }

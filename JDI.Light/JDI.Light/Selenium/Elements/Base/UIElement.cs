@@ -26,13 +26,13 @@ namespace JDI.Light.Selenium.Elements.Base
         public Timer Timer { get; set; }
         public string DriverName { get; set; }
 
-        public UIElement(By byLocator = null)
+        public UIElement()
+        {
+        }
+
+        public UIElement(By byLocator)
         {
             Locator = byLocator;
-            Timer = new Timer(JDI.Timeouts.CurrentTimeoutSec * 1000);
-            if (string.IsNullOrEmpty(DriverName) && JDI.DriverFactory != null &&
-                !string.IsNullOrEmpty(JDI.DriverFactory.CurrentDriverName))
-                DriverName = JDI.DriverFactory.CurrentDriverName;
         }
 
         public void SetUp(ILogger logger)
@@ -40,6 +40,10 @@ namespace JDI.Light.Selenium.Elements.Base
             Logger = logger;
             Invoker = new ActionInvoker<UIElement>(this, logger);
             Actions = new ElementsActions(Invoker);
+            Timer = new Timer(JDI.Timeouts.CurrentTimeoutSec * 1000);
+            if (string.IsNullOrEmpty(DriverName) && JDI.DriverFactory != null &&
+                !string.IsNullOrEmpty(JDI.DriverFactory.CurrentDriverName))
+                DriverName = JDI.DriverFactory.CurrentDriverName;
         }
 
         public IWebElement WebElement
