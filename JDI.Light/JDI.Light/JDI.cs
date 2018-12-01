@@ -2,10 +2,10 @@
 using System.Linq;
 using JDI.Light.Interfaces;
 using JDI.Light.Logging;
-using JDI.Light.Matchers;
 using JDI.Light.Selenium.DriverFactory;
 using JDI.Light.Selenium.Elements;
 using JDI.Light.Settings;
+using JDI.Light.Utils;
 using OpenQA.Selenium;
 using static JDI.Light.Utils.ExceptionUtils;
 

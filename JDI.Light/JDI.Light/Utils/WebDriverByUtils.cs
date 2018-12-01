@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using JDI.Light.Extensions;
-using JDI.Light.Utils;
 using OpenQA.Selenium;
 
-namespace JDI.Light.Selenium.DriverFactory
+namespace JDI.Light.Utils
 {
     public static class WebDriverByUtils
     {

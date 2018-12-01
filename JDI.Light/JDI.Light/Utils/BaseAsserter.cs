@@ -4,7 +4,7 @@ using System.Linq;
 using JDI.Light.Extensions;
 using JDI.Light.Interfaces;
 
-namespace JDI.Light.Matchers
+namespace JDI.Light.Utils
 {
     public class BaseAsserter : IAssert
     {

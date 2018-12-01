@@ -6,8 +6,11 @@ namespace JDI.Light.Selenium.Elements.Common
 {
     public class Button : ClickableText, IButton
     {
-        public Button(By byLocator = null)
-            : base(byLocator)
+        public Button()
+        {
+        }
+
+        public Button(By byLocator) : base(byLocator)
         {
         }
     }

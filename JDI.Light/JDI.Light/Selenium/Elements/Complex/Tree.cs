@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using JDI.Light.Extensions;
 using JDI.Light.Selenium.DriverFactory;
 using JDI.Light.Selenium.Elements.Base;
+using JDI.Light.Utils;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 

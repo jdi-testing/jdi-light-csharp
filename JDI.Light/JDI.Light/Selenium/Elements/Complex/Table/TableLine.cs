@@ -4,6 +4,7 @@ using JDI.Light.Enums;
 using JDI.Light.Selenium.DriverFactory;
 using JDI.Light.Selenium.Elements.Base;
 using JDI.Light.Selenium.Elements.Complex.Table.Interfaces;
+using JDI.Light.Utils;
 using OpenQA.Selenium;
 
 namespace JDI.Light.Selenium.Elements.Complex.Table
