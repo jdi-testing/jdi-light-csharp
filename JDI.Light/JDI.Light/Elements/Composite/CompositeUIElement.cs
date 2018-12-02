@@ -33,15 +33,15 @@ namespace JDI.Light.Elements.Composite
 
         public Button GetButton(string buttonName)
         {
-            var fields = WebElement.GetFields(typeof(IButton));
+            var fields = this.GetFields(typeof(IButton));
             switch (fields.Count)
             {
                 case 0:
                     throw JDI.Assert.Exception($"Can't find ny buttons on form {ToString()}'");
                 case 1:
-                    return (Button)fields[0].GetValue(WebElement);
+                    return (Button)fields[0].GetValue(this);
                 default:
-                    var buttons = fields.Select(f => (Button)f.GetValue(WebElement)).ToList();
+                    var buttons = fields.Select(f => (Button)f.GetValue(this)).ToList();
                     var button = buttons.FirstOrDefault(b => ToButton(b.Name).SimplifiedEqual(ToButton(buttonName)));
                     if (button == null)
                         throw JDI.Assert.Exception($"Can't find button '{buttonName}' for Element '{ToString()}'." +
