@@ -25,7 +25,7 @@ namespace JDI.Light.Elements
 {
     public class WebCascadeInit
     {
-        public ILogger Logger { get; set; } = JDI.Logger;
+        public ILogger Logger => JDI.Logger;
 
         protected Type[] Decorators = { typeof(IBaseElement), typeof(IList) };
 

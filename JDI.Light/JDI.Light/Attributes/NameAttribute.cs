@@ -5,7 +5,7 @@ namespace JDI.Light.Attributes
     [AttributeUsage(AttributeTargets.All, Inherited = false)]
     public class NameAttribute : Attribute
     {
-        public string Name { get; }
+        public readonly string Name;
 
         public NameAttribute(string name)
         {

@@ -18,7 +18,7 @@ namespace JDI.Light.Elements.WebActions
             _actionScenarios = new ActionScenarios<T>(element, logger);
         }
 
-        public TResult DoJActionResult<TResult>(string actionName, Func<T, TResult> action,
+        public TResult DoActionResultWithResult<TResult>(string actionName, Func<T, TResult> action,
             Func<TResult, string> logResult = null, LogLevel level = LogLevel.Info)
         {
             return ExceptionUtils.ActionWithException(() =>
@@ -28,7 +28,7 @@ namespace JDI.Light.Elements.WebActions
             }, ex => $"Failed to do '{actionName}' action. Reason: {ex}");
         }
 
-        public void DoJAction(string actionName, Action<T> action, LogLevel level = LogLevel.Info)
+        public void DoAction(string actionName, Action<T> action, LogLevel level = LogLevel.Info)
         {
             TimerExtensions.ForceDone(() =>
             {

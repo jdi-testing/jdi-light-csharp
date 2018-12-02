@@ -25,14 +25,14 @@ namespace JDI.Light.Elements.Common
 
         public string GetReference()
         {
-            return Invoker.DoJActionResult("Get link reference", GetReferenceFunc,
+            return Invoker.DoActionResultWithResult("Get link reference", GetReferenceFunc,
                 href => $"Get href of link '{href}'");
         }
 
         public string WaitReferenceContains(string text)
         {
             Func<UIElement, Func<string>> textFunc = el => () => GetReferenceFunc(el);
-            return Invoker.DoJActionResult(
+            return Invoker.DoActionResultWithResult(
                 $"Wait link contains '{text}'",
                 el => textFunc(el).GetByCondition(t => t.Contains(text))
             );
@@ -41,7 +41,7 @@ namespace JDI.Light.Elements.Common
         public string WaitMatchReference(string regEx)
         {
             Func<UIElement, Func<string>> textFunc = el => () => GetReferenceFunc(el);
-            return Invoker.DoJActionResult(
+            return Invoker.DoActionResultWithResult(
                 $"Wait link match regex '{regEx}'",
                 el => textFunc(el).GetByCondition(t => t.Matches(regEx))
             );
@@ -49,7 +49,7 @@ namespace JDI.Light.Elements.Common
 
         public string GetTooltip()
         {
-            return Invoker.DoJActionResult("Get link tooltip", GetTooltipFunc, href => $"Get link tooltip '{href}'");
+            return Invoker.DoActionResultWithResult("Get link tooltip", GetTooltipFunc, href => $"Get link tooltip '{href}'");
         }
     }
 }

@@ -103,27 +103,27 @@ namespace JDI.Light.Elements.Composite
 
         public void Next()
         {
-            Invoker.DoJAction("Choose Next page", p => ((Pagination) p).NextAction(this).Click());
+            Invoker.DoAction("Choose Next page", p => ((Pagination) p).NextAction(this).Click());
         }
 
         public void Previous()
         {
-            Invoker.DoJAction("Choose Previous page", p => ((Pagination) p).PreviousAction(this).Click());
+            Invoker.DoAction("Choose Previous page", p => ((Pagination) p).PreviousAction(this).Click());
         }
 
         public void First()
         {
-            Invoker.DoJAction("Choose First page", p => ((Pagination) p).FirstAction(this).Click());
+            Invoker.DoAction("Choose First page", p => ((Pagination) p).FirstAction(this).Click());
         }
 
         public void Last()
         {
-            Invoker.DoJAction("Choose Last page", p => ((Pagination) p).LastAction(this).Click());
+            Invoker.DoAction("Choose Last page", p => ((Pagination) p).LastAction(this).Click());
         }
 
         public void SelectPage(int index)
         {
-            Invoker.DoJAction($"Choose '{index}' page", p => ((Pagination) p).PageAction(this, index).Click());
+            Invoker.DoAction($"Choose '{index}' page", p => ((Pagination) p).PageAction(this, index).Click());
         }
 
         private Clickable GetClickable(string name)

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text.RegularExpressions;
+using JDI.Light.Attributes;
 using JDI.Light.Extensions;
 
 namespace JDI.Light.Utils
@@ -54,9 +56,10 @@ namespace JDI.Light.Utils
         public static Dictionary<string, string> ToDictionary(this object o)
         {
             var dict = new Dictionary<string, string>();
-            o.GetFields().ForEach(f =>
+            var props = o.GetType().GetProperties();
+            foreach (var prop in props)
             {
-                var v = f.GetValue(o);
+                var v = prop.GetValue(o);
                 string strValue = null;
                 switch (v)
                 {
@@ -70,10 +73,11 @@ namespace JDI.Light.Utils
                         strValue = v.ToString();
                         break;
                 }
-                var n = f.GetElementName();
-                var strKey = string.IsNullOrWhiteSpace(n) ? f.Name : n;
+                var attr = prop.GetCustomAttribute<NameAttribute>(false);
+                var n = attr?.Name.SplitCamelCase() ?? "";
+                var strKey = string.IsNullOrWhiteSpace(n) ? prop.Name : n;
                 dict.Add(strKey, strValue);
-            });
+            }
             return dict;
         }
 

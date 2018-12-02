@@ -38,8 +38,9 @@ namespace JDI.Light.Utils
             {
                 return waitFunc();
             }
-            catch
+            catch(Exception e)
             {
+                var ex = e;
                 return default(T);
             }
         }

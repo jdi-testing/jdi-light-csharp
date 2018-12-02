@@ -23,7 +23,7 @@ namespace JDI.Light.Elements.Base
 
         public void ClickByXY(int x, int y)
         {
-            Invoker.DoJAction($"Click on Element with coordinates (x,y) = ({x},{y})",
+            Invoker.DoAction($"Click on Element with coordinates (x,y) = ({x},{y})",
                 el =>
                 {
                     new Actions(WebDriver).MoveToElement(WebElement, x, y).Click().Build().Perform();

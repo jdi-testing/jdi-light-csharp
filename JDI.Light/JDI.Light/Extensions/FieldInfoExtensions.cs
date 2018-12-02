@@ -15,7 +15,8 @@ namespace JDI.Light.Extensions
 
         public static string GetElementName(this FieldInfo field)
         {
-            return field.GetCustomAttribute<NameAttribute>(false)?.Name.SplitCamelCase() ?? "";
+            var attr = field.GetCustomAttribute<NameAttribute>(false);
+            return attr?.Name.SplitCamelCase() ?? "";
         }
 
         public static By GetFindsBy(this FieldInfo field)

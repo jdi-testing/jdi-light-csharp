@@ -157,7 +157,7 @@ namespace JDI.Light.Elements.Complex
 
         public void Clear()
         {
-            Invoker.DoJAction("Clear Options", m => ClearAction(this));
+            Invoker.DoAction("Clear Options", m => ClearAction(this));
         }
 
         public void CheckAll()

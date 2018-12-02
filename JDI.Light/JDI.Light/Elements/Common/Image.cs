@@ -24,12 +24,12 @@ namespace JDI.Light.Elements.Common
 
         public string GetSource()
         {
-            return Invoker.DoJActionResult("Get image source for Element " + this, GetSourceFunc);
+            return Invoker.DoActionResultWithResult("Get image source for Element " + this, GetSourceFunc);
         }
 
         public string GetAlt()
         {
-            return Invoker.DoJActionResult("Get image title for Element " + this, GetAltFunc);
+            return Invoker.DoActionResultWithResult("Get image title for Element " + this, GetAltFunc);
         }
     }
 }

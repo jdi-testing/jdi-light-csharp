@@ -94,8 +94,9 @@ namespace JDI.Light.Elements.Composite
 
         public void Open()
         {
-            Invoker.DoJAction($"Open page {Name} by url {Url}",
+            Invoker.DoAction($"Open page {Name} by url {Url}",
                 el => WebDriver.Navigate().GoToUrl(Url));
+            //WebDriver.Navigate().GoToUrl(Url);
             if (CheckAfterOpen)
                 CheckOpened();
         }
@@ -184,7 +185,7 @@ namespace JDI.Light.Elements.Composite
 
         public void Refresh()
         {
-            Invoker.DoJAction($"Refresh page {Name}",
+            Invoker.DoAction($"Refresh page {Name}",
                 el => WebDriver.Navigate().Refresh());
         }
 
@@ -194,7 +195,7 @@ namespace JDI.Light.Elements.Composite
 
         public void Back()
         {
-            Invoker.DoJAction("Go back to previous page",
+            Invoker.DoAction("Go back to previous page",
                 el => WebDriver.Navigate().Back());
         }
 
@@ -204,7 +205,7 @@ namespace JDI.Light.Elements.Composite
 
         public void Forward()
         {
-            Invoker.DoJAction("Go forward to next page",
+            Invoker.DoAction("Go forward to next page",
                 el => WebDriver.Navigate().Forward());
         }
 
@@ -215,7 +216,7 @@ namespace JDI.Light.Elements.Composite
 
         public void AddCookie(Cookie cookie)
         {
-            Invoker.DoJAction("Go forward to next page",
+            Invoker.DoAction("Go forward to next page",
                 el => WebDriver.Manage().Cookies.AddCookie(cookie));
         }
 
@@ -225,7 +226,7 @@ namespace JDI.Light.Elements.Composite
 
         public void ClearCache()
         {
-            Invoker.DoJAction("Go forward to next page",
+            Invoker.DoAction("Go forward to next page",
                 el => WebDriver.Manage().Cookies.DeleteAllCookies());
         }
 

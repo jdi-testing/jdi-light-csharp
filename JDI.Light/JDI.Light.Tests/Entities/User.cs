@@ -12,8 +12,10 @@ namespace JDI.Light.Tests.Entities
             Password = password;
         }
 
-        [Name("Login")] public string Login { get; set; }
+        [Name("Login")]
+        public string Login { get; set; }
 
-        [Name("Password")] public string Password { get; set; }
+        [Name("Password")]
+        public string Password { get; set; }
     }
 }

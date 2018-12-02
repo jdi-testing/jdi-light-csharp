@@ -158,7 +158,7 @@ namespace JDI.Light.Elements.Base
 
         public void SetAttribute(string attributeName, string value)
         {
-            Invoker.DoJAction($"Set Attribute '{attributeName}'='{value}'",
+            Invoker.DoAction($"Set Attribute '{attributeName}'='{value}'",
                 el => el.JsExecutor.ExecuteScript($"arguments[0].setAttribute('{attributeName}',arguments[1]);",
                     WebElement, value));
         }
