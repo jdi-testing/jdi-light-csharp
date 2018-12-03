@@ -113,7 +113,7 @@ namespace JDI.Light.Elements.Complex
             Invoker.DoAction("Click on dropdown", d => ClickAction(this));
         }
 
-        public string GetText => Actions.GetText(d => GetTextAction(this));
+        public string GetText => Invoker.DoActionWithResult("Get text", d => GetTextAction(this));
 
         public string WaitText(string text)
         {

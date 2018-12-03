@@ -18,7 +18,7 @@ namespace JDI.Light.Elements.WebActions
             _actionScenarios = new ActionScenarios<T>(element, logger);
         }
 
-        public TResult DoActionResultWithResult<TResult>(string actionName, Func<T, TResult> action,
+        public TResult DoActionWithResult<TResult>(string actionName, Func<T, TResult> action,
             Func<TResult, string> logResult = null, LogLevel level = LogLevel.Info)
         {
             return ExceptionUtils.ActionWithException(() =>

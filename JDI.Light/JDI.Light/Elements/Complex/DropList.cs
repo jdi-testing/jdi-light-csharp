@@ -79,7 +79,7 @@ namespace JDI.Light.Elements.Complex
             Button.SetAttribute(attributeName, value);
         }
 
-        public string GetText => Actions.GetText(d => GetTextAction(this));
+        public string GetText => Invoker.DoActionWithResult("Get text", d => GetTextAction(this));
 
         public string WaitText(string text)
         {

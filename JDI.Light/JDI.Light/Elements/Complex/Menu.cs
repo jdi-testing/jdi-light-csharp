@@ -114,7 +114,7 @@ namespace JDI.Light.Elements.Complex
 
         public void HoverAndClick(params string[] names)
         {
-            Actions.Select(names.FormattedJoin(Separator), (m, n) => HoverAndClickAction(this, names));
+            Invoker.DoAction($"Select '{names.FormattedJoin(Separator)}'", e => HoverAndClickAction(this, names));
         }
 
         public void HoverAndClick(TEnum name)

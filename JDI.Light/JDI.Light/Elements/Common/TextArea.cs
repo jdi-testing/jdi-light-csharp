@@ -33,7 +33,7 @@ namespace JDI.Light.Elements.Common
 
         public string[] GetLines()
         {
-            return Invoker.DoActionResultWithResult("Get text as lines", el => Regex.Split(GetTextFunc(this), "\\\\n"));
+            return Invoker.DoActionWithResult("Get text as lines", el => Regex.Split(GetTextFunc(this), "\\\\n"));
         }
     }
 }

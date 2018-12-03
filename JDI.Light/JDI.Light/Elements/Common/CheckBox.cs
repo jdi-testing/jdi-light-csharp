@@ -67,7 +67,7 @@ namespace JDI.Light.Elements.Common
 
         public bool IsChecked()
         {
-            return Invoker.DoActionResultWithResult("IsChecked",
+            return Invoker.DoActionWithResult("IsChecked",
                 el => IsCheckedAction(this),
                 result => "Checkbox is " + (result ? "checked" : "unchecked"));
         }

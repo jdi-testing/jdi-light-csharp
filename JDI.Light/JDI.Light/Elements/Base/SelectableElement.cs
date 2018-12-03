@@ -8,10 +8,7 @@ namespace JDI.Light.Elements.Base
     {
         protected Func<UIElement, string> GetValueFunc = el
             => ((SelectableElement) el).Selected + "";
-
-        //TODO: is it a bug?
-        protected Action<SelectableElement> SelectAction = s => s.Click();
-
+        
         protected Func<SelectableElement, bool> SelectedAction = s => s.WebElement.Selected;
 
         protected Action<UIElement, string> SetValueAction = (el, value)
@@ -28,10 +25,10 @@ namespace JDI.Light.Elements.Base
 
         public void Select()
         {
-            Actions.Select(Name, (w, n) => ClickAction(this));
+            Invoker.DoAction($"Select '{Name}'", el => ClickAction(this));
         }
 
-        public bool Selected => Invoker.DoActionResultWithResult("Is Selected", e => SelectedAction(this));
+        public bool Selected => Invoker.DoActionWithResult("Is Selected", e => SelectedAction(this));
 
         public new string Value
         {

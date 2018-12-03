@@ -28,7 +28,7 @@ namespace JDI.Light.Elements.Base
             return Value;
         }
 
-        public string GetText => Actions.GetText(GetTextFunc);
+        public string GetText => Invoker.DoActionWithResult("Get text", GetTextFunc);
 
         public string WaitText(string text)
         {

@@ -25,7 +25,7 @@ namespace JDI.Light.Elements.Common
             return getValue ?? getText;
         };
 
-        public string GetText => Actions.GetText(GetTextAction);
+        public string GetText => Invoker.DoActionWithResult("Get text", GetTextAction);
 
         public string Value => Actions.GetValue(el => ((Text)el).GetTextAction(el));
 
