@@ -1,5 +1,4 @@
 ﻿using System;
-using JDI.Light.Settings;
 using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Composite

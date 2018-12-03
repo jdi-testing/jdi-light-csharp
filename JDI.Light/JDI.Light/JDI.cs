@@ -14,7 +14,6 @@ namespace JDI.Light
 {
     public static class JDI
     {
-        public static bool IsDemoMode;
         public static bool UseCache;
         public static WebCascadeInit WebInit;
         public static IDriverFactory<IWebDriver> DriverFactory;

@@ -1,5 +1,4 @@
 ﻿using System;
-using JDI.Light.Elements.Base;
 using JDI.Light.Enums;
 using JDI.Light.Extensions;
 using JDI.Light.Interfaces;
@@ -28,7 +27,6 @@ namespace JDI.Light.Elements.WebActions
         {
             return ExceptionUtils.ActionWithException(() =>
             {
-                ProcessDemoMode();
                 LogAction(actionName, level);
                 var timer = new Timer();
                 var result = action.Invoke(_element);
@@ -47,7 +45,6 @@ namespace JDI.Light.Elements.WebActions
         {
             TimerExtensions.ForceDone(() =>
             {
-                ProcessDemoMode();
                 LogAction(actionName, level);
                 new Timer(JDI.Timeouts.CurrentTimeoutSec).Wait(() =>
                 {
@@ -56,12 +53,6 @@ namespace JDI.Light.Elements.WebActions
                 });
                 _logger.Info(actionName + " done");
             });
-        }
-
-        public void ProcessDemoMode()
-        {
-            if (!JDI.IsDemoMode) return;
-            (_element as UIElement)?.Highlight();
         }
     }
 }

@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading;
 using JDI.Light.Enums;
 using JDI.Light.Interfaces;
-using JDI.Light.Settings;
 using JDI.Light.Utils;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
