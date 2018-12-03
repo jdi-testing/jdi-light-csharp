@@ -1,4 +1,5 @@
 ﻿using System;
+using JDI.Light.Extensions;
 using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
 
@@ -16,6 +17,8 @@ namespace JDI.Light.Elements.Base
                 return getValue ?? getText;
             };
 
+        private Func<string> TextAction(UIElement el) => () => GetTextFunc(el);
+
         public ClickableText(By byLocator = null)
             : base(byLocator)
         {
@@ -32,12 +35,14 @@ namespace JDI.Light.Elements.Base
 
         public string WaitText(string text)
         {
-            return Actions.WaitText(text, GetTextFunc);
+            return Invoker.DoActionWithResult($"Wait text contains '{text}'",
+                el => TextAction(this).GetByCondition(t => t.Contains(text)));
         }
 
         public string WaitMatchText(string regEx)
         {
-            return Actions.WaitMatchText(regEx, GetTextFunc);
+            return Invoker.DoActionWithResult($"Wait text match regex '{regEx}'",
+                el => TextAction(this).GetByCondition(t => t.Matches(regEx)));
         }
     }
 }

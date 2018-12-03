@@ -1,6 +1,7 @@
 ﻿using System;
 using JDI.Light.Elements.Base;
 using JDI.Light.Elements.Common;
+using JDI.Light.Extensions;
 using JDI.Light.Interfaces.Complex;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
@@ -115,14 +116,18 @@ namespace JDI.Light.Elements.Complex
 
         public string GetText => Invoker.DoActionWithResult("Get text", d => GetTextAction(this));
 
+        private Func<string> TextAction() => () => GetTextAction(this);
+
         public string WaitText(string text)
         {
-            return Actions.WaitText(text, d => GetTextAction(this));
+            return Invoker.DoActionWithResult($"Wait text contains '{text}'",
+                el => TextAction().GetByCondition(t => t.Contains(text)));
         }
 
         public string WaitMatchText(string regEx)
         {
-            return Actions.WaitMatchText(regEx, d => GetTextAction(this));
+            return Invoker.DoActionWithResult($"Wait text match regex '{regEx}'",
+                el => TextAction().GetByCondition(t => t.Matches(regEx)));
         }
 
         public new void SetAttribute(string attributeName, string value)

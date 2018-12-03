@@ -16,7 +16,6 @@ namespace JDI.Light.Elements.Base
     {
         private IWebElement _webElement;
 
-        public ElementsActions Actions;
         public By FrameLocator;
         public ActionInvoker<UIElement> Invoker;
         public By Locator;
@@ -36,7 +35,6 @@ namespace JDI.Light.Elements.Base
         {
             Logger = logger;
             Invoker = new ActionInvoker<UIElement>(this, logger);
-            Actions = new ElementsActions(Invoker);
             Timer = new Timer(JDI.Timeouts.CurrentTimeoutSec * 1000);
             if (string.IsNullOrEmpty(DriverName) && JDI.DriverFactory != null &&
                 !string.IsNullOrEmpty(JDI.DriverFactory.CurrentDriverName))

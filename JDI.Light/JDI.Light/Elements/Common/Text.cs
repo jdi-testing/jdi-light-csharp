@@ -1,5 +1,6 @@
 ﻿using System;
 using JDI.Light.Elements.Base;
+using JDI.Light.Extensions;
 using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
 
@@ -25,6 +26,8 @@ namespace JDI.Light.Elements.Common
             return getValue ?? getText;
         };
 
+        private Func<string> TextAction(UIElement el) => () => GetTextAction(el);
+
         public string GetText => Invoker.DoActionWithResult("Get text", GetTextAction);
 
         public string Value => Invoker.DoActionWithResult("Get value", GetTextAction);
@@ -36,12 +39,14 @@ namespace JDI.Light.Elements.Common
 
         public string WaitText(string text)
         {
-            return Actions.WaitText(text, GetTextAction);
+            return Invoker.DoActionWithResult($"Wait text contains '{text}'",
+                el => TextAction(el).GetByCondition(t => t.Contains(text)));
         }
 
         public string WaitMatchText(string regEx)
         {
-            return Actions.WaitMatchText(regEx, GetTextAction);
+            return Invoker.DoActionWithResult($"Wait text match regex '{regEx}'",
+                el => TextAction(this).GetByCondition(t => t.Matches(regEx)));
         }
     }
 }

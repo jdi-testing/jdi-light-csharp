@@ -81,14 +81,18 @@ namespace JDI.Light.Elements.Complex
 
         public string GetText => Invoker.DoActionWithResult("Get text", d => GetTextAction(this));
 
+        Func<string> TextAction(UIElement el) => () => GetTextAction(this);
+
         public string WaitText(string text)
         {
-            return Actions.WaitText(text, d => GetTextAction(this));
+            return Invoker.DoActionWithResult($"Wait text contains '{text}'",
+                el => TextAction(el).GetByCondition(t => t.Contains(text)));
         }
 
         public string WaitMatchText(string regEx)
         {
-            return Actions.WaitMatchText(regEx, d => GetTextAction(this));
+            return Invoker.DoActionWithResult($"Wait text match regex '{regEx}'",
+                el => TextAction(el).GetByCondition(t => t.Matches(regEx)));
         }
 
         public new string GetAttribute(string name)
