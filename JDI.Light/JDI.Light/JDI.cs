@@ -77,10 +77,11 @@ namespace JDI.Light
         public static void Init(ILogger logger = null, IAssert assert = null,
             Timeouts timeouts = null, IDriverFactory<IWebDriver> driverFactory = null)
         {
-            DriverFactory = driverFactory ?? new WebDriverFactory();
-            Assert = assert ?? new BaseAsserter();
-            Timeouts = timeouts ?? new Timeouts();
             Logger = logger ?? new ConsoleLogger();
+            Assert = assert ?? new BaseAsserter();
+            Assert.SetUpLogger(Logger);
+            DriverFactory = driverFactory ?? new WebDriverFactory();
+            Timeouts = timeouts ?? new Timeouts();
         }
 
         public static void InitSite(Type siteType)

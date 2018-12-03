@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using JDI.Light.Tests.Asserts;
 using JDI.Light.Tests.UIObjects;
 using OpenQA.Selenium;
 
@@ -21,7 +20,7 @@ namespace JDI.Light.Tests.Tests.Complex
         /// <param name="text"></param>
         public static void CheckCalculate(string text)
         {
-            new NUnitAsserter().Contains(TestSite.MetalsColorsPage.CalculateText.GetText, text);
+            JDI.Assert.Contains(TestSite.MetalsColorsPage.CalculateText.GetText, text);
         }
 
         public static void CheckText(Func<string> func, string expectedAttrValue)
@@ -32,12 +31,12 @@ namespace JDI.Light.Tests.Tests.Complex
         public static void CheckAction(string text)
         {
             IList<IWebElement> logOutput = TestSite.HomePage.WebDriver.FindElements(By.CssSelector(".logs li"));
-            new NUnitAsserter().Contains(logOutput[0].Text, text);
+            JDI.Assert.Contains(logOutput[0].Text, text);
         }
 
         public static void CheckResult(string text)
         {
-            new NUnitAsserter().Contains(TestSite.ContactFormPage.Result.GetText, text);
+            JDI.Assert.Contains(TestSite.ContactFormPage.Result.GetText, text);
         }
 
         public static void CheckActionThrowError(Action checkedAction, string message)

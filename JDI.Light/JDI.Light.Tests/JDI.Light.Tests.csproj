@@ -60,7 +60,7 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Enums\Buttons.cs" />
     <Compile Include="Enums\Colors.cs" />
-    <Compile Include="Enums\Elements.cs" />
+    <Compile Include="Enums\CheckboxElements.cs" />
     <Compile Include="Enums\Metals.cs" />
     <Compile Include="Enums\Odds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

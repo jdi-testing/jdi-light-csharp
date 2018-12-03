@@ -8,7 +8,7 @@ namespace JDI.Light.Logging
     {
         public void Log(string message, LogLevel logLevel)
         {
-            Console.WriteLine($"{DateTime.Now:dd.MM.yyyy_HH:mm:ss.fff} {logLevel} {message}");
+            Console.WriteLine($"{DateTime.Now:dd.MM.yyyy HH:mm:ss.fff} {logLevel} {message}");
         }
 
         public void Exception(Exception ex)

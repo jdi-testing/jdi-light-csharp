@@ -1,6 +1,6 @@
 ﻿namespace JDI.Light.Tests.Enums
 {
-    public enum Elements
+    public enum CheckboxElements
     {
         Water,
         Earth,

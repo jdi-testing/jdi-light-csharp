@@ -8,8 +8,7 @@ namespace JDI.Light.Utils
 {
     public class BaseAsserter : IAssert
     {
-        private static ILogger _logger;
-
+        private ILogger _logger;
         private readonly string _checkMessage;
 
         public BaseAsserter(string checkMessage) : this()
@@ -19,7 +18,11 @@ namespace JDI.Light.Utils
 
         public BaseAsserter()
         {
-            _logger = JDI.Logger;
+        }
+
+        public void SetUpLogger(ILogger logger)
+        {
+            _logger = logger;
         }
 
         public virtual void ThrowFail(string message)

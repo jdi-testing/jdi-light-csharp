@@ -41,7 +41,7 @@ namespace JDI.Light.Tests.UIObjects.Pages
             };
 
         [FindBy(Css = "#elements-checklist label")]
-        public CheckList<Enums.Elements> Elements;
+        public CheckList<CheckboxElements> Elements;
 
         [FindBy(Id = "summary-block")]
         public Summary SummaryBlock;

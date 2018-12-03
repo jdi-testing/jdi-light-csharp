@@ -11,6 +11,7 @@ namespace JDI.Light.Interfaces
         void Contains(string actual, string expected);
         void IsTrue(bool condition);
         void IsFalse(bool condition);
+        void SetUpLogger(ILogger logger);
         void CollectionEquals<T>(IEnumerable<T> actual, IEnumerable<T> expected);
         void AreEquals<T>(T actual, T expected, bool logOnlyFail = false);
     }

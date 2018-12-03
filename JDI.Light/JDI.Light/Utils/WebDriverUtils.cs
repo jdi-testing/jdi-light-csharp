@@ -113,7 +113,7 @@ namespace JDI.Light.Utils
                 if (File.Exists(driverFullPath))
                     File.Delete(driverFullPath);
 
-                new global::WebDriverManager.DriverManager().SetUpDriver(url, driverFullPath, binaryName);
+                new WebDriverManager.DriverManager().SetUpDriver(url, driverFullPath, binaryName);
             }
 
             return driverLocationPath;
