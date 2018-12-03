@@ -15,7 +15,6 @@ namespace JDI.Light
     public static class JDI
     {
         public static bool IsDemoMode;
-        public static bool ShortLogMessagesFormat;
         public static bool UseCache;
         public static WebCascadeInit WebInit;
         public static IDriverFactory<IWebDriver> DriverFactory;
@@ -23,7 +22,6 @@ namespace JDI.Light
         public static IAssert Assert;
         public static ILogger Logger;
         public static string Domain;
-
         public static bool HasDomain => Domain != null && Domain.Contains("://");
         public static bool GetLatestDriver = true;
         public static IJavaScriptExecutor JsExecutor => DriverFactory.GetDriver() as IJavaScriptExecutor;
@@ -31,18 +29,15 @@ namespace JDI.Light
         static JDI()
         {
             Timeouts = new Timeouts();
-            ShortLogMessagesFormat = true;
             WebInit = new WebCascadeInit();
 
             GetFromPropertiesAvoidExceptions(p => DriverFactory.RegisterDriver(p), "Driver");
             GetFromPropertiesAvoidExceptions(p => DriverFactory.SetRunType(p), "RunType");
             GetFromPropertiesAvoidExceptions(p => Timeouts.WaitElementSec = int.Parse(p), "TimeoutWaitElement");
-            GetFromPropertiesAvoidExceptions(p => ShortLogMessagesFormat = p.ToLower().Equals("short"), "LogMessageFormat");
+            GetFromPropertiesAvoidExceptions(p => UseCache = p.ToLower().Equals("true") || p.ToLower().Equals("1"), "Cache");
+            GetFromPropertiesAvoidExceptions(p => UseCache = p.ToLower().Equals("true") || p.ToLower().Equals("1"), "DemoMode");
+            GetFromPropertiesAvoidExceptions(p => DriverFactory.DriverPath = p, "DriversFolder");
             GetFromPropertiesAvoidExceptions(p =>
-                UseCache = p.ToLower().Equals("true") || p.ToLower().Equals("1"), "Cache");
-            GetFromPropertiesAvoidExceptions(p =>
-                UseCache = p.ToLower().Equals("true") || p.ToLower().Equals("1"), "DemoMode");
-            GetFromPropertiesAvoidExceptions(p => DriverFactory.DriverPath = p, "DriversFolder"); GetFromPropertiesAvoidExceptions(p =>
             {
                 p = p.ToLower();
                 if (p.Equals("soft"))

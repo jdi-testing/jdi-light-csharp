@@ -183,9 +183,7 @@ namespace JDI.Light.Elements.Base
 
         public new string ToString()
         {
-            return JDI.ShortLogMessagesFormat
-                ? $"{TypeName} '{Name}' ({Parent?.GetType().Name ?? ""}.{Name};)"
-                : $"Name: '{Name}', Type: '{TypeName}' In: '{Parent?.GetType().Name ?? ""}'";
+            return $"Name: '{Name}', Type: '{TypeName}' In: '{Parent?.GetType().Name ?? ""}'";
         }
         
         protected Func<UIElement, bool> IsDisplayedAction =

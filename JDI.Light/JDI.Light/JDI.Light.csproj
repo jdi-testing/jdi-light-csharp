@@ -174,7 +174,6 @@
     <Compile Include="Elements\Composite\WebPage.cs" />
     <Compile Include="Elements\Composite\WebSite.cs" />
     <Compile Include="Elements\WebActions\ActionInvoker.cs" />
-    <Compile Include="Elements\WebActions\ActionScenarios.cs" />
     <Compile Include="Elements\WebCascadeInit.cs" />
     <Compile Include="Interfaces\IAssert.cs" />
     <Compile Include="JDI.cs" />
