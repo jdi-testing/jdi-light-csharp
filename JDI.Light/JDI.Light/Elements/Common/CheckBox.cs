@@ -74,8 +74,8 @@ namespace JDI.Light.Elements.Common
 
         public string Value
         {
-            get => Actions.GetValue(GetValueFunc);
-            set => Actions.SetValue(value, SetValueAction);
+            get => Invoker.DoActionWithResult("Get value", GetValueFunc);
+            set => Invoker.DoAction("Get value", el => SetValueAction(this, value));
         }
 
         public string GetValue()

@@ -166,8 +166,8 @@ namespace JDI.Light.Elements.Complex
 
         public string Value
         {
-            get { return Actions.GetValue(el => GetValueAction(this)); }
-            set { Actions.SetValue(value, (el, val) => SetValueAction(this, val)); }
+            get { return Invoker.DoActionWithResult("Get value", el => GetValueAction(this)); }
+            set { Invoker.DoAction("Get value", el => SetValueAction(this, value)); }
         }
 
         public IList<string> Options => GetOptionsAction(this);

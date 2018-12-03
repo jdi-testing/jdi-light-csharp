@@ -13,17 +13,6 @@ namespace JDI.Light.Elements.WebActions
 
         public ActionInvoker<UIElement> Invoker { get; set; }
 
-        // Value Actions
-        public string GetValue(Func<UIElement, string> getValueFunc)
-        {
-            return Invoker.DoActionWithResult("Get value", getValueFunc);
-        }
-
-        public void SetValue(string value, Action<UIElement, string> setValueAction)
-        {
-            Invoker.DoAction("Get value", el => setValueAction(el, value));
-        }
-
         // Text Actions
         public string WaitText(string text, Func<UIElement, string> getTextAction)
         {

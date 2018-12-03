@@ -38,7 +38,7 @@ namespace JDI.Light.Elements.Common
         public new string Value
         {
             get => base.Value;
-            set => Actions.SetValue(value, SetValueAction);
+            set => Invoker.DoAction("Get value", el => SetValueAction(this, value));
         }
 
         public void SendKeys(string text)

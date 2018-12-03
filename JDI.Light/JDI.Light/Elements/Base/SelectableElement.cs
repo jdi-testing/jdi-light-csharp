@@ -32,8 +32,8 @@ namespace JDI.Light.Elements.Base
 
         public new string Value
         {
-            get => Actions.GetValue(GetValueFunc);
-            set => Actions.SetValue(value, SetValueAction);
+            get => Invoker.DoActionWithResult("Get value", GetValueFunc);
+            set => Invoker.DoAction("Get value", el => SetValueAction(this, value));
         }
     }
 }

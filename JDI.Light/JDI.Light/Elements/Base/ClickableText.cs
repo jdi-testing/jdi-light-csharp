@@ -21,7 +21,7 @@ namespace JDI.Light.Elements.Base
         {
         }
 
-        public string Value => Actions.GetValue(GetTextFunc);
+        public string Value => Invoker.DoActionWithResult("Get value", GetTextFunc);
 
         public string GetValue()
         {
