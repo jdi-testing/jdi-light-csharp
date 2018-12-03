@@ -204,7 +204,7 @@ namespace JDI.Light.Elements.Base
 
         public void WaitVanished()
         {
-            Actions.WaitVanished(el => Timer.Wait(() => !IsDisplayedAction(el)));
+            Invoker.DoActionResultWithResult("Wait element vanished", el => Timer.Wait(() => !IsDisplayedAction(this)));
         }
     }
 }

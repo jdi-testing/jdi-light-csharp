@@ -32,7 +32,7 @@ namespace JDI.Light.Elements.Common
 
         public void Input(string text)
         {
-            Actions.Input(text, InputAction);
+            Invoker.DoAction($"Input text '{text}' in text field", el => InputAction(this, text));
         }
 
         public new string Value
@@ -48,12 +48,12 @@ namespace JDI.Light.Elements.Common
 
         public void Clear()
         {
-            Actions.Clear(ClearAction);
+            Invoker.DoAction("Clear text field", ClearAction);
         }
 
         public void Focus()
         {
-            Actions.Focus(FocusAction);
+            Invoker.DoAction("Focus on text field", FocusAction);
         }
     }
 }

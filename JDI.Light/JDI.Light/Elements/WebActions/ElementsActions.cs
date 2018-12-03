@@ -16,12 +16,6 @@ namespace JDI.Light.Elements.WebActions
 
         public ActionInvoker<UIElement> Invoker { get; set; }
 
-        // Element Actions
-        public void WaitVanished(Func<UIElement, bool> isVanished)
-        {
-            Invoker.DoActionResultWithResult("Wait element vanished", isVanished);
-        }
-
         // Value Actions
         public string GetValue(Func<UIElement, string> getValueFunc)
         {
@@ -31,12 +25,6 @@ namespace JDI.Light.Elements.WebActions
         public void SetValue(string value, Action<UIElement, string> setValueAction)
         {
             Invoker.DoAction("Get value", el => setValueAction(el, value));
-        }
-
-        // Click Action
-        public void Click(Action<UIElement> clickAction)
-        {
-            Invoker.DoAction("Click on Element", clickAction);
         }
 
         // Text Actions
@@ -57,45 +45,6 @@ namespace JDI.Light.Elements.WebActions
             Func<UIElement, Func<string>> textAction = el => () => getTextAction(el);
             return Invoker.DoActionResultWithResult($"Wait text match regex '{regEx}'",
                 el => textAction(el).GetByCondition(t => t.Matches(regEx)));
-        }
-
-        // Input Actions
-        public void InputLines(Action<UIElement> clearAction, Action<UIElement, string> inputAction,
-            params string[] textLines)
-        {
-            Invoker.DoAction("Input several lines of text in textarea",
-                el =>
-                {
-                    clearAction(el);
-                    inputAction(el, string.Join("\n", textLines));
-                });
-        }
-
-        public void AddNewLine(string textLine, Action<UIElement, string> inputAction)
-        {
-            Invoker.DoAction("Add text from new line in textarea",
-                el => inputAction(el, "\n" + textLine));
-        }
-
-        public string[] GetLines(Func<UIElement, string> getTextAction)
-        {
-            return Invoker.DoActionResultWithResult("Get text as lines", el => Regex.Split(getTextAction(el), "\\\\n"));
-        }
-
-        public void Input(string text, Action<UIElement, string> inputAction)
-        {
-            Invoker.DoAction("Input text '" + text + "' in text field",
-                el => inputAction(el, text));
-        }
-
-        public void Clear(Action<UIElement> clearAction)
-        {
-            Invoker.DoAction("Clear text field", clearAction);
-        }
-
-        public void Focus(Action<UIElement> focusAction)
-        {
-            Invoker.DoAction("Focus on text field", focusAction);
         }
 
         // Selector

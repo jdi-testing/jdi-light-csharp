@@ -18,7 +18,7 @@ namespace JDI.Light.Elements.Base
 
         public void Click()
         {
-            Actions.Click(ClickAction);
+            Invoker.DoAction("Click on Element", ClickAction);
         }
 
         public void ClickByXY(int x, int y)

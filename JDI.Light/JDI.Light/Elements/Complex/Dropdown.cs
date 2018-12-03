@@ -110,7 +110,7 @@ namespace JDI.Light.Elements.Complex
 
         public void Click()
         {
-            Actions.Click(d => ClickAction(this));
+            Invoker.DoAction("Click on dropdown", d => ClickAction(this));
         }
 
         public string GetText => Actions.GetText(d => GetTextAction(this));
