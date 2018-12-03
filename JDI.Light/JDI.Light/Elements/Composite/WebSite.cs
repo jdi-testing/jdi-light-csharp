@@ -14,7 +14,7 @@ namespace JDI.Light.Elements.Composite
         
         public void Open()
         {
-            WebDriver.Navigate().GoToUrl(WebSettings.Domain);
+            WebDriver.Navigate().GoToUrl(JDI.Domain);
         }
 
         public void OpenUrl(string url)

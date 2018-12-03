@@ -47,7 +47,7 @@ namespace JDI.Light.Elements.Composite
 
         public string Url
         {
-            get => _url == null || _url.Contains("://") || !WebSettings.HasDomain
+            get => _url == null || _url.Contains("://") || !JDI.HasDomain
                 ? _url
                 : GetUrlFromUri(_url);
             set => _url = value;
@@ -103,12 +103,12 @@ namespace JDI.Light.Elements.Composite
 
         public static string GetUrlFromUri(string uri)
         {
-            return WebSettings.Domain.Replace("/*$", "") + "/" + new Regex("^//*").Replace(uri, "");
+            return JDI.Domain.Replace("/*$", "") + "/" + new Regex("^//*").Replace(uri, "");
         }
 
         public static string GetMatchFromDomain(string uri)
         {
-            return WebSettings.Domain.Replace("/*$", "").Replace(".", "\\.") + "/" + uri.Replace("^/*", "");
+            return JDI.Domain.Replace("/*$", "").Replace(".", "\\.") + "/" + uri.Replace("^/*", "");
         }
 
         public static void OpenUrl(string url)

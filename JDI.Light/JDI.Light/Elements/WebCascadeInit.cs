@@ -68,9 +68,9 @@ namespace JDI.Light.Elements
             var page = (WebPage) instance;
             var url = pageAttribute.Url;
             var site = parentType.GetCustomAttribute<SiteAttribute>(false);
-            if (!WebSettings.HasDomain && site != null)
-                WebSettings.Domain = site.Domain;
-            url = url.Contains("://") || !WebSettings.HasDomain
+            if (!JDI.HasDomain && site != null)
+                JDI.Domain = site.Domain;
+            url = url.Contains("://") || !JDI.HasDomain
                 ? url
                 : WebPage.GetUrlFromUri(url);
             var title = pageAttribute.Title;
@@ -79,7 +79,7 @@ namespace JDI.Light.Elements
             var titleCheckType = pageAttribute.TitleCheckType;
             if (!string.IsNullOrEmpty(urlTemplate))
             {
-                urlTemplate = urlTemplate.Contains("://") || !WebSettings.HasDomain ||
+                urlTemplate = urlTemplate.Contains("://") || !JDI.HasDomain ||
                               urlCheckType != CheckPageType.Match
                     ? urlTemplate
                     : WebPage.GetMatchFromDomain(urlTemplate);

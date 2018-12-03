@@ -1,6 +1,4 @@
-﻿using OpenQA.Selenium;
-
-namespace JDI.Light.Interfaces.Base
+﻿namespace JDI.Light.Interfaces.Base
 {
     public interface IBaseElement
     {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Linq;
 using JDI.Light.Elements;
 using JDI.Light.Factories;
@@ -16,20 +17,21 @@ namespace JDI.Light
         public static bool IsDemoMode;
         public static bool ShortLogMessagesFormat;
         public static bool UseCache;
-        public static WebSettings WebSettings;
         public static WebCascadeInit WebInit;
         public static IDriverFactory<IWebDriver> DriverFactory;
         public static Timeouts Timeouts;
         public static IAssert Assert;
         public static ILogger Logger;
+        public static string Domain;
 
+        public static bool HasDomain => Domain != null && Domain.Contains("://");
+        public static bool GetLatestDriver = true;
         public static IJavaScriptExecutor JsExecutor => DriverFactory.GetDriver() as IJavaScriptExecutor;
 
         static JDI()
         {
             Timeouts = new Timeouts();
             ShortLogMessagesFormat = true;
-            WebSettings = new WebSettings();
             WebInit = new WebCascadeInit();
 
             GetFromPropertiesAvoidExceptions(p => DriverFactory.RegisterDriver(p), "Driver");
@@ -58,6 +60,18 @@ namespace JDI.Light
                 if (parameters.Contains("multiple") || parameters.Contains("displayed"))
                     WebDriverFactory.OnlyOneElementAllowedInSearch = false;
             }, "SearchElementStrategy");
+            GetFromPropertiesAvoidExceptions(p => Domain = p, "Domain");
+            GetFromPropertiesAvoidExceptions(p => GetLatestDriver = p.ToLower().Equals("true") || p.ToLower().Equals("1"), "GetLatest");
+            GetFromPropertiesAvoidExceptions(p =>
+            {
+                string[] split = null;
+                if (p.Split(',').Length == 2)
+                    split = p.Split(',');
+                if (p.ToLower().Split('x').Length == 2)
+                    split = p.ToLower().Split('x');
+                if (split != null)
+                    WebDriverFactory.BrowserSize = new Size(int.Parse(split[0]), int.Parse(split[1]));
+            }, "BrowserSize");
         }
 
         public static void Init(ILogger logger = null, IAssert assert = null,
@@ -67,8 +81,6 @@ namespace JDI.Light
             Assert = assert ?? new BaseAsserter();
             Timeouts = timeouts ?? new Timeouts();
             Logger = logger ?? new ConsoleLogger();
-
-            WebSettings.Init();
         }
 
         public static void InitSite(Type siteType)

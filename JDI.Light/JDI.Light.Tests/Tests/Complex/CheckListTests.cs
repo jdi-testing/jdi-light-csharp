@@ -2,7 +2,6 @@
 using System.Linq;
 using JDI.Light.Interfaces.Complex;
 using JDI.Light.Tests.Asserts;
-using JDI.Light.Tests.Enums;
 using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 using OpenQA.Selenium;

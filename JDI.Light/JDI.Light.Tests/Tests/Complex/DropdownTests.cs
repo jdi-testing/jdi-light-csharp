@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using JDI.Light.Elements.Complex;
-using JDI.Light.Interfaces.Complex;
 using JDI.Light.Tests.Asserts;
 using JDI.Light.Tests.Enums;
 using JDI.Light.Tests.UIObjects;
