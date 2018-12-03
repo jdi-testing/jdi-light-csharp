@@ -17,21 +17,6 @@ namespace JDI.Light.Elements.WebActions
         public ActionInvoker<UIElement> Invoker { get; set; }
 
         // Element Actions
-        public bool IsDisplayed(Func<UIElement, bool> isDisplayed)
-        {
-            return Invoker.DoActionResultWithResult("Is element displayed", isDisplayed);
-        }
-
-        public bool IsHidden(Func<UIElement, bool> isHidden)
-        {
-            return Invoker.DoActionResultWithResult("Is element hidden", isHidden);
-        }
-
-        public void WaitDisplayed(Func<UIElement, bool> isDisplayed)
-        {
-            Invoker.DoActionResultWithResult("Wait element displayed", isDisplayed);
-        }
-
         public void WaitVanished(Func<UIElement, bool> isVanished)
         {
             Invoker.DoActionResultWithResult("Wait element vanished", isVanished);

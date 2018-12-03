@@ -4,17 +4,15 @@ using System.Linq;
 using JDI.Light.Elements.Base;
 using JDI.Light.Elements.Composite;
 using JDI.Light.Extensions;
-using JDI.Light.Interfaces.Base;
 using JDI.Light.Utils;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
 namespace JDI.Light.Elements.Complex
 {
-    public abstract class BaseSelector<TEnum> : CompositeUIElement, IVisible
-        where TEnum : IConvertible
+    public abstract class BaseSelector<TEnum> : CompositeUIElement where TEnum : IConvertible
     {
-        public Func<BaseSelector<TEnum>, bool> DisplayedAction = s =>
+        public new Func<BaseSelector<TEnum>, bool> IsDisplayedAction = s =>
         {
             var els = s.FindImmediately(() => s.Elements, null);
             return els != null && els.Any() && els[0].Displayed;
@@ -131,7 +129,7 @@ namespace JDI.Light.Elements.Complex
             s.SelectFromList(elements, num);
         };
 
-        public Func<BaseSelector<TEnum>, bool> WaitDisplayedAction = s =>
+        public new Func<BaseSelector<TEnum>, bool> WaitDisplayedAction = s =>
         {
             return s.Timer.Wait(() =>
             {
@@ -193,21 +191,7 @@ namespace JDI.Light.Elements.Complex
                 return GetElementsFromTag();
             }
         }
-
-        public new bool Displayed => Actions.IsDisplayed(s => DisplayedAction(this));
-
-        public new bool Hidden => Actions.IsDisplayed(s => !DisplayedAction(this));
-
-        public new void WaitDisplayed()
-        {
-            Actions.WaitDisplayed(s => WaitDisplayedAction(this));
-        }
-
-        public new void WaitVanished()
-        {
-            Actions.WaitVanished(s => Timer.Wait(() => !DisplayedAction(this)));
-        }
-
+        
         private static SelectElement GetSelectElement(List<IWebElement> elements)
         {
             var selector = elements.Count == 1 ? elements[0] : null;
