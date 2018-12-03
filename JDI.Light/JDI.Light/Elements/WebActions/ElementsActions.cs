@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
 using JDI.Light.Elements.Base;
 using JDI.Light.Extensions;
 
@@ -40,67 +37,6 @@ namespace JDI.Light.Elements.WebActions
             Func<UIElement, Func<string>> textAction = el => () => getTextAction(el);
             return Invoker.DoActionWithResult($"Wait text match regex '{regEx}'",
                 el => textAction(el).GetByCondition(t => t.Matches(regEx)));
-        }
-
-        // Selector
-        public void Hover(string name, Action<UIElement, string> hoverAction)
-        {
-            Invoker.DoAction($"Hover '{name}'", el => hoverAction(el, name));
-        }
-
-        public bool Selected(string name, Func<UIElement, string, bool> isSelectedAction)
-        {
-            return Invoker.DoActionWithResult($"Wait is '{name}' selected", el => isSelectedAction(el, name));
-        }
-
-        public string Selected(Func<UIElement, string> isSelectedAction)
-        {
-            return Invoker.DoActionWithResult("Get Selected element name", isSelectedAction);
-        }
-
-        public int SelectedIndex(Func<UIElement, int> isSelectedAction)
-        {
-            return Invoker.DoActionWithResult("Get Selected element index", isSelectedAction);
-        }
-
-        //MultiSelector
-        public void Select(Action<UIElement, IList<string>> selectListAction, params string[] names)
-        {
-            Invoker.DoAction($"Select '{names.FormattedJoin()}'", el => selectListAction(el, names));
-        }
-
-        public void Select(Action<UIElement, IList<int>> selectListAction, int[] indexes)
-        {
-            var listIndexes = indexes.Select(i => i.ToString()).ToList();
-            Invoker.DoAction($"Select '{listIndexes.FormattedJoin()}'", el => selectListAction(el, indexes));
-        }
-
-        public List<string> AreSelected(Func<UIElement, IList<string>> getNames,
-            Func<UIElement, string, bool> waitSelectedAction)
-        {
-            return Invoker.DoActionWithResult("Are selected", el =>
-                getNames(el).Where(name => waitSelectedAction(el, name)).ToList());
-        }
-
-        public void WaitSelected(Func<UIElement, string, bool> waitSelectedAction, params string[] names)
-        {
-            var result = Invoker.DoActionWithResult($"Are deselected '{names.FormattedJoin()}'",
-                el => names.All(name => waitSelectedAction(el, name)));
-            JDI.Assert.IsTrue(result);
-        }
-
-        public List<string> AreDeselected(Func<UIElement, IList<string>> getNames,
-            Func<string, bool> waitSelectedAction)
-        {
-            return Invoker.DoActionWithResult("Are deselected", el =>
-                getNames(el).Where(name => !waitSelectedAction.Invoke(name)).ToList());
-        }
-
-        public void WaitDeselected(Func<UIElement, string, bool> waitSelectedAction, params string[] names)
-        {
-            var result = Invoker.DoActionWithResult($"Are deselected '{names.FormattedJoin()}'",
-                el => names.All(name => !waitSelectedAction(el, name)));
-            JDI.Assert.IsTrue(result);
         }
     }
 }

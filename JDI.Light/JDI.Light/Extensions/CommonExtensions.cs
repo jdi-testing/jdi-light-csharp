@@ -17,6 +17,11 @@ namespace JDI.Light.Extensions
             return list != null ? string.Join(separator, list.Select(el => string.Format(format, el))) : "";
         }
 
+        public static string FormattedJoin(this IEnumerable<int> list, string separator = ", ", string format = "{0}")
+        {
+            return list != null ? string.Join(separator, list.Select(el => string.Format(format, el))) : "";
+        }
+
         public static string Print<TValue>(this IEnumerable<KeyValuePair<string, TValue>> collection,
             string separator = "; ", string pairFormat = "{0}: {1}")
         {

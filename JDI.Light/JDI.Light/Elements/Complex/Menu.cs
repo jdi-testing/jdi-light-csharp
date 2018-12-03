@@ -95,11 +95,7 @@ namespace JDI.Light.Elements.Complex
         {
             if (names == null || names.Length == 0)
                 return;
-            Actions.Hover(names.FormattedJoin(Separator), (w, n) =>
-            {
-                var m = (Menu<TEnum>) w;
-                m.ChooseItemAction(m, names, HoverAction);
-            });
+            Invoker.DoAction($"Hover '{names.FormattedJoin(Separator)}'", el => ChooseItemAction(this, names, HoverAction));
         }
 
         public void Hover(TEnum name)

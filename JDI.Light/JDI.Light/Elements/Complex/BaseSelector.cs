@@ -224,7 +224,7 @@ namespace JDI.Light.Elements.Complex
 
         public void WaitSelected(string name)
         {
-            Actions.Selected(name, (el, n) => TimerExtensions.ForceDone(() => SelectedNameAction(this, n)));
+            Invoker.DoActionWithResult($"Wait is '{name}' selected", el =>TimerExtensions.ForceDone(() => SelectedNameAction(this, name)));
         }
 
         public void WaitSelected(TEnum enumType)
@@ -234,7 +234,7 @@ namespace JDI.Light.Elements.Complex
 
         public bool Selected(string name)
         {
-            return Actions.Selected(name, (el, n) => SelectedNameAction(this, n));
+            return Invoker.DoActionWithResult($"Wait is '{name}' selected", el => SelectedNameAction(this, name));
         }
 
         public bool Selected(TEnum enumType)

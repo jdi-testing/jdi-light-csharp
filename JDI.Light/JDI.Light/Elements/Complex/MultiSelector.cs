@@ -76,7 +76,7 @@ namespace JDI.Light.Elements.Complex
 
         public void Select(params string[] names)
         {
-            Actions.Select((m, v) => SelectListNamesAction(this, names), names);
+            Invoker.DoAction($"Select '{names.FormattedJoin()}'", el => SelectListNamesAction(this, names));
         }
 
         public void Select(params TEnum[] names)
@@ -86,7 +86,7 @@ namespace JDI.Light.Elements.Complex
 
         public void Select(params int[] nums)
         {
-            Actions.Select((m, i) => SelectListIndexesAction(this, nums), nums);
+            Invoker.DoAction($"Select '{nums.FormattedJoin()}'", el => SelectListIndexesAction(this, nums));
         }
 
         public void Check(params string[] names)
@@ -127,7 +127,8 @@ namespace JDI.Light.Elements.Complex
 
         public IList<string> AreSelected()
         {
-            return Actions.AreSelected(m => Names, (m, name) => SelectedNameAction(this, name));
+            return Invoker.DoActionWithResult("Are selected", el =>
+                Names.Where(name => SelectedNameAction(this, name)).ToList());
         }
 
         public void WaitSelected(params TEnum[] names)
@@ -137,12 +138,15 @@ namespace JDI.Light.Elements.Complex
 
         public void WaitSelected(params string[] names)
         {
-            Actions.WaitSelected((m, n) => Timer.Wait(() => SelectedNameAction(this, n)), names);
+            var result = Invoker.DoActionWithResult($"Are selected '{names.FormattedJoin()}'",
+                el => names.All(name => Timer.Wait(() => SelectedNameAction(this, name))));
+            JDI.Assert.IsTrue(result);
         }
 
         public IList<string> AreDeselected()
         {
-            return Actions.AreDeselected(m => Names, n => Timer.Wait(() => SelectedNameAction(this, n)));
+            return Invoker.DoActionWithResult("Are deselected", el =>
+               Names.Where(name => !Timer.Wait(() => SelectedNameAction(this, name))).ToList());
         }
 
         public void WaitDeselected(params TEnum[] names)
@@ -152,7 +156,9 @@ namespace JDI.Light.Elements.Complex
 
         public void WaitDeselected(params string[] names)
         {
-            Actions.WaitDeselected((m, n) => Timer.Wait(() => SelectedNameAction(this, n)), names);
+            var result = Invoker.DoActionWithResult($"Wait deselected '{names.FormattedJoin()}'",
+                el => names.All(name => !Timer.Wait(() => SelectedNameAction(this, name))));
+            JDI.Assert.IsTrue(result);
         }
 
         public void Clear()
