@@ -74,29 +74,6 @@ namespace JDI.Light.Elements.WebActions
                 el => textAction(el).GetByCondition(t => t.Matches(regEx)));
         }
 
-        // Check/Select Actions
-        public bool Selected(Func<UIElement, bool> isSelectedAction)
-        {
-            return Invoker.DoActionResultWithResult("Is Selected", isSelectedAction);
-        }
-
-        public void Check(Action<UIElement> checkAction)
-        {
-            Invoker.DoAction("Check Checkbox", checkAction);
-        }
-
-        public void Uncheck(Action<UIElement> uncheckAction)
-        {
-            Invoker.DoAction("Uncheck Checkbox", uncheckAction);
-        }
-
-        public bool IsChecked(Func<UIElement, bool> isCheckedAction)
-        {
-            return Invoker.DoActionResultWithResult("IsChecked",
-                isCheckedAction,
-                result => "Checkbox is " + (result ? "checked" : "unchecked"));
-        }
-
         // Input Actions
         public void InputLines(Action<UIElement> clearAction, Action<UIElement, string> inputAction,
             params string[] textLines)

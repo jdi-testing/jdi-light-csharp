@@ -57,17 +57,19 @@ namespace JDI.Light.Elements.Common
 
         public void Check()
         {
-            Actions.Check(el => CheckAction(this));
+            Invoker.DoAction("Check Checkbox", el => CheckAction(this));
         }
 
         public void Uncheck()
         {
-            Actions.Uncheck(UncheckAction);
+            Invoker.DoAction("Uncheck Checkbox", UncheckAction);
         }
 
         public bool IsChecked()
         {
-            return Actions.IsChecked(el => IsCheckedAction(this));
+            return Invoker.DoActionResultWithResult("IsChecked",
+                el => IsCheckedAction(this),
+                result => "Checkbox is " + (result ? "checked" : "unchecked"));
         }
 
         public string Value

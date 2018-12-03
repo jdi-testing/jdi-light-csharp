@@ -9,6 +9,7 @@ namespace JDI.Light.Elements.Base
         protected Func<UIElement, string> GetValueFunc = el
             => ((SelectableElement) el).Selected + "";
 
+        //TODO: is it a bug?
         protected Action<SelectableElement> SelectAction = s => s.Click();
 
         protected Func<SelectableElement, bool> SelectedAction = s => s.WebElement.Selected;
@@ -30,7 +31,7 @@ namespace JDI.Light.Elements.Base
             Actions.Select(Name, (w, n) => ClickAction(this));
         }
 
-        public bool Selected => Actions.Selected(w => SelectedAction(this));
+        public bool Selected => Invoker.DoActionResultWithResult("Is Selected", e => SelectedAction(this));
 
         public new string Value
         {
