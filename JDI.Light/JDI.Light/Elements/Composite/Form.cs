@@ -24,7 +24,7 @@ namespace JDI.Light.Elements.Composite
                 return this.GetFields(typeof(IHasValue)).Select(field => ((IHasValue) field.GetValue(this)).Value)
                     .FormattedJoin();
             }
-            set => Submit(value.ParseAsString());
+            set => throw new Exception("This is not supported at the moment");
         }
 
         public string GetValue()
@@ -162,12 +162,12 @@ namespace JDI.Light.Elements.Composite
 
         public void Fill(T entity)
         {
-            Fill(entity.ToDictionary());
+            Fill(entity.PropertiesToDictionary());
         }
 
         public IList<string> Verify(T entity)
         {
-            return Verify(entity.ToDictionary());
+            return Verify(entity.PropertiesToDictionary());
         }
 
         public void Search(T entity)
@@ -177,7 +177,7 @@ namespace JDI.Light.Elements.Composite
 
         public void Submit(T entity, string buttonName)
         {
-            Fill(entity.ToDictionary());
+            Fill(entity.PropertiesToDictionary());
             GetButton(buttonName).Click();
         }
 
@@ -238,13 +238,13 @@ namespace JDI.Light.Elements.Composite
 
         public void Submit(T entity, Enum buttonName)
         {
-            Fill(entity.ToDictionary());
+            Fill(entity.PropertiesToDictionary());
             GetButton(buttonName.ToString().ToLower()).Click();
         }
 
         public void Check(T entity)
         {
-            Check(entity.ToDictionary());
+            Check(entity.PropertiesToDictionary());
         }
     }
 }

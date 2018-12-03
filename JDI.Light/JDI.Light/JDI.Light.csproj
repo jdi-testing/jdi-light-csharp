@@ -75,6 +75,7 @@
     <Compile Include="Enums\TableHeaderType.cs" />
     <Compile Include="Extensions\CommonExtensions.cs" />
     <Compile Include="Extensions\FieldInfoExtensions.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\TimerExtensions.cs" />
     <Compile Include="Factories\UIElementFactory.cs" />
@@ -182,7 +183,6 @@
     <Compile Include="Settings\WebSettings.cs" />
     <Compile Include="Settings\Timeouts.cs" />
     <Compile Include="Utils\ExceptionUtils.cs" />
-    <Compile Include="Utils\ParseObjectUtil.cs" />
     <Compile Include="Utils\ReflectionUtils.cs" />
     <Compile Include="Utils\Timer.cs" />
   </ItemGroup>
