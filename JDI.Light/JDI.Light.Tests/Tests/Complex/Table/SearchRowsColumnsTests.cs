@@ -46,7 +46,7 @@ namespace JDI.Light.Tests.Tests.Complex.Table
         {
             var column = Table.Column("TestNG, JUnit, Custom", Row.CreateRow(3))
                 .Select(pair => $"{pair.Key}:{pair.Value.GetText}");
-            new NUnitAsserter().AreEquals(column.FormattedJoin(), _expectedColumn2);
+            JDI.Assert.AreEquals(column.FormattedJoin(), _expectedColumn2);
         }
 
         [Test]
@@ -54,21 +54,21 @@ namespace JDI.Light.Tests.Tests.Complex.Table
         {
             var column = Table.Column("TestNG, JUnit, Custom", Row.CreateRow("3"))
                 .Select(pair => $"{pair.Key}:{pair.Value.GetText}");
-            new NUnitAsserter().AreEquals(column.FormattedJoin(), _expectedColumn2);
+            JDI.Assert.AreEquals(column.FormattedJoin(), _expectedColumn2);
         }
 
         [Test]
         public void ColumnByNameTest()
         {
             var column = Table.Column("Now").Select(pair => $"{pair.Key}:{pair.Value.GetText}");
-            new NUnitAsserter().AreEquals(column.FormattedJoin(), _expectedColumn2);
+            JDI.Assert.AreEquals(column.FormattedJoin(), _expectedColumn2);
         }
 
         [Test]
         public void ColumnByNumTest()
         {
             var column = Table.Column(2).Select(pair => $"{pair.Key}:{pair.Value.GetText}");
-            new NUnitAsserter().AreEquals(column.FormattedJoin(), _expectedColumn2);
+            JDI.Assert.AreEquals(column.FormattedJoin(), _expectedColumn2);
         }
 
         [Test]
@@ -105,7 +105,7 @@ namespace JDI.Light.Tests.Tests.Complex.Table
         public void ColumnsByCriteriaTest()
         {
             var columns = Table.GetColumns("1=Selenium, Custom");
-            new NUnitAsserter().AreEquals(columns.Count, 1);
+            JDI.Assert.AreEquals(columns.Count, 1);
             var stringColumns =
                 columns.Select(
                         pair =>
@@ -125,7 +125,7 @@ namespace JDI.Light.Tests.Tests.Complex.Table
         public void ColumnsByTwoCriteriasTest()
         {
             var columns = Table.GetColumns("2=Test Runner", "4=Logger");
-            new NUnitAsserter().AreEquals(columns.Count, 1);
+            JDI.Assert.AreEquals(columns.Count, 1);
             var stringColumns =
                 columns.Select(
                         pair =>
@@ -234,7 +234,7 @@ namespace JDI.Light.Tests.Tests.Complex.Table
         {
             var row = Table.Row("MSTest, NUnit, Epam", Column.column(3))
                 .Select(pair => $"{pair.Key}:{pair.Value.GetText}");
-            new NUnitAsserter().AreEquals(row.FormattedJoin(), _expectedRow2);
+            JDI.Assert.AreEquals(row.FormattedJoin(), _expectedRow2);
         }
 
         [Test]
@@ -242,21 +242,21 @@ namespace JDI.Light.Tests.Tests.Complex.Table
         {
             var row = Table.Row("MSTest, NUnit, Epam", Column.column("Plans"))
                 .Select(pair => $"{pair.Key}:{pair.Value.GetText}");
-            new NUnitAsserter().AreEquals(row.FormattedJoin(), _expectedRow2);
+            JDI.Assert.AreEquals(row.FormattedJoin(), _expectedRow2);
         }
 
         [Test]
         public void RowByNameTest()
         {
             var row = Table.Row("2").Select(pair => $"{pair.Key}:{pair.Value.GetText}");
-            new NUnitAsserter().AreEquals(row.FormattedJoin(), _expectedRow2);
+            JDI.Assert.AreEquals(row.FormattedJoin(), _expectedRow2);
         }
 
         [Test]
         public void RowByNumTest()
         {
             var row = Table.Row(2).Select(pair => $"{pair.Key}:{pair.Value.GetText}");
-            new NUnitAsserter().AreEquals(row.FormattedJoin(), _expectedRow2);
+            JDI.Assert.AreEquals(row.FormattedJoin(), _expectedRow2);
         }
 
         [Test]

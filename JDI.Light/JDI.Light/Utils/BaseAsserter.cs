@@ -9,6 +9,13 @@ namespace JDI.Light.Utils
     public class BaseAsserter : IAssert
     {
         private ILogger _logger;
+
+        public ILogger Logger
+        {
+            get => _logger ?? (_logger = JDI.Logger);
+            set => _logger = value;
+        }
+
         private readonly string _checkMessage;
 
         public BaseAsserter(string checkMessage) : this()
@@ -18,11 +25,6 @@ namespace JDI.Light.Utils
 
         public BaseAsserter()
         {
-        }
-
-        public void SetUpLogger(ILogger logger)
-        {
-            _logger = logger;
         }
 
         public virtual void ThrowFail(string message)
@@ -67,7 +69,7 @@ namespace JDI.Light.Utils
 
         private void AssertAction(string message, bool result, bool logOnlyFail = false, string failMessage = null)
         {
-            if (!logOnlyFail) _logger.Info(GetBeforeMessage(message));
+            if (!logOnlyFail) Logger.Info(GetBeforeMessage(message));
             // TODO: Take screenshot
             //TakeScreenshot();
             if (!result) AssertException(failMessage ?? message + " failed");
@@ -81,7 +83,7 @@ namespace JDI.Light.Utils
         private void AssertException(string failMessage, params object[] args)
         {
             var failMsg = args.Length > 0 ? string.Format(failMessage, args) : failMessage;
-            _logger.Error(failMsg);
+            Logger.Error(failMsg);
             ThrowFail(failMsg);
         }
 

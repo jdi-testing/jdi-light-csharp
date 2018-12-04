@@ -1,5 +1,4 @@
 ﻿using JDI.Light.Interfaces.Common;
-using JDI.Light.Tests.Asserts;
 using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 
@@ -36,19 +35,19 @@ namespace JDI.Light.Tests.Tests.Common
             var _attributeName = "testAttr";
             var _value = "testValue";
             _logoImage.SetAttribute(_attributeName, _value);
-            new NUnitAsserter().AreEquals(_logoImage.GetAttribute(_attributeName), _value);
+            JDI.Assert.AreEquals(_logoImage.GetAttribute(_attributeName), _value);
         }
 
         [Test]
         public void GetSourceTest()
         {
-            new NUnitAsserter().AreEquals(_logoImage.GetSource(), SRC);
+            JDI.Assert.AreEquals(_logoImage.GetSource(), SRC);
         }
 
         [Test]
         public void GetTipTest()
         {
-            new NUnitAsserter().AreEquals(_logoImage.GetAlt(), ALT);
+            JDI.Assert.AreEquals(_logoImage.GetAlt(), ALT);
         }
     }
 }

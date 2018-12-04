@@ -51,25 +51,25 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void GetOptionsTest()
         {
-            new NUnitAsserter().CollectionEquals(MetalsControl.Options, OddOptions);
+            JDI.Assert.CollectionEquals(MetalsControl.Options, OddOptions);
         }
 
         [Test]
         public void GetNamesTest()
         {
-            new NUnitAsserter().CollectionEquals(MetalsControl.Names, OddOptions);
+            JDI.Assert.CollectionEquals(MetalsControl.Names, OddOptions);
         }
 
         [Test]
         public void GetValuesTest()
         {
-            new NUnitAsserter().CollectionEquals(MetalsControl.Values, OddOptions);
+            JDI.Assert.CollectionEquals(MetalsControl.Values, OddOptions);
         }
 
         [Test]
         public void GetOptionsAsTextTest()
         {
-            new NUnitAsserter().AreEquals(MetalsControl.OptionsAsText, "Col, Gold, Silver, Bronze, Selen");
+            JDI.Assert.AreEquals(MetalsControl.OptionsAsText, "Col, Gold, Silver, Bronze, Selen");
         }
 
         [Test]
@@ -84,7 +84,7 @@ namespace JDI.Light.Tests.Tests.Complex
         public void GetSelectedTest()
         {
             MetalsControl.Select("Gold");
-            new NUnitAsserter().AreEquals(MetalsControl.Selected(), "Gold");
+            JDI.Assert.AreEquals(MetalsControl.Selected(), "Gold");
         }
 
         [Test]

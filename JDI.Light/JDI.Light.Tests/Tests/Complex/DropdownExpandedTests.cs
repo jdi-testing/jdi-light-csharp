@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using JDI.Light.Interfaces.Complex;
-using JDI.Light.Tests.Asserts;
 using JDI.Light.Tests.Enums;
 using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
@@ -53,25 +52,25 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void GetOptionsTest()
         {
-            new NUnitAsserter().CollectionEquals(_colors().Options, ColorsOptions);
+            JDI.Assert.CollectionEquals(_colors().Options, ColorsOptions);
         }
 
         [Test]
         public void GetNamesTest()
         {
-            new NUnitAsserter().CollectionEquals(_colors().Names, ColorsOptions);
+            JDI.Assert.CollectionEquals(_colors().Names, ColorsOptions);
         }
 
         [Test]
         public void GetValuesTest()
         {
-            new NUnitAsserter().CollectionEquals(_colors().Values, ColorsOptions);
+            JDI.Assert.CollectionEquals(_colors().Values, ColorsOptions);
         }
 
         [Test]
         public void GetOptionsAsTextTest()
         {
-            new NUnitAsserter().AreEquals(_colors().OptionsAsText, "Colors, Red, Green, Blue, Yellow");
+            JDI.Assert.AreEquals(_colors().OptionsAsText, "Colors, Red, Green, Blue, Yellow");
         }
 
         [Test]
@@ -84,19 +83,19 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void GetNameTest()
         {
-            new NUnitAsserter().AreEquals(_colors().Name, "Colors");
+            JDI.Assert.AreEquals(_colors().Name, "Colors");
         }
 
         [Test]
         public void GetSelectedTest()
         {
-            new NUnitAsserter().AreEquals(_colors().Selected(), "Colors");
+            JDI.Assert.AreEquals(_colors().Selected(), "Colors");
         }
 
         [Test]
         public void GetValueTest()
         {
-            new NUnitAsserter().AreEquals(_colors().Value, "Colors");
+            JDI.Assert.AreEquals(_colors().Value, "Colors");
         }
     }
 }

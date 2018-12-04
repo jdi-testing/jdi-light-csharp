@@ -1,5 +1,4 @@
-﻿using JDI.Light.Tests.Asserts;
-using JDI.Light.Tests.UIObjects;
+﻿using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
@@ -22,9 +21,9 @@ namespace JDI.Light.Tests.Tests.Composite
         public void RefreshTest()
         {
             TestSite.ContactFormPage.ContactSubmit.Click();
-            new NUnitAsserter().AreEquals(TestSite.ContactFormPage.Result.GetText, "Summary: 3");
+            JDI.Assert.AreEquals(TestSite.ContactFormPage.Result.GetText, "Summary: 3");
             TestSite.ContactFormPage.Refresh();
-            new NUnitAsserter().AreEquals(TestSite.ContactFormPage.Result.GetText, "");
+            JDI.Assert.AreEquals(TestSite.ContactFormPage.Result.GetText, "");
             TestSite.ContactFormPage.CheckOpened();
         }
 
@@ -51,10 +50,10 @@ namespace JDI.Light.Tests.Tests.Composite
         public void AddCookieTest()
         {
             TestSite.HomePage.WebDriver.Manage().Cookies.DeleteAllCookies();
-            new NUnitAsserter().IsTrue(TestSite.HomePage.WebDriver.Manage().Cookies.AllCookies.Count == 0);
+            JDI.Assert.IsTrue(TestSite.HomePage.WebDriver.Manage().Cookies.AllCookies.Count == 0);
             var cookie = new Cookie("key", "value");
             TestSite.ContactFormPage.AddCookie(cookie);
-            new NUnitAsserter().AreEquals(TestSite.HomePage.WebDriver.Manage().Cookies.GetCookieNamed(cookie.Name).Value,
+            JDI.Assert.AreEquals(TestSite.HomePage.WebDriver.Manage().Cookies.GetCookieNamed(cookie.Name).Value,
                 cookie.Value);
         }
 
@@ -63,9 +62,9 @@ namespace JDI.Light.Tests.Tests.Composite
         {
             var cookie = new Cookie("key", "value");
             TestSite.HomePage.WebDriver.Manage().Cookies.AddCookie(cookie);
-            new NUnitAsserter().IsFalse(TestSite.HomePage.WebDriver.Manage().Cookies.AllCookies.Count == 0);
+            JDI.Assert.IsFalse(TestSite.HomePage.WebDriver.Manage().Cookies.AllCookies.Count == 0);
             TestSite.ContactFormPage.DeleteAllCookies();
-            new NUnitAsserter().IsTrue(TestSite.HomePage.WebDriver.Manage().Cookies.AllCookies.Count == 0);
+            JDI.Assert.IsTrue(TestSite.HomePage.WebDriver.Manage().Cookies.AllCookies.Count == 0);
         }
 
         [Test]

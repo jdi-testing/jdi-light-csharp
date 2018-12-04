@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using JDI.Light.Tests.Asserts;
 using JDI.Light.Tests.Entities;
 using JDI.Light.Tests.Enums;
 using JDI.Light.Tests.Tests.Complex;
@@ -28,8 +27,8 @@ namespace JDI.Light.Tests.Tests.Composite
         public void FillFormTest()
         {
             _contactForm.Fill(Contact.DEFAULT_CONTACT);
-            IList<string> filledFilds = _contactForm.GetFormValue();
-            new NUnitAsserter().CollectionEquals(filledFilds, Contact.DEFAULT_CONTACT.ToList());
+            IList<string> filledFields = _contactForm.GetFormValue();
+            JDI.Assert.CollectionEquals(filledFields, Contact.DEFAULT_CONTACT.ToList());
         }
 
         [Test]
@@ -66,14 +65,14 @@ namespace JDI.Light.Tests.Tests.Composite
         public void VerifyTest()
         {
             _contactForm.Fill(Contact.DEFAULT_CONTACT);
-            new NUnitAsserter().IsTrue(_contactForm.Verify(Contact.DEFAULT_CONTACT).Count == 0);
+            JDI.Assert.IsTrue(_contactForm.Verify(Contact.DEFAULT_CONTACT).Count == 0);
         }
 
         [Test]
-        public void checkTest()
+        public void CheckTest()
         {
             _contactForm.Fill(Contact.DEFAULT_CONTACT);
-            new NUnitAsserter().HasNoException(() => _contactForm.Check(Contact.DEFAULT_CONTACT));
+            _contactForm.Check(Contact.DEFAULT_CONTACT);
         }
     }
 }

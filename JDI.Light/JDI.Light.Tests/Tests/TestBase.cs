@@ -1,5 +1,4 @@
-﻿using JDI.Light.Tests.Asserts;
-using JDI.Light.Tests.Entities;
+﻿using JDI.Light.Tests.Entities;
 using JDI.Light.Tests.UIObjects;
 using JDI.Light.Utils;
 using NUnit.Framework;
@@ -12,7 +11,7 @@ namespace JDI.Light.Tests.Tests
         [OneTimeSetUp]
         protected void SetUp()
         {
-            JDI.Init(null, new NUnitAsserter());
+            JDI.Init(null, JDI.Assert);
             JDI.Logger.Info("Init test run...");
             WinProcUtils.KillAllRunWebDrivers();
             JDI.InitSite(typeof(TestSite));

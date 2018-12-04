@@ -1,5 +1,4 @@
 ﻿using System;
-using JDI.Light.Tests.Asserts;
 using JDI.Light.Tests.Entities;
 using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
@@ -32,35 +31,35 @@ namespace JDI.Light.Tests.Tests.Common
         public void InputTest()
         {
             TestSite.ContactFormPage.NameField.Input(TO_ADD_TEXT);
-            new NUnitAsserter().AreEquals(TestSite.ContactFormPage.NameField.GetText, DEFAULT_TEXT + TO_ADD_TEXT);
+            JDI.Assert.AreEquals(TestSite.ContactFormPage.NameField.GetText, DEFAULT_TEXT + TO_ADD_TEXT);
         }
         
         [Test]
         public void SendKeyTest()
         {
             TestSite.ContactFormPage.NameField.SendKeys(TO_ADD_TEXT);
-            new NUnitAsserter().AreEquals(TestSite.ContactFormPage.NameField.GetText, DEFAULT_TEXT + TO_ADD_TEXT);
+            JDI.Assert.AreEquals(TestSite.ContactFormPage.NameField.GetText, DEFAULT_TEXT + TO_ADD_TEXT);
         }
 
         [Test]
         public void NewInputTest()
         {
             TestSite.ContactFormPage.NameField.NewInput(TO_ADD_TEXT);
-            new NUnitAsserter().AreEquals(TestSite.ContactFormPage.NameField.GetText, TO_ADD_TEXT);
+            JDI.Assert.AreEquals(TestSite.ContactFormPage.NameField.GetText, TO_ADD_TEXT);
         }
 
         [Test]
         public void ClearTest()
         {
             TestSite.ContactFormPage.NameField.Clear();
-            new NUnitAsserter().AreEquals(TestSite.ContactFormPage.NameField.GetText, "");
+            JDI.Assert.AreEquals(TestSite.ContactFormPage.NameField.GetText, "");
         }
 
         [Test]
         public void MultiKeyTest()
         {
             foreach (var letter in TO_ADD_TEXT) TestSite.ContactFormPage.NameField.SendKeys(letter.ToString());
-            new NUnitAsserter().AreEquals(TestSite.ContactFormPage.NameField.GetText, DEFAULT_TEXT + TO_ADD_TEXT);
+            JDI.Assert.AreEquals(TestSite.ContactFormPage.NameField.GetText, DEFAULT_TEXT + TO_ADD_TEXT);
         }
     }
 }

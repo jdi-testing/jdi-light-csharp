@@ -1,5 +1,4 @@
 ﻿using JDI.Light.Interfaces.Common;
-using JDI.Light.Tests.Asserts;
 using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 
@@ -30,7 +29,7 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void GetReferenceTest()
         {
-            new NUnitAsserter().AreEquals(_link.GetReference(), TestSite.SupportPage.Url);
+            JDI.Assert.AreEquals(_link.GetReference(), TestSite.SupportPage.Url);
         }
 
         /*

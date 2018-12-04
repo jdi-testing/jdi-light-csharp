@@ -12,7 +12,7 @@ namespace JDI.Light.Tests.Tests.Complex.Table
     {
         private void CheckCell(ICell cell)
         {
-            new NUnitAsserter().AreEquals(
+            JDI.Assert.AreEquals(
                 $"Value: {cell.Value}; " +
                 $"Text: {cell.GetText}; {cell.ColumnName}/{cell.RowName}; {cell.ColumnNum}/{cell.RowNum}",
                 "Value: MSTest, NUnit, Epam; Text: MSTest, NUnit, Epam; Plans/2; 3/2");
@@ -91,7 +91,7 @@ namespace JDI.Light.Tests.Tests.Complex.Table
         public void CellsMatchInRowNameEqualsTest()
         {
             var cells = Table.CellsMatch(".*MSTest, NUnit, Epam", Row.CreateRow("2"));
-            new NUnitAsserter().AreEquals(cells.Count, 1);
+            JDI.Assert.AreEquals(cells.Count, 1);
             CheckCell(cells[0]);
         }
 
@@ -99,7 +99,7 @@ namespace JDI.Light.Tests.Tests.Complex.Table
         public void CellsMatchInRowNumEqualsTest()
         {
             var cells = Table.CellsMatch(".*MSTest, NUnit, Epam", Row.CreateRow(2));
-            new NUnitAsserter().AreEquals(cells.Count, 1);
+            JDI.Assert.AreEquals(cells.Count, 1);
             CheckCell(cells[0]);
         }
 

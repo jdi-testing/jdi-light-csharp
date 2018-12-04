@@ -178,25 +178,25 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void GetOptionsTest()
         {
-            new NUnitAsserter().CollectionEquals(_nature().Options, NATURE_OPTIONS);
+            JDI.Assert.CollectionEquals(_nature().Options, NATURE_OPTIONS);
         }
 
         [Test]
         public void GetNamesTest()
         {
-            new NUnitAsserter().CollectionEquals(_nature().Names, NATURE_OPTIONS);
+            JDI.Assert.CollectionEquals(_nature().Names, NATURE_OPTIONS);
         }
 
         [Test]
         public void GetValuesTest()
         {
-            new NUnitAsserter().CollectionEquals(_nature().Values, NATURE_OPTIONS);
+            JDI.Assert.CollectionEquals(_nature().Values, NATURE_OPTIONS);
         }
 
         [Test]
         public void GetOptionsAsTextTest()
         {
-            new NUnitAsserter().AreEquals(_nature().OptionsAsText, ALL_VALUES);
+            JDI.Assert.AreEquals(_nature().OptionsAsText, ALL_VALUES);
         }
 
         [Test]
@@ -209,7 +209,7 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void GetNameTest()
         {
-            new NUnitAsserter().AreEquals(_nature().Name, "Elements");
+            JDI.Assert.AreEquals(_nature().Name, "Elements");
         }
 
         // TODO: fix incorrect work of AreSelected method. It is always return empty collection
@@ -217,7 +217,7 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void AreSelectedTest()
         {
-            new NUnitAsserter().CollectionEquals(_nature().AreSelected(), new List<string>() );
+            JDI.Assert.CollectionEquals(_nature().AreSelected(), new List<string>() );
         }
 
 
@@ -225,14 +225,14 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void AreDeselectedTest()
         {
-            new NUnitAsserter().CollectionEquals(_nature().AreDeselected(), NATURE_OPTIONS);
+            JDI.Assert.CollectionEquals(_nature().AreDeselected(), NATURE_OPTIONS);
         }
         */
 
         [Test]
         public void GetValueTest()
         {
-            new NUnitAsserter().AreEquals(_nature().Value, "");
+            JDI.Assert.AreEquals(_nature().Value, "");
         }
     }
 }

@@ -73,7 +73,7 @@ namespace JDI.Light
         {
             Logger = logger ?? new ConsoleLogger();
             Assert = assert ?? new BaseAsserter();
-            Assert.SetUpLogger(Logger);
+            Assert.Logger = Logger;
             DriverFactory = driverFactory ?? new WebDriverFactory();
             Timeouts = timeouts ?? new Timeouts();
         }
