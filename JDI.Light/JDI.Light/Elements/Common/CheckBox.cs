@@ -10,7 +10,7 @@ namespace JDI.Light.Elements.Common
         public Action<CheckBox> CheckAction = el =>
         {
             if (!el.IsCheckedAction(el))
-                el.ClickAction(el);
+                el.Click();
             if (!el.IsCheckedAction(el))
                 throw JDI.Assert.Exception("Can't check element. Verify locator for click or isCheckedAction");
         };
@@ -57,7 +57,7 @@ namespace JDI.Light.Elements.Common
 
         public void Check()
         {
-            Invoker.DoAction("Check Checkbox", el => CheckAction(this));
+            Invoker.DoAction("Check Checkbox", () => CheckAction(this));
         }
 
         public void Uncheck()
@@ -75,7 +75,7 @@ namespace JDI.Light.Elements.Common
         public string Value
         {
             get => Invoker.DoActionWithResult("Get value", GetValueFunc);
-            set => Invoker.DoAction("Get value", el => SetValueAction(this, value));
+            set => Invoker.DoAction("Get value", () => SetValueAction(this, value));
         }
 
         public string GetValue()
@@ -83,11 +83,11 @@ namespace JDI.Light.Elements.Common
             return Value;
         }
 
-        protected void UncheckAction(UIElement el)
+        protected void UncheckAction()
         {
-            if (IsCheckedAction((CheckBox) el))
-                ClickAction(el);
-            if (IsCheckedAction((CheckBox) el))
+            if (IsCheckedAction(this))
+                Click();
+            if (IsCheckedAction(this))
                 throw JDI.Assert.Exception("Can't uncheck element. Verify locator for click or isCheckedAction");
         }
     }

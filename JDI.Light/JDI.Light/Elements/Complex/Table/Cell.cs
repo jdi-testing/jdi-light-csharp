@@ -29,7 +29,6 @@ namespace JDI.Light.Elements.Complex.Table
             if (cellLocatorTemplate != null)
                 _cellLocatorTemplate = cellLocatorTemplate;
             Table = table;
-            ClickAction = c => ((Cell) c).Get().Click();
             GetValueFunc = w => TextAction(this);
         }
 

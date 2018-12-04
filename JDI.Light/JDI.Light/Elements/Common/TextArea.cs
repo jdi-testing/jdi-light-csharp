@@ -18,17 +18,17 @@ namespace JDI.Light.Elements.Common
         public void InputLines(params string[] textLines)
         {
             Invoker.DoAction("Input several lines of text in textarea",
-                el =>
+                () =>
                 {
-                    ClearAction(this);
-                    InputAction(this, string.Join("\n", textLines));
+                    Clear();
+                    Input(string.Join("\n", textLines));
                 });
         }
 
         public void AddNewLine(string textLine)
         {
             Invoker.DoAction("Add text from new line in textarea",
-                el => InputAction(this, "\n" + textLine));
+                () => Input("\n" + textLine));
         }
 
         public string[] GetLines()

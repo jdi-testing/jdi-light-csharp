@@ -52,7 +52,7 @@ namespace JDI.Light.Elements.Complex
 
         public void Select(string name)
         {
-            Invoker.DoAction($"Select '{name}'", el => SelectNameAction(this, name));
+            Invoker.DoAction($"Select '{name}'", () => SelectNameAction(this, name));
         }
 
         public void Select(TEnum enumType)
@@ -62,7 +62,7 @@ namespace JDI.Light.Elements.Complex
 
         public void Select(int num)
         {
-            Invoker.DoAction($"Select '{num}'", el => SelectNumAction(this, num));
+            Invoker.DoAction($"Select '{num}'", () => SelectNumAction(this, num));
         }
 
         public string Selected()

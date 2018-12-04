@@ -7,15 +7,9 @@ namespace JDI.Light.Elements.Common
 {
     public class TextField : Text, ITextField
     {
-        protected Action<UIElement> ClearAction = cl => cl.WebElement.Clear();
-        protected Action<UIElement> FocusAction = fa => fa.WebElement.Click();
-
         protected Func<UIElement, string> GetTextFunc =
             el => el.FindImmediately(() => el.WebElement.GetAttribute("value"), "");
         
-        protected Action<UIElement, string> InputAction =
-            (el, text) => el.WebElement.SendKeys(text);
-
         protected Action<UIElement, string> SetValueAction = (el, val) =>
             ((TextField) el).NewInput(val);
 
@@ -32,13 +26,13 @@ namespace JDI.Light.Elements.Common
 
         public void Input(string text)
         {
-            Invoker.DoAction($"Input text '{text}' in text field", el => InputAction(this, text));
+            Invoker.DoAction($"Input text '{text}' in text field", () => WebElement.SendKeys(text));
         }
 
         public new string Value
         {
             get => base.Value;
-            set => Invoker.DoAction("Get value", el => SetValueAction(this, value));
+            set => Invoker.DoAction("Get value", () => SetValueAction(this, value));
         }
 
         public void SendKeys(string text)
@@ -48,12 +42,12 @@ namespace JDI.Light.Elements.Common
 
         public void Clear()
         {
-            Invoker.DoAction("Clear text field", ClearAction);
+            Invoker.DoAction("Clear text field", () => WebElement.Clear());
         }
 
         public void Focus()
         {
-            Invoker.DoAction("Focus on text field", FocusAction);
+            Invoker.DoAction("Focus on text field", () => WebElement.Click());
         }
     }
 }

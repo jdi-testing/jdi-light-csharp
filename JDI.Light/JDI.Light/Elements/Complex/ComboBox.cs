@@ -39,7 +39,7 @@ namespace JDI.Light.Elements.Complex
 
         public void Input(string text)
         {
-            Invoker.DoAction($"Input text '{text}' in combobox", el => InputAction(this, text));
+            Invoker.DoAction($"Input text '{text}' in combobox", () => InputAction(this, text));
         }
 
         public void SendKeys(string text)
@@ -55,12 +55,12 @@ namespace JDI.Light.Elements.Complex
 
         public void Clear()
         {
-            Invoker.DoAction("Clear combobox", c => ClearAction());
+            Invoker.DoAction("Clear combobox", ClearAction);
         }
 
         public void Focus()
         {
-            Invoker.DoAction("Focus on text field", c => FocusAction());
+            Invoker.DoAction("Focus on text field", FocusAction);
         }
 
         public void ClearAction()

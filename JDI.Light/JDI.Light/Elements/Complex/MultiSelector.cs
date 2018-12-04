@@ -76,7 +76,7 @@ namespace JDI.Light.Elements.Complex
 
         public void Select(params string[] names)
         {
-            Invoker.DoAction($"Select '{names.FormattedJoin()}'", el => SelectListNamesAction(this, names));
+            Invoker.DoAction($"Select '{names.FormattedJoin()}'", () => SelectListNamesAction(this, names));
         }
 
         public void Select(params TEnum[] names)
@@ -86,7 +86,7 @@ namespace JDI.Light.Elements.Complex
 
         public void Select(params int[] nums)
         {
-            Invoker.DoAction($"Select '{nums.FormattedJoin()}'", el => SelectListIndexesAction(this, nums));
+            Invoker.DoAction($"Select '{nums.FormattedJoin()}'", () => SelectListIndexesAction(this, nums));
         }
 
         public void Check(params string[] names)
@@ -163,7 +163,7 @@ namespace JDI.Light.Elements.Complex
 
         public void Clear()
         {
-            Invoker.DoAction("Clear Options", m => ClearAction(this));
+            Invoker.DoAction("Clear Options", () => ClearAction(this));
         }
 
         public void CheckAll()

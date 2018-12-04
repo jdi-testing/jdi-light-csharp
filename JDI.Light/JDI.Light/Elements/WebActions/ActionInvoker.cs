@@ -17,17 +17,12 @@ namespace JDI.Light.Elements.WebActions
             _logger = logger;
         }
         
-        private void LogAction(string actionName, LogLevel level)
-        {
-            _logger.Log($"Perform action '{actionName}' with WebElement ({_element.ToString()})", level);
-        }
-
         public TResult DoActionWithResult<TResult>(string actionName, Func<T, TResult> action,
             Func<TResult, string> logResult = null, LogLevel level = LogLevel.Info)
         {
+            _logger.Log($"Perform action with result '{actionName}' with WebElement ({_element.ToString()})", level);
             return ExceptionUtils.ActionWithException(() =>
             {
-                LogAction(actionName, level);
                 var timer = new Timer();
                 var result = action.Invoke(_element);
                 if (result == null)
@@ -41,14 +36,14 @@ namespace JDI.Light.Elements.WebActions
             }, ex => $"Failed to do '{actionName}' action. Reason: {ex}");
         }
 
-        public void DoAction(string actionName, Action<T> action, LogLevel level = LogLevel.Info)
+        public void DoAction(string actionName, Action action, LogLevel level = LogLevel.Info)
         {
+            _logger.Log($"Perform action '{actionName}' with WebElement ({_element.ToString()})", level);
             TimerExtensions.ForceDone(() =>
             {
-                LogAction(actionName, level);
                 new Timer(JDI.Timeouts.CurrentTimeoutSec).Wait(() =>
                 {
-                    action(_element);
+                    action();
                     return true;
                 });
                 _logger.Info(actionName + " done");
