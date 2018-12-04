@@ -1,5 +1,4 @@
-﻿using System;
-using JDI.Light.Elements.Base;
+﻿using JDI.Light.Elements.Base;
 using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
 
@@ -7,12 +6,6 @@ namespace JDI.Light.Elements.Common
 {
     public class Image : Clickable, IImage
     {
-        protected Func<UIElement, string> GetAltFunc =
-            el => el.FindImmediately(() => el.WebElement.GetAttribute("alt"), "");
-
-        protected Func<UIElement, string> GetSourceFunc =
-            el => el.FindImmediately(() => el.WebElement.GetAttribute("src"), "");
-
         public Image() : this(null)
         {
         }
@@ -24,12 +17,12 @@ namespace JDI.Light.Elements.Common
 
         public string GetSource()
         {
-            return Invoker.DoActionWithResult("Get image source for Element " + this, GetSourceFunc);
+            return Invoker.DoActionWithResult("Get image source for Element " + this, () => FindImmediately(() => WebElement.GetAttribute("src"), ""));
         }
 
         public string GetAlt()
         {
-            return Invoker.DoActionWithResult("Get image title for Element " + this, GetAltFunc);
+            return Invoker.DoActionWithResult("Get image title for Element " + this, () => FindImmediately(() => WebElement.GetAttribute("alt"), ""));
         }
     }
 }

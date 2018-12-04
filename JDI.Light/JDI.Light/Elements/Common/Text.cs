@@ -17,16 +17,16 @@ namespace JDI.Light.Elements.Common
         {
         }
 
-        protected virtual Func<UIElement, string> GetTextAction { get; set; } = el =>
+        protected virtual string GetTextAction()
         {
-            var getText = el.WebElement.Text ?? "";
+            var getText = WebElement.Text ?? "";
             if (!getText.Equals(""))
                 return getText;
-            var getValue = el.WebElement.GetAttribute("value");
+            var getValue = WebElement.GetAttribute("value");
             return getValue ?? getText;
-        };
+        }
 
-        private Func<string> TextAction(UIElement el) => () => GetTextAction(el);
+        private Func<string> TextAction() => GetTextAction;
 
         public string GetText => Invoker.DoActionWithResult("Get text", GetTextAction);
 
@@ -40,13 +40,13 @@ namespace JDI.Light.Elements.Common
         public string WaitText(string text)
         {
             return Invoker.DoActionWithResult($"Wait text contains '{text}'",
-                el => TextAction(el).GetByCondition(t => t.Contains(text)));
+                () => TextAction().GetByCondition(t => t.Contains(text)));
         }
 
         public string WaitMatchText(string regEx)
         {
             return Invoker.DoActionWithResult($"Wait text match regex '{regEx}'",
-                el => TextAction(this).GetByCondition(t => t.Matches(regEx)));
+                () => TextAction().GetByCondition(t => t.Matches(regEx)));
         }
     }
 }

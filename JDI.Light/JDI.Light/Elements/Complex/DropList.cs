@@ -79,20 +79,20 @@ namespace JDI.Light.Elements.Complex
             Button.SetAttribute(attributeName, value);
         }
 
-        public string GetText => Invoker.DoActionWithResult("Get text", d => GetTextAction(this));
+        public string GetText => Invoker.DoActionWithResult("Get text", () => GetTextAction(this));
 
-        Func<string> TextAction(UIElement el) => () => GetTextAction(this);
+        Func<string> TextAction() => () => GetTextAction(this);
 
         public string WaitText(string text)
         {
             return Invoker.DoActionWithResult($"Wait text contains '{text}'",
-                el => TextAction(el).GetByCondition(t => t.Contains(text)));
+                () => TextAction().GetByCondition(t => t.Contains(text)));
         }
 
         public string WaitMatchText(string regEx)
         {
             return Invoker.DoActionWithResult($"Wait text match regex '{regEx}'",
-                el => TextAction(el).GetByCondition(t => t.Matches(regEx)));
+                () => TextAction().GetByCondition(t => t.Matches(regEx)));
         }
 
         public new string GetAttribute(string name)

@@ -189,18 +189,18 @@ namespace JDI.Light.Elements.Base
         protected Func<UIElement, bool> IsDisplayedAction =
             el => el.FindImmediately(() => el.WebElement.Displayed, false);
 
-        public bool Displayed => Invoker.DoActionWithResult("Is element displayed", IsDisplayedAction);
-        public bool Hidden => Invoker.DoActionWithResult("Is element hidden", el => !IsDisplayedAction(this));
+        public bool Displayed => Invoker.DoActionWithResult("Is element displayed", () => FindImmediately(() => WebElement.Displayed, false));
+        public bool Hidden => Invoker.DoActionWithResult("Is element hidden", () => !IsDisplayedAction(this));
         public Func<UIElement, bool> WaitDisplayedAction => el => WebElement.Displayed;
 
         public void WaitDisplayed()
         {
-            Invoker.DoActionWithResult("Wait element displayed", el => WaitDisplayedAction(this));
+            Invoker.DoActionWithResult("Wait element displayed", () => WaitDisplayedAction(this));
         }
 
         public void WaitVanished()
         {
-            Invoker.DoActionWithResult("Wait element vanished", el => Timer.Wait(() => !IsDisplayedAction(this)));
+            Invoker.DoActionWithResult("Wait element vanished", () => Timer.Wait(() => !IsDisplayedAction(this)));
         }
     }
 }

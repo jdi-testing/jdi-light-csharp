@@ -166,7 +166,7 @@ namespace JDI.Light.Elements.Complex
 
         public string Value
         {
-            get { return Invoker.DoActionWithResult("Get value", el => GetValueAction(this)); }
+            get { return Invoker.DoActionWithResult("Get value", () => GetValueAction(this)); }
             set { Invoker.DoAction("Get value", () => SetValueAction(this, value)); }
         }
 
@@ -224,7 +224,7 @@ namespace JDI.Light.Elements.Complex
 
         public void WaitSelected(string name)
         {
-            Invoker.DoActionWithResult($"Wait is '{name}' selected", el =>TimerExtensions.ForceDone(() => SelectedNameAction(this, name)));
+            Invoker.DoActionWithResult($"Wait is '{name}' selected", () => TimerExtensions.ForceDone(() => SelectedNameAction(this, name)));
         }
 
         public void WaitSelected(TEnum enumType)
@@ -234,7 +234,7 @@ namespace JDI.Light.Elements.Complex
 
         public bool Selected(string name)
         {
-            return Invoker.DoActionWithResult($"Wait is '{name}' selected", el => SelectedNameAction(this, name));
+            return Invoker.DoActionWithResult($"Wait is '{name}' selected", () => SelectedNameAction(this, name));
         }
 
         public bool Selected(TEnum enumType)

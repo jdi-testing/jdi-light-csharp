@@ -17,14 +17,14 @@ namespace JDI.Light.Elements.WebActions
             _logger = logger;
         }
         
-        public TResult DoActionWithResult<TResult>(string actionName, Func<T, TResult> action,
+        public TResult DoActionWithResult<TResult>(string actionName, Func<TResult> action,
             Func<TResult, string> logResult = null, LogLevel level = LogLevel.Info)
         {
             _logger.Log($"Perform action with result '{actionName}' with WebElement ({_element.ToString()})", level);
             return ExceptionUtils.ActionWithException(() =>
             {
                 var timer = new Timer();
-                var result = action.Invoke(_element);
+                var result = action.Invoke();
                 if (result == null)
                     throw JDI.Assert.Exception($"Do action {actionName} failed. Can't got result");
                 var stringResult = logResult == null

@@ -15,8 +15,6 @@ namespace JDI.Light.Elements.Common
                 throw JDI.Assert.Exception("Can't check element. Verify locator for click or isCheckedAction");
         };
 
-        protected Func<UIElement, string> GetValueFunc = el => ((CheckBox) el).IsChecked() + "";
-
         public Func<CheckBox, bool> IsCheckedAction =
             el => el.IsSelected(el) || el.IsCheckedByAttribute(el);
 
@@ -68,13 +66,13 @@ namespace JDI.Light.Elements.Common
         public bool IsChecked()
         {
             return Invoker.DoActionWithResult("IsChecked",
-                el => IsCheckedAction(this),
+                () => IsCheckedAction(this),
                 result => "Checkbox is " + (result ? "checked" : "unchecked"));
         }
 
         public string Value
         {
-            get => Invoker.DoActionWithResult("Get value", GetValueFunc);
+            get => Invoker.DoActionWithResult("Get value", IsChecked().ToString);
             set => Invoker.DoAction("Get value", () => SetValueAction(this, value));
         }
 

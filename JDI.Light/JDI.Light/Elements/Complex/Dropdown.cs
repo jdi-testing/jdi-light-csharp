@@ -114,20 +114,20 @@ namespace JDI.Light.Elements.Complex
             Invoker.DoAction("Click on dropdown", () => ClickAction(this));
         }
 
-        public string GetText => Invoker.DoActionWithResult("Get text", d => GetTextAction(this));
+        public string GetText => Invoker.DoActionWithResult("Get text", () => GetTextAction(this));
 
         private Func<string> TextAction() => () => GetTextAction(this);
 
         public string WaitText(string text)
         {
             return Invoker.DoActionWithResult($"Wait text contains '{text}'",
-                el => TextAction().GetByCondition(t => t.Contains(text)));
+                () => TextAction().GetByCondition(t => t.Contains(text)));
         }
 
         public string WaitMatchText(string regEx)
         {
             return Invoker.DoActionWithResult($"Wait text match regex '{regEx}'",
-                el => TextAction().GetByCondition(t => t.Matches(regEx)));
+                () => TextAction().GetByCondition(t => t.Matches(regEx)));
         }
 
         public new void SetAttribute(string attributeName, string value)

@@ -8,9 +8,6 @@ namespace JDI.Light.Elements.Common
 {
     public class Link : ClickableText, ILink
     {
-        protected Func<UIElement, string> GetReferenceFunc =
-            el => el.FindImmediately(() => el.WebElement.GetAttribute("href"), "");
-
         protected Func<UIElement, string> GetTooltipFunc =
             el => el.FindImmediately(() => el.WebElement.GetAttribute("title"), "");
 
@@ -25,31 +22,32 @@ namespace JDI.Light.Elements.Common
 
         public string GetReference()
         {
-            return Invoker.DoActionWithResult("Get link reference", GetReferenceFunc,
+            return Invoker.DoActionWithResult("Get link reference", () => FindImmediately(() => WebElement.GetAttribute("href"), ""),
                 href => $"Get href of link '{href}'");
         }
 
         public string WaitReferenceContains(string text)
         {
-            Func<UIElement, Func<string>> textFunc = el => () => GetReferenceFunc(el);
+            Func<string> TextFunc (UIElement el) => GetReference;
             return Invoker.DoActionWithResult(
                 $"Wait link contains '{text}'",
-                el => textFunc(el).GetByCondition(t => t.Contains(text))
+                () => TextFunc(this).GetByCondition(t => t.Contains(text))
             );
         }
 
         public string WaitMatchReference(string regEx)
         {
-            Func<UIElement, Func<string>> textFunc = el => () => GetReferenceFunc(el);
+            Func<string> TextFunc(UIElement el) => GetReference;
             return Invoker.DoActionWithResult(
                 $"Wait link match regex '{regEx}'",
-                el => textFunc(el).GetByCondition(t => t.Matches(regEx))
+                () => TextFunc(this).GetByCondition(t => t.Matches(regEx))
             );
         }
 
         public string GetTooltip()
         {
-            return Invoker.DoActionWithResult("Get link tooltip", GetTooltipFunc, href => $"Get link tooltip '{href}'");
+            return Invoker.DoActionWithResult("Get link tooltip", 
+                () => FindImmediately(() => WebElement.GetAttribute("title"), ""), href => $"Get link tooltip '{href}'");
         }
     }
 }

@@ -105,7 +105,7 @@ namespace JDI.Light.Elements.Composite
         public IList<string> GetSuggestions(string text)
         {
             return Invoker.DoActionWithResult($"Get all suggestions for input '{text}'",
-                s => GetSuggestionsAction(this, text));
+                () => GetSuggestionsAction(this, text));
         }
     }
 }

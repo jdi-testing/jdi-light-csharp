@@ -28,11 +28,11 @@ namespace JDI.Light.Elements.Base
             Invoker.DoAction($"Select '{Name}'", Click);
         }
 
-        public bool Selected => Invoker.DoActionWithResult("Is Selected", e => SelectedAction(this));
+        public bool Selected => Invoker.DoActionWithResult("Is Selected", () => SelectedAction(this));
 
         public new string Value
         {
-            get => Invoker.DoActionWithResult("Get value", GetValueFunc);
+            get => Invoker.DoActionWithResult("Get value", Selected.ToString);
             set => Invoker.DoAction("Get value", () => SetValueAction(this, value));
         }
     }

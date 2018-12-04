@@ -67,12 +67,12 @@ namespace JDI.Light.Elements.Complex
 
         public string Selected()
         {
-            return Invoker.DoActionWithResult("Get Selected element name", s => SelectedAction(this));
+            return Invoker.DoActionWithResult("Get Selected element name", () => SelectedAction(this));
         }
 
         public int SelectedIndex()
         {
-            return Invoker.DoActionWithResult("Get Selected element index", s => SelectedIndexAction(this));
+            return Invoker.DoActionWithResult("Get Selected element index", () => SelectedIndexAction(this));
         }
 
         public string GetValue()

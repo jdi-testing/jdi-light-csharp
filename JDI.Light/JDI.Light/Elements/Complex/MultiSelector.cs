@@ -127,7 +127,7 @@ namespace JDI.Light.Elements.Complex
 
         public IList<string> AreSelected()
         {
-            return Invoker.DoActionWithResult("Are selected", el =>
+            return Invoker.DoActionWithResult("Are selected", () =>
                 Names.Where(name => SelectedNameAction(this, name)).ToList());
         }
 
@@ -139,13 +139,13 @@ namespace JDI.Light.Elements.Complex
         public void WaitSelected(params string[] names)
         {
             var result = Invoker.DoActionWithResult($"Are selected '{names.FormattedJoin()}'",
-                el => names.All(name => Timer.Wait(() => SelectedNameAction(this, name))));
+                () => names.All(name => Timer.Wait(() => SelectedNameAction(this, name))));
             JDI.Assert.IsTrue(result);
         }
 
         public IList<string> AreDeselected()
         {
-            return Invoker.DoActionWithResult("Are deselected", el =>
+            return Invoker.DoActionWithResult("Are deselected", () =>
                Names.Where(name => !Timer.Wait(() => SelectedNameAction(this, name))).ToList());
         }
 
@@ -157,7 +157,7 @@ namespace JDI.Light.Elements.Complex
         public void WaitDeselected(params string[] names)
         {
             var result = Invoker.DoActionWithResult($"Wait deselected '{names.FormattedJoin()}'",
-                el => names.All(name => !Timer.Wait(() => SelectedNameAction(this, name))));
+                () => names.All(name => !Timer.Wait(() => SelectedNameAction(this, name))));
             JDI.Assert.IsTrue(result);
         }
 

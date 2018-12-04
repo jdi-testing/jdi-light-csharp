@@ -7,18 +7,17 @@ namespace JDI.Light.Elements.Base
 {
     public class ClickableText : Clickable, IText
     {
-        protected Func<UIElement, string> GetTextFunc =
-            el =>
-            {
-                var getText = el.WebElement.Text ?? "";
-                if (!getText.Equals(""))
-                    return getText;
-                var getValue = el.WebElement.GetAttribute("value");
-                return getValue ?? getText;
-            };
+        protected string GetTextFunc()
+        {
+            var getText = WebElement.Text ?? "";
+            if (!getText.Equals(""))
+                return getText;
+            var getValue = WebElement.GetAttribute("value");
+            return getValue ?? getText;
+        }
 
-        private Func<string> TextAction(UIElement el) => () => GetTextFunc(el);
-
+        private Func<string> TextAction() => GetTextFunc;
+        
         public ClickableText(By byLocator = null)
             : base(byLocator)
         {
@@ -36,13 +35,13 @@ namespace JDI.Light.Elements.Base
         public string WaitText(string text)
         {
             return Invoker.DoActionWithResult($"Wait text contains '{text}'",
-                el => TextAction(this).GetByCondition(t => t.Contains(text)));
+                () => TextAction().GetByCondition(t => t.Contains(text)));
         }
 
         public string WaitMatchText(string regEx)
         {
             return Invoker.DoActionWithResult($"Wait text match regex '{regEx}'",
-                el => TextAction(this).GetByCondition(t => t.Matches(regEx)));
+                () => TextAction().GetByCondition(t => t.Matches(regEx)));
         }
     }
 }
