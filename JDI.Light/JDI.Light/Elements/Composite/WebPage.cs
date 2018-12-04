@@ -20,7 +20,7 @@ namespace JDI.Light.Elements.Composite
         public CheckPageType CheckUrlType { get; set; } = CheckPageType.None;
         public string Title { get; set; }
         public string UrlTemplate { get; set; }
-        public ActionInvoker<WebPage> Invoker { get; set; }
+        public ActionInvoker Invoker { get; set; }
         public ILogger Logger { get; set; }
         public string DriverName { get; set; }
         public string Name { get; set; }
@@ -29,7 +29,7 @@ namespace JDI.Light.Elements.Composite
         public void SetUp(ILogger logger)
         {
             Logger = logger;
-            Invoker = new ActionInvoker<WebPage>(this, logger);
+            Invoker = new ActionInvoker(logger);
         }
 
         public IWebDriver WebDriver { get; set; }

@@ -6,21 +6,19 @@ using JDI.Light.Utils;
 
 namespace JDI.Light.Elements.WebActions
 {
-    public class ActionInvoker<T>
+    public class ActionInvoker
     {
-        private readonly T _element;
         private readonly ILogger _logger;
 
-        public ActionInvoker(T element, ILogger logger)
+        public ActionInvoker(ILogger logger)
         {
-            _element = element;
             _logger = logger;
         }
         
         public TResult DoActionWithResult<TResult>(string actionName, Func<TResult> action,
             Func<TResult, string> logResult = null, LogLevel level = LogLevel.Info)
         {
-            _logger.Log($"Perform action with result '{actionName}' with WebElement ({_element.ToString()})", level);
+            _logger.Log($"Perform action with result '{actionName}'", level);
             return ExceptionUtils.ActionWithException(() =>
             {
                 var timer = new Timer();
@@ -38,7 +36,7 @@ namespace JDI.Light.Elements.WebActions
 
         public void DoAction(string actionName, Action action, LogLevel level = LogLevel.Info)
         {
-            _logger.Log($"Perform action '{actionName}' with WebElement ({_element.ToString()})", level);
+            _logger.Log($"Perform action '{actionName}'", level);
             TimerExtensions.ForceDone(() =>
             {
                 new Timer(JDI.Timeouts.CurrentTimeoutSec).Wait(() =>

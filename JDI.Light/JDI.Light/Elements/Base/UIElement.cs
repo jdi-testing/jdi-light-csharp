@@ -17,11 +17,11 @@ namespace JDI.Light.Elements.Base
         private IWebElement _webElement;
 
         public By FrameLocator;
-        public ActionInvoker<UIElement> Invoker;
         public By Locator;
 
         public IWebDriver WebDriver => JDI.DriverFactory.GetDriver(DriverName);
 
+        public ActionInvoker Invoker { get; set; }
         public ILogger Logger { get; set; }
         public Timer Timer { get; set; }
         public string DriverName { get; set; }
@@ -34,7 +34,7 @@ namespace JDI.Light.Elements.Base
         public void SetUp(ILogger logger)
         {
             Logger = logger;
-            Invoker = new ActionInvoker<UIElement>(this, logger);
+            Invoker = new ActionInvoker(logger);
             Timer = new Timer(JDI.Timeouts.CurrentTimeoutSec * 1000);
             if (string.IsNullOrEmpty(DriverName) && JDI.DriverFactory != null &&
                 !string.IsNullOrEmpty(JDI.DriverFactory.CurrentDriverName))
