@@ -7,23 +7,6 @@ namespace JDI.Light.Elements.Common
 {
     public class CheckBox : Clickable, ICheckBox
     {
-        public Action<CheckBox> CheckAction = el =>
-        {
-            if (!el.IsCheckedAction(el))
-                el.Click();
-            if (!el.IsCheckedAction(el))
-                throw JDI.Assert.Exception("Can't check element. Verify locator for click or isCheckedAction");
-        };
-
-        public Func<CheckBox, bool> IsCheckedAction =
-            el => el.IsSelected(el) || el.IsCheckedByAttribute(el);
-
-        public Func<UIElement, bool> IsCheckedByAttribute =
-            el => el.FindImmediately(() => el.WebElement.GetAttribute("checked") != null, false);
-
-        public Func<UIElement, bool> IsSelected =
-            el => el.FindImmediately(() => el.WebElement.Selected, false);
-
         protected Action<UIElement, string> SetValueAction = (el, value) =>
         {
             switch (value.ToLower())
@@ -55,18 +38,32 @@ namespace JDI.Light.Elements.Common
 
         public void Check()
         {
-            Invoker.DoAction("Check Checkbox", () => CheckAction(this));
+            Invoker.DoAction("Check Checkbox", () => 
+            {
+                if (!IsChecked())
+                    Click();
+                if (!IsChecked())
+                    throw JDI.Assert.Exception("Can't check element. Verify locator for click or isCheckedAction");
+            });
         }
 
         public void Uncheck()
         {
-            Invoker.DoAction("Uncheck Checkbox", UncheckAction);
+            Invoker.DoAction("Uncheck Checkbox", () => {
+                if (IsChecked())
+                    Click();
+                if (IsChecked())
+                    throw JDI.Assert.Exception("Can't uncheck element. Verify locator for click or isCheckedAction");
+            });
         }
 
         public bool IsChecked()
         {
             return Invoker.DoActionWithResult("IsChecked",
-                () => IsCheckedAction(this),
+                () =>
+                {
+                    return FindImmediately(() => WebElement.Selected || WebElement.GetAttribute("checked") != null, false);
+                },
                 result => "Checkbox is " + (result ? "checked" : "unchecked"));
         }
 
@@ -79,14 +76,6 @@ namespace JDI.Light.Elements.Common
         public string GetValue()
         {
             return Value;
-        }
-
-        protected void UncheckAction()
-        {
-            if (IsCheckedAction(this))
-                Click();
-            if (IsCheckedAction(this))
-                throw JDI.Assert.Exception("Can't uncheck element. Verify locator for click or isCheckedAction");
         }
     }
 }

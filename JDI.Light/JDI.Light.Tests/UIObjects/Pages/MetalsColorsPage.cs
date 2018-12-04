@@ -25,10 +25,8 @@ namespace JDI.Light.Tests.UIObjects.Pages
         public IText CalculateText;
 
         [FindBy(XPath = "//*[@id='elements-checklist']//*[text()='Water']")]
-        public CheckBox CbWater = new CheckBox
-        {
-            IsCheckedAction = el => new UIElement(By.XPath("//*[@id='elements-checklist']//*[*[text()='Water']]/input")).WebElement.Selected
-        };
+        //"//*[@id='elements-checklist']//*[*[text()='Water']]/input"
+        public CheckBox CbWater;
 
         public Dropdown<Colors> Colors =
             new Dropdown<Colors>(By.CssSelector(".colors .filter-option"), By.CssSelector(".colors li span"));

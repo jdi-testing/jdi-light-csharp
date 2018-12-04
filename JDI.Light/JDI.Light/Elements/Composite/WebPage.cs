@@ -25,12 +25,6 @@ namespace JDI.Light.Elements.Composite
         public string Name { get; set; }
         public IBaseElement Parent { get; set; }
 
-        public void SetUp(ILogger logger)
-        {
-            Logger = logger;
-            Invoker = new ActionInvoker(logger);
-        }
-
         public IWebDriver WebDriver { get; set; }
         public Timer Timer { get; set; }
 
@@ -67,21 +61,6 @@ namespace JDI.Light.Elements.Composite
         public static string GetMatchFromDomain(string uri)
         {
             return JDI.Domain.Replace("/*$", "").Replace(".", "\\.") + "/" + uri.Replace("^/*", "");
-        }
-
-        public static void OpenUrl(string url)
-        {
-            new WebPage(url).Open();
-        }
-
-        public static string GetUrl()
-        {
-            return JDI.DriverFactory.GetDriver().Url;
-        }
-
-        public static string GetTitle()
-        {
-            return JDI.DriverFactory.GetDriver().Title;
         }
 
         public void UpdatePageData(string url, string title, CheckPageType checkUrlType, CheckPageType checkTitleType,
@@ -127,55 +106,29 @@ namespace JDI.Light.Elements.Composite
             }, ex => $"Can't open page {Name}. Reason: {ex}");
         }
 
-        /**
-         * Refresh current page
-         */
-
         public void Refresh()
         {
-            Invoker.DoAction($"Refresh page {Name}",
-                () => WebDriver.Navigate().Refresh());
+            Invoker.DoAction($"Refresh page {Name}", () => WebDriver.Navigate().Refresh());
         }
-
-        /**
-         * Go back to previous page
-         */
 
         public void Back()
         {
-            Invoker.DoAction("Go back to previous page",
-                () => WebDriver.Navigate().Back());
+            Invoker.DoAction("Go back to previous page", () => WebDriver.Navigate().Back());
         }
-
-        /**
-         * Go forward to next page
-         */
 
         public void Forward()
         {
-            Invoker.DoAction("Go forward to next page",
-                () => WebDriver.Navigate().Forward());
+            Invoker.DoAction("Go forward to next page", () => WebDriver.Navigate().Forward());
         }
-
-        /**
-         * @param cookie Specify cookie
-         *               Add cookie in browser
-         */
 
         public void AddCookie(Cookie cookie)
         {
-            Invoker.DoAction("Go forward to next page",
-                () => WebDriver.Manage().Cookies.AddCookie(cookie));
+            Invoker.DoAction("Add cookie for the page", () => WebDriver.Manage().Cookies.AddCookie(cookie));
         }
 
-        /**
-         * Clear browsers cache
-         */
-
-        public void ClearCache()
+        public void DeleteAllCookies()
         {
-            Invoker.DoAction("Go forward to next page",
-                () => WebDriver.Manage().Cookies.DeleteAllCookies());
+            Invoker.DoAction("Delete page cookies", () => WebDriver.Manage().Cookies.DeleteAllCookies());
         }
 
         public void CheckUrl()
@@ -191,8 +144,7 @@ namespace JDI.Light.Elements.Composite
                 switch (CheckUrlType)
                 {
                     case CheckPageType.None:
-                        JDI.Assert.IsTrue(GetUrl().Contains(UrlTemplate)
-                                          || GetUrl().Matches(UrlTemplate));
+                        JDI.Assert.IsTrue(WebDriver.Url.Contains(UrlTemplate) || WebDriver.Url.Matches(UrlTemplate));
                         break;
                     case CheckPageType.Equal:
                         JDI.Assert.IsTrue(Timer.Wait(() => WebDriver.Url.Equals(Url)));

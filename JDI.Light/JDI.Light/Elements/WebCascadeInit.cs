@@ -9,6 +9,7 @@ using JDI.Light.Elements.Base;
 using JDI.Light.Elements.Complex;
 using JDI.Light.Elements.Complex.Table.Interfaces;
 using JDI.Light.Elements.Composite;
+using JDI.Light.Elements.WebActions;
 using JDI.Light.Enums;
 using JDI.Light.Extensions;
 using JDI.Light.Factories;
@@ -51,7 +52,8 @@ namespace JDI.Light.Elements
                     var instance = typeof(IPage).IsAssignableFrom(type)
                         ? GetInstancePage(parent, field, type, parentType)
                         : GetInstanceElement(parent, type, parentType, field, driverName);
-                    instance.SetUp(Logger);
+                    instance.Logger = Logger;
+                    instance.Invoker = new ActionInvoker(Logger);
                     instance.Name = field.GetElementName();
                     instance.DriverName = driverName;
                     instance.Parent = parent;

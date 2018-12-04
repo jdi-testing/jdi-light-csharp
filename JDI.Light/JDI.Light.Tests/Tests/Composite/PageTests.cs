@@ -64,7 +64,7 @@ namespace JDI.Light.Tests.Tests.Composite
             var cookie = new Cookie("key", "value");
             TestSite.HomePage.WebDriver.Manage().Cookies.AddCookie(cookie);
             new NUnitAsserter().IsFalse(TestSite.HomePage.WebDriver.Manage().Cookies.AllCookies.Count == 0);
-            TestSite.ContactFormPage.ClearCache();
+            TestSite.ContactFormPage.DeleteAllCookies();
             new NUnitAsserter().IsTrue(TestSite.HomePage.WebDriver.Manage().Cookies.AllCookies.Count == 0);
         }
 

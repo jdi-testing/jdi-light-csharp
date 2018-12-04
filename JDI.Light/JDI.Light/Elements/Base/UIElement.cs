@@ -29,12 +29,6 @@ namespace JDI.Light.Elements.Base
         public UIElement(By byLocator)
         {
             Locator = byLocator;
-        }
-
-        public void SetUp(ILogger logger)
-        {
-            Logger = logger;
-            Invoker = new ActionInvoker(logger);
             Timer = new Timer(JDI.Timeouts.CurrentTimeoutSec * 1000);
             if (string.IsNullOrEmpty(DriverName) && JDI.DriverFactory != null &&
                 !string.IsNullOrEmpty(JDI.DriverFactory.CurrentDriverName))
