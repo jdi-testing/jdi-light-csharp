@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
 using JDI.Light.Elements.WebActions;
 using JDI.Light.Enums;
@@ -52,50 +51,10 @@ namespace JDI.Light.Elements.Composite
             set => _url = value;
         }
 
-        public void CheckOpened()
-        {
-            if (string.IsNullOrEmpty(UrlTemplate) &&
-                new[] {CheckPageType.None, CheckPageType.Equal}.Contains(CheckUrlType))
-                CheckUrl().Equal();
-            else
-                switch (CheckUrlType)
-                {
-                    case CheckPageType.None:
-                        JDI.Assert.IsTrue(GetUrl().Contains(UrlTemplate)
-                                                    || GetUrl().Matches(UrlTemplate));
-                        break;
-                    case CheckPageType.Equal:
-                        CheckUrl().Equal();
-                        break;
-                    case CheckPageType.Match:
-                        CheckUrl().Match();
-                        break;
-                    case CheckPageType.Contains:
-                        CheckUrl().Contains();
-                        break;
-                }
-            switch (CheckTitleType)
-            {
-                case CheckPageType.None:
-                    CheckTitle().Equal();
-                    break;
-                case CheckPageType.Equal:
-                    CheckTitle().Equal();
-                    break;
-                case CheckPageType.Match:
-                    CheckTitle().Match();
-                    break;
-                case CheckPageType.Contains:
-                    CheckTitle().Contains();
-                    break;
-            }
-        }
-
         public void Open()
         {
             Invoker.DoAction($"Open page {Name} by url {Url}",
                 () => WebDriver.Navigate().GoToUrl(Url));
-            //WebDriver.Navigate().GoToUrl(Url);
             if (CheckAfterOpen)
                 CheckOpened();
         }
@@ -136,17 +95,7 @@ namespace JDI.Light.Elements.Composite
             CheckTitleType = checkTitleType;
             UrlTemplate = urlTemplate;
         }
-
-        public StringCheckType CheckUrl()
-        {
-            return new StringCheckType(() => WebDriver.Url, Url, UrlTemplate, "url", () => Timer);
-        }
-
-        public StringCheckType CheckTitle()
-        {
-            return new StringCheckType(() => WebDriver.Title, Title, Title, "title", () => Timer);
-        }
-
+        
         private bool IsOnPage()
         {
             var url = WebDriver.Url;
@@ -229,57 +178,60 @@ namespace JDI.Light.Elements.Composite
                 () => WebDriver.Manage().Cookies.DeleteAllCookies());
         }
 
-        public class StringCheckType
+        public void CheckUrl()
         {
-            private readonly Func<string> _actual;
-            private readonly string _equals;
-            private readonly string _template;
-            private readonly Func<Timer> _timer;
-            private readonly string _what;
-
-            public StringCheckType(Func<string> actual, string equals, string template, string what, Func<Timer> timer)
+            JDI.Logger.Info($"Checking page url. Url = '{Url}', UrlTemplate = '{UrlTemplate}', CheckType = {CheckUrlType}");
+            if (string.IsNullOrEmpty(UrlTemplate) &&
+                new[] {CheckPageType.None, CheckPageType.Equal}.Contains(CheckUrlType))
             {
-                _actual = actual;
-                _equals = equals;
-                _template = template;
-                _what = what;
-                _timer = timer;
+                if (string.IsNullOrEmpty(Url)) return;
+                JDI.Assert.IsTrue(Timer.Wait(() => WebDriver.Url.Equals(Url)));
             }
+            else
+                switch (CheckUrlType)
+                {
+                    case CheckPageType.None:
+                        JDI.Assert.IsTrue(GetUrl().Contains(UrlTemplate)
+                                          || GetUrl().Matches(UrlTemplate));
+                        break;
+                    case CheckPageType.Equal:
+                        JDI.Assert.IsTrue(Timer.Wait(() => WebDriver.Url.Equals(Url)));
+                        break;
+                    case CheckPageType.Match:
+                        JDI.Assert.IsTrue(Timer.Wait(() => WebDriver.Url.Matches(UrlTemplate)));
+                        break;
+                    case CheckPageType.Contains:
+                        JDI.Assert.IsTrue(Timer.Wait(() => WebDriver.Url.Contains(string.IsNullOrEmpty(UrlTemplate)
+                            ? Url
+                            : UrlTemplate)));
+                        break;
+                }
+        }
 
-            /**
-             * Check that current page url/title equals to expected url/title
-             */
-
-            public void Equal()
+        public void CheckTitle()
+        {
+            JDI.Logger.Info($"Checking page title. Title = '{Title}', CheckType = {CheckTitleType}");
+            switch (CheckTitleType)
             {
-                if (string.IsNullOrEmpty(_equals)) return;
-                JDI.Logger.Info($"Page {_what} equals to '{_equals}'");
-                JDI.Assert.IsTrue(_timer().Wait(() => _actual().Equals(_equals)));
+                case CheckPageType.None:
+                    JDI.Assert.IsTrue(Timer.Wait(() => WebDriver.Title.Equals(Title)));
+                    break;
+                case CheckPageType.Equal:
+                    JDI.Assert.IsTrue(Timer.Wait(() => WebDriver.Title.Equals(Title)));
+                    break;
+                case CheckPageType.Match:
+                    JDI.Assert.IsTrue(Timer.Wait(() => WebDriver.Title.Matches(Title)));
+                    break;
+                case CheckPageType.Contains:
+                    JDI.Assert.IsTrue(Timer.Wait(() => WebDriver.Title.Contains(Title)));
+                    break;
             }
+        }
 
-            /**
-             * Check that current page url/title matches to expected url/title-matcher
-             */
-
-            public void Match()
-            {
-                if (string.IsNullOrEmpty(_template)) return;
-                JDI.Logger.Info($"Page {_what} matches to '{_template}'");
-                JDI.Assert.IsTrue(_timer().Wait(() => _actual().Matches(_template)));
-            }
-
-            /**
-             * Check that current page url/title contains expected url/title-matcher
-             */
-
-            public void Contains()
-            {
-                var url = string.IsNullOrEmpty(_template)
-                    ? _equals
-                    : _template;
-                JDI.Logger.Info($"Page {_what} contains to '{url}'");
-                JDI.Assert.IsTrue(_timer().Wait(() => _actual().Contains(url)));
-            }
+        public void CheckOpened()
+        {
+            CheckUrl();
+            CheckTitle();
         }
     }
 }
