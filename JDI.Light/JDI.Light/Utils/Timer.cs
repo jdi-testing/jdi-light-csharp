@@ -6,23 +6,26 @@ namespace JDI.Light.Utils
 {
     public class Timer
     {
-        private const double DefaultTimeout = 10000;
-        private const int DefaultRetryTimeout = 100;
-        private readonly int _retryTimeoutInMSec = DefaultRetryTimeout;
+        private static readonly double DefaultTimeout = JDI.Timeouts.CurrentTimeoutMSec;
+        private static readonly int DefaultRetryTimeout = JDI.Timeouts.RetryMSec;
+
+        private readonly int _retryTimeoutInMSec;
         private readonly double _timeoutInMSec;
 
         private readonly Stopwatch _watch;
 
         public Timer()
         {
-            _timeoutInMSec = DefaultTimeout;
             _watch = Stopwatch.StartNew();
+            _timeoutInMSec = DefaultTimeout;
+            _retryTimeoutInMSec = DefaultRetryTimeout;
         }
 
-        public Timer(double timeoutInMSec = DefaultTimeout, int retryTimeoutInMSec = DefaultRetryTimeout) : this()
+        public Timer(double timeoutInMSec)
         {
+            _watch = Stopwatch.StartNew();
             _timeoutInMSec = timeoutInMSec;
-            _retryTimeoutInMSec = retryTimeoutInMSec;
+            _retryTimeoutInMSec = DefaultRetryTimeout;
         }
 
         public TimeSpan TimePassed => _watch.Elapsed;

@@ -54,8 +54,6 @@ namespace JDI.Light.Elements
                     var instance = typeof(IPage).IsAssignableFrom(type)
                         ? GetInstancePage(parent, field, type, parentType)
                         : GetInstanceElement(parent, type, parentType, field, driverName);
-                    instance.Logger = Logger;
-                    instance.Invoker = new ActionInvoker(Logger);
                     instance.Name = field.GetElementName();
                     instance.DriverName = driverName;
                     instance.Parent = parent;

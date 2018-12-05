@@ -19,13 +19,9 @@ namespace JDI.Light.Elements.Complex
         {
             get
             {
-                if (_texts != null)
-                {
-                    return _texts;
-                }
                 return _texts = WebElements.Select(e =>
                 {
-                    var l = new Label(Locator) {WebElement = e};
+                    var l = new Label(Locator) { WebElement = e };
                     return l;
                 }).ToList();
             }
@@ -33,7 +29,7 @@ namespace JDI.Light.Elements.Complex
 
         public int Count()
         {
-            return _texts.Count;
+            return TextElements.Count;
         }
 
         public IList<string> WaitText(string expected)
@@ -43,22 +39,7 @@ namespace JDI.Light.Elements.Complex
             throw JDI.Assert.Exception($"Wait Text '{expected}' Failed ({ToString()}");
         }
 
-        public IList<string> Texts => _texts.Select(el => el.GetText).ToList();
-
-        public string this[int index]
-        {
-            get
-            {
-                var texts = Texts;
-                return index >= 0
-                    ? texts[index]
-                    : texts[texts.Count - index];
-            }
-            set
-            {
-                /* Not applicable */
-            }
-        }
+        public IList<string> Texts => TextElements.Select(el => el.GetText).ToList();
 
         public string Value => Texts.FormattedJoin();
 

@@ -2,7 +2,7 @@
 {
     public class Timeouts
     {
-        public int CurrentTimeoutSec;
+        public int CurrentTimeoutMSec;
         public int RetryMSec = 100;
 
         public int WaitElementSec = 20;
@@ -10,17 +10,7 @@
 
         public Timeouts()
         {
-            SetCurrentTimeoutSec(WaitPageLoadSec);
-        }
-
-        public void SetCurrentTimeoutSec(int timeoutSec)
-        {
-            CurrentTimeoutSec = timeoutSec;
-        }
-
-        public void DropTimeouts()
-        {
-            SetCurrentTimeoutSec(WaitPageLoadSec);
+            CurrentTimeoutMSec = WaitPageLoadSec * 1000;
         }
     }
 }

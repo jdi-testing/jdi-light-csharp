@@ -30,8 +30,8 @@ namespace JDI.Light.Tests.Tests.Complex
 
         public static void CheckAction(string text)
         {
-            IList<IWebElement> logOutput = TestSite.HomePage.WebDriver.FindElements(By.CssSelector(".logs li"));
-            JDI.Assert.Contains(logOutput[0].Text, text);
+            var logOutput = TestSite.ActionsLog.Texts;//TestSite.HomePage.WebDriver.FindElements(By.CssSelector(".logs li"));
+            JDI.Assert.Contains(logOutput[0], text);
         }
 
         public static void CheckResult(string text)

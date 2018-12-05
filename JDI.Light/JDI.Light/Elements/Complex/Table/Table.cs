@@ -348,10 +348,7 @@ namespace JDI.Light.Elements.Complex.Table
         {
             get
             {
-                WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.Zero;
                 var rowsCount = Rows.GetCount(true);
-                WebDriver.Manage().Timeouts().ImplicitWait =
-                    TimeSpan.FromSeconds(JDI.Timeouts.CurrentTimeoutSec);
                 return rowsCount == 0;
             }
         }

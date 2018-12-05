@@ -1,6 +1,5 @@
 ﻿using System;
 using JDI.Light.Enums;
-using JDI.Light.Extensions;
 using JDI.Light.Interfaces;
 using JDI.Light.Utils;
 
@@ -37,15 +36,12 @@ namespace JDI.Light.Elements.WebActions
         public void DoAction(string actionName, Action action, LogLevel level = LogLevel.Info)
         {
             _logger.Log($"Perform action '{actionName}'", level);
-            TimerExtensions.ForceDone(() =>
-            {
-                new Timer(JDI.Timeouts.CurrentTimeoutSec).Wait(() =>
-                {
-                    action();
-                    return true;
-                });
-                _logger.Info(actionName + " done");
-            });
+             new Timer().Wait(() =>
+             {
+                 action();
+                 return true;
+             });
+             _logger.Info(actionName + " done");
         }
     }
 }

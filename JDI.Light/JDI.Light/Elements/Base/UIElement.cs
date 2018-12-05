@@ -28,8 +28,10 @@ namespace JDI.Light.Elements.Base
 
         public UIElement(By byLocator)
         {
+            Logger = JDI.Logger;
+            Invoker = new ActionInvoker(Logger);
             Locator = byLocator;
-            Timer = new Timer(JDI.Timeouts.CurrentTimeoutSec * 1000);
+            Timer = new Timer(JDI.Timeouts.CurrentTimeoutMSec);
             if (string.IsNullOrEmpty(DriverName) && JDI.DriverFactory != null &&
                 !string.IsNullOrEmpty(JDI.DriverFactory.CurrentDriverName))
                 DriverName = JDI.DriverFactory.CurrentDriverName;
@@ -44,18 +46,17 @@ namespace JDI.Light.Elements.Base
                 {
                     if (_webElement != null)
                         return _webElement;
-                    var timeout = JDI.Timeouts.CurrentTimeoutSec;
                     var result = GetWebElements();
                     switch (result.Count)
                     {
                         case 0:
-                            throw JDI.Assert.Exception($"Can't find Element '{this}' during {timeout} seconds");
+                            throw JDI.Assert.Exception($"Can't find Element '{this}' during {JDI.Timeouts.CurrentTimeoutMSec} milliseconds");
                         case 1:
                             return result[0];
                         default:
                             if (WebDriverFactory.OnlyOneElementAllowedInSearch)
                                 throw JDI.Assert.Exception(
-                                    $"Find {result.Count} elements instead of one for Element '{this}' during {timeout} seconds");
+                                    $"Find {result.Count} elements instead of one for Element '{this}' during {JDI.Timeouts.CurrentTimeoutMSec} milliseconds");
                             return result[0];
                     }
                 }, el => el != null);
@@ -72,7 +73,6 @@ namespace JDI.Light.Elements.Base
                 var locator = Locator.ContainsRoot() ? Locator.TrimRoot() : Locator;
                 return SearchContext.FindElements(locator.CorrectXPath()).ToList();
             }, els => els.Count(GetSearchCriteria) > 0);
-            JDI.Timeouts.DropTimeouts();
             if (result == null)
                 throw JDI.Assert.Exception("Can't get Web Elements");
             return result.Where(GetSearchCriteria).ToList();
@@ -168,11 +168,11 @@ namespace JDI.Light.Elements.Base
 
         public string TypeName => GetType().Name;
 
-        public void SetWaitTimeout(long mSeconds)
+        public void SetWaitTimeout(int mSeconds)
         {
             JDI.Logger.Debug("Set wait timeout to " + mSeconds);
             WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(mSeconds);
-            JDI.Timeouts.CurrentTimeoutSec = (int) (mSeconds / 1000);
+            JDI.Timeouts.CurrentTimeoutMSec = mSeconds;
         }
 
         public new string ToString()

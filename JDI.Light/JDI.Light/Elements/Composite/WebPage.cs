@@ -30,11 +30,13 @@ namespace JDI.Light.Elements.Composite
 
         public WebPage(string url = null, string title = null)
         {
+            Logger = JDI.Logger;
+            Invoker = new ActionInvoker(Logger);
             Url = url;
             Title = title;
             Name = $"{Title} ({Url})";
             WebDriver = JDI.DriverFactory.GetDriver();
-            Timer = new Timer(JDI.Timeouts.CurrentTimeoutSec * 1000);
+            Timer = new Timer();
         }
 
         public string Url
