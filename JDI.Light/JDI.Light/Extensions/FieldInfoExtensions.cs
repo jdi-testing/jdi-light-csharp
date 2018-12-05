@@ -21,17 +21,16 @@ namespace JDI.Light.Extensions
 
         public static By GetFindsBy(this FieldInfo field)
         {
-            var findBy = field.GetCustomAttribute<FindsByAttribute>(false);
-            var locator = field.GetAttribute<JFindByAttribute>()?.ByLocator
-                             ?? field.GetCustomAttribute<FindByAttribute>(false)?.ByLocator;
+            var locator = field.GetCustomAttribute<FindByAttribute>(false)?.ByLocator;
             if (locator != null)
             {
                 return locator;
             }
-            if (findBy == null)
+            var findsBy = field.GetCustomAttribute<FindsByAttribute>(false);
+            if (findsBy == null)
                 return null;
-            var how = findBy.How;
-            var @using = findBy.Using;
+            var how = findsBy.How;
+            var @using = findsBy.Using;
             switch (how)
             {
                 case How.Id:

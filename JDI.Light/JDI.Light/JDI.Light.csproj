@@ -63,7 +63,6 @@
     <Compile Include="Attributes\JAttributes\JDropdownAttribute.cs" />
     <Compile Include="Attributes\JAttributes\JMenuAttribute.cs" />
     <Compile Include="Attributes\JAttributes\JTableAttribute.cs" />
-    <Compile Include="Attributes\JFindByAttribute.cs" />
     <Compile Include="Attributes\NameAttribute.cs" />
     <Compile Include="Attributes\PageAttribute.cs" />
     <Compile Include="Attributes\SiteAttribute.cs" />

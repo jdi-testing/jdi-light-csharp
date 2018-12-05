@@ -62,7 +62,8 @@ namespace JDI.Light.Elements.Common
             return Invoker.DoActionWithResult("IsChecked",
                 () =>
                 {
-                    return FindImmediately(() => WebElement.Selected || WebElement.GetAttribute("checked") != null, false);
+                    return FindImmediately(() => WebElement.Selected 
+                                                 || WebElement.GetAttribute("checked") != null, false);
                 },
                 result => "Checkbox is " + (result ? "checked" : "unchecked"));
         }

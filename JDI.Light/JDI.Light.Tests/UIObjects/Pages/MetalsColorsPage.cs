@@ -23,8 +23,8 @@ namespace JDI.Light.Tests.UIObjects.Pages
         [FindBy(Css = ".summ-res")]
         public IText CalculateText;
 
-        [FindBy(XPath = "//*[@id='elements-checklist']//*[text()='Water']")]
-        //"//*[@id='elements-checklist']//*[*[text()='Water']]/input"
+        [FindBy(XPath = "//*[@id='elements-checklist']//*[*[text()='Water']]/input")]
+        //"//*[@id='elements-checklist']//*[*[text()='Water']]/input""//*[@id='elements-checklist']//*[text()='Water']"
         public CheckBox CbWater;
 
         public Dropdown<Colors> Colors =
