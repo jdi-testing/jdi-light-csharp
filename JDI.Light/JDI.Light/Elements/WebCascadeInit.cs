@@ -6,6 +6,7 @@ using System.Reflection;
 using JDI.Light.Attributes;
 using JDI.Light.Attributes.JAttributes;
 using JDI.Light.Elements.Base;
+using JDI.Light.Elements.Common;
 using JDI.Light.Elements.Complex;
 using JDI.Light.Elements.Complex.Table.Interfaces;
 using JDI.Light.Elements.Composite;
@@ -15,6 +16,7 @@ using JDI.Light.Extensions;
 using JDI.Light.Factories;
 using JDI.Light.Interfaces;
 using JDI.Light.Interfaces.Base;
+using JDI.Light.Interfaces.Common;
 using JDI.Light.Interfaces.Complex;
 using JDI.Light.Settings;
 using JDI.Light.Utils;
@@ -96,6 +98,12 @@ namespace JDI.Light.Elements
             var instance = (IBaseElement)field.GetValue(parent);
             type = type.IsInterface ? MapInterfaceToElement.ClassFromInterface(type) : type;
             var element = (UIElement) instance ?? UIElementFactory.CreateInstance(type, field.GetFindsBy());
+            var checkedAttr = field.GetAttribute<CheckedAttribute>();
+            if (checkedAttr != null && typeof(ICheckBox).IsAssignableFrom(field.FieldType))
+            {
+                var checkBox = (CheckBox)element;
+                checkBox.IsCheckedFunc = checkedAttr.CheckedDelegate;
+            }
             var jTable = field.GetAttribute<JTableAttribute>();
             if (jTable != null && typeof(ITable).IsAssignableFrom(field.FieldType))
             {

@@ -7,6 +7,13 @@ namespace JDI.Light.Elements.Common
 {
     public class CheckBox : Clickable, ICheckBox
     {
+        public Func<UIElement, bool> IsCheckedFunc = e =>
+        {
+            var res = e.FindImmediately(() => e.WebElement.Selected
+                                              || e.WebElement.GetAttribute("checked") != null, false);
+            return res;
+        };
+
         protected Action<UIElement, string> SetValueAction = (el, value) =>
         {
             switch (value.ToLower())
@@ -60,11 +67,7 @@ namespace JDI.Light.Elements.Common
         public bool IsChecked()
         {
             return Invoker.DoActionWithResult("IsChecked",
-                () =>
-                {
-                    return FindImmediately(() => WebElement.Selected 
-                                                 || WebElement.GetAttribute("checked") != null, false);
-                },
+                () => IsCheckedFunc(this),
                 result => "Checkbox is " + (result ? "checked" : "unchecked"));
         }
 

@@ -25,7 +25,7 @@ namespace JDI.Light.Elements.Composite
             get
             {
                 JDI.Logger.Debug($"Get Web Elements: {this}");
-                var elements = GetWebElementsAction();
+                var elements = GetWebElements();
                 JDI.Logger.Debug($"Found {elements.Count} elements");
                 return elements;
             }

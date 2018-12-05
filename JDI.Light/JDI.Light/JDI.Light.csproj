@@ -58,6 +58,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\CheckedAttribute.cs" />
     <Compile Include="Attributes\FindByAttribute.cs" />
     <Compile Include="Attributes\FrameAttribute.cs" />
     <Compile Include="Attributes\JAttributes\JDropdownAttribute.cs" />

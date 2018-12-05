@@ -45,7 +45,7 @@ namespace JDI.Light.Elements.Base
                     if (_webElement != null)
                         return _webElement;
                     var timeout = JDI.Timeouts.CurrentTimeoutSec;
-                    var result = GetWebElementsAction();
+                    var result = GetWebElements();
                     switch (result.Count)
                     {
                         case 0:
@@ -65,7 +65,7 @@ namespace JDI.Light.Elements.Base
             set => _webElement = value;
         }
 
-        protected List<IWebElement> GetWebElementsAction()
+        protected List<IWebElement> GetWebElements()
         {
             var result = Timer.GetResultByCondition(() =>
             {

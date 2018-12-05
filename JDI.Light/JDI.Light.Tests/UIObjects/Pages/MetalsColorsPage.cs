@@ -1,4 +1,6 @@
-﻿using JDI.Light.Attributes;
+﻿using System;
+using JDI.Light.Attributes;
+using JDI.Light.Elements.Base;
 using JDI.Light.Elements.Common;
 using JDI.Light.Elements.Complex;
 using JDI.Light.Elements.Composite;
@@ -11,6 +13,16 @@ namespace JDI.Light.Tests.UIObjects.Pages
 {
     public class MetalsColorsPage : WebPage
     {
+        public class CustomCheck
+        {
+            public bool CheckFunc(UIElement e)
+            {
+                var a = new UIElement(By.XPath("//*[@id='elements-checklist']//*[*[text()='Water']]/input"));
+                return a.FindImmediately(() => a.WebElement.Selected
+                                               || a.WebElement.GetAttribute("checked") != null, false);
+            }
+        }
+
         [FindBy(Id = "calculate-button")]
         public Label Calculate;
 
@@ -23,8 +35,8 @@ namespace JDI.Light.Tests.UIObjects.Pages
         [FindBy(Css = ".summ-res")]
         public IText CalculateText;
 
-        [FindBy(XPath = "//*[@id='elements-checklist']//*[*[text()='Water']]/input")]
-        //"//*[@id='elements-checklist']//*[*[text()='Water']]/input""//*[@id='elements-checklist']//*[text()='Water']"
+        [FindBy(XPath = "//*[@id='elements-checklist']//*[text()='Water']")]
+        [Checked(typeof(CustomCheck), nameof(CustomCheck.CheckFunc))]
         public CheckBox CbWater;
 
         public Dropdown<Colors> Colors =
