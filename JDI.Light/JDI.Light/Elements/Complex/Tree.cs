@@ -66,7 +66,7 @@ namespace JDI.Light.Elements.Complex
 
         public void Select(params string[] names)
         {
-            Invoker.DoAction($"Select '{names.FormattedJoin()}'", () => ChooseItemAction(this, names));
+            Invoker.DoActionWithWait($"Select '{names.FormattedJoin()}'", () => ChooseItemAction(this, names));
         }
     }
 }

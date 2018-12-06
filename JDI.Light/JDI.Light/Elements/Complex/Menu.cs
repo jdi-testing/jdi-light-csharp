@@ -95,7 +95,7 @@ namespace JDI.Light.Elements.Complex
         {
             if (names == null || names.Length == 0)
                 return;
-            Invoker.DoAction($"Hover '{names.FormattedJoin(Separator)}'", () => ChooseItemAction(this, names, HoverAction));
+            Invoker.DoActionWithWait($"Hover '{names.FormattedJoin(Separator)}'", () => ChooseItemAction(this, names, HoverAction));
         }
 
         public void Hover(TEnum name)
@@ -110,7 +110,7 @@ namespace JDI.Light.Elements.Complex
 
         public void HoverAndClick(params string[] names)
         {
-            Invoker.DoAction($"Select '{names.FormattedJoin(Separator)}'", () => HoverAndClickAction(this, names));
+            Invoker.DoActionWithWait($"Select '{names.FormattedJoin(Separator)}'", () => HoverAndClickAction(this, names));
         }
 
         public void HoverAndClick(TEnum name)

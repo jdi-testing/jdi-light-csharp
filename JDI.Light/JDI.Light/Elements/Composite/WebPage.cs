@@ -49,7 +49,7 @@ namespace JDI.Light.Elements.Composite
 
         public void Open()
         {
-            Invoker.DoAction($"Open page {Name} by url {Url}",
+            Invoker.DoActionWithWait($"Open page {Name} by url {Url}",
                 () => WebDriver.Navigate().GoToUrl(Url));
             if (CheckAfterOpen)
                 CheckOpened();
@@ -110,27 +110,27 @@ namespace JDI.Light.Elements.Composite
 
         public void Refresh()
         {
-            Invoker.DoAction($"Refresh page {Name}", () => WebDriver.Navigate().Refresh());
+            Invoker.DoActionWithWait($"Refresh page {Name}", () => WebDriver.Navigate().Refresh());
         }
 
         public void Back()
         {
-            Invoker.DoAction("Go back to previous page", () => WebDriver.Navigate().Back());
+            Invoker.DoActionWithWait("Go back to previous page", () => WebDriver.Navigate().Back());
         }
 
         public void Forward()
         {
-            Invoker.DoAction("Go forward to next page", () => WebDriver.Navigate().Forward());
+            Invoker.DoActionWithWait("Go forward to next page", () => WebDriver.Navigate().Forward());
         }
 
         public void AddCookie(Cookie cookie)
         {
-            Invoker.DoAction("Add cookie for the page", () => WebDriver.Manage().Cookies.AddCookie(cookie));
+            Invoker.DoActionWithWait("Add cookie for the page", () => WebDriver.Manage().Cookies.AddCookie(cookie));
         }
 
         public void DeleteAllCookies()
         {
-            Invoker.DoAction("Delete page cookies", () => WebDriver.Manage().Cookies.DeleteAllCookies());
+            Invoker.DoActionWithWait("Delete page cookies", () => WebDriver.Manage().Cookies.DeleteAllCookies());
         }
 
         public void CheckUrl()

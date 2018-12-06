@@ -14,19 +14,19 @@ namespace JDI.Light.Elements.Common
             return res;
         };
 
-        protected Action<UIElement, string> SetValueAction = (el, value) =>
+        protected Action<CheckBox, string> SetValueAction = (cb, value) =>
         {
             switch (value.ToLower())
             {
                 case "true":
                 case "1":
                 case "check":
-                    ((CheckBox) el).Check();
+                    cb.Check();
                     break;
                 case "false":
                 case "0":
                 case "uncheck":
-                    ((CheckBox) el).Uncheck();
+                    cb.Uncheck();
                     break;
                 default:
                     throw JDI.Assert.Exception(
@@ -45,21 +45,21 @@ namespace JDI.Light.Elements.Common
 
         public void Check()
         {
-            Invoker.DoAction("Check Checkbox", () => 
+            Invoker.DoActionWithWait("Check Checkbox", () => 
             {
-                if (!IsChecked())
+                if (!IsCheckedFunc(this))
                     Click();
-                if (!IsChecked())
+                if (!IsCheckedFunc(this))
                     throw JDI.Assert.Exception("Can't check element. Verify locator for click or isCheckedAction");
             });
         }
 
         public void Uncheck()
         {
-            Invoker.DoAction("Uncheck Checkbox", () => {
-                if (IsChecked())
+            Invoker.DoActionWithWait("Uncheck Checkbox", () => {
+                if (IsCheckedFunc(this))
                     Click();
-                if (IsChecked())
+                if (IsCheckedFunc(this))
                     throw JDI.Assert.Exception("Can't uncheck element. Verify locator for click or isCheckedAction");
             });
         }
@@ -73,8 +73,8 @@ namespace JDI.Light.Elements.Common
 
         public string Value
         {
-            get => Invoker.DoActionWithResult("Get value", IsChecked().ToString);
-            set => Invoker.DoAction("Get value", () => SetValueAction(this, value));
+            get => Invoker.DoActionWithResult("Get value", IsCheckedFunc(this).ToString);
+            set => Invoker.DoAction("Set value", () => SetValueAction(this, value));
         }
 
         public string GetValue()

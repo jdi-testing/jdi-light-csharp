@@ -33,15 +33,22 @@ namespace JDI.Light.Elements.WebActions
             }, ex => $"Failed to do '{actionName}' action. Reason: {ex}");
         }
 
+        public void DoActionWithWait(string actionName, Action action, LogLevel level = LogLevel.Info)
+        {
+            _logger.Log($"Perform action '{actionName}'", level);
+            new Timer().Wait(() =>
+            {
+                action();
+                return true;
+            });
+            _logger.Info($"Action '{actionName}' done");
+        }
+
         public void DoAction(string actionName, Action action, LogLevel level = LogLevel.Info)
         {
             _logger.Log($"Perform action '{actionName}'", level);
-             new Timer().Wait(() =>
-             {
-                 action();
-                 return true;
-             });
-             _logger.Info(actionName + " done");
+            action();
+            _logger.Info($"Action '{actionName}' done");
         }
     }
 }

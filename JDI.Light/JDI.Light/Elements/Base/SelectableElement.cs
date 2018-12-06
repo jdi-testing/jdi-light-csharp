@@ -25,7 +25,7 @@ namespace JDI.Light.Elements.Base
 
         public void Select()
         {
-            Invoker.DoAction($"Select '{Name}'", Click);
+            Invoker.DoActionWithWait($"Select '{Name}'", Click);
         }
 
         public bool Selected => Invoker.DoActionWithResult("Is Selected", () => SelectedAction(this));
@@ -33,7 +33,7 @@ namespace JDI.Light.Elements.Base
         public new string Value
         {
             get => Invoker.DoActionWithResult("Get value", Selected.ToString);
-            set => Invoker.DoAction("Get value", () => SetValueAction(this, value));
+            set => Invoker.DoActionWithWait("Get value", () => SetValueAction(this, value));
         }
     }
 }

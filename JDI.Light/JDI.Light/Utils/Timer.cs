@@ -63,7 +63,6 @@ namespace JDI.Light.Utils
                 {
                     exception = ex;
                 }
-
                 Thread.Sleep(_retryTimeoutInMSec);
             } while (!TimeoutPassed);
 

@@ -111,7 +111,7 @@ namespace JDI.Light.Elements.Complex
 
         public void Click()
         {
-            Invoker.DoAction("Click on dropdown", () => ClickAction(this));
+            Invoker.DoActionWithWait("Click on dropdown", () => ClickAction(this));
         }
 
         public string GetText => Invoker.DoActionWithResult("Get text", () => GetTextAction(this));

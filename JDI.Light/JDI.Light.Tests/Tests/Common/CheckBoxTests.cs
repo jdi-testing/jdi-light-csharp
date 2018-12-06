@@ -1,4 +1,5 @@
-﻿using JDI.Light.Interfaces.Common;
+﻿using System;
+using JDI.Light.Interfaces.Common;
 using JDI.Light.Tests.DataProviders;
 using JDI.Light.Tests.Tests.Complex;
 using JDI.Light.Tests.UIObjects;
@@ -76,12 +77,11 @@ namespace JDI.Light.Tests.Tests.Common
         [TestCaseSource(typeof(CheckBoxProvider), nameof(CheckBoxProvider.InputValue))]
         public void SetWrongValueTest(string value)
         {
-            _checkBoxWater.Click();
-            _checkBoxWater.Value = value;
-            CommonActionsData.CheckAction("Water: condition changed to true");
-            _checkBoxWater.Click();
-            _checkBoxWater.Value = value;
-            CommonActionsData.CheckAction("Water: condition changed to false");
+            Assert.Throws<Exception>(() =>
+            {
+                _checkBoxWater.Click();
+                _checkBoxWater.Value = value;
+            });
         }
     }
 }

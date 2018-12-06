@@ -26,13 +26,13 @@ namespace JDI.Light.Elements.Common
 
         public void Input(string text)
         {
-            Invoker.DoAction($"Input text '{text}' in text field", () => WebElement.SendKeys(text));
+            Invoker.DoActionWithWait($"Input text '{text}' in text field", () => WebElement.SendKeys(text));
         }
 
         public new string Value
         {
             get => base.Value;
-            set => Invoker.DoAction("Get value", () => SetValueAction(this, value));
+            set => Invoker.DoActionWithWait("Get value", () => SetValueAction(this, value));
         }
 
         public void SendKeys(string text)
@@ -42,12 +42,12 @@ namespace JDI.Light.Elements.Common
 
         public void Clear()
         {
-            Invoker.DoAction("Clear text field", () => WebElement.Clear());
+            Invoker.DoActionWithWait("Clear text field", () => WebElement.Clear());
         }
 
         public void Focus()
         {
-            Invoker.DoAction("Focus on text field", () => WebElement.Click());
+            Invoker.DoActionWithWait("Focus on text field", () => WebElement.Click());
         }
     }
 }

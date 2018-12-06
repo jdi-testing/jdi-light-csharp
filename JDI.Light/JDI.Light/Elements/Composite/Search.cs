@@ -93,12 +93,12 @@ namespace JDI.Light.Elements.Composite
 
         public void Find(string text)
         {
-            Invoker.DoAction($"Search text '{text}'", () => FindAction(this, text));
+            Invoker.DoActionWithWait($"Search text '{text}'", () => FindAction(this, text));
         }
 
         public void ChooseSuggestion(string text, int selectIndex)
         {
-            Invoker.DoAction($"Search for text '{text}' and choose suggestion '{selectIndex}'",
+            Invoker.DoActionWithWait($"Search for text '{text}' and choose suggestion '{selectIndex}'",
                 () => ChooseSuggestionIndexAction(this, text, selectIndex));
         }
 
