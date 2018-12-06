@@ -10,8 +10,7 @@ namespace JDI.Light.Attributes
 
         public CheckedAttribute(Type delegateType, string delegateName)
         {
-            var i = Activator.CreateInstance(delegateType);
-            CheckedDelegate = (Func<UIElement, bool>)Delegate.CreateDelegate(typeof(Func<UIElement, bool>), i, delegateName, true, false);
+            CheckedDelegate = (Func<UIElement, bool>)Delegate.CreateDelegate(typeof(Func<UIElement, bool>), delegateType, delegateName, true, false);
         }
     }
 }

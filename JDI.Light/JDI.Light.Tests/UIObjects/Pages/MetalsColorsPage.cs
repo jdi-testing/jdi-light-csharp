@@ -15,7 +15,7 @@ namespace JDI.Light.Tests.UIObjects.Pages
     {
         public class CustomCheck
         {
-            public bool CheckFunc(UIElement e)
+            public static bool CheckFunc(UIElement e)
             {
                 var a = new UIElement(By.XPath("//*[@id='elements-checklist']//*[*[text()='Water']]/input"));
                 return a.FindImmediately(() => a.WebElement.Selected
