@@ -5,7 +5,7 @@ using JDI.Light.Enums;
 using JDI.Light.Extensions;
 using JDI.Light.Interfaces;
 using JDI.Light.Interfaces.Base;
-using JDI.Light.Interfaces.Complex;
+using JDI.Light.Interfaces.Composite;
 using JDI.Light.Utils;
 using OpenQA.Selenium;
 

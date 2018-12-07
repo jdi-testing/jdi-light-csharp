@@ -3,7 +3,7 @@ using JDI.Light.Interfaces.Base;
 using JDI.Light.Utils;
 using OpenQA.Selenium;
 
-namespace JDI.Light.Interfaces.Complex
+namespace JDI.Light.Interfaces.Composite
 {
     public interface IPage : IBaseElement
     {

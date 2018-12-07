@@ -1,6 +1,6 @@
 ﻿using JDI.Light.Interfaces.Base;
 
-namespace JDI.Light.Interfaces.Complex
+namespace JDI.Light.Interfaces.Composite
 {
     public interface IPagination : IBaseElement
     {

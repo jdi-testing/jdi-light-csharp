@@ -12,7 +12,7 @@ using JDI.Light.Extensions;
 using JDI.Light.Factories;
 using JDI.Light.Interfaces.Base;
 using JDI.Light.Interfaces.Common;
-using JDI.Light.Interfaces.Complex;
+using JDI.Light.Interfaces.Composite;
 using JDI.Light.Settings;
 using JDI.Light.Utils;
 using OpenQA.Selenium;

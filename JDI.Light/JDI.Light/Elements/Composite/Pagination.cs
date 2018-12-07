@@ -3,7 +3,7 @@ using System.Linq;
 using JDI.Light.Elements.Base;
 using JDI.Light.Extensions;
 using JDI.Light.Interfaces.Base;
-using JDI.Light.Interfaces.Complex;
+using JDI.Light.Interfaces.Composite;
 using JDI.Light.Utils;
 using OpenQA.Selenium;
 

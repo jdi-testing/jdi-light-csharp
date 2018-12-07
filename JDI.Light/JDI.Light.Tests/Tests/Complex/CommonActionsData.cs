@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using JDI.Light.Tests.UIObjects;
-using OpenQA.Selenium;
 
 namespace JDI.Light.Tests.Tests.Complex
 {

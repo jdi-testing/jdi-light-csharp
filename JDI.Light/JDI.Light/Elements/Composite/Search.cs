@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using JDI.Light.Elements.Base;
 using JDI.Light.Elements.Common;
-using JDI.Light.Elements.Complex;
 using JDI.Light.Interfaces.Common;
-using JDI.Light.Interfaces.Complex;
+using JDI.Light.Interfaces.Composite;
 using JDI.Light.Utils;
 using OpenQA.Selenium;
 

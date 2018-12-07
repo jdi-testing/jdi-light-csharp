@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using JDI.Light.Interfaces.Base;
 
-namespace JDI.Light.Interfaces.Complex
+namespace JDI.Light.Interfaces.Composite
 {
     public interface IForm<T> : ISetValue<T>, IBaseElement
     {

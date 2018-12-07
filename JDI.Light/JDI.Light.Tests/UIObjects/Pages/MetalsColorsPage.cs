@@ -3,7 +3,6 @@ using JDI.Light.Elements.Base;
 using JDI.Light.Elements.Common;
 using JDI.Light.Elements.Composite;
 using JDI.Light.Interfaces.Common;
-using JDI.Light.Tests.Enums;
 using JDI.Light.Tests.UIObjects.Sections;
 using OpenQA.Selenium;
 
