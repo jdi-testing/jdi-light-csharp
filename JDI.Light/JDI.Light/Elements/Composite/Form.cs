@@ -28,7 +28,7 @@ namespace JDI.Light.Elements.Composite
                 return (T) this.GetFields(typeof(IGetValue<>))
                     .Select(field => ((IGetValue<T>) field.GetValue(this)).Value);
             }
-            set => throw new Exception("This is not supported at the moment");
+            set => Fill(value);
         }
 
         public T GetValue()
@@ -38,19 +38,20 @@ namespace JDI.Light.Elements.Composite
 
         public void Fill(T entity)
         {
-            throw new NotImplementedException();
+            Fill(entity.PropertiesToDictionary());
         }
 
         public void Fill(Dictionary<string, string> map)
         {
-            this.GetFields(typeof(ISetValue<T>)).ForEach(fieldInfo =>
+            var fieldsToSet = this.GetFields(typeof(ISetValue<string>));
+            foreach (var fieldInfo in fieldsToSet)
             {
                 var fieldValue = map.FirstOrDefault(pair =>
                     pair.Key.SimplifiedEqual(fieldInfo.GetElementName())).Value;
                 if (fieldValue == null) return;
-                var setValueElement = (ISetValue<string>) fieldInfo.GetValue(this);
+                var setValueElement = (ISetValue<string>)fieldInfo.GetValue(this);
                 setValueElement.Value = fieldValue;
-            });
+            }
         }
 
         public void Check(T entity)

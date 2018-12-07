@@ -73,7 +73,7 @@
     <Compile Include="Tests\Common\LinkTests.cs" />
     <Compile Include="Tests\Common\TextFieldsTests.cs" />
     <Compile Include="Tests\Common\TextTests.cs" />
-    <Compile Include="Tests\Complex\CommonActionsData.cs" />
+    <Compile Include="Tests\CommonActionsData.cs" />
     <Compile Include="Tests\Composite\FormTests.cs" />
     <Compile Include="Tests\Composite\FormTwoButtonsTests.cs" />
     <Compile Include="Tests\Composite\PageTests.cs" />

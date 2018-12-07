@@ -1,5 +1,4 @@
-﻿using JDI.Light.Tests.Tests.Complex;
-using JDI.Light.Tests.UIObjects;
+﻿using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 
 namespace JDI.Light.Tests.Tests.Common

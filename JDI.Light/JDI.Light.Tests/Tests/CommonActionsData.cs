@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using JDI.Light.Tests.UIObjects;
 
-namespace JDI.Light.Tests.Tests.Complex
+namespace JDI.Light.Tests.Tests
 {
     public class CommonActionsData
     {

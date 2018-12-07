@@ -35,17 +35,12 @@ namespace JDI.Light.Utils
         {
             while (!TimeoutPassed)
             {
-                if (waitFunc.AvoidExceptions())
-                    return true;
+                var res = waitFunc.AvoidExceptions();
+                if (res) return true;
                 Thread.Sleep(_retryTimeoutInMSec);
             }
 
             return false;
-        }
-
-        public T GetResult<T>(Func<T> func)
-        {
-            return GetResultByCondition(func, result => true);
         }
 
         public T GetResultByCondition<T>(Func<T> getFunc, Func<T, bool> conditionFunc)
