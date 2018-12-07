@@ -1,8 +1,6 @@
-﻿using System;
-using JDI.Light.Attributes;
+﻿using JDI.Light.Attributes;
 using JDI.Light.Elements.Base;
 using JDI.Light.Elements.Common;
-using JDI.Light.Elements.Complex;
 using JDI.Light.Elements.Composite;
 using JDI.Light.Interfaces.Common;
 using JDI.Light.Tests.Enums;
@@ -36,22 +34,9 @@ namespace JDI.Light.Tests.UIObjects.Pages
         public IText CalculateText;
 
         [FindBy(XPath = "//*[@id='elements-checklist']//*[text()='Water']")]
-        [Checked(typeof(CustomCheck), nameof(CustomCheck.CheckFunc))]
+        [IsChecked(typeof(CustomCheck), nameof(CustomCheck.CheckFunc))]
         public CheckBox CbWater;
-
-        public Dropdown<Colors> Colors =
-            new Dropdown<Colors>(By.CssSelector(".colors .filter-option"), By.CssSelector(".colors li span"));
-
-        public ComboBox<Metals> ComboBox =
-            new ComboBox<Metals>(By.CssSelector(".metals .caret"), By.CssSelector(".metals li span"),
-                By.CssSelector(".metals input"))
-            {
-                GetTextAction = c => new Text(By.CssSelector(".metals .filter-option")).GetText
-            };
-
-        [FindBy(Css = "#elements-checklist label")]
-        public CheckList<CheckboxElements> Elements;
-
+        
         [FindBy(Id = "summary-block")]
         public Summary SummaryBlock;
     }

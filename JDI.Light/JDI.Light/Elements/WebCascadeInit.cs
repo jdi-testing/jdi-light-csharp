@@ -4,32 +4,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using JDI.Light.Attributes;
-using JDI.Light.Attributes.JAttributes;
 using JDI.Light.Elements.Base;
 using JDI.Light.Elements.Common;
-using JDI.Light.Elements.Complex;
-using JDI.Light.Elements.Complex.Table.Interfaces;
 using JDI.Light.Elements.Composite;
-using JDI.Light.Elements.WebActions;
 using JDI.Light.Enums;
 using JDI.Light.Extensions;
 using JDI.Light.Factories;
-using JDI.Light.Interfaces;
 using JDI.Light.Interfaces.Base;
 using JDI.Light.Interfaces.Common;
 using JDI.Light.Interfaces.Complex;
 using JDI.Light.Settings;
 using JDI.Light.Utils;
 using OpenQA.Selenium;
-using Menu = JDI.Light.Elements.Complex.Menu;
-using Table = JDI.Light.Elements.Complex.Table.Table;
 
 namespace JDI.Light.Elements
 {
     public class WebCascadeInit
     {
-        public ILogger Logger => JDI.Logger;
-
         protected Type[] Decorators = { typeof(IBaseElement), typeof(IList) };
 
         protected Type[] StopTypes => new[]
@@ -96,55 +87,11 @@ namespace JDI.Light.Elements
             var instance = (IBaseElement)field.GetValue(parent);
             type = type.IsInterface ? MapInterfaceToElement.ClassFromInterface(type) : type;
             var element = (UIElement) instance ?? UIElementFactory.CreateInstance(type, field.GetFindsBy());
-            var checkedAttr = field.GetAttribute<CheckedAttribute>();
+            var checkedAttr = field.GetAttribute<IsCheckedAttribute>();
             if (checkedAttr != null && typeof(ICheckBox).IsAssignableFrom(field.FieldType))
             {
                 var checkBox = (CheckBox)element;
-                checkBox.IsCheckedFunc = checkedAttr.CheckedDelegate;
-            }
-            var jTable = field.GetAttribute<JTableAttribute>();
-            if (jTable != null && typeof(ITable).IsAssignableFrom(field.FieldType))
-            {
-                var table = (Table) element;
-                table.SetUp(jTable.Root.ByLocator, jTable.Cell.ByLocator,
-                    jTable.Row.ByLocator, jTable.Column.ByLocator, jTable.Footer.ByLocator,
-                    jTable.ColStartIndex, jTable.RowStartIndex);
-                if (jTable.Header != null)
-                    table.ColumnHeaders = jTable.Header;
-                if (jTable.RowsHeader != null)
-                    table.RowHeaders = jTable.RowsHeader;
-                if (jTable.Height > 0)
-                    table.SetColumnsCount(jTable.Height);
-                if (jTable.Width > 0)
-                    table.SetRowsCount(jTable.Width);
-                if (!jTable.Size.Equals(""))
-                {
-                    var split = jTable.Size.Split('x');
-                    if (split.Length == 1)
-                        split = jTable.Size.Split('X');
-                    if (split.Length != 2)
-                        throw JDI.Assert.Exception("Can't setup Table from attribute. Bad size: " + jTable.Size);
-                    table.SetColumnsCount(int.Parse(split[0]));
-                    table.SetRowsCount(int.Parse(split[1]));
-                }
-                table.HeaderType = jTable.HeaderType;
-                table.UseCache(jTable.UseCache);
-            }
-            var jDropdown = field.GetAttribute<JDropdownAttribute>();
-            if (jDropdown != null && typeof(IDropDown).IsAssignableFrom(field.FieldType))
-            {
-                var dropdown = (Dropdown) element;
-                dropdown.SetUp(jDropdown.Root.ByLocator, jDropdown.Value.ByLocator,
-                    jDropdown.List.ByLocator, jDropdown.Expand.ByLocator,
-                    jDropdown.ElementByName.ByLocator);
-            }
-            var jMenu = field.GetAttribute<JMenuAttribute>();
-            if (jMenu != null && typeof(IMenu).IsAssignableFrom(field.FieldType))
-            {
-                var menu = (Menu) element;
-                menu.SetUp(jMenu.LevelLocators.Select(findby => findby.ByLocator).ToList());
-                if (!jMenu.Separator.Equals(""))
-                    menu.UseSeparator(jMenu.Separator);
+                checkBox.SetIsCheckedFunc(checkedAttr.CheckedDelegate);
             }
             if (parent == null || type != null)
             {
@@ -152,7 +99,7 @@ namespace JDI.Light.Elements
                 if (frameBy != null)
                     element.FrameLocator = frameBy;
                 By template;
-                if (element.Parent is Form form && !element.HasLocator
+                if (element.Parent is Form<IConvertible> form && !element.HasLocator
                                                 && (template = form.LocatorTemplate) != null)
                     element.Locator = template.FillByTemplate(field.Name);
             }

@@ -4,14 +4,14 @@ using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Base
 {
-    public class SelectableElement : ClickableText, ISelect
+    public class SelectableElement : Clickable, ISelectable<bool>
     {
         protected Func<UIElement, string> GetValueFunc = el
             => ((SelectableElement) el).Selected + "";
         
         protected Func<SelectableElement, bool> SelectedAction = s => s.WebElement.Selected;
 
-        protected Action<UIElement, string> SetValueAction = (el, value)
+        protected Action<UIElement, bool> SetValueAction = (el, value)
             => ((SelectableElement) el).Select();
 
         public SelectableElement() : this(null)
@@ -30,10 +30,15 @@ namespace JDI.Light.Elements.Base
 
         public bool Selected => Invoker.DoActionWithResult("Is Selected", () => SelectedAction(this));
 
-        public new string Value
+        public bool Value
         {
-            get => Invoker.DoActionWithResult("Get value", Selected.ToString);
+            get => Invoker.DoActionWithResult("Get value", () => SelectedAction(this));
             set => Invoker.DoActionWithWait("Get value", () => SetValueAction(this, value));
+        }
+
+        public bool GetValue()
+        {
+            return Value;
         }
     }
 }

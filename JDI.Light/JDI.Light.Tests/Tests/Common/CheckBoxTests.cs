@@ -1,5 +1,4 @@
-﻿using System;
-using JDI.Light.Interfaces.Common;
+﻿using JDI.Light.Interfaces.Common;
 using JDI.Light.Tests.DataProviders;
 using JDI.Light.Tests.Tests.Complex;
 using JDI.Light.Tests.UIObjects;
@@ -40,9 +39,9 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void IsCheckTest()
         {
-            Assert.IsFalse(_checkBoxWater.IsChecked());
+            Assert.IsFalse(_checkBoxWater.IsChecked);
             _checkBoxWater.Click();
-            Assert.IsTrue(_checkBoxWater.IsChecked());
+            Assert.IsTrue(_checkBoxWater.IsChecked);
         }
 
         [Test]
@@ -65,23 +64,12 @@ namespace JDI.Light.Tests.Tests.Common
 
         [Test]
         [TestCaseSource(typeof(CheckBoxProvider), nameof(CheckBoxProvider.InputData))]
-        public void SetValueTest(string value, bool expected)
+        public void SetValueTest(bool value, bool expected)
         {
             if (!expected) _checkBoxWater.Click();
             _checkBoxWater.Value = value;
             var resultMsg = "Water: condition changed to " + expected.ToString().ToLower();
             CommonActionsData.CheckAction(resultMsg);
-        }
-
-        [Test]
-        [TestCaseSource(typeof(CheckBoxProvider), nameof(CheckBoxProvider.InputValue))]
-        public void SetWrongValueTest(string value)
-        {
-            Assert.Throws<Exception>(() =>
-            {
-                _checkBoxWater.Click();
-                _checkBoxWater.Value = value;
-            });
         }
     }
 }

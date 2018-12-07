@@ -10,10 +10,8 @@ namespace JDI.Light.Tests.DataProviders
         {
             get
             {
-                yield return new TestCaseData("true", true);
-                yield return new TestCaseData("1", true);
-                yield return new TestCaseData("false", false);
-                yield return new TestCaseData("0", false);
+                yield return new TestCaseData(true, true);
+                yield return new TestCaseData(false, false);
             }
         }
 

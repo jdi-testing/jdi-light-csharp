@@ -1,7 +1,7 @@
 ﻿namespace JDI.Light.Interfaces.Base
 {
-    public interface ISetValue : IHasValue
+    public interface ISetValue<T> : IGetValue<T>
     {
-        new string Value { get; set; }
+        new T Value { get; set; }
     }
 }

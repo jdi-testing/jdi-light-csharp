@@ -51,16 +51,7 @@ namespace JDI.Light.Tests.Tests.Composite
             _contactForm.Submit(Contact.DEFAULT_CONTACT, Buttons.SUBMIT);
             CommonActionsData.CheckResult(Contact.DEFAULT_CONTACT.ToString());
         }
-
-        [Test]
-        public void SubmitStringTest()
-        {
-            _contactForm.Submit(Contact.DEFAULT_CONTACT.FirstName);
-            var s = string.Format("Summary: 3\r\nName: {0}",
-                Contact.DEFAULT_CONTACT.FirstName);
-            CommonActionsData.CheckResult(s);
-        }
-
+        
         [Test]
         public void VerifyTest()
         {

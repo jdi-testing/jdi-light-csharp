@@ -2,24 +2,10 @@
 
 namespace JDI.Light.Interfaces.Common
 {
-    public interface ICheckBox : IClickable, ISetValue
+    public interface ICheckBox : IClickable, ISetValue<bool>
     {
-        /**
-         * Set checkbox checked
-         */
-        //TODO[JDIAction]
         void Check();
-
-        /**
-         * Set checkbox unchecked
-         */
-        //TODO[JDIAction]
         void Uncheck();
-
-        /**
-         * return: Verify is checkbox checked
-         */
-        //TODO[JDIAction]
-        bool IsChecked();
+        bool IsChecked { get; }
     }
 }
