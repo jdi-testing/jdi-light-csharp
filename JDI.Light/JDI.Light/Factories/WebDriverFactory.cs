@@ -95,9 +95,10 @@ namespace JDI.Light.Factories
                 RegisterDriver(DriverType.Chrome);
                 return GetDriver(DriverType.Chrome);
             }
-            catch
+            catch (Exception e)
             {
-                throw new Exception($"Can't get driver: {CurrentDriverName}");
+                throw new Exception($"Can't get driver: {CurrentDriverName}. Message: {e.Message}, {Environment.NewLine}" +
+                                    $"Stack trace: {e.StackTrace}");
             }
         }
 
