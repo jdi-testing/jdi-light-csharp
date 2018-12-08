@@ -178,8 +178,18 @@ namespace JDI.Light.Factories
         private string RegisterLocalDriver(DriverType driverType)
         {
             if (JDI.GetLatestDriver)
+            {
                 if (!WebDriverUtils.IsLocalVersionLatestVersion(driverType, DriverPath))
                     DriverPath = WebDriverUtils.GetLatestVersion(driverType);
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(JDI.DriverVersion)))
+                {
+                    DriverPath = WebDriverUtils.GetSpecifiedVersion(driverType, JDI.DriverVersion);
+                }
+            }
+
             return RegisterDriver(GetDriverName(_driverNamesDictionary[driverType]),
                 () => WebDriverSettings(_driversDictionary[driverType](DriverPath)));
         }

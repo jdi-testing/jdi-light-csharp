@@ -12,6 +12,7 @@ namespace JDI.Light.Tests.Tests
         protected void SetUp()
         {
             JDI.Init(null, JDI.Assert);
+            JDI.DriverVersion = "2.41";
             JDI.Logger.Info("Init test run...");
             WinProcUtils.KillAllRunWebDrivers();
             JDI.InitSite(typeof(TestSite));

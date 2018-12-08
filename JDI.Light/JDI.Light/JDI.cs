@@ -23,6 +23,7 @@ namespace JDI.Light
         public static string Domain;
         public static bool HasDomain => Domain != null && Domain.Contains("://");
         public static bool GetLatestDriver = true;
+        public static string DriverVersion = "";
         public static IJavaScriptExecutor JsExecutor => DriverFactory.GetDriver() as IJavaScriptExecutor;
 
         static JDI()
