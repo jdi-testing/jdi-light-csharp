@@ -56,12 +56,12 @@ namespace JDI.Light.Elements.Composite
 
         public void Check(T entity)
         {
-            throw new NotImplementedException();
+            Check(entity.PropertiesToDictionary());
         }
 
         public void Submit(T entity, Enum buttonName)
         {
-            throw new NotImplementedException();
+            Submit(entity, buttonName.ToString());
         }
 
         public void Submit(T entity)
@@ -107,7 +107,8 @@ namespace JDI.Light.Elements.Composite
 
         public void Submit(T entity, string buttonName)
         {
-            throw new NotImplementedException();
+            Fill(entity.PropertiesToDictionary());
+            GetButton(buttonName).Click();
         }
     }
 }
