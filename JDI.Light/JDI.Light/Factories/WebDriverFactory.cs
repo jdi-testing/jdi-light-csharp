@@ -98,8 +98,8 @@ namespace JDI.Light.Factories
             }
             catch (Exception e)
             {
-                throw new Exception($"Can't get driver: {CurrentDriverName}. Message: {e.Message}, {Environment.NewLine}" +
-                                    $"Stack trace: {e.StackTrace}");
+                throw new Exception($"Can't get driver: {CurrentDriverName}.{Environment.NewLine}Message: {e.Message}, {Environment.NewLine}" +
+                                    $"Stack trace:{Environment.NewLine}{e.StackTrace}");
             }
         }
 
