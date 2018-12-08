@@ -34,7 +34,7 @@ namespace JDI.Light.Factories
                     {
                         var o = new ChromeOptions();
                         o.AddArgument("-no-sandbox");
-                        return string.IsNullOrEmpty(path) ? new ChromeDriver(o) : new ChromeDriver(path, o);
+                        return string.IsNullOrEmpty(path) ? new ChromeDriver(o) : new ChromeDriver(path, o, TimeSpan.FromSeconds(150));
                     }
                 },
                 {DriverType.Firefox, path => string.IsNullOrEmpty(path) ? new FirefoxDriver() : new FirefoxDriver(path)},
