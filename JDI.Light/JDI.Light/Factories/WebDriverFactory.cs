@@ -184,7 +184,7 @@ namespace JDI.Light.Factories
             }
             else
             {
-                if (!string.IsNullOrEmpty(JDI.DriverVersion)))
+                if (!string.IsNullOrEmpty(JDI.DriverVersion))
                 {
                     DriverPath = WebDriverUtils.GetSpecifiedVersion(driverType, JDI.DriverVersion);
                 }
