@@ -30,14 +30,15 @@ namespace JDI.Light.Factories
         private readonly Dictionary<DriverType, Func<string, IWebDriver>> _driversDictionary = new Dictionary
             <DriverType, Func<string, IWebDriver>>
             {
-                {DriverType.Chrome, path => string.IsNullOrEmpty(path) ? new ChromeDriver() : new ChromeDriver(path)},
-                {DriverType.Firefox, path => new FirefoxDriver()},
-                {
-                    DriverType.IE,
-                    path => string.IsNullOrEmpty(path)
-                        ? new InternetExplorerDriver()
-                        : new InternetExplorerDriver(path)
-                }
+                {DriverType.Chrome, path =>
+                    {
+                        var o = new ChromeOptions();
+                        o.AddArgument("-no-sandbox");
+                        return string.IsNullOrEmpty(path) ? new ChromeDriver(o) : new ChromeDriver(path, o);
+                    }
+                },
+                {DriverType.Firefox, path => string.IsNullOrEmpty(path) ? new FirefoxDriver() : new FirefoxDriver(path)},
+                {DriverType.IE, path => string.IsNullOrEmpty(path) ? new InternetExplorerDriver() : new InternetExplorerDriver(path)}
             };
 
         private readonly object _locker = new object();
