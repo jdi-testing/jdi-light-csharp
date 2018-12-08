@@ -21,7 +21,7 @@ namespace JDI.Light.Tests.Tests.Composite
 
         private void CheckPageOpened(int num)
         {
-            Assert.True(JDI.DriverFactory.GetDriver().Url.Contains("/page" + num + ".htm"));
+            Assert.True(JDI.DriverFactory.GetDriver().Url.Contains($"/page{num}.htm"));
         }
 
         [Test]
