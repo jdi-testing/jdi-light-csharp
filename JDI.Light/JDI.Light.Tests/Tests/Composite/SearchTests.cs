@@ -21,7 +21,6 @@ namespace JDI.Light.Tests.Tests.Composite
         {
             TestSite.Header.Search.SearchButton.Click();
             TestSite.Header.Search.Find("something");
-            TestSite.Header.Search.SearchButtonActive.Click();
             TestSite.SupportPage.CheckOpened();
         }
     }

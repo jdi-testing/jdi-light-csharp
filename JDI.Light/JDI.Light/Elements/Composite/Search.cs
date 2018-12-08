@@ -59,13 +59,14 @@ namespace JDI.Light.Elements.Composite
         {
             get
             {
-                var fields = this.GetFields(typeof(ITextField));
+                var fields = this.GetFields(typeof(ITextField))
+                    .Select(fi => (ITextField)fi.GetValue(this)).Where(b => ((UIElement)b).Displayed).ToList();
                 switch (fields.Count)
                 {
                     case 0:
                         throw JDI.Assert.Exception($"Can't find any buttons on form '{ToString()}'.");
                     case 1:
-                        return (ITextField) fields[0].GetValue(this);
+                        return fields[0];
                     default:
                         throw JDI.Assert.Exception(
                             $"Form '{ToString()}' have more than 1 button. Use submit(entity, buttonName) for this case instead");
@@ -77,7 +78,8 @@ namespace JDI.Light.Elements.Composite
         {
             get
             {
-                var fields = this.GetFields(typeof(IButton)).Select(fi => (IButton)fi.GetValue(this)).Where(b => ((UIElement)b).Displayed).ToList();
+                var fields = this.GetFields(typeof(IButton))
+                    .Select(fi => (IButton)fi.GetValue(this)).Where(b => ((UIElement)b).Displayed).ToList();
                 switch (fields.Count)
                 {
                     case 0:
