@@ -29,7 +29,6 @@ namespace JDI.Light.Utils
                 case DriverType.Chrome:
                     driverBinaryName = new ChromeConfig().GetBinaryName();
                     result = Path.Combine(executingPath, driverBinaryName).CheckDriverVersionFromExe(latestVersion);
-                    Console.WriteLine($"Chrome: {result} {latestVersion}");
                     break;
                 case DriverType.Firefox:
                     driverBinaryName = new FirefoxConfig().GetBinaryName();
