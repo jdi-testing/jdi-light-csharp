@@ -34,21 +34,21 @@ namespace JDI.Light.Tests.Tests.Composite
         public void SubmitTest()
         {
             _contactForm.Submit(Contact.DEFAULT_CONTACT);
-            CommonActionsData.CheckResult(Contact.DEFAULT_CONTACT.ToString());
+            JDI.Assert.Contains(TestSite.ContactFormPage.Result.Value, Contact.DEFAULT_CONTACT.ToString());
         }
 
         [Test]
         public void SubmitSpecButtonStringTest()
         {
             _contactForm.Submit(Contact.DEFAULT_CONTACT, "submit");
-            CommonActionsData.CheckResult(Contact.DEFAULT_CONTACT.ToString());
+            JDI.Assert.Contains(TestSite.ContactFormPage.Result.Value, Contact.DEFAULT_CONTACT.ToString());
         }
 
         [Test]
         public void SubmitSpecButtonEnumTest()
         {
             _contactForm.Submit(Contact.DEFAULT_CONTACT, Buttons.SUBMIT);
-            CommonActionsData.CheckResult(Contact.DEFAULT_CONTACT.ToString());
+            JDI.Assert.Contains(TestSite.ContactFormPage.Result.Value, Contact.DEFAULT_CONTACT.ToString());
         }
         
         [Test]

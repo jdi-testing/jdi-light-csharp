@@ -20,11 +20,6 @@ namespace JDI.Light.Tests.Tests
             JDI.Assert.Contains(logOutput[0], text);
         }
 
-        public static void CheckResult(string text)
-        {
-            JDI.Assert.Contains(TestSite.ContactFormPage.Result.Value, text);
-        }
-
         public static void RunParallel(Action action)
         {
             Task.Run(() =>
