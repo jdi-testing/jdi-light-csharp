@@ -87,14 +87,16 @@ namespace JDI.Light.Utils
             ThrowFail(failMsg);
         }
 
-        public void IsTrue(bool condition)
+        public void IsTrue(bool condition, string message = "")
         {
-            AssertAction($"Check that condition '{condition}' is True", condition);
+            var msg = string.IsNullOrEmpty(message) ? "" : $": {message}";
+            AssertAction($"Check that condition is true{msg}", condition);
         }
 
-        public void IsFalse(bool condition)
+        public void IsFalse(bool condition, string message = "")
         {
-            AssertAction($"Check that condition '{condition}' is False", !condition);
+            var msg = string.IsNullOrEmpty(message) ? "" : $": {message}";
+            AssertAction($"Check that condition is false{msg}", !condition);
         }
 
         public void AreEquals<T>(T actual, T expected, bool logOnlyFail = false)

@@ -10,8 +10,8 @@ namespace JDI.Light.Interfaces
         void ThrowFail(string message, Exception ex);
         Exception Exception(string message);
         void Contains(string actual, string expected);
-        void IsTrue(bool condition);
-        void IsFalse(bool condition);
+        void IsTrue(bool condition, string message = "");
+        void IsFalse(bool condition, string message = "");
         void CollectionEquals<T>(IEnumerable<T> actual, IEnumerable<T> expected);
         void AreEquals<T>(T actual, T expected, bool logOnlyFail = false);
     }
