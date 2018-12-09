@@ -1,4 +1,5 @@
-﻿using JDI.Light.Tests.Entities;
+﻿using JDI.Light.Tests.Asserts;
+using JDI.Light.Tests.Entities;
 using JDI.Light.Tests.UIObjects;
 using JDI.Light.Utils;
 using NUnit.Framework;
@@ -11,7 +12,7 @@ namespace JDI.Light.Tests.Tests
         [OneTimeSetUp]
         protected void SetUp()
         {
-            JDI.Init();
+            JDI.Init(assert: new NUnitAsserter());
             JDI.GetLatestDriver = false;
             JDI.DriverVersion = "2.41";
             JDI.Logger.Info("Init test run...");
