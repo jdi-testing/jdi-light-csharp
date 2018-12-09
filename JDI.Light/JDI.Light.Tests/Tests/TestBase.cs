@@ -15,6 +15,7 @@ namespace JDI.Light.Tests.Tests
             JDI.GetLatestDriver = false;
             JDI.DriverVersion = "2.41";
             JDI.Logger.Info("Init test run...");
+            JDI.Timeouts.WaitElementSec = 40;
             WinProcUtils.KillAllRunWebDrivers();
             JDI.InitSite(typeof(TestSite));
             TestSite.HomePage.Open();
@@ -25,7 +26,6 @@ namespace JDI.Light.Tests.Tests
         [OneTimeTearDown]
         protected void TearDown()
         {
-            // Some log outputs
             WinProcUtils.KillAllRunWebDrivers();
         }
     }
