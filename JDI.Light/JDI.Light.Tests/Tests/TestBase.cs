@@ -17,6 +17,7 @@ namespace JDI.Light.Tests.Tests
             JDI.DriverVersion = "2.41";
             JDI.Logger.Info("Init test run...");
             JDI.Timeouts.WaitElementSec = 40;
+            JDI.Timeouts.WaitPageLoadSec = 100;
             WinProcUtils.KillAllRunWebDrivers();
             JDI.InitSite(typeof(TestSite));
             TestSite.HomePage.Open();
