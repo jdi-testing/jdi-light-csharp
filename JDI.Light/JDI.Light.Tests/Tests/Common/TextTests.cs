@@ -30,7 +30,7 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void GetTextTest()
         {
-            JDI.Assert.AreEquals(_textItem.GetText, _expectedText);
+            JDI.Assert.AreEquals(_textItem.Value, _expectedText);
         }
 
         [Test]

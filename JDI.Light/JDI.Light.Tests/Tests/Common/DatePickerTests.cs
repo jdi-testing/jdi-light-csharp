@@ -6,10 +6,8 @@ namespace JDI.Light.Tests.Tests.Common
 {
     public class DatePickerTests
     {
-        private const string DEFAULT_DATE = "09/09/1945";
-        private const string CHECK_DATE = "09/05/1945";
-        private const string PARTIAL_TEXT_FIRST = "09/";
-        private const string PARTIAL_TEXT_LAST = "09/1945";
+        private const string DefaultDate = "09/09/1955";
+        private const string CheckDate = "09/05/1955";
         private readonly ITextField _datePicker = TestSite.Dates.Datepicker;
 
         [SetUp]
@@ -27,47 +25,38 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void InputDatePickerTest()
         {
-            _datePicker.Input(DEFAULT_DATE);
-            JDI.Assert.AreEquals(_datePicker.GetText, DEFAULT_DATE);
+            _datePicker.Input(DefaultDate);
+            JDI.Assert.AreEquals(_datePicker.Value, DefaultDate);
         }
 
         [Test]
         public void SendKeysDatePickerTest()
         {
-            _datePicker.SendKeys(DEFAULT_DATE);
-            JDI.Assert.AreEquals(_datePicker.GetText, DEFAULT_DATE);
+            _datePicker.SendKeys(DefaultDate);
+            JDI.Assert.AreEquals(_datePicker.Value, DefaultDate);
         }
 
         [Test]
         public void NewInputDatePickerTest()
         {
-            _datePicker.SendKeys(CHECK_DATE);
-            _datePicker.NewInput(DEFAULT_DATE);
-            JDI.Assert.AreEquals(_datePicker.GetText, DEFAULT_DATE);
+            _datePicker.SendKeys(CheckDate);
+            _datePicker.NewInput(DefaultDate);
+            JDI.Assert.AreEquals(_datePicker.Value, DefaultDate);
         }
 
         [Test]
         public void ClearTest()
         {
-            _datePicker.SendKeys(DEFAULT_DATE);
+            _datePicker.SendKeys(DefaultDate);
             _datePicker.Clear();
-            JDI.Assert.AreEquals(_datePicker.GetText, "");
+            JDI.Assert.AreEquals(_datePicker.Value, "");
         }
 
         [Test]
         public void MultiKeyTest()
         {
-            foreach (var ch in DEFAULT_DATE) _datePicker.SendKeys(ch.ToString());
-            JDI.Assert.AreEquals(_datePicker.GetText, DEFAULT_DATE);
+            foreach (var ch in DefaultDate) _datePicker.SendKeys(ch.ToString());
+            JDI.Assert.AreEquals(_datePicker.Value, DefaultDate);
         }
-
-        //TO_DO
-        /*
-        [Test]
-        public void ElementFocusTest()
-        {
-
-        }
-        */
     }
 }

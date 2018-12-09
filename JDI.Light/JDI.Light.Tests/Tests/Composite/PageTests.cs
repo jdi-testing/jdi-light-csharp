@@ -21,9 +21,9 @@ namespace JDI.Light.Tests.Tests.Composite
         public void RefreshTest()
         {
             TestSite.ContactFormPage.ContactSubmit.Click();
-            JDI.Assert.AreEquals(TestSite.ContactFormPage.Result.GetText, "Summary: 3");
+            JDI.Assert.AreEquals(TestSite.ContactFormPage.Result.Value, "Summary: 3");
             TestSite.ContactFormPage.Refresh();
-            JDI.Assert.AreEquals(TestSite.ContactFormPage.Result.GetText, "");
+            JDI.Assert.AreEquals(TestSite.ContactFormPage.Result.Value, "");
             TestSite.ContactFormPage.CheckOpened();
         }
 

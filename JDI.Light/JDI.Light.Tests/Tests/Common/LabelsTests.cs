@@ -1,5 +1,5 @@
-﻿using JDI.Light.Tests.UIObjects;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using static JDI.Light.Tests.UIObjects.TestSite;
 
 namespace JDI.Light.Tests.Tests.Common
 {
@@ -9,17 +9,17 @@ namespace JDI.Light.Tests.Tests.Common
         [SetUp]
         public void SetUp()
         {
-            TestSite.MetalsColorsPage.Open();
+            MetalsColorsPage.Open();
             JDI.Logger.Info("Navigating to Metals and Colors page.");
-            TestSite.MetalsColorsPage.CheckTitle();
+            MetalsColorsPage.CheckTitle();
             JDI.Logger.Info("Setup method finished");
         }
 
         [Test]
         public void CheckCalculate()
         {
-            TestSite.MetalsColorsPage.CalculateButton.Click();
-            CommonActionsData.CheckCalculate("Summary: 3");
+            MetalsColorsPage.CalculateButton.Click();
+            JDI.Assert.Contains(MetalsColorsPage.CalculateText.Value, "Summary: 3");
         }
     }
 }

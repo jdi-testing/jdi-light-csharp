@@ -7,12 +7,8 @@ namespace JDI.Light.Tests.Tests.Common
 {
     public class TextFieldsTests
     {
-        private const string CONTAINS = "ame";
-        private const string REGEX = ".am.";
-        private const string TO_ADD_TEXT = "text123!@#$%^&*()";
-        private const string EXPECTED_TEXT = "text123!@#$%^&*()";
-        private const string ELEMENT_TYPE = "TextField";
-        private readonly string DEFAULT_TEXT = User.DefaultUser.Login;
+        private const string ToAddText = "text123!@#$%^&*()";
+        private readonly string _defaultText = User.DefaultUser.Login;
 
         [SetUp]
         public void SetUp()
@@ -21,8 +17,8 @@ namespace JDI.Light.Tests.Tests.Common
             TestSite.ContactFormPage.Open();
             TestSite.ContactFormPage.CheckTitle();
             TestSite.ContactFormPage.IsOpened();
-            TestSite.ContactFormPage.FillAndSubmitForm(DEFAULT_TEXT, DEFAULT_TEXT + new Random().Next(),
-                DEFAULT_TEXT + new Random().Next());
+            TestSite.ContactFormPage.FillAndSubmitForm(_defaultText, _defaultText + new Random().Next(),
+                _defaultText + new Random().Next());
             JDI.Logger.Info("Setup method finished");
             JDI.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
@@ -30,36 +26,39 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void InputTest()
         {
-            TestSite.ContactFormPage.NameField.Input(TO_ADD_TEXT);
-            JDI.Assert.AreEquals(TestSite.ContactFormPage.NameField.GetText, DEFAULT_TEXT + TO_ADD_TEXT);
+            TestSite.ContactFormPage.NameField.Input(ToAddText);
+            JDI.Assert.AreEquals(TestSite.ContactFormPage.NameField.Value, _defaultText + ToAddText);
         }
         
         [Test]
         public void SendKeyTest()
         {
-            TestSite.ContactFormPage.NameField.SendKeys(TO_ADD_TEXT);
-            JDI.Assert.AreEquals(TestSite.ContactFormPage.NameField.GetText, DEFAULT_TEXT + TO_ADD_TEXT);
+            TestSite.ContactFormPage.NameField.SendKeys(ToAddText);
+            JDI.Assert.AreEquals(TestSite.ContactFormPage.NameField.Value, _defaultText + ToAddText);
         }
 
         [Test]
         public void NewInputTest()
         {
-            TestSite.ContactFormPage.NameField.NewInput(TO_ADD_TEXT);
-            JDI.Assert.AreEquals(TestSite.ContactFormPage.NameField.GetText, TO_ADD_TEXT);
+            TestSite.ContactFormPage.NameField.NewInput(ToAddText);
+            JDI.Assert.AreEquals(TestSite.ContactFormPage.NameField.Value, ToAddText);
         }
 
         [Test]
         public void ClearTest()
         {
             TestSite.ContactFormPage.NameField.Clear();
-            JDI.Assert.AreEquals(TestSite.ContactFormPage.NameField.GetText, "");
+            JDI.Assert.AreEquals(TestSite.ContactFormPage.NameField.Value, "");
         }
 
         [Test]
         public void MultiKeyTest()
         {
-            foreach (var letter in TO_ADD_TEXT) TestSite.ContactFormPage.NameField.SendKeys(letter.ToString());
-            JDI.Assert.AreEquals(TestSite.ContactFormPage.NameField.GetText, DEFAULT_TEXT + TO_ADD_TEXT);
+            foreach (var letter in ToAddText)
+            {
+                TestSite.ContactFormPage.NameField.SendKeys(letter.ToString());
+            }
+            JDI.Assert.AreEquals(TestSite.ContactFormPage.NameField.Value, _defaultText + ToAddText);
         }
     }
 }

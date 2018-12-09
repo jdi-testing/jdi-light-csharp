@@ -33,9 +33,9 @@ namespace JDI.Light.Tests.UIObjects.Sections
         public List<string> GetFormValue()
         {
             var fields = new List<string>();
-            fields.Add(NameField.GetText);
-            fields.Add(LastNameField.GetText);
-            fields.Add(DescriptionField.GetText);
+            fields.Add(NameField.Value);
+            fields.Add(LastNameField.Value);
+            fields.Add(DescriptionField.Value);
             return fields;
         }
 
@@ -45,31 +45,5 @@ namespace JDI.Light.Tests.UIObjects.Sections
             LastNameField.NewInput(contact.LastName);
             DescriptionField.NewInput(contact.Description);
         }
-
-        private IJavaScriptExecutor GetJSExecutor()
-        {
-            if (javaScriptExecutor == null) javaScriptExecutor = JDI.JsExecutor;
-            return javaScriptExecutor;
-        }
-
-        //TO_DO
-        /*
-        public void SetLeftRollerPosition(int position)
-        {
-            JSLoader jsLoader = new JSLoader();
-            string[][] keyWords = { { "LEFT_POS", String.valueOf(position) } };
-            getJSExecutor().executeScript(jsLoader.getJSFromFile("JavaScript/rollerLeft.js", keyWords));
-            FirstRoller.Click();
-        }
-
-        public void setRightRollerPosition(int position)
-        {
-            JSLoader jsLoader = new JSLoader();
-            string[][] keyWords = { { "RIGHT_POS", String.valueOf(position) } };
-            getJSExecutor().executeScript(jsLoader.getJSFromFile("JavaScript/rollerRight.js", keyWords));
-
-            SecondRoller.Click();
-        }
-        */
     }
 }

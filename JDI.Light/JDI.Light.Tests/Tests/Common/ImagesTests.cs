@@ -6,8 +6,8 @@ namespace JDI.Light.Tests.Tests.Common
 {
     public class ImagesTests
     {
-        private const string ALT = "ALT";
-        private const string SRC = "https://jdi-framework.github.io/tests/images/Logo_Epam_Color.svg";
+        private const string Alt = "ALT";
+        private const string Src = "https://jdi-framework.github.io/tests/images/Logo_Epam_Color.svg";
         private readonly IImage _logoImage = TestSite.HomePage.LogoImage;
 
         [SetUp]
@@ -41,13 +41,13 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void GetSourceTest()
         {
-            JDI.Assert.AreEquals(_logoImage.GetSource(), SRC);
+            JDI.Assert.AreEquals(_logoImage.GetSource(), Src);
         }
 
         [Test]
         public void GetTipTest()
         {
-            JDI.Assert.AreEquals(_logoImage.GetAlt(), ALT);
+            JDI.Assert.AreEquals(_logoImage.GetAlt(), Alt);
         }
     }
 }

@@ -1,20 +1,17 @@
-﻿using JDI.Light.Interfaces.Common;
-using JDI.Light.Tests.UIObjects;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using static JDI.Light.Tests.UIObjects.TestSite;
 
 namespace JDI.Light.Tests.Tests.Common
 {
     public class ButtonTests
     {
-        private readonly IButton _button = TestSite.MetalsColorsPage.CalculateButton;
-
         [SetUp]
         public void SetUp()
         {
             JDI.Logger.Info("Navigating to Metals and Colors page.");
-            TestSite.MetalsColorsPage.Open();
-            TestSite.MetalsColorsPage.CheckTitle();
-            TestSite.MetalsColorsPage.IsOpened();
+            MetalsColorsPage.Open();
+            MetalsColorsPage.CheckTitle();
+            MetalsColorsPage.IsOpened();
             JDI.Logger.Info("Setup method finished");
             JDI.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
@@ -22,8 +19,9 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void ClickTest()
         {
-            _button.Click();
-            CommonActionsData.CheckCalculate("Summary: 3");
+            MetalsColorsPage.CalculateButton.Click();
+            var calcText = MetalsColorsPage.CalculateText.Value;
+            JDI.Assert.Contains(calcText, "Summary: 3");
         }
     }
 }

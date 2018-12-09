@@ -28,8 +28,6 @@ namespace JDI.Light.Elements.Common
 
         private Func<string> TextAction() => GetTextAction;
 
-        public string GetText => Invoker.DoActionWithResult("Get text", GetTextAction);
-
         public string Value => Invoker.DoActionWithResult("Get value", GetTextAction);
 
         public string GetValue()
