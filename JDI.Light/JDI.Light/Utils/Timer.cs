@@ -12,7 +12,7 @@ namespace JDI.Light.Utils
         private readonly int _retryTimeoutInMSec;
         private readonly double _timeoutInMSec;
 
-        private readonly Stopwatch _watch;
+        private Stopwatch _watch;
 
         public Timer()
         {
@@ -33,6 +33,7 @@ namespace JDI.Light.Utils
 
         public bool Wait(Func<bool> waitFunc)
         {
+            _watch = Stopwatch.StartNew();
             while (!TimeoutPassed)
             {
                 var res = waitFunc.AvoidExceptions();
@@ -45,6 +46,7 @@ namespace JDI.Light.Utils
 
         public T GetResultByCondition<T>(Func<T> getFunc, Func<T, bool> conditionFunc)
         {
+            _watch = Stopwatch.StartNew();
             Exception exception = null;
             do
             {
