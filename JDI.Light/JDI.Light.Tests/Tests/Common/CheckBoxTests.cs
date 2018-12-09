@@ -14,6 +14,7 @@ namespace JDI.Light.Tests.Tests.Common
         {
             JDI.Logger.Info("Navigating to Metals and Colors page.");
             TestSite.MetalsColorsPage.Open();
+            TestSite.MetalsColorsPage.CheckUrl();
             TestSite.MetalsColorsPage.CheckTitle();
             TestSite.MetalsColorsPage.IsOpened();
             JDI.Logger.Info("Setup method finished");

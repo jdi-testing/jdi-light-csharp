@@ -140,13 +140,21 @@ namespace JDI.Light.Elements.Composite
                 new[] {CheckPageType.None, CheckPageType.Equal}.Contains(CheckUrlType))
             {
                 if (string.IsNullOrEmpty(Url)) return;
-                JDI.Assert.IsTrue(Timer.Wait(() => WebDriver.Url.Equals(Url)));
+                JDI.Assert.IsTrue(Timer.Wait(() =>
+                {
+                    Logger.Debug($"Current URL: {WebDriver.Url}");
+                    return WebDriver.Url.Equals(Url);
+                }));
             }
             else
                 switch (CheckUrlType)
                 {
                     case CheckPageType.None:
-                        JDI.Assert.IsTrue(WebDriver.Url.Contains(UrlTemplate) || WebDriver.Url.Matches(UrlTemplate));
+                        JDI.Assert.IsTrue(Timer.Wait(() =>
+                        {
+                            Logger.Debug($"Current URL: {WebDriver.Url}");
+                            return WebDriver.Url.Contains(UrlTemplate) || WebDriver.Url.Matches(UrlTemplate);
+                        }));
                         break;
                     case CheckPageType.Equal:
                         JDI.Assert.IsTrue(Timer.Wait(() => WebDriver.Url.Equals(Url)));
