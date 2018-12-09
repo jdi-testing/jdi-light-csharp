@@ -1,21 +1,18 @@
 ﻿using JDI.Light.Tests.Entities;
-using JDI.Light.Tests.UIObjects;
-using JDI.Light.Tests.UIObjects.Sections;
 using NUnit.Framework;
+using static JDI.Light.Tests.UIObjects.TestSite;
 
 namespace JDI.Light.Tests.Tests.Composite
 {
     public class FormTwoButtonsTests
     {
-        private readonly ContactFormTwoButtons _contactForm = TestSite.ContactFormPage.ContactFormTwoButtons;
-
         [SetUp]
         public void SetUp()
         {
             JDI.Logger.Info("Navigating to Contact page.");
-            TestSite.ContactFormPage.Open();
-            TestSite.ContactFormPage.CheckTitle();
-            TestSite.ContactFormPage.IsOpened();
+            ContactFormPage.Open();
+            ContactFormPage.CheckTitle();
+            ContactFormPage.IsOpened();
             JDI.Logger.Info("Setup method finished");
             JDI.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
@@ -23,8 +20,8 @@ namespace JDI.Light.Tests.Tests.Composite
         [Test]
         public void SubmitSpecButtonStringTest()
         {
-            _contactForm.Submit(Contact.DEFAULT_CONTACT, "calculate");
-            JDI.Assert.Contains(TestSite.ContactFormPage.Result.Value, "Summary: 3");
+            ContactFormPage.ContactFormTwoButtons.Submit(Contact.DEFAULT_CONTACT, "calculate");
+            JDI.Assert.Contains(ContactFormPage.Result.Value, "Summary: 3");
         }
     }
 }
