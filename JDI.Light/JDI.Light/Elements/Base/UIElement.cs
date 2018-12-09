@@ -84,10 +84,11 @@ namespace JDI.Light.Elements.Base
 
         private ISearchContext GetSearchContext(IBaseElement element)
         {
-            UIElement el;
-            if (element == null || (el = element as UIElement) == null
-                                || el.Parent == null && el.FrameLocator == null)
+            var el = element as UIElement;
+            if (element == null || el == null || (el.Parent == null && el.FrameLocator == null))
+            {
                 return WebDriver.SwitchTo().DefaultContent();
+            }
             var uiElement = (UIElement) element;
             if (_webElement != null)
                 return uiElement.WebElement;

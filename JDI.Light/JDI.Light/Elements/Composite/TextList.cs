@@ -80,7 +80,12 @@ namespace JDI.Light.Elements.Composite
             if (!Timer.Wait(() =>
             {
                 var elements = WebElements;
-                return elements == null || !elements.Any() && elements.All(el => !el.Displayed);
+                var res = elements == null;
+                if (!res)
+                {
+                    return !elements.Any() && elements.All(el => !el.Displayed);
+                }
+                return res;
             }))
                 throw JDI.Assert.Exception($"Wait vanished failed ({ToString()})");
         }

@@ -28,7 +28,7 @@ namespace JDI.Light.Tests.Tests
 
         public static void CheckAction(string text)
         {
-            var logOutput = TestSite.ActionsLog.Texts;//TestSite.HomePage.WebDriver.FindElements(By.CssSelector(".logs li"));
+            var logOutput = TestSite.ActionsLog.Texts;
             JDI.Assert.Contains(logOutput[0], text);
         }
 
