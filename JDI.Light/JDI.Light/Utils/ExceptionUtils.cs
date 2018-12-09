@@ -40,26 +40,9 @@ namespace JDI.Light.Utils
             }
             catch(Exception e)
             {
-                var ex = e;
+                JDI.Logger.Debug($"Exception: {e.Message}.{Environment.NewLine}{e.StackTrace}");
                 return default(T);
             }
-        }
-
-        public static void AvoidExceptions(this Action action)
-        {
-            try
-            {
-                action();
-            }
-            catch
-            {
-                /* ignored */
-            }
-        }
-
-        public static void GetFromPropertiesAvoidExceptions(Action<string> action, string name)
-        {
-            AvoidExceptions(() => action.Invoke(Properties.Settings.Default[name].ToString()));
         }
     }
 }

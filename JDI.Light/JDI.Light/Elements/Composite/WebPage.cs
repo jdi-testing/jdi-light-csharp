@@ -170,28 +170,28 @@ namespace JDI.Light.Elements.Composite
                 case CheckPageType.None:
                     JDI.Assert.IsTrue(Timer.Wait(() =>
                     {
-                        Logger.Debug($"Actual: {WebDriver.Title}, Expected: {Title}");
+                        Logger.Debug($"Actual: '{WebDriver.Title}', Expected: '{Title}'");
                         return WebDriver.Title.Equals(Title);
                     }));
                     break;
                 case CheckPageType.Equal:
                     JDI.Assert.IsTrue(Timer.Wait(() =>
                     {
-                        Logger.Debug($"Actual: {WebDriver.Title}, Expected: {Title}");
+                        Logger.Debug($"Actual: '{WebDriver.Title}', Expected: '{Title}'");
                         return WebDriver.Title.Equals(Title);
                     }));
                     break;
                 case CheckPageType.Match:
                     JDI.Assert.IsTrue(Timer.Wait(() =>
                     {
-                        Logger.Debug($"Actual: {WebDriver.Title}, Expected: {Title}");
+                        Logger.Debug($"Actual: '{WebDriver.Title}', Expected: '{Title}'");
                         return WebDriver.Title.Matches(Title);
                     }));
                     break;
                 case CheckPageType.Contains:
                     JDI.Assert.IsTrue(Timer.Wait(() =>
                     {
-                        Logger.Debug($"Actual: {WebDriver.Title}, Expected: {Title}");
+                        Logger.Debug($"Actual: '{WebDriver.Title}', Expected: '{Title}'");
                         return WebDriver.Title.Contains(Title);
                     }));
                     break;
