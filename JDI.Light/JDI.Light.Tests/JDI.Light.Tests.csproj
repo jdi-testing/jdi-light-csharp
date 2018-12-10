@@ -80,6 +80,7 @@
     <Compile Include="Tests\Composite\PaginationTests.cs" />
     <Compile Include="Tests\Composite\SearchTests.cs" />
     <Compile Include="Tests\TestBase.cs" />
+    <Compile Include="Tests\TestsSetUp.cs" />
     <Compile Include="UIObjects\Pages\ContactPage.cs" />
     <Compile Include="UIObjects\Pages\DatesPage.cs" />
     <Compile Include="UIObjects\Pages\DynamicTablePage.cs" />
