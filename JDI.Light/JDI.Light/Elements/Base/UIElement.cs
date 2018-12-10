@@ -8,7 +8,6 @@ using JDI.Light.Interfaces;
 using JDI.Light.Interfaces.Base;
 using JDI.Light.Utils;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
 using Timer = JDI.Light.Utils.Timer;
 
 namespace JDI.Light.Elements.Base
