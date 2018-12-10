@@ -5,8 +5,8 @@
         public int CurrentTimeoutMSec;
         public int RetryMSec = 500;
 
-        public int WaitElementSec = 40;
-        public int WaitPageLoadSec = 120;
+        public int WaitElementSec = 5;
+        public int WaitPageLoadSec = 10;
 
         public Timeouts()
         {

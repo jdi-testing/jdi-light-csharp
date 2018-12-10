@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Drawing;
-using System.Linq;
 using JDI.Light.Elements;
 using JDI.Light.Factories;
 using JDI.Light.Interfaces;
@@ -13,7 +11,6 @@ namespace JDI.Light
 {
     public static class JDI
     {
-        public static bool UseCache;
         public static WebCascadeInit WebInit;
         public static IDriverFactory<IWebDriver> DriverFactory;
         public static Timeouts Timeouts;
@@ -23,7 +20,6 @@ namespace JDI.Light
         public static bool HasDomain => Domain != null && Domain.Contains("://");
         public static bool GetLatestDriver = true;
         public static string DriverVersion = "";
-        public static IJavaScriptExecutor JsExecutor => DriverFactory.GetDriver() as IJavaScriptExecutor;
 
         static JDI()
         {
