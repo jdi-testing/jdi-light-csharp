@@ -12,11 +12,11 @@ namespace JDI.Light.Tests.UITests
         [TearDown]
         public void TestTearDown()
         {
+            var folder = @"C:\Screenshots";
+            Directory.CreateDirectory(folder);
             var res = TestContext.CurrentContext.Result.Outcome;
             if (res.Equals(ResultState.Failure) || res.Equals(ResultState.Error))
             {
-                var folder = @"C:\Screenshots";
-                Directory.CreateDirectory(folder);
                 JDI.DriverFactory.GetDriver().TakeScreenshot()
                     .SaveAsFile(Path.Combine(folder, $"{Guid.NewGuid()}.png"), ScreenshotImageFormat.Png);
             }

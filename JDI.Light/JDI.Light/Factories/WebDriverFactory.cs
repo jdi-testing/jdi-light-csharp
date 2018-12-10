@@ -17,8 +17,6 @@ namespace JDI.Light.Factories
     public class WebDriverFactory : IDriverFactory<IWebDriver>
     {
         public static bool OnlyOneElementAllowedInSearch = true;
-
-        //public static Size BrowserSize = new Size(1024, 768);
         public static Size BrowserSize = new Size();
 
         private readonly Dictionary<DriverType, string> _driverNamesDictionary = new Dictionary<DriverType, string>
