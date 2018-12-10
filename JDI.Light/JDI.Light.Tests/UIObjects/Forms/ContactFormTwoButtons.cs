@@ -4,7 +4,7 @@ using JDI.Light.Elements.Composite;
 using JDI.Light.Interfaces.Common;
 using JDI.Light.Tests.Entities;
 
-namespace JDI.Light.Tests.UIObjects.Sections
+namespace JDI.Light.Tests.UIObjects.Forms
 {
     public class ContactFormTwoButtons : Form<Contact>
     {

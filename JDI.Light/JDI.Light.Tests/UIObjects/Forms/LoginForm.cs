@@ -4,7 +4,7 @@ using JDI.Light.Interfaces.Base;
 using JDI.Light.Interfaces.Common;
 using JDI.Light.Tests.Entities;
 
-namespace JDI.Light.Tests.UIObjects.Sections
+namespace JDI.Light.Tests.UIObjects.Forms
 {
     public class LoginForm : Form<User>
     {

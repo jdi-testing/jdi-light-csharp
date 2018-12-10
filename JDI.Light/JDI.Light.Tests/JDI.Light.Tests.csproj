@@ -90,22 +90,20 @@
     <Compile Include="UIObjects\Pages\SimpleTablePage.cs" />
     <Compile Include="UIObjects\Pages\SortingTablePage.cs" />
     <Compile Include="UIObjects\Pages\SupportPage.cs" />
-    <Compile Include="UIObjects\Sections\ContactForm.cs" />
-    <Compile Include="UIObjects\Sections\ContactFormTwoButtons.cs" />
+    <Compile Include="UIObjects\Forms\ContactForm.cs" />
+    <Compile Include="UIObjects\Forms\ContactFormTwoButtons.cs" />
     <Compile Include="UIObjects\Sections\Footer.cs" />
     <Compile Include="UIObjects\Sections\Header.cs" />
     <Compile Include="UIObjects\Sections\JdiPaginator.cs" />
     <Compile Include="UIObjects\Sections\JdiSearch.cs" />
-    <Compile Include="UIObjects\Sections\LoginForm.cs" />
+    <Compile Include="UIObjects\Forms\LoginForm.cs" />
     <Compile Include="UIObjects\Sections\Summary.cs" />
     <Compile Include="UIObjects\TestSite.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UIObjects\Forms\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\JDI.Light\JDI.Light.csproj">
       <Project>{abaf27b0-bfde-4fec-b93e-15b595fa77aa}</Project>

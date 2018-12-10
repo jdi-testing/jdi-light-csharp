@@ -2,6 +2,7 @@
 using JDI.Light.Tests.Entities;
 using JDI.Light.Tests.Enums;
 using JDI.Light.Tests.UIObjects;
+using JDI.Light.Tests.UIObjects.Forms;
 using JDI.Light.Tests.UIObjects.Sections;
 using NUnit.Framework;
 

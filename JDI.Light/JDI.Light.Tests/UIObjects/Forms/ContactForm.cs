@@ -4,9 +4,8 @@ using JDI.Light.Elements.Common;
 using JDI.Light.Elements.Composite;
 using JDI.Light.Interfaces.Common;
 using JDI.Light.Tests.Entities;
-using OpenQA.Selenium;
 
-namespace JDI.Light.Tests.UIObjects.Sections
+namespace JDI.Light.Tests.UIObjects.Forms
 {
     public class ContactForm : Form<Contact>
     {
@@ -33,10 +32,7 @@ namespace JDI.Light.Tests.UIObjects.Sections
 
         public List<string> GetFormValue()
         {
-            var fields = new List<string>();
-            fields.Add(NameField.Value);
-            fields.Add(LastNameField.Value);
-            fields.Add(DescriptionField.Value);
+            var fields = new List<string> {NameField.Value, LastNameField.Value, DescriptionField.Value};
             return fields;
         }
 

@@ -1,5 +1,6 @@
 ﻿using JDI.Light.Attributes;
 using JDI.Light.Elements.Composite;
+using JDI.Light.Tests.UIObjects.Forms;
 using JDI.Light.Tests.UIObjects.Pages;
 using JDI.Light.Tests.UIObjects.Sections;
 
