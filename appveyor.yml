@@ -44,7 +44,7 @@
   before_build:
   - nuget restore JDI.Light/JDI.Light.sln
   - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-desktop.ps1'))
-  - ps: Set-ScreenResolution 1920 1080
+  - ps: screen.ps1
 
   build_script:
     - msbuild JDI.Light/JDI.Light.sln /p:Configuration=Release /t:Rebuild
