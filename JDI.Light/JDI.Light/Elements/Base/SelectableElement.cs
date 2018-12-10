@@ -1,5 +1,6 @@
 ﻿using System;
 using JDI.Light.Interfaces.Base;
+using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Base
 {

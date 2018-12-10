@@ -1,6 +1,7 @@
 ﻿using System;
 using JDI.Light.Extensions;
 using JDI.Light.Interfaces.Common;
+using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Base
 {

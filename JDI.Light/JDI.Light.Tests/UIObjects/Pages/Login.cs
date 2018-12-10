@@ -1,5 +1,6 @@
 ﻿using JDI.Light.Elements.Composite;
 using JDI.Light.Tests.Entities;
+using OpenQA.Selenium;
 
 namespace JDI.Light.Tests.UIObjects.Pages
 {

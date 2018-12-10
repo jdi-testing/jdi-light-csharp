@@ -3,10 +3,10 @@
     public class Timeouts
     {
         public int CurrentTimeoutMSec;
-        public int RetryMSec = 250;
+        public int RetryMSec = 500;
 
-        public int WaitElementSec = 10;
-        public int WaitPageLoadSec = 20;
+        public int WaitElementSec = 40;
+        public int WaitPageLoadSec = 120;
 
         public Timeouts()
         {

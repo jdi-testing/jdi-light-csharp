@@ -4,6 +4,7 @@ using JDI.Light.Elements.Common;
 using JDI.Light.Elements.Composite;
 using JDI.Light.Interfaces.Common;
 using JDI.Light.Tests.Entities;
+using OpenQA.Selenium;
 
 namespace JDI.Light.Tests.UIObjects.Sections
 {

@@ -1,4 +1,6 @@
 ﻿using JDI.Light.Interfaces.Base;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 
 namespace JDI.Light.Elements.Base
 {

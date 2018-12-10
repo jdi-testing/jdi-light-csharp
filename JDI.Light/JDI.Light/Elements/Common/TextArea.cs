@@ -1,4 +1,6 @@
-﻿using JDI.Light.Interfaces.Common;
+﻿using System.Text.RegularExpressions;
+using JDI.Light.Interfaces.Common;
+using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Common
 {
