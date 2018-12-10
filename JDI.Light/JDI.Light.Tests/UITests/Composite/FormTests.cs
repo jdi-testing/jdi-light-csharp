@@ -5,7 +5,7 @@ using JDI.Light.Tests.UIObjects;
 using JDI.Light.Tests.UIObjects.Sections;
 using NUnit.Framework;
 
-namespace JDI.Light.Tests.Tests.Composite
+namespace JDI.Light.Tests.UITests.Composite
 {
     [TestFixture]
     public class FormTests : TestBase
@@ -36,6 +36,8 @@ namespace JDI.Light.Tests.Tests.Composite
         {
             _contactForm.Submit(Contact.DEFAULT_CONTACT);
             JDI.Assert.Contains(TestSite.ContactFormPage.Result.Value, Contact.DEFAULT_CONTACT.ToString());
+            IList<string> filledFields = _contactForm.GetFormValue();
+            JDI.Assert.CollectionEquals(filledFields, Contact.DEFAULT_CONTACT.ToList());
         }
 
         [Test]
@@ -43,6 +45,8 @@ namespace JDI.Light.Tests.Tests.Composite
         {
             _contactForm.Submit(Contact.DEFAULT_CONTACT, "submit");
             JDI.Assert.Contains(TestSite.ContactFormPage.Result.Value, Contact.DEFAULT_CONTACT.ToString());
+            IList<string> filledFields = _contactForm.GetFormValue();
+            JDI.Assert.CollectionEquals(filledFields, Contact.DEFAULT_CONTACT.ToList());
         }
 
         [Test]
@@ -50,6 +54,8 @@ namespace JDI.Light.Tests.Tests.Composite
         {
             _contactForm.Submit(Contact.DEFAULT_CONTACT, Buttons.SUBMIT);
             JDI.Assert.Contains(TestSite.ContactFormPage.Result.Value, Contact.DEFAULT_CONTACT.ToString());
+            IList<string> filledFields = _contactForm.GetFormValue();
+            JDI.Assert.CollectionEquals(filledFields, Contact.DEFAULT_CONTACT.ToList());
         }
         
         [Test]

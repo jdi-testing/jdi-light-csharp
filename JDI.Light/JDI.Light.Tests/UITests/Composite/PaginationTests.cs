@@ -2,7 +2,7 @@
 using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 
-namespace JDI.Light.Tests.Tests.Composite
+namespace JDI.Light.Tests.UITests.Composite
 {
     [TestFixture]
     public class PaginationTests : TestBase
@@ -20,37 +20,37 @@ namespace JDI.Light.Tests.Tests.Composite
             JDI.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
-        private void CheckPageOpened(int num)
+        private void CheckPageOpened(string page)
         {
-            Assert.True(JDI.DriverFactory.GetDriver().Url.Contains($"/page{num}.htm"));
+            Assert.True(JDI.DriverFactory.GetDriver().Url.Contains($"{page}"));
         }
 
         [Test]
         public void NextTest()
         {
             _simplePagePaginator.Next();
-            CheckPageOpened(7);
+            CheckPageOpened("user-table.html");
         }
         
         [Test]
         public void PrevTest()
         {
             _simplePagePaginator.Previous();
-            CheckPageOpened(5);
+            CheckPageOpened("complex-table.html");
         }
         
         [Test]
         public void FirstTest()
         {
             _simplePagePaginator.First();
-            CheckPageOpened(1);
+            CheckPageOpened("support.html");
         }
         
         [Test]
         public void LastTest()
         {
             _simplePagePaginator.Last();
-            CheckPageOpened(2);
+            CheckPageOpened("performance.html");
         }
     }
 }

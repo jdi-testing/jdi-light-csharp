@@ -1,10 +1,10 @@
 ﻿using System;
+using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.Extensions;
-using static JDI.Light.Tests.UIObjects.TestSite;
 
-namespace JDI.Light.Tests.Tests.Common
+namespace JDI.Light.Tests.UITests.Common
 {
     [TestFixture]
     public class ButtonTests : TestBase
@@ -13,9 +13,9 @@ namespace JDI.Light.Tests.Tests.Common
         public void SetUp()
         {
             JDI.Logger.Info("Navigating to Metals and Colors page.");
-            MetalsColorsPage.Open();
-            MetalsColorsPage.CheckTitle();
-            MetalsColorsPage.IsOpened();
+            TestSite.MetalsColorsPage.Open();
+            TestSite.MetalsColorsPage.CheckTitle();
+            TestSite.MetalsColorsPage.IsOpened();
             JDI.Logger.Info("Setup method finished");
             JDI.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
@@ -23,8 +23,8 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void ClickTest()
         {
-            MetalsColorsPage.CalculateButton.Click();
-            var calcText = MetalsColorsPage.CalculateText.Value;
+            TestSite.MetalsColorsPage.CalculateButton.Click();
+            var calcText = TestSite.MetalsColorsPage.CalculateText.Value;
             JDI.Assert.Contains(calcText, "Summary: 3");
             JDI.DriverFactory.GetDriver().TakeScreenshot().SaveAsFile($"{Guid.NewGuid()}.png", ScreenshotImageFormat.Png);
         }

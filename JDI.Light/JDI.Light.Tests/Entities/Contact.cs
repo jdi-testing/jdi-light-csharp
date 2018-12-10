@@ -32,8 +32,7 @@ namespace JDI.Light.Tests.Entities
 
         public override string ToString()
         {
-            return "Summary: 3\r\n" + $"Name: {FirstName}\r\n" + $"Last Name: {LastName}\r\n" +
-                   $"Description: {Description}";
+            return "Summary: 3";
         }
     }
 }

@@ -8,6 +8,7 @@ using JDI.Light.Interfaces;
 using JDI.Light.Interfaces.Base;
 using JDI.Light.Utils;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using Timer = JDI.Light.Utils.Timer;
 
 namespace JDI.Light.Elements.Base
@@ -52,7 +53,10 @@ namespace JDI.Light.Elements.Base
                         case 0:
                             throw JDI.Assert.Exception($"Can't find Element '{this}' during {JDI.Timeouts.CurrentTimeoutMSec} milliseconds");
                         case 1:
-                            return result[0];
+                        {
+                            var e = result[0];
+                            return e;
+                        }
                         default:
                             if (WebDriverFactory.OnlyOneElementAllowedInSearch)
                                 throw JDI.Assert.Exception(

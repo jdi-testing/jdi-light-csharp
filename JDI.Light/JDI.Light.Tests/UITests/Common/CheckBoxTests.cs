@@ -3,7 +3,7 @@ using JDI.Light.Tests.DataProviders;
 using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 
-namespace JDI.Light.Tests.Tests.Common
+namespace JDI.Light.Tests.UITests.Common
 {
     [TestFixture]
     public class CheckBoxTests : TestBase

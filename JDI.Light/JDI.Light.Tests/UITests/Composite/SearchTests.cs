@@ -1,7 +1,7 @@
 ﻿using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 
-namespace JDI.Light.Tests.Tests.Composite
+namespace JDI.Light.Tests.UITests.Composite
 {
     [TestFixture]
     public class SearchTests : TestBase
@@ -22,7 +22,7 @@ namespace JDI.Light.Tests.Tests.Composite
         {
             TestSite.Header.Search.SearchButton.Click();
             TestSite.Header.Search.Find("something");
-            TestSite.SupportPage.CheckOpened();
+            Assert.True(JDI.DriverFactory.GetDriver().Url.Contains("complex-table.html"));
         }
     }
 }

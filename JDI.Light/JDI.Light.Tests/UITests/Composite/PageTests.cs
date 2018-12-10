@@ -1,8 +1,10 @@
-﻿using JDI.Light.Tests.UIObjects;
+﻿using System;
+using System.Linq;
+using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
-namespace JDI.Light.Tests.Tests.Composite
+namespace JDI.Light.Tests.UITests.Composite
 {
     [TestFixture]
     public class PageTests : TestBase
@@ -21,8 +23,9 @@ namespace JDI.Light.Tests.Tests.Composite
         [Test]
         public void RefreshTest()
         {
+            TestSite.ContactFormPage.CheckOpened();
             TestSite.ContactFormPage.ContactSubmit.Click();
-            JDI.Assert.AreEquals(TestSite.ContactFormPage.Result.Value, "Summary: 3");
+            JDI.Assert.Contains(TestSite.ContactFormPage.Result.Value, "Summary: 3");
             TestSite.ContactFormPage.Refresh();
             JDI.Assert.AreEquals(TestSite.ContactFormPage.Result.Value, "");
             TestSite.ContactFormPage.CheckOpened();
@@ -41,6 +44,7 @@ namespace JDI.Light.Tests.Tests.Composite
         public void ForwardTest()
         {
             TestSite.HomePage.Open();
+            TestSite.HomePage.CheckOpened();
             TestSite.HomePage.Back();
             TestSite.ContactFormPage.CheckOpened();
             TestSite.ContactFormPage.Forward();
@@ -50,22 +54,21 @@ namespace JDI.Light.Tests.Tests.Composite
         [Test]
         public void AddCookieTest()
         {
-            TestSite.HomePage.WebDriver.Manage().Cookies.DeleteAllCookies();
-            JDI.Assert.IsTrue(TestSite.HomePage.WebDriver.Manage().Cookies.AllCookies.Count == 0);
-            var cookie = new Cookie("key", "value");
+            var cookie = new Cookie($"key: {Guid.NewGuid()}", $"value: {Guid.NewGuid()}");
             TestSite.ContactFormPage.AddCookie(cookie);
             JDI.Assert.AreEquals(TestSite.HomePage.WebDriver.Manage().Cookies.GetCookieNamed(cookie.Name).Value,
                 cookie.Value);
         }
 
         [Test]
-        public void ClearCacheTest()
+        public void DeleteCookieTest()
         {
-            var cookie = new Cookie("key", "value");
-            TestSite.HomePage.WebDriver.Manage().Cookies.AddCookie(cookie);
-            JDI.Assert.IsFalse(TestSite.HomePage.WebDriver.Manage().Cookies.AllCookies.Count == 0);
-            TestSite.ContactFormPage.DeleteAllCookies();
-            JDI.Assert.IsTrue(TestSite.HomePage.WebDriver.Manage().Cookies.AllCookies.Count == 0);
+            var cookie = new Cookie($"key: {Guid.NewGuid()}", $"value: {Guid.NewGuid()}");
+            TestSite.ContactFormPage.AddCookie(cookie);
+            JDI.Assert.AreEquals(TestSite.HomePage.WebDriver.Manage().Cookies.GetCookieNamed(cookie.Name).Value,
+                cookie.Value);
+            TestSite.ContactFormPage.DeleteCookie(cookie);
+            JDI.Assert.IsFalse(TestSite.HomePage.WebDriver.Manage().Cookies.AllCookies.Any(c => c.Name.Equals(cookie.Name)));
         }
 
         [Test]

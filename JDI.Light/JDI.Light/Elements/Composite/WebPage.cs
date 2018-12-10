@@ -128,6 +128,11 @@ namespace JDI.Light.Elements.Composite
             Invoker.DoActionWithWait("Add cookie for the page", () => WebDriver.Manage().Cookies.AddCookie(cookie));
         }
 
+        public void DeleteCookie(Cookie cookie)
+        {
+            Invoker.DoActionWithWait("Add cookie for the page", () => WebDriver.Manage().Cookies.DeleteCookie(cookie));
+        }
+
         public void DeleteAllCookies()
         {
             Invoker.DoActionWithWait("Delete page cookies", () => WebDriver.Manage().Cookies.DeleteAllCookies());

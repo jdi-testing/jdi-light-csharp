@@ -10,18 +10,19 @@ namespace JDI.Light.Tests.UIObjects.Sections
 {
     public class ContactForm : Form<Contact>
     {
-        [FindBy(Css = "textarea#Description")] [Name("Description")]
+        [FindBy(Css = "textarea#description")]
+        [Name("Description")]
         public ITextArea DescriptionField;
 
         [FindBy(XPath = ".//a[@class='ui-slider-handle ui-state-default ui-corner-all' and position()=1]")]
         public Link FirstRoller;
 
-        private IJavaScriptExecutor javaScriptExecutor;
-
-        [FindBy(Css = "input#LastName")] [Name("LastName")]
+        [FindBy(Css = "input#last-name")]
+        [Name("LastName")]
         public ITextField LastNameField;
 
-        [FindBy(Css = "input#Name")] [Name("FirstName")]
+        [FindBy(Css = "input#name")]
+        [Name("FirstName")]
         public ITextField NameField;
 
         [FindBy(XPath = ".//a[@class='ui-slider-handle ui-state-default ui-corner-all' and position()=2]")]

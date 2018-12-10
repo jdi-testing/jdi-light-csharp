@@ -5,7 +5,7 @@ using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.Extensions;
 
-namespace JDI.Light.Tests.Tests
+namespace JDI.Light.Tests.UITests
 {
     public class TestBase
     {

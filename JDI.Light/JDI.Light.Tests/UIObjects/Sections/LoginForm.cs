@@ -8,18 +8,23 @@ namespace JDI.Light.Tests.UIObjects.Sections
 {
     public class LoginForm : Form<User>
     {
-        [FindBy(Css = "button.btn-login")] private IButton _loginButton;
+        [FindBy(Css = "button.btn-login")]
+        public IButton LoginButton;
 
-        [FindBy(Id = "Login")] [Name("Login")] private ITextField _loginField;
+        [FindBy(Css = "#Name")]
+        [Name("Login")]
+        public ITextField LoginField;
 
-        [FindBy(Id = "Password")] [Name("Password")]
-        private ITextField _passwordField;
+        [FindBy(Css = "#Password")]
+        [Name("Password")]
+        public ITextField PasswordField;
 
-        [FindBy(Css = "a>div.profile-photo")] private IClickable _profile;
+        [FindBy(Css = "a>div.profile-photo")]
+        public IClickable Profile;
 
         public new void Submit(User user)
         {
-            _profile.Click();
+            Profile.Click();
             base.Submit(user);
         }
     }

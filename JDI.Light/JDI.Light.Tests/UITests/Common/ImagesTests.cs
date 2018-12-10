@@ -2,19 +2,19 @@
 using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 
-namespace JDI.Light.Tests.Tests.Common
+namespace JDI.Light.Tests.UITests.Common
 {
     [TestFixture]
     public class ImagesTests : TestBase
     {
         private const string Alt = "ALT";
-        private const string Src = "https://jdi-framework.github.io/tests/images/Logo_Epam_Color.svg";
+        private const string Src = "https://epam.github.io/JDI/images/Logo_Epam_Color.svg";
         private readonly IImage _logoImage = TestSite.HomePage.LogoImage;
 
         [SetUp]
         public void SetUp()
         {
-            JDI.Logger.Info("Navigating to Metals and Colors page.");
+            JDI.Logger.Info("Navigating to Home page.");
             TestSite.HomePage.Open();
             TestSite.HomePage.CheckTitle();
             TestSite.HomePage.IsOpened();
