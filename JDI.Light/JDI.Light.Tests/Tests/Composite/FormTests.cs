@@ -7,7 +7,8 @@ using NUnit.Framework;
 
 namespace JDI.Light.Tests.Tests.Composite
 {
-    public class FormTests
+    [TestFixture]
+    public class FormTests : TestBase
     {
         private readonly ContactForm _contactForm = TestSite.ContactFormPage.ContactForm;
 

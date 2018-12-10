@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace JDI.Light.Tests.Tests.Common
 {
     [TestFixture]
-    public class TextTests
+    public class TextTests : TestBase
     {
         [SetUp]
         public void SetUp()

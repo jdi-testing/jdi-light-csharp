@@ -4,7 +4,8 @@ using NUnit.Framework;
 
 namespace JDI.Light.Tests.Tests.Composite
 {
-    public class PaginationTests
+    [TestFixture]
+    public class PaginationTests : TestBase
     {
         private readonly Pagination _simplePagePaginator = TestSite.SimpleTablePage.Paginator;
 

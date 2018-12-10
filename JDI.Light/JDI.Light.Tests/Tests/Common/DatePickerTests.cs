@@ -4,7 +4,8 @@ using NUnit.Framework;
 
 namespace JDI.Light.Tests.Tests.Common
 {
-    public class DatePickerTests
+    [TestFixture]
+    public class DatePickerTests : TestBase
     {
         private const string DefaultDate = "09/09/1955";
         private const string CheckDate = "09/05/1955";

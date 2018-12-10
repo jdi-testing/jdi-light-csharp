@@ -4,7 +4,8 @@ using OpenQA.Selenium;
 
 namespace JDI.Light.Tests.Tests.Composite
 {
-    public class PageTests
+    [TestFixture]
+    public class PageTests : TestBase
     {
         [SetUp]
         public void SetUp()

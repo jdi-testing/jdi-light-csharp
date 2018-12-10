@@ -4,7 +4,8 @@ using NUnit.Framework;
 
 namespace JDI.Light.Tests.Tests.Common
 {
-    public class ImagesTests
+    [TestFixture]
+    public class ImagesTests : TestBase
     {
         private const string Alt = "ALT";
         private const string Src = "https://jdi-framework.github.io/tests/images/Logo_Epam_Color.svg";

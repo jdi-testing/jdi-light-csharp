@@ -1,9 +1,13 @@
-﻿using JDI.Light.Enums;
+﻿using System;
 using JDI.Light.Tests.Asserts;
 using JDI.Light.Tests.Entities;
 using JDI.Light.Tests.UIObjects;
 using JDI.Light.Utils;
 using NUnit.Framework;
+using NUnit.Framework.Interfaces;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.Extensions;
+using LogLevel = JDI.Light.Enums.LogLevel;
 
 namespace JDI.Light.Tests.Tests
 {
@@ -11,7 +15,7 @@ namespace JDI.Light.Tests.Tests
     public class TestBase
     {
         [OneTimeSetUp]
-        protected void SetUp()
+        protected void OneTimeSetUp()
         {
             JDI.Init(assert: new NUnitAsserter());
             JDI.Logger.LogLevel = LogLevel.Debug;
@@ -28,9 +32,19 @@ namespace JDI.Light.Tests.Tests
         }
 
         [OneTimeTearDown]
-        protected void TearDown()
+        protected void OneTimeTearDown()
         {
             WinProcUtils.KillAllRunWebDrivers();
+        }
+
+        [TearDown]
+        public void TestTearDown()
+        {
+            var res = TestContext.CurrentContext.Result.Outcome;
+            if (res.Equals(ResultState.Failure) || res.Equals(ResultState.Error))
+            {
+                JDI.DriverFactory.GetDriver().TakeScreenshot().SaveAsFile($"C:\\projects\\jdi-light-csharp\\JDI.Light\\JDI.Light.Tests\\{Guid.NewGuid()}.png", ScreenshotImageFormat.Png);
+            }
         }
     }
 }

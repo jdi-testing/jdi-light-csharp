@@ -4,7 +4,7 @@ using static JDI.Light.Tests.UIObjects.TestSite;
 namespace JDI.Light.Tests.Tests.Common
 {
     [TestFixture]
-    public class LabelsTests
+    public class LabelsTests : TestBase
     {
         [SetUp]
         public void SetUp()

@@ -4,7 +4,8 @@ using static JDI.Light.Tests.UIObjects.TestSite;
 
 namespace JDI.Light.Tests.Tests.Composite
 {
-    public class FormTwoButtonsTests
+    [TestFixture]
+    public class FormTwoButtonsTests : TestBase
     {
         [SetUp]
         public void SetUp()

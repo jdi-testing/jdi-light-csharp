@@ -5,7 +5,8 @@ using NUnit.Framework;
 
 namespace JDI.Light.Tests.Tests.Common
 {
-    public class CheckBoxTests
+    [TestFixture]
+    public class CheckBoxTests : TestBase
     {
         private readonly ICheckBox _checkBoxWater = TestSite.MetalsColorsPage.CbWater;
 

@@ -4,7 +4,8 @@ using NUnit.Framework;
 
 namespace JDI.Light.Tests.Tests.Common
 {
-    public class LinkTests
+    [TestFixture]
+    public class LinkTests : TestBase
     {
         private readonly ILink _link = TestSite.Footer.About;
 

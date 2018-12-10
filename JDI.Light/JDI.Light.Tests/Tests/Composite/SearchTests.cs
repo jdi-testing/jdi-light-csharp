@@ -3,7 +3,8 @@ using NUnit.Framework;
 
 namespace JDI.Light.Tests.Tests.Composite
 {
-    public class SearchTests
+    [TestFixture]
+    public class SearchTests : TestBase
     {
         [SetUp]
         public void SetUp()

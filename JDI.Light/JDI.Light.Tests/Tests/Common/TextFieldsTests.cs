@@ -5,7 +5,8 @@ using NUnit.Framework;
 
 namespace JDI.Light.Tests.Tests.Common
 {
-    public class TextFieldsTests
+    [TestFixture]
+    public class TextFieldsTests : TestBase
     {
         private const string ToAddText = "text123!@#$%^&*()";
         private readonly string _defaultText = User.DefaultUser.Login;

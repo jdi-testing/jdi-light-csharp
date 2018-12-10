@@ -6,7 +6,8 @@ using static JDI.Light.Tests.UIObjects.TestSite;
 
 namespace JDI.Light.Tests.Tests.Common
 {
-    public class ButtonTests
+    [TestFixture]
+    public class ButtonTests : TestBase
     {
         [SetUp]
         public void SetUp()
