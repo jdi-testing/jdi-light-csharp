@@ -1,4 +1,7 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.Extensions;
 using static JDI.Light.Tests.UIObjects.TestSite;
 
 namespace JDI.Light.Tests.Tests.Common
@@ -22,6 +25,7 @@ namespace JDI.Light.Tests.Tests.Common
             MetalsColorsPage.CalculateButton.Click();
             var calcText = MetalsColorsPage.CalculateText.Value;
             JDI.Assert.Contains(calcText, "Summary: 3");
+            JDI.DriverFactory.GetDriver().TakeScreenshot().SaveAsFile($"{Guid.NewGuid()}.png", ScreenshotImageFormat.Png);
         }
     }
 }
