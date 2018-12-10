@@ -41,12 +41,10 @@
     COVERALLS_REPO_TOKEN:
       secure: Lc7yX8JRxQdRZ8yYUPMuxrp22UkAIXLlkQK6H890Sh1GASFiKG4GkjwqbM9zy9O6
 
-  install:
+  before_build:
+  - nuget restore JDI.Light/JDI.Light.sln
   - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-desktop.ps1'))
   - ps: Set-ScreenResolution 1920 1080
-
-  before_build:
-    - nuget restore JDI.Light/JDI.Light.sln
 
   build_script:
     - msbuild JDI.Light/JDI.Light.sln /p:Configuration=Release /t:Rebuild
