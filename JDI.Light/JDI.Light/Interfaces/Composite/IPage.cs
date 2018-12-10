@@ -1,7 +1,6 @@
 ﻿using JDI.Light.Enums;
 using JDI.Light.Interfaces.Base;
 using JDI.Light.Utils;
-using OpenQA.Selenium;
 
 namespace JDI.Light.Interfaces.Composite
 {

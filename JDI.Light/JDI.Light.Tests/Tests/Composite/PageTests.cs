@@ -1,6 +1,4 @@
 ﻿using JDI.Light.Tests.UIObjects;
-using NUnit.Framework;
-using OpenQA.Selenium;
 
 namespace JDI.Light.Tests.Tests.Composite
 {

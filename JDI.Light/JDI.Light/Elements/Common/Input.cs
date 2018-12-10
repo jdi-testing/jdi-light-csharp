@@ -1,6 +1,4 @@
-﻿using OpenQA.Selenium;
-
-namespace JDI.Light.Elements.Common
+﻿namespace JDI.Light.Elements.Common
 {
     public class Input : TextField
     {

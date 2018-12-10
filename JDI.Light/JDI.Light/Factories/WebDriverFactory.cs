@@ -1,16 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Threading;
 using JDI.Light.Enums;
 using JDI.Light.Interfaces;
 using JDI.Light.Utils;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.IE;
-using OpenQA.Selenium.Remote;
 
 namespace JDI.Light.Factories
 {

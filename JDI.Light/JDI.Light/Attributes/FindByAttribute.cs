@@ -1,5 +1,4 @@
 ﻿using System;
-using OpenQA.Selenium;
 
 namespace JDI.Light.Attributes
 {

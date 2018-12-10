@@ -3,7 +3,6 @@ using JDI.Light.Tests.Entities;
 using JDI.Light.Tests.Enums;
 using JDI.Light.Tests.UIObjects;
 using JDI.Light.Tests.UIObjects.Sections;
-using NUnit.Framework;
 
 namespace JDI.Light.Tests.Tests.Composite
 {

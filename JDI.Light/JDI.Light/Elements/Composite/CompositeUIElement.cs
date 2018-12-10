@@ -5,7 +5,6 @@ using JDI.Light.Elements.Common;
 using JDI.Light.Extensions;
 using JDI.Light.Interfaces.Common;
 using JDI.Light.Utils;
-using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Composite
 {

@@ -2,8 +2,6 @@
 using System.IO;
 using JDI.Light.Enums;
 using JDI.Light.Extensions;
-using WebDriverManager.DriverConfigs.Impl;
-using WebDriverManager.Helpers;
 
 namespace JDI.Light.Utils
 {

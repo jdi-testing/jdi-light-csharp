@@ -1,7 +1,4 @@
-﻿using System;
-using OpenQA.Selenium;
-
-namespace JDI.Light.Elements.Composite
+﻿namespace JDI.Light.Elements.Composite
 {
     public class WebSite
     {

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Reflection;
 using JDI.Light.Attributes;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
 
 namespace JDI.Light.Extensions
 {

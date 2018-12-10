@@ -1,7 +1,6 @@
 ﻿using JDI.Light.Interfaces.Common;
 using JDI.Light.Tests.DataProviders;
 using JDI.Light.Tests.UIObjects;
-using NUnit.Framework;
 
 namespace JDI.Light.Tests.Tests.Common
 {
