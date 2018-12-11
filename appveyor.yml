@@ -6,7 +6,9 @@
   image: Visual Studio 2017
 
   before_build:
-    - nuget restore JDI.Light/JDI.Light.sln
+  - nuget restore JDI.Light/JDI.Light.sln
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/set-screenresolution.ps1'))
+  - ps: Set-ScreenResolution 1280 1024
 
   build_script:
     - msbuild JDI.Light/JDI.Light.sln /p:Configuration=Release /t:Rebuild
@@ -26,9 +28,11 @@
     skip_symbols: false
     artifact: nupkg
 
-  test:
-    assemblies:
-      - '**\*Tests.dll'
+  test_script:
+  - ps: .\TestsAndCoverage.ps1
+
+  on_finish:
+  - ps: Get-ChildItem C:\Screenshots\*.png -Recurse | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
 
 -
   branches:
@@ -37,14 +41,10 @@
 
   image: Visual Studio 2017
 
-  environment:
-    COVERALLS_REPO_TOKEN:
-      secure: Lc7yX8JRxQdRZ8yYUPMuxrp22UkAIXLlkQK6H890Sh1GASFiKG4GkjwqbM9zy9O6
-
   before_build:
   - nuget restore JDI.Light/JDI.Light.sln
   - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/set-screenresolution.ps1'))
-  - ps: Set-ScreenResolution 1280 1024 
+  - ps: Set-ScreenResolution 1280 1024
 
   build_script:
     - msbuild JDI.Light/JDI.Light.sln /p:Configuration=Release /t:Rebuild

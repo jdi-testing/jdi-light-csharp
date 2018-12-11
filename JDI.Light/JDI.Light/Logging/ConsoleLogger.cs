@@ -16,52 +16,39 @@ namespace JDI.Light.Logging
 
         public void Log(string message, LogLevel logLevel)
         {
+            var doLog = true;
             switch (LogLevel)
             {
                 case LogLevel.Off:
                     return;
                 case LogLevel.Fatal:
-                    if (logLevel != LogLevel.Fatal)
-                    {
-                        return;
-                    }
+                    doLog = logLevel == LogLevel.Fatal;
                     break;
                 case LogLevel.Error:
-                    if (logLevel != LogLevel.Fatal && logLevel!= LogLevel.Error)
-                    {
-                        return;
-                    }
+                    doLog = logLevel == LogLevel.Fatal || logLevel == LogLevel.Error;
                     break;
                 case LogLevel.Warning:
-                    if (!_warningLevels.Contains(logLevel))
-                    {
-                        return;
-                    }
+                    doLog = _warningLevels.Contains(logLevel);
                     break;
                 case LogLevel.Info:
-                    if (!_infoLevels.Contains(logLevel))
-                    {
-                        return;
-                    }
+                    doLog = _infoLevels.Contains(logLevel);
                     break;
                 case LogLevel.Debug:
-                    if (!_debugLevels.Contains(logLevel))
-                    {
-                        return;
-                    }
+                    doLog = _debugLevels.Contains(logLevel);
                     break;
                 case LogLevel.Trace:
-                    if (_traceLevels.Contains(logLevel))
-                    {
-                        return;
-                    }
+                    doLog = _traceLevels.Contains(logLevel);
                     break;
                 case LogLevel.All:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            Console.WriteLine($"{DateTime.Now:dd.MM.yyyy HH:mm:ss.fff} {logLevel}: {message}");
+
+            if (doLog)
+            {
+                Console.WriteLine($"{DateTime.Now:dd.MM.yyyy HH:mm:ss.fff} {logLevel}: {message}");
+            }
         }
 
         public void Exception(Exception ex)
