@@ -6,7 +6,9 @@
   image: Visual Studio 2017
 
   before_build:
-    - nuget restore JDI.Light/JDI.Light.sln
+  - nuget restore JDI.Light/JDI.Light.sln
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/set-screenresolution.ps1'))
+  - ps: Set-ScreenResolution 1280 1024
 
   build_script:
     - msbuild JDI.Light/JDI.Light.sln /p:Configuration=Release /t:Rebuild
@@ -26,9 +28,11 @@
     skip_symbols: false
     artifact: nupkg
 
-  test:
-    assemblies:
-      - '**\*Tests.dll'
+  test_script:
+  - ps: .\TestsAndCoverage.ps1
+
+  on_finish:
+  - ps: Get-ChildItem C:\Screenshots\*.png -Recurse | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
 
 -
   branches:
@@ -37,20 +41,16 @@
 
   image: Visual Studio 2017
 
-  environment:
-    COVERALLS_REPO_TOKEN:
-      secure: Lc7yX8JRxQdRZ8yYUPMuxrp22UkAIXLlkQK6H890Sh1GASFiKG4GkjwqbM9zy9O6
-
   before_build:
-    - nuget restore JDI.Light/JDI.Light.sln
+  - nuget restore JDI.Light/JDI.Light.sln
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/set-screenresolution.ps1'))
+  - ps: Set-ScreenResolution 1280 1024
 
   build_script:
     - msbuild JDI.Light/JDI.Light.sln /p:Configuration=Release /t:Rebuild
 
   test_script:
-  - ps: >-
-      .\JDI.Light\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"nunit3-console.exe" "-targetargs:""JDI.Light\JDI.Light.UnitTests\bin\Release\JDI.Light.UnitTests.dll""" -filter:"+[JDI*]*" -output:opencoverCoverage.xml
+  - ps: .\TestsAndCoverage.ps1
 
-      $coveralls = (Resolve-Path "JDI.Light/packages/coveralls.net.*/tools/csmacnz.coveralls.exe").ToString()
-
-      & $coveralls --opencover -i opencoverCoverage.xml --repoToken $env:COVERALLS_REPO_TOKEN --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_JOB_ID
+  on_finish:
+  - ps: Get-ChildItem C:\Screenshots\*.png -Recurse | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }

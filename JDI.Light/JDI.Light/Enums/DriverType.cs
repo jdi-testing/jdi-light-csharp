@@ -4,9 +4,6 @@
     {
         Chrome,
         Firefox,
-        IE,
-        PhantomJs,
-        Opera,
-        Edge
+        IE
     }
 }

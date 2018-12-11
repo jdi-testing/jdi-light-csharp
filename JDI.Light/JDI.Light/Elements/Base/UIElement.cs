@@ -1,141 +1,204 @@
-﻿using System.Collections.ObjectModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Drawing;
-using JDI.Light.Elements.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using JDI.Light.Elements.WebActions;
+using JDI.Light.Factories;
+using JDI.Light.Interfaces;
+using JDI.Light.Interfaces.Base;
+using JDI.Light.Utils;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.Extensions;
-using OpenQA.Selenium.Support.UI;
+using Timer = JDI.Light.Utils.Timer;
 
 namespace JDI.Light.Elements.Base
 {
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
-    public class UIElement : IWebElement, IBaseElement
+    public class UIElement : IBaseUIElement, IVisible
     {
-        private readonly IWebElement _webElement;
-        private readonly IWebDriver _webDriver;
-        private readonly Js _js;
+        private IWebElement _webElement;
 
-        public UIElement(IWebElement element, IWebDriver webDriver)
+        public By FrameLocator;
+        public By Locator;
+
+        public IWebDriver WebDriver => JDI.DriverFactory.GetDriver(DriverName);
+
+        public ActionInvoker Invoker { get; set; }
+        public ILogger Logger { get; set; }
+        public Timer Timer { get; set; }
+        public string DriverName { get; set; }
+
+        public UIElement(By byLocator)
         {
-            _webElement = element;
-            _webDriver = webDriver;
-            _js = new Js(_webDriver, _webElement);
+            Logger = JDI.Logger;
+            Invoker = new ActionInvoker(Logger);
+            Locator = byLocator;
+            Timer = new Timer(JDI.Timeouts.CurrentTimeoutMSec);
+            if (string.IsNullOrEmpty(DriverName) && JDI.DriverFactory != null &&
+                !string.IsNullOrEmpty(JDI.DriverFactory.CurrentDriverName))
+                DriverName = JDI.DriverFactory.CurrentDriverName;
         }
 
-        public string TagName => _webElement.TagName;
-        public string Text => _webElement.Text;
-        public bool Enabled => _webElement.Enabled;
-        public bool Selected => _webElement.Selected;
-        public Point Location => _webElement.Location;
-        public Size Size => _webElement.Size;
-        public bool Displayed => _webElement.Displayed;
-
-        #region IBaseElement methods
-
-        public string GetValue()
+        public IWebElement WebElement
         {
-            var text = _webElement.Text;
-            var value = string.IsNullOrWhiteSpace(text) ? _webElement.GetAttribute("value") : text;
-            return value;
+            get
+            {
+                JDI.Logger.Debug($"Get Web Element: {ToString()}");
+                var element = Timer.GetResultByCondition(() =>
+                {
+                    if (_webElement != null)
+                        return _webElement;
+                    var result = GetWebElements();
+                    switch (result.Count)
+                    {
+                        case 0:
+                            throw JDI.Assert.Exception($"Can't find Element '{this}' during {JDI.Timeouts.CurrentTimeoutMSec} milliseconds");
+                        case 1:
+                        {
+                            var e = result[0];
+                            return e;
+                        }
+                        default:
+                            if (WebDriverFactory.OnlyOneElementAllowedInSearch)
+                                throw JDI.Assert.Exception(
+                                    $"Find {result.Count} elements instead of one for Element '{this}' during {JDI.Timeouts.CurrentTimeoutMSec} milliseconds");
+                            return result[0];
+                    }
+                }, el => el != null);
+                JDI.Logger.Debug("One Web Element found");
+                return element;
+            }
+            set => _webElement = value;
         }
 
-        public void Hover()
+        protected List<IWebElement> GetWebElements()
         {
-            _js.ScrollIntoView();
+            var result = Timer.GetResultByCondition(() =>
+            {
+                var locator = Locator.ContainsRoot() ? Locator.TrimRoot() : Locator;
+                return SearchContext.FindElements(locator.CorrectXPath()).ToList();
+            }, els => els.Count(GetSearchCriteria) > 0);
+            if (result == null)
+                throw JDI.Assert.Exception("Can't get Web Elements");
+            return result.Where(GetSearchCriteria).ToList();
         }
 
-        public Point GetLocation()
+        public ISearchContext SearchContext => Locator.ContainsRoot() 
+            ? WebDriver.SwitchTo().DefaultContent() 
+            : GetSearchContext(Parent);
+
+        private ISearchContext GetSearchContext(IBaseElement element)
         {
-            return _webElement.Location;
+            var el = element as UIElement;
+            if (element == null || el == null || (el.Parent == null && el.FrameLocator == null))
+            {
+                return WebDriver.SwitchTo().DefaultContent();
+            }
+            var uiElement = (UIElement) element;
+            if (_webElement != null)
+                return uiElement.WebElement;
+            var locator = el.Locator;
+            var searchContext = locator.ContainsRoot()
+                ? WebDriver.SwitchTo().DefaultContent()
+                : GetSearchContext(el.Parent);
+            locator = locator.ContainsRoot()
+                ? locator.TrimRoot()
+                : locator;
+            var frame = el.FrameLocator;
+            if (frame != null)
+                WebDriver.SwitchTo().Frame(WebDriver.FindElement(frame));
+            return locator != null
+                ? searchContext.FindElement(locator.CorrectXPath())
+                : searchContext;
         }
 
-        public Size GetSize()
+        public Func<IWebElement, bool> LocalElementSearchCriteria;
+
+        private Func<IWebElement, bool> GetSearchCriteria
+            => LocalElementSearchCriteria ?? JDI.DriverFactory.ElementSearchCriteria;
+
+        public T FindImmediately<T>(Func<T> func, T ifError)
         {
-            return _webElement.Size;
+            SetWaitTimeout(0);
+            var temp = LocalElementSearchCriteria;
+            LocalElementSearchCriteria = el => true;
+            T result;
+            try
+            {
+                result = func.Invoke();
+            }
+            catch
+            {
+                result = ifError;
+            }
+
+            LocalElementSearchCriteria = temp;
+            SetWaitTimeout(JDI.Timeouts.WaitElementSec);
+            return result;
         }
 
-        public Rectangle GetRect()
-        {
-            return new Rectangle(_webElement.Location, _webElement.Size);
-        }
+        public bool HasLocator => Locator != null;
 
-        public Screenshot GetScreenshot()
-        {
-            Show();
-            var screenshot = _webDriver.TakeScreenshot();
-            return screenshot;
-        }
+        public IJavaScriptExecutor JsExecutor => (IJavaScriptExecutor) WebDriver;
 
-        public void SetAttribute(string name, string value)
-        {
-            _js.SetAttribute(name, value);
-        }
-
-        public void Highlight(string color = "red")
-        {
-            _js.AddBorder(color);
-        }
-
-        public void Show()
-        {
-            _js.ScrollIntoView();
-        }
-
-        public SelectElement Select()
-        {
-            return new SelectElement(_webElement);
-        }
-
-        #endregion
-        
-        #region IWebElement methods
-        
-        public IWebElement FindElement(By by)
-        {
-            return _webElement.FindElement(by);
-        }
-
-        public ReadOnlyCollection<IWebElement> FindElements(By by)
-        {
-            return _webElement.FindElements(by);
-        }
-
-        public void Clear()
-        {
-            _webElement.Clear();
-        }
-
-        public void SendKeys(string text)
-        {
-            _webElement.SendKeys(text);
-        }
-
-        public void Submit()
-        {
-            _webElement.Submit();
-        }
-
-        public void Click()
-        {
-            _webElement.Click();
-        }
+        public IBaseElement Parent { get; set; }
 
         public string GetAttribute(string name)
         {
-            return _webElement.GetAttribute(name);
+            return WebElement.GetAttribute(name);
         }
 
-        public string GetProperty(string propertyName)
+        public void WaitAttribute(string name, string value)
         {
-            return _webElement.GetProperty(propertyName);
+            var result = Timer.GetResultByCondition(() => WebElement.GetAttribute(name).Equals(value), r => r);
+            JDI.Assert.IsTrue(result);
         }
 
-        public string GetCssValue(string propertyName)
+        public void SetAttribute(string attributeName, string value)
         {
-            return _webElement.GetCssValue(propertyName);
+            Invoker.DoActionWithWait($"Set Attribute '{attributeName}'='{value}'",
+                () => JsExecutor.ExecuteScript($"arguments[0].setAttribute('{attributeName}',arguments[1]);",
+                    WebElement, value));
         }
 
-        #endregion
+        public void Highlight(string borderColor = "red", string backgroundColor = "yellow", int highlightMillisecondsTime = 1000)
+        {
+            var originalStyle = GetAttribute("style");
+            SetAttribute("style",
+                $"border: 3px solid {borderColor}; background-color: {backgroundColor};");
+            Thread.Sleep(highlightMillisecondsTime);
+            SetAttribute("style", originalStyle);
+        }
 
+        public string Name { get; set; }
+
+        public string TypeName => GetType().Name;
+
+        public void SetWaitTimeout(int mSeconds)
+        {
+            JDI.Logger.Debug("Set wait timeout to " + mSeconds);
+            WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(mSeconds);
+            JDI.Timeouts.CurrentTimeoutMSec = mSeconds;
+        }
+
+        public new string ToString()
+        {
+            return $"Name: '{Name}', Type: '{TypeName}' In: '{Parent?.GetType().Name ?? ""}'";
+        }
+        
+        protected Func<UIElement, bool> IsDisplayedAction =
+            el => el.FindImmediately(() => el.WebElement.Displayed, false);
+
+        public bool Displayed => Invoker.DoActionWithResult("Is element displayed", () => FindImmediately(() => WebElement.Displayed, false));
+        public bool Hidden => Invoker.DoActionWithResult("Is element hidden", () => !IsDisplayedAction(this));
+        public Func<UIElement, bool> WaitDisplayedAction => el => WebElement.Displayed;
+
+        public void WaitDisplayed()
+        {
+            Invoker.DoActionWithResult("Wait element displayed", () => WaitDisplayedAction(this));
+        }
+
+        public void WaitVanished()
+        {
+            Invoker.DoActionWithResult("Wait element vanished", () => Timer.Wait(() => !IsDisplayedAction(this)));
+        }
     }
 }
