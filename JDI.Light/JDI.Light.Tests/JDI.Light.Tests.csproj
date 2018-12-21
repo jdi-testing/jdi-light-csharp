@@ -76,6 +76,7 @@
     <Compile Include="UITests\CommonActionsData.cs" />
     <Compile Include="UITests\Composite\FormTests.cs" />
     <Compile Include="UITests\Composite\FormTwoButtonsTests.cs" />
+    <Compile Include="UITests\Composite\MenuTests.cs" />
     <Compile Include="UITests\Composite\PageTests.cs" />
     <Compile Include="UITests\Composite\PaginationTests.cs" />
     <Compile Include="UITests\Composite\SearchTests.cs" />

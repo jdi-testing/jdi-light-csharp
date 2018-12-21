@@ -9,6 +9,9 @@ namespace JDI.Light.Tests.UIObjects.Sections
         [FindBy(XPath = "//img[@src=\"label/Logo_Epam_Color.svg\"]")]
         public IImage Image;
 
+        [FindBy(Css = "ul.uui-navigation.nav")]
+        public Menu Menu;
+
         public JdiSearch Search;
     }
 }
