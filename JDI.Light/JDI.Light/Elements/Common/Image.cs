@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Common
 {
-    public class Image : Clickable, IImage
+    public class Image : UIElement, IImage
     {
         public Image() : this(null)
         {

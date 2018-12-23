@@ -38,7 +38,7 @@ namespace JDI.Light.Elements.Composite
             throw JDI.Assert.Exception($"Wait Text '{expected}' Failed ({ToString()}");
         }
 
-        public IList<string> Texts => TextElements.Select(el => el.GetText).ToList();
+        public IList<string> Texts => TextElements.Select(el => el.GetText()).ToList();
 
         public string Value => Texts.FormattedJoin();
 

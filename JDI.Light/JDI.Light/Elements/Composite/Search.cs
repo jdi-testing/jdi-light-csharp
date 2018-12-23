@@ -32,7 +32,7 @@ namespace JDI.Light.Elements.Composite
             return s.Suggestions.Texts;
         };
 
-        protected Clickable Select;
+        protected UIElement Select;
 
         public Search() : this(null)
         {
@@ -40,7 +40,7 @@ namespace JDI.Light.Elements.Composite
 
         public Search(By byLocator = null, By selectLocator = null, By suggestionsListLocator = null) : base(byLocator)
         {
-            Select = new Clickable(selectLocator);
+            Select = new UIElement(selectLocator);
             _suggestions = new TextList(suggestionsListLocator);
         }
 

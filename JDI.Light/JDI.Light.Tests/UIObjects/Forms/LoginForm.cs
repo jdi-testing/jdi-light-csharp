@@ -20,7 +20,7 @@ namespace JDI.Light.Tests.UIObjects.Forms
         public ITextField PasswordField;
 
         [FindBy(Css = "a>div.profile-photo")]
-        public IClickable Profile;
+        public IBaseUIElement Profile;
 
         public new void Submit(User user)
         {

@@ -2,7 +2,7 @@
 
 namespace JDI.Light.Interfaces.Common
 {
-    public interface ICheckBox : IClickable, ISetValue<bool>
+    public interface ICheckBox : IBaseUIElement, ISetValue<bool>
     {
         void Check();
         void Uncheck();
