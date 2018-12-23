@@ -35,6 +35,11 @@ namespace JDI.Light.Elements.Common
             return Value;
         }
 
+        public string GetText()
+        {
+            return Value;
+        }
+
         public string WaitText(string text)
         {
             return Invoker.DoActionWithResult($"Wait text contains '{text}'",

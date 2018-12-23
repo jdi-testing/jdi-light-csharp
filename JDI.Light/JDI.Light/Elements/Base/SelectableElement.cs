@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Base
 {
-    public class SelectableElement : Clickable, ISelectable<bool>
+    public class SelectableElement : UIElement, ISelectable<bool>
     {
         protected Func<UIElement, string> GetValueFunc = el
             => ((SelectableElement) el).Selected + "";

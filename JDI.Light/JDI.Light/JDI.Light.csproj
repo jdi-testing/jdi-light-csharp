@@ -81,7 +81,6 @@
     <Compile Include="Factories\UIElementFactory.cs" />
     <Compile Include="Interfaces\Base\IBaseElement.cs" />
     <Compile Include="Interfaces\Base\IBaseUIElement.cs" />
-    <Compile Include="Interfaces\Base\IClickable.cs" />
     <Compile Include="Interfaces\Base\IGetValue.cs" />
     <Compile Include="Interfaces\Base\IMultiSelector.cs" />
     <Compile Include="Interfaces\Base\ISelectable.cs" />
@@ -116,8 +115,6 @@
     <Compile Include="Factories\WebDriverFactory.cs" />
     <Compile Include="Utils\WinProcUtils.cs" />
     <Compile Include="Utils\WebDriverUtils.cs" />
-    <Compile Include="Elements\Base\Clickable.cs" />
-    <Compile Include="Elements\Base\ClickableText.cs" />
     <Compile Include="Elements\Base\SelectableElement.cs" />
     <Compile Include="Elements\Base\UIElement.cs" />
     <Compile Include="Elements\Common\Button.cs" />

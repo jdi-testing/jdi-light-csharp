@@ -2,18 +2,9 @@
 
 namespace JDI.Light.Interfaces.Common
 {
-    public interface IImage : IClickable
+    public interface IImage : IBaseUIElement
     {
-        /**
-        * @return Get image source
-        */
-        //TODO[JDIAction]
         string GetSource();
-
-        /**
-         * @return Get image alt/hint text
-         */
-        //TODO[JDIAction]
         string GetAlt();
     }
 }

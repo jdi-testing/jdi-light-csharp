@@ -5,7 +5,7 @@ using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Common
 {
-    public class CheckBox : Clickable, ICheckBox
+    public class CheckBox : UIElement, ICheckBox
     {
         private Func<UIElement, bool> _isCheckedFunc = e =>
         {

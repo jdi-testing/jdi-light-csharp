@@ -1,8 +1,6 @@
-﻿using JDI.Light.Interfaces.Base;
-
-namespace JDI.Light.Interfaces.Common
+﻿namespace JDI.Light.Interfaces.Common
 {
-    public interface IButton : IClickable, IText
+    public interface IButton : IText
     {
     }
 }

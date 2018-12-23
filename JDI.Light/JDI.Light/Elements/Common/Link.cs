@@ -6,11 +6,8 @@ using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Common
 {
-    public class Link : ClickableText, ILink
+    public class Link : Text, ILink
     {
-        protected Func<UIElement, string> GetTooltipFunc =
-            el => el.FindImmediately(() => el.WebElement.GetAttribute("title"), "");
-
         public Link() : this(null)
         {
         }

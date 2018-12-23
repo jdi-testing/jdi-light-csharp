@@ -11,62 +11,62 @@ namespace JDI.Light.Elements.Composite
 {
     public class Pagination : CompositeUIElement, IPagination
     {
-        public Func<Pagination, Clickable> FirstAction = p =>
+        public Func<Pagination, UIElement> FirstAction = p =>
         {
             const string shortName = "first";
             if (p.FirstLocator != null)
-                return new Clickable(p.FirstLocator);
+                return new UIElement(p.FirstLocator);
 
             var firstLink = p.GetClickable(shortName);
             if (firstLink != null)
                 return firstLink;
 
             if (p.Locator != null && p.Locator.ToString().Contains("{0}"))
-                return new Clickable(p.Locator.FillByTemplate(shortName));
+                return new UIElement(p.Locator.FillByTemplate(shortName));
             throw JDI.Assert.Exception(p.CantChooseElementMsg("First", shortName, "firstAction"));
         };
 
         public By FirstLocator;
 
-        public Func<Pagination, Clickable> LastAction = p =>
+        public Func<Pagination, UIElement> LastAction = p =>
         {
             const string shortName = "last";
             if (p.LastLocator != null)
-                return new Clickable(p.LastLocator);
+                return new UIElement(p.LastLocator);
 
             var lastLink = p.GetClickable(shortName);
             if (lastLink != null)
                 return lastLink;
 
             if (p.Locator != null && p.Locator.ToString().Contains("{0}"))
-                return new Clickable(p.Locator.FillByTemplate(shortName));
+                return new UIElement(p.Locator.FillByTemplate(shortName));
             throw JDI.Assert.Exception(p.CantChooseElementMsg("Last", shortName, "lastAction"));
         };
 
         public By LastLocator;
 
-        public Func<Pagination, Clickable> NextAction = p =>
+        public Func<Pagination, UIElement> NextAction = p =>
         {
             const string shortName = "next";
             if (p.NextLocator != null)
-                return new Clickable(p.NextLocator);
+                return new UIElement(p.NextLocator);
 
             var nextLink = p.GetClickable(shortName);
             if (nextLink != null)
                 return nextLink;
 
             if (p.Locator != null && p.Locator.ToString().Contains("{0}"))
-                return new Clickable(p.Locator.FillByTemplate(shortName));
+                return new UIElement(p.Locator.FillByTemplate(shortName));
             throw JDI.Assert.Exception(p.CantChooseElementMsg("Next", shortName, "nextAction"));
         };
 
         public By NextLocator;
 
-        public Func<Pagination, int, Clickable> PageAction = (p, index) =>
+        public Func<Pagination, int, UIElement> PageAction = (p, index) =>
         {
             const string shortName = "page";
             if (p.Locator != null && p.Locator.ToString().Contains("{0}"))
-                return new Clickable(p.Locator.FillByTemplate(index));
+                return new UIElement(p.Locator.FillByTemplate(index));
 
             var pageLink = p.GetClickable(shortName);
             if (pageLink != null)
@@ -74,18 +74,18 @@ namespace JDI.Light.Elements.Composite
             throw JDI.Assert.Exception(p.CantChooseElementMsg(index.ToString(), shortName, "pageAction"));
         };
 
-        public Func<Pagination, Clickable> PreviousAction = p =>
+        public Func<Pagination, UIElement> PreviousAction = p =>
         {
             const string shortName = "prev";
             if (p.PreviousLocator != null)
-                return new Clickable(p.PreviousLocator);
+                return new UIElement(p.PreviousLocator);
 
             var prevLink = p.GetClickable(shortName);
             if (prevLink != null)
                 return prevLink;
 
             if (p.Locator != null && p.Locator.ToString().Contains("{0}"))
-                return new Clickable(p.Locator.FillByTemplate(shortName));
+                return new UIElement(p.Locator.FillByTemplate(shortName));
             throw JDI.Assert.Exception(p.CantChooseElementMsg("Previous", shortName, "previousAction"));
         };
 
@@ -126,12 +126,12 @@ namespace JDI.Light.Elements.Composite
             Invoker.DoActionWithWait($"Choose '{index}' page", () => PageAction(this, index).Click());
         }
 
-        private Clickable GetClickable(string name)
+        private UIElement GetClickable(string name)
         {
-            var fields = this.GetFields(typeof(IClickable));
+            var fields = this.GetFields(typeof(IBaseUIElement));
             var result = fields.FirstOrDefault(field =>
                 field.GetElementName().ToLower().Contains(name.ToLower()));
-            return (Clickable) result?.GetValue(this);
+            return (UIElement) result?.GetValue(this);
         }
 
         private string CantChooseElementMsg(string actionName, string shortName, string action)
