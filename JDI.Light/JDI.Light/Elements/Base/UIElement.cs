@@ -146,12 +146,6 @@ namespace JDI.Light.Elements.Base
             return WebElement.GetAttribute(name);
         }
 
-        public void WaitAttribute(string name, string value)
-        {
-            var result = Timer.GetResultByCondition(() => WebElement.GetAttribute(name).Equals(value), r => r);
-            JDI.Assert.IsTrue(result);
-        }
-
         public void SetAttribute(string attributeName, string value)
         {
             Invoker.DoActionWithWait($"Set Attribute '{attributeName}'='{value}'",
@@ -199,6 +193,11 @@ namespace JDI.Light.Elements.Base
         public void WaitVanished()
         {
             Invoker.DoActionWithResult("Wait element vanished", () => Timer.Wait(() => !IsDisplayedAction(this)));
+        }
+
+        public void Click()
+        {
+            Invoker.DoActionWithWait("Click on Element", () => WebElement.Click());
         }
     }
 }

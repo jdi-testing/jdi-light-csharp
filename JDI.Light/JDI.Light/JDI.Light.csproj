@@ -64,6 +64,7 @@
     <Compile Include="Attributes\NameAttribute.cs" />
     <Compile Include="Attributes\PageAttribute.cs" />
     <Compile Include="Attributes\SiteAttribute.cs" />
+    <Compile Include="Elements\Composite\Menu.cs" />
     <Compile Include="Elements\Composite\TextList.cs" />
     <Compile Include="Enums\CheckPageType.cs" />
     <Compile Include="Enums\DriverType.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Enums\RunType.cs" />
     <Compile Include="Enums\ScreenshotState.cs" />
     <Compile Include="Enums\TableHeaderType.cs" />
+    <Compile Include="Exceptions\ElementNotFoundException.cs" />
     <Compile Include="Extensions\CommonExtensions.cs" />
     <Compile Include="Extensions\FieldInfoExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
@@ -131,7 +133,6 @@
     <Compile Include="Elements\Common\TextField.cs" />
     <Compile Include="Elements\Composite\CompositeUIElement.cs" />
     <Compile Include="Elements\Composite\Form.cs" />
-    <Compile Include="Elements\Composite\NavigationPane.cs" />
     <Compile Include="Elements\Composite\Pagination.cs" />
     <Compile Include="Elements\Composite\Search.cs" />
     <Compile Include="Elements\Composite\Section.cs" />
