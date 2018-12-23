@@ -12,6 +12,7 @@ namespace JDI.Light.Settings
         public static readonly Dictionary<Type, Type> DefaultInterfacesMap = new Dictionary<Type, Type>
         {
             {typeof(IBaseElement), typeof(UIElement)},
+            {typeof(IBaseUIElement), typeof(UIElement)},
             {typeof(IButton), typeof(Button)},
             {typeof(IText), typeof(Text)},
             {typeof(IImage), typeof(Image)},
