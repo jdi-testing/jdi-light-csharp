@@ -65,6 +65,7 @@
     <Compile Include="Attributes\PageAttribute.cs" />
     <Compile Include="Attributes\SiteAttribute.cs" />
     <Compile Include="Elements\Composite\Menu.cs" />
+    <Compile Include="Elements\Composite\Table.cs" />
     <Compile Include="Elements\Composite\TextList.cs" />
     <Compile Include="Enums\CheckPageType.cs" />
     <Compile Include="Enums\DriverType.cs" />
