@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Drawing;
 using System.Linq;
 using System.Threading;
 using JDI.Light.Elements.WebActions;
@@ -146,6 +148,23 @@ namespace JDI.Light.Elements.Base
             return WebElement.GetAttribute(name);
         }
 
+        public string GetProperty(string propertyName)
+        {
+            return WebElement.GetProperty(propertyName);
+        }
+
+        public string GetCssValue(string propertyName)
+        {
+            return WebElement.GetCssValue(propertyName);
+        }
+
+        public string TagName => WebElement.TagName;
+        public string Text => WebElement.Text;
+        public bool Enabled => WebElement.Enabled;
+        public bool Selected => WebElement.Selected;
+        public Point Location => WebElement.Location;
+        public Size Size => WebElement.Size;
+
         public void SetAttribute(string attributeName, string value)
         {
             Invoker.DoActionWithWait($"Set Attribute '{attributeName}'='{value}'",
@@ -195,9 +214,34 @@ namespace JDI.Light.Elements.Base
             Invoker.DoActionWithResult("Wait element vanished", () => Timer.Wait(() => !IsDisplayedAction(this)));
         }
 
+        public void Clear()
+        {
+            WebElement.Clear();
+        }
+
+        public void SendKeys(string text)
+        {
+            WebElement.SendKeys(text);
+        }
+
+        public void Submit()
+        {
+            WebElement.Submit();
+        }
+
         public void Click()
         {
             Invoker.DoActionWithWait("Click on Element", () => WebElement.Click());
+        }
+
+        public IWebElement FindElement(By by)
+        {
+            return WebElement.FindElement(by);
+        }
+
+        public ReadOnlyCollection<IWebElement> FindElements(By by)
+        {
+            return WebElement.FindElements(by);
         }
     }
 }

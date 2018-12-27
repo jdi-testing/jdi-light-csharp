@@ -35,12 +35,12 @@ namespace JDI.Light.Elements.Common
             set => Invoker.DoActionWithWait("Get value", () => SetValueAction(this, value));
         }
 
-        public void SendKeys(string text)
+        public new void SendKeys(string text)
         {
             Input(text);
         }
 
-        public void Clear()
+        public new void Clear()
         {
             Invoker.DoActionWithWait("Clear text field", () => WebElement.Clear());
         }
