@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using JDI.Light.Elements.Base;
+using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Composite
 {

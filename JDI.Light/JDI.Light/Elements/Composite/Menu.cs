@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using JDI.Light.Elements.Base;
 using JDI.Light.Exceptions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
