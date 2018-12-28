@@ -54,10 +54,7 @@ namespace JDI.Light.Elements.Base
                         case 0:
                             throw JDI.Assert.Exception($"Can't find Element '{this}' during {JDI.Timeouts.CurrentTimeoutMSec} milliseconds");
                         case 1:
-                        {
-                            var e = result[0];
-                            return e;
-                        }
+                            return result[0];
                         default:
                             if (WebDriverFactory.OnlyOneElementAllowedInSearch)
                                 throw JDI.Assert.Exception(
@@ -216,17 +213,17 @@ namespace JDI.Light.Elements.Base
 
         public void Clear()
         {
-            WebElement.Clear();
+            Invoker.DoActionWithWait("Clear an Element", () => WebElement.Clear());
         }
 
         public void SendKeys(string text)
         {
-            WebElement.SendKeys(text);
+            Invoker.DoActionWithWait($"Send keys '{text}' into Element", () => WebElement.SendKeys(text));
         }
 
         public void Submit()
         {
-            WebElement.Submit();
+            Invoker.DoActionWithWait("Submit an Element", () => WebElement.Submit());
         }
 
         public void Click()

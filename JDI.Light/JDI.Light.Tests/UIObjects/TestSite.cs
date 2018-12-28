@@ -27,6 +27,9 @@ namespace JDI.Light.Tests.UIObjects
         [Page(Url = "simple-table.html", Title = "Simple Table")]
         public static SimpleTablePage SimpleTablePage;
 
+        [Page(Url = "complex-table.html", Title = "Complex Table")]
+        public static ComplexTablePage ComplexTablePage;
+
         [FindBy(Css = "form")]
         public static Login Login;
 

@@ -20,37 +20,32 @@ namespace JDI.Light.Tests.UITests.Composite
             JDI.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
-        private void CheckPageOpened(string page)
-        {
-            Assert.True(JDI.DriverFactory.GetDriver().Url.Contains($"{page}"));
-        }
-
         [Test]
         public void NextTest()
         {
             _simplePagePaginator.Next();
-            CheckPageOpened("user-table.html");
+            Assert.True(JDI.DriverFactory.GetDriver().Url.Contains("user-table.html"));
         }
         
         [Test]
         public void PrevTest()
         {
             _simplePagePaginator.Previous();
-            CheckPageOpened("complex-table.html");
+            Assert.True(JDI.DriverFactory.GetDriver().Url.Contains("complex-table.html"));
         }
         
         [Test]
         public void FirstTest()
         {
             _simplePagePaginator.First();
-            CheckPageOpened("support.html");
+            Assert.True(JDI.DriverFactory.GetDriver().Url.Contains("support.html"));
         }
         
         [Test]
         public void LastTest()
         {
             _simplePagePaginator.Last();
-            CheckPageOpened("performance.html");
+            Assert.True(JDI.DriverFactory.GetDriver().Url.Contains("performance.html"));
         }
     }
 }
