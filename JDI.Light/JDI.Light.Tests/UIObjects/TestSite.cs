@@ -39,7 +39,7 @@ namespace JDI.Light.Tests.UIObjects
         [FindBy(Css = ".footer-content")]
         public static Footer Footer;
 
-        [FindBy(Css = "form.form-horizontal")]
+        [FindBy(Id = "login-form")]
         public static LoginForm LoginForm;
 
         [FindBy(Css = ".logs li")]
