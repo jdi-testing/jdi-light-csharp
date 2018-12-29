@@ -8,7 +8,7 @@ namespace JDI.Light.Tests.UIObjects.Pages
     {
         public JdiPaginator Paginator;
 
-        [FindBy(Id = "table")]
+        [FindBy(Id = "simple-table")]
         public Table Table;
     }
 }
