@@ -14,11 +14,6 @@ namespace JDI.Light.Elements.Base
         {
         }
 
-        private string ToButton(string buttonName)
-        {
-            return buttonName.ToLower().Contains("button") ? buttonName : buttonName + "Button";
-        }
-
         public List<IWebElement> WebElements
         {
             get
@@ -41,7 +36,7 @@ namespace JDI.Light.Elements.Base
                     return (Button)fields[0].GetValue(this);
                 default:
                     var buttons = fields.Select(f => (Button)f.GetValue(this)).ToList();
-                    var button = buttons.FirstOrDefault(b => ToButton(b.Name).SimplifiedEqual(ToButton(buttonName)));
+                    var button = buttons.FirstOrDefault(b => b.Name.SimplifiedEqual(buttonName));
                     if (button == null)
                         throw JDI.Assert.Exception($"Can't find button '{buttonName}' for Element '{ToString()}'." +
                                                     $"(Found following buttons: {buttons.Select(el => el.Name).FormattedJoin()})."
