@@ -13,36 +13,5 @@ namespace JDI.Light.Elements.Base
         public CompositeUIElement(By locator) : base(locator)
         {
         }
-
-        public List<IWebElement> WebElements
-        {
-            get
-            {
-                JDI.Logger.Debug($"Get Web Elements: {this}");
-                var elements = GetWebElements();
-                JDI.Logger.Debug($"Found {elements.Count} elements");
-                return elements;
-            }
-        }
-
-        public Button GetButton(string buttonName)
-        {
-            var fields = this.GetFields(typeof(IButton));
-            switch (fields.Count)
-            {
-                case 0:
-                    throw JDI.Assert.Exception($"Can't find ny buttons on form {ToString()}'");
-                case 1:
-                    return (Button)fields[0].GetValue(this);
-                default:
-                    var buttons = fields.Select(f => (Button)f.GetValue(this)).ToList();
-                    var button = buttons.FirstOrDefault(b => b.Name.SimplifiedEqual(buttonName));
-                    if (button == null)
-                        throw JDI.Assert.Exception($"Can't find button '{buttonName}' for Element '{ToString()}'." +
-                                                    $"(Found following buttons: {buttons.Select(el => el.Name).FormattedJoin()})."
-                                                        .FromNewLine());
-                    return button;
-            }
-        }
     }
 }

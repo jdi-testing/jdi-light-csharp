@@ -67,6 +67,17 @@ namespace JDI.Light.Elements.Base
             }
             set => _webElement = value;
         }
+        
+        public List<IWebElement> WebElements
+        {
+            get
+            {
+                JDI.Logger.Debug($"Get Web Elements: {this}");
+                var elements = GetWebElements();
+                JDI.Logger.Debug($"Found {elements.Count} elements");
+                return elements;
+            }
+        }
 
         protected List<IWebElement> GetWebElements()
         {

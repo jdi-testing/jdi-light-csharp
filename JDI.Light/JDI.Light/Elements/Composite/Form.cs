@@ -68,13 +68,13 @@ namespace JDI.Light.Elements.Composite
         public void Submit(T entity)
         {
             Fill(entity.PropertiesToDictionary());
-            GetButton("Submit").Click();
+            this.GetButton("Submit").Click();
         }
 
         public void Submit(Dictionary<string, string> objStrings)
         {
             Fill(objStrings);
-            GetButton("Submit").Click();
+            this.GetButton("Submit").Click();
         }
 
         public IList<string> Verify(Dictionary<string, string> objStrings)
@@ -109,7 +109,7 @@ namespace JDI.Light.Elements.Composite
         public void Submit(T entity, string buttonName)
         {
             Fill(entity.PropertiesToDictionary());
-            GetButton(buttonName).Click();
+            this.GetButton(buttonName).Click();
         }
     }
 }
