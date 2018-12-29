@@ -10,7 +10,7 @@ using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Composite
 {
-    public class Form<T> : CompositeUIElement, IForm<T>
+    public class Form<T> : UIElement, IForm<T>
     {
         public By LocatorTemplate;
 

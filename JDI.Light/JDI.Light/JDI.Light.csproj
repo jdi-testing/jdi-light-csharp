@@ -127,7 +127,6 @@
     <Compile Include="Elements\Common\Text.cs" />
     <Compile Include="Elements\Common\TextArea.cs" />
     <Compile Include="Elements\Common\TextField.cs" />
-    <Compile Include="Elements\Base\CompositeUIElement.cs" />
     <Compile Include="Elements\Composite\Form.cs" />
     <Compile Include="Elements\Composite\Pagination.cs" />
     <Compile Include="Elements\Composite\Search.cs" />

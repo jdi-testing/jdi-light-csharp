@@ -9,7 +9,7 @@ using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Composite
 {
-    public class Pagination : CompositeUIElement, IPagination
+    public class Pagination : UIElement, IPagination
     {
         public Func<Pagination, UIElement> FirstAction = p =>
         {

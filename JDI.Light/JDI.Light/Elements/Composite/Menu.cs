@@ -7,7 +7,7 @@ using OpenQA.Selenium.Interactions;
 
 namespace JDI.Light.Elements.Composite
 {
-    public class Menu : CompositeUIElement
+    public class Menu : UIElement
     {
         public By MenuItemLocator;
 

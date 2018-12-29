@@ -7,7 +7,7 @@ using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Composite
 {
-    public class TextList : CompositeUIElement
+    public class TextList : UIElement
     {
         private IList<Label> _texts;
 

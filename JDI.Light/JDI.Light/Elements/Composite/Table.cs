@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Composite
 {
-    public class Table : CompositeUIElement
+    public class Table : UIElement
     {
         public Table(By locator) : base(locator)
         {
@@ -21,18 +21,18 @@ namespace JDI.Light.Elements.Composite
         public By TableRowsLocator { get; set; }
         public By TableCellsLocator { get; set; }
 
-        public CompositeUIElement Headers => new CompositeUIElement(TableHeadersLocator) { Parent = this };
-        public CompositeUIElement Body => new CompositeUIElement(TableBodyLocator) { Parent = this };
-        public CompositeUIElement Footer => new CompositeUIElement(TableFooterLocator) { Parent = this };
-        public CompositeUIElement[] Rows => Body.FindElements(TableRowsLocator)
-            .Select(e => new CompositeUIElement(TableRowsLocator)
+        public UIElement Headers => new UIElement(TableHeadersLocator) { Parent = this };
+        public UIElement Body => new UIElement(TableBodyLocator) { Parent = this };
+        public UIElement Footer => new UIElement(TableFooterLocator) { Parent = this };
+        public UIElement[] Rows => Body.FindElements(TableRowsLocator)
+            .Select(e => new UIElement(TableRowsLocator)
             {
                 WebElement = e,
                 Parent = Body
             }).ToArray();
 
-        public CompositeUIElement[][] Cells => Rows.Select(r => r.FindElements(TableCellsLocator)
-            .Select(e => new CompositeUIElement(TableCellsLocator)
+        public UIElement[][] Cells => Rows.Select(r => r.FindElements(TableCellsLocator)
+            .Select(e => new UIElement(TableCellsLocator)
             {
                 WebElement = e,
                 Parent = r
