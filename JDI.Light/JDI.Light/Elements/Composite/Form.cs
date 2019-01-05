@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using JDI.Light.Elements.Base;
 using JDI.Light.Extensions;
 using JDI.Light.Interfaces.Base;
 using JDI.Light.Interfaces.Composite;
@@ -9,7 +10,7 @@ using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Composite
 {
-    public class Form<T> : CompositeUIElement, IForm<T>
+    public class Form<T> : UIElement, IForm<T>
     {
         public By LocatorTemplate;
 
@@ -67,13 +68,13 @@ namespace JDI.Light.Elements.Composite
         public void Submit(T entity)
         {
             Fill(entity.PropertiesToDictionary());
-            GetButton("Submit").Click();
+            this.GetButton("Submit").Click();
         }
 
         public void Submit(Dictionary<string, string> objStrings)
         {
             Fill(objStrings);
-            GetButton("Submit").Click();
+            this.GetButton("Submit").Click();
         }
 
         public IList<string> Verify(Dictionary<string, string> objStrings)
@@ -108,7 +109,7 @@ namespace JDI.Light.Elements.Composite
         public void Submit(T entity, string buttonName)
         {
             Fill(entity.PropertiesToDictionary());
-            GetButton(buttonName).Click();
+            this.GetButton(buttonName).Click();
         }
     }
 }

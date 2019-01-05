@@ -65,6 +65,7 @@
     <Compile Include="Attributes\PageAttribute.cs" />
     <Compile Include="Attributes\SiteAttribute.cs" />
     <Compile Include="Elements\Composite\Menu.cs" />
+    <Compile Include="Elements\Composite\Table.cs" />
     <Compile Include="Elements\Composite\TextList.cs" />
     <Compile Include="Enums\CheckPageType.cs" />
     <Compile Include="Enums\DriverType.cs" />
@@ -78,12 +79,11 @@
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\TimerExtensions.cs" />
+    <Compile Include="Extensions\UIElementExtensions.cs" />
     <Compile Include="Factories\UIElementFactory.cs" />
     <Compile Include="Interfaces\Base\IBaseElement.cs" />
     <Compile Include="Interfaces\Base\IBaseUIElement.cs" />
     <Compile Include="Interfaces\Base\IGetValue.cs" />
-    <Compile Include="Interfaces\Base\IMultiSelector.cs" />
-    <Compile Include="Interfaces\Base\ISelectable.cs" />
     <Compile Include="Interfaces\Base\ISetValue.cs" />
     <Compile Include="Interfaces\Base\IVisible.cs" />
     <Compile Include="Interfaces\Common\IButton.cs" />
@@ -115,7 +115,6 @@
     <Compile Include="Factories\WebDriverFactory.cs" />
     <Compile Include="Utils\WinProcUtils.cs" />
     <Compile Include="Utils\WebDriverUtils.cs" />
-    <Compile Include="Elements\Base\SelectableElement.cs" />
     <Compile Include="Elements\Base\UIElement.cs" />
     <Compile Include="Elements\Common\Button.cs" />
     <Compile Include="Elements\Common\CheckBox.cs" />
@@ -128,7 +127,6 @@
     <Compile Include="Elements\Common\Text.cs" />
     <Compile Include="Elements\Common\TextArea.cs" />
     <Compile Include="Elements\Common\TextField.cs" />
-    <Compile Include="Elements\Composite\CompositeUIElement.cs" />
     <Compile Include="Elements\Composite\Form.cs" />
     <Compile Include="Elements\Composite\Pagination.cs" />
     <Compile Include="Elements\Composite\Search.cs" />
