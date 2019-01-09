@@ -24,7 +24,7 @@
     provider: NuGet
     server:
     api_key:
-      secure: <ADD_HERE_BEFORE_PUBLISH>
+      secure: crLYbWXNgfrzYazkV18cEBRKnl90ee0wjWUfZGIDhkZcZg1ZlGbbsqRdr8JLmU3O
     skip_symbols: false
     artifact: nupkg
 
