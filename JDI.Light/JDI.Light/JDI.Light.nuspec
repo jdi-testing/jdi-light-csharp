@@ -9,7 +9,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Framework for UI Automation Testing</description>
     <releaseNotes></releaseNotes>
-    <copyright>Copyright © 2009-2018 EPAM Systems, Inc.</copyright>
+    <copyright>Copyright © 2009-2019 EPAM Systems, Inc.</copyright>
     <tags>nuget ui automation testing web mobile qa framework epam pageobjects selenium</tags>
   </metadata>
 </package>
