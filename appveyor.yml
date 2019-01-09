@@ -17,7 +17,7 @@
   - ps: .\TestsAndCoverage.ps1
 
   after_build:
-    - nuget pack "JDI.Light/JDI.Light.csproj" -Prop Configuration=Release
+    - nuget pack "JDI.Light/JDI.Light/JDI.Light.csproj" -Prop Configuration=Release
 
   artifacts:
     - path: '*.nupkg'
