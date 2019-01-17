@@ -61,7 +61,7 @@ namespace JDI.Light.Elements
             var page = (WebPage) instance;
             var url = pageAttribute.Url;
             var site = parentType.GetCustomAttribute<SiteAttribute>(false);
-            if (!JDI.HasDomain && site != null)
+            if (!JDI.HasDomain && site?.Domain != null)
                 JDI.Domain = site.Domain;
             url = url.Contains("://") || !JDI.HasDomain
                 ? url
