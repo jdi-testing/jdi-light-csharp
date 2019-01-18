@@ -8,58 +8,56 @@ namespace JDI.Light.Tests.UITests.Common
     [TestFixture]
     public class CheckBoxTests : TestBase
     {
-        private readonly ICheckBox _checkBoxWater = TestSite.MetalsColorsPage.CbWater;
-
         [SetUp]
         public void SetUp()
         {
-            JDI.Logger.Info("Navigating to Metals and Colors page.");
+            Jdi.Logger.Info("Navigating to Metals and Colors page.");
             TestSite.MetalsColorsPage.Open();
             TestSite.MetalsColorsPage.CheckUrl();
             TestSite.MetalsColorsPage.CheckTitle();
             TestSite.MetalsColorsPage.IsOpened();
-            JDI.Logger.Info("Setup method finished");
-            JDI.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            Jdi.Logger.Info("Setup method finished");
+            Jdi.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         [Test]
         public void CheckSingleTest()
         {
-            _checkBoxWater.Check();
+            TestSite.MetalsColorsPage.CbWater.Check();
             CommonActionsData.CheckAction("Water: condition changed to true");
         }
 
         [Test]
         public void UncheckSingleTest()
         {
-            _checkBoxWater.Click();
-            _checkBoxWater.Uncheck();
+            TestSite.MetalsColorsPage.CbWater.Click();
+            TestSite.MetalsColorsPage.CbWater.Uncheck();
             CommonActionsData.CheckAction("Water: condition changed to false");
         }
 
         [Test]
         public void IsCheckTest()
         {
-            Assert.IsFalse(_checkBoxWater.IsChecked);
-            _checkBoxWater.Click();
-            Assert.IsTrue(_checkBoxWater.IsChecked);
+            Assert.IsFalse(TestSite.MetalsColorsPage.CbWater.IsChecked);
+            TestSite.MetalsColorsPage.CbWater.Click();
+            Assert.IsTrue(TestSite.MetalsColorsPage.CbWater.IsChecked);
         }
 
         [Test]
         public void MultipleUncheckTest()
         {
-            _checkBoxWater.Click();
-            _checkBoxWater.Uncheck();
-            _checkBoxWater.Uncheck();
+            TestSite.MetalsColorsPage.CbWater.Click();
+            TestSite.MetalsColorsPage.CbWater.Uncheck();
+            TestSite.MetalsColorsPage.CbWater.Uncheck();
             CommonActionsData.CheckAction("Water: condition changed to false");
         }
 
         [Test]
         public void ClickTest()
         {
-            _checkBoxWater.Click();
+            TestSite.MetalsColorsPage.CbWater.Click();
             CommonActionsData.CheckAction("Water: condition changed to true");
-            _checkBoxWater.Click();
+            TestSite.MetalsColorsPage.CbWater.Click();
             CommonActionsData.CheckAction("Water: condition changed to false");
         }
 
@@ -67,8 +65,8 @@ namespace JDI.Light.Tests.UITests.Common
         [TestCaseSource(typeof(CheckBoxProvider), nameof(CheckBoxProvider.InputData))]
         public void SetValueTest(bool value, bool expected)
         {
-            if (!expected) _checkBoxWater.Click();
-            _checkBoxWater.Value = value;
+            if (!expected) TestSite.MetalsColorsPage.CbWater.Click();
+            TestSite.MetalsColorsPage.CbWater.Value = value;
             var resultMsg = "Water: condition changed to " + expected.ToString().ToLower();
             CommonActionsData.CheckAction(resultMsg);
         }

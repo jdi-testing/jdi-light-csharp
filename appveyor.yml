@@ -14,7 +14,7 @@
     - msbuild JDI.Light/JDI.Light.sln /p:Configuration=Release /t:Rebuild
 
   test_script:
-  - ps: .\TestsAndCoverage.ps1
+  - ps: .\JDI.Light\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -returntargetcode -register:user -target:"nunit3-console.exe" "-targetargs:""JDI.Light\JDI.Light.Tests\bin\Release\JDI.Light.Tests.dll""" -filter:"+[JDI.Light*]* -[JDI.Light.Tests*]*" -output:opencoverCoverage.xml
 
   after_build:
     - nuget pack "JDI.Light/JDI.Light/JDI.Light.csproj" -Prop Configuration=Release
@@ -32,7 +32,7 @@
     artifact: nupkg
 
   on_finish:
-  - ps: Get-ChildItem C:\Screenshots\*.png -Recurse | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
+  - ps: .\Coverage.ps1
 
 -
   branches:
@@ -50,7 +50,7 @@
     - msbuild JDI.Light/JDI.Light.sln /p:Configuration=Release /t:Rebuild
 
   test_script:
-  - ps: .\TestsAndCoverage.ps1
+  - ps: .\JDI.Light\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -returntargetcode -register:user -target:"nunit3-console.exe" "-targetargs:""JDI.Light\JDI.Light.Tests\bin\Release\JDI.Light.Tests.dll""" -filter:"+[JDI.Light*]* -[JDI.Light.Tests*]*" -output:opencoverCoverage.xml
 
   on_finish:
-  - ps: Get-ChildItem C:\Screenshots\*.png -Recurse | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
+  - ps: .\Coverage.ps1

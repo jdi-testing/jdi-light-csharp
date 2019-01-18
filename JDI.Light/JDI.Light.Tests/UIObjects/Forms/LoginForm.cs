@@ -27,5 +27,11 @@ namespace JDI.Light.Tests.UIObjects.Forms
             Profile.Click();
             base.Submit(user);
         }
+
+        public void Logout()
+        {
+            Profile.Click();
+            LoginButton.Click();
+        }
     }
 }

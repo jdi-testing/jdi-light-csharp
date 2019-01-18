@@ -6,8 +6,8 @@ namespace JDI.Light.Utils
 {
     public class Timer
     {
-        private static readonly double DefaultTimeout = JDI.Timeouts.CurrentTimeoutMSec;
-        private static readonly int DefaultRetryTimeout = JDI.Timeouts.RetryMSec;
+        private static readonly double DefaultTimeout = Jdi.Timeouts.CurrentTimeoutMSec;
+        private static readonly int DefaultRetryTimeout = Jdi.Timeouts.RetryMSec;
 
         private readonly int _retryTimeoutInMSec;
         private readonly double _timeoutInMSec;
@@ -63,8 +63,7 @@ namespace JDI.Light.Utils
                 Thread.Sleep(_retryTimeoutInMSec);
             } while (!TimeoutPassed);
 
-            if (exception != null) throw exception;
-            throw new TimeoutException("The operation has timed-out");
+            throw exception ?? new TimeoutException("The operation has timed-out");
         }
     }
 }

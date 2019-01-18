@@ -10,16 +10,16 @@ namespace JDI.Light.Tests.UITests.Common
         public void SetUp()
         {
             TestSite.MetalsColorsPage.Open();
-            JDI.Logger.Info("Navigating to Metals and Colors page.");
+            Jdi.Logger.Info("Navigating to Metals and Colors page.");
             TestSite.MetalsColorsPage.CheckTitle();
-            JDI.Logger.Info("Setup method finished");
+            Jdi.Logger.Info("Setup method finished");
         }
 
         [Test]
         public void CheckCalculate()
         {
             TestSite.MetalsColorsPage.CalculateButton.Click();
-            JDI.Assert.Contains(TestSite.MetalsColorsPage.CalculateText.Value, "Summary: 3");
+            Jdi.Assert.Contains(TestSite.MetalsColorsPage.CalculateText.Value, "Summary: 3");
         }
     }
 }

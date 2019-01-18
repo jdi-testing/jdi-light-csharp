@@ -13,7 +13,7 @@ namespace JDI.Light.Utils
             catch (Exception ex)
             {
                 var msg = getExceptionMsg.Invoke(ex.Message);
-                JDI.Assert.ThrowFail(msg, ex);
+                Jdi.Assert.ThrowFail(msg, ex);
             }
         }
 
@@ -27,7 +27,7 @@ namespace JDI.Light.Utils
             catch (Exception ex)
             {
                 var msg = getExceptionMsg.Invoke(ex.Message);
-                JDI.Assert.ThrowFail(msg, ex);
+                Jdi.Assert.ThrowFail(msg, ex);
                 return default(T);
             }
         }
@@ -40,7 +40,7 @@ namespace JDI.Light.Utils
             }
             catch(Exception e)
             {
-                JDI.Logger.Debug($"Exception: {e.Message}.{Environment.NewLine}{e.StackTrace}");
+                Jdi.Logger.Debug($"Exception: {e.Message}.{Environment.NewLine}{e.StackTrace}");
                 return default(T);
             }
         }

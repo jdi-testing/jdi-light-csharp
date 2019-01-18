@@ -14,27 +14,27 @@ namespace JDI.Light.Tests.UITests.Common
         [SetUp]
         public void SetUp()
         {
-            JDI.Logger.Info("Navigating to Metals and Colors page.");
+            Jdi.Logger.Info("Navigating to Metals and Colors page.");
             TestSite.Dates.Open();
             TestSite.Dates.CheckTitle();
             TestSite.Dates.IsOpened();
             TestSite.Dates.Datepicker.Clear();
-            JDI.Logger.Info("Setup method finished");
-            JDI.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            Jdi.Logger.Info("Setup method finished");
+            Jdi.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         [Test]
         public void InputDatePickerTest()
         {
             _datePicker.Input(DefaultDate);
-            JDI.Assert.AreEquals(_datePicker.Value, DefaultDate);
+            Jdi.Assert.AreEquals(_datePicker.Value, DefaultDate);
         }
 
         [Test]
         public void SendKeysDatePickerTest()
         {
             _datePicker.SendKeys(DefaultDate);
-            JDI.Assert.AreEquals(_datePicker.Value, DefaultDate);
+            Jdi.Assert.AreEquals(_datePicker.Value, DefaultDate);
         }
 
         [Test]
@@ -42,7 +42,7 @@ namespace JDI.Light.Tests.UITests.Common
         {
             _datePicker.SendKeys(CheckDate);
             _datePicker.NewInput(DefaultDate);
-            JDI.Assert.AreEquals(_datePicker.Value, DefaultDate);
+            Jdi.Assert.AreEquals(_datePicker.Value, DefaultDate);
         }
 
         [Test]
@@ -50,14 +50,14 @@ namespace JDI.Light.Tests.UITests.Common
         {
             _datePicker.SendKeys(DefaultDate);
             _datePicker.Clear();
-            JDI.Assert.AreEquals(_datePicker.Value, "");
+            Jdi.Assert.AreEquals(_datePicker.Value, "");
         }
 
         [Test]
         public void MultiKeyTest()
         {
             foreach (var ch in DefaultDate) _datePicker.SendKeys(ch.ToString());
-            JDI.Assert.AreEquals(_datePicker.Value, DefaultDate);
+            Jdi.Assert.AreEquals(_datePicker.Value, DefaultDate);
         }
     }
 }

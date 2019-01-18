@@ -12,12 +12,12 @@ namespace JDI.Light.Tests.UITests.Common
         [SetUp]
         public void SetUp()
         {
-            JDI.Logger.Info("Navigating to Metals and Colors page.");
+            Jdi.Logger.Info("Navigating to Metals and Colors page.");
             TestSite.HomePage.Open();
             TestSite.HomePage.CheckTitle();
             TestSite.HomePage.IsOpened();
-            JDI.Logger.Info("Setup method finished");
-            JDI.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            Jdi.Logger.Info("Setup method finished");
+            Jdi.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         [Test]
@@ -30,7 +30,7 @@ namespace JDI.Light.Tests.UITests.Common
         [Test]
         public void GetReferenceTest()
         {
-            JDI.Assert.AreEquals(_link.GetReference(), TestSite.SupportPage.Url);
+            Jdi.Assert.AreEquals(_link.GetReference(), TestSite.SupportPage.Url);
         }
 
         /*

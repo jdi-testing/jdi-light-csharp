@@ -1,0 +1,1 @@
+& .\JDI.Light\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -returntargetcode -register:user -target:"nunit3-console.exe" "-targetargs:""JDI.Light\JDI.Light.Tests\bin\Release\JDI.Light.Tests.dll""" -filter:"+[JDI.Light*]* -[JDI.Light.Tests*]*" -output:opencoverCoverage.xml

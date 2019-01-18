@@ -14,7 +14,7 @@ namespace JDI.Light.Tests.Asserts
 
         public override void ThrowFail(string message)
         {
-            JDI.Logger.Error(message);
+            Jdi.Logger.Error(message);
             NUnit.Framework.Assert.Fail(message);
         }
     }

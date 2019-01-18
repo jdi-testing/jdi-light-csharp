@@ -36,7 +36,7 @@ namespace JDI.Light.Elements.Composite
         {
             if (Timer.Wait(() => Texts.Contains(expected)))
                 return Texts;
-            throw JDI.Assert.Exception($"Wait Text '{expected}' Failed ({ToString()}");
+            throw Jdi.Assert.Exception($"Wait Text '{expected}' Failed ({ToString()}");
         }
 
         public IList<string> Texts => TextElements.Select(el => el.GetText()).ToList();
@@ -73,7 +73,7 @@ namespace JDI.Light.Elements.Composite
                 var elements = WebElements;
                 return elements != null && elements.Any() && elements.All(el => el.Displayed);
             }))
-                throw JDI.Assert.Exception($"Wait displayed failed ({ToString()})");
+                throw Jdi.Assert.Exception($"Wait displayed failed ({ToString()})");
         }
 
         public new void WaitVanished()
@@ -88,7 +88,7 @@ namespace JDI.Light.Elements.Composite
                 }
                 return res;
             }))
-                throw JDI.Assert.Exception($"Wait vanished failed ({ToString()})");
+                throw Jdi.Assert.Exception($"Wait vanished failed ({ToString()})");
         }
     }
 }

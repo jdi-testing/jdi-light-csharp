@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using JDI.Light.Tests.Entities;
+using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
@@ -9,6 +11,15 @@ namespace JDI.Light.Tests.UITests
 {
     public class TestBase
     {
+        [SetUp]
+        public virtual void SetUpTest()
+        {
+            Jdi.InitSite(typeof(TestSite));
+            TestSite.HomePage.Open();
+            TestSite.LoginForm.Submit(User.DefaultUser);
+            Jdi.Logger.Info("Run test...");
+        }
+
         [TearDown]
         public void TestTearDown()
         {
@@ -17,9 +28,10 @@ namespace JDI.Light.Tests.UITests
             var res = TestContext.CurrentContext.Result.Outcome;
             if (res.Equals(ResultState.Failure) || res.Equals(ResultState.Error))
             {
-                JDI.DriverFactory.GetDriver().TakeScreenshot()
+                Jdi.WebDriver.TakeScreenshot()
                     .SaveAsFile(Path.Combine(folder, $"{Guid.NewGuid()}.png"), ScreenshotImageFormat.Png);
             }
+            TestSite.LoginForm.Logout();
         }
     }
 }
