@@ -26,7 +26,6 @@ namespace JDI.Light.Tests.UITests.Common
             TestSite.MetalsColorsPage.CalculateButton.Click();
             var calcText = TestSite.MetalsColorsPage.CalculateText.Value;
             Jdi.Assert.Contains(calcText, "Summary: 3");
-            Jdi.WebDriver.TakeScreenshot().SaveAsFile($"{Guid.NewGuid()}.png", ScreenshotImageFormat.Png);
         }
     }
 }
