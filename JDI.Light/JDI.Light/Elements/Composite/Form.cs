@@ -102,7 +102,7 @@ namespace JDI.Light.Elements.Composite
         {
             var result = Verify(objStrings);
             if (result.Count > 0)
-                throw JDI.Assert.Exception("Check form failed:" +
+                throw Jdi.Assert.Exception("Check form failed:" +
                                            result.FormattedJoin("".FromNewLine()).FromNewLine());
         }
 

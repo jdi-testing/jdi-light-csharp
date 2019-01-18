@@ -10,9 +10,9 @@ namespace JDI.Light.Tests.UITests.Common
         [SetUp]
         public void SetUp()
         {
-            JDI.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            Jdi.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
             TestSite.HomePage.IsOpened();
-            JDI.Logger.Info("Setup method finished");
+            Jdi.Logger.Info("Setup method finished");
         }
 
         private readonly IText _textItem = TestSite.HomePage.Text;
@@ -30,13 +30,13 @@ namespace JDI.Light.Tests.UITests.Common
         [Test]
         public void GetTextTest()
         {
-            JDI.Assert.AreEquals(_textItem.Value, _expectedText);
+            Jdi.Assert.AreEquals(_textItem.Value, _expectedText);
         }
 
         [Test]
         public void GetValueTest()
         {
-            JDI.Assert.AreEquals(_textItem.Value, _expectedText);
+            Jdi.Assert.AreEquals(_textItem.Value, _expectedText);
         }
 
         [Test]
@@ -51,7 +51,7 @@ namespace JDI.Light.Tests.UITests.Common
         [Test]
         public void WaitMatchTest()
         {
-            JDI.Assert.AreEquals(_textItem.WaitMatchText(_regEx), _expectedText);
+            Jdi.Assert.AreEquals(_textItem.WaitMatchText(_regEx), _expectedText);
         }
 
         [Test]
@@ -59,13 +59,13 @@ namespace JDI.Light.Tests.UITests.Common
         {
             TestSite.SupportPage.IsOpened();
             CommonActionsData.RunParallel(() => TestSite.HomePage.IsOpened());
-            JDI.Assert.AreEquals(_textItem.WaitMatchText(_regEx), _expectedText);
+            Jdi.Assert.AreEquals(_textItem.WaitMatchText(_regEx), _expectedText);
         }
 
         [Test]
         public void WaitText()
         {
-            JDI.Assert.AreEquals(_textItem.WaitText(_contains), _expectedText);
+            Jdi.Assert.AreEquals(_textItem.WaitText(_contains), _expectedText);
         }
 
         [Test]
@@ -73,7 +73,7 @@ namespace JDI.Light.Tests.UITests.Common
         {
             TestSite.SupportPage.IsOpened();
             CommonActionsData.RunParallel(() => TestSite.HomePage.IsOpened());
-            JDI.Assert.AreEquals(_textItem.WaitText(_contains), _expectedText);
+            Jdi.Assert.AreEquals(_textItem.WaitText(_contains), _expectedText);
         }
     }
 }

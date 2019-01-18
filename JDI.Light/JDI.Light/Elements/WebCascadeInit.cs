@@ -61,21 +61,24 @@ namespace JDI.Light.Elements
             var page = (WebPage) instance;
             var url = pageAttribute.Url;
             var site = parentType.GetCustomAttribute<SiteAttribute>(false);
-            if (!JDI.HasDomain && site?.Domain != null)
-                JDI.Domain = site.Domain;
-            url = url.Contains("://") || !JDI.HasDomain
-                ? url
-                : WebPage.GetUrlFromUri(url);
+            if (!Jdi.HasDomain && site?.Domain != null)
+            {
+                Jdi.Domain = site.Domain;
+            }
+            else if (site?.DomainProviderMethodName != null && site.DomainProviderType != null)
+            {
+                Jdi.Domain = site.GetDomainFunc.Invoke();
+            }
             var title = pageAttribute.Title;
             var urlTemplate = pageAttribute.UrlTemplate;
             var urlCheckType = pageAttribute.UrlCheckType;
             var titleCheckType = pageAttribute.TitleCheckType;
             if (!string.IsNullOrEmpty(urlTemplate))
             {
-                urlTemplate = urlTemplate.Contains("://") || !JDI.HasDomain ||
+                urlTemplate = urlTemplate.Contains("://") || !Jdi.HasDomain ||
                               urlCheckType != CheckPageType.Match
                     ? urlTemplate
-                    : WebPage.GetMatchFromDomain(urlTemplate);
+                    : Jdi.Domain.Replace(".", "\\.") + "/" + urlTemplate.Replace("^/*", "");
             }
             page.UpdatePageData(url, title, urlCheckType, titleCheckType, urlTemplate);
             return instance;

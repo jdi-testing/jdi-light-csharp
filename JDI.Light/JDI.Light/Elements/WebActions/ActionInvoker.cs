@@ -23,7 +23,7 @@ namespace JDI.Light.Elements.WebActions
                 var timer = new Timer();
                 var result = action.Invoke();
                 if (result == null)
-                    throw JDI.Assert.Exception($"Do action {actionName} failed. Can't get result.");
+                    throw Jdi.Assert.Exception($"Do action {actionName} failed. Can't get result.");
                 var stringResult = logResult == null
                     ? result.ToString()
                     : logResult.Invoke(result);

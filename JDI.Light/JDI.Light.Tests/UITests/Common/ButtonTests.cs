@@ -12,12 +12,12 @@ namespace JDI.Light.Tests.UITests.Common
         [SetUp]
         public void SetUp()
         {
-            JDI.Logger.Info("Navigating to Metals and Colors page.");
+            Jdi.Logger.Info("Navigating to Metals and Colors page.");
             TestSite.MetalsColorsPage.Open();
             TestSite.MetalsColorsPage.CheckTitle();
             TestSite.MetalsColorsPage.IsOpened();
-            JDI.Logger.Info("Setup method finished");
-            JDI.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            Jdi.Logger.Info("Setup method finished");
+            Jdi.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         [Test]
@@ -25,8 +25,8 @@ namespace JDI.Light.Tests.UITests.Common
         {
             TestSite.MetalsColorsPage.CalculateButton.Click();
             var calcText = TestSite.MetalsColorsPage.CalculateText.Value;
-            JDI.Assert.Contains(calcText, "Summary: 3");
-            JDI.DriverFactory.GetDriver().TakeScreenshot().SaveAsFile($"{Guid.NewGuid()}.png", ScreenshotImageFormat.Png);
+            Jdi.Assert.Contains(calcText, "Summary: 3");
+            Jdi.WebDriver.TakeScreenshot().SaveAsFile($"{Guid.NewGuid()}.png", ScreenshotImageFormat.Png);
         }
     }
 }

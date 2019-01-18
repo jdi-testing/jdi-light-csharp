@@ -47,7 +47,7 @@ namespace JDI.Light.Elements.Common
                 if (!_isCheckedFunc(this))
                     Click();
                 if (!_isCheckedFunc(this))
-                    throw JDI.Assert.Exception("Can't check element. Verify locator for click or isCheckedAction");
+                    throw Jdi.Assert.Exception("Can't check element. Verify locator for click or isCheckedAction");
             });
         }
 
@@ -57,7 +57,7 @@ namespace JDI.Light.Elements.Common
                 if (_isCheckedFunc(this))
                     Click();
                 if (_isCheckedFunc(this))
-                    throw JDI.Assert.Exception("Can't uncheck element. Verify locator for click or isCheckedAction");
+                    throw Jdi.Assert.Exception("Can't uncheck element. Verify locator for click or isCheckedAction");
             });
         }
 

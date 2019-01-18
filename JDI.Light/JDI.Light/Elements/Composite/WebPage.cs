@@ -30,20 +30,20 @@ namespace JDI.Light.Elements.Composite
 
         public WebPage(string url = null, string title = null)
         {
-            Logger = JDI.Logger;
+            Logger = Jdi.Logger;
             Invoker = new ActionInvoker(Logger);
-            Url = url;
+            _url = url;
             Title = title;
             Name = $"{Title} ({Url})";
-            WebDriver = JDI.DriverFactory.GetDriver();
+            WebDriver = Jdi.DriverFactory.GetDriver();
             Timer = new Timer();
         }
-
+        
         public string Url
         {
-            get => _url == null || _url.Contains("://") || !JDI.HasDomain
+            get => _url == null || _url.StartsWith("http://") || _url.StartsWith("https://") || !Jdi.HasDomain
                 ? _url
-                : GetUrlFromUri(_url);
+                : Jdi.Domain + "/" + new Regex("^//*").Replace(_url, "");
             set => _url = value;
         }
 
@@ -53,16 +53,6 @@ namespace JDI.Light.Elements.Composite
                 () => WebDriver.Navigate().GoToUrl(Url));
             if (CheckAfterOpen)
                 CheckOpened();
-        }
-
-        public static string GetUrlFromUri(string uri)
-        {
-            return JDI.Domain.Replace("/*$", "") + "/" + new Regex("^//*").Replace(uri, "");
-        }
-
-        public static string GetMatchFromDomain(string uri)
-        {
-            return JDI.Domain.Replace("/*$", "").Replace(".", "\\.") + "/" + uri.Replace("^/*", "");
         }
 
         public void UpdatePageData(string url, string title, CheckPageType checkUrlType, CheckPageType checkTitleType,
@@ -104,7 +94,7 @@ namespace JDI.Light.Elements.Composite
             {
                 if (!IsOnPage())
                     Open();
-                JDI.Logger.Info($"Page {Name} is opened");
+                Jdi.Logger.Info($"Page {Name} is opened");
             }, ex => $"Can't open page {Name}. Reason: {ex}");
         }
 
@@ -140,12 +130,12 @@ namespace JDI.Light.Elements.Composite
 
         public void CheckUrl()
         {
-            JDI.Logger.Info($"Checking page url. Url = '{Url}', UrlTemplate = '{UrlTemplate}', CheckType = {CheckUrlType}");
+            Jdi.Logger.Info($"Checking page url. Url = '{Url}', UrlTemplate = '{UrlTemplate}', CheckType = {CheckUrlType}");
             if (string.IsNullOrEmpty(UrlTemplate) &&
                 new[] {CheckPageType.None, CheckPageType.Equal}.Contains(CheckUrlType))
             {
                 if (string.IsNullOrEmpty(Url)) return;
-                JDI.Assert.IsTrue(Timer.Wait(() =>
+                Jdi.Assert.IsTrue(Timer.Wait(() =>
                 {
                     Logger.Debug($"Current URL: {WebDriver.Url}");
                     return WebDriver.Url.Equals(Url);
@@ -155,20 +145,20 @@ namespace JDI.Light.Elements.Composite
                 switch (CheckUrlType)
                 {
                     case CheckPageType.None:
-                        JDI.Assert.IsTrue(Timer.Wait(() =>
+                        Jdi.Assert.IsTrue(Timer.Wait(() =>
                         {
                             Logger.Debug($"Current URL: {WebDriver.Url}");
                             return WebDriver.Url.Contains(UrlTemplate) || WebDriver.Url.Matches(UrlTemplate);
                         }));
                         break;
                     case CheckPageType.Equal:
-                        JDI.Assert.IsTrue(Timer.Wait(() => WebDriver.Url.Equals(Url)));
+                        Jdi.Assert.IsTrue(Timer.Wait(() => WebDriver.Url.Equals(Url)));
                         break;
                     case CheckPageType.Match:
-                        JDI.Assert.IsTrue(Timer.Wait(() => WebDriver.Url.Matches(UrlTemplate)));
+                        Jdi.Assert.IsTrue(Timer.Wait(() => WebDriver.Url.Matches(UrlTemplate)));
                         break;
                     case CheckPageType.Contains:
-                        JDI.Assert.IsTrue(Timer.Wait(() => WebDriver.Url.Contains(string.IsNullOrEmpty(UrlTemplate)
+                        Jdi.Assert.IsTrue(Timer.Wait(() => WebDriver.Url.Contains(string.IsNullOrEmpty(UrlTemplate)
                             ? Url
                             : UrlTemplate)));
                         break;
@@ -177,32 +167,32 @@ namespace JDI.Light.Elements.Composite
 
         public void CheckTitle()
         {
-            JDI.Logger.Info($"Checking page title. Title = '{Title}', CheckType = {CheckTitleType}");
+            Jdi.Logger.Info($"Checking page title. Title = '{Title}', CheckType = {CheckTitleType}");
             switch (CheckTitleType)
             {
                 case CheckPageType.None:
-                    JDI.Assert.IsTrue(Timer.Wait(() =>
+                    Jdi.Assert.IsTrue(Timer.Wait(() =>
                     {
                         Logger.Debug($"Actual: '{WebDriver.Title}', Expected: '{Title}'");
                         return WebDriver.Title.Equals(Title);
                     }));
                     break;
                 case CheckPageType.Equal:
-                    JDI.Assert.IsTrue(Timer.Wait(() =>
+                    Jdi.Assert.IsTrue(Timer.Wait(() =>
                     {
                         Logger.Debug($"Actual: '{WebDriver.Title}', Expected: '{Title}'");
                         return WebDriver.Title.Equals(Title);
                     }));
                     break;
                 case CheckPageType.Match:
-                    JDI.Assert.IsTrue(Timer.Wait(() =>
+                    Jdi.Assert.IsTrue(Timer.Wait(() =>
                     {
                         Logger.Debug($"Actual: '{WebDriver.Title}', Expected: '{Title}'");
                         return WebDriver.Title.Matches(Title);
                     }));
                     break;
                 case CheckPageType.Contains:
-                    JDI.Assert.IsTrue(Timer.Wait(() =>
+                    Jdi.Assert.IsTrue(Timer.Wait(() =>
                     {
                         Logger.Debug($"Actual: '{WebDriver.Title}', Expected: '{Title}'");
                         return WebDriver.Title.Contains(Title);

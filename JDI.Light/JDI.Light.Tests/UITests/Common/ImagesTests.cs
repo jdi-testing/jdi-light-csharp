@@ -14,12 +14,12 @@ namespace JDI.Light.Tests.UITests.Common
         [SetUp]
         public void SetUp()
         {
-            JDI.Logger.Info("Navigating to Home page.");
+            Jdi.Logger.Info("Navigating to Home page.");
             TestSite.HomePage.Open();
             TestSite.HomePage.CheckTitle();
             TestSite.HomePage.IsOpened();
-            JDI.Logger.Info("Setup method finished");
-            JDI.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            Jdi.Logger.Info("Setup method finished");
+            Jdi.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         [Test]
@@ -36,19 +36,19 @@ namespace JDI.Light.Tests.UITests.Common
             var _attributeName = "testAttr";
             var _value = "testValue";
             _logoImage.SetAttribute(_attributeName, _value);
-            JDI.Assert.AreEquals(_logoImage.GetAttribute(_attributeName), _value);
+            Jdi.Assert.AreEquals(_logoImage.GetAttribute(_attributeName), _value);
         }
 
         [Test]
         public void GetSourceTest()
         {
-            JDI.Assert.AreEquals(_logoImage.GetSource(), Src);
+            Jdi.Assert.AreEquals(_logoImage.GetSource(), Src);
         }
 
         [Test]
         public void GetTipTest()
         {
-            JDI.Assert.AreEquals(_logoImage.GetAlt(), Alt);
+            Jdi.Assert.AreEquals(_logoImage.GetAlt(), Alt);
         }
     }
 }

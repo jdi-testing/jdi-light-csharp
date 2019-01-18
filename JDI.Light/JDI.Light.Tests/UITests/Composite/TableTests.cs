@@ -9,7 +9,7 @@ namespace JDI.Light.Tests.UITests.Composite
         [Test]
         public void InitComplexTable()
         {
-            JDI.Logger.Info("Navigating to Complex Table page.");
+            Jdi.Logger.Info("Navigating to Complex Table page.");
             TestSite.ComplexTablePage.Open();
             TestSite.ComplexTablePage.CheckTitle();
             TestSite.ComplexTablePage.IsOpened();
@@ -24,7 +24,7 @@ namespace JDI.Light.Tests.UITests.Composite
         [Test]
         public void InitSimpleTable()
         {
-            JDI.Logger.Info("Navigating to Simple Table page.");
+            Jdi.Logger.Info("Navigating to Simple Table page.");
             TestSite.SimpleTablePage.Open();
             TestSite.SimpleTablePage.CheckTitle();
             TestSite.SimpleTablePage.IsOpened();

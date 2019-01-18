@@ -136,7 +136,7 @@
     <Compile Include="Elements\WebActions\ActionInvoker.cs" />
     <Compile Include="Elements\WebCascadeInit.cs" />
     <Compile Include="Interfaces\IAssert.cs" />
-    <Compile Include="JDI.cs" />
+    <Compile Include="Jdi.cs" />
     <Compile Include="Settings\MapInterfaceToElement.cs" />
     <Compile Include="Settings\Timeouts.cs" />
     <Compile Include="Utils\ExceptionUtils.cs" />

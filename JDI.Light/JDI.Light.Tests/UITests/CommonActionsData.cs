@@ -11,13 +11,13 @@ namespace JDI.Light.Tests.UITests
 
         public static void CheckText(Func<string> func, string expectedAttrValue)
         {
-            JDI.Assert.AreEquals(func(), expectedAttrValue);
+            Jdi.Assert.AreEquals(func(), expectedAttrValue);
         }
 
         public static void CheckAction(string text)
         {
             var logOutput = TestSite.ActionsLog.Texts;
-            JDI.Assert.Contains(logOutput[0], text);
+            Jdi.Assert.Contains(logOutput[0], text);
         }
 
         public static void RunParallel(Action action)

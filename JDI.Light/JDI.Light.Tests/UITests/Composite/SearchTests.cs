@@ -9,12 +9,12 @@ namespace JDI.Light.Tests.UITests.Composite
         [SetUp]
         public void SetUp()
         {
-            JDI.Logger.Info("Navigating to Home page.");
+            Jdi.Logger.Info("Navigating to Home page.");
             TestSite.HomePage.Open();
             TestSite.HomePage.CheckTitle();
             TestSite.HomePage.IsOpened();
-            JDI.Logger.Info("Setup method finished");
-            JDI.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            Jdi.Logger.Info("Setup method finished");
+            Jdi.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         [Test]
@@ -22,7 +22,7 @@ namespace JDI.Light.Tests.UITests.Composite
         {
             TestSite.Header.Search.SearchButton.Click();
             TestSite.Header.Search.Find("something");
-            Assert.True(JDI.DriverFactory.GetDriver().Url.Contains("complex-table.html"));
+            Assert.True(Jdi.WebDriver.Url.Contains("complex-table.html"));
         }
     }
 }

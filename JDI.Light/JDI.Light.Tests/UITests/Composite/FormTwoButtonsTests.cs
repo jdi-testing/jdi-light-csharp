@@ -10,19 +10,19 @@ namespace JDI.Light.Tests.UITests.Composite
         [SetUp]
         public void SetUp()
         {
-            JDI.Logger.Info("Navigating to Contact page.");
+            Jdi.Logger.Info("Navigating to Contact page.");
             TestSite.ContactFormPage.Open();
             TestSite.ContactFormPage.CheckTitle();
             TestSite.ContactFormPage.IsOpened();
-            JDI.Logger.Info("Setup method finished");
-            JDI.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            Jdi.Logger.Info("Setup method finished");
+            Jdi.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         [Test]
         public void SubmitSpecButtonStringTest()
         {
             TestSite.ContactFormPage.ContactFormTwoButtons.Submit(Contact.DEFAULT_CONTACT, "calculate");
-            JDI.Assert.Contains(TestSite.ContactFormPage.Result.Value, "Summary: 3");
+            Jdi.Assert.Contains(TestSite.ContactFormPage.Result.Value, "Summary: 3");
         }
     }
 }

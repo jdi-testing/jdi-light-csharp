@@ -50,7 +50,7 @@ namespace JDI.Light.Elements.Composite
             {
                 if (_suggestions != null)
                     return _suggestions;
-                throw JDI.Assert.Exception(
+                throw Jdi.Assert.Exception(
                     "Suggestions list locator not specified for search. Use accordance constructor");
             }
         }
@@ -64,11 +64,11 @@ namespace JDI.Light.Elements.Composite
                 switch (fields.Count)
                 {
                     case 0:
-                        throw JDI.Assert.Exception($"Can't find any buttons on form '{ToString()}'.");
+                        throw Jdi.Assert.Exception($"Can't find any buttons on form '{ToString()}'.");
                     case 1:
                         return fields[0];
                     default:
-                        throw JDI.Assert.Exception(
+                        throw Jdi.Assert.Exception(
                             $"Form '{ToString()}' have more than 1 button. Use submit(entity, buttonName) for this case instead");
                 }
             }
@@ -83,11 +83,11 @@ namespace JDI.Light.Elements.Composite
                 switch (fields.Count)
                 {
                     case 0:
-                        throw JDI.Assert.Exception($"Can't find any buttons on form '{ToString()}'.");
+                        throw Jdi.Assert.Exception($"Can't find any buttons on form '{ToString()}'.");
                     case 1:
                         return fields[0];
                     default:
-                        throw JDI.Assert.Exception(
+                        throw Jdi.Assert.Exception(
                             $"Form '{ToString()}' have more than 1 button. Use submit(entity, buttonName) for this case instead");
                 }
             }

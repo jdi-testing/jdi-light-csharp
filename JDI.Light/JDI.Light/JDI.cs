@@ -9,10 +9,11 @@ using OpenQA.Selenium;
 
 namespace JDI.Light
 {
-    public static class JDI
+    public static class Jdi
     {
         public static WebCascadeInit WebInit;
         public static IDriverFactory<IWebDriver> DriverFactory;
+        public static IWebDriver WebDriver => DriverFactory.GetDriver();
         public static Timeouts Timeouts;
         public static IAssert Assert;
         public static ILogger Logger;
@@ -21,7 +22,7 @@ namespace JDI.Light
         public static bool GetLatestDriver = true;
         public static string DriverVersion = "";
 
-        static JDI()
+        static Jdi()
         {
             Timeouts = new Timeouts();
             WebInit = new WebCascadeInit();
@@ -40,6 +41,11 @@ namespace JDI.Light
         public static void InitSite(Type siteType)
         {
             WebInit.InitStaticPages(siteType, DriverFactory.CurrentDriverName);
+        }
+
+        public static object ExecuteScript(string script, params object[] args)
+        {
+            return ((IJavaScriptExecutor) WebDriver).ExecuteScript(script, args);
         }
     }
 }

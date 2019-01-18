@@ -50,7 +50,7 @@ namespace JDI.Light.Factories
                 driver.Manage().Window.Maximize();
             else
                 driver.Manage().Window.Size = BrowserSize;
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(JDI.Timeouts.WaitElementSec);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(Jdi.Timeouts.WaitElementSec);
             return driver;
         };
 
@@ -176,16 +176,16 @@ namespace JDI.Light.Factories
 
         private string RegisterLocalDriver(DriverType driverType)
         {
-            if (JDI.GetLatestDriver)
+            if (Jdi.GetLatestDriver)
             {
                 if (!WebDriverUtils.IsLocalVersionLatestVersion(driverType, DriverPath))
                     DriverPath = WebDriverUtils.GetLatestVersion(driverType);
             }
             else
             {
-                if (!string.IsNullOrEmpty(JDI.DriverVersion))
+                if (!string.IsNullOrEmpty(Jdi.DriverVersion))
                 {
-                    DriverPath = WebDriverUtils.GetSpecifiedVersion(driverType, JDI.DriverVersion);
+                    DriverPath = WebDriverUtils.GetSpecifiedVersion(driverType, Jdi.DriverVersion);
                 }
             }
 
@@ -210,7 +210,7 @@ namespace JDI.Light.Factories
         public string RegisterDriver(string driverName, Func<IWebDriver> driver)
         {
             if (Drivers.ContainsKey(driverName))
-                throw JDI.Assert.Exception(
+                throw Jdi.Assert.Exception(
                     $"Can't register WebDriver {driverName}. Driver with the same name already registered");
             try
             {
@@ -219,7 +219,7 @@ namespace JDI.Light.Factories
             }
             catch (Exception e)
             {
-                throw JDI.Assert.Exception($"Can't register WebDriver {driverName}. StackTrace: {e.StackTrace}");
+                throw Jdi.Assert.Exception($"Can't register WebDriver {driverName}. StackTrace: {e.StackTrace}");
             }
 
             return driverName;

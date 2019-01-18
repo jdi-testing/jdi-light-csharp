@@ -12,7 +12,7 @@ namespace JDI.Light.Utils
 
         public ILogger Logger
         {
-            get => _logger ?? (_logger = JDI.Logger);
+            get => _logger ?? (_logger = Jdi.Logger);
             set => _logger = value;
         }
 

@@ -21,7 +21,7 @@ namespace JDI.Light.Elements.Base
         public By FrameLocator;
         public By Locator;
 
-        public IWebDriver WebDriver => JDI.DriverFactory.GetDriver(DriverName);
+        public IWebDriver WebDriver => Jdi.DriverFactory.GetDriver(DriverName);
 
         public ActionInvoker Invoker { get; set; }
         public ILogger Logger { get; set; }
@@ -30,20 +30,20 @@ namespace JDI.Light.Elements.Base
 
         public UIElement(By byLocator)
         {
-            Logger = JDI.Logger;
+            Logger = Jdi.Logger;
             Invoker = new ActionInvoker(Logger);
             Locator = byLocator;
-            Timer = new Timer(JDI.Timeouts.CurrentTimeoutMSec);
-            if (string.IsNullOrEmpty(DriverName) && JDI.DriverFactory != null &&
-                !string.IsNullOrEmpty(JDI.DriverFactory.CurrentDriverName))
-                DriverName = JDI.DriverFactory.CurrentDriverName;
+            Timer = new Timer(Jdi.Timeouts.CurrentTimeoutMSec);
+            if (string.IsNullOrEmpty(DriverName) && Jdi.DriverFactory != null &&
+                !string.IsNullOrEmpty(Jdi.DriverFactory.CurrentDriverName))
+                DriverName = Jdi.DriverFactory.CurrentDriverName;
         }
 
         public IWebElement WebElement
         {
             get
             {
-                JDI.Logger.Debug($"Get Web Element: {ToString()}");
+                Jdi.Logger.Debug($"Get Web Element: {ToString()}");
                 var element = Timer.GetResultByCondition(() =>
                 {
                     if (_webElement != null)
@@ -52,17 +52,17 @@ namespace JDI.Light.Elements.Base
                     switch (result.Count)
                     {
                         case 0:
-                            throw JDI.Assert.Exception($"Can't find Element '{this}' during {JDI.Timeouts.CurrentTimeoutMSec} milliseconds");
+                            throw Jdi.Assert.Exception($"Can't find Element '{this}' during {Jdi.Timeouts.CurrentTimeoutMSec} milliseconds");
                         case 1:
                             return result[0];
                         default:
                             if (WebDriverFactory.OnlyOneElementAllowedInSearch)
-                                throw JDI.Assert.Exception(
-                                    $"Find {result.Count} elements instead of one for Element '{this}' during {JDI.Timeouts.CurrentTimeoutMSec} milliseconds");
+                                throw Jdi.Assert.Exception(
+                                    $"Find {result.Count} elements instead of one for Element '{this}' during {Jdi.Timeouts.CurrentTimeoutMSec} milliseconds");
                             return result[0];
                     }
                 }, el => el != null);
-                JDI.Logger.Debug("One Web Element found");
+                Jdi.Logger.Debug("One Web Element found");
                 return element;
             }
             set => _webElement = value;
@@ -72,9 +72,9 @@ namespace JDI.Light.Elements.Base
         {
             get
             {
-                JDI.Logger.Debug($"Get Web Elements: {this}");
+                Jdi.Logger.Debug($"Get Web Elements: {this}");
                 var elements = GetWebElements();
-                JDI.Logger.Debug($"Found {elements.Count} elements");
+                Jdi.Logger.Debug($"Found {elements.Count} elements");
                 return elements;
             }
         }
@@ -87,7 +87,7 @@ namespace JDI.Light.Elements.Base
                 return SearchContext.FindElements(locator.CorrectXPath()).ToList();
             }, els => els.Count(GetSearchCriteria) > 0);
             if (result == null)
-                throw JDI.Assert.Exception("Can't get Web Elements");
+                throw Jdi.Assert.Exception("Can't get Web Elements");
             return result.Where(GetSearchCriteria).ToList();
         }
 
@@ -123,7 +123,7 @@ namespace JDI.Light.Elements.Base
         public Func<IWebElement, bool> LocalElementSearchCriteria;
 
         private Func<IWebElement, bool> GetSearchCriteria
-            => LocalElementSearchCriteria ?? JDI.DriverFactory.ElementSearchCriteria;
+            => LocalElementSearchCriteria ?? Jdi.DriverFactory.ElementSearchCriteria;
 
         public T FindImmediately<T>(Func<T> func, T ifError)
         {
@@ -141,7 +141,7 @@ namespace JDI.Light.Elements.Base
             }
 
             LocalElementSearchCriteria = temp;
-            SetWaitTimeout(JDI.Timeouts.WaitElementSec);
+            SetWaitTimeout(Jdi.Timeouts.WaitElementSec);
             return result;
         }
 
@@ -195,9 +195,9 @@ namespace JDI.Light.Elements.Base
 
         public void SetWaitTimeout(int mSeconds)
         {
-            JDI.Logger.Debug("Set wait timeout to " + mSeconds);
+            Jdi.Logger.Debug("Set wait timeout to " + mSeconds);
             WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(mSeconds);
-            JDI.Timeouts.CurrentTimeoutMSec = mSeconds;
+            Jdi.Timeouts.CurrentTimeoutMSec = mSeconds;
         }
 
         public new string ToString()

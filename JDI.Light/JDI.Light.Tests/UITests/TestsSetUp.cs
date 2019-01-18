@@ -1,7 +1,5 @@
 ﻿using JDI.Light.Enums;
 using JDI.Light.Tests.Asserts;
-using JDI.Light.Tests.Entities;
-using JDI.Light.Tests.UIObjects;
 using JDI.Light.Utils;
 using NUnit.Framework;
 
@@ -13,18 +11,14 @@ namespace JDI.Light.Tests.UITests
         [OneTimeSetUp]
         protected void OneTimeSetUp()
         {
-            JDI.Init(assert: new NUnitAsserter());
-            JDI.Logger.LogLevel = LogLevel.Debug;
-            JDI.GetLatestDriver = false;
-            JDI.DriverVersion = "2.41";
-            JDI.Logger.Info("Init test run...");
-            JDI.Timeouts.WaitElementSec = 10;
-            JDI.Timeouts.WaitPageLoadSec = 10;
+            Jdi.Init(assert: new NUnitAsserter());
+            Jdi.Logger.LogLevel = LogLevel.Debug;
+            Jdi.GetLatestDriver = false;
+            Jdi.DriverVersion = "2.41";
+            Jdi.Logger.Info("Init test run...");
+            Jdi.Timeouts.WaitElementSec = 10;
+            Jdi.Timeouts.WaitPageLoadSec = 10;
             WinProcUtils.KillAllRunWebDrivers();
-            JDI.InitSite(typeof(TestSite));
-            TestSite.HomePage.Open();
-            TestSite.LoginForm.Submit(User.DefaultUser);
-            JDI.Logger.Info("Run test...");
         }
 
         [OneTimeTearDown]

@@ -66,6 +66,7 @@
     <Compile Include="Enums\Odds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UIObjects\Pages\ComplexTablePage.cs" />
+    <Compile Include="UIObjects\TestSiteCustomDomain.cs" />
     <Compile Include="UITests\Common\ButtonTests.cs" />
     <Compile Include="UITests\Common\CheckBoxTests.cs" />
     <Compile Include="UITests\Common\DatePickerTests.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="UITests\Composite\PageTests.cs" />
     <Compile Include="UITests\Composite\PaginationTests.cs" />
     <Compile Include="UITests\Composite\SearchTests.cs" />
+    <Compile Include="UITests\Composite\SiteDomainTests.cs" />
     <Compile Include="UITests\Composite\TableTests.cs" />
     <Compile Include="UITests\TestBase.cs" />
     <Compile Include="UITests\TestsSetUp.cs" />
