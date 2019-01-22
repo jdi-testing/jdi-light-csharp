@@ -10,6 +10,7 @@ namespace JDI.Light.Interfaces.Composite
         CheckPageType CheckTitleType { get; set; }
         CheckPageType CheckUrlType { get; set; }
 
+        string Url { get; set; }
         string Title { get; set; }
         string UrlTemplate { get; set; }
 

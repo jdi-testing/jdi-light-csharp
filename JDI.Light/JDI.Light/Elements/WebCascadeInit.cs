@@ -80,7 +80,11 @@ namespace JDI.Light.Elements
                     ? urlTemplate
                     : Jdi.Domain.Replace(".", "\\.") + "/" + urlTemplate.Replace("^/*", "");
             }
-            page.UpdatePageData(url, title, urlCheckType, titleCheckType, urlTemplate);
+            page.Url = url;
+            page.Title = title;
+            page.CheckUrlType = urlCheckType;
+            page.CheckTitleType = titleCheckType;
+            page.UrlTemplate = urlTemplate;
             return instance;
         }
 

@@ -55,18 +55,6 @@ namespace JDI.Light.Elements.Composite
                 CheckOpened();
         }
 
-        public void UpdatePageData(string url, string title, CheckPageType checkUrlType, CheckPageType checkTitleType,
-            string urlTemplate)
-        {
-            if (_url == null)
-                Url = url;
-            if (Title == null)
-                Title = title;
-            CheckUrlType = checkUrlType;
-            CheckTitleType = checkTitleType;
-            UrlTemplate = urlTemplate;
-        }
-        
         private bool IsOnPage()
         {
             var url = WebDriver.Url;
