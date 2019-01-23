@@ -1,8 +1,5 @@
-﻿using System;
-using JDI.Light.Tests.UIObjects;
+﻿using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.Extensions;
 
 namespace JDI.Light.Tests.UITests.Common
 {

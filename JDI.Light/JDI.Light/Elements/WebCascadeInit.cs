@@ -7,7 +7,6 @@ using JDI.Light.Attributes;
 using JDI.Light.Elements.Base;
 using JDI.Light.Elements.Common;
 using JDI.Light.Elements.Composite;
-using JDI.Light.Enums;
 using JDI.Light.Extensions;
 using JDI.Light.Factories;
 using JDI.Light.Interfaces.Base;
@@ -58,8 +57,6 @@ namespace JDI.Light.Elements
             var instance = (IPage)(field.GetValue(parent)
                                            ?? Activator.CreateInstance(type));
             var pageAttribute = field.GetAttribute<PageAttribute>();
-            var page = (WebPage) instance;
-            var url = pageAttribute.Url;
             var site = parentType.GetCustomAttribute<SiteAttribute>(false);
             if (!Jdi.HasDomain && site?.Domain != null)
             {
@@ -69,22 +66,11 @@ namespace JDI.Light.Elements
             {
                 Jdi.Domain = site.GetDomainFunc.Invoke();
             }
-            var title = pageAttribute.Title;
-            var urlTemplate = pageAttribute.UrlTemplate;
-            var urlCheckType = pageAttribute.UrlCheckType;
-            var titleCheckType = pageAttribute.TitleCheckType;
-            if (!string.IsNullOrEmpty(urlTemplate))
-            {
-                urlTemplate = urlTemplate.Contains("://") || !Jdi.HasDomain ||
-                              urlCheckType != CheckPageType.Match
-                    ? urlTemplate
-                    : Jdi.Domain.Replace(".", "\\.") + "/" + urlTemplate.Replace("^/*", "");
-            }
-            page.Url = url;
-            page.Title = title;
-            page.CheckUrlType = urlCheckType;
-            page.CheckTitleType = titleCheckType;
-            page.UrlTemplate = urlTemplate;
+            instance.Url = pageAttribute.Url;
+            instance.UrlTemplate = pageAttribute.UrlTemplate;
+            instance.Title = pageAttribute.Title;
+            instance.CheckUrlType = pageAttribute.UrlCheckType;
+            instance.CheckTitleType = pageAttribute.TitleCheckType;
             return instance;
         }
 
