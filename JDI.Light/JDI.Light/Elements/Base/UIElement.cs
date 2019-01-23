@@ -44,28 +44,24 @@ namespace JDI.Light.Elements.Base
             get
             {
                 Jdi.Logger.Debug($"Get Web Element: {ToString()}");
-                //var element = Timer.GetResultByCondition(() =>
-                //{
-                    if (_webElement != null)
-                        return _webElement;
-                    var result = GetWebElements();
-                    switch (result.Count)
+                if (_webElement != null)
+                    return _webElement;
+                var result = GetWebElements();
+                switch (result.Count)
+                {
+                    case 0:
+                        throw Jdi.Assert.Exception($"Can't find Element '{this}' during {Jdi.Timeouts.CurrentTimeoutMSec} milliseconds");
+                    case 1:
                     {
-                        case 0:
-                            throw Jdi.Assert.Exception($"Can't find Element '{this}' during {Jdi.Timeouts.CurrentTimeoutMSec} milliseconds");
-                        case 1:
-                        {
-                            Jdi.Logger.Debug("One Web Element found");
-                            return result[0];
-                        }
-                        default:
-                            if (WebDriverFactory.OnlyOneElementAllowedInSearch)
-                                throw Jdi.Assert.Exception(
-                                    $"Find {result.Count} elements instead of one for Element '{this}' during {Jdi.Timeouts.CurrentTimeoutMSec} milliseconds");
-                            return result[0];
+                        Jdi.Logger.Debug("One Web Element found");
+                        return result[0];
                     }
-                //}, el => el != null);
-                //return element;
+                    default:
+                        if (WebDriverFactory.OnlyOneElementAllowedInSearch)
+                            throw Jdi.Assert.Exception(
+                                $"Find {result.Count} elements instead of one for Element '{this}' during {Jdi.Timeouts.CurrentTimeoutMSec} milliseconds");
+                        return result[0];
+                }
             }
             set => _webElement = value;
         }
