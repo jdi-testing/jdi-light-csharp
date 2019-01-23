@@ -44,7 +44,6 @@ namespace JDI.Light.Elements.Base
             get
             {
                 Jdi.Logger.Debug($"Get Web Element: {ToString()}");
-                Jdi.Logger.Debug($"LLL: {Locator}");
                 var element = Timer.GetResultByCondition(() =>
                 {
                     if (_webElement != null)
@@ -82,18 +81,14 @@ namespace JDI.Light.Elements.Base
 
         protected List<IWebElement> GetWebElements()
         {
-            var result = Timer.GetResultByCondition(() =>
-            {
-                return SearchContext.FindElements(Locator.CorrectXPath()).ToList();
-            }, els => els.Count(GetSearchCriteria) > 0);
+            var result = Timer.GetResultByCondition(() => SearchContext.FindElements(Locator.CorrectXPath()).ToList(), 
+                els => els.Count(GetSearchCriteria) > 0);
             if (result == null)
                 throw Jdi.Assert.Exception("Can't get Web Elements");
             return result.Where(GetSearchCriteria).ToList();
         }
 
-        public ISearchContext SearchContext => Locator.ContainsRoot() 
-            ? WebDriver.SwitchTo().DefaultContent() 
-            : GetSearchContext(Parent);
+        public ISearchContext SearchContext => GetSearchContext(Parent);
 
         private ISearchContext GetSearchContext(IBaseElement element)
         {
@@ -106,12 +101,7 @@ namespace JDI.Light.Elements.Base
             if (_webElement != null)
                 return uiElement.WebElement;
             var locator = el.Locator;
-            var searchContext = locator.ContainsRoot()
-                ? WebDriver.SwitchTo().DefaultContent()
-                : GetSearchContext(el.Parent);
-            locator = locator.ContainsRoot()
-                ? locator.TrimRoot()
-                : locator;
+            var searchContext = GetSearchContext(el.Parent);
             var frame = el.FrameLocator;
             if (frame != null)
                 WebDriver.SwitchTo().Frame(WebDriver.FindElement(frame));
@@ -202,7 +192,7 @@ namespace JDI.Light.Elements.Base
 
         public new string ToString()
         {
-            return $"Name: '{Name}', Type: '{TypeName}' In: '{Parent?.GetType().Name ?? ""}'";
+            return $"Name: '{Name}', Type: '{TypeName}', Locator: '{Locator}', In: '{Parent?.GetType().Name ?? ""}'";
         }
         
         protected Func<UIElement, bool> IsDisplayedAction =

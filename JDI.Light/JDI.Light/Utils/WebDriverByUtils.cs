@@ -50,17 +50,6 @@ namespace JDI.Light.Utils
                 : byValue;
         }
 
-        public static bool ContainsRoot(this By by)
-        {
-            return by != null && by.ToString().Contains(": *root*");
-        }
-
-        public static By TrimRoot(this By by)
-        {
-            var byLocator = by.GetByLocator().Replace("*root*", " ").Trim();
-            return GetByFunc(by)(byLocator);
-        }
-
         public static string GetByLocator(this By by)
         {
             var byAsString = by.ToString();
