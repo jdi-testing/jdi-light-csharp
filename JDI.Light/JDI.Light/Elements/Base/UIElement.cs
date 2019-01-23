@@ -44,6 +44,7 @@ namespace JDI.Light.Elements.Base
             get
             {
                 Jdi.Logger.Debug($"Get Web Element: {ToString()}");
+                Jdi.Logger.Debug($"LLL: {Locator}");
                 var element = Timer.GetResultByCondition(() =>
                 {
                     if (_webElement != null)
@@ -83,8 +84,7 @@ namespace JDI.Light.Elements.Base
         {
             var result = Timer.GetResultByCondition(() =>
             {
-                var locator = Locator.ContainsRoot() ? Locator.TrimRoot() : Locator;
-                return SearchContext.FindElements(locator.CorrectXPath()).ToList();
+                return SearchContext.FindElements(Locator.CorrectXPath()).ToList();
             }, els => els.Count(GetSearchCriteria) > 0);
             if (result == null)
                 throw Jdi.Assert.Exception("Can't get Web Elements");

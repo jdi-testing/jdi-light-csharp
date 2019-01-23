@@ -30,9 +30,6 @@ namespace JDI.Light.Tests.UIObjects
         [Page(Url = "complex-table.html", Title = "Complex Table")]
         public static ComplexTablePage ComplexTablePage;
 
-        [FindBy(Css = "form")]
-        public static Login Login;
-
         [FindBy(Css = ".uui-header")]
         public static Header Header;
 
