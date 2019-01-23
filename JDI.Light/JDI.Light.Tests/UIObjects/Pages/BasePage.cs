@@ -1,5 +1,7 @@
 ﻿using JDI.Light.Attributes;
+using JDI.Light.Elements.Common;
 using JDI.Light.Elements.Composite;
+using JDI.Light.Interfaces.Base;
 using JDI.Light.Tests.UIObjects.Forms;
 using JDI.Light.Tests.UIObjects.Sections;
 
@@ -15,5 +17,8 @@ namespace JDI.Light.Tests.UIObjects.Pages
 
         [FindBy(Id = "login-form")]
         public LoginForm LoginForm;
+
+        [FindBy(Css = "a>div.profile-photo")]
+        public Button Profile;
     }
 }

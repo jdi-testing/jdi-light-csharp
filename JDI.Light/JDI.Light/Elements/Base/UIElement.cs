@@ -44,8 +44,8 @@ namespace JDI.Light.Elements.Base
             get
             {
                 Jdi.Logger.Debug($"Get Web Element: {ToString()}");
-                var element = Timer.GetResultByCondition(() =>
-                {
+                //var element = Timer.GetResultByCondition(() =>
+                //{
                     if (_webElement != null)
                         return _webElement;
                     var result = GetWebElements();
@@ -54,16 +54,18 @@ namespace JDI.Light.Elements.Base
                         case 0:
                             throw Jdi.Assert.Exception($"Can't find Element '{this}' during {Jdi.Timeouts.CurrentTimeoutMSec} milliseconds");
                         case 1:
+                        {
+                            Jdi.Logger.Debug("One Web Element found");
                             return result[0];
+                        }
                         default:
                             if (WebDriverFactory.OnlyOneElementAllowedInSearch)
                                 throw Jdi.Assert.Exception(
                                     $"Find {result.Count} elements instead of one for Element '{this}' during {Jdi.Timeouts.CurrentTimeoutMSec} milliseconds");
                             return result[0];
                     }
-                }, el => el != null);
-                Jdi.Logger.Debug("One Web Element found");
-                return element;
+                //}, el => el != null);
+                //return element;
             }
             set => _webElement = value;
         }
@@ -81,11 +83,13 @@ namespace JDI.Light.Elements.Base
 
         protected List<IWebElement> GetWebElements()
         {
-            var result = Timer.GetResultByCondition(() => SearchContext.FindElements(Locator.CorrectXPath()).ToList(), 
-                els => els.Count(GetSearchCriteria) > 0);
-            if (result == null)
-                throw Jdi.Assert.Exception("Can't get Web Elements");
-            return result.Where(GetSearchCriteria).ToList();
+            var context = SearchContext;
+            var xpath = Locator.CorrectXPath();
+            var criteria = LocalElementSearchCriteria ?? Jdi.DriverFactory.ElementSearchCriteria;
+            var result = Timer.GetResultByCondition(
+                () => context.FindElements(xpath).ToList(), 
+                els => els.Count(criteria) > 0);
+            return result.Where(criteria).ToList();
         }
 
         public ISearchContext SearchContext => GetSearchContext(Parent);
@@ -111,10 +115,7 @@ namespace JDI.Light.Elements.Base
         }
 
         public Func<IWebElement, bool> LocalElementSearchCriteria;
-
-        private Func<IWebElement, bool> GetSearchCriteria
-            => LocalElementSearchCriteria ?? Jdi.DriverFactory.ElementSearchCriteria;
-
+        
         public T FindImmediately<T>(Func<T> func, T ifError)
         {
             SetWaitTimeout(0);

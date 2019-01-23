@@ -18,19 +18,14 @@ namespace JDI.Light.Tests.UIObjects.Forms
         [FindBy(Css = "#password")]
         [Name("Password")]
         public ITextField PasswordField;
-
-        [FindBy(Css = "a>div.profile-photo")]
-        public IBaseUIElement Profile;
-
+        
         public new void Submit(User user)
         {
-            Profile.Click();
             base.Submit(user);
         }
 
         public void Logout()
         {
-            Profile.Click();
             LoginButton.Click();
         }
     }
