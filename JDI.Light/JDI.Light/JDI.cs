@@ -36,6 +36,7 @@ namespace JDI.Light
             Assert.Logger = Logger;
             DriverFactory = driverFactory ?? new WebDriverFactory();
             Timeouts = timeouts ?? new Timeouts();
+            WinProcUtils.Init();
         }
 
         public static void InitSite(Type siteType)

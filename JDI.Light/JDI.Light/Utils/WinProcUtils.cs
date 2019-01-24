@@ -6,8 +6,6 @@ namespace JDI.Light.Utils
 {
     public static class WinProcUtils
     {
-        public static DateTime? TestRunStartTime { get; set; }
-
         private static readonly string[] ProcessToKill =
         {
             "chromedriver",
@@ -16,6 +14,13 @@ namespace JDI.Light.Utils
             "gecko"
         };
 
+        public static DateTime? TestRunStartTime { get; private set; }
+        
+        public static void Init()
+        {
+            TestRunStartTime = DateTime.Now;
+        }
+        
         public static void KillAllRunningDrivers()
         {
             foreach (var process in ProcessToKill)
