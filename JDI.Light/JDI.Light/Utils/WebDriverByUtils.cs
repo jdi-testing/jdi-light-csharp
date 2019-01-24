@@ -33,21 +33,15 @@ namespace JDI.Light.Utils
 
         public static By FillByTemplate(this By by, params object[] args)
         {
-            var byLocator = by.GetByLocator();
-            if (!byLocator.Contains("{0}"))
-                throw new Exception(GetBadLocatorMsg(byLocator, args));
-            var locator = byLocator;
-            byLocator = ExceptionUtils.ActionWithException(
-                () => string.Format(locator, args),
-                ex => GetBadLocatorMsg(locator, args));
-            return by.GetByFunc()(byLocator);
-        }
-
-        public static string GetByLocator(this By by)
-        {
-            var byAsString = by.ToString();
-            var index = byAsString.IndexOf(": ", StringComparison.Ordinal) + 2;
-            return byAsString.Substring(index);
+            var byLocatorString = by.ToString();
+            if (!byLocatorString.Contains("{0}"))
+                throw new Exception(GetBadLocatorMsg(byLocatorString, args));
+            
+            var locatorAsString = byLocatorString;
+            byLocatorString = ExceptionUtils.ActionWithException(
+                () => string.Format(locatorAsString, args),
+                ex => GetBadLocatorMsg(locatorAsString, args));
+            return by.GetByFunc()(byLocatorString);
         }
     }
 }
