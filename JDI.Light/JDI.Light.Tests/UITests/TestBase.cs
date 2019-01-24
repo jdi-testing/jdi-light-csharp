@@ -2,7 +2,6 @@
 using System.IO;
 using JDI.Light.Tests.Entities;
 using JDI.Light.Tests.UIObjects;
-using JDI.Light.Tests.UIObjects.Pages;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
@@ -19,7 +18,6 @@ namespace JDI.Light.Tests.UITests
             TestSite.HomePage.Open();
             TestSite.HomePage.Profile.Click();
             TestSite.HomePage.LoginForm.Submit(User.DefaultUser);
-            //TestSite.LoginForm.Submit(User.DefaultUser);
             Jdi.Logger.Info("Run test...");
         }
 

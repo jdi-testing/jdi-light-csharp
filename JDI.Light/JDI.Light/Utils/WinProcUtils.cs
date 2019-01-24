@@ -10,7 +10,6 @@ namespace JDI.Light.Utils
 
         private static readonly string[] ProcessToKill =
         {
-            "chrome",
             "chromedriver",
             "firefox",
             "IEDriverServer",
