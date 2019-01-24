@@ -34,6 +34,7 @@ namespace JDI.Light.Tests.UITests
                 Jdi.WebDriver.TakeScreenshot()
                     .SaveAsFile(Path.Combine(folder, $"{Guid.NewGuid()}.png"), ScreenshotImageFormat.Png);
             }
+            TestSite.HomePage.Refresh();
             TestSite.HomePage.Profile.Click();
             TestSite.LoginForm.Logout();
         }
