@@ -10,7 +10,7 @@ namespace JDI.Light.Tests.UITests.Composite
     [TestFixture]
     public class FormTests : TestBase
     {
-        private readonly ContactForm _contactForm = TestSite.ContactFormPage.ContactForm;
+        private ContactForm _contactForm => TestSite.ContactFormPage.ContactForm;
 
         [SetUp]
         public void SetUp()
