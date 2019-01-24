@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using JDI.Light.Extensions;
 using OpenQA.Selenium;
 
@@ -9,39 +8,39 @@ namespace JDI.Light.Utils
 {
     public static class WebDriverByUtils
     {
-        private static readonly Dictionary<string, Func<string, By>> ByTypes = new Dictionary<string, Func<string, By>>
-        {
-            {"CssSelector", By.CssSelector},
-            {"ClassName", By.ClassName},
-            {"Id", By.Id},
-            {"LinkText", By.LinkText},
-            {"Name", By.Name},
-            {"PartialLinkText", By.PartialLinkText},
-            {"TagName", By.TagName},
-            {"XPath", By.XPath}
-        };
-
-        public static Func<string, By> GetByFunc(this By by)
-        {
-            return ByTypes.FirstOrDefault(el => by.ToString().Contains(el.Key)).Value;
-        }
-
-        private static string GetBadLocatorMsg(this string byLocator, params object[] args)
-        {
-            return $"Bad locator template '{byLocator}'. Args: {args.Select(el => el.ToString()).FormattedJoin(", ", "'{0}'")}.";
-        }
-
         public static By FillByTemplate(this By by, params object[] args)
         {
             var byLocatorString = by.ToString();
             if (!byLocatorString.Contains("{0}"))
                 throw new Exception(GetBadLocatorMsg(byLocatorString, args));
-            
+
             var locatorAsString = byLocatorString;
             byLocatorString = ExceptionUtils.ActionWithException(
                 () => string.Format(locatorAsString, args),
                 ex => GetBadLocatorMsg(locatorAsString, args));
             return by.GetByFunc()(byLocatorString);
+        }
+
+        private static Func<string, By> GetByFunc(this By by)
+        {
+            var byTypes = new Dictionary<string, Func<string, By>>
+            {
+                { "CssSelector", By.CssSelector },
+                { "ClassName", By.ClassName },
+                { "Id", By.Id },
+                { "LinkText", By.LinkText },
+                { "Name", By.Name },
+                { "PartialLinkText", By.PartialLinkText },
+                { "TagName", By.TagName },
+                { "XPath", By.XPath }
+            };
+            
+            return byTypes.FirstOrDefault(el => by.ToString().Contains(el.Key)).Value;
+        }
+
+        private static string GetBadLocatorMsg(this string byLocator, params object[] args)
+        {
+            return $"Locator without parameter placeholder provided '{byLocator}'. Args: {args.Select(el => el.ToString()).FormattedJoin(", ", "'{0}'")}.";
         }
     }
 }
