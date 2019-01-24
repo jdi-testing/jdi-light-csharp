@@ -80,10 +80,9 @@ namespace JDI.Light.Elements.Base
         protected List<IWebElement> GetWebElements()
         {
             var context = SearchContext;
-            var xpath = Locator.CorrectXPath();
             var criteria = LocalElementSearchCriteria ?? Jdi.DriverFactory.ElementSearchCriteria;
             var result = Timer.GetResultByCondition(
-                () => context.FindElements(xpath).ToList(), 
+                () => context.FindElements(Locator).ToList(), 
                 els => els.Count(criteria) > 0);
             return result.Where(criteria).ToList();
         }
@@ -106,7 +105,7 @@ namespace JDI.Light.Elements.Base
             if (frame != null)
                 WebDriver.SwitchTo().Frame(WebDriver.FindElement(frame));
             return locator != null
-                ? searchContext.FindElement(locator.CorrectXPath())
+                ? searchContext.FindElement(locator)
                 : searchContext;
         }
 

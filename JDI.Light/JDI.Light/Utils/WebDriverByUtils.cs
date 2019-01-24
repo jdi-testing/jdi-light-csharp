@@ -43,13 +43,6 @@ namespace JDI.Light.Utils
             return by.GetByFunc()(byLocator);
         }
 
-        public static By CorrectXPath(this By byValue)
-        {
-            return byValue.ToString().Contains("By.xpath: //")
-                ? byValue.GetByFunc()(new Regex("//").Replace(byValue.GetByLocator(), "./", 1))
-                : byValue;
-        }
-
         public static string GetByLocator(this By by)
         {
             var byAsString = by.ToString();
