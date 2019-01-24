@@ -20,13 +20,13 @@ namespace JDI.Light.Tests.UITests
             Jdi.Timeouts.WaitElementSec = 10;
             Jdi.Timeouts.WaitPageLoadSec = 10;
             WinProcUtils.TestRunStartTime = DateTime.Now;
-            WinProcUtils.KillAllRunWebDrivers();
+            WinProcUtils.KillAllRunningDrivers();
         }
 
         [OneTimeTearDown]
         protected void OneTimeTearDown()
         {
-            WinProcUtils.KillAllRunWebDrivers();
+            WinProcUtils.KillAllRunningDrivers();
         }
     }
 }

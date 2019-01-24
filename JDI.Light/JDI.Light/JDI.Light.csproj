@@ -111,7 +111,7 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Utils\WebDriverByUtils.cs" />
+    <Compile Include="Utils\LocatorUtils.cs" />
     <Compile Include="Factories\WebDriverFactory.cs" />
     <Compile Include="Utils\WinProcUtils.cs" />
     <Compile Include="Utils\WebDriverUtils.cs" />

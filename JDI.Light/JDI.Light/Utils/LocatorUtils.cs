@@ -6,7 +6,7 @@ using OpenQA.Selenium;
 
 namespace JDI.Light.Utils
 {
-    public static class LocatorsUtils
+    public static class LocatorUtils
     {
         public static By FillByTemplate(this By by, params object[] args)
         {
