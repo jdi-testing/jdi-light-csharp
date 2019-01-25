@@ -2,6 +2,7 @@
 using JDI.Light.Elements;
 using JDI.Light.Factories;
 using JDI.Light.Interfaces;
+using JDI.Light.Interfaces.Base;
 using JDI.Light.Logging;
 using JDI.Light.Settings;
 using JDI.Light.Utils;
@@ -43,6 +44,12 @@ namespace JDI.Light
         {
             WebInit.InitStaticPages(siteType, DriverFactory.CurrentDriverName);
         }
+
+        //public static T InitSite<T>() where T : IBaseElement
+        //{
+        //    var instance = WebInit.InitStaticPages(typeof(T), DriverFactory.CurrentDriverName);
+        //    return instance;
+        //}
 
         public static object ExecuteScript(string script, params object[] args)
         {

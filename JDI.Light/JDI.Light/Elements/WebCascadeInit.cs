@@ -29,7 +29,7 @@ namespace JDI.Light.Elements
             typeof(Section),
             typeof(UIElement)
         };
-        
+
         public void InitStaticPages(Type parentType, string driverName)
         {
             SetFields(null, parentType.StaticFields().GetFields(Decorators), parentType, driverName);

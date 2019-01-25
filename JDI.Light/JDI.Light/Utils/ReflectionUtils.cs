@@ -7,21 +7,16 @@ namespace JDI.Light.Utils
 {
     public static class ReflectionUtils
     {
-        public static List<FieldInfo> InstanceFields(this Type type)
-        {
-            return type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).ToList();
-        }
-        
         public static List<FieldInfo> StaticFields(this Type type)
         {
-            return type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static).ToList();
+            return type.GetFields(BindingFlags.Public | BindingFlags.Static).ToList();
         }
 
         public static List<FieldInfo> GetFieldsDeep(this Type type, params Type[] types)
         {
             if (types.Contains(type))
                 return new List<FieldInfo>();
-            var result = type.InstanceFields();
+            var result = type.GetFields(BindingFlags.Public | BindingFlags.Instance).ToList();
             result.AddRange(GetFieldsDeep(type.BaseType, types));
             return result;
         }
