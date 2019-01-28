@@ -12,15 +12,16 @@ namespace JDI.Light.Tests.UITests
 {
     public class TestBase
     {
+        public TestSite TestSite { get; set; }
+
         [SetUp]
         public virtual void SetUpTest()
         {
             //TODO:
-            //Jdi.InitSite(typeof(TestSite));
+            TestSite = Jdi.InitSite<TestSite>();
             TestSite.HomePage.Open();
             TestSite.HomePage.Profile.Click();
             TestSite.HomePage.LoginForm.Submit(User.DefaultUser);
-            var f = HomePage.Footer;
             Jdi.Logger.Info("Run test...");
         }
 

@@ -1,5 +1,4 @@
 ﻿using JDI.Light.Tests.DataProviders;
-using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 
 namespace JDI.Light.Tests.UITests.Common
@@ -23,7 +22,7 @@ namespace JDI.Light.Tests.UITests.Common
         public void CheckSingleTest()
         {
             TestSite.MetalsColorsPage.CbWater.Check();
-            CommonActionsData.CheckAction("Water: condition changed to true");
+            CommonActionsData.CheckAction(TestSite,"Water: condition changed to true");
         }
 
         [Test]
@@ -31,7 +30,7 @@ namespace JDI.Light.Tests.UITests.Common
         {
             TestSite.MetalsColorsPage.CbWater.Click();
             TestSite.MetalsColorsPage.CbWater.Uncheck();
-            CommonActionsData.CheckAction("Water: condition changed to false");
+            CommonActionsData.CheckAction(TestSite, "Water: condition changed to false");
         }
 
         [Test]
@@ -48,16 +47,16 @@ namespace JDI.Light.Tests.UITests.Common
             TestSite.MetalsColorsPage.CbWater.Click();
             TestSite.MetalsColorsPage.CbWater.Uncheck();
             TestSite.MetalsColorsPage.CbWater.Uncheck();
-            CommonActionsData.CheckAction("Water: condition changed to false");
+            CommonActionsData.CheckAction(TestSite, "Water: condition changed to false");
         }
 
         [Test]
         public void ClickTest()
         {
             TestSite.MetalsColorsPage.CbWater.Click();
-            CommonActionsData.CheckAction("Water: condition changed to true");
+            CommonActionsData.CheckAction(TestSite, "Water: condition changed to true");
             TestSite.MetalsColorsPage.CbWater.Click();
-            CommonActionsData.CheckAction("Water: condition changed to false");
+            CommonActionsData.CheckAction(TestSite, "Water: condition changed to false");
         }
 
         [Test]
@@ -67,7 +66,7 @@ namespace JDI.Light.Tests.UITests.Common
             if (!expected) TestSite.MetalsColorsPage.CbWater.Click();
             TestSite.MetalsColorsPage.CbWater.Value = value;
             var resultMsg = "Water: condition changed to " + expected.ToString().ToLower();
-            CommonActionsData.CheckAction(resultMsg);
+            CommonActionsData.CheckAction(TestSite, resultMsg);
         }
     }
 }

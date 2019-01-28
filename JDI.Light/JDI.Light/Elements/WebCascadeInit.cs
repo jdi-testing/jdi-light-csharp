@@ -26,11 +26,11 @@ namespace JDI.Light.Elements
         public T InitPages<T>(string driverName) where T : IBaseElement, new ()
         {
             var site = new T();
-            SetFields(site, typeof(T).InstanceFields().GetFields(Decorators), driverName);
+            SetMembers(site, typeof(T).InstanceMembers().FilterMembers(Decorators), driverName);
             return site;
         }
 
-        private void SetFields(IBaseElement parent, IEnumerable<MemberInfo> parentMembers, string driverName)
+        private void SetMembers(IBaseElement parent, IEnumerable<MemberInfo> parentMembers, string driverName)
         {
             var members = parentMembers.Where(field => Decorators.Any(type => type.IsAssignableFrom(field.GetMemberType())));
             foreach (var member in members)
@@ -41,9 +41,8 @@ namespace JDI.Light.Elements
                     : GetInstanceElement(parent, member, driverName);
                 instance.Name = member.GetElementName();
                 instance.DriverName = driverName;
-                instance.Parent = parent;
                 member.SetMemberValue(parent, instance);
-                SetFields(instance, instance.GetFields(Decorators, StopTypes), driverName);
+                SetMembers(instance, instance.GetFields(Decorators, StopTypes), driverName);
             }
         }
         
@@ -62,6 +61,7 @@ namespace JDI.Light.Elements
             {
                 Jdi.Domain = site.GetDomainFunc.Invoke();
             }
+            instance.Parent = parent;
             instance.Url = pageAttribute.Url;
             instance.UrlTemplate = pageAttribute.UrlTemplate;
             instance.Title = pageAttribute.Title;
@@ -73,7 +73,8 @@ namespace JDI.Light.Elements
         protected IBaseElement GetInstanceElement(IBaseElement parent, MemberInfo member, string driverName)
         {
             var type = member.GetMemberType();
-            var instance = (IBaseElement)member.GetMemberValue(parent);
+            var instance = (IBaseUIElement)member.GetMemberValue(parent);
+            instance.Parent = parent;
             type = type.IsInterface ? MapInterfaceToElement.ClassFromInterface(type) : type;
             var element = (UIElement) instance ?? UIElementFactory.CreateInstance(type, member.GetFindsBy());
             var checkedAttr = member.GetCustomAttribute<IsCheckedAttribute>(false);
