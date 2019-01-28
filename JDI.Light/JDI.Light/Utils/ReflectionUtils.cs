@@ -10,7 +10,7 @@ namespace JDI.Light.Utils
     {
         public static IEnumerable<MemberInfo> InstanceMembers(this Type type)
         {
-            return type.GetMembers(BindingFlags.Public & BindingFlags.Instance);
+            return type.GetMembers(BindingFlags.Public | BindingFlags.Instance);
         }
 
         private static List<FieldInfo> GetFieldsDeep(this Type type, params Type[] types)

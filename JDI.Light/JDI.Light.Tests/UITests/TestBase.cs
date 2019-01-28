@@ -2,7 +2,6 @@
 using System.IO;
 using JDI.Light.Tests.Entities;
 using JDI.Light.Tests.UIObjects;
-using JDI.Light.Tests.UIObjects.Pages;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
@@ -17,7 +16,6 @@ namespace JDI.Light.Tests.UITests
         [SetUp]
         public virtual void SetUpTest()
         {
-            //TODO:
             TestSite = Jdi.InitSite<TestSite>();
             TestSite.HomePage.Open();
             TestSite.HomePage.Profile.Click();
@@ -26,7 +24,7 @@ namespace JDI.Light.Tests.UITests
         }
 
         [TearDown]
-        public void TestTearDown()
+        public virtual void TestTearDown()
         {
             var folder = @"C:\Screenshots";
             Directory.CreateDirectory(folder);

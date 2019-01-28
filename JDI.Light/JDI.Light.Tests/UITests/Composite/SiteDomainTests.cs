@@ -1,4 +1,5 @@
 ﻿using JDI.Light.Tests.UIObjects;
+using JDI.Light.Utils;
 using NUnit.Framework;
 
 namespace JDI.Light.Tests.UITests.Composite
@@ -6,11 +7,12 @@ namespace JDI.Light.Tests.UITests.Composite
     [TestFixture]
     public class SiteDomainTests : TestBase
     {
+        public TestSiteCustomDomain TestSiteCustomDomain { get; set; }
+
         [SetUp]
         public override void SetUpTest()
         {
-            //TODO:
-            //Jdi.InitSite(typeof(TestSiteCustomDomain));
+            TestSiteCustomDomain = Jdi.InitSite<TestSiteCustomDomain>();
             Jdi.Logger.Info("Run test...");
         }
 
@@ -19,6 +21,12 @@ namespace JDI.Light.Tests.UITests.Composite
         {
             TestSiteCustomDomain.HomePage.Open();
             Jdi.Logger.Info("Custom domain worked!");
+        }
+
+        [TearDown]
+        public override void TestTearDown()
+        {
+            WinProcUtils.KillAllRunningDrivers();
         }
     }
 }

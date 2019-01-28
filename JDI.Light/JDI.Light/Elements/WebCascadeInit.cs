@@ -26,13 +26,14 @@ namespace JDI.Light.Elements
         public T InitPages<T>(string driverName) where T : IBaseElement, new ()
         {
             var site = new T();
-            SetMembers(site, typeof(T).InstanceMembers().FilterMembers(Decorators), driverName);
+            var members = typeof(T).InstanceMembers().Where(m => m.MemberType == MemberTypes.Property || m.MemberType == MemberTypes.Field);
+            SetMembers(site, members.FilterMembers(Decorators), driverName);
             return site;
         }
 
         private void SetMembers(IBaseElement parent, IEnumerable<MemberInfo> parentMembers, string driverName)
         {
-            var members = parentMembers.Where(field => Decorators.Any(type => type.IsAssignableFrom(field.GetMemberType())));
+            var members = parentMembers.Where(m => Decorators.Any(type => type.IsAssignableFrom(m.GetMemberType())));
             foreach (var member in members)
             {
                 var type = member.GetMemberType();
@@ -74,9 +75,9 @@ namespace JDI.Light.Elements
         {
             var type = member.GetMemberType();
             var instance = (IBaseUIElement)member.GetMemberValue(parent);
-            instance.Parent = parent;
             type = type.IsInterface ? MapInterfaceToElement.ClassFromInterface(type) : type;
             var element = (UIElement) instance ?? UIElementFactory.CreateInstance(type, member.GetFindsBy());
+            element.Parent = parent;
             var checkedAttr = member.GetCustomAttribute<IsCheckedAttribute>(false);
             if (checkedAttr != null && typeof(ICheckBox).IsAssignableFrom(member.GetMemberType()))
             {

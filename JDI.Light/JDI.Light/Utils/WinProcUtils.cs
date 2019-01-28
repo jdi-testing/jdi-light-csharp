@@ -14,6 +14,7 @@ namespace JDI.Light.Utils
             "gecko"
         };
 
+        public static bool KillAllDrivers = false;
         public static DateTime? TestRunStartTime { get; private set; }
         
         public static void Init()
@@ -25,9 +26,17 @@ namespace JDI.Light.Utils
         {
             foreach (var process in ProcessToKill)
             {
-                Process.GetProcessesByName(process)
-                    .Where(x => x.StartTime > TestRunStartTime)
-                    .ToList().ForEach(x => x.Kill());
+                if (KillAllDrivers)
+                {
+                    Process.GetProcessesByName(process)
+                        .ToList().ForEach(x => x.Kill());
+                }
+                else
+                {
+                    Process.GetProcessesByName(process)
+                        .Where(x => x.StartTime > TestRunStartTime)
+                        .ToList().ForEach(x => x.Kill());
+                }
             }
         }
     }

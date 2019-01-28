@@ -1,5 +1,4 @@
-﻿using System;
-using JDI.Light.Elements;
+﻿using JDI.Light.Elements;
 using JDI.Light.Factories;
 using JDI.Light.Interfaces;
 using JDI.Light.Interfaces.Base;
