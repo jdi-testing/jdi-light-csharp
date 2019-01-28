@@ -9,7 +9,8 @@ namespace JDI.Light.Tests.UITests.Composite
         [SetUp]
         public override void SetUpTest()
         {
-            Jdi.InitSite(typeof(TestSiteCustomDomain));
+            //TODO:
+            //Jdi.InitSite(typeof(TestSiteCustomDomain));
             Jdi.Logger.Info("Run test...");
         }
 

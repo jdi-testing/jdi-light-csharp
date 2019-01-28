@@ -15,7 +15,8 @@ namespace JDI.Light.Tests.UITests
         [SetUp]
         public virtual void SetUpTest()
         {
-            Jdi.InitSite(typeof(TestSite));
+            //TODO:
+            //Jdi.InitSite(typeof(TestSite));
             TestSite.HomePage.Open();
             TestSite.HomePage.Profile.Click();
             TestSite.HomePage.LoginForm.Submit(User.DefaultUser);

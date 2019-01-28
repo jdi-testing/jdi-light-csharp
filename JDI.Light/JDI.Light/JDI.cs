@@ -40,16 +40,11 @@ namespace JDI.Light
             WinProcUtils.Init();
         }
 
-        public static void InitSite(Type siteType)
+        public static T InitSite<T>() where T : IBaseElement, new()
         {
-            WebInit.InitStaticPages(siteType, DriverFactory.CurrentDriverName);
+            var instance = WebInit.InitPages<T>(DriverFactory.CurrentDriverName);
+            return instance;
         }
-
-        //public static T InitSite<T>() where T : IBaseElement
-        //{
-        //    var instance = WebInit.InitStaticPages(typeof(T), DriverFactory.CurrentDriverName);
-        //    return instance;
-        //}
 
         public static object ExecuteScript(string script, params object[] args)
         {

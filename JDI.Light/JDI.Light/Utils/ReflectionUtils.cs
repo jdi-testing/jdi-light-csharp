@@ -12,6 +12,11 @@ namespace JDI.Light.Utils
             return type.GetFields(BindingFlags.Public | BindingFlags.Static).ToList();
         }
 
+        public static List<FieldInfo> InstanceFields(this Type type)
+        {
+            return type.GetFields(BindingFlags.Public & BindingFlags.Instance).ToList();
+        }
+
         public static List<FieldInfo> GetFieldsDeep(this Type type, params Type[] types)
         {
             if (types.Contains(type))
