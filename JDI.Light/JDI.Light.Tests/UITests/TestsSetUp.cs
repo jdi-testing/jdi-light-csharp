@@ -18,7 +18,6 @@ namespace JDI.Light.Tests.UITests
             Jdi.Logger.Info("Init test run...");
             Jdi.Timeouts.WaitElementSec = 10;
             Jdi.Timeouts.WaitPageLoadSec = 10;
-            WinProcUtils.KillAllDrivers = true;
             WinProcUtils.KillAllRunningDrivers();
         }
 
