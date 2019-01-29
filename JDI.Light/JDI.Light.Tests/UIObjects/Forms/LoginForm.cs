@@ -10,6 +10,9 @@ namespace JDI.Light.Tests.UIObjects.Forms
         [FindBy(Css = "button.btn-login")]
         public IButton LoginButton;
 
+        [FindBy(XPath = ".//div[@class='logout']/button")]
+        public IButton LogoutButton;
+
         [FindBy(Css = "#name")]
         [Name("Login")]
         public ITextField LoginField;
@@ -17,10 +20,5 @@ namespace JDI.Light.Tests.UIObjects.Forms
         [FindBy(Css = "#password")]
         [Name("Password")]
         public ITextField PasswordField;
-        
-        public void Logout()
-        {
-            LoginButton.Click();
-        }
     }
 }

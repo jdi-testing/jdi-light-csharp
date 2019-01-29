@@ -36,7 +36,7 @@ namespace JDI.Light.Tests.UITests
             }
             TestSite.HomePage.Refresh();
             TestSite.HomePage.Profile.Click();
-            TestSite.LoginForm.Logout();
+            TestSite.LoginForm.LogoutButton.Click();
         }
     }
 }
