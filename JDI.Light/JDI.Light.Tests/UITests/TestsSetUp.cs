@@ -1,5 +1,4 @@
-﻿using System;
-using JDI.Light.Enums;
+﻿using JDI.Light.Enums;
 using JDI.Light.Tests.Asserts;
 using JDI.Light.Utils;
 using NUnit.Framework;
@@ -19,6 +18,7 @@ namespace JDI.Light.Tests.UITests
             Jdi.Logger.Info("Init test run...");
             Jdi.Timeouts.WaitElementSec = 10;
             Jdi.Timeouts.WaitPageLoadSec = 10;
+            WinProcUtils.KillAllDrivers = true;
             WinProcUtils.KillAllRunningDrivers();
         }
 

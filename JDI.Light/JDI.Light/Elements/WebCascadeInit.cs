@@ -21,42 +21,38 @@ namespace JDI.Light.Elements
     public class WebCascadeInit
     {
         protected Type[] Decorators = { typeof(IBaseElement), typeof(IList) };
+        protected Type[] StopTypes = { typeof(object), typeof(WebPage), typeof(Section), typeof(UIElement) };
 
-        protected Type[] StopTypes => new[]
+        public T InitPages<T>(string driverName) where T : IBaseElement, new ()
         {
-            typeof(object),
-            typeof(WebPage),
-            typeof(Section),
-            typeof(UIElement)
-        };
-        
-        public void InitStaticPages(Type parentType, string driverName)
-        {
-            SetFields(null, parentType.StaticFields().GetFields(Decorators), parentType, driverName);
+            var site = new T();
+            var members = typeof(T).InstanceMembers().Where(m => m.MemberType == MemberTypes.Property || m.MemberType == MemberTypes.Field);
+            SetMembers(site, members.FilterMembers(Decorators), driverName);
+            return site;
         }
 
-        private void SetFields(IBaseElement parent, List<FieldInfo> fields, Type parentType, string driverName)
+        private void SetMembers(IBaseElement parent, IEnumerable<MemberInfo> parentMembers, string driverName)
         {
-            fields.Where(field => Decorators.ToList().Any(type => type.IsAssignableFrom(field.FieldType))).ToList()
-                .ForEach(field =>
-                {
-                    var type = field.FieldType;
-                    var instance = typeof(IPage).IsAssignableFrom(type)
-                        ? GetInstancePage(parent, field, type, parentType)
-                        : GetInstanceElement(parent, type, parentType, field, driverName);
-                    instance.Name = field.GetElementName();
-                    instance.DriverName = driverName;
-                    instance.Parent = parent;
-                    field.SetValue(parent, instance);
-                    SetFields(instance, instance.GetFields(Decorators, StopTypes), instance.GetType(), driverName);
-                });
+            var members = parentMembers.Where(m => Decorators.Any(type => type.IsAssignableFrom(m.GetMemberType())));
+            foreach (var member in members)
+            {
+                var type = member.GetMemberType();
+                var instance = typeof(IPage).IsAssignableFrom(type)
+                    ? GetInstancePage(parent, member)
+                    : GetInstanceElement(parent, member, driverName);
+                instance.Name = member.GetElementName();
+                instance.DriverName = driverName;
+                member.SetMemberValue(parent, instance);
+                SetMembers(instance, instance.GetFields(Decorators, StopTypes), driverName);
+            }
         }
         
-        protected IPage GetInstancePage(object parent, FieldInfo field, Type type, Type parentType)
+        protected IPage GetInstancePage(IBaseElement parent, MemberInfo memberInfo)
         {
-            var instance = (IPage)(field.GetValue(parent)
-                                           ?? Activator.CreateInstance(type));
-            var pageAttribute = field.GetAttribute<PageAttribute>();
+            var parentType = parent.GetType();
+            var instance = (IPage)(memberInfo.GetMemberValue(parent)
+                                           ?? Activator.CreateInstance(memberInfo.GetMemberType()));
+            var pageAttribute = memberInfo.GetCustomAttribute<PageAttribute>(false);
             var site = parentType.GetCustomAttribute<SiteAttribute>(false);
             if (!Jdi.HasDomain && site?.Domain != null)
             {
@@ -66,6 +62,7 @@ namespace JDI.Light.Elements
             {
                 Jdi.Domain = site.GetDomainFunc.Invoke();
             }
+            instance.Parent = parent;
             instance.Url = pageAttribute.Url;
             instance.UrlTemplate = pageAttribute.UrlTemplate;
             instance.Title = pageAttribute.Title;
@@ -74,27 +71,28 @@ namespace JDI.Light.Elements
             return instance;
         }
 
-        protected IBaseElement GetInstanceElement(IBaseElement parent, Type type, Type parentType, FieldInfo field,
-            string driverName)
+        protected IBaseElement GetInstanceElement(IBaseElement parent, MemberInfo member, string driverName)
         {
-            var instance = (IBaseElement)field.GetValue(parent);
+            var type = member.GetMemberType();
+            var instance = (IBaseUIElement)member.GetMemberValue(parent);
             type = type.IsInterface ? MapInterfaceToElement.ClassFromInterface(type) : type;
-            var element = (UIElement) instance ?? UIElementFactory.CreateInstance(type, field.GetFindsBy());
-            var checkedAttr = field.GetAttribute<IsCheckedAttribute>();
-            if (checkedAttr != null && typeof(ICheckBox).IsAssignableFrom(field.FieldType))
+            var element = (UIElement) instance ?? UIElementFactory.CreateInstance(type, member.GetFindsBy());
+            element.Parent = parent;
+            var checkedAttr = member.GetCustomAttribute<IsCheckedAttribute>(false);
+            if (checkedAttr != null && typeof(ICheckBox).IsAssignableFrom(member.GetMemberType()))
             {
                 var checkBox = (CheckBox)element;
                 checkBox.SetIsCheckedFunc(checkedAttr.CheckedDelegate);
             }
             if (parent == null || type != null)
             {
-                var frameBy = field.GetCustomAttribute<FrameAttribute>(false)?.FrameLocator;
+                var frameBy = member.GetCustomAttribute<FrameAttribute>(false)?.FrameLocator;
                 if (frameBy != null)
                     element.FrameLocator = frameBy;
                 By template;
                 if (element.Parent is Form<IConvertible> form && !element.HasLocator
                                                 && (template = form.LocatorTemplate) != null)
-                    element.Locator = template.FillByTemplate(field.Name);
+                    element.Locator = template.FillByTemplate(member.Name);
             }
             return element;
         }

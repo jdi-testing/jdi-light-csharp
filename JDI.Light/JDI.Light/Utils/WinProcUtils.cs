@@ -15,8 +15,6 @@ namespace JDI.Light.Utils
             "gecko"
         };
 
-        public static DateTime? TestRunStartTime { get; private set; }
-
         public static void KillAllRunningDrivers()
         {
             foreach (var process in ProcessToKill)

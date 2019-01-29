@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 using OpenQA.Selenium;
 

@@ -13,6 +13,6 @@ namespace JDI.Light.Tests.UIObjects
         }
 
         [Page(Url = "/index.html", Title = "Home Page")]
-        public static HomePage HomePage;
+        public HomePage HomePage;
     }
 }

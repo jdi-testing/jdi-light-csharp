@@ -1,11 +1,17 @@
 ﻿using System;
+using JDI.Light.Elements.WebActions;
+using JDI.Light.Interfaces;
+using JDI.Light.Interfaces.Base;
 using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Composite
 {
-    public class WebSite
+    public class WebSite : IBaseElement
     {
+        public ActionInvoker Invoker { get; set; }
+        public ILogger Logger { get; set; }
         public string DriverName { set; get; }
+        public string Name { get; set; }
         public IWebDriver WebDriver => Jdi.DriverFactory.GetDriver(DriverName);
         public string Url => WebDriver.Url;
         public string BaseUrl => new Uri(WebDriver.Url).GetLeftPart(UriPartial.Authority);

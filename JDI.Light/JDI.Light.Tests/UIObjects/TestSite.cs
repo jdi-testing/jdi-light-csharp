@@ -10,36 +10,36 @@ namespace JDI.Light.Tests.UIObjects
     public class TestSite : WebSite
     {
         [Page(Url = "/index.html", Title = "Home Page")]
-        public static HomePage HomePage;
+        public HomePage HomePage;
 
         [Page(Url = "/contacts.html", Title = "Contact Form")]
-        public static ContactPage ContactFormPage;
+        public ContactPage ContactFormPage;
 
         [Page(Url = "/metals-colors.html", Title = "Metal and Colors")]
-        public static MetalsColorsPage MetalsColorsPage;
+        public MetalsColorsPage MetalsColorsPage;
 
         [Page(Url = "/support.html", Title = "Support")]
-        public static SupportPage SupportPage;
+        public SupportPage SupportPage;
 
         [Page(Url = "/dates.html", Title = "Dates")]
-        public static DatesPage Dates;
+        public DatesPage Dates;
 
         [Page(Url = "simple-table.html", Title = "Simple Table")]
-        public static SimpleTablePage SimpleTablePage;
+        public SimpleTablePage SimpleTablePage;
 
         [Page(Url = "complex-table.html", Title = "Complex Table")]
-        public static ComplexTablePage ComplexTablePage;
+        public ComplexTablePage ComplexTablePage;
 
         [FindBy(Css = ".uui-header")]
-        public static Header Header;
+        public Header Header;
 
         [FindBy(Css = ".footer-content")]
-        public static Footer Footer;
+        public Footer Footer;
 
         [FindBy(Id = "login-form")]
-        public static LoginForm LoginForm;
+        public LoginForm LoginForm;
 
         [FindBy(Css = ".logs li")]
-        public static TextList ActionsLog;
+        public TextList ActionsLog;
     }
 }
