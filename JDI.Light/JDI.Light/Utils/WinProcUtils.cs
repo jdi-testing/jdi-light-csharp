@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Management;
 
 namespace JDI.Light.Utils
 {
@@ -14,29 +15,34 @@ namespace JDI.Light.Utils
             "gecko"
         };
 
-        public static bool KillAllDrivers = false;
-        public static DateTime? TestRunStartTime { get; private set; }
-        
-        public static void Init()
-        {
-            TestRunStartTime = DateTime.Now;
-        }
-        
         public static void KillAllRunningDrivers()
         {
             foreach (var process in ProcessToKill)
             {
-                if (KillAllDrivers)
-                {
-                    Process.GetProcessesByName(process)
-                        .ToList().ForEach(x => x.Kill());
-                }
-                else
-                {
-                    Process.GetProcessesByName(process)
-                        .Where(x => x.StartTime > TestRunStartTime)
-                        .ToList().ForEach(x => x.Kill());
-                }
+                Process.GetProcessesByName(process)
+                    .ToList().ForEach(x => x.KillProcessAndChildren());
+            }
+        }
+
+        private static void KillProcessAndChildren(this Process process)
+        {
+            if (process.Id == 0)
+            {
+                return;
+            }
+            var searcher = new ManagementObjectSearcher("select * From Win32_Process Where ParentProcessID =" + process.Id);
+            ManagementObjectCollection managementObjectCollection = searcher.Get();
+            foreach (var managementBaseObject in managementObjectCollection)
+            {
+                KillProcessAndChildren(Process.GetProcessById(Convert.ToInt32(managementBaseObject["ProcessID"])));
+            }
+            try
+            {
+                process.Kill();
+            }
+            catch (ArgumentException)
+            {
+                // Process already exited.
             }
         }
     }
