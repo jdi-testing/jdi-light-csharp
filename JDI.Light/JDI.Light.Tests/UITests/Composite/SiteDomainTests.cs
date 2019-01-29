@@ -26,7 +26,6 @@ namespace JDI.Light.Tests.UITests.Composite
         [TearDown]
         public override void TestTearDown()
         {
-            WinProcUtils.KillAllRunningDrivers();
         }
     }
 }

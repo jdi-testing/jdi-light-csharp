@@ -1,5 +1,6 @@
 ﻿using System;
 using JDI.Light.Elements.WebActions;
+using JDI.Light.Factories;
 using JDI.Light.Interfaces;
 using JDI.Light.Interfaces.Base;
 using OpenQA.Selenium;
@@ -16,10 +17,17 @@ namespace JDI.Light.Elements.Composite
         public string Url => WebDriver.Url;
         public string BaseUrl => new Uri(WebDriver.Url).GetLeftPart(UriPartial.Authority);
         public string Title => WebDriver.Title;
-        
+
         public void Open()
         {
             WebDriver.Navigate().GoToUrl(Jdi.Domain);
+        }
+        
+        public T OpenPage<T>(string relativeUrl, string title = "") where T : WebPage
+        {
+            var page = WebPageFactory.CreateInstance(typeof(T), relativeUrl, title);
+            page.Open();
+            return (T)page;
         }
 
         public void OpenUrl(string url)

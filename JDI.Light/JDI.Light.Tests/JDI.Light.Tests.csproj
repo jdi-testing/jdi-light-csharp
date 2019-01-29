@@ -85,6 +85,7 @@
     <Compile Include="UITests\Composite\SearchTests.cs" />
     <Compile Include="UITests\Composite\SiteDomainTests.cs" />
     <Compile Include="UITests\Composite\TableTests.cs" />
+    <Compile Include="UITests\Composite\WebSiteTests.cs" />
     <Compile Include="UITests\TestBase.cs" />
     <Compile Include="UITests\TestsSetUp.cs" />
     <Compile Include="UIObjects\Pages\ContactPage.cs" />

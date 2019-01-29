@@ -49,10 +49,10 @@ namespace JDI.Light.Elements
         
         protected IPage GetInstancePage(IBaseElement parent, MemberInfo memberInfo)
         {
-            var parentType = parent.GetType();
-            var instance = (IPage)(memberInfo.GetMemberValue(parent)
-                                           ?? Activator.CreateInstance(memberInfo.GetMemberType()));
             var pageAttribute = memberInfo.GetCustomAttribute<PageAttribute>(false);
+            var parentType = parent.GetType();
+            var instance = (IPage) (memberInfo.GetMemberValue(parent)
+                                    ?? WebPageFactory.CreateInstance(memberInfo.GetMemberType(), pageAttribute.Url, pageAttribute.Title));
             var site = parentType.GetCustomAttribute<SiteAttribute>(false);
             if (!Jdi.HasDomain && site?.Domain != null)
             {
@@ -63,9 +63,7 @@ namespace JDI.Light.Elements
                 Jdi.Domain = site.GetDomainFunc.Invoke();
             }
             instance.Parent = parent;
-            instance.Url = pageAttribute.Url;
             instance.UrlTemplate = pageAttribute.UrlTemplate;
-            instance.Title = pageAttribute.Title;
             instance.CheckUrlType = pageAttribute.UrlCheckType;
             instance.CheckTitleType = pageAttribute.TitleCheckType;
             return instance;
