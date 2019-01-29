@@ -8,11 +8,9 @@ namespace JDI.Light.Tests.UIObjects.Forms
     public class LoginForm : Form<User>
     {
         [FindBy(Css = "button.btn-login")]
+        [Name("Login")]
         public IButton LoginButton;
-
-        [FindBy(XPath = ".//div[@class='logout']/button")]
-        public IButton LogoutButton;
-
+        
         [FindBy(Css = "#name")]
         [Name("Login")]
         public ITextField LoginField;

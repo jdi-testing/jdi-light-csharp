@@ -19,7 +19,7 @@ namespace JDI.Light.Tests.UITests
             TestSite = Jdi.InitSite<TestSite>();
             TestSite.HomePage.Open();
             TestSite.HomePage.Profile.Click();
-            TestSite.HomePage.LoginForm.Submit(User.DefaultUser);
+            TestSite.HomePage.LoginForm.Submit(User.DefaultUser, "Login");
             Jdi.Logger.Info("Run test...");
         }
 
@@ -34,9 +34,9 @@ namespace JDI.Light.Tests.UITests
                 Jdi.WebDriver.TakeScreenshot()
                     .SaveAsFile(Path.Combine(folder, $"{Guid.NewGuid()}.png"), ScreenshotImageFormat.Png);
             }
-            TestSite.HomePage.Refresh();
+            TestSite.HomePage.Open();
             TestSite.HomePage.Profile.Click();
-            TestSite.LoginForm.LogoutButton.Click();
+            TestSite.HomePage.LogoutButton.Click();
         }
     }
 }
