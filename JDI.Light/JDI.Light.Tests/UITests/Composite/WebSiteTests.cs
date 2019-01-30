@@ -12,5 +12,13 @@ namespace JDI.Light.Tests.UITests.Composite
             var page = TestSite.OpenPage<HomePage>("/index.html", "Home Page");
             page.CheckOpened();
         }
+
+        [Test]
+        public void OpenUrlTest()
+        {
+            var url = TestSite.Domain + "/support.html";
+            TestSite.OpenUrl(url);
+            Assert.AreEqual(url, TestSite.Url);
+        }
     }
 }

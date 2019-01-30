@@ -10,12 +10,12 @@ namespace JDI.Light.Interfaces.Composite
         CheckPageType CheckTitleType { get; set; }
         CheckPageType CheckUrlType { get; set; }
 
-        IBaseElement Parent { get; set; }
+        ISite Parent { get; set; }
         string Url { get; set; }
         string Title { get; set; }
         string UrlTemplate { get; set; }
 
-        IWebDriver WebDriver { get; set; }
+        IWebDriver WebDriver { get; }
         Timer Timer { get; set; }
 
         void CheckOpened();

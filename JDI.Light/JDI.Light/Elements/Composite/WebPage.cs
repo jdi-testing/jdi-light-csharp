@@ -23,8 +23,9 @@ namespace JDI.Light.Elements.Composite
         public ILogger Logger { get; set; }
         public string DriverName { get; set; }
         public string Name { get; set; }
-        public IBaseElement Parent { get; set; }
-        public IWebDriver WebDriver { get; set; }
+        public ISite Parent { get; set; }
+        public IWebDriver WebDriver => Jdi.DriverFactory.GetDriver(DriverName);
+
         public Timer Timer { get; set; }
 
         private void InitPage()
@@ -32,7 +33,6 @@ namespace JDI.Light.Elements.Composite
             Logger = Jdi.Logger;
             Invoker = new ActionInvoker(Logger);
             Name = $"{Title} ({Url})";
-            WebDriver = Jdi.DriverFactory.GetDriver();
             Timer = new Timer();
         }
 
@@ -56,9 +56,9 @@ namespace JDI.Light.Elements.Composite
 
         public string Url
         {
-            get => _url == null || _url.StartsWith("http://") || _url.StartsWith("https://") || !Jdi.HasDomain
+            get => _url == null || _url.StartsWith("http://") || _url.StartsWith("https://") || !Parent.HasDomain
                 ? _url
-                : Jdi.Domain + "/" + new Regex("^//*").Replace(_url, "");
+                : Parent.Domain + "/" + new Regex("^//*").Replace(_url, "");
             set => _url = value;
         }
 

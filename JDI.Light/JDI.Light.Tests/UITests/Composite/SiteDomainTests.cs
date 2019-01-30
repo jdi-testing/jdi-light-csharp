@@ -1,5 +1,4 @@
 ﻿using JDI.Light.Tests.UIObjects;
-using JDI.Light.Utils;
 using NUnit.Framework;
 
 namespace JDI.Light.Tests.UITests.Composite

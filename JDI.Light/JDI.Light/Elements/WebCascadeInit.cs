@@ -23,10 +23,20 @@ namespace JDI.Light.Elements
         protected Type[] Decorators = { typeof(IBaseElement), typeof(IList) };
         protected Type[] StopTypes = { typeof(object), typeof(WebPage), typeof(Section), typeof(UIElement) };
 
-        public T InitPages<T>(string driverName) where T : IBaseElement, new ()
+        public T InitPages<T>(string driverName) where T : ISite, new ()
         {
-            var site = new T();
-            var members = typeof(T).InstanceMembers().Where(m => m.MemberType == MemberTypes.Property || m.MemberType == MemberTypes.Field);
+            var siteType = typeof(T);
+            var site = new T { DriverName = driverName };
+            var siteAttribute = siteType.GetCustomAttribute<SiteAttribute>(false);
+            if (siteAttribute?.Domain != null)
+            {
+                site.Domain = siteAttribute.Domain;
+            }
+            else if (siteAttribute?.DomainProviderMethodName != null && siteAttribute.DomainProviderType != null)
+            {
+                site.Domain = siteAttribute.GetDomainFunc.Invoke();
+            }
+            var members = siteType.InstanceMembers().Where(m => m.MemberType == MemberTypes.Property || m.MemberType == MemberTypes.Field);
             SetMembers(site, members.FilterMembers(Decorators), driverName);
             return site;
         }
@@ -50,19 +60,9 @@ namespace JDI.Light.Elements
         protected IPage GetInstancePage(IBaseElement parent, MemberInfo memberInfo)
         {
             var pageAttribute = memberInfo.GetCustomAttribute<PageAttribute>(false);
-            var parentType = parent.GetType();
             var instance = (IPage) (memberInfo.GetMemberValue(parent)
                                     ?? WebPageFactory.CreateInstance(memberInfo.GetMemberType(), pageAttribute.Url, pageAttribute.Title));
-            var site = parentType.GetCustomAttribute<SiteAttribute>(false);
-            if (!Jdi.HasDomain && site?.Domain != null)
-            {
-                Jdi.Domain = site.Domain;
-            }
-            else if (site?.DomainProviderMethodName != null && site.DomainProviderType != null)
-            {
-                Jdi.Domain = site.GetDomainFunc.Invoke();
-            }
-            instance.Parent = parent;
+            instance.Parent = (ISite) parent;
             instance.UrlTemplate = pageAttribute.UrlTemplate;
             instance.CheckUrlType = pageAttribute.UrlCheckType;
             instance.CheckTitleType = pageAttribute.TitleCheckType;

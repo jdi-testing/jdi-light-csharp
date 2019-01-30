@@ -7,7 +7,7 @@ namespace JDI.Light.Utils
 {
     public static class WinProcUtils
     {
-        private static readonly string[] ProcessToKill =
+        public static string[] ProcessToKill =
         {
             "chromedriver",
             "firefox",

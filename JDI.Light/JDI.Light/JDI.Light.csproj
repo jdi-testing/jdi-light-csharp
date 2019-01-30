@@ -102,6 +102,7 @@
     <Compile Include="Interfaces\Composite\IPage.cs" />
     <Compile Include="Interfaces\Composite\IPagination.cs" />
     <Compile Include="Interfaces\Composite\ISearch.cs" />
+    <Compile Include="Interfaces\Composite\ISite.cs" />
     <Compile Include="Interfaces\IDriverFactory.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Interfaces\ILogger.cs" />

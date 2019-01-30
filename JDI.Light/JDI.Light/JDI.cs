@@ -1,7 +1,7 @@
 ﻿using JDI.Light.Elements;
 using JDI.Light.Factories;
 using JDI.Light.Interfaces;
-using JDI.Light.Interfaces.Base;
+using JDI.Light.Interfaces.Composite;
 using JDI.Light.Logging;
 using JDI.Light.Settings;
 using JDI.Light.Utils;
@@ -17,8 +17,8 @@ namespace JDI.Light
         public static Timeouts Timeouts;
         public static IAssert Assert;
         public static ILogger Logger;
-        public static string Domain;
-        public static bool HasDomain => Domain != null && Domain.Contains("://");
+        //public static string Domain;
+        //public static bool HasDomain => Domain != null && Domain.Contains("://");
         public static bool GetLatestDriver = true;
         public static string DriverVersion = "";
 
@@ -38,7 +38,7 @@ namespace JDI.Light
             Timeouts = timeouts ?? new Timeouts();
         }
 
-        public static T InitSite<T>() where T : IBaseElement, new()
+        public static T InitSite<T>() where T : ISite, new()
         {
             var instance = WebInit.InitPages<T>(DriverFactory.CurrentDriverName);
             return instance;
