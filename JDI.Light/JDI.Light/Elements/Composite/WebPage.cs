@@ -4,7 +4,6 @@ using JDI.Light.Elements.WebActions;
 using JDI.Light.Enums;
 using JDI.Light.Extensions;
 using JDI.Light.Interfaces;
-using JDI.Light.Interfaces.Base;
 using JDI.Light.Interfaces.Composite;
 using JDI.Light.Utils;
 using OpenQA.Selenium;
@@ -70,35 +69,28 @@ namespace JDI.Light.Elements.Composite
                 CheckOpened();
         }
 
-        private bool IsOnPage()
+        public bool IsOpened
         {
-            var url = WebDriver.Url;
-            if (string.IsNullOrEmpty(UrlTemplate)
-                && new[] {CheckPageType.None, CheckPageType.Equal}.Contains(CheckUrlType))
-                return url.Equals(Url);
-            switch (CheckUrlType)
+            get
             {
-                case CheckPageType.None:
-                    return url.Contains(UrlTemplate) || url.Matches(UrlTemplate);
-                case CheckPageType.Equal:
+                var url = WebDriver.Url;
+                if (string.IsNullOrEmpty(UrlTemplate)
+                    && new[] { CheckPageType.None, CheckPageType.Equal }.Contains(CheckUrlType))
                     return url.Equals(Url);
-                case CheckPageType.Match:
-                    return url.Matches(UrlTemplate);
-                case CheckPageType.Contains:
-                    return url.Contains(string.IsNullOrEmpty(UrlTemplate) ? Url : UrlTemplate);
+                switch (CheckUrlType)
+                {
+                    case CheckPageType.None:
+                        return url.Contains(UrlTemplate) || url.Matches(UrlTemplate);
+                    case CheckPageType.Equal:
+                        return url.Equals(Url);
+                    case CheckPageType.Match:
+                        return url.Matches(UrlTemplate);
+                    case CheckPageType.Contains:
+                        return url.Contains(string.IsNullOrEmpty(UrlTemplate) ? Url : UrlTemplate);
+                }
+
+                return false;
             }
-
-            return false;
-        }
-
-        public void IsOpened()
-        {
-            ExceptionUtils.ActionWithException(() =>
-            {
-                if (!IsOnPage())
-                    Open();
-                Jdi.Logger.Info($"Page {Name} is opened");
-            }, ex => $"Can't open page {Name}. Reason: {ex}");
         }
 
         public void Refresh()

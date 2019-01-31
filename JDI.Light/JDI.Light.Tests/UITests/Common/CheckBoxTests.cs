@@ -13,7 +13,6 @@ namespace JDI.Light.Tests.UITests.Common
             TestSite.MetalsColorsPage.Open();
             TestSite.MetalsColorsPage.CheckUrl();
             TestSite.MetalsColorsPage.CheckTitle();
-            TestSite.MetalsColorsPage.IsOpened();
             Jdi.Logger.Info("Setup method finished");
             Jdi.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }

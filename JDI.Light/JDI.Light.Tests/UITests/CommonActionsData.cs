@@ -7,7 +7,7 @@ namespace JDI.Light.Tests.UITests
 {
     public class CommonActionsData
     {
-        public static int WaitTimeout => 1000;
+        public static int WaitTimeout => 500;
 
         public static void CheckText(Func<string> func, string expectedAttrValue)
         {

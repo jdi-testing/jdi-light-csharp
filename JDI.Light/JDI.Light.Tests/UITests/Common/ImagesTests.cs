@@ -16,7 +16,6 @@ namespace JDI.Light.Tests.UITests.Common
             Jdi.Logger.Info("Navigating to Home page.");
             TestSite.HomePage.Open();
             TestSite.HomePage.CheckTitle();
-            TestSite.HomePage.IsOpened();
             Jdi.Logger.Info("Setup method finished");
             Jdi.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
@@ -26,7 +25,7 @@ namespace JDI.Light.Tests.UITests.Common
         {
             TestSite.ContactFormPage.Open();
             LogoImage.Click();
-            TestSite.HomePage.IsOpened();
+            Assert.IsTrue(TestSite.HomePage.IsOpened);
         }
 
         [Test]

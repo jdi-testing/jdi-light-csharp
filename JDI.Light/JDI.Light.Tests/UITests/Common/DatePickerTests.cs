@@ -16,7 +16,6 @@ namespace JDI.Light.Tests.UITests.Common
             Jdi.Logger.Info("Navigating to Metals and Colors page.");
             TestSite.Dates.Open();
             TestSite.Dates.CheckTitle();
-            TestSite.Dates.IsOpened();
             TestSite.Dates.Datepicker.Clear();
             Jdi.Logger.Info("Setup method finished");
             Jdi.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);

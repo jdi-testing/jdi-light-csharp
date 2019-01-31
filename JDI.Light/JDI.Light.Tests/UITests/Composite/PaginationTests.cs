@@ -14,7 +14,6 @@ namespace JDI.Light.Tests.UITests.Composite
             Jdi.Logger.Info("Navigating to Simple Table page.");
             TestSite.SimpleTablePage.Open();
             TestSite.SimpleTablePage.CheckTitle();
-            TestSite.SimpleTablePage.IsOpened();
             Jdi.Logger.Info("Setup method finished");
             Jdi.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }

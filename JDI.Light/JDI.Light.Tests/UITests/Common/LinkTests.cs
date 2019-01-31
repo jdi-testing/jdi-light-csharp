@@ -14,7 +14,6 @@ namespace JDI.Light.Tests.UITests.Common
             Jdi.Logger.Info("Navigating to Metals and Colors page.");
             TestSite.HomePage.Open();
             TestSite.HomePage.CheckTitle();
-            TestSite.HomePage.IsOpened();
             Jdi.Logger.Info("Setup method finished");
             Jdi.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
@@ -23,7 +22,7 @@ namespace JDI.Light.Tests.UITests.Common
         public void ClickTest()
         {
             AboutLink.Click();
-            TestSite.SupportPage.IsOpened();
+            Assert.IsTrue(TestSite.SupportPage.IsOpened);
         }
 
         [Test]

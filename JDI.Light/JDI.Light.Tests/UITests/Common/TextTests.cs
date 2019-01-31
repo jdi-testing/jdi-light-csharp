@@ -10,7 +10,7 @@ namespace JDI.Light.Tests.UITests.Common
         public void SetUp()
         {
             Jdi.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
-            TestSite.HomePage.IsOpened();
+            TestSite.HomePage.Open();
             Jdi.Logger.Info("Setup method finished");
         }
 
@@ -56,8 +56,11 @@ namespace JDI.Light.Tests.UITests.Common
         [Test]
         public void WaitMatchTextParallelTest()
         {
-            TestSite.SupportPage.IsOpened();
-            CommonActionsData.RunParallel(() => TestSite.HomePage.IsOpened());
+            TestSite.SupportPage.Open();
+            CommonActionsData.RunParallel(() =>
+            {
+                TestSite.HomePage.Open();
+            });
             Jdi.Assert.AreEquals(TextItem.WaitMatchText(_regEx), _expectedText);
         }
 
@@ -70,8 +73,11 @@ namespace JDI.Light.Tests.UITests.Common
         [Test]
         public void WaitTextParallelTest()
         {
-            TestSite.SupportPage.IsOpened();
-            CommonActionsData.RunParallel(() => TestSite.HomePage.IsOpened());
+            TestSite.SupportPage.Open();
+            CommonActionsData.RunParallel(() =>
+            {
+                TestSite.HomePage.Open();
+            });
             Jdi.Assert.AreEquals(TextItem.WaitText(_contains), _expectedText);
         }
     }
