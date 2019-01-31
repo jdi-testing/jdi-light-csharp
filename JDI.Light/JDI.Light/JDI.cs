@@ -17,8 +17,6 @@ namespace JDI.Light
         public static Timeouts Timeouts;
         public static IAssert Assert;
         public static ILogger Logger;
-        //public static string Domain;
-        //public static bool HasDomain => Domain != null && Domain.Contains("://");
         public static bool GetLatestDriver = true;
         public static string DriverVersion = "";
 

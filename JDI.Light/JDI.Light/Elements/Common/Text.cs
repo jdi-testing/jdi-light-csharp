@@ -43,13 +43,13 @@ namespace JDI.Light.Elements.Common
         public string WaitText(string text)
         {
             return Invoker.DoActionWithResult($"Wait text contains '{text}'",
-                () => TextAction().GetByCondition(t => t.Contains(text)));
+                () => Timer.GetResultByCondition(TextAction(), t => t.Contains(text)));
         }
 
         public string WaitMatchText(string regEx)
         {
             return Invoker.DoActionWithResult($"Wait text match regex '{regEx}'",
-                () => TextAction().GetByCondition(t => t.Matches(regEx)));
+                () => Timer.GetResultByCondition(TextAction(), t => t.Matches(regEx)));
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using JDI.Light.Elements.Base;
-using JDI.Light.Extensions;
 using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
 
@@ -28,7 +27,7 @@ namespace JDI.Light.Elements.Common
             Func<string> TextFunc (UIElement el) => GetReference;
             return Invoker.DoActionWithResult(
                 $"Wait link contains '{text}'",
-                () => TextFunc(this).GetByCondition(t => t.Contains(text))
+                () => Timer.GetResultByCondition(TextFunc(this), t => t.Contains(text))
             );
         }
 
@@ -37,7 +36,7 @@ namespace JDI.Light.Elements.Common
             Func<string> TextFunc(UIElement el) => GetReference;
             return Invoker.DoActionWithResult(
                 $"Wait link match regex '{regEx}'",
-                () => TextFunc(this).GetByCondition(t => t.Matches(regEx))
+                () => Timer.GetResultByCondition(TextFunc(this), t => t.Contains(regEx))
             );
         }
 

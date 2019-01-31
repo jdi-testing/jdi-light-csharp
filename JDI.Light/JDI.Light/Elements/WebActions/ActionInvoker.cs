@@ -18,7 +18,7 @@ namespace JDI.Light.Elements.WebActions
             Func<TResult, string> logResult = null, LogLevel level = LogLevel.Info)
         {
             _logger.Log($"Perform action with result '{actionName}'", level);
-            return ExceptionUtils.ActionWithException(() =>
+            return new Timer().GetResultByCondition(() =>
             {
                 var timer = new Timer();
                 var result = action.Invoke();
@@ -30,7 +30,7 @@ namespace JDI.Light.Elements.WebActions
                 var timePassed = timer.TimePassed.TotalMilliseconds;
                 _logger.Log($"Get result '{stringResult}' in {timePassed / 1000:F} seconds", level);
                 return result;
-            }, ex => $"Failed to do '{actionName}' action. Reason: {ex}");
+            }, r => r != null);
         }
 
         public void DoActionWithWait(string actionName, Action action, LogLevel level = LogLevel.Info)

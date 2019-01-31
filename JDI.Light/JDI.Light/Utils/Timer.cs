@@ -8,22 +8,19 @@ namespace JDI.Light.Utils
     {
         private static readonly double DefaultTimeout = Jdi.Timeouts.CurrentTimeoutMSec;
         private static readonly int DefaultRetryTimeout = Jdi.Timeouts.RetryMSec;
-
         private readonly int _retryTimeoutInMSec;
         private readonly double _timeoutInMSec;
 
-        private Stopwatch _watch;
+        private Stopwatch _watch = Stopwatch.StartNew();
 
         public Timer()
         {
-            _watch = Stopwatch.StartNew();
             _timeoutInMSec = DefaultTimeout;
             _retryTimeoutInMSec = DefaultRetryTimeout;
         }
 
         public Timer(double timeoutInMSec)
         {
-            _watch = Stopwatch.StartNew();
             _timeoutInMSec = timeoutInMSec;
             _retryTimeoutInMSec = DefaultRetryTimeout;
         }
@@ -36,11 +33,19 @@ namespace JDI.Light.Utils
             _watch = Stopwatch.StartNew();
             while (!TimeoutPassed)
             {
-                var res = waitFunc.AvoidExceptions();
+                bool res;
+                try
+                {
+                    res = waitFunc();
+                }
+                catch (Exception e)
+                {
+                    Jdi.Logger.Debug($"Exception: {e.Message}.{Environment.NewLine}{e.StackTrace}");
+                    res = false;
+                }
                 if (res) return true;
                 Thread.Sleep(_retryTimeoutInMSec);
             }
-
             return false;
         }
 

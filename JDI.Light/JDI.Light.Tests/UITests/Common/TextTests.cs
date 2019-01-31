@@ -1,5 +1,4 @@
-﻿using JDI.Light.Interfaces.Common;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace JDI.Light.Tests.UITests.Common
 {
@@ -14,8 +13,6 @@ namespace JDI.Light.Tests.UITests.Common
             Jdi.Logger.Info("Setup method finished");
         }
 
-        private IText TextItem => TestSite.HomePage.Text;
-
         private readonly string _expectedText = ("Lorem ipsum dolor sit amet, consectetur adipisicing elit,"
                                                  + " sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
                                                  + " Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"
@@ -29,13 +26,13 @@ namespace JDI.Light.Tests.UITests.Common
         [Test]
         public void GetTextTest()
         {
-            Jdi.Assert.AreEquals(TextItem.Value, _expectedText);
+            Jdi.Assert.AreEquals(TestSite.HomePage.Text.Value, _expectedText);
         }
 
         [Test]
         public void GetValueTest()
         {
-            Jdi.Assert.AreEquals(TextItem.Value, _expectedText);
+            Jdi.Assert.AreEquals(TestSite.HomePage.Text.Value, _expectedText);
         }
 
         [Test]
@@ -43,42 +40,36 @@ namespace JDI.Light.Tests.UITests.Common
         {
             var attributeName = "testAttr";
             var value = "testValue";
-            TextItem.SetAttribute(attributeName, value);
-            CommonActionsData.CheckText(() => TextItem.GetAttribute(attributeName), value);
+            TestSite.HomePage.Text.SetAttribute(attributeName, value);
+            CommonActionsData.CheckText(() => TestSite.HomePage.Text.GetAttribute(attributeName), value);
         }
 
         [Test]
         public void WaitMatchTest()
         {
-            Jdi.Assert.AreEquals(TextItem.WaitMatchText(_regEx), _expectedText);
+            Jdi.Assert.AreEquals(TestSite.HomePage.Text.WaitMatchText(_regEx), _expectedText);
         }
 
         [Test]
         public void WaitMatchTextParallelTest()
         {
-            TestSite.SupportPage.Open();
-            CommonActionsData.RunParallel(() =>
-            {
-                TestSite.HomePage.Open();
-            });
-            Jdi.Assert.AreEquals(TextItem.WaitMatchText(_regEx), _expectedText);
+            TestSite.HomePage.Open();
+            CommonActionsData.RunParallel(() => { TestSite.SupportPage.Open(); });
+            Jdi.Assert.AreEquals(TestSite.HomePage.Text.WaitMatchText(_regEx), _expectedText);
         }
 
         [Test]
         public void WaitText()
         {
-            Jdi.Assert.AreEquals(TextItem.WaitText(_contains), _expectedText);
+            Jdi.Assert.AreEquals(TestSite.HomePage.Text.WaitText(_contains), _expectedText);
         }
 
         [Test]
         public void WaitTextParallelTest()
         {
-            TestSite.SupportPage.Open();
-            CommonActionsData.RunParallel(() =>
-            {
-                TestSite.HomePage.Open();
-            });
-            Jdi.Assert.AreEquals(TextItem.WaitText(_contains), _expectedText);
+            TestSite.HomePage.Open();
+            CommonActionsData.RunParallel(() => { TestSite.SupportPage.Open(); });
+            Jdi.Assert.AreEquals(TestSite.HomePage.Text.WaitText(_contains), _expectedText);
         }
     }
 }
