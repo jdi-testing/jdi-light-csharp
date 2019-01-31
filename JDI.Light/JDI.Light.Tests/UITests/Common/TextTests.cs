@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Threading;
+using NUnit.Framework;
 
 namespace JDI.Light.Tests.UITests.Common
 {
@@ -53,8 +54,9 @@ namespace JDI.Light.Tests.UITests.Common
         [Test]
         public void WaitMatchTextParallelTest()
         {
-            TestSite.HomePage.Open();
-            CommonActionsData.RunParallel(() => { TestSite.SupportPage.Open(); });
+            TestSite.SupportPage.Open();
+            CommonActionsData.RunParallel(() => { TestSite.HomePage.Open(); });
+            Thread.Sleep(3000);
             Jdi.Assert.AreEquals(TestSite.HomePage.Text.WaitMatchText(_regEx), _expectedText);
         }
 
@@ -67,8 +69,8 @@ namespace JDI.Light.Tests.UITests.Common
         [Test]
         public void WaitTextParallelTest()
         {
-            TestSite.HomePage.Open();
-            CommonActionsData.RunParallel(() => { TestSite.SupportPage.Open(); });
+            TestSite.SupportPage.Open();
+            CommonActionsData.RunParallel(() => { TestSite.HomePage.Open(); });
             Jdi.Assert.AreEquals(TestSite.HomePage.Text.WaitText(_contains), _expectedText);
         }
     }

@@ -42,14 +42,12 @@ namespace JDI.Light.Elements.Common
 
         public string WaitText(string text)
         {
-            return Invoker.DoActionWithResult($"Wait text contains '{text}'",
-                () => Timer.GetResultByCondition(TextAction(), t => t.Contains(text)));
+            return Invoker.DoActionWithResult($"Wait text contains '{text}'", TextAction(), checkResultFunc: t => t.Contains(text));
         }
 
         public string WaitMatchText(string regEx)
         {
-            return Invoker.DoActionWithResult($"Wait text match regex '{regEx}'",
-                () => Timer.GetResultByCondition(TextAction(), t => t.Matches(regEx)));
+            return Invoker.DoActionWithResult($"Wait text match regex '{regEx}'", TextAction(), checkResultFunc: t => t.Matches(regEx));
         }
     }
 }

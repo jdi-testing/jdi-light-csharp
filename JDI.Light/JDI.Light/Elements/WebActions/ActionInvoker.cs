@@ -15,8 +15,9 @@ namespace JDI.Light.Elements.WebActions
         }
         
         public TResult DoActionWithResult<TResult>(string actionName, Func<TResult> action,
-            Func<TResult, string> logResult = null, LogLevel level = LogLevel.Info)
+            Func<TResult, string> logResult = null, LogLevel level = LogLevel.Info, Func<TResult, bool> checkResultFunc = null)
         {
+            checkResultFunc = checkResultFunc ?? (r => r != null);
             _logger.Log($"Perform action with result '{actionName}'", level);
             return new Timer().GetResultByCondition(() =>
             {
@@ -30,7 +31,7 @@ namespace JDI.Light.Elements.WebActions
                 var timePassed = timer.TimePassed.TotalMilliseconds;
                 _logger.Log($"Get result '{stringResult}' in {timePassed / 1000:F} seconds", level);
                 return result;
-            }, r => r != null);
+            }, checkResultFunc);
         }
 
         public void DoActionWithWait(string actionName, Action action, LogLevel level = LogLevel.Info)

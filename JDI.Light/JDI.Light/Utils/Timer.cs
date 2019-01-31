@@ -61,9 +61,10 @@ namespace JDI.Light.Utils
                     if (result != null && conditionFunc.Invoke(result))
                         return result;
                 }
-                catch (Exception ex)
+                catch (Exception e)
                 {
-                    exception = ex;
+                    Jdi.Logger.Debug($"Exception: {e.Message}.{Environment.NewLine}{e.StackTrace}");
+                    exception = e;
                 }
                 Thread.Sleep(_retryTimeoutInMSec);
             } while (!TimeoutPassed);

@@ -26,6 +26,7 @@ namespace JDI.Light.Tests.UITests
         [TearDown]
         public virtual void TestTearDown()
         {
+            Jdi.Logger.Info("Run test tear down...");
             var folder = @"C:\Screenshots";
             Directory.CreateDirectory(folder);
             var res = TestContext.CurrentContext.Result.Outcome;
@@ -37,6 +38,7 @@ namespace JDI.Light.Tests.UITests
             TestSite.HomePage.Open();
             TestSite.HomePage.Profile.Click();
             TestSite.HomePage.LogoutButton.Click();
+            Jdi.Logger.Info("Run test tear down done.");
         }
     }
 }
