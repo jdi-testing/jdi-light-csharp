@@ -24,33 +24,24 @@ namespace JDI.Light.Elements.Composite
         public string Name { get; set; }
         public ISite Parent { get; set; }
         public IWebDriver WebDriver => Jdi.DriverFactory.GetDriver(DriverName);
-
         public Timer Timer { get; set; }
 
-        private void InitPage()
+        public WebPage() : this(null)
         {
-            Logger = Jdi.Logger;
-            Invoker = new ActionInvoker(Logger);
-            Name = $"{Title} ({Url})";
-            Timer = new Timer();
         }
 
-        public WebPage()
+        public WebPage(string url) : this(url, null)
         {
-            InitPage();
-        }
-
-        public WebPage(string url)
-        {
-            _url = url;
-            InitPage();
         }
 
         public WebPage(string url, string title)
         {
             _url = url;
             Title = title;
-            InitPage();
+            Logger = Jdi.Logger;
+            Timer = new Timer(Jdi.Timeouts.CurrentTimeoutMSec, Jdi.Timeouts.RetryMSec, Logger);
+            Invoker = new ActionInvoker(Logger, Timer);
+            Name = $"{Title} ({Url})";
         }
 
         public string Url

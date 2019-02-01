@@ -8,10 +8,12 @@ namespace JDI.Light.Elements.WebActions
     public class ActionInvoker
     {
         private readonly ILogger _logger;
+        private readonly Timer _timer;
 
-        public ActionInvoker(ILogger logger)
+        public ActionInvoker(ILogger logger, Timer timer)
         {
             _logger = logger;
+            _timer = timer;
         }
         
         public TResult DoActionWithResult<TResult>(string actionName, Func<TResult> action,
@@ -19,17 +21,15 @@ namespace JDI.Light.Elements.WebActions
         {
             checkResultFunc = checkResultFunc ?? (r => r != null);
             _logger.Log($"Perform action with result '{actionName}'", level);
-            return new Timer().GetResultByCondition(() =>
+            return _timer.GetResultByCondition(() =>
             {
-                var timer = new Timer();
                 var result = action.Invoke();
                 if (result == null)
                     throw Jdi.Assert.Exception($"Do action {actionName} failed. Can't get result.");
                 var stringResult = logResult == null
                     ? result.ToString()
                     : logResult.Invoke(result);
-                var timePassed = timer.TimePassed.TotalMilliseconds;
-                _logger.Log($"Get result '{stringResult}' in {timePassed / 1000:F} seconds", level);
+                _logger.Log($"Get result '{stringResult}'", level);
                 return result;
             }, checkResultFunc);
         }
@@ -37,7 +37,7 @@ namespace JDI.Light.Elements.WebActions
         public void DoActionWithWait(string actionName, Action action, LogLevel level = LogLevel.Info)
         {
             _logger.Log($"Perform action '{actionName}'", level);
-            new Timer().Wait(() =>
+            _timer.Wait(() =>
             {
                 action();
                 return true;

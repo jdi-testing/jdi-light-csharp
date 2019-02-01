@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -57,14 +58,14 @@ namespace JDI.Light.Factories
         public WebDriverFactory()
         {
             Drivers = new Dictionary<string, Func<IWebDriver>>();
-            RunDrivers = new ThreadLocal<Dictionary<string, IWebDriver>>(() => new Dictionary<string, IWebDriver>());
+            RunDrivers = new ConcurrentDictionary<string, IWebDriver>();
             DriverPath = AppDomain.CurrentDomain.BaseDirectory;
             RunType = RunType.Local;
         }
 
         private Dictionary<string, Func<IWebDriver>> Drivers { get; }
 
-        private ThreadLocal<Dictionary<string, IWebDriver>> RunDrivers { get; }
+        private ConcurrentDictionary<string, IWebDriver> RunDrivers { get; }
         public RunType RunType { get; set; }
 
         public Func<IWebElement, bool> ElementSearchCriteria { get; set; } = el => el.Displayed;
@@ -111,28 +112,23 @@ namespace JDI.Light.Factories
                     throw new Exception($"Can't find driver with name {driverName}");
             try
             {
-                IWebDriver result;
-                lock (_locker)
+                if (RunDrivers.TryGetValue(driverName, out var driver))
                 {
-                    if (RunDrivers.Value == null || !RunDrivers.Value.ContainsKey(driverName))
-                    {
-                        var rDrivers = RunDrivers.Value ?? new Dictionary<string, IWebDriver>();
-                        var resultDriver = Drivers[driverName]();
-                        if (resultDriver == null)
-                            throw new Exception(
-                                $"Can't get WebDriver {driverName}. This Driver name is not registered");
-                        rDrivers.Add(driverName, resultDriver);
-                        RunDrivers.Value = rDrivers;
-                    }
-
-                    result = RunDrivers.Value[driverName];
+                    return driver;
                 }
 
-                return result;
+                if (Drivers.TryGetValue(driverName, out var getFunc))
+                {
+                    var result = getFunc();
+                    RunDrivers.TryAdd(driverName, result);
+                    return result;
+                }
+
+                throw new ApplicationException($"Can't get WebDriver {driverName}. This Driver name is not registered");
             }
             catch (Exception e)
             {
-                throw new Exception($"Can't get driver: {e.Message}; StackTrace: {e.StackTrace}");
+                throw new Exception($"Can't get driver: {e.Message}; StackTrace: {e.StackTrace}", e);
             }
         }
 
@@ -171,7 +167,7 @@ namespace JDI.Light.Factories
 
         public bool HasRunDrivers()
         {
-            return RunDrivers.Value != null && RunDrivers.Value.Any();
+            return !RunDrivers.IsEmpty;
         }
 
         private string RegisterLocalDriver(DriverType driverType)
@@ -276,23 +272,26 @@ namespace JDI.Light.Factories
 
         public void ReopenDriver(string driverName)
         {
-            var rDriver = RunDrivers.Value;
-            if (rDriver.ContainsKey(driverName))
+            if (RunDrivers.TryRemove(driverName, out var driver))
             {
-                rDriver[driverName].Close();
-                rDriver.Remove(driverName);
-                RunDrivers.Value = rDriver;
+                driver.Close();
+                GetDriver(driverName);
             }
-
-            if (Drivers.ContainsKey(driverName))
-                GetDriver();
         }
 
         public void Close()
         {
-            foreach (var driver in RunDrivers.Value)
-                driver.Value.Quit();
-            RunDrivers.Value.Clear();
+            while (!RunDrivers.IsEmpty)
+            {
+                var keys = RunDrivers.Keys.ToArray();
+                foreach (var key in keys)
+                {
+                    if (RunDrivers.TryRemove(key, out var driver))
+                    {
+                        driver.Quit();
+                    }
+                }
+            }
         }
     }
 }

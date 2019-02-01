@@ -1,75 +1,73 @@
 ﻿using System;
-using System.Diagnostics;
+using System.ComponentModel;
 using System.Threading;
+using System.Threading.Tasks;
+using JDI.Light.Interfaces;
 
 namespace JDI.Light.Utils
 {
     public class Timer
     {
-        private static readonly double DefaultTimeout = Jdi.Timeouts.CurrentTimeoutMSec;
-        private static readonly int DefaultRetryTimeout = Jdi.Timeouts.RetryMSec;
+        private static readonly SynchronizationContext SynchronizationContext = new SynchronizationContext();
         private readonly int _retryTimeoutInMSec;
-        private readonly double _timeoutInMSec;
+        private readonly int _timeoutInMSec;
+        private readonly ILogger _logger;
 
-        private Stopwatch _watch = Stopwatch.StartNew();
-
-        public Timer()
+        public Timer(int timeoutInMSec, int retryTimeout, ILogger logger)
         {
-            _timeoutInMSec = DefaultTimeout;
-            _retryTimeoutInMSec = DefaultRetryTimeout;
-        }
-
-        public Timer(double timeoutInMSec)
-        {
+            _logger = logger;
             _timeoutInMSec = timeoutInMSec;
-            _retryTimeoutInMSec = DefaultRetryTimeout;
+            _retryTimeoutInMSec = retryTimeout;
         }
-
-        public TimeSpan TimePassed => _watch.Elapsed;
-        public bool TimeoutPassed => _watch.Elapsed > TimeSpan.FromMilliseconds(_timeoutInMSec);
 
         public bool Wait(Func<bool> waitFunc)
         {
-            _watch = Stopwatch.StartNew();
-            while (!TimeoutPassed)
-            {
-                bool res;
-                try
-                {
-                    res = waitFunc();
-                }
-                catch (Exception e)
-                {
-                    Jdi.Logger.Debug($"Exception: {e.Message}.{Environment.NewLine}{e.StackTrace}");
-                    res = false;
-                }
-                if (res) return true;
-                Thread.Sleep(_retryTimeoutInMSec);
-            }
-            return false;
+            return GetResultByCondition(waitFunc, b => true);
         }
 
         public T GetResultByCondition<T>(Func<T> getFunc, Func<T, bool> conditionFunc)
         {
-            _watch = Stopwatch.StartNew();
-            Exception exception = null;
-            do
+            Exception lastException = null;
+            using (var tokenSource = new CancellationTokenSource())
             {
-                try
+                if (SynchronizationContext.Current == null)
                 {
-                    var result = getFunc.Invoke();
-                    if (result != null && conditionFunc.Invoke(result))
-                        return result;
+                    SynchronizationContext.SetSynchronizationContext(SynchronizationContext);
                 }
-                catch (Exception e)
-                {
-                    Jdi.Logger.Debug($"Exception: {e.Message}.{Environment.NewLine}{e.StackTrace}");
-                    exception = e;
-                }
-                Thread.Sleep(_retryTimeoutInMSec);
-            } while (!TimeoutPassed);
 
-            throw exception ?? new TimeoutException("The operation has timed-out");
+                var token = tokenSource.Token;
+                var task = Task.Factory.StartNew(() =>
+                {
+                    while (true)
+                    {
+                        try
+                        {
+                            var result = getFunc.Invoke();
+                            if (result != null && conditionFunc.Invoke(result))
+                                return result;
+                        }
+                        catch (Exception e)
+                        {
+                            _logger.Debug($"Exception: {e.Message}.{Environment.NewLine}{e.StackTrace}");
+                            lastException = e;
+                        }
+                        Thread.Sleep(_retryTimeoutInMSec);
+                    }
+                }, token, TaskCreationOptions.DenyChildAttach, TaskScheduler.FromCurrentSynchronizationContext());
+
+                if (!task.Wait(_timeoutInMSec))
+                {
+                    tokenSource.Cancel();
+                    throw lastException ?? new TimeoutException("The operation has timed-out");
+                }
+
+                if (!task.IsCompleted)
+                {
+                    throw lastException ?? new TimeoutException("The operation has timed-out");
+                }
+
+                return task.Result;
+            }
         }
     }
 }

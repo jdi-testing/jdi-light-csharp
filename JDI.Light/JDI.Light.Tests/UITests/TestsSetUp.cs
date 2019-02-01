@@ -16,8 +16,8 @@ namespace JDI.Light.Tests.UITests
             Jdi.GetLatestDriver = false;
             Jdi.DriverVersion = "2.41";
             Jdi.Logger.Info("Init test run...");
-            Jdi.Timeouts.WaitElementSec = 10;
-            Jdi.Timeouts.WaitPageLoadSec = 10;
+            Jdi.Timeouts.WaitElementSec = 20;
+            Jdi.Timeouts.WaitPageLoadSec = 30;
             WinProcUtils.ProcessToKill = new[] { "chromedriver" };
             WinProcUtils.KillAllRunningDrivers();
         }
