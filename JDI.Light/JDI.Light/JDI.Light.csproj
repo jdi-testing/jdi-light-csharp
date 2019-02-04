@@ -115,6 +115,7 @@
     </Compile>
     <Compile Include="Utils\LocatorUtils.cs" />
     <Compile Include="Factories\WebDriverFactory.cs" />
+    <Compile Include="Utils\StaTaskScheduler.cs" />
     <Compile Include="Utils\WinProcUtils.cs" />
     <Compile Include="Utils\WebDriverUtils.cs" />
     <Compile Include="Elements\Base\UIElement.cs" />
