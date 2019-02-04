@@ -19,7 +19,7 @@ namespace JDI.Light
         public static ILogger Logger;
         public static bool GetLatestDriver = true;
         public static string DriverVersion = "";
-
+        
         static Jdi()
         {
             Timeouts = new Timeouts();
