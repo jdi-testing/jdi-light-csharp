@@ -3,7 +3,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Threading;
 using JDI.Light.Enums;
 using JDI.Light.Interfaces;
 using JDI.Light.Utils;
@@ -41,8 +40,6 @@ namespace JDI.Light.Factories
                 {DriverType.IE, path => string.IsNullOrEmpty(path) ? new InternetExplorerDriver() : new InternetExplorerDriver(path)}
             };
 
-        private readonly object _locker = new object();
-
         private string _currentDriverName;
 
         public Func<IWebDriver, IWebDriver> WebDriverSettings = driver =>
@@ -51,7 +48,7 @@ namespace JDI.Light.Factories
                 driver.Manage().Window.Maximize();
             else
                 driver.Manage().Window.Size = BrowserSize;
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(Jdi.Timeouts.WaitElementSec);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(Jdi.Timeouts.WaitElementMSec);
             return driver;
         };
 

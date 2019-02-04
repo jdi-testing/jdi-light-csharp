@@ -39,7 +39,7 @@ namespace JDI.Light.Elements.Composite
             _url = url;
             Title = title;
             Logger = Jdi.Logger;
-            Timer = new Timer(Jdi.Timeouts.CurrentTimeoutMSec, Jdi.Timeouts.RetryMSec, Logger);
+            Timer = new Timer(Jdi.Timeouts.WaitPageLoadMSec, Jdi.Timeouts.RetryMSec, Logger);
             Invoker = new ActionInvoker(Logger, Timer);
             Name = $"{Title} ({Url})";
         }

@@ -19,10 +19,11 @@ namespace JDI.Light.Elements.Common
 
         protected virtual string GetTextAction()
         {
-            var getText = WebElement.Text ?? "";
+            var e = WebElement;
+            var getText = e.Text ?? "";
             if (!getText.Equals(""))
                 return getText;
-            var getValue = WebElement.GetAttribute("value");
+            var getValue = e.GetAttribute("value");
             return getValue ?? getText;
         }
 

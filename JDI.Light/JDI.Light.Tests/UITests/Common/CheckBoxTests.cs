@@ -21,7 +21,7 @@ namespace JDI.Light.Tests.UITests.Common
         public void CheckSingleTest()
         {
             TestSite.MetalsColorsPage.CbWater.Check();
-            CommonActionsData.CheckAction(TestSite,"Water: condition changed to true");
+            Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Water: condition changed to true");
         }
 
         [Test]
@@ -29,7 +29,7 @@ namespace JDI.Light.Tests.UITests.Common
         {
             TestSite.MetalsColorsPage.CbWater.Click();
             TestSite.MetalsColorsPage.CbWater.Uncheck();
-            CommonActionsData.CheckAction(TestSite, "Water: condition changed to false");
+            Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Water: condition changed to false");
         }
 
         [Test]
@@ -46,16 +46,17 @@ namespace JDI.Light.Tests.UITests.Common
             TestSite.MetalsColorsPage.CbWater.Click();
             TestSite.MetalsColorsPage.CbWater.Uncheck();
             TestSite.MetalsColorsPage.CbWater.Uncheck();
-            CommonActionsData.CheckAction(TestSite, "Water: condition changed to false");
+            Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Water: condition changed to false");
         }
 
         [Test]
         public void ClickTest()
         {
             TestSite.MetalsColorsPage.CbWater.Click();
-            CommonActionsData.CheckAction(TestSite, "Water: condition changed to true");
+            Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Water: condition changed to true");
             TestSite.MetalsColorsPage.CbWater.Click();
-            CommonActionsData.CheckAction(TestSite, "Water: condition changed to false");
+            var texts = TestSite.ActionsLog.Texts;
+            Jdi.Assert.Contains(texts[0], "Water: condition changed to false");
         }
 
         [Test]
@@ -65,7 +66,7 @@ namespace JDI.Light.Tests.UITests.Common
             if (!expected) TestSite.MetalsColorsPage.CbWater.Click();
             TestSite.MetalsColorsPage.CbWater.Value = value;
             var resultMsg = "Water: condition changed to " + expected.ToString().ToLower();
-            CommonActionsData.CheckAction(TestSite, resultMsg);
+            Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], resultMsg);
         }
     }
 }

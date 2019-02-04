@@ -1,4 +1,5 @@
 ﻿using System.Threading;
+using System.Threading.Tasks;
 using NUnit.Framework;
 
 namespace JDI.Light.Tests.UITests.Common
@@ -42,7 +43,7 @@ namespace JDI.Light.Tests.UITests.Common
             var attributeName = "testAttr";
             var value = "testValue";
             TestSite.HomePage.Text.SetAttribute(attributeName, value);
-            CommonActionsData.CheckText(() => TestSite.HomePage.Text.GetAttribute(attributeName), value);
+            Jdi.Assert.AreEquals(TestSite.HomePage.Text.GetAttribute(attributeName), value);
         }
 
         [Test]
@@ -55,9 +56,17 @@ namespace JDI.Light.Tests.UITests.Common
         public void WaitMatchTextParallelTest()
         {
             TestSite.SupportPage.Open();
-            CommonActionsData.RunParallel(() => { TestSite.HomePage.Open(); });
-            Thread.Sleep(3000);
-            Jdi.Assert.AreEquals(TestSite.HomePage.Text.WaitMatchText(_regEx), _expectedText);
+            var actualResultTask = Task.Factory.StartNew(() =>
+            {
+                Thread.Sleep(200);
+                return TestSite.HomePage.Text.WaitMatchText(_regEx);
+            });
+            Task.Factory.StartNew(() =>
+            {
+                Thread.Sleep(100);
+                TestSite.HomePage.Open();
+            });
+            Jdi.Assert.AreEquals(actualResultTask.Result, _expectedText);
         }
 
         [Test]
@@ -70,8 +79,17 @@ namespace JDI.Light.Tests.UITests.Common
         public void WaitTextParallelTest()
         {
             TestSite.SupportPage.Open();
-            CommonActionsData.RunParallel(() => { TestSite.HomePage.Open(); });
-            Jdi.Assert.AreEquals(TestSite.HomePage.Text.WaitText(_contains), _expectedText);
+            var actualResultTask = Task.Factory.StartNew(() =>
+            {
+                Thread.Sleep(200);
+                return TestSite.HomePage.Text.WaitText(_contains);
+            });
+            Task.Run(() =>
+            {
+                Thread.Sleep(100);
+                TestSite.HomePage.Open();
+            });
+            Jdi.Assert.AreEquals(actualResultTask.Result, _expectedText);
         }
     }
 }

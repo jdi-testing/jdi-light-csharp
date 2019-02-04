@@ -2,15 +2,12 @@
 using System.Linq;
 using JDI.Light.Elements.Base;
 using JDI.Light.Elements.Common;
-using JDI.Light.Extensions;
 using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Composite
 {
     public class TextList : UIElement
     {
-        private IList<Label> _texts;
-
         public TextList(By locator) : base(locator)
         {
         }
@@ -19,11 +16,12 @@ namespace JDI.Light.Elements.Composite
         {
             get
             {
-                return _texts = WebElements.Select(e =>
+                var res = WebElements.Select(e =>
                 {
-                    var l = new Label(Locator) { WebElement = e };
+                    var l = new Label(Locator) { WebElement = e, Parent = Parent};
                     return l;
                 }).ToList();
+                return res;
             }
         }
 
@@ -40,13 +38,6 @@ namespace JDI.Light.Elements.Composite
         }
 
         public IList<string> Texts => TextElements.Select(el => el.GetText()).ToList();
-
-        public string Value => Texts.FormattedJoin();
-
-        public string GetValue()
-        {
-            return Value;
-        }
 
         public new bool Displayed
         {

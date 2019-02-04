@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using JDI.Light.Enums;
 using JDI.Light.Interfaces;
 
@@ -47,7 +48,7 @@ namespace JDI.Light.Logging
 
             if (doLog)
             {
-                Console.WriteLine($"{DateTime.Now:dd.MM.yyyy HH:mm:ss.fff} {logLevel}: {message}");
+                Console.WriteLine($"{DateTime.Now:dd.MM.yyyy HH:mm:ss.fff} {logLevel} [{Thread.CurrentThread.ManagedThreadId}]: {message}");
             }
         }
 
