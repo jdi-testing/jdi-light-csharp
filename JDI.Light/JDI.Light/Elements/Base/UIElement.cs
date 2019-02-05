@@ -9,7 +9,6 @@ using JDI.Light.Factories;
 using JDI.Light.Interfaces;
 using JDI.Light.Interfaces.Base;
 using OpenQA.Selenium;
-using Timer = JDI.Light.Utils.Timer;
 
 namespace JDI.Light.Elements.Base
 {
@@ -24,14 +23,12 @@ namespace JDI.Light.Elements.Base
 
         public ActionInvoker Invoker { get; set; }
         public ILogger Logger { get; set; }
-        public Timer Timer { get; set; }
         public string DriverName { get; set; }
 
         public UIElement(By byLocator)
         {
             Logger = Jdi.Logger;
-            Timer = new Timer(Jdi.Timeouts.WaitElementMSec, Jdi.Timeouts.RetryMSec, Logger);
-            Invoker = new ActionInvoker(Logger, Timer);
+            Invoker = new ActionInvoker(Logger, Jdi.Timeouts.WaitElementMSec, Jdi.Timeouts.RetryMSec);
             Locator = byLocator;
             if (string.IsNullOrEmpty(DriverName) && Jdi.DriverFactory != null &&
                 !string.IsNullOrEmpty(Jdi.DriverFactory.CurrentDriverName))
@@ -89,8 +86,9 @@ namespace JDI.Light.Elements.Base
         protected List<IWebElement> GetWebElements()
         {
             var criteria = LocalElementSearchCriteria ?? Jdi.DriverFactory.ElementSearchCriteria;
-            var result = Timer.GetResultByCondition(
-                () => GetSearchContext(Parent).FindElements(Locator).ToList(), 
+            var context = GetSearchContext(Parent);
+            var result = Invoker.GetResultByCondition(
+                () => context.FindElements(Locator).ToList(), 
                 els => els.Count(criteria) > 0);
             return result.Where(criteria).ToList();
         }
@@ -210,7 +208,7 @@ namespace JDI.Light.Elements.Base
 
         public void WaitVanished()
         {
-            Invoker.DoActionWithResult("Wait element vanished", () => Timer.Wait(() => !IsDisplayedAction(this)));
+            Invoker.DoActionWithResult("Wait element vanished", () => !IsDisplayedAction(this));
         }
 
         public void Clear()

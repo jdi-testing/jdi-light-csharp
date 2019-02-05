@@ -5,14 +5,13 @@ using JDI.Light.Enums;
 using JDI.Light.Extensions;
 using JDI.Light.Interfaces;
 using JDI.Light.Interfaces.Composite;
-using JDI.Light.Utils;
 using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Composite
 {
     public class WebPage : IPage
     {
-        public static bool CheckAfterOpen = false;
+        public bool CheckAfterOpen = false;
         private string _url;
         public CheckPageType CheckTitleType { get; set; } = CheckPageType.None;
         public CheckPageType CheckUrlType { get; set; } = CheckPageType.None;
@@ -24,8 +23,7 @@ namespace JDI.Light.Elements.Composite
         public string Name { get; set; }
         public ISite Parent { get; set; }
         public IWebDriver WebDriver => Jdi.DriverFactory.GetDriver(DriverName);
-        public Timer Timer { get; set; }
-
+        
         public WebPage() : this(null)
         {
         }
@@ -39,8 +37,7 @@ namespace JDI.Light.Elements.Composite
             _url = url;
             Title = title;
             Logger = Jdi.Logger;
-            Timer = new Timer(Jdi.Timeouts.WaitPageLoadMSec, Jdi.Timeouts.RetryMSec, Logger);
-            Invoker = new ActionInvoker(Logger, Timer);
+            Invoker = new ActionInvoker(Logger, Jdi.Timeouts.WaitPageLoadMSec, Jdi.Timeouts.RetryMSec);
             Name = $"{Title} ({Url})";
         }
 
@@ -84,34 +81,38 @@ namespace JDI.Light.Elements.Composite
             }
         }
 
+        public INavigation Navigation => WebDriver.Navigate();
+
         public void Refresh()
         {
-            Invoker.DoActionWithWait($"Refresh page {Name}", () => WebDriver.Navigate().Refresh());
+            Invoker.DoActionWithWait($"Refresh page {Name}", () => Navigation.Refresh());
         }
 
         public void Back()
         {
-            Invoker.DoActionWithWait("Go back to previous page", () => WebDriver.Navigate().Back());
+            Invoker.DoActionWithWait("Go back to previous page", () => Navigation.Back());
         }
 
         public void Forward()
         {
-            Invoker.DoActionWithWait("Go forward to next page", () => WebDriver.Navigate().Forward());
+            Invoker.DoActionWithWait("Go forward to next page", () => Navigation.Forward());
         }
+
+        public ICookieJar Cookies => WebDriver.Manage().Cookies;
 
         public void AddCookie(Cookie cookie)
         {
-            Invoker.DoActionWithWait("Add cookie for the page", () => WebDriver.Manage().Cookies.AddCookie(cookie));
+            Invoker.DoActionWithWait("Add cookie for the page", () => Cookies.AddCookie(cookie));
         }
 
         public void DeleteCookie(Cookie cookie)
         {
-            Invoker.DoActionWithWait("Add cookie for the page", () => WebDriver.Manage().Cookies.DeleteCookie(cookie));
+            Invoker.DoActionWithWait("Add cookie for the page", () => Cookies.DeleteCookie(cookie));
         }
 
         public void DeleteAllCookies()
         {
-            Invoker.DoActionWithWait("Delete page cookies", () => WebDriver.Manage().Cookies.DeleteAllCookies());
+            Invoker.DoActionWithWait("Delete page cookies", () => Cookies.DeleteAllCookies());
         }
 
         public void CheckUrl()
@@ -121,7 +122,7 @@ namespace JDI.Light.Elements.Composite
                 new[] {CheckPageType.None, CheckPageType.Equal}.Contains(CheckUrlType))
             {
                 if (string.IsNullOrEmpty(Url)) return;
-                Jdi.Assert.IsTrue(Timer.Wait(() =>
+                Jdi.Assert.IsTrue(Invoker.Wait(() =>
                 {
                     Logger.Debug($"Current URL: {WebDriver.Url}");
                     return WebDriver.Url.Equals(Url);
@@ -131,20 +132,20 @@ namespace JDI.Light.Elements.Composite
                 switch (CheckUrlType)
                 {
                     case CheckPageType.None:
-                        Jdi.Assert.IsTrue(Timer.Wait(() =>
+                        Jdi.Assert.IsTrue(Invoker.Wait(() =>
                         {
                             Logger.Debug($"Current URL: {WebDriver.Url}");
                             return WebDriver.Url.Contains(UrlTemplate) || WebDriver.Url.Matches(UrlTemplate);
                         }));
                         break;
                     case CheckPageType.Equal:
-                        Jdi.Assert.IsTrue(Timer.Wait(() => WebDriver.Url.Equals(Url)));
+                        Jdi.Assert.IsTrue(Invoker.Wait(() => WebDriver.Url.Equals(Url)));
                         break;
                     case CheckPageType.Match:
-                        Jdi.Assert.IsTrue(Timer.Wait(() => WebDriver.Url.Matches(UrlTemplate)));
+                        Jdi.Assert.IsTrue(Invoker.Wait(() => WebDriver.Url.Matches(UrlTemplate)));
                         break;
                     case CheckPageType.Contains:
-                        Jdi.Assert.IsTrue(Timer.Wait(() => WebDriver.Url.Contains(string.IsNullOrEmpty(UrlTemplate)
+                        Jdi.Assert.IsTrue(Invoker.Wait(() => WebDriver.Url.Contains(string.IsNullOrEmpty(UrlTemplate)
                             ? Url
                             : UrlTemplate)));
                         break;
@@ -157,28 +158,28 @@ namespace JDI.Light.Elements.Composite
             switch (CheckTitleType)
             {
                 case CheckPageType.None:
-                    Jdi.Assert.IsTrue(Timer.Wait(() =>
+                    Jdi.Assert.IsTrue(Invoker.Wait(() =>
                     {
                         Logger.Debug($"Actual: '{WebDriver.Title}', Expected: '{Title}'");
                         return WebDriver.Title.Equals(Title);
                     }));
                     break;
                 case CheckPageType.Equal:
-                    Jdi.Assert.IsTrue(Timer.Wait(() =>
+                    Jdi.Assert.IsTrue(Invoker.Wait(() =>
                     {
                         Logger.Debug($"Actual: '{WebDriver.Title}', Expected: '{Title}'");
                         return WebDriver.Title.Equals(Title);
                     }));
                     break;
                 case CheckPageType.Match:
-                    Jdi.Assert.IsTrue(Timer.Wait(() =>
+                    Jdi.Assert.IsTrue(Invoker.Wait(() =>
                     {
                         Logger.Debug($"Actual: '{WebDriver.Title}', Expected: '{Title}'");
                         return WebDriver.Title.Matches(Title);
                     }));
                     break;
                 case CheckPageType.Contains:
-                    Jdi.Assert.IsTrue(Timer.Wait(() =>
+                    Jdi.Assert.IsTrue(Invoker.Wait(() =>
                     {
                         Logger.Debug($"Actual: '{WebDriver.Title}', Expected: '{Title}'");
                         return WebDriver.Title.Contains(Title);

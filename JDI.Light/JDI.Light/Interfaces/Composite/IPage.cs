@@ -1,6 +1,5 @@
 ﻿using JDI.Light.Enums;
 using JDI.Light.Interfaces.Base;
-using JDI.Light.Utils;
 using OpenQA.Selenium;
 
 namespace JDI.Light.Interfaces.Composite
@@ -16,7 +15,6 @@ namespace JDI.Light.Interfaces.Composite
         string UrlTemplate { get; set; }
 
         IWebDriver WebDriver { get; }
-        Timer Timer { get; set; }
 
         void CheckOpened();
         void Open();

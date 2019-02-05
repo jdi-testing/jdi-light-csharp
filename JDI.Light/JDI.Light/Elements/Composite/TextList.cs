@@ -32,7 +32,7 @@ namespace JDI.Light.Elements.Composite
 
         public IList<string> WaitText(string expected)
         {
-            if (Timer.Wait(() => Texts.Contains(expected)))
+            if (Invoker.Wait(() => Texts.Contains(expected)))
                 return Texts;
             throw Jdi.Assert.Exception($"Wait Text '{expected}' Failed ({ToString()}");
         }
@@ -59,7 +59,7 @@ namespace JDI.Light.Elements.Composite
 
         public new void WaitDisplayed()
         {
-            if (!Timer.Wait(() =>
+            if (!Invoker.Wait(() =>
             {
                 var elements = WebElements;
                 return elements != null && elements.Any() && elements.All(el => el.Displayed);
@@ -69,7 +69,7 @@ namespace JDI.Light.Elements.Composite
 
         public new void WaitVanished()
         {
-            if (!Timer.Wait(() =>
+            if (!Invoker.Wait(() =>
             {
                 var elements = WebElements;
                 var res = elements == null;

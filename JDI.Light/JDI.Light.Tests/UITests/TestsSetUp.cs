@@ -1,5 +1,6 @@
 ﻿using JDI.Light.Enums;
 using JDI.Light.Tests.Asserts;
+using JDI.Light.Tests.Utils;
 using JDI.Light.Utils;
 using NUnit.Framework;
 
@@ -11,7 +12,7 @@ namespace JDI.Light.Tests.UITests
         [OneTimeSetUp]
         protected void OneTimeSetUp()
         {
-            Jdi.Init(assert: new NUnitAsserter());
+            Jdi.Init(assert: new NUnitAsserter(), logger: new FileLogger());
             Jdi.Logger.LogLevel = LogLevel.Debug;
             Jdi.GetLatestDriver = false;
             Jdi.DriverVersion = "2.41";

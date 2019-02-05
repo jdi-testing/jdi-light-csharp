@@ -105,6 +105,7 @@
     <Compile Include="UIObjects\Forms\LoginForm.cs" />
     <Compile Include="UIObjects\Sections\Summary.cs" />
     <Compile Include="UIObjects\TestSite.cs" />
+    <Compile Include="Utils\FileLogger.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -143,7 +143,6 @@
     <Compile Include="Settings\MapInterfaceToElement.cs" />
     <Compile Include="Settings\Timeouts.cs" />
     <Compile Include="Utils\ReflectionUtils.cs" />
-    <Compile Include="Utils\Timer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="JDI.Light.nuspec" />

@@ -18,7 +18,9 @@ namespace JDI.Light.Elements.Common
 
         public string GetReference()
         {
-            return Invoker.DoActionWithResult("Get link reference", () => FindImmediately(() => WebElement.GetAttribute("href"), ""),
+            return Invoker.DoActionWithResult(
+                "Get link reference", 
+                () => FindImmediately(() => WebElement.GetAttribute("href"), ""),
                 href => $"Get href of link '{href}'");
         }
 
@@ -27,7 +29,7 @@ namespace JDI.Light.Elements.Common
             Func<string> TextFunc (UIElement el) => GetReference;
             return Invoker.DoActionWithResult(
                 $"Wait link contains '{text}'",
-                () => Timer.GetResultByCondition(TextFunc(this), t => t.Contains(text))
+                () => Invoker.GetResultByCondition(TextFunc(this), t => t.Contains(text))
             );
         }
 
@@ -36,7 +38,7 @@ namespace JDI.Light.Elements.Common
             Func<string> TextFunc(UIElement el) => GetReference;
             return Invoker.DoActionWithResult(
                 $"Wait link match regex '{regEx}'",
-                () => Timer.GetResultByCondition(TextFunc(this), t => t.Contains(regEx))
+                () => Invoker.GetResultByCondition(TextFunc(this), t => t.Contains(regEx))
             );
         }
 
