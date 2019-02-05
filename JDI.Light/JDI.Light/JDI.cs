@@ -26,11 +26,11 @@ namespace JDI.Light
             WebInit = new WebCascadeInit();
         }
 
-        public static void Init(ILogger logger = null, IAssert assert = null,
+        public static void Init(IAssert assert = null, ILogger logger = null, 
             Timeouts timeouts = null, IDriverFactory<IWebDriver> driverFactory = null)
         {
-            Logger = logger ?? new ConsoleLogger();
             Assert = assert ?? new BaseAsserter();
+            Logger = logger ?? new ConsoleLogger();
             Assert.Logger = Logger;
             DriverFactory = driverFactory ?? new WebDriverFactory();
             Timeouts = timeouts ?? new Timeouts();
