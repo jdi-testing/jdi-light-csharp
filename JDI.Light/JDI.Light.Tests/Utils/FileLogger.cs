@@ -96,6 +96,5 @@ namespace JDI.Light.Tests.Utils
         {
             Log($"{message}", LogLevel.Info);
         }
-
     }
 }
