@@ -20,6 +20,13 @@ namespace JDI.Light.Tests.UITests.Composite
         }
 
         [Test]
+        public void GetCurrentUrlTest()
+        {
+            TestSite.ContactFormPage.CheckOpened();
+            Assert.AreEqual(TestSite.ContactFormPage.GetCurrentUrl(), TestSite.ContactFormPage.Url);
+        }
+
+        [Test]
         public void RefreshTest()
         {
             TestSite.ContactFormPage.CheckOpened();
@@ -94,12 +101,5 @@ namespace JDI.Light.Tests.UITests.Composite
         {
             TestSite.ContactFormPage.CheckOpened();
         }
-
-        //[TearDown]
-        //public void TearDown()
-        //{
-        //    var loginCookie = new Cookie("authUser", "true", TestSite.Domain, "/", null);
-        //    TestSite.HomePage.Cookies.AddCookie(loginCookie);
-        //}
     }
 }

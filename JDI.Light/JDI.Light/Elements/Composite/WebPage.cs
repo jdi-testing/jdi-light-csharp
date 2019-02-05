@@ -41,6 +41,11 @@ namespace JDI.Light.Elements.Composite
             Name = $"{Title} ({Url})";
         }
 
+        public string GetCurrentUrl()
+        {
+            return WebDriver.Url;
+        }
+
         public string Url
         {
             get => _url == null || _url.StartsWith("http://") || _url.StartsWith("https://") || !Parent.HasDomain
