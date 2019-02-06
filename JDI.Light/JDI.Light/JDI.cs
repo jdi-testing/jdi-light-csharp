@@ -11,7 +11,6 @@ namespace JDI.Light
 {
     public static class Jdi
     {
-        public static WebCascadeInit WebInit;
         public static IDriverFactory<IWebDriver> DriverFactory;
         public static IWebDriver WebDriver => DriverFactory.GetDriver();
         public static Timeouts Timeouts;
@@ -23,7 +22,6 @@ namespace JDI.Light
         static Jdi()
         {
             Timeouts = new Timeouts();
-            WebInit = new WebCascadeInit();
         }
 
         public static void Init(IAssert assert = null, ILogger logger = null, 
@@ -38,7 +36,7 @@ namespace JDI.Light
 
         public static T InitSite<T>() where T : ISite, new()
         {
-            var instance = WebInit.InitSite<T>(DriverFactory.CurrentDriverName);
+            var instance = WebCascadeInit.InitSite<T>(DriverFactory.CurrentDriverName);
             return instance;
         }
 

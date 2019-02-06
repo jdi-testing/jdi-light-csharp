@@ -27,9 +27,10 @@ namespace JDI.Light.Elements.Composite
         
         public T Get<T>(string relativeUrl, string title = "") where T : WebPage
         {
-            var page = WebPageFactory.CreateInstance(typeof(T), relativeUrl, title);
+            var page = typeof(T).CreateInstance(relativeUrl, title);
             page.Parent = this;
             page.DriverName = DriverName;
+            page.InitElementMembers(DriverName);
             return (T)page;
         }
 

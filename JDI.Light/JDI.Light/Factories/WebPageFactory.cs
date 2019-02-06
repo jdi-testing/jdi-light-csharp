@@ -10,7 +10,7 @@ namespace JDI.Light.Factories
 {
     public static class WebPageFactory
     {
-        public static WebPage CreateInstance(Type t, string url, string title)
+        public static WebPage CreateInstance(this Type t, string url, string title)
         {
             WebPage instance = null;
             var constructors = t.GetConstructors();
@@ -42,11 +42,11 @@ namespace JDI.Light.Factories
             return instance ?? throw new MissingMethodException($"Can't find correct constructor to create instance of type {t}");
         }
         
-        public static IPage GetInstancePage(IBaseElement parent, MemberInfo memberInfo)
+        public static IPage GetInstancePage(this IBaseElement parent, MemberInfo memberInfo)
         {
             var pageAttribute = memberInfo.GetCustomAttribute<PageAttribute>(false);
             var instance = (IPage)(memberInfo.GetMemberValue(parent)
-                                   ?? CreateInstance(memberInfo.GetMemberType(), pageAttribute.Url, pageAttribute.Title));
+                                   ?? memberInfo.GetMemberType().CreateInstance(pageAttribute.Url, pageAttribute.Title));
             instance.Parent = (ISite)parent;
             instance.UrlTemplate = pageAttribute.UrlTemplate;
             instance.CheckUrlType = pageAttribute.UrlCheckType;

@@ -13,9 +13,9 @@ using OpenQA.Selenium;
 
 namespace JDI.Light.Factories
 {
-    public class UIElementFactory
+    public static class UIElementFactory
     {
-        public static UIElement CreateInstance(Type t, By locator)
+        public static UIElement CreateInstance(this Type t, By locator)
         {
             var constructors = t.GetConstructors();
             foreach (var con in constructors)
@@ -39,12 +39,12 @@ namespace JDI.Light.Factories
             throw new MissingMethodException($"Can't find correct constructor to create instance of type {t}");
         }
         
-        public static IBaseElement GetInstanceElement(IBaseElement parent, MemberInfo member)
+        public static IBaseElement GetInstanceElement(this IBaseElement parent, MemberInfo member)
         {
             var type = member.GetMemberType();
             var instance = (IBaseUIElement)member.GetMemberValue(parent);
             type = type.IsInterface ? MapInterfaceToElement.ClassFromInterface(type) : type;
-            var element = (UIElement)instance ?? UIElementFactory.CreateInstance(type, member.GetFindsBy());
+            var element = (UIElement)instance ?? type.CreateInstance(member.GetFindsBy());
             element.Parent = parent;
             var checkedAttr = member.GetCustomAttribute<IsCheckedAttribute>(false);
             if (checkedAttr != null && typeof(ICheckBox).IsAssignableFrom(member.GetMemberType()))

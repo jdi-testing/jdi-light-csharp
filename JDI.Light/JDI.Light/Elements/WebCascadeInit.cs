@@ -13,12 +13,12 @@ using JDI.Light.Utils;
 
 namespace JDI.Light.Elements
 {
-    public class WebCascadeInit
+    public static class WebCascadeInit
     {
-        protected Type[] Decorators = { typeof(IBaseElement), typeof(IList<IBaseElement>) };
-        protected Type[] StopTypes = { typeof(object), typeof(WebPage), typeof(Section), typeof(UIElement) };
+        private static readonly Type[] Decorators = { typeof(IBaseElement), typeof(IList<IBaseElement>) };
+        private static readonly Type[] StopTypes = { typeof(object), typeof(WebPage), typeof(Section), typeof(UIElement) };
 
-        public T InitSite<T>(string driverName) where T : ISite, new ()
+        public static T InitSite<T>(string driverName) where T : ISite, new ()
         {
             var siteType = typeof(T);
             var site = new T { DriverName = driverName };
@@ -31,25 +31,27 @@ namespace JDI.Light.Elements
             {
                 site.Domain = siteAttribute.GetDomainFunc.Invoke();
             }
-            InitMembers(site, driverName);
+            InitElementMembers(site, driverName);
             return site;
         }
 
-        private void InitMembers(IBaseElement parent, string driverName)
+        public static IBaseElement InitElementMembers(this IBaseElement targetElement, string driverName)
         {
-            var parentMembers = parent.GetMembers(Decorators, StopTypes);
-            var members = parentMembers.Where(m => Decorators.Any(type => type.IsAssignableFrom(m.GetMemberType())));
+            var elementMembers = targetElement.GetMembers(Decorators, StopTypes);
+            var members = elementMembers.Where(m => Decorators.Any(type => type.IsAssignableFrom(m.GetMemberType())));
             foreach (var member in members)
             {
                 var type = member.GetMemberType();
                 var instance = typeof(IPage).IsAssignableFrom(type)
-                    ? WebPageFactory.GetInstancePage(parent, member)
-                    : UIElementFactory.GetInstanceElement(parent, member);
+                    ? targetElement.GetInstancePage(member)
+                    : targetElement.GetInstanceElement(member);
                 instance.Name = member.GetElementName();
                 instance.DriverName = driverName;
-                member.SetMemberValue(parent, instance);
-                InitMembers(instance, driverName);
+                member.SetMemberValue(targetElement, instance);
+                InitElementMembers(instance, driverName);
             }
+
+            return targetElement;
         }
     }
 }
