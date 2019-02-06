@@ -65,6 +65,7 @@
     <Compile Include="Enums\Metals.cs" />
     <Compile Include="Enums\Odds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UIObjects\Pages\BasePage.cs" />
     <Compile Include="UIObjects\Pages\ComplexTablePage.cs" />
     <Compile Include="UIObjects\TestSiteCustomDomain.cs" />
     <Compile Include="UITests\Common\ButtonTests.cs" />
@@ -75,15 +76,14 @@
     <Compile Include="UITests\Common\LinkTests.cs" />
     <Compile Include="UITests\Common\TextFieldsTests.cs" />
     <Compile Include="UITests\Common\TextTests.cs" />
-    <Compile Include="UITests\CommonActionsData.cs" />
     <Compile Include="UITests\Composite\FormTests.cs" />
     <Compile Include="UITests\Composite\FormTwoButtonsTests.cs" />
     <Compile Include="UITests\Composite\MenuTests.cs" />
     <Compile Include="UITests\Composite\PageTests.cs" />
-    <Compile Include="UITests\Composite\PaginationTests.cs" />
     <Compile Include="UITests\Composite\SearchTests.cs" />
     <Compile Include="UITests\Composite\SiteDomainTests.cs" />
     <Compile Include="UITests\Composite\TableTests.cs" />
+    <Compile Include="UITests\Composite\WebSiteTests.cs" />
     <Compile Include="UITests\TestBase.cs" />
     <Compile Include="UITests\TestsSetUp.cs" />
     <Compile Include="UIObjects\Pages\ContactPage.cs" />
@@ -99,11 +99,11 @@
     <Compile Include="UIObjects\Forms\ContactFormTwoButtons.cs" />
     <Compile Include="UIObjects\Sections\Footer.cs" />
     <Compile Include="UIObjects\Sections\Header.cs" />
-    <Compile Include="UIObjects\Sections\JdiPaginator.cs" />
     <Compile Include="UIObjects\Sections\JdiSearch.cs" />
     <Compile Include="UIObjects\Forms\LoginForm.cs" />
     <Compile Include="UIObjects\Sections\Summary.cs" />
     <Compile Include="UIObjects\TestSite.cs" />
+    <Compile Include="Utils\FileLogger.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

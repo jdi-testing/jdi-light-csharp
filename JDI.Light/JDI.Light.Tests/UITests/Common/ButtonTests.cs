@@ -1,8 +1,4 @@
-﻿using System;
-using JDI.Light.Tests.UIObjects;
-using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.Extensions;
+﻿using NUnit.Framework;
 
 namespace JDI.Light.Tests.UITests.Common
 {
@@ -15,7 +11,6 @@ namespace JDI.Light.Tests.UITests.Common
             Jdi.Logger.Info("Navigating to Metals and Colors page.");
             TestSite.MetalsColorsPage.Open();
             TestSite.MetalsColorsPage.CheckTitle();
-            TestSite.MetalsColorsPage.IsOpened();
             Jdi.Logger.Info("Setup method finished");
             Jdi.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }

@@ -6,6 +6,7 @@ namespace JDI.Light.Tests.UIObjects.Sections
 {
     public class Footer : Section
     {
-        [FindBy(PartialLinkText = "About")] public Link About;
+        [FindBy(PartialLinkText = "About")]
+        public Link About;
     }
 }

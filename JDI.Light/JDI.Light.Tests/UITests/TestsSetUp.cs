@@ -11,20 +11,19 @@ namespace JDI.Light.Tests.UITests
         [OneTimeSetUp]
         protected void OneTimeSetUp()
         {
-            Jdi.Init(assert: new NUnitAsserter());
+            Jdi.Init(new NUnitAsserter());
             Jdi.Logger.LogLevel = LogLevel.Debug;
             Jdi.GetLatestDriver = false;
             Jdi.DriverVersion = "2.41";
             Jdi.Logger.Info("Init test run...");
-            Jdi.Timeouts.WaitElementSec = 10;
-            Jdi.Timeouts.WaitPageLoadSec = 10;
-            WinProcUtils.KillAllRunWebDrivers();
+            WinProcUtils.ProcessToKill = new[] { "chromedriver" };
+            WinProcUtils.KillAllRunningDrivers();
         }
 
         [OneTimeTearDown]
         protected void OneTimeTearDown()
         {
-            WinProcUtils.KillAllRunWebDrivers();
+            WinProcUtils.KillAllRunningDrivers();
         }
     }
 }

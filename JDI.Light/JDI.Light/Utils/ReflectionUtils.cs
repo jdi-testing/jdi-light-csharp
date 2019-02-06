@@ -2,46 +2,32 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using JDI.Light.Extensions;
 
 namespace JDI.Light.Utils
 {
     public static class ReflectionUtils
     {
-        public static List<FieldInfo> InstanceFields(this Type type)
+        public static IEnumerable<MemberInfo> InstanceMembers(this Type type)
         {
-            return type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).ToList();
-        }
-        
-        public static List<FieldInfo> StaticFields(this Type type)
-        {
-            return type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static).ToList();
+            return type.GetMembers(BindingFlags.Public | BindingFlags.Instance);
         }
 
-        public static object Value(this FieldInfo f, object parent)
-        {
-            try
-            {
-                return f.GetValue(parent);
-            }
-            catch
-            {
-                if (parent == null)
-                    return null;
-                throw;
-            }
-        }
-
-        public static bool ContainsFieldType(this Type[] types, FieldInfo field)
-        {
-            return types.Any(type => type.IsAssignableFrom(field.FieldType));
-        }
-
-        public static List<FieldInfo> GetFieldsDeep(this Type type, params Type[] types)
+        private static List<FieldInfo> GetFieldsDeep(this Type type, params Type[] types)
         {
             if (types.Contains(type))
                 return new List<FieldInfo>();
-            var result = type.InstanceFields();
+            var result = type.GetFields(BindingFlags.Public | BindingFlags.Instance).ToList();
             result.AddRange(GetFieldsDeep(type.BaseType, types));
+            return result;
+        }
+
+        private static List<MemberInfo> GetMembersDeep(this Type type, params Type[] stopTypes)
+        {
+            if (stopTypes.Contains(type))
+                return new List<MemberInfo>();
+            var result = InstanceMembers(type).ToList();
+            result.ToList().AddRange(GetMembersDeep(type.BaseType, stopTypes));
             return result;
         }
 
@@ -52,27 +38,35 @@ namespace JDI.Light.Utils
 
         public static List<FieldInfo> GetFields(this object obj, Type[] types, params Type[] stopTypes)
         {
-            return GetFields(GetFieldsDeep(obj.GetType(), stopTypes), types);
+            return FilterFields(GetFieldsDeep(obj.GetType(), stopTypes), types);
         }
 
-        public static List<FieldInfo> GetFields(this List<FieldInfo> fields, Type[] types)
+        public static IEnumerable<MemberInfo> GetMembers(this object obj, params Type[] types)
+        {
+            return GetMembers(obj, types, typeof(object));
+        }
+
+        public static IEnumerable<MemberInfo> GetMembers(this object obj, Type[] types, params Type[] stopTypes)
+        {
+            return FilterMembers(GetMembersDeep(obj.GetType(), stopTypes), types);
+        }
+
+        public static List<FieldInfo> FilterFields(this List<FieldInfo> fields, Type[] types)
         {
             return types == null || types.Length == 0
                 ? fields
                 : fields.Where(field => types.Any(t => t.IsAssignableFrom(field.FieldType))).ToList();
         }
 
-        public static FieldInfo GetFirstField(this object obj, params Type[] types)
+        public static IEnumerable<MemberInfo> FilterMembers(this IEnumerable<MemberInfo> members, Type[] types)
         {
-            var fields = obj.GetType().InstanceFields();
-            return types.Length == 0
-                ? fields[0]
-                : fields.FirstOrDefault(types.ContainsFieldType);
-        }
-
-        public static string GetClassName(this object obj)
-        {
-            return obj?.GetType().Name ?? "NULL Class";
+            var membersArray = members.ToArray();
+            var fieldMembers = membersArray.Where(m => m.MemberType == MemberTypes.Field);
+            var propertyMembers = membersArray.Where(m => m.MemberType == MemberTypes.Property && ((PropertyInfo)m).SetMethod != null);
+            members = fieldMembers.Concat(propertyMembers).Where(m => m.Name != "Parent");
+            return types == null || types.Length == 0
+                ? members
+                : members.Where(m => types.Any(t => t.IsAssignableFrom(m.GetMemberType())));
         }
     }
 }

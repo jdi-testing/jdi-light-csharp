@@ -1,7 +1,7 @@
-﻿using System;
-using JDI.Light.Elements;
+﻿using JDI.Light.Elements;
 using JDI.Light.Factories;
 using JDI.Light.Interfaces;
+using JDI.Light.Interfaces.Composite;
 using JDI.Light.Logging;
 using JDI.Light.Settings;
 using JDI.Light.Utils;
@@ -11,36 +11,33 @@ namespace JDI.Light
 {
     public static class Jdi
     {
-        public static WebCascadeInit WebInit;
         public static IDriverFactory<IWebDriver> DriverFactory;
         public static IWebDriver WebDriver => DriverFactory.GetDriver();
         public static Timeouts Timeouts;
         public static IAssert Assert;
         public static ILogger Logger;
-        public static string Domain;
-        public static bool HasDomain => Domain != null && Domain.Contains("://");
         public static bool GetLatestDriver = true;
         public static string DriverVersion = "";
-
+        
         static Jdi()
         {
             Timeouts = new Timeouts();
-            WebInit = new WebCascadeInit();
         }
 
-        public static void Init(ILogger logger = null, IAssert assert = null,
+        public static void Init(IAssert assert = null, ILogger logger = null, 
             Timeouts timeouts = null, IDriverFactory<IWebDriver> driverFactory = null)
         {
-            Logger = logger ?? new ConsoleLogger();
             Assert = assert ?? new BaseAsserter();
+            Logger = logger ?? new ConsoleLogger();
             Assert.Logger = Logger;
             DriverFactory = driverFactory ?? new WebDriverFactory();
             Timeouts = timeouts ?? new Timeouts();
         }
 
-        public static void InitSite(Type siteType)
+        public static T InitSite<T>() where T : ISite, new()
         {
-            WebInit.InitStaticPages(siteType, DriverFactory.CurrentDriverName);
+            var instance = WebCascadeInit.InitSite<T>(DriverFactory.CurrentDriverName);
+            return instance;
         }
 
         public static object ExecuteScript(string script, params object[] args)

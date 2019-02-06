@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using JDI.Light.Tests.UIObjects;
+using JDI.Light.Tests.Entities;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
@@ -15,9 +15,15 @@ namespace JDI.Light.Tests.UITests.Composite
             Jdi.Logger.Info("Navigating to Contact page.");
             TestSite.ContactFormPage.Open();
             TestSite.ContactFormPage.CheckTitle();
-            TestSite.ContactFormPage.IsOpened();
             Jdi.Logger.Info("Setup method finished");
             Jdi.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+        }
+
+        [Test]
+        public void GetCurrentUrlTest()
+        {
+            TestSite.ContactFormPage.CheckOpened();
+            Assert.AreEqual(TestSite.ContactFormPage.GetCurrentUrl(), TestSite.ContactFormPage.Url);
         }
 
         [Test]
@@ -56,8 +62,27 @@ namespace JDI.Light.Tests.UITests.Composite
         {
             var cookie = new Cookie($"key: {Guid.NewGuid()}", $"value: {Guid.NewGuid()}");
             TestSite.ContactFormPage.AddCookie(cookie);
-            Jdi.Assert.AreEquals(TestSite.HomePage.WebDriver.Manage().Cookies.GetCookieNamed(cookie.Name).Value,
+            Jdi.Assert.AreEquals(TestSite.HomePage.Cookies.GetCookieNamed(cookie.Name).Value,
                 cookie.Value);
+        }
+
+        [Test]
+        public void DeleteAllCookiesTest()
+        {
+            TestSite.HomePage.Open();
+            var cookie1 = new Cookie($"key: {Guid.NewGuid()}", $"value: {Guid.NewGuid()}");
+            var cookie2 = new Cookie($"key: {Guid.NewGuid()}", $"value: {Guid.NewGuid()}");
+            TestSite.HomePage.AddCookie(cookie1);
+            TestSite.HomePage.AddCookie(cookie2);
+            Jdi.Assert.AreEquals(TestSite.HomePage.Cookies.GetCookieNamed(cookie1.Name).Value,
+                cookie1.Value);
+            TestSite.HomePage.DeleteAllCookies();
+            TestSite.HomePage.Refresh();
+            var cookies = TestSite.HomePage.Cookies.AllCookies;
+            var cookiesCount = cookies.Count;
+            Jdi.Assert.AreEquals(cookiesCount, 0);
+            TestSite.HomePage.Profile.Click();
+            TestSite.HomePage.LoginForm.Submit(User.DefaultUser, "Login");
         }
 
         [Test]
@@ -65,23 +90,16 @@ namespace JDI.Light.Tests.UITests.Composite
         {
             var cookie = new Cookie($"key: {Guid.NewGuid()}", $"value: {Guid.NewGuid()}");
             TestSite.ContactFormPage.AddCookie(cookie);
-            Jdi.Assert.AreEquals(TestSite.HomePage.WebDriver.Manage().Cookies.GetCookieNamed(cookie.Name).Value,
+            Jdi.Assert.AreEquals(TestSite.HomePage.Cookies.GetCookieNamed(cookie.Name).Value,
                 cookie.Value);
             TestSite.ContactFormPage.DeleteCookie(cookie);
-            Jdi.Assert.IsFalse(TestSite.HomePage.WebDriver.Manage().Cookies.AllCookies.Any(c => c.Name.Equals(cookie.Name)));
+            Jdi.Assert.IsFalse(TestSite.HomePage.Cookies.AllCookies.Any(c => c.Name.Equals(cookie.Name)));
         }
 
         [Test]
         public void CheckOpenedTest()
         {
             TestSite.ContactFormPage.CheckOpened();
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            var loginCookie = new Cookie("authUser", "true", "jdi-framework.github.io", "/", null);
-            TestSite.HomePage.WebDriver.Manage().Cookies.AddCookie(loginCookie);
         }
     }
 }

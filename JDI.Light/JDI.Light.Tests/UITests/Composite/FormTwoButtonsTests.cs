@@ -1,5 +1,4 @@
 ﻿using JDI.Light.Tests.Entities;
-using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 
 namespace JDI.Light.Tests.UITests.Composite
@@ -13,7 +12,6 @@ namespace JDI.Light.Tests.UITests.Composite
             Jdi.Logger.Info("Navigating to Contact page.");
             TestSite.ContactFormPage.Open();
             TestSite.ContactFormPage.CheckTitle();
-            TestSite.ContactFormPage.IsOpened();
             Jdi.Logger.Info("Setup method finished");
             Jdi.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }

@@ -7,57 +7,52 @@ namespace JDI.Light.Utils
 {
     public static class WinProcUtils
     {
-        public static void KillAllRunWebDrivers()
+        public static string[] ProcessToKill =
         {
-            try
-            {
-                foreach (var proc in Process.GetProcessesByName("chromedriver"))
-                    KillProcessTree(proc.Id);
-                foreach (var proc in from proc in Process.GetProcessesByName("firefox")
-                    let cmd = GetProcessCommandLine(proc.Id)
-                    where cmd.EndsWith("-foreground")
-                    select proc)
-                    proc.Kill();
+            "chromedriver",
+            "firefox",
+            "IEDriverServer",
+            "gecko"
+        };
 
-                foreach (var proc in Process.GetProcessesByName("IEDriverServer"))
-                    KillProcessTree(proc.Id);
-            }
-            catch (Exception)
+        public static void KillAllRunningDrivers()
+        {
+            foreach (var process in ProcessToKill)
             {
+                Process.GetProcessesByName(process)
+                    .ToList().ForEach(x => x.KillProcessAndChildren());
             }
         }
 
-        private static string GetProcessCommandLine(int pid)
+        private static void KillProcessAndChildren(this Process process)
         {
-            using (var searcher = new ManagementObjectSearcher("Select * From Win32_Process Where ProcessID=" + pid))
+            if (process.Id == 0)
             {
-                using (var moc = searcher.Get())
-                {
-                    foreach (var mo in moc)
-                        return mo["CommandLine"].ToString();
-                }
+                return;
             }
-            throw new ArgumentException("pid");
-        }
 
-        private static void KillProcessTree(int pid)
-        {
-            using (var searcher = new ManagementObjectSearcher("Select * From Win32_Process Where ParentProcessID=" + pid))
+            using (var searcher = new ManagementObjectSearcher("select * From Win32_Process Where ParentProcessID =" + process.Id))
             {
-                using (var moc = searcher.Get())
+                using (var managementObjectCollection = searcher.Get())
                 {
-                    foreach (var mo in moc)
+                    foreach (var managementBaseObject in managementObjectCollection)
                     {
-                        KillProcessTree(Convert.ToInt32(mo["ProcessID"]));
+                        var p = Process.GetProcessById(Convert.ToInt32(managementBaseObject["ProcessID"]));
+                        if (!p.HasExited)
+                        {
+                            KillProcessAndChildren(p);
+                        }
                     }
                     try
                     {
-                        var proc = Process.GetProcessById(pid);
-                        proc.Kill();
+                        if (!process.HasExited)
+                        {
+                            process.Kill();
+                        }
                     }
                     catch (ArgumentException)
                     {
-                        // Process already exited
+                        // Process already exited.
                     }
                 }
             }

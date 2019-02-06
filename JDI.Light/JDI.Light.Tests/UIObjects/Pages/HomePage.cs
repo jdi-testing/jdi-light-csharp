@@ -1,11 +1,10 @@
 ﻿using JDI.Light.Attributes;
 using JDI.Light.Elements.Common;
-using JDI.Light.Elements.Composite;
 using JDI.Light.Interfaces.Common;
 
 namespace JDI.Light.Tests.UIObjects.Pages
 {
-    public class HomePage : WebPage
+    public class HomePage : BasePage
     {
         [FindBy(Css = ".epam-logo img")]
         public IImage LogoImage;

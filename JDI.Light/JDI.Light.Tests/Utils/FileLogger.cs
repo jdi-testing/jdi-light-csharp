@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using JDI.Light.Enums;
 using JDI.Light.Interfaces;
 
-namespace JDI.Light.Logging
+namespace JDI.Light.Tests.Utils
 {
-    public class ConsoleLogger : ILogger
+    public class FileLogger : ILogger
     {
+        public const string LogFilePath = @"C:\temp\jdi.txt";
+
         public LogLevel LogLevel { get; set; } = LogLevel.Info;
 
         private readonly LogLevel[] _warningLevels = { LogLevel.Fatal, LogLevel.Error, LogLevel.Warning };
@@ -48,7 +52,8 @@ namespace JDI.Light.Logging
 
             if (doLog)
             {
-                Console.WriteLine($"{DateTime.Now:dd.MM.yyyy HH:mm:ss.fff} {logLevel} [{Thread.CurrentThread.ManagedThreadId}]: {message}");
+                var msg = $"{DateTime.Now:dd.MM.yyyy HH:mm:ss.fff} {logLevel} [{Thread.CurrentThread.ManagedThreadId}]: {message}";
+                File.AppendAllLines(LogFilePath, new List<string>{msg});
             }
         }
 
