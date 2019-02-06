@@ -99,7 +99,6 @@
     <Compile Include="Interfaces\Common\ITextField.cs" />
     <Compile Include="Interfaces\Composite\IForm.cs" />
     <Compile Include="Interfaces\Composite\IPage.cs" />
-    <Compile Include="Interfaces\Composite\IPagination.cs" />
     <Compile Include="Interfaces\Composite\ISearch.cs" />
     <Compile Include="Interfaces\Composite\ISite.cs" />
     <Compile Include="Interfaces\IDriverFactory.cs" />
@@ -131,7 +130,6 @@
     <Compile Include="Elements\Common\TextArea.cs" />
     <Compile Include="Elements\Common\TextField.cs" />
     <Compile Include="Elements\Composite\Form.cs" />
-    <Compile Include="Elements\Composite\Pagination.cs" />
     <Compile Include="Elements\Composite\Search.cs" />
     <Compile Include="Elements\Composite\Section.cs" />
     <Compile Include="Elements\Composite\WebPage.cs" />

@@ -80,7 +80,6 @@
     <Compile Include="UITests\Composite\FormTwoButtonsTests.cs" />
     <Compile Include="UITests\Composite\MenuTests.cs" />
     <Compile Include="UITests\Composite\PageTests.cs" />
-    <Compile Include="UITests\Composite\PaginationTests.cs" />
     <Compile Include="UITests\Composite\SearchTests.cs" />
     <Compile Include="UITests\Composite\SiteDomainTests.cs" />
     <Compile Include="UITests\Composite\TableTests.cs" />
@@ -100,7 +99,6 @@
     <Compile Include="UIObjects\Forms\ContactFormTwoButtons.cs" />
     <Compile Include="UIObjects\Sections\Footer.cs" />
     <Compile Include="UIObjects\Sections\Header.cs" />
-    <Compile Include="UIObjects\Sections\JdiPaginator.cs" />
     <Compile Include="UIObjects\Sections\JdiSearch.cs" />
     <Compile Include="UIObjects\Forms\LoginForm.cs" />
     <Compile Include="UIObjects\Sections\Summary.cs" />
