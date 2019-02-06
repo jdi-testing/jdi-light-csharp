@@ -1,5 +1,10 @@
 ﻿using System;
+using System.Reflection;
+using JDI.Light.Attributes;
 using JDI.Light.Elements.Composite;
+using JDI.Light.Extensions;
+using JDI.Light.Interfaces.Base;
+using JDI.Light.Interfaces.Composite;
 
 namespace JDI.Light.Factories
 {
@@ -35,6 +40,18 @@ namespace JDI.Light.Factories
                 }
             }
             return instance ?? throw new MissingMethodException($"Can't find correct constructor to create instance of type {t}");
+        }
+        
+        public static IPage GetInstancePage(IBaseElement parent, MemberInfo memberInfo)
+        {
+            var pageAttribute = memberInfo.GetCustomAttribute<PageAttribute>(false);
+            var instance = (IPage)(memberInfo.GetMemberValue(parent)
+                                   ?? CreateInstance(memberInfo.GetMemberType(), pageAttribute.Url, pageAttribute.Title));
+            instance.Parent = (ISite)parent;
+            instance.UrlTemplate = pageAttribute.UrlTemplate;
+            instance.CheckUrlType = pageAttribute.UrlCheckType;
+            instance.CheckTitleType = pageAttribute.TitleCheckType;
+            return instance;
         }
     }
 }
