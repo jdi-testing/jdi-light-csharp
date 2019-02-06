@@ -1,8 +1,10 @@
 ﻿using System.Linq;
 using System.Text.RegularExpressions;
+using JDI.Light.Elements.Base;
 using JDI.Light.Elements.WebActions;
 using JDI.Light.Enums;
 using JDI.Light.Extensions;
+using JDI.Light.Factories;
 using JDI.Light.Interfaces;
 using JDI.Light.Interfaces.Composite;
 using OpenQA.Selenium;
@@ -40,6 +42,14 @@ namespace JDI.Light.Elements.Composite
             Invoker = new ActionInvoker(Logger, Jdi.Timeouts.WaitPageLoadMSec, Jdi.Timeouts.RetryMSec);
             Name = $"{Title} ({Url})";
         }
+        
+        public T Get<T>(By locator) where T : UIElement
+        {
+            var element = UIElementFactory.CreateInstance(typeof(T), locator);
+            element.Parent = this;
+            element.DriverName = DriverName;
+            return (T)element;
+        }
 
         public string GetCurrentUrl()
         {
@@ -53,7 +63,7 @@ namespace JDI.Light.Elements.Composite
                 : Parent.Domain + "/" + new Regex("^//*").Replace(_url, "");
             set => _url = value;
         }
-
+        
         public void Open()
         {
             Invoker.DoActionWithWait($"Open page {Name} by url {Url}",

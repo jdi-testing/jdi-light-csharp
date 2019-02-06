@@ -20,10 +20,10 @@ namespace JDI.Light.Elements
 {
     public class WebCascadeInit
     {
-        protected Type[] Decorators = { typeof(IBaseElement), typeof(IList) };
+        protected Type[] Decorators = { typeof(IBaseElement), typeof(IList<IBaseElement>) };
         protected Type[] StopTypes = { typeof(object), typeof(WebPage), typeof(Section), typeof(UIElement) };
 
-        public T InitPages<T>(string driverName) where T : ISite, new ()
+        public T InitSite<T>(string driverName) where T : ISite, new ()
         {
             var siteType = typeof(T);
             var site = new T { DriverName = driverName };
@@ -36,13 +36,13 @@ namespace JDI.Light.Elements
             {
                 site.Domain = siteAttribute.GetDomainFunc.Invoke();
             }
-            var members = siteType.InstanceMembers().Where(m => m.MemberType == MemberTypes.Property || m.MemberType == MemberTypes.Field);
-            SetMembers(site, members.FilterMembers(Decorators), driverName);
+            InitMembers(site, driverName);
             return site;
         }
 
-        private void SetMembers(IBaseElement parent, IEnumerable<MemberInfo> parentMembers, string driverName)
+        private void InitMembers(IBaseElement parent, string driverName)
         {
+            var parentMembers = parent.GetMembers(Decorators, StopTypes);
             var members = parentMembers.Where(m => Decorators.Any(type => type.IsAssignableFrom(m.GetMemberType())));
             foreach (var member in members)
             {
@@ -53,7 +53,7 @@ namespace JDI.Light.Elements
                 instance.Name = member.GetElementName();
                 instance.DriverName = driverName;
                 member.SetMemberValue(parent, instance);
-                SetMembers(instance, instance.GetFields(Decorators, StopTypes), driverName);
+                InitMembers(instance, driverName);
             }
         }
         

@@ -25,12 +25,11 @@ namespace JDI.Light.Elements.Composite
             WebDriver.Navigate().GoToUrl(Domain);
         }
         
-        public T OpenPage<T>(string relativeUrl, string title = "") where T : WebPage
+        public T Get<T>(string relativeUrl, string title = "") where T : WebPage
         {
             var page = WebPageFactory.CreateInstance(typeof(T), relativeUrl, title);
             page.Parent = this;
             page.DriverName = DriverName;
-            page.Open();
             return (T)page;
         }
 

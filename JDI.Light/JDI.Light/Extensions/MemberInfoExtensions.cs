@@ -48,8 +48,14 @@ namespace JDI.Light.Extensions
                     ((FieldInfo)mi).SetValue(instance, value);
                     break;
                 case MemberTypes.Property:
-                    ((PropertyInfo)mi).SetValue(instance, value);
+                {
+                    var pi = (PropertyInfo) mi;
+                    if (pi.SetMethod != null)
+                    {
+                        pi.SetValue(instance, value);
+                    }
                     break;
+                }
                 default:
                     throw new ArgumentOutOfRangeException();
             }

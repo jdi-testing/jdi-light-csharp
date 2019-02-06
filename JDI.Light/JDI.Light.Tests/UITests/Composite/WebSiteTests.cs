@@ -9,7 +9,8 @@ namespace JDI.Light.Tests.UITests.Composite
         [Test]
         public void OpenPageTest()
         {
-            var page = TestSite.OpenPage<HomePage>("/index.html", "Home Page");
+            var page = TestSite.Get<HomePage>("/index.html", "Home Page");
+            page.Open();
             page.CheckOpened();
         }
 

@@ -38,7 +38,7 @@ namespace JDI.Light
 
         public static T InitSite<T>() where T : ISite, new()
         {
-            var instance = WebInit.InitPages<T>(DriverFactory.CurrentDriverName);
+            var instance = WebInit.InitSite<T>(DriverFactory.CurrentDriverName);
             return instance;
         }
 

@@ -22,12 +22,12 @@ namespace JDI.Light.Utils
             return result;
         }
 
-        private static List<MemberInfo> GetMembersDeep(this Type type, params Type[] types)
+        private static List<MemberInfo> GetMembersDeep(this Type type, params Type[] stopTypes)
         {
-            if (types.Contains(type))
+            if (stopTypes.Contains(type))
                 return new List<MemberInfo>();
             var result = InstanceMembers(type).ToList();
-            result.ToList().AddRange(GetMembersDeep(type.BaseType, types));
+            result.ToList().AddRange(GetMembersDeep(type.BaseType, stopTypes));
             return result;
         }
 
@@ -60,6 +60,10 @@ namespace JDI.Light.Utils
 
         public static IEnumerable<MemberInfo> FilterMembers(this IEnumerable<MemberInfo> members, Type[] types)
         {
+            var membersArray = members.ToArray();
+            var fieldMembers = membersArray.Where(m => m.MemberType == MemberTypes.Field);
+            var propertyMembers = membersArray.Where(m => m.MemberType == MemberTypes.Property && ((PropertyInfo)m).SetMethod != null);
+            members = fieldMembers.Concat(propertyMembers).Where(m => m.Name != "Parent");
             return types == null || types.Length == 0
                 ? members
                 : members.Where(m => types.Any(t => t.IsAssignableFrom(m.GetMemberType())));
