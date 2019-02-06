@@ -2,7 +2,6 @@
 using System.IO;
 using JDI.Light.Tests.Entities;
 using JDI.Light.Tests.UIObjects;
-using JDI.Light.Tests.UIObjects.Pages;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
@@ -12,20 +11,24 @@ namespace JDI.Light.Tests.UITests
 {
     public class TestBase
     {
+        public TestSite TestSite { get; set; }
+
         [SetUp]
         public virtual void SetUpTest()
         {
-            Jdi.InitSite(typeof(TestSite));
+            Jdi.Logger.Info("Test Base Set up started...");
+            TestSite = Jdi.InitSite<TestSite>();
             TestSite.HomePage.Open();
             TestSite.HomePage.Profile.Click();
-            TestSite.HomePage.LoginForm.Submit(User.DefaultUser);
-            var f = HomePage.Footer;
+            TestSite.HomePage.LoginForm.Submit(User.DefaultUser, "Login");
+            Jdi.Logger.Info("Test Base Set up done.");
             Jdi.Logger.Info("Run test...");
         }
 
         [TearDown]
-        public void TestTearDown()
+        public virtual void TestTearDown()
         {
+            Jdi.Logger.Info("Run test tear down...");
             var folder = @"C:\Screenshots";
             Directory.CreateDirectory(folder);
             var res = TestContext.CurrentContext.Result.Outcome;
@@ -34,9 +37,10 @@ namespace JDI.Light.Tests.UITests
                 Jdi.WebDriver.TakeScreenshot()
                     .SaveAsFile(Path.Combine(folder, $"{Guid.NewGuid()}.png"), ScreenshotImageFormat.Png);
             }
-            TestSite.HomePage.Refresh();
+            TestSite.HomePage.Open();
             TestSite.HomePage.Profile.Click();
-            TestSite.LoginForm.Logout();
+            TestSite.HomePage.LogoutButton.Click();
+            Jdi.Logger.Info("Run test tear down done.");
         }
     }
 }

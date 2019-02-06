@@ -20,7 +20,6 @@ namespace JDI.Light.Settings
             {typeof(ITextField), typeof(TextField)},
             {typeof(ILabel), typeof(Label)},
             {typeof(ICheckBox), typeof(CheckBox)},
-            {typeof(IFileInput), typeof(FileInput)},
             {typeof(IDatePicker), typeof(DatePicker)},
             {typeof(ILink), typeof(Link)}
         };

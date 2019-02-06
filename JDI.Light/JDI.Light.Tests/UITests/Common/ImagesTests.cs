@@ -1,5 +1,4 @@
 ﻿using JDI.Light.Interfaces.Common;
-using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 
 namespace JDI.Light.Tests.UITests.Common
@@ -9,7 +8,7 @@ namespace JDI.Light.Tests.UITests.Common
     {
         private const string Alt = "ALT";
         private const string Src = "https://epam.github.io/JDI/images/Logo_Epam_Color.svg";
-        private readonly IImage _logoImage = TestSite.HomePage.LogoImage;
+        private IImage LogoImage => TestSite.HomePage.LogoImage;
 
         [SetUp]
         public void SetUp()
@@ -17,7 +16,6 @@ namespace JDI.Light.Tests.UITests.Common
             Jdi.Logger.Info("Navigating to Home page.");
             TestSite.HomePage.Open();
             TestSite.HomePage.CheckTitle();
-            TestSite.HomePage.IsOpened();
             Jdi.Logger.Info("Setup method finished");
             Jdi.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
@@ -26,8 +24,8 @@ namespace JDI.Light.Tests.UITests.Common
         public void ClickTest()
         {
             TestSite.ContactFormPage.Open();
-            _logoImage.Click();
-            TestSite.HomePage.IsOpened();
+            LogoImage.Click();
+            Assert.IsTrue(TestSite.HomePage.IsOpened);
         }
 
         [Test]
@@ -35,20 +33,20 @@ namespace JDI.Light.Tests.UITests.Common
         {
             var _attributeName = "testAttr";
             var _value = "testValue";
-            _logoImage.SetAttribute(_attributeName, _value);
-            Jdi.Assert.AreEquals(_logoImage.GetAttribute(_attributeName), _value);
+            LogoImage.SetAttribute(_attributeName, _value);
+            Jdi.Assert.AreEquals(LogoImage.GetAttribute(_attributeName), _value);
         }
 
         [Test]
         public void GetSourceTest()
         {
-            Jdi.Assert.AreEquals(_logoImage.GetSource(), Src);
+            Jdi.Assert.AreEquals(LogoImage.GetSource(), Src);
         }
 
         [Test]
         public void GetTipTest()
         {
-            Jdi.Assert.AreEquals(_logoImage.GetAlt(), Alt);
+            Jdi.Assert.AreEquals(LogoImage.GetAlt(), Alt);
         }
     }
 }

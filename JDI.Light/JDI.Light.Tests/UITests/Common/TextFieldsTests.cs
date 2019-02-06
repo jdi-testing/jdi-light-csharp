@@ -1,6 +1,5 @@
 ﻿using System;
 using JDI.Light.Tests.Entities;
-using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 
 namespace JDI.Light.Tests.UITests.Common
@@ -17,7 +16,6 @@ namespace JDI.Light.Tests.UITests.Common
             Jdi.Logger.Info("Navigating to Metals and Colors page.");
             TestSite.ContactFormPage.Open();
             TestSite.ContactFormPage.CheckTitle();
-            TestSite.ContactFormPage.IsOpened();
             TestSite.ContactFormPage.FillAndSubmitForm(_defaultText, _defaultText + new Random().Next(),
                 _defaultText + new Random().Next());
             Jdi.Logger.Info("Setup method finished");

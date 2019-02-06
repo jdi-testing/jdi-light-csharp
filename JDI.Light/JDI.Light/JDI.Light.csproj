@@ -76,11 +76,12 @@
     <Compile Include="Exceptions\ElementNotFoundException.cs" />
     <Compile Include="Extensions\CommonExtensions.cs" />
     <Compile Include="Extensions\FieldInfoExtensions.cs" />
+    <Compile Include="Extensions\MemberInfoExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="Extensions\TimerExtensions.cs" />
     <Compile Include="Extensions\UIElementExtensions.cs" />
     <Compile Include="Factories\UIElementFactory.cs" />
+    <Compile Include="Factories\WebPageFactory.cs" />
     <Compile Include="Interfaces\Base\IBaseElement.cs" />
     <Compile Include="Interfaces\Base\IBaseUIElement.cs" />
     <Compile Include="Interfaces\Base\IGetValue.cs" />
@@ -89,7 +90,6 @@
     <Compile Include="Interfaces\Common\IButton.cs" />
     <Compile Include="Interfaces\Common\ICheckBox.cs" />
     <Compile Include="Interfaces\Common\IDatePicker.cs" />
-    <Compile Include="Interfaces\Common\IFileInput.cs" />
     <Compile Include="Interfaces\Common\IImage.cs" />
     <Compile Include="Interfaces\Common\ILabel.cs" />
     <Compile Include="Interfaces\Common\ILink.cs" />
@@ -98,8 +98,8 @@
     <Compile Include="Interfaces\Common\ITextField.cs" />
     <Compile Include="Interfaces\Composite\IForm.cs" />
     <Compile Include="Interfaces\Composite\IPage.cs" />
-    <Compile Include="Interfaces\Composite\IPagination.cs" />
     <Compile Include="Interfaces\Composite\ISearch.cs" />
+    <Compile Include="Interfaces\Composite\ISite.cs" />
     <Compile Include="Interfaces\IDriverFactory.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
@@ -113,13 +113,13 @@
     </Compile>
     <Compile Include="Utils\LocatorUtils.cs" />
     <Compile Include="Factories\WebDriverFactory.cs" />
+    <Compile Include="Utils\StaTaskScheduler.cs" />
     <Compile Include="Utils\WinProcUtils.cs" />
     <Compile Include="Utils\WebDriverUtils.cs" />
     <Compile Include="Elements\Base\UIElement.cs" />
     <Compile Include="Elements\Common\Button.cs" />
     <Compile Include="Elements\Common\CheckBox.cs" />
     <Compile Include="Elements\Common\DatePicker.cs" />
-    <Compile Include="Elements\Common\FileInput.cs" />
     <Compile Include="Elements\Common\Image.cs" />
     <Compile Include="Elements\Common\Input.cs" />
     <Compile Include="Elements\Common\Label.cs" />
@@ -128,7 +128,6 @@
     <Compile Include="Elements\Common\TextArea.cs" />
     <Compile Include="Elements\Common\TextField.cs" />
     <Compile Include="Elements\Composite\Form.cs" />
-    <Compile Include="Elements\Composite\Pagination.cs" />
     <Compile Include="Elements\Composite\Search.cs" />
     <Compile Include="Elements\Composite\Section.cs" />
     <Compile Include="Elements\Composite\WebPage.cs" />
@@ -139,9 +138,7 @@
     <Compile Include="Jdi.cs" />
     <Compile Include="Settings\MapInterfaceToElement.cs" />
     <Compile Include="Settings\Timeouts.cs" />
-    <Compile Include="Utils\ExceptionUtils.cs" />
     <Compile Include="Utils\ReflectionUtils.cs" />
-    <Compile Include="Utils\Timer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="JDI.Light.nuspec" />

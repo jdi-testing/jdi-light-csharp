@@ -15,9 +15,7 @@ namespace JDI.Light.Utils
                 throw new Exception(GetBadLocatorMsg(byLocatorString, args));
 
             var locatorAsString = byLocatorString;
-            byLocatorString = ExceptionUtils.ActionWithException(
-                () => string.Format(locatorAsString, args),
-                ex => GetBadLocatorMsg(locatorAsString, args));
+            byLocatorString = string.Format(locatorAsString, args);
             return by.GetByFunc()(byLocatorString);
         }
 

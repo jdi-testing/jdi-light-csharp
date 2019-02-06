@@ -10,9 +10,6 @@ namespace JDI.Light.Elements.Common
         protected Func<UIElement, string> GetTextFunc =
             el => el.FindImmediately(() => el.WebElement.GetAttribute("value"), "");
         
-        protected Action<UIElement, string> SetValueAction = (el, val) =>
-            ((TextField) el).NewInput(val);
-
         public TextField(By byLocator = null)
             : base(byLocator)
         {
@@ -32,7 +29,12 @@ namespace JDI.Light.Elements.Common
         public new string Value
         {
             get => base.Value;
-            set => Invoker.DoActionWithWait("Get value", () => SetValueAction(this, value));
+            set => Invoker.DoActionWithWait("Set value", () =>
+            {
+                var e = WebElement;
+                e.Clear();
+                e.SendKeys(value);
+            });
         }
 
         public new void SendKeys(string text)

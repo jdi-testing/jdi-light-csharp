@@ -1,5 +1,5 @@
-﻿using JDI.Light.Interfaces.Common;
-using JDI.Light.Tests.UIObjects;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using NUnit.Framework;
 
 namespace JDI.Light.Tests.UITests.Common
@@ -11,11 +11,9 @@ namespace JDI.Light.Tests.UITests.Common
         public void SetUp()
         {
             Jdi.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
-            TestSite.HomePage.IsOpened();
+            TestSite.HomePage.Open();
             Jdi.Logger.Info("Setup method finished");
         }
-
-        private readonly IText _textItem = TestSite.HomePage.Text;
 
         private readonly string _expectedText = ("Lorem ipsum dolor sit amet, consectetur adipisicing elit,"
                                                  + " sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
@@ -30,13 +28,13 @@ namespace JDI.Light.Tests.UITests.Common
         [Test]
         public void GetTextTest()
         {
-            Jdi.Assert.AreEquals(_textItem.Value, _expectedText);
+            Jdi.Assert.AreEquals(TestSite.HomePage.Text.Value, _expectedText);
         }
 
         [Test]
         public void GetValueTest()
         {
-            Jdi.Assert.AreEquals(_textItem.Value, _expectedText);
+            Jdi.Assert.AreEquals(TestSite.HomePage.Text.Value, _expectedText);
         }
 
         [Test]
@@ -44,36 +42,54 @@ namespace JDI.Light.Tests.UITests.Common
         {
             var attributeName = "testAttr";
             var value = "testValue";
-            _textItem.SetAttribute(attributeName, value);
-            CommonActionsData.CheckText(() => _textItem.GetAttribute(attributeName), value);
+            TestSite.HomePage.Text.SetAttribute(attributeName, value);
+            Jdi.Assert.AreEquals(TestSite.HomePage.Text.GetAttribute(attributeName), value);
         }
 
         [Test]
         public void WaitMatchTest()
         {
-            Jdi.Assert.AreEquals(_textItem.WaitMatchText(_regEx), _expectedText);
+            Jdi.Assert.AreEquals(TestSite.HomePage.Text.WaitMatchText(_regEx), _expectedText);
         }
 
         [Test]
         public void WaitMatchTextParallelTest()
         {
-            TestSite.SupportPage.IsOpened();
-            CommonActionsData.RunParallel(() => TestSite.HomePage.IsOpened());
-            Jdi.Assert.AreEquals(_textItem.WaitMatchText(_regEx), _expectedText);
+            TestSite.SupportPage.Open();
+            var actualResultTask = Task.Factory.StartNew(() =>
+            {
+                Thread.Sleep(200);
+                return TestSite.HomePage.Text.WaitMatchText(_regEx);
+            });
+            Task.Factory.StartNew(() =>
+            {
+                Thread.Sleep(100);
+                TestSite.HomePage.Open();
+            });
+            Jdi.Assert.AreEquals(actualResultTask.Result, _expectedText);
         }
 
         [Test]
         public void WaitText()
         {
-            Jdi.Assert.AreEquals(_textItem.WaitText(_contains), _expectedText);
+            Jdi.Assert.AreEquals(TestSite.HomePage.Text.WaitText(_contains), _expectedText);
         }
 
         [Test]
         public void WaitTextParallelTest()
         {
-            TestSite.SupportPage.IsOpened();
-            CommonActionsData.RunParallel(() => TestSite.HomePage.IsOpened());
-            Jdi.Assert.AreEquals(_textItem.WaitText(_contains), _expectedText);
+            TestSite.SupportPage.Open();
+            var actualResultTask = Task.Factory.StartNew(() =>
+            {
+                Thread.Sleep(200);
+                return TestSite.HomePage.Text.WaitText(_contains);
+            });
+            Task.Run(() =>
+            {
+                Thread.Sleep(100);
+                TestSite.HomePage.Open();
+            });
+            Jdi.Assert.AreEquals(actualResultTask.Result, _expectedText);
         }
     }
 }

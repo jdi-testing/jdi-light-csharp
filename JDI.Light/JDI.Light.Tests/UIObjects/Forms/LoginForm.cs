@@ -8,8 +8,9 @@ namespace JDI.Light.Tests.UIObjects.Forms
     public class LoginForm : Form<User>
     {
         [FindBy(Css = "button.btn-login")]
+        [Name("Login")]
         public IButton LoginButton;
-
+        
         [FindBy(Css = "#name")]
         [Name("Login")]
         public ITextField LoginField;
@@ -17,10 +18,5 @@ namespace JDI.Light.Tests.UIObjects.Forms
         [FindBy(Css = "#password")]
         [Name("Password")]
         public ITextField PasswordField;
-        
-        public void Logout()
-        {
-            LoginButton.Click();
-        }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using JDI.Light.Enums;
 using JDI.Light.Interfaces.Base;
-using JDI.Light.Utils;
 using OpenQA.Selenium;
 
 namespace JDI.Light.Interfaces.Composite
@@ -10,12 +9,12 @@ namespace JDI.Light.Interfaces.Composite
         CheckPageType CheckTitleType { get; set; }
         CheckPageType CheckUrlType { get; set; }
 
+        ISite Parent { get; set; }
         string Url { get; set; }
         string Title { get; set; }
         string UrlTemplate { get; set; }
 
-        IWebDriver WebDriver { get; set; }
-        Timer Timer { get; set; }
+        IWebDriver WebDriver { get; }
 
         void CheckOpened();
         void Open();

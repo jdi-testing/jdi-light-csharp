@@ -1,5 +1,4 @@
-﻿using JDI.Light.Tests.UIObjects;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace JDI.Light.Tests.UITests.Composite
 {
@@ -12,7 +11,6 @@ namespace JDI.Light.Tests.UITests.Composite
             Jdi.Logger.Info("Navigating to Complex Table page.");
             TestSite.ComplexTablePage.Open();
             TestSite.ComplexTablePage.CheckTitle();
-            TestSite.ComplexTablePage.IsOpened();
             var table = TestSite.ComplexTablePage.Table;
             var headers = table.Headers;
             var body = table.Body;
@@ -27,7 +25,6 @@ namespace JDI.Light.Tests.UITests.Composite
             Jdi.Logger.Info("Navigating to Simple Table page.");
             TestSite.SimpleTablePage.Open();
             TestSite.SimpleTablePage.CheckTitle();
-            TestSite.SimpleTablePage.IsOpened();
             var table = TestSite.SimpleTablePage.Table;
             var headers = table.Headers;
             var body = table.Body;
