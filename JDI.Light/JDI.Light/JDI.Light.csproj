@@ -90,7 +90,6 @@
     <Compile Include="Interfaces\Common\IButton.cs" />
     <Compile Include="Interfaces\Common\ICheckBox.cs" />
     <Compile Include="Interfaces\Common\IDatePicker.cs" />
-    <Compile Include="Interfaces\Common\IFileInput.cs" />
     <Compile Include="Interfaces\Common\IImage.cs" />
     <Compile Include="Interfaces\Common\ILabel.cs" />
     <Compile Include="Interfaces\Common\ILink.cs" />
