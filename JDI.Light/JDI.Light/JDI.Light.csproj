@@ -121,7 +121,6 @@
     <Compile Include="Elements\Common\Button.cs" />
     <Compile Include="Elements\Common\CheckBox.cs" />
     <Compile Include="Elements\Common\DatePicker.cs" />
-    <Compile Include="Elements\Common\FileInput.cs" />
     <Compile Include="Elements\Common\Image.cs" />
     <Compile Include="Elements\Common\Input.cs" />
     <Compile Include="Elements\Common\Label.cs" />
