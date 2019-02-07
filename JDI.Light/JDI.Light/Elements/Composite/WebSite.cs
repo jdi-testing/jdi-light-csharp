@@ -29,8 +29,7 @@ namespace JDI.Light.Elements.Composite
         {
             var page = typeof(T).CreateInstance(relativeUrl, title);
             page.Parent = this;
-            page.DriverName = DriverName;
-            page.InitElementMembers(DriverName);
+            page.InitMembers(DriverName);
             return (T)page;
         }
 

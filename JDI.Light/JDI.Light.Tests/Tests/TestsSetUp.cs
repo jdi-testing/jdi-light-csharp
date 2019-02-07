@@ -3,7 +3,7 @@ using JDI.Light.Tests.Asserts;
 using JDI.Light.Utils;
 using NUnit.Framework;
 
-namespace JDI.Light.Tests.UITests
+namespace JDI.Light.Tests.Tests
 {
     [SetUpFixture]
     public class TestsSetUp

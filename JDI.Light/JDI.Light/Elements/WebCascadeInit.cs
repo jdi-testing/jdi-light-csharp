@@ -31,11 +31,11 @@ namespace JDI.Light.Elements
             {
                 site.Domain = siteAttribute.GetDomainFunc.Invoke();
             }
-            InitElementMembers(site, driverName);
+            InitMembers(site, driverName);
             return site;
         }
 
-        public static IBaseElement InitElementMembers(this IBaseElement targetElement, string driverName)
+        public static IBaseElement InitMembers(this IBaseElement targetElement, string driverName)
         {
             var elementMembers = targetElement.GetMembers(Decorators, StopTypes);
             var members = elementMembers.Where(m => Decorators.Any(type => type.IsAssignableFrom(m.GetMemberType())));
@@ -48,7 +48,7 @@ namespace JDI.Light.Elements
                 instance.Name = member.GetElementName();
                 instance.DriverName = driverName;
                 member.SetMemberValue(targetElement, instance);
-                InitElementMembers(instance, driverName);
+                InitMembers(instance, driverName);
             }
 
             return targetElement;

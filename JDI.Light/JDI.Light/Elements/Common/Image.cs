@@ -17,12 +17,14 @@ namespace JDI.Light.Elements.Common
 
         public string GetSource()
         {
-            return Invoker.DoActionWithResult("Get image source for Element " + this, () => FindImmediately(() => WebElement.GetAttribute("src"), ""));
+            return Invoker.DoActionWithResult("Get image source for Element " + this,
+                () => FindImmediately(() => WebElement.GetAttribute("src"), ""));
         }
 
         public string GetAlt()
         {
-            return Invoker.DoActionWithResult("Get image title for Element " + this, () => FindImmediately(() => WebElement.GetAttribute("alt"), ""));
+            return Invoker.DoActionWithResult("Get image title for Element " + this,
+                () => FindImmediately(() => WebElement.GetAttribute("alt"), ""));
         }
     }
 }

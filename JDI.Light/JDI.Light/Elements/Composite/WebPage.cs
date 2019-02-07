@@ -47,8 +47,7 @@ namespace JDI.Light.Elements.Composite
         {
             var element = typeof(T).CreateInstance(locator);
             element.Parent = this;
-            element.DriverName = DriverName;
-            element.InitElementMembers(DriverName);
+            element.InitMembers(DriverName);
             return (T)element;
         }
 

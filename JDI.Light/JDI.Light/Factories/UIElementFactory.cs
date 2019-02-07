@@ -46,21 +46,21 @@ namespace JDI.Light.Factories
             type = type.IsInterface ? MapInterfaceToElement.ClassFromInterface(type) : type;
             var element = (UIElement)instance ?? type.CreateInstance(member.GetFindsBy());
             element.Parent = parent;
+            element.DriverName = parent.DriverName;
             var checkedAttr = member.GetCustomAttribute<IsCheckedAttribute>(false);
             if (checkedAttr != null && typeof(ICheckBox).IsAssignableFrom(member.GetMemberType()))
             {
                 var checkBox = (CheckBox)element;
                 checkBox.SetIsCheckedFunc(checkedAttr.CheckedDelegate);
             }
-            if (parent == null || type != null)
+            var frameBy = member.GetCustomAttribute<FrameAttribute>(false)?.FrameLocator;
+            if (frameBy != null)
+                element.FrameLocator = frameBy;
+            By template;
+            if (element.Parent is Form<IConvertible> form 
+                && !element.HasLocator && (template = form.LocatorTemplate) != null)
             {
-                var frameBy = member.GetCustomAttribute<FrameAttribute>(false)?.FrameLocator;
-                if (frameBy != null)
-                    element.FrameLocator = frameBy;
-                By template;
-                if (element.Parent is Form<IConvertible> form && !element.HasLocator
-                                                              && (template = form.LocatorTemplate) != null)
-                    element.Locator = template.FillByTemplate(member.Name);
+                element.Locator = template.FillByTemplate(member.Name);
             }
             return element;
         }

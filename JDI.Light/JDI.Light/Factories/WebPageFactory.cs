@@ -48,6 +48,7 @@ namespace JDI.Light.Factories
             var instance = (IPage)(memberInfo.GetMemberValue(parent)
                                    ?? memberInfo.GetMemberType().CreateInstance(pageAttribute.Url, pageAttribute.Title));
             instance.Parent = (ISite)parent;
+            instance.DriverName = parent.DriverName;
             instance.UrlTemplate = pageAttribute.UrlTemplate;
             instance.CheckUrlType = pageAttribute.UrlCheckType;
             instance.CheckTitleType = pageAttribute.TitleCheckType;

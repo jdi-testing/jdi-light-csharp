@@ -4,7 +4,7 @@ using JDI.Light.Tests.Enums;
 using JDI.Light.Tests.UIObjects.Forms;
 using NUnit.Framework;
 
-namespace JDI.Light.Tests.UITests.Composite
+namespace JDI.Light.Tests.Tests.Composite
 {
     [TestFixture]
     public class FormTests : TestBase
