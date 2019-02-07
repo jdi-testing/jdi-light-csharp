@@ -47,9 +47,9 @@ namespace JDI.Light.Elements.Base
                         var displayed = _webElement.Displayed;
                         return _webElement;
                     }
-                    catch (StaleElementReferenceException)
+                    catch (WebDriverException e)
                     {
-                        Logger.Debug($"Element {this} state is invalid");
+                        Logger.Debug($"Element {this} state is invalid: {e.Message}");
                         _webElement = null;
                     }
                 }

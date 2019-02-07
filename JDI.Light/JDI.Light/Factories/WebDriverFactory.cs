@@ -287,6 +287,8 @@ namespace JDI.Light.Factories
                     {
                         driver.Quit();
                     }
+
+                    Drivers.Remove(key);
                 }
             }
         }

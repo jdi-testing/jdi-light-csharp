@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace JDI.Light.Tests.UITests.Common
+namespace JDI.Light.Tests.Tests.Common
 {
     [TestFixture]
     public class ButtonTests : TestBase

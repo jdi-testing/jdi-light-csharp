@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 
-namespace JDI.Light.Tests.UITests.Composite
+namespace JDI.Light.Tests.Tests.Composite
 {
     [TestFixture]
     public class MenuTests : TestBase

@@ -44,5 +44,10 @@ namespace JDI.Light
         {
             return ((IJavaScriptExecutor) WebDriver).ExecuteScript(script, args);
         }
+
+        public static void CloseDriver()
+        {
+            DriverFactory.Close();
+        }
     }
 }

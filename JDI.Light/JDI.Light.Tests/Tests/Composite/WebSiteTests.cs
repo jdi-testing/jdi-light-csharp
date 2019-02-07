@@ -1,7 +1,7 @@
 ﻿using JDI.Light.Tests.UIObjects.Pages;
 using NUnit.Framework;
 
-namespace JDI.Light.Tests.UITests.Composite
+namespace JDI.Light.Tests.Tests.Composite
 {
     [TestFixture]
     public class WebSiteTests : TestBase
