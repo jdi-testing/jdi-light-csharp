@@ -34,6 +34,7 @@ namespace JDI.Light.Factories
             RunDrivers = new ConcurrentDictionary<string, IWebDriver>();
             DriverPath = AppDomain.CurrentDomain.BaseDirectory;
             RunType = RunType.Local;
+            DriverVersion = "";
         }
 
         private readonly Dictionary<DriverType, string> _driverNamesDictionary = new Dictionary<DriverType, string>
@@ -84,6 +85,7 @@ namespace JDI.Light.Factories
         }
 
         public string DriverPath { get; set; }
+        public string DriverVersion { get; set; }
 
         public IWebDriver GetDriver()
         {
@@ -177,9 +179,9 @@ namespace JDI.Light.Factories
             }
             else
             {
-                if (!string.IsNullOrEmpty(Jdi.DriverVersion))
+                if (!string.IsNullOrEmpty(DriverVersion))
                 {
-                    DriverPath = WebDriverUtils.GetSpecifiedVersion(driverType, Jdi.DriverVersion);
+                    DriverPath = WebDriverUtils.GetSpecifiedVersion(driverType, DriverVersion);
                 }
             }
 

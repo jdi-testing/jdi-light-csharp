@@ -19,7 +19,6 @@ namespace JDI.Light
         public static ILogger Logger;
         public static IKillDriver KillDriver;
         public static bool GetLatestDriver = true;
-        public static string DriverVersion = "";
 
         static Jdi()
         {
