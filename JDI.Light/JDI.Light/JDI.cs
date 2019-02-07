@@ -24,6 +24,7 @@ namespace JDI.Light
         static Jdi()
         {
             Timeouts = new Timeouts();
+            KillDriver = new WinProcUtils();
         }
 
         public static void Init(IAssert assert = null, ILogger logger = null, 
@@ -34,7 +35,6 @@ namespace JDI.Light
             Assert.Logger = Logger;
             DriverFactory = driverFactory ?? new WebDriverFactory();
             Timeouts = timeouts ?? new Timeouts();
-            KillDriver = new WinProcUtils();
         }
 
         public static T InitSite<T>() where T : ISite, new()

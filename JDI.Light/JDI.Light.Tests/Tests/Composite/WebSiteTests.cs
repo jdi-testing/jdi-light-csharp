@@ -7,6 +7,13 @@ namespace JDI.Light.Tests.Tests.Composite
     public class WebSiteTests : TestBase
     {
         [Test]
+        public void TitleTest()
+        {
+            var title = TestSite.Title;
+            Assert.AreEqual("Home Page", title);
+        }
+
+        [Test]
         public void OpenPageTest()
         {
             var page = TestSite.Get<HomePage>("/index.html", "Home Page");
