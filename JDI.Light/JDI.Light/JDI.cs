@@ -2,6 +2,7 @@
 using JDI.Light.Factories;
 using JDI.Light.Interfaces;
 using JDI.Light.Interfaces.Composite;
+using JDI.Light.Interfaces.Utils;
 using JDI.Light.Logging;
 using JDI.Light.Settings;
 using JDI.Light.Utils;
@@ -16,9 +17,10 @@ namespace JDI.Light
         public static Timeouts Timeouts;
         public static IAssert Assert;
         public static ILogger Logger;
+        public static IKillDriver KillDriver;
         public static bool GetLatestDriver = true;
         public static string DriverVersion = "";
-        
+
         static Jdi()
         {
             Timeouts = new Timeouts();
@@ -32,6 +34,7 @@ namespace JDI.Light
             Assert.Logger = Logger;
             DriverFactory = driverFactory ?? new WebDriverFactory();
             Timeouts = timeouts ?? new Timeouts();
+            KillDriver = new WinProcUtils();
         }
 
         public static T InitSite<T>() where T : ISite, new()
@@ -48,6 +51,11 @@ namespace JDI.Light
         public static void CloseDriver()
         {
             DriverFactory.Close();
+        }
+
+        public static void KillAllDrivers()
+        {
+            KillDriver.KillAllRunningDrivers();
         }
     }
 }

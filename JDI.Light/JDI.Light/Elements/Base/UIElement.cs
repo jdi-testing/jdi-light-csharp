@@ -5,7 +5,6 @@ using System.Drawing;
 using System.Linq;
 using System.Threading;
 using JDI.Light.Elements.WebActions;
-using JDI.Light.Factories;
 using JDI.Light.Interfaces;
 using JDI.Light.Interfaces.Base;
 using OpenQA.Selenium;
@@ -21,6 +20,7 @@ namespace JDI.Light.Elements.Base
 
         public IWebDriver WebDriver => Jdi.DriverFactory.GetDriver(DriverName);
 
+        public bool OnlyOneElementAllowedInSearch { get; set; } = true;
         public ActionInvoker Invoker { get; set; }
         public ILogger Logger { get; set; }
         public string DriverName { get; set; }
@@ -62,7 +62,7 @@ namespace JDI.Light.Elements.Base
                         Logger.Debug($"One Web Element found: '{this}'");
                         break;
                     default:
-                        if (WebDriverFactory.OnlyOneElementAllowedInSearch)
+                        if (OnlyOneElementAllowedInSearch)
                             throw Jdi.Assert.Exception(
                                 $"Find {result.Count} elements instead of one for Element '{this}' during {Jdi.Timeouts.WaitElementMSec} milliseconds");
                         break;

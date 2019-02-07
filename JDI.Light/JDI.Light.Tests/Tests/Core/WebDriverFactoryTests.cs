@@ -1,5 +1,4 @@
 ﻿using JDI.Light.Tests.Entities;
-using JDI.Light.Utils;
 using NUnit.Framework;
 
 namespace JDI.Light.Tests.Tests.Core
@@ -11,7 +10,7 @@ namespace JDI.Light.Tests.Tests.Core
         {
             TestSite.HomePage.CheckOpened();
             Jdi.CloseDriver();
-            WinProcUtils.KillAllRunningDrivers();
+            Jdi.KillAllDrivers();
             TestSite.HomePage.Open();
             TestSite.HomePage.Profile.Click();
             TestSite.HomePage.LoginForm.Submit(User.DefaultUser, "Login");
