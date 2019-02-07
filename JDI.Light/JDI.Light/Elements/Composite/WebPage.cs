@@ -45,9 +45,8 @@ namespace JDI.Light.Elements.Composite
         
         public T Get<T>(By locator) where T : UIElement
         {
-            var element = typeof(T).CreateInstance(locator);
-            element.Parent = this;
-            element.InitMembers(DriverName);
+            var element = typeof(T).CreateInstance(locator, this);
+            element.InitMembers();
             return (T)element;
         }
 
