@@ -10,7 +10,7 @@ namespace JDI.Light.Factories
 {
     public static class WebPageFactory
     {
-        public static WebPage CreateInstance(this Type t, string url, string title)
+        public static WebPage CreateInstance(this Type t, string url, string title, ISite parent)
         {
             WebPage instance = null;
             var constructors = t.GetConstructors();
@@ -22,12 +22,16 @@ namespace JDI.Light.Factories
                     case 2:
                     {
                         instance = (WebPage)Activator.CreateInstance(t, url, title);
+                        instance.DriverName = parent.DriverName;
+                        instance.Parent = parent;
                         break;
                     }
                     case 1:
                     {
                         instance = (WebPage)Activator.CreateInstance(t, url);
                         instance.Title = title;
+                        instance.DriverName = parent.DriverName;
+                        instance.Parent = parent;
                         break;
                     }
                     case 0:
@@ -35,6 +39,8 @@ namespace JDI.Light.Factories
                         instance = (WebPage)Activator.CreateInstance(t);
                         instance.Url = url;
                         instance.Title = title;
+                        instance.DriverName = parent.DriverName;
+                        instance.Parent = parent;
                         break;
                     }
                 }
@@ -46,9 +52,7 @@ namespace JDI.Light.Factories
         {
             var pageAttribute = memberInfo.GetCustomAttribute<PageAttribute>(false);
             var instance = (IPage)(memberInfo.GetMemberValue(parent)
-                                   ?? memberInfo.GetMemberType().CreateInstance(pageAttribute.Url, pageAttribute.Title));
-            instance.Parent = (ISite)parent;
-            instance.DriverName = parent.DriverName;
+                                   ?? memberInfo.GetMemberType().CreateInstance(pageAttribute.Url, pageAttribute.Title, (ISite) parent));
             instance.UrlTemplate = pageAttribute.UrlTemplate;
             instance.CheckUrlType = pageAttribute.UrlCheckType;
             instance.CheckTitleType = pageAttribute.TitleCheckType;

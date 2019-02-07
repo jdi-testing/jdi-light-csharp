@@ -15,7 +15,7 @@ namespace JDI.Light.Factories
 {
     public static class UIElementFactory
     {
-        public static UIElement CreateInstance(this Type t, By locator)
+        public static UIElement CreateInstance(this Type t, By locator, IBaseElement parent)
         {
             var constructors = t.GetConstructors();
             foreach (var con in constructors)
@@ -26,12 +26,16 @@ namespace JDI.Light.Factories
                     case 1:
                     {
                         var instance = (UIElement)Activator.CreateInstance(t, locator);
+                        instance.DriverName = parent.DriverName;
+                        instance.Parent = parent;
                         return instance;
                     }
                     case 0:
                     {
                         var instance = (UIElement)Activator.CreateInstance(t);
+                        instance.DriverName = parent.DriverName;
                         instance.Locator = locator;
+                        instance.Parent = parent;
                         return instance;
                     }
                 }
@@ -44,9 +48,7 @@ namespace JDI.Light.Factories
             var type = member.GetMemberType();
             var instance = (IBaseUIElement)member.GetMemberValue(parent);
             type = type.IsInterface ? MapInterfaceToElement.ClassFromInterface(type) : type;
-            var element = (UIElement)instance ?? type.CreateInstance(member.GetFindsBy());
-            element.Parent = parent;
-            element.DriverName = parent.DriverName;
+            var element = (UIElement)instance ?? type.CreateInstance(member.GetFindsBy(), parent);
             var checkedAttr = member.GetCustomAttribute<IsCheckedAttribute>(false);
             if (checkedAttr != null && typeof(ICheckBox).IsAssignableFrom(member.GetMemberType()))
             {
