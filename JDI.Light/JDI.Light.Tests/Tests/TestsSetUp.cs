@@ -16,14 +16,14 @@ namespace JDI.Light.Tests.Tests
             Jdi.GetLatestDriver = false;
             Jdi.DriverVersion = "2.41";
             Jdi.Logger.Info("Init test run...");
-            WinProcUtils.ProcessToKill = new[] { "chromedriver" };
-            WinProcUtils.KillAllRunningDrivers();
+            Jdi.KillDriver.ProcessToKill = new[] { "chromedriver" };
+            Jdi.KillAllDrivers();
         }
 
         [OneTimeTearDown]
         protected void OneTimeTearDown()
         {
-            WinProcUtils.KillAllRunningDrivers();
+            Jdi.KillAllDrivers();
         }
     }
 }

@@ -2,12 +2,13 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Management;
+using JDI.Light.Interfaces.Utils;
 
 namespace JDI.Light.Utils
 {
-    public static class WinProcUtils
+    public class WinProcUtils : IKillDriver
     {
-        public static string[] ProcessToKill =
+        public string[] ProcessToKill { get; set; } =
         {
             "chromedriver",
             "firefox",
@@ -15,16 +16,16 @@ namespace JDI.Light.Utils
             "gecko"
         };
 
-        public static void KillAllRunningDrivers()
+        public void KillAllRunningDrivers()
         {
             foreach (var process in ProcessToKill)
             {
                 Process.GetProcessesByName(process)
-                    .ToList().ForEach(x => x.KillProcessAndChildren());
+                    .ToList().ForEach(KillProcessAndChildren);
             }
         }
 
-        private static void KillProcessAndChildren(this Process process)
+        private void KillProcessAndChildren(Process process)
         {
             if (process.Id == 0)
             {

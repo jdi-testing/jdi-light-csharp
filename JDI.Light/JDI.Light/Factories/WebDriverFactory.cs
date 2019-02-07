@@ -16,8 +16,25 @@ namespace JDI.Light.Factories
 {
     public class WebDriverFactory : IDriverFactory<IWebDriver>
     {
-        public static bool OnlyOneElementAllowedInSearch = true;
-        public static Size BrowserSize = new Size();
+        public Size BrowserSize = new Size();
+        public string RemoteUrl = "";
+
+        public WebDriverFactory()
+        {
+            Drivers = new Dictionary<string, Func<IWebDriver>>();
+            WebDriverSettings = driver =>
+            {
+                if (BrowserSize.Height == 0)
+                    driver.Manage().Window.Maximize();
+                else
+                    driver.Manage().Window.Size = BrowserSize;
+                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(Jdi.Timeouts.WaitElementMSec);
+                return driver;
+            };
+            RunDrivers = new ConcurrentDictionary<string, IWebDriver>();
+            DriverPath = AppDomain.CurrentDomain.BaseDirectory;
+            RunType = RunType.Local;
+        }
 
         private readonly Dictionary<DriverType, string> _driverNamesDictionary = new Dictionary<DriverType, string>
         {
@@ -42,24 +59,8 @@ namespace JDI.Light.Factories
 
         private string _currentDriverName;
 
-        public Func<IWebDriver, IWebDriver> WebDriverSettings = driver =>
-        {
-            if (BrowserSize.Height == 0)
-                driver.Manage().Window.Maximize();
-            else
-                driver.Manage().Window.Size = BrowserSize;
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(Jdi.Timeouts.WaitElementMSec);
-            return driver;
-        };
-
-        public WebDriverFactory()
-        {
-            Drivers = new Dictionary<string, Func<IWebDriver>>();
-            RunDrivers = new ConcurrentDictionary<string, IWebDriver>();
-            DriverPath = AppDomain.CurrentDomain.BaseDirectory;
-            RunType = RunType.Local;
-        }
-
+        public Func<IWebDriver, IWebDriver> WebDriverSettings;
+        
         private Dictionary<string, Func<IWebDriver>> Drivers { get; }
 
         private ConcurrentDictionary<string, IWebDriver> RunDrivers { get; }
@@ -251,7 +252,7 @@ namespace JDI.Light.Factories
             });
 
             return RegisterDriver("Remote_" + _driverNamesDictionary[driverType],
-                () => new RemoteWebDriver(new Uri(Properties.Settings.Default.remote_url), capabilities));
+                () => new RemoteWebDriver(new Uri(RemoteUrl), capabilities));
         }
 
         public void SwitchToDriver(string driverName)
