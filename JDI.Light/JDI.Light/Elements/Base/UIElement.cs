@@ -49,7 +49,7 @@ namespace JDI.Light.Elements.Base
                     }
                     catch (WebDriverException e)
                     {
-                        Logger.Debug($"Element {this} state is invalid: {e.Message}");
+                        Logger.Debug($"Element {this} state is invalid, exception message: {e.Message}");
                         _webElement = null;
                     }
                 }
