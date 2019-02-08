@@ -61,10 +61,10 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Enums\Buttons.cs" />
     <Compile Include="Enums\Colors.cs" />
-    <Compile Include="Enums\CheckboxElements.cs" />
     <Compile Include="Enums\Metals.cs" />
     <Compile Include="Enums\Odds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\Common\InputTests.cs" />
     <Compile Include="Tests\Common\UIElementTests.cs" />
     <Compile Include="Tests\Core\WebDriverFactoryTests.cs" />
     <Compile Include="UIObjects\Pages\BasePage.cs" />

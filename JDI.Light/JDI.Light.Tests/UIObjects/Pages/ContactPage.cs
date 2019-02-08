@@ -26,6 +26,9 @@ namespace JDI.Light.Tests.UIObjects.Pages
         [FindBy(Id = "name")]
         public TextField NameField;
 
+        [FindBy(Id = "name")]
+        public Input NameInput;
+
         [FindBy(Css = ".results")]
         public ITextElement Result;
         
