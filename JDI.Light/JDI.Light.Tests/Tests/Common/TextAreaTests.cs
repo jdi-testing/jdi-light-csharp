@@ -5,8 +5,6 @@ namespace JDI.Light.Tests.Tests.Common
     [TestFixture]
     public class TextAreaTests : TestBase
     {
-        private const string ToAddText = "text123!@#$%^&*()";
-
         [SetUp]
         public void SetUp()
         {

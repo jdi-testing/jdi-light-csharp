@@ -31,26 +31,15 @@ namespace JDI.Light.Utils
 
         public void Contains(string actual, string expected)
         {
-            Contains(actual, expected, false);
-        }
-
-        public void Contains(string actual, string expected, bool logOnlyFail)
-        {
-            Contains(actual, expected, logOnlyFail, null);
-        }
-
-        public void Contains(string actual, string expected, bool logOnlyFail, string failMessage)
-        {
             var result = actual.Contains(expected);
-            AssertAction($"Check that '{actual}' contains '{expected}'", result, logOnlyFail);
+            AssertAction($"Check that '{actual}' contains '{expected}'", result);
         }
 
-        private void AssertAction(string message, bool result, bool logOnlyFail = false, string failMessage = null)
+        private void AssertAction(string message, bool result)
         {
-            if (!logOnlyFail) Logger.Info(message);
             // TODO: Take screenshot
             //TakeScreenshot();
-            if (!result) AssertException(failMessage ?? message + " failed");
+            if (!result) AssertException(message + " failed");
         }
 
         private void AssertException(string failMessage, params object[] args)
@@ -72,10 +61,10 @@ namespace JDI.Light.Utils
             AssertAction($"Check that condition is false{msg}", !condition);
         }
 
-        public void AreEquals<T>(T actual, T expected, bool logOnlyFail = false)
+        public void AreEquals<T>(T actual, T expected)
         {
             var result = typeof(T) == typeof(string) ? actual.ToString().Equals(expected.ToString()) : actual.Equals(expected);
-            AssertAction($"Check that '{actual}' equals to '{expected}'", result, logOnlyFail);
+            AssertAction($"Check that '{actual}' equals to '{expected}'", result);
         }
 
         public void CollectionEquals<T>(IEnumerable<T> actual, IEnumerable<T> expected)
