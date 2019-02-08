@@ -10,7 +10,7 @@ namespace JDI.Light.Factories
 {
     public static class WebPageFactory
     {
-        public static WebPage CreateInstance(this Type t, string url, string title, ISite parent)
+        public static WebPage CreateInstance(this Type t, string url, string title, IWebSite parent)
         {
             WebPage instance = null;
             var constructors = t.GetConstructors();
@@ -52,7 +52,7 @@ namespace JDI.Light.Factories
         {
             var pageAttribute = memberInfo.GetCustomAttribute<PageAttribute>(false);
             var instance = (IPage)(memberInfo.GetMemberValue(parent)
-                                   ?? memberInfo.GetMemberType().CreateInstance(pageAttribute.Url, pageAttribute.Title, (ISite) parent));
+                                   ?? memberInfo.GetMemberType().CreateInstance(pageAttribute.Url, pageAttribute.Title, (IWebSite) parent));
             instance.UrlTemplate = pageAttribute.UrlTemplate;
             instance.CheckUrlType = pageAttribute.UrlCheckType;
             instance.CheckTitleType = pageAttribute.TitleCheckType;

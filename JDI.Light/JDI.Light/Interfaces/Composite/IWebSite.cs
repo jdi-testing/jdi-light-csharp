@@ -2,7 +2,7 @@
 
 namespace JDI.Light.Interfaces.Composite
 {
-    public interface ISite : IBaseElement
+    public interface IWebSite : IBaseElement
     {
         string Domain { get; set; }
         bool HasDomain { get; }

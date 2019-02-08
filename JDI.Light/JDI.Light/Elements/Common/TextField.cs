@@ -5,7 +5,7 @@ using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Common
 {
-    public class TextField : Text, ITextField
+    public class TextField : TextElement, ITextField
     {
         protected Func<UIElement, string> GetTextFunc =
             el => el.FindImmediately(() => el.WebElement.GetAttribute("value"), "");

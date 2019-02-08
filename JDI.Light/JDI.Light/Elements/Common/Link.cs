@@ -5,7 +5,7 @@ using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Common
 {
-    public class Link : Text, ILink
+    public class Link : TextElement, ILink
     {
         public Link() : this(null)
         {

@@ -34,7 +34,6 @@ namespace JDI.Light.Elements.Base
         public bool Selected => WebElement.Selected;
         public Point Location => WebElement.Location;
         public Size Size => WebElement.Size;
-
         protected Func<UIElement, bool> IsDisplayedAction = el => el.FindImmediately(() => el.WebElement.Displayed, false);
         public bool Displayed => Invoker.DoActionWithResult("Is element displayed", () => FindImmediately(() => WebElement.Displayed, false));
         public bool Hidden => Invoker.DoActionWithResult("Is element hidden", () => !IsDisplayedAction(this));
@@ -47,7 +46,7 @@ namespace JDI.Light.Elements.Base
             Locator = byLocator;
         }
 
-        public T Get<T>(By locator) where T : UIElement
+        public T Get<T>(By locator) where T : IBaseUIElement
         {
             var element = UIElementFactory.CreateInstance<T>(locator, this);
             element.InitMembers();

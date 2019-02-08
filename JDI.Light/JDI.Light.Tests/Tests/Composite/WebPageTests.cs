@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Linq;
 using JDI.Light.Tests.Entities;
+using JDI.Light.Tests.UIObjects.Pages;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
 namespace JDI.Light.Tests.Tests.Composite
 {
     [TestFixture]
-    public class PageTests : TestBase
+    public class WebPageTests : TestBase
     {
         [SetUp]
         public void SetUp()
@@ -17,6 +18,14 @@ namespace JDI.Light.Tests.Tests.Composite
             TestSite.ContactFormPage.CheckTitle();
             Jdi.Logger.Info("Setup method finished");
             Jdi.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+        }
+
+        [Test]
+        public void GetGenericPageTest()
+        {
+            var p = TestSite.Get<ContactPage>("/contacts.html", "Contact Form");
+            p.Open();
+            p.CheckOpened();
         }
 
         [Test]

@@ -1,6 +1,6 @@
 ﻿namespace JDI.Light.Interfaces.Common
 {
-    public interface ILink : IText
+    public interface ILink : ITextElement
     {
         string GetReference();
         string WaitReferenceContains(string text);

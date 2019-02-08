@@ -65,9 +65,11 @@
     <Compile Include="Enums\Metals.cs" />
     <Compile Include="Enums\Odds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\Common\UIElementTests.cs" />
     <Compile Include="Tests\Core\WebDriverFactoryTests.cs" />
     <Compile Include="UIObjects\Pages\BasePage.cs" />
     <Compile Include="UIObjects\Pages\ComplexTablePage.cs" />
+    <Compile Include="UIObjects\TestSiteBrokenDomain.cs" />
     <Compile Include="UIObjects\TestSiteCustomDomain.cs" />
     <Compile Include="Tests\Common\ButtonTests.cs" />
     <Compile Include="Tests\Common\CheckBoxTests.cs" />
@@ -80,7 +82,7 @@
     <Compile Include="Tests\Composite\FormTests.cs" />
     <Compile Include="Tests\Composite\FormTwoButtonsTests.cs" />
     <Compile Include="Tests\Composite\MenuTests.cs" />
-    <Compile Include="Tests\Composite\PageTests.cs" />
+    <Compile Include="Tests\Composite\WebPageTests.cs" />
     <Compile Include="Tests\Composite\SearchTests.cs" />
     <Compile Include="Tests\Composite\SiteDomainTests.cs" />
     <Compile Include="Tests\Composite\TableTests.cs" />

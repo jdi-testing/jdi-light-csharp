@@ -27,7 +27,7 @@ namespace JDI.Light.Tests.UIObjects.Pages
         public TextField NameField;
 
         [FindBy(Css = ".results")]
-        public IText Result;
+        public ITextElement Result;
         
         public void FillAndSubmitForm(string firstName, string secondName, string description)
         {

@@ -81,6 +81,7 @@
     <Compile Include="Extensions\UIElementExtensions.cs" />
     <Compile Include="Factories\UIElementFactory.cs" />
     <Compile Include="Factories\WebPageFactory.cs" />
+    <Compile Include="Factories\WebSiteFactory.cs" />
     <Compile Include="Interfaces\Base\IBaseElement.cs" />
     <Compile Include="Interfaces\Base\IBaseUIElement.cs" />
     <Compile Include="Interfaces\Base\IGetValue.cs" />
@@ -93,12 +94,13 @@
     <Compile Include="Interfaces\Common\ILabel.cs" />
     <Compile Include="Interfaces\Common\ILink.cs" />
     <Compile Include="Interfaces\Common\IText.cs" />
+    <Compile Include="Interfaces\Common\ITextElement.cs" />
     <Compile Include="Interfaces\Common\ITextArea.cs" />
     <Compile Include="Interfaces\Common\ITextField.cs" />
     <Compile Include="Interfaces\Composite\IForm.cs" />
     <Compile Include="Interfaces\Composite\IPage.cs" />
     <Compile Include="Interfaces\Composite\ISearch.cs" />
-    <Compile Include="Interfaces\Composite\ISite.cs" />
+    <Compile Include="Interfaces\Composite\IWebSite.cs" />
     <Compile Include="Interfaces\IDriverFactory.cs" />
     <Compile Include="Interfaces\Utils\IKillDriver.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
@@ -119,7 +121,7 @@
     <Compile Include="Elements\Common\Input.cs" />
     <Compile Include="Elements\Common\Label.cs" />
     <Compile Include="Elements\Common\Link.cs" />
-    <Compile Include="Elements\Common\Text.cs" />
+    <Compile Include="Elements\Common\TextElement.cs" />
     <Compile Include="Elements\Common\TextArea.cs" />
     <Compile Include="Elements\Common\TextField.cs" />
     <Compile Include="Elements\Composite\Form.cs" />

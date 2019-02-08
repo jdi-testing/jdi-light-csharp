@@ -23,7 +23,7 @@ namespace JDI.Light.Elements.Composite
         public ILogger Logger { get; set; }
         public string DriverName { get; set; } = Jdi.DriverFactory.CurrentDriverName;
         public string Name { get; set; }
-        public ISite Parent { get; set; }
+        public IWebSite Parent { get; set; }
         public IWebDriver WebDriver => Jdi.DriverFactory.GetDriver(DriverName);
 
         protected WebPage() : this(null)

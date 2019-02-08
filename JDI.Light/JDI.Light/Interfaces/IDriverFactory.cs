@@ -9,6 +9,7 @@ namespace JDI.Light.Interfaces
         string CurrentDriverName { get; set; }
         string DriverPath { get; set; }
         string DriverVersion { get; set; }
+        bool GetLatestDriver { get; set; }
 
         string RegisterDriver(string driverName);
         void SetRunType(string runType);

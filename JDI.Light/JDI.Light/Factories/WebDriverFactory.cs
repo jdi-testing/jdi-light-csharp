@@ -16,6 +16,7 @@ namespace JDI.Light.Factories
 {
     public class WebDriverFactory : IDriverFactory<IWebDriver>
     {
+        public bool GetLatestDriver { get; set; } = true;
         public Size BrowserSize = new Size();
         public string RemoteUrl = "";
 
@@ -44,9 +45,8 @@ namespace JDI.Light.Factories
             {DriverType.IE, "internet explorer"}
         };
 
-        private readonly Dictionary<DriverType, Func<string, IWebDriver>> _driversDictionary = new Dictionary
-            <DriverType, Func<string, IWebDriver>>
-            {
+        private readonly Dictionary<DriverType, Func<string, IWebDriver>> _driversDictionary = new Dictionary<DriverType, Func<string, IWebDriver>>
+        {
                 {DriverType.Chrome, path =>
                     {
                         var o = new ChromeOptions();
@@ -173,7 +173,7 @@ namespace JDI.Light.Factories
 
         private string RegisterLocalDriver(DriverType driverType)
         {
-            if (Jdi.GetLatestDriver)
+            if (GetLatestDriver)
             {
                 if (!WebDriverUtils.IsLocalVersionLatestVersion(driverType, DriverPath))
                     DriverPath = WebDriverUtils.GetLatestVersion(driverType);

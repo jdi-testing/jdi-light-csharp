@@ -7,7 +7,7 @@ using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Composite
 {
-    public class WebSite : ISite
+    public class WebSite : IWebSite
     {
         public ActionInvoker Invoker { get; set; }
         public ILogger Logger { get; set; }
