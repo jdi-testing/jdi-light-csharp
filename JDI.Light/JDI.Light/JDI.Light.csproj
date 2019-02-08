@@ -93,7 +93,6 @@
     <Compile Include="Interfaces\Common\IImage.cs" />
     <Compile Include="Interfaces\Common\ILabel.cs" />
     <Compile Include="Interfaces\Common\ILink.cs" />
-    <Compile Include="Interfaces\Common\IText.cs" />
     <Compile Include="Interfaces\Common\ITextElement.cs" />
     <Compile Include="Interfaces\Common\ITextArea.cs" />
     <Compile Include="Interfaces\Common\ITextField.cs" />
