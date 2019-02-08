@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -48,11 +47,6 @@ namespace JDI.Light.Extensions
             return result;
         }
 
-        public static bool Contains(this string source, string toCheck, StringComparison comparison)
-        {
-            return source.IndexOf(toCheck, comparison) >= 0;
-        }
-
         public static bool Matches(this string input, string pattern)
         {
             return Regex.IsMatch(input, pattern);
@@ -71,11 +65,6 @@ namespace JDI.Light.Extensions
         public static string FromNewLine(this string s)
         {
             return " " + Environment.NewLine + s;
-        }
-
-        public static IList<string> Split(this string s, string separator)
-        {
-            return s.Split(new[] { separator }, StringSplitOptions.None);
         }
 
         public static string SplitCamelCase(this string camel)

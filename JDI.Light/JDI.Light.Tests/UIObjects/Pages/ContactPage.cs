@@ -18,7 +18,7 @@ namespace JDI.Light.Tests.UIObjects.Pages
         public IButton ContactSubmit;
 
         [FindBy(Id = "description")]
-        public TextArea DescriptionField;
+        public TextArea DescriptionArea;
 
         [FindBy(Id = "last-name")]
         public ITextField LastNameField;
@@ -42,7 +42,7 @@ namespace JDI.Light.Tests.UIObjects.Pages
         {
             NameField.NewInput(firstName);
             LastNameField.NewInput(secondName);
-            DescriptionField.NewInput(description);
+            DescriptionArea.NewInput(description);
         }
     }
 }
