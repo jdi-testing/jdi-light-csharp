@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using JDI.Light.Elements.Base;
+using JDI.Light.Factories;
 using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Composite
@@ -21,21 +22,13 @@ namespace JDI.Light.Elements.Composite
         public By TableRowsLocator { get; set; }
         public By TableCellsLocator { get; set; }
 
-        public UIElement Headers => new UIElement(TableHeadersLocator) { Parent = this };
-        public UIElement Body => new UIElement(TableBodyLocator) { Parent = this };
-        public UIElement Footer => new UIElement(TableFooterLocator) { Parent = this };
+        public UIElement Headers => UIElementFactory.CreateInstance<UIElement>(TableHeadersLocator, this);
+        public UIElement Body => UIElementFactory.CreateInstance<UIElement>(TableBodyLocator, this);
+        public UIElement Footer => UIElementFactory.CreateInstance<UIElement>(TableFooterLocator, this );
         public UIElement[] Rows => Body.FindElements(TableRowsLocator)
-            .Select(e => new UIElement(TableRowsLocator)
-            {
-                WebElement = e,
-                Parent = Body
-            }).ToArray();
+            .Select(e => UIElementFactory.CreateInstance<UIElement>(TableRowsLocator, Body, e)).ToArray();
 
         public UIElement[][] Cells => Rows.Select(r => r.FindElements(TableCellsLocator)
-            .Select(e => new UIElement(TableCellsLocator)
-            {
-                WebElement = e,
-                Parent = r
-            }).ToArray()).ToArray();
+            .Select(e => UIElementFactory.CreateInstance<UIElement>(TableCellsLocator, r, e)).ToArray()).ToArray();
     }
 }

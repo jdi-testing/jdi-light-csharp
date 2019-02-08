@@ -12,8 +12,6 @@ namespace JDI.Light.Elements.Composite
 {
     public class Form<T> : UIElement, IForm<T>
     {
-        public By LocatorTemplate;
-
         public Form() : base(null)
         {
         }

@@ -31,16 +31,13 @@ namespace JDI.Light.Elements.Composite
             s.SearchField.Input(text);
             return s.Suggestions.Texts;
         };
-
-        protected UIElement Select;
-
+        
         public Search() : this(null)
         {
         }
 
-        public Search(By byLocator = null, By selectLocator = null, By suggestionsListLocator = null) : base(byLocator)
+        public Search(By byLocator , By selectLocator = null, By suggestionsListLocator = null) : base(byLocator)
         {
-            Select = new UIElement(selectLocator);
             _suggestions = new TextList(suggestionsListLocator);
         }
 

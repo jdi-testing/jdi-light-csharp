@@ -15,24 +15,36 @@ namespace JDI.Light.Elements.Base
     {
         private IWebElement _webElement;
 
-        public By FrameLocator;
-        public By Locator;
-
-        public IWebDriver WebDriver => Jdi.DriverFactory.GetDriver(DriverName);
-
+        public By Locator { get; set; }
         public bool OnlyOneElementAllowedInSearch { get; set; } = true;
         public ActionInvoker Invoker { get; set; }
         public ILogger Logger { get; set; }
-        public string DriverName { get; set; }
+        public string DriverName { get; set; } = Jdi.DriverFactory.CurrentDriverName;
+        public string Name { get; set; }
+        public IBaseElement Parent { get; set; }
 
-        public UIElement(By byLocator)
+        public Func<IWebElement, bool> LocalElementSearchCriteria;
+
+        public bool HasLocator => Locator != null;
+        public IJavaScriptExecutor JsExecutor => (IJavaScriptExecutor)WebDriver;
+        public IWebDriver WebDriver => Jdi.DriverFactory.GetDriver(DriverName);
+        public string TagName => WebElement.TagName;
+        public string Text => WebElement.Text;
+        public bool Enabled => WebElement.Enabled;
+        public bool Selected => WebElement.Selected;
+        public Point Location => WebElement.Location;
+        public Size Size => WebElement.Size;
+
+        protected Func<UIElement, bool> IsDisplayedAction = el => el.FindImmediately(() => el.WebElement.Displayed, false);
+        public bool Displayed => Invoker.DoActionWithResult("Is element displayed", () => FindImmediately(() => WebElement.Displayed, false));
+        public bool Hidden => Invoker.DoActionWithResult("Is element hidden", () => !IsDisplayedAction(this));
+        public Func<UIElement, bool> WaitDisplayedAction => el => WebElement.Displayed;
+
+        protected UIElement(By byLocator)
         {
             Logger = Jdi.Logger;
             Invoker = new ActionInvoker(Logger, Jdi.Timeouts.WaitElementMSec, Jdi.Timeouts.RetryMSec);
             Locator = byLocator;
-            if (string.IsNullOrEmpty(DriverName) && Jdi.DriverFactory != null &&
-                !string.IsNullOrEmpty(Jdi.DriverFactory.CurrentDriverName))
-                DriverName = Jdi.DriverFactory.CurrentDriverName;
         }
 
         public IWebElement WebElement
@@ -96,7 +108,7 @@ namespace JDI.Light.Elements.Base
         private ISearchContext GetSearchContext(IBaseElement element)
         {
             var el = element as UIElement;
-            if (element == null || el == null || (el.Parent == null && el.FrameLocator == null))
+            if (element == null || el?.Parent == null)
             {
                 return WebDriver.SwitchTo().DefaultContent();
             }
@@ -105,15 +117,11 @@ namespace JDI.Light.Elements.Base
                 return uiElement.WebElement;
             var locator = el.Locator;
             var searchContext = GetSearchContext(el.Parent);
-            var frame = el.FrameLocator;
-            if (frame != null)
-                WebDriver.SwitchTo().Frame(WebDriver.FindElement(frame));
             return locator != null
                 ? searchContext.FindElement(locator)
                 : searchContext;
         }
 
-        public Func<IWebElement, bool> LocalElementSearchCriteria;
         
         public T FindImmediately<T>(Func<T> func, T ifError)
         {
@@ -134,13 +142,7 @@ namespace JDI.Light.Elements.Base
             SetWaitTimeout(Jdi.Timeouts.WaitElementMSec);
             return result;
         }
-
-        public bool HasLocator => Locator != null;
-
-        public IJavaScriptExecutor JsExecutor => (IJavaScriptExecutor) WebDriver;
-
-        public IBaseElement Parent { get; set; }
-
+        
         public string GetAttribute(string name)
         {
             return WebElement.GetAttribute(name);
@@ -155,14 +157,7 @@ namespace JDI.Light.Elements.Base
         {
             return WebElement.GetCssValue(propertyName);
         }
-
-        public string TagName => WebElement.TagName;
-        public string Text => WebElement.Text;
-        public bool Enabled => WebElement.Enabled;
-        public bool Selected => WebElement.Selected;
-        public Point Location => WebElement.Location;
-        public Size Size => WebElement.Size;
-
+        
         public void SetAttribute(string attributeName, string value)
         {
             Invoker.DoActionWithWait($"Set Attribute '{attributeName}'='{value}'",
@@ -178,11 +173,7 @@ namespace JDI.Light.Elements.Base
             Thread.Sleep(highlightMillisecondsTime);
             SetAttribute("style", originalStyle);
         }
-
-        public string Name { get; set; }
-
-        public string TypeName => GetType().Name;
-
+        
         public void SetWaitTimeout(int mSeconds)
         {
             Logger.Debug("Set wait timeout to " + mSeconds);
@@ -191,16 +182,9 @@ namespace JDI.Light.Elements.Base
 
         public new string ToString()
         {
-            return $"Name: '{Name}', Type: '{TypeName}', Locator: '{Locator}', In: '{Parent?.GetType().Name ?? ""}'";
+            return $"Name: '{Name}', Type: '{GetType().Name}', Locator: '{Locator}', In: '{Parent?.GetType().Name ?? ""}'";
         }
         
-        protected Func<UIElement, bool> IsDisplayedAction =
-            el => el.FindImmediately(() => el.WebElement.Displayed, false);
-
-        public bool Displayed => Invoker.DoActionWithResult("Is element displayed", () => FindImmediately(() => WebElement.Displayed, false));
-        public bool Hidden => Invoker.DoActionWithResult("Is element hidden", () => !IsDisplayedAction(this));
-        public Func<UIElement, bool> WaitDisplayedAction => el => WebElement.Displayed;
-
         public void WaitDisplayed()
         {
             Invoker.DoActionWithResult("Wait element displayed", () => WaitDisplayedAction(this));

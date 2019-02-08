@@ -46,7 +46,6 @@ namespace JDI.Light.Elements
                     ? targetElement.GetInstancePage(member)
                     : targetElement.GetInstanceElement(member);
                 instance.Name = member.GetElementName();
-                //instance.DriverName = driverName;
                 member.SetMemberValue(targetElement, instance);
                 InitMembers(instance);
             }

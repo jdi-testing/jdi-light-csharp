@@ -105,6 +105,7 @@ namespace JDI.Light.Factories
 
         public IWebDriver GetDriver(string driverName)
         {
+            driverName = driverName ?? CurrentDriverName;
             if (!Drivers.ContainsKey(driverName))
                 if (Drivers.Count == 0)
                     RegisterDriver(driverName);

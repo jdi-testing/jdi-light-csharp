@@ -11,7 +11,7 @@ namespace JDI.Light.Elements.Composite
     {
         public ActionInvoker Invoker { get; set; }
         public ILogger Logger { get; set; }
-        public string DriverName { set; get; }
+        public string DriverName { set; get; } = Jdi.DriverFactory.CurrentDriverName;
         public string Name { get; set; }
         public string Domain { get; set; }
         public bool HasDomain => Domain != null && Domain.Contains("://");
@@ -19,6 +19,10 @@ namespace JDI.Light.Elements.Composite
         public string Url => WebDriver.Url;
         public string BaseUrl => new Uri(WebDriver.Url).GetLeftPart(UriPartial.Authority);
         public string Title => WebDriver.Title;
+
+        protected WebSite()
+        {
+        }
 
         public void Open()
         {

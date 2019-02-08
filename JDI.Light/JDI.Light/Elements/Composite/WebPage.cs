@@ -21,20 +21,20 @@ namespace JDI.Light.Elements.Composite
         public string UrlTemplate { get; set; }
         public ActionInvoker Invoker { get; set; }
         public ILogger Logger { get; set; }
-        public string DriverName { get; set; }
+        public string DriverName { get; set; } = Jdi.DriverFactory.CurrentDriverName;
         public string Name { get; set; }
         public ISite Parent { get; set; }
         public IWebDriver WebDriver => Jdi.DriverFactory.GetDriver(DriverName);
-        
-        public WebPage() : this(null)
+
+        protected WebPage() : this(null)
         {
         }
 
-        public WebPage(string url) : this(url, null)
+        protected WebPage(string url) : this(url, null)
         {
         }
 
-        public WebPage(string url, string title)
+        protected WebPage(string url, string title)
         {
             _url = url;
             Title = title;
@@ -45,9 +45,9 @@ namespace JDI.Light.Elements.Composite
         
         public T Get<T>(By locator) where T : UIElement
         {
-            var element = typeof(T).CreateInstance(locator, this);
+            var element = UIElementFactory.CreateInstance<T>(locator, this);
             element.InitMembers();
-            return (T)element;
+            return element;
         }
 
         public string GetCurrentUrl()
