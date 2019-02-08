@@ -56,7 +56,10 @@ namespace JDI.Light.Factories
         public static IBaseElement GetInstanceElement(this IBaseElement parent, MemberInfo member)
         {
             var type = member.GetMemberType();
-            var instance = (IBaseUIElement)member.GetMemberValue(parent);
+            var n = member.Name;
+            var r = type == typeof(IWebElement);
+            var v = member.GetMemberValue(parent);
+            var instance = (IBaseUIElement)v;
             type = type.IsInterface ? MapInterfaceToElement.ClassFromInterface(type) : type;
             var element = (UIElement)instance ?? CreateInstance(type, member.GetFindsBy(), parent);
             var checkedAttr = member.GetCustomAttribute<IsCheckedAttribute>(false);

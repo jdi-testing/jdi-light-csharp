@@ -2,7 +2,6 @@
 using JDI.Light.Elements.Base;
 using JDI.Light.Elements.Common;
 using JDI.Light.Elements.Composite;
-using JDI.Light.Factories;
 using JDI.Light.Interfaces.Common;
 using JDI.Light.Tests.UIObjects.Sections;
 using OpenQA.Selenium;
@@ -15,8 +14,8 @@ namespace JDI.Light.Tests.UIObjects.Pages
         {
             public static bool CheckFunc(UIElement e)
             {
-                var a = UIElementFactory.CreateInstance<UIElement>(By.XPath("//*[@id='elements-checklist']//*[*[text()='Water']]/input"), e.Parent);
-                return a.FindImmediately(() => a.WebElement.GetAttribute("checked") != null, false);
+                var a = e.Get<UIElement>(By.XPath("//*[@id='elements-checklist']//*[*[text()='Water']]/input"));
+                return a.FindImmediately(() => a.GetAttribute("checked") != null, false);
             }
         }
 
@@ -24,7 +23,8 @@ namespace JDI.Light.Tests.UIObjects.Pages
         public Label Calculate;
 
         [FindBy(Id = "calculate-button")]
-        public Button CalculateButton;
+        public IWebElement CalculateButton;
+        //public Button CalculateButton;
 
         [FindBy(Id = "calculate-button")]
         public ILabel CalculateLabel;

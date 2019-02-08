@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading;
 using JDI.Light.Elements.WebActions;
+using JDI.Light.Factories;
 using JDI.Light.Interfaces;
 using JDI.Light.Interfaces.Base;
 using OpenQA.Selenium;
@@ -25,7 +26,6 @@ namespace JDI.Light.Elements.Base
 
         public Func<IWebElement, bool> LocalElementSearchCriteria;
 
-        public bool HasLocator => Locator != null;
         public IJavaScriptExecutor JsExecutor => (IJavaScriptExecutor)WebDriver;
         public IWebDriver WebDriver => Jdi.DriverFactory.GetDriver(DriverName);
         public string TagName => WebElement.TagName;
@@ -45,6 +45,13 @@ namespace JDI.Light.Elements.Base
             Logger = Jdi.Logger;
             Invoker = new ActionInvoker(Logger, Jdi.Timeouts.WaitElementMSec, Jdi.Timeouts.RetryMSec);
             Locator = byLocator;
+        }
+
+        public T Get<T>(By locator) where T : UIElement
+        {
+            var element = UIElementFactory.CreateInstance<T>(locator, this);
+            element.InitMembers();
+            return element;
         }
 
         public IWebElement WebElement
@@ -121,7 +128,6 @@ namespace JDI.Light.Elements.Base
                 ? searchContext.FindElement(locator)
                 : searchContext;
         }
-
         
         public T FindImmediately<T>(Func<T> func, T ifError)
         {

@@ -10,12 +10,13 @@ using JDI.Light.Factories;
 using JDI.Light.Interfaces.Base;
 using JDI.Light.Interfaces.Composite;
 using JDI.Light.Utils;
+using OpenQA.Selenium;
 
 namespace JDI.Light.Elements
 {
     public static class WebCascadeInit
     {
-        private static readonly Type[] Decorators = { typeof(IBaseElement), typeof(IList<IBaseElement>) };
+        private static readonly Type[] Decorators = { typeof(IBaseElement), typeof(IWebElement), typeof(IList<IBaseElement>) };
         private static readonly Type[] StopTypes = { typeof(object), typeof(WebPage), typeof(Section), typeof(UIElement) };
 
         public static T InitSite<T>(string driverName) where T : ISite, new ()
