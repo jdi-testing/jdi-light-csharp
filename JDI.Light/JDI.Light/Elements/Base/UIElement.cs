@@ -120,12 +120,10 @@ namespace JDI.Light.Elements.Base
                 return WebDriver.SwitchTo().DefaultContent();
             }
             var parentUiElement = (UIElement) parent;
-            //if (_webElement != null)
+            var locator = parentUiElement.Locator;
+            if (locator != null)
                 return parentUiElement.WebElement;
-            //var locator = parentUiElement.Locator;
-            //return locator != null
-            //    ? GetSearchContext(parentUiElement.Parent).FindElement(locator)
-            //    : parentUiElement;
+            return GetSearchContext(parentUiElement.Parent);
         }
         
         public T FindImmediately<T>(Func<T> func, T ifError)

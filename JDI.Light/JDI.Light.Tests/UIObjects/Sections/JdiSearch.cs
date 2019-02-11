@@ -4,7 +4,7 @@ using JDI.Light.Interfaces.Common;
 
 namespace JDI.Light.Tests.UIObjects.Sections
 {
-    public sealed class JdiSearch : Search
+    public class JdiSearch : Search
     {
         [FindBy(Css = ".search>.icon-search")]
         public new IButton SearchButton;
