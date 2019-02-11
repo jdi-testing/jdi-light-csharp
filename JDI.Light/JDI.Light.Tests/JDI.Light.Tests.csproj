@@ -59,7 +59,6 @@
     <Compile Include="DataProviders\IndexesProvider.cs" />
     <Compile Include="Entities\Contact.cs" />
     <Compile Include="Entities\User.cs" />
-    <Compile Include="Enums\Buttons.cs" />
     <Compile Include="Enums\Colors.cs" />
     <Compile Include="Enums\Metals.cs" />
     <Compile Include="Enums\Odds.cs" />

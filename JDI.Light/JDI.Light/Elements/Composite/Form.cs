@@ -4,6 +4,7 @@ using System.Linq;
 using JDI.Light.Elements.Base;
 using JDI.Light.Extensions;
 using JDI.Light.Interfaces.Base;
+using JDI.Light.Interfaces.Common;
 using JDI.Light.Interfaces.Composite;
 using JDI.Light.Utils;
 using OpenQA.Selenium;
@@ -58,21 +59,28 @@ namespace JDI.Light.Elements.Composite
             Check(entity.PropertiesToDictionary());
         }
 
-        public void Submit(T entity, Enum buttonName)
-        {
-            Submit(entity, buttonName.ToString());
-        }
-
         public void Submit(T entity)
         {
             Fill(entity.PropertiesToDictionary());
-            this.GetButton("Submit").Click();
+            Get<IButton>(By.XPath("//button[@type='submit']")).Click();
         }
 
         public void Submit(Dictionary<string, string> objStrings)
         {
             Fill(objStrings);
-            this.GetButton("Submit").Click();
+            Get<IButton>(By.XPath("//button[@type='submit']")).Click();
+        }
+
+        public void Submit(T entity, string buttonText)
+        {
+            Fill(entity.PropertiesToDictionary());
+            Get<IButton>(By.XPath($"//button[text()='{buttonText}']")).Click();
+        }
+
+        public void Submit(T entity, By locator)
+        {
+            Fill(entity.PropertiesToDictionary());
+            Get<IButton>(locator).Click();
         }
 
         public IList<string> Verify(Dictionary<string, string> objStrings)
@@ -102,12 +110,6 @@ namespace JDI.Light.Elements.Composite
             if (result.Count > 0)
                 throw Jdi.Assert.Exception("Check form failed:" +
                                            result.FormattedJoin("".FromNewLine()).FromNewLine());
-        }
-
-        public void Submit(T entity, string buttonName)
-        {
-            Fill(entity.PropertiesToDictionary());
-            this.GetButton(buttonName).Click();
         }
     }
 }

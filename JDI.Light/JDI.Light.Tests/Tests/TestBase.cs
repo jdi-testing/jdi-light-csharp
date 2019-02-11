@@ -20,7 +20,7 @@ namespace JDI.Light.Tests.Tests
             TestSite = Jdi.InitSite<TestSite>();
             TestSite.HomePage.Open();
             TestSite.HomePage.Profile.Click();
-            TestSite.HomePage.LoginForm.Submit(User.DefaultUser, "Login");
+            TestSite.HomePage.LoginForm.Submit(User.DefaultUser);
             Jdi.Logger.Info("Test Base Set up done.");
             Jdi.Logger.Info("Run test...");
         }

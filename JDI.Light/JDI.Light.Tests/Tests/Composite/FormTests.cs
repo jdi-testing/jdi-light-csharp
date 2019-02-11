@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using JDI.Light.Tests.Entities;
-using JDI.Light.Tests.Enums;
 using JDI.Light.Tests.UIObjects.Forms;
 using NUnit.Framework;
+using OpenQA.Selenium;
 
 namespace JDI.Light.Tests.Tests.Composite
 {
@@ -39,18 +39,18 @@ namespace JDI.Light.Tests.Tests.Composite
         }
 
         [Test]
-        public void SubmitSpecButtonStringTest()
+        public void SubmitSpecButtonTextTest()
         {
-            ContactForm.Submit(Contact.DEFAULT_CONTACT, "submit");
+            ContactForm.Submit(Contact.DEFAULT_CONTACT, "Submit");
             Jdi.Assert.Contains(TestSite.ContactFormPage.Result.Value, Contact.DEFAULT_CONTACT.ToString());
             IList<string> filledFields = ContactForm.GetFormValue();
             Jdi.Assert.CollectionEquals(filledFields, Contact.DEFAULT_CONTACT.ToList());
         }
 
         [Test]
-        public void SubmitSpecButtonEnumTest()
+        public void SubmitSpecButtonLocatorTest()
         {
-            ContactForm.Submit(Contact.DEFAULT_CONTACT, Buttons.SUBMIT);
+            ContactForm.Submit(Contact.DEFAULT_CONTACT, By.XPath("//button[@type='submit']"));
             Jdi.Assert.Contains(TestSite.ContactFormPage.Result.Value, Contact.DEFAULT_CONTACT.ToString());
             IList<string> filledFields = ContactForm.GetFormValue();
             Jdi.Assert.CollectionEquals(filledFields, Contact.DEFAULT_CONTACT.ToList());

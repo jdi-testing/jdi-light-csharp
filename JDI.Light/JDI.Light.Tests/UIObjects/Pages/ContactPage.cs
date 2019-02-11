@@ -8,7 +8,7 @@ namespace JDI.Light.Tests.UIObjects.Pages
 {
     public class ContactPage : WebPage
     {
-        [FindBy(Css = "main form")]
+        [FindBy(Id = "contact-form")]
         public ContactForm ContactForm;
 
         [FindBy(Css = "main form")]

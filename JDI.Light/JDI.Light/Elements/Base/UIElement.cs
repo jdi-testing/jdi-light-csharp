@@ -46,10 +46,11 @@ namespace JDI.Light.Elements.Base
             Locator = byLocator;
         }
 
-        public T Get<T>(By locator) where T : IBaseUIElement
+        public T Get<T>(By locator, bool onlyOneElementAllowedInSearch = false) where T : IBaseUIElement
         {
             var element = UIElementFactory.CreateInstance<T>(locator, this);
             element.InitMembers();
+            element.OnlyOneElementAllowedInSearch = onlyOneElementAllowedInSearch;
             return element;
         }
 
@@ -57,7 +58,7 @@ namespace JDI.Light.Elements.Base
         {
             get
             {
-                Logger.Debug($"Get Web Element: {this}");
+                Logger.Debug($"Get Web Element: {this}, Locator: {Locator}");
                 if (_webElement != null)
                 {
                     try
@@ -111,21 +112,20 @@ namespace JDI.Light.Elements.Base
             return result.Where(criteria).ToList();
         }
 
-        private ISearchContext GetSearchContext(IBaseElement element)
+        private ISearchContext GetSearchContext(IBaseElement parent)
         {
-            var el = element as UIElement;
-            if (element == null || el?.Parent == null)
+            var el = parent as UIElement;
+            if (parent == null || el?.Parent == null)
             {
                 return WebDriver.SwitchTo().DefaultContent();
             }
-            var uiElement = (UIElement) element;
-            if (_webElement != null)
-                return uiElement.WebElement;
-            var locator = el.Locator;
-            var searchContext = GetSearchContext(el.Parent);
-            return locator != null
-                ? searchContext.FindElement(locator)
-                : searchContext;
+            var parentUiElement = (UIElement) parent;
+            //if (_webElement != null)
+                return parentUiElement.WebElement;
+            //var locator = parentUiElement.Locator;
+            //return locator != null
+            //    ? GetSearchContext(parentUiElement.Parent).FindElement(locator)
+            //    : parentUiElement;
         }
         
         public T FindImmediately<T>(Func<T> func, T ifError)
