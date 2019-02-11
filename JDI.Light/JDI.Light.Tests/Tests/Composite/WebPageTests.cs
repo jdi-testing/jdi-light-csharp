@@ -91,7 +91,7 @@ namespace JDI.Light.Tests.Tests.Composite
             var cookiesCount = cookies.Count;
             Jdi.Assert.AreEquals(cookiesCount, 0);
             TestSite.HomePage.Profile.Click();
-            TestSite.HomePage.LoginForm.Submit(User.DefaultUser, "Login");
+            TestSite.HomePage.LoginForm.Submit(User.DefaultUser);
         }
 
         [Test]
