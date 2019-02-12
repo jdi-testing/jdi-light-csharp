@@ -4,7 +4,7 @@
     {
         string GetReference();
         string WaitReferenceContains(string text);
-        string WaitMatchReference(string regEx);
+        string WaitReferenceMatches(string regEx);
         string GetTooltip();
     }
 }

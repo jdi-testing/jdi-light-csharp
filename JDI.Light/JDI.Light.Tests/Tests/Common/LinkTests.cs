@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Text.RegularExpressions;
+using NUnit.Framework;
 
 namespace JDI.Light.Tests.Tests.Common
 {
@@ -18,14 +19,35 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void ClickTest()
         {
-            TestSite.Footer.About.Click();
+            TestSite.Footer.AboutLink.Click();
             Assert.IsTrue(TestSite.SupportPage.IsOpened);
         }
 
         [Test]
         public void GetReferenceTest()
         {
-            var reference = TestSite.Footer.About.GetReference();
+            var reference = TestSite.Footer.AboutLink.GetReference();
+            Assert.AreEqual(TestSite.SupportPage.Url, reference);
+        }
+
+        [Test]
+        public void GetReferenceTooltipTest()
+        {
+            var tooltip = TestSite.Footer.AboutLink.GetTooltip();
+            Assert.AreEqual("Tip title", tooltip);
+        }
+
+        [Test]
+        public void WaitReferenceContainsTest()
+        {
+            var reference = TestSite.Footer.AboutLink.WaitReferenceContains("support");
+            Assert.AreEqual(reference, TestSite.SupportPage.Url);
+        }
+
+        [Test]
+        public void WaitReferenceMatchesTest()
+        {
+            var reference = TestSite.Footer.AboutLink.WaitReferenceMatches(".*");
             Assert.AreEqual(reference, TestSite.SupportPage.Url);
         }
     }
