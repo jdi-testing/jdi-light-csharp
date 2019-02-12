@@ -19,7 +19,7 @@ namespace JDI.Light.Tests.Tests.Composite
         [Test]
         public void SubmitSpecButtonTextTest()
         {
-            TestSite.ContactFormPage.ContactFormTwoButtons.Submit(Contact.DEFAULT_CONTACT, "Calculate");
+            TestSite.ContactFormPage.ContactFormTwoButtons.Submit(Contact.DefaultContact, "Calculate");
             Jdi.Assert.Contains(TestSite.ContactFormPage.Result.Value, "Summary: 3");
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using JDI.Light.Elements.Base;
 using JDI.Light.Extensions;
@@ -107,8 +108,7 @@ namespace JDI.Light.Elements.Composite
         {
             var result = Verify(objStrings);
             if (result.Count > 0)
-                throw Jdi.Assert.Exception("Check form failed:" +
-                                           result.FormattedJoin("".FromNewLine()).FromNewLine());
+                throw Jdi.Assert.Exception($"Check form failed: {string.Join(Environment.NewLine, result)}");
         }
     }
 }

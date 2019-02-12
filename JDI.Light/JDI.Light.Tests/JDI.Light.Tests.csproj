@@ -66,6 +66,7 @@
     <Compile Include="Tests\Common\InputTests.cs" />
     <Compile Include="Tests\Common\TextAreaTests.cs" />
     <Compile Include="Tests\Common\UIElementTests.cs" />
+    <Compile Include="Tests\Composite\SectionTests.cs" />
     <Compile Include="Tests\Core\WebDriverFactoryTests.cs" />
     <Compile Include="UIObjects\Pages\BasePage.cs" />
     <Compile Include="UIObjects\Pages\ComplexTablePage.cs" />

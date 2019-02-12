@@ -24,50 +24,50 @@ namespace JDI.Light.Tests.Tests.Composite
         [Test]
         public void FillFormTest()
         {
-            ContactForm.Fill(Contact.DEFAULT_CONTACT);
+            ContactForm.Fill(Contact.DefaultContact);
             IList<string> filledFields = ContactForm.GetFormValue();
-            Jdi.Assert.CollectionEquals(filledFields, Contact.DEFAULT_CONTACT.ToList());
+            Jdi.Assert.CollectionEquals(filledFields, Contact.DefaultContact.ToList());
         }
 
         [Test]
         public void SubmitTest()
         {
-            ContactForm.Submit(Contact.DEFAULT_CONTACT);
-            Jdi.Assert.Contains(TestSite.ContactFormPage.Result.Value, Contact.DEFAULT_CONTACT.ToString());
+            ContactForm.Submit(Contact.DefaultContact);
+            Jdi.Assert.Contains(TestSite.ContactFormPage.Result.Value, Contact.DefaultContact.ToString());
             IList<string> filledFields = ContactForm.GetFormValue();
-            Jdi.Assert.CollectionEquals(filledFields, Contact.DEFAULT_CONTACT.ToList());
+            Jdi.Assert.CollectionEquals(filledFields, Contact.DefaultContact.ToList());
         }
 
         [Test]
         public void SubmitSpecButtonTextTest()
         {
-            ContactForm.Submit(Contact.DEFAULT_CONTACT, "Submit");
-            Jdi.Assert.Contains(TestSite.ContactFormPage.Result.Value, Contact.DEFAULT_CONTACT.ToString());
+            ContactForm.Submit(Contact.DefaultContact, "Submit");
+            Jdi.Assert.Contains(TestSite.ContactFormPage.Result.Value, Contact.DefaultContact.ToString());
             IList<string> filledFields = ContactForm.GetFormValue();
-            Jdi.Assert.CollectionEquals(filledFields, Contact.DEFAULT_CONTACT.ToList());
+            Jdi.Assert.CollectionEquals(filledFields, Contact.DefaultContact.ToList());
         }
 
         [Test]
         public void SubmitSpecButtonLocatorTest()
         {
-            ContactForm.Submit(Contact.DEFAULT_CONTACT, By.XPath("//button[@type='submit']"));
-            Jdi.Assert.Contains(TestSite.ContactFormPage.Result.Value, Contact.DEFAULT_CONTACT.ToString());
+            ContactForm.Submit(Contact.DefaultContact, By.XPath("//button[@type='submit']"));
+            Jdi.Assert.Contains(TestSite.ContactFormPage.Result.Value, Contact.DefaultContact.ToString());
             IList<string> filledFields = ContactForm.GetFormValue();
-            Jdi.Assert.CollectionEquals(filledFields, Contact.DEFAULT_CONTACT.ToList());
+            Jdi.Assert.CollectionEquals(filledFields, Contact.DefaultContact.ToList());
         }
         
         [Test]
         public void VerifyTest()
         {
-            ContactForm.Fill(Contact.DEFAULT_CONTACT);
-            Jdi.Assert.IsTrue(ContactForm.Verify(Contact.DEFAULT_CONTACT).Count == 0);
+            ContactForm.Fill(Contact.DefaultContact);
+            Jdi.Assert.IsTrue(ContactForm.Verify(Contact.DefaultContact).Count == 0);
         }
 
         [Test]
         public void CheckTest()
         {
-            ContactForm.Fill(Contact.DEFAULT_CONTACT);
-            ContactForm.Check(Contact.DEFAULT_CONTACT);
+            ContactForm.Fill(Contact.DefaultContact);
+            ContactForm.Check(Contact.DefaultContact);
         }
     }
 }
