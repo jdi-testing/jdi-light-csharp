@@ -61,12 +61,11 @@ namespace JDI.Light.Factories
         private string _currentDriverName;
 
         public Func<IWebDriver, IWebDriver> WebDriverSettings;
-        
+        public string DriverPath { get; set; }
+        public string DriverVersion { get; set; }
         private Dictionary<string, Func<IWebDriver>> Drivers { get; }
-
         private ConcurrentDictionary<string, IWebDriver> RunDrivers { get; }
         public RunType RunType { get; set; }
-
         public Func<IWebElement, bool> ElementSearchCriteria { get; set; } = el => el.Displayed;
 
         public string CurrentDriverName
@@ -83,10 +82,7 @@ namespace JDI.Light.Factories
             }
             set => _currentDriverName = value;
         }
-
-        public string DriverPath { get; set; }
-        public string DriverVersion { get; set; }
-
+        
         public IWebDriver GetDriver()
         {
             try
@@ -222,11 +218,6 @@ namespace JDI.Light.Factories
             return driverName;
         }
 
-        public string RegisterDriver(Func<IWebDriver> driver)
-        {
-            return RegisterDriver("Driver" + (Drivers.Count + 1), driver);
-        }
-
         public IWebDriver GetDriver(DriverType driverType)
         {
             return GetDriver(_driverNamesDictionary[driverType]);
@@ -256,28 +247,6 @@ namespace JDI.Light.Factories
 
             return RegisterDriver("Remote_" + _driverNamesDictionary[driverType],
                 () => new RemoteWebDriver(new Uri(RemoteUrl), capabilities));
-        }
-
-        public void SwitchToDriver(string driverName)
-        {
-            if (Drivers.ContainsKey(driverName))
-                CurrentDriverName = driverName;
-            else
-                throw new Exception($"Can't switch to WebDriver {driverName}. This Driver name not registered");
-        }
-
-        public void ReopenDriver()
-        {
-            ReopenDriver(CurrentDriverName);
-        }
-
-        public void ReopenDriver(string driverName)
-        {
-            if (RunDrivers.TryRemove(driverName, out var driver))
-            {
-                driver.Close();
-                GetDriver(driverName);
-            }
         }
 
         public void Close()

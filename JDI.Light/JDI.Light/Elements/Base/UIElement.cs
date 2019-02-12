@@ -15,13 +15,25 @@ namespace JDI.Light.Elements.Base
     public class UIElement : IBaseUIElement, IVisible
     {
         private IWebElement _webElement;
+        private string _name;
 
         public By Locator { get; set; }
         public bool OnlyOneElementAllowedInSearch { get; set; } = true;
         public ActionInvoker Invoker { get; set; }
         public ILogger Logger { get; set; }
         public string DriverName { get; set; } = Jdi.DriverFactory.CurrentDriverName;
-        public string Name { get; set; }
+
+        public string Name
+        {
+            get
+            {
+                if(_name != null)
+                    return _name;
+                return _name = GetType().Name;
+            }
+            set => _name = value;
+        }
+
         public IBaseElement Parent { get; set; }
 
         public Func<IWebElement, bool> LocalElementSearchCriteria;
@@ -185,7 +197,7 @@ namespace JDI.Light.Elements.Base
 
         public new string ToString()
         {
-            return $"Name: '{Name}', Type: '{GetType().Name}', Locator: '{Locator}', In: '{Parent?.GetType().Name ?? ""}'";
+            return $"Name: '{Name ?? ""}', Type: '{GetType().Name}', Locator: '{Locator}', In: '{Parent?.GetType().Name ?? ""}'";
         }
         
         public void WaitDisplayed()

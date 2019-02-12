@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using JDI.Light.Interfaces.Base;
-using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
 
 namespace JDI.Light.Interfaces.Composite

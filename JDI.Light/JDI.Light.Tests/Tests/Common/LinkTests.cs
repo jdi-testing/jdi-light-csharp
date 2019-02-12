@@ -1,13 +1,10 @@
-﻿using JDI.Light.Interfaces.Common;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace JDI.Light.Tests.Tests.Common
 {
     [TestFixture]
     public class LinkTests : TestBase
     {
-        private ILink AboutLink => TestSite.Footer.About;
-
         [SetUp]
         public void SetUp()
         {
@@ -21,14 +18,15 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void ClickTest()
         {
-            AboutLink.Click();
+            TestSite.Footer.About.Click();
             Assert.IsTrue(TestSite.SupportPage.IsOpened);
         }
 
         [Test]
         public void GetReferenceTest()
         {
-            Jdi.Assert.AreEquals(AboutLink.GetReference(), TestSite.SupportPage.Url);
+            var reference = TestSite.Footer.About.GetReference();
+            Assert.AreEqual(reference, TestSite.SupportPage.Url);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace JDI.Light.Extensions
                     throw new ArgumentOutOfRangeException();
             }
         }
-
+        
         public static object GetMemberValue(this MemberInfo mi, object instance)
         {
             switch (mi.MemberType)

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using JDI.Light.Elements.Base;
 using JDI.Light.Extensions;
@@ -25,8 +24,8 @@ namespace JDI.Light.Elements.Composite
         {
             get
             {
-                return (T) this.GetFields(typeof(IGetValue<>))
-                    .Select(field => ((IGetValue<T>) field.GetValue(this)).Value);
+                return (T) this.GetMembers(typeof(IGetValue<>))
+                    .Select(field => ((IGetValue<T>) field.GetMemberValue(this)).Value);
             }
             set => Fill(value);
         }
@@ -43,13 +42,13 @@ namespace JDI.Light.Elements.Composite
 
         public void Fill(Dictionary<string, string> map)
         {
-            var fieldsToSet = this.GetFields(typeof(ISetValue<string>));
+            var fieldsToSet = this.GetMembers(typeof(ISetValue<string>));
             foreach (var fieldInfo in fieldsToSet)
             {
                 var fieldValue = map.FirstOrDefault(pair =>
                     pair.Key.SimplifiedEqual(fieldInfo.GetElementName())).Value;
                 if (fieldValue == null) return;
-                var setValueElement = (ISetValue<string>)fieldInfo.GetValue(this);
+                var setValueElement = (ISetValue<string>)fieldInfo.GetMemberValue(this);
                 setValueElement.Value = fieldValue;
             }
         }
@@ -86,15 +85,15 @@ namespace JDI.Light.Elements.Composite
         public IList<string> Verify(Dictionary<string, string> objStrings)
         {
             var compareFalse = new List<string>();
-            this.GetFields(typeof(IGetValue<>)).ForEach(field =>
+            this.GetMembers(typeof(IGetValue<>)).ToList().ForEach(member =>
             {
                 var fieldValue = objStrings.FirstOrDefault(pair =>
-                    pair.Key.SimplifiedEqual(field.GetElementName())).Value;
+                    pair.Key.SimplifiedEqual(member.GetElementName())).Value;
                 if (fieldValue == null) return;
-                var valueField = (IGetValue<string>)field.GetValue(this);
-                var actual = valueField.Value.Trim();
+                var valueMember = (IGetValue<string>)member.GetMemberValue(this);
+                var actual = valueMember.Value.Trim();
                 if (!actual.Equals(fieldValue))
-                    compareFalse.Add($"Field '{field.Name}' (Actual: '{actual}' <> Expected: '{fieldValue}')");
+                    compareFalse.Add($"Field '{member.Name}' (Actual: '{actual}' <> Expected: '{fieldValue}')");
             });
             return compareFalse;
         }
