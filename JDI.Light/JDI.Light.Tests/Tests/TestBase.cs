@@ -6,6 +6,9 @@ using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.Extensions;
+using static JDI.Light.Tests.Entities.Client;
+using static JDI.Light.Tests.Entities.User;
+using static JDI.Light.Tests.UIObjects.TestSite;
 
 namespace JDI.Light.Tests.Tests
 {
@@ -18,9 +21,10 @@ namespace JDI.Light.Tests.Tests
         {
             Jdi.Logger.Info("Test Base Set up started...");
             TestSite = Jdi.InitSite<TestSite>();
-            TestSite.HomePage.Open();
+            //TestSite.HomePage.Open();
+            HomePageStatic.Open();
             TestSite.HomePage.Profile.Click();
-            TestSite.HomePage.LoginForm.Submit(User.DefaultUser);
+            LoginFormPage.AsForm<Client>().Login(DefaultClient);
             Jdi.Logger.Info("Test Base Set up done.");
             Jdi.Logger.Info("Run test...");
         }

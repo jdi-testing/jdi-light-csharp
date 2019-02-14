@@ -3,6 +3,5 @@
     public interface IGetValue<T>
     {
         T Value { get; }
-        T GetValue();
     }
 }

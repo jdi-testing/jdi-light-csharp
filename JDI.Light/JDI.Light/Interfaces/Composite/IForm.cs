@@ -7,7 +7,7 @@ namespace JDI.Light.Interfaces.Composite
     public interface IForm<T> : ISetValue<T>, IBaseElement
     {
         void Fill(T entity);
-        void Fill(Dictionary<string, string> map);
+        void Fill(Dictionary<string, string> dataMap);
         void Check(T entity);
         void Check(Dictionary<string, string> map);
         IList<string> Verify(Dictionary<string, string> objStrings);

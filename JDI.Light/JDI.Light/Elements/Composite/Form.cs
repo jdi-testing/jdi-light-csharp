@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using JDI.Light.Elements.Base;
+using JDI.Light.Elements.Common;
 using JDI.Light.Extensions;
 using JDI.Light.Interfaces.Base;
 using JDI.Light.Interfaces.Common;
@@ -15,42 +17,43 @@ namespace JDI.Light.Elements.Composite
     {
         public Form() : base(null)
         {
+            pageObject = this;
         }
 
         public Form(By locator) : base(locator)
         {
+            pageObject = this;
         }
 
+        private object pageObject;
+        public Form<T> SetPageObject(object obj)
+        {
+            pageObject = obj;
+            return this;
+        }
         public T Value
         {
-            get
-            {
-                return (T) this.GetMembers(typeof(IGetValue<>))
-                    .Select(field => ((IGetValue<T>) field.GetMemberValue(this)).Value);
-            }
+            get => (T) pageObject.GetMembers(typeof(IGetValue<>))
+                .Select(field => ((IGetValue<T>) field.GetMemberValue(pageObject)).Value);
             set => Fill(value);
-        }
-
-        public T GetValue()
-        {
-            return Value;
-        }
+        }       
 
         public void Fill(T entity)
         {
             Fill(entity.PropertiesToDictionary());
         }
 
-        public void Fill(Dictionary<string, string> map)
+        public void Fill(Dictionary<string, string> dataMap)
         {
-            var fieldsToSet = this.GetMembers(typeof(ISetValue<string>));
-            foreach (var fieldInfo in fieldsToSet)
+            var fieldsToSet = pageObject.GetMembers(typeof(ISetValue<string>));
+            foreach (var data in dataMap)
             {
-                var fieldValue = map.FirstOrDefault(pair =>
-                    pair.Key.SimplifiedEqual(fieldInfo.GetElementName())).Value;
-                if (fieldValue == null) return;
-                var setValueElement = (ISetValue<string>)fieldInfo.GetMemberValue(this);
-                setValueElement.Value = fieldValue;
+                if (data.Value.Equals("null")) continue;
+                var fieldValue = fieldsToSet.FirstOrDefault(f =>
+                    data.Key.SimplifiedEqual(f.GetElementName()));
+                if (fieldValue == null) continue;
+                var setValueElement = (ISetValue<string>) fieldValue.GetMemberValue(pageObject);
+                setValueElement.Value = data.Value;
             }
         }
 
@@ -62,19 +65,19 @@ namespace JDI.Light.Elements.Composite
         public void Submit(T entity)
         {
             Fill(entity.PropertiesToDictionary());
-            Get<IButton>(By.XPath("//button[@type='submit']")).Click();
+            GET_BUTTON.Invoke(pageObject, "Submit").Click();
         }
 
         public void Submit(Dictionary<string, string> objStrings)
         {
             Fill(objStrings);
-            Get<IButton>(By.XPath("//button[@type='submit']")).Click();
+            GET_BUTTON.Invoke(pageObject, "Submit").Click();
         }
 
         public void Submit(T entity, string buttonText)
         {
             Fill(entity.PropertiesToDictionary());
-            Get<IButton>(By.XPath($"//button[text()='{buttonText}']")).Click();
+            GET_BUTTON.Invoke(pageObject, buttonText).Click();
         }
 
         public void Submit(T entity, By locator)
@@ -86,12 +89,12 @@ namespace JDI.Light.Elements.Composite
         public IList<string> Verify(Dictionary<string, string> objStrings)
         {
             var compareFalse = new List<string>();
-            this.GetMembers(typeof(IGetValue<>)).ToList().ForEach(member =>
+            pageObject.GetMembers(typeof(IGetValue<>)).ToList().ForEach(member =>
             {
                 var fieldValue = objStrings.FirstOrDefault(pair =>
                     pair.Key.SimplifiedEqual(member.GetElementName())).Value;
                 if (fieldValue == null) return;
-                var valueMember = (IGetValue<string>)member.GetMemberValue(this);
+                var valueMember = (IGetValue<string>) member.GetMemberValue(pageObject);
                 var actual = valueMember.Value.Trim();
                 if (!actual.Equals(fieldValue))
                     compareFalse.Add($"Field '{member.Name}' (Actual: '{actual}' <> Expected: '{fieldValue}')");
@@ -110,5 +113,70 @@ namespace JDI.Light.Elements.Composite
             if (result.Count > 0)
                 throw Jdi.Assert.Exception($"Check form failed: {string.Join(Environment.NewLine, result)}");
         }
+
+        public void Login(T entity)
+        {
+            Submit(entity, "Login");
+        }
+
+        public static Func<object, string, IButton> GET_BUTTON = (obj, buttonName) =>
+        {
+            var fields = obj.GetFieldsOfType(typeof(IButton));
+            if (!fields.Any())
+                fields = obj.GetFieldsOfType(typeof(IWebElement));
+            switch (fields.Count())
+            {
+                case 0:
+                    if (obj.GetType().Name.Equals("Form"))
+                        return new Button(By.CssSelector("[type=submit]"));
+                    throw Jdi.Assert.Exception($"Can't find any buttons on form '{obj}.");
+                case 1:
+                    return (IButton) fields.First().GetMemberValue(obj);
+                default:
+                    return GetButtonByName(fields, obj, buttonName);
+            }
+        };
+        public static IButton GetButtonByName(IEnumerable<MemberInfo> fields, object obj, string buttonName)
+        {
+            var buttons = fields.Where(f => f.GetMemberValue(obj) is IButton).Select(f => (IButton)f);
+            var button = buttons.First(b => b.Name.Replace("Button", "").SimplifiedEqual(buttonName));
+            if (button == null)
+                throw Jdi.Assert.Exception($"Can't find button '{buttonName}' for Element '{obj}'");
+            return button;
+        }
     }
 }
+/*
+Form.FILL_ACTION = (field, element, parent, setValue) -> {
+                if (field != null) {
+                    Method[] methods = field.getType().getDeclaredMethods();
+Method setMethod = first(methods, m->m.isAnnotationPresent(FillValue.class));
+                    if (setMethod != null) {
+                        setMethod.invoke(element, setValue);
+                        return;
+                    }
+                }
+                ((SetValue) element).setValue(setValue);
+            };
+            Form.GET_ACTION = (field, element, parent) -> {
+                if (field != null) {
+                    Method[] methods = field.getType().getDeclaredMethods();
+Method getMethod = first(methods, m->m.isAnnotationPresent(VerifyValue.class));
+                    if (getMethod != null) {
+                        return getMethod.invoke(element).toString();
+                    }
+                }
+                return ((HasValue) element).getValue().trim();
+            };
+            UIList.GET_TITLE_FIELD_NAME = list -> {
+                Field[] fields = list.classType.getFields();
+Field expectedField = first(fields, f->f.isAnnotationPresent(Title.class));
+                if (expectedField != null)
+                    return expectedField.getName();
+                List<Field> titles = filter(fields,
+                    f->f.getType() == com.epam.jdi.light.ui.html.common.Title.class);
+                return titles.size() == 1
+                        ? titles.get(0).getName()
+                        : null;
+            };
+    }*/

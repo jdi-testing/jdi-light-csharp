@@ -11,6 +11,8 @@ namespace JDI.Light.Tests.UIObjects
     {
         [Page(Url = "/index.html", Title = "Home Page")]
         public HomePage HomePage;
+        [Page(Url = "/index.html", Title = "Home Page")]
+        public static HomePage HomePageStatic;
 
         [Page(Url = "/contacts.html", Title = "Contact Form")]
         public ContactPage ContactFormPage;
@@ -36,10 +38,10 @@ namespace JDI.Light.Tests.UIObjects
         [FindBy(Css = ".footer-content")]
         public Footer Footer;
 
-        [FindBy(Id = "login-form")]
-        public LoginForm LoginForm;
-
         [FindBy(Css = ".logs li")]
         public TextList ActionsLog;
+
+        [FindBy(Id = "login-form")]
+        public static LoginFormClient LoginFormPage;
     }
 }
