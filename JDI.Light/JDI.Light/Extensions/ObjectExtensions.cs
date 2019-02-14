@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using System.Reflection;
 using JDI.Light.Attributes;
+using JDI.Light.Utils;
 
 namespace JDI.Light.Extensions
 {
     public static class ObjectExtensions
     {
-        public static Dictionary<string, string> PropertiesToDictionary(this object o)
+        public static Dictionary<string, string> FieldsAndPropertiesToDictionary(this object o)
         {
             var dict = new Dictionary<string, string>();
-            var props = o.GetType().GetProperties();
+            var props = o.GetMembers();
             foreach (var prop in props)
             {
-                var v = prop.GetValue(o);
+                var v = prop.GetMemberValue(o);
                 string strValue = null;
                 switch (v)
                 {

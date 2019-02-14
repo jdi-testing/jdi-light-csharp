@@ -38,7 +38,7 @@ namespace JDI.Light.Elements.Composite
 
         public void Fill(T entity)
         {
-            Fill(entity.PropertiesToDictionary());
+            Fill(entity.FieldsAndPropertiesToDictionary());
         }
 
         public void Fill(Dictionary<string, string> map)
@@ -56,12 +56,12 @@ namespace JDI.Light.Elements.Composite
 
         public void Check(T entity)
         {
-            Check(entity.PropertiesToDictionary());
+            Check(entity.FieldsAndPropertiesToDictionary());
         }
 
         public void Submit(T entity)
         {
-            Fill(entity.PropertiesToDictionary());
+            Fill(entity.FieldsAndPropertiesToDictionary());
             Get<IButton>(By.XPath("//button[@type='submit']")).Click();
         }
 
@@ -73,13 +73,13 @@ namespace JDI.Light.Elements.Composite
 
         public void Submit(T entity, string buttonText)
         {
-            Fill(entity.PropertiesToDictionary());
+            Fill(entity.FieldsAndPropertiesToDictionary());
             Get<IButton>(By.XPath($"//button[text()='{buttonText}']")).Click();
         }
 
         public void Submit(T entity, By locator)
         {
-            Fill(entity.PropertiesToDictionary());
+            Fill(entity.FieldsAndPropertiesToDictionary());
             Get<IButton>(locator).Click();
         }
 
@@ -101,7 +101,7 @@ namespace JDI.Light.Elements.Composite
 
         public IList<string> Verify(T entity)
         {
-            return Verify(entity.PropertiesToDictionary());
+            return Verify(entity.FieldsAndPropertiesToDictionary());
         }
 
         public void Check(Dictionary<string, string> objStrings)
