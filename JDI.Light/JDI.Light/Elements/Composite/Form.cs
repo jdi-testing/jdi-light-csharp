@@ -146,37 +146,3 @@ namespace JDI.Light.Elements.Composite
         }
     }
 }
-/*
-Form.FILL_ACTION = (field, element, parent, setValue) -> {
-                if (field != null) {
-                    Method[] methods = field.getType().getDeclaredMethods();
-Method setMethod = first(methods, m->m.isAnnotationPresent(FillValue.class));
-                    if (setMethod != null) {
-                        setMethod.invoke(element, setValue);
-                        return;
-                    }
-                }
-                ((SetValue) element).setValue(setValue);
-            };
-            Form.GET_ACTION = (field, element, parent) -> {
-                if (field != null) {
-                    Method[] methods = field.getType().getDeclaredMethods();
-Method getMethod = first(methods, m->m.isAnnotationPresent(VerifyValue.class));
-                    if (getMethod != null) {
-                        return getMethod.invoke(element).toString();
-                    }
-                }
-                return ((HasValue) element).getValue().trim();
-            };
-            UIList.GET_TITLE_FIELD_NAME = list -> {
-                Field[] fields = list.classType.getFields();
-Field expectedField = first(fields, f->f.isAnnotationPresent(Title.class));
-                if (expectedField != null)
-                    return expectedField.getName();
-                List<Field> titles = filter(fields,
-                    f->f.getType() == com.epam.jdi.light.ui.html.common.Title.class);
-                return titles.size() == 1
-                        ? titles.get(0).getName()
-                        : null;
-            };
-    }*/

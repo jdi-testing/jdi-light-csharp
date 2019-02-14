@@ -12,6 +12,5 @@ namespace JDI.Light.Tests.Entities
             Login = login;
             Password = password;
         }
-        
     }
 }
