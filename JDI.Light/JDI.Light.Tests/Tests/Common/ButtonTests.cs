@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using static JDI.Light.Jdi;
 
 namespace JDI.Light.Tests.Tests.Common
 {
@@ -8,11 +9,11 @@ namespace JDI.Light.Tests.Tests.Common
         [SetUp]
         public void SetUp()
         {
-            Jdi.Logger.Info("Navigating to Metals and Colors page.");
+            Logger.Info("Navigating to Metals and Colors page.");
             TestSite.MetalsColorsPage.Open();
             TestSite.MetalsColorsPage.CheckTitle();
-            Jdi.Logger.Info("Setup method finished");
-            Jdi.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            Logger.Info("Setup method finished");
+            Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         [Test]
