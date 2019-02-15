@@ -69,6 +69,8 @@ namespace JDI.Light.Extensions
             if (locator != null) return locator;
             locator = member.GetCustomAttribute<XPathAttribute>(false)?.Value;
             if (locator != null) return locator;
+            locator = member.GetCustomAttribute<ByText>(false)?.Value;
+            if (locator != null) return locator;
             var findsBy = member.GetCustomAttribute<FindsByAttribute>(false);
             if (findsBy == null) return null;
             switch (findsBy.How)
