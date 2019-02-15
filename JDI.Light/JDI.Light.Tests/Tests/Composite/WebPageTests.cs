@@ -4,6 +4,7 @@ using JDI.Light.Tests.Entities;
 using JDI.Light.Tests.UIObjects.Pages;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using static JDI.Light.Elements.Composite.WebPage;
 
 namespace JDI.Light.Tests.Tests.Composite
 {
@@ -32,7 +33,7 @@ namespace JDI.Light.Tests.Tests.Composite
         public void GetCurrentUrlTest()
         {
             TestSite.ContactFormPage.CheckOpened();
-            Assert.AreEqual(TestSite.ContactFormPage.GetCurrentUrl(), TestSite.ContactFormPage.Url);
+            Assert.AreEqual(PageUrl, TestSite.ContactFormPage.Url);
         }
 
         [Test]

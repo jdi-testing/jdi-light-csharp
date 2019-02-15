@@ -10,49 +10,22 @@ namespace JDI.Light.Factories
 {
     public static class WebPageFactory
     {
-        public static WebPage CreateInstance(this Type t, string url, string title, IWebSite parent)
+        public static WebPage CreateInstance(this Type t, IWebSite parent)
         {
-            WebPage instance = null;
-            var constructors = t.GetConstructors();
-            foreach (var con in constructors)
-            {
-                var conParams = con.GetParameters();
-                switch (conParams.Length)
-                {
-                    case 2:
-                    {
-                        instance = (WebPage)Activator.CreateInstance(t, url, title);
-                        instance.DriverName = parent.DriverName;
-                        instance.Parent = parent;
-                        break;
-                    }
-                    case 1:
-                    {
-                        instance = (WebPage)Activator.CreateInstance(t, url);
-                        instance.Title = title;
-                        instance.DriverName = parent.DriverName;
-                        instance.Parent = parent;
-                        break;
-                    }
-                    case 0:
-                    {
-                        instance = (WebPage)Activator.CreateInstance(t);
-                        instance.Url = url;
-                        instance.Title = title;
-                        instance.DriverName = parent.DriverName;
-                        instance.Parent = parent;
-                        break;
-                    }
-                }
-            }
-            return instance ?? throw new MissingMethodException($"Can't find correct constructor to create instance of type {t}");
+            var instance = (WebPage)Activator.CreateInstance(t);
+            instance.DriverName = parent.DriverName;
+            instance.Parent = parent;
+            return instance;
         }
         
         public static IPage GetInstancePage(this IBaseElement parent, MemberInfo memberInfo)
         {
             var pageAttribute = memberInfo.GetCustomAttribute<PageAttribute>(false);
-            var instance = (IPage)(memberInfo.GetMemberValue(parent)
-                                   ?? memberInfo.GetMemberType().CreateInstance(pageAttribute.Url, pageAttribute.Title, (IWebSite) parent));
+            var instance = (IPage) (memberInfo.GetMemberValue(parent)
+                ?? memberInfo.GetMemberType().CreateInstance((IWebSite) parent));
+            if (pageAttribute == null) return instance;
+            instance.Url = pageAttribute.Url;
+            instance.Title = pageAttribute.Title;
             instance.UrlTemplate = pageAttribute.UrlTemplate;
             instance.CheckUrlType = pageAttribute.UrlCheckType;
             instance.CheckTitleType = pageAttribute.TitleCheckType;

@@ -58,6 +58,7 @@
     <Compile Include="DataProviders\CheckBoxProvider.cs" />
     <Compile Include="DataProviders\IndexesProvider.cs" />
     <Compile Include="Entities\Contact.cs" />
+    <Compile Include="Entities\Client.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Enums\Colors.cs" />
     <Compile Include="Enums\Metals.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Tests\Common\UIElementTests.cs" />
     <Compile Include="Tests\Composite\SectionTests.cs" />
     <Compile Include="Tests\Core\WebDriverFactoryTests.cs" />
+    <Compile Include="UIObjects\Forms\LoginFormClient.cs" />
     <Compile Include="UIObjects\Pages\BasePage.cs" />
     <Compile Include="UIObjects\Pages\ComplexTablePage.cs" />
     <Compile Include="UIObjects\TestSiteBrokenDomain.cs" />
