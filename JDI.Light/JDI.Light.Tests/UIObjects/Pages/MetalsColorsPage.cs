@@ -22,7 +22,7 @@ namespace JDI.Light.Tests.UIObjects.Pages
         [FindBy(Id = "calculate-button")]
         public Label Calculate;
 
-        [FindBy(Id = "calculate-button")]
+        [Css("#calculate-button")]
         public IWebElement CalculateButton;
         //public Button CalculateButton;
 

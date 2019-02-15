@@ -60,37 +60,37 @@ namespace JDI.Light.Extensions
                     throw new ArgumentOutOfRangeException();
             }
         }
-        
+
         public static By GetFindsBy(this MemberInfo member)
         {
             var locator = member.GetCustomAttribute<FindByAttribute>(false)?.ByLocator;
-            if (locator != null)
-            {
-                return locator;
-            }
+            if (locator != null) return locator;
+            locator = member.GetCustomAttribute<CssAttribute>(false)?.Value;
+            if (locator != null) return locator;
+            locator = member.GetCustomAttribute<XPathAttribute>(false)?.Value;
+            if (locator != null) return locator;
+            locator = member.GetCustomAttribute<ByText>(false)?.Value;
+            if (locator != null) return locator;
             var findsBy = member.GetCustomAttribute<FindsByAttribute>(false);
-            if (findsBy == null)
-                return null;
-            var how = findsBy.How;
-            var @using = findsBy.Using;
-            switch (how)
+            if (findsBy == null) return null;
+            switch (findsBy.How)
             {
                 case How.Id:
-                    return By.Id(@using);
+                    return By.Id(findsBy.Using);
                 case How.Name:
-                    return By.Name(@using);
+                    return By.Name(findsBy.Using);
                 case How.TagName:
-                    return By.TagName(@using);
+                    return By.TagName(findsBy.Using);
                 case How.ClassName:
-                    return By.ClassName(@using);
+                    return By.ClassName(findsBy.Using);
                 case How.CssSelector:
-                    return By.CssSelector(@using);
+                    return By.CssSelector(findsBy.Using);
                 case How.LinkText:
-                    return By.LinkText(@using);
+                    return By.LinkText(findsBy.Using);
                 case How.PartialLinkText:
-                    return By.PartialLinkText(@using);
+                    return By.PartialLinkText(findsBy.Using);
                 case How.XPath:
-                    return By.XPath(@using);
+                    return By.XPath(findsBy.Using);
                 default:
                     return null;
             }

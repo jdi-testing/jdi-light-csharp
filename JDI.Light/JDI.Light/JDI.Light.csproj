@@ -58,6 +58,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\ByText.cs" />
+    <Compile Include="Attributes\XPathAttribute.cs" />
+    <Compile Include="Attributes\CssAttribute.cs" />
     <Compile Include="Attributes\IsCheckedAttribute.cs" />
     <Compile Include="Attributes\FindByAttribute.cs" />
     <Compile Include="Attributes\NameAttribute.cs" />
