@@ -10,6 +10,7 @@ using JDI.Light.Interfaces.Common;
 using JDI.Light.Interfaces.Composite;
 using JDI.Light.Utils;
 using OpenQA.Selenium;
+using static JDI.Light.Extensions.ObjectExtensions;
 
 namespace JDI.Light.Elements.Composite
 {
@@ -40,7 +41,7 @@ namespace JDI.Light.Elements.Composite
 
         public void Fill(T entity)
         {
-            Fill(entity.PropertiesToDictionary());
+            Fill(FieldsAsDictionary(entity));
         }
 
         public void Fill(Dictionary<string, string> dataMap)
@@ -59,30 +60,30 @@ namespace JDI.Light.Elements.Composite
 
         public void Check(T entity)
         {
-            Check(entity.PropertiesToDictionary());
+            Check(FieldsAsDictionary(entity));
         }
 
         public void Submit(T entity)
         {
-            Fill(entity.PropertiesToDictionary());
-            GET_BUTTON.Invoke(pageObject, "Submit").Click();
+            Fill(FieldsAsDictionary(entity));
+            GetButton.Invoke(pageObject, "Submit").Click();
         }
 
         public void Submit(Dictionary<string, string> objStrings)
         {
             Fill(objStrings);
-            GET_BUTTON.Invoke(pageObject, "Submit").Click();
+            GetButton.Invoke(pageObject, "Submit").Click();
         }
 
         public void Submit(T entity, string buttonText)
         {
-            Fill(entity.PropertiesToDictionary());
-            GET_BUTTON.Invoke(pageObject, buttonText).Click();
+            Fill(FieldsAsDictionary(entity));
+            GetButton.Invoke(pageObject, buttonText).Click();
         }
 
         public void Submit(T entity, By locator)
         {
-            Fill(entity.PropertiesToDictionary());
+            Fill(FieldsAsDictionary(entity));
             Get<IButton>(locator).Click();
         }
 
@@ -104,7 +105,7 @@ namespace JDI.Light.Elements.Composite
 
         public IList<string> Verify(T entity)
         {
-            return Verify(entity.PropertiesToDictionary());
+            return Verify(FieldsAsDictionary(entity));
         }
 
         public void Check(Dictionary<string, string> objStrings)
@@ -119,12 +120,12 @@ namespace JDI.Light.Elements.Composite
             Submit(entity, "Login");
         }
 
-        public static Func<object, string, IButton> GET_BUTTON = (obj, buttonName) =>
+        public static Func<object, string, IButton> GetButton = (obj, buttonName) =>
         {
-            var fields = obj.GetFieldsOfType(typeof(IButton));
+            var fields = GetFieldsOfType(obj, typeof(IButton)).ToList();
             if (!fields.Any())
-                fields = obj.GetFieldsOfType(typeof(IWebElement));
-            switch (fields.Count())
+                fields = GetFieldsOfType(obj, typeof(IWebElement)).ToList();
+            switch (fields.Count)
             {
                 case 0:
                     if (obj.GetType().Name.Equals("Form"))

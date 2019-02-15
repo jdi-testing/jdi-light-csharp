@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using JDI.Light.Attributes;
-using JDI.Light.Elements.Common;
-using JDI.Light.Interfaces.Common;
-using JDI.Light.Utils;
 
 namespace JDI.Light.Extensions
 {
@@ -39,7 +36,7 @@ namespace JDI.Light.Extensions
 
             return dict;
         }
-        public static Dictionary<string, string> PropertiesToDictionary(this object o)
+        public static Dictionary<string, string> FieldsAsDictionary(object o)
         {
             var props = o.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
             var dictProperties = CreateDictionary(o, props.Select(p => (MemberInfo)p), 
@@ -50,15 +47,15 @@ namespace JDI.Light.Extensions
             return result;
         }
 
-        public static IEnumerable<MemberInfo> GetFields(this object o)
+        public static IEnumerable<MemberInfo> GetFields(object o)
         {
             var props = o.GetType().GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).Select(p => (MemberInfo)p);
             var fields = o.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             return props.Union(fields);
         }
-        public static IEnumerable<MemberInfo> GetFieldsOfType(this object o, Type type)
+        public static IEnumerable<MemberInfo> GetFieldsOfType(object o, Type type)
         {
-            var fields = o.GetFields();
+            var fields = GetFields(o);
             return fields.Where(p =>  type.IsAssignableFrom(p.GetMemberType()));
         }
     }
