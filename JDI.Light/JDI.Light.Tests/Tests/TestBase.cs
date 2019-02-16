@@ -7,7 +7,6 @@ using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.Extensions;
 using static JDI.Light.Tests.Entities.Client;
-using static JDI.Light.Tests.Entities.User;
 using static JDI.Light.Tests.UIObjects.TestSite;
 
 namespace JDI.Light.Tests.Tests
