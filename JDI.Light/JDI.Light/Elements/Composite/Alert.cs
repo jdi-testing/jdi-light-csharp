@@ -7,35 +7,30 @@ namespace JDI.Light.Elements.Composite
     {
         public Alert() : base(null)
         {
-
         }
 
-        private IAlert alert;
+        private IAlert _alert;
         private IAlert GetAlert()
         {
-            if (alert == null)
-            {
-                alert = WebDriver.SwitchTo().Alert();
-            }
-            return alert;
+            return _alert ?? (_alert = WebDriver.SwitchTo().Alert());
         }
 
-        public void OkAction()
+        public void Ok()
         {
             GetAlert().Accept();
         }
 
-        public void CancelAction()
+        public void Cancel()
         {
             GetAlert().Dismiss();
         }
 
-        public void CloseAction()
+        public void SendKeys(string keysToSend)
         {
-            GetAlert().Dismiss();
+            GetAlert().SendKeys(keysToSend);
         }
 
-        public string GetTextAction()
+        public string GetText()
         {
             return GetAlert().Text;
         }
