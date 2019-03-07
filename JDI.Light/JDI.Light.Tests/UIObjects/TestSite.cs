@@ -11,6 +11,7 @@ namespace JDI.Light.Tests.UIObjects
     {
         [Page(Url = "/index.html", Title = "Home Page")]
         public HomePage HomePage;
+
         [Page(Url = "/index.html", Title = "Home Page")]
         public static HomePage HomePageStatic;
 

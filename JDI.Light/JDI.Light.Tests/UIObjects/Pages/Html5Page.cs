@@ -7,9 +7,9 @@ namespace JDI.Light.Tests.UIObjects.Pages
     public class Html5Page : WebPage
     {
         [FindBy(Id = "blue-button")]
-        public IButton BlueButton;
+        public IButton BlueButton { get; set; }
 
         [FindBy(Css = "h1")]
-        public ILabel JdiLabel;
+        public ILabel JdiLabel { get; set; }
     }
 }
