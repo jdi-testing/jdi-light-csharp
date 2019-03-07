@@ -29,6 +29,9 @@ namespace JDI.Light.Tests.UIObjects
         [Page(Url = "simple-table.html", Title = "Simple Table")]
         public SimpleTablePage SimpleTablePage;
 
+        [Page(Url = "/html5.html", Title = "HTML 5")]
+        public Html5Page Html5Page;
+
         [Page(Url = "complex-table.html", Title = "Complex Table")]
         public ComplexTablePage ComplexTablePage;
 
