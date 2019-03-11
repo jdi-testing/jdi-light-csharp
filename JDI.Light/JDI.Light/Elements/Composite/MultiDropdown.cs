@@ -12,7 +12,11 @@ namespace JDI.Light.Elements.Composite
     {
         public MultiDropdown(By locator): base (locator)
         {
+        }
 
+        public void Expand()
+        {
+            this.Click();
         }
 
     }
