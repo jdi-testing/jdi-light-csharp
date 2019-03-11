@@ -56,7 +56,6 @@ namespace JDI.Light.Tests.Tests.Common
             TestSite.Html5Page.FileDownload.Click();
             Thread.Sleep(5000);
             Jdi.Assert.IsTrue(File.Exists(fileToUpload));
-
         }
     }
 }
