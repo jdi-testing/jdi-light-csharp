@@ -8,6 +8,10 @@ namespace JDI.Light.Tests.UIObjects.Pages
     public class Html5Page : WebPage
     {
         [FindBy(Css = "#ice-cream")]
-        public DropDown IceCreamDataList;
+        public Button IceCream;
+
+        [FindBy(Css = "#ice-cream-flavors > option:nth-child(1)")]
+        public Button Chocolate;
+
     }
 }

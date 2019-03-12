@@ -6,5 +6,6 @@ namespace JDI.Light.Interfaces.Common
     {
         void Select(string value);
         void Select(int index);
+        string GetSelected();
     }
 }

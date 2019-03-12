@@ -19,9 +19,8 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void SelectDropDown()
         {
-            TestSite.MetalsColorsPage.MetalsDropDown.DropDownItemLocator = By.XPath("//li/a");
-            TestSite.MetalsColorsPage.MetalsDropDown.Select(Metals.Bronze.ToString());
-            Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Metals: value changed to Bronze");
+            TestSite.MetalsColorsPage.ColorsDropDown.Select(Colors.Blue.ToString());
+            Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Colors: value changed to Blue");
         }
 
         [Test]
@@ -32,9 +31,16 @@ namespace JDI.Light.Tests.Tests.Common
         }
 
         [Test]
+        public void GetSelectedTest()
+        {
+            TestSite.MetalsColorsPage.ColorsDropDown.Select(Colors.Blue.ToString());
+            var selected = TestSite.MetalsColorsPage.ColorsDropDownText.GetSelected();
+            Assert.AreEqual(selected, "Blue");
+        }
+
+        [Test]
         public void NegativeDropDownTest()
         {
-            TestSite.MetalsColorsPage.ColorsDropDown.DropDownItemLocator = By.XPath("//li/a");
             Assert.Throws<ElementNotFoundException>(() => TestSite.MetalsColorsPage.ColorsDropDown.Select("xxx"));
         }
     }
