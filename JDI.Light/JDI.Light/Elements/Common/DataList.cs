@@ -1,9 +1,8 @@
-﻿using System.Linq;
-using JDI.Light.Elements.Base;
+﻿using JDI.Light.Elements.Base;
 using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
 
-namespace JDI.Light.Tests.Tests.Common
+namespace JDI.Light.Elements.Common
 {
     public class DataList : UIElement, IDataList
     {
