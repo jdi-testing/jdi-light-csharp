@@ -20,6 +20,8 @@ namespace JDI.Light.Elements.Composite
         {
             get
             {
+                var a = this.FindElements(By.XPath("//input[@type='checkbox']"));
+                
                 var elems = this.FindElements(By.XPath("//input[@type='checkbox']"));
                 var res = new List<CheckBox>();
                 return res;
