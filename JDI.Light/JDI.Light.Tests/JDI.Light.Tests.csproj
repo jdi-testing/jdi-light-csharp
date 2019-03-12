@@ -64,6 +64,9 @@
     <Compile Include="Enums\Metals.cs" />
     <Compile Include="Enums\Odds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\Common\DataList.cs" />
+    <Compile Include="Tests\Common\DataListTests.cs" />
+    <Compile Include="Tests\Common\DropDownTests.cs" />
     <Compile Include="Tests\Common\InputTests.cs" />
     <Compile Include="Tests\Common\TextAreaTests.cs" />
     <Compile Include="Tests\Common\UIElementTests.cs" />
@@ -72,6 +75,7 @@
     <Compile Include="UIObjects\Forms\LoginFormClient.cs" />
     <Compile Include="UIObjects\Pages\BasePage.cs" />
     <Compile Include="UIObjects\Pages\ComplexTablePage.cs" />
+    <Compile Include="UIObjects\Pages\Html5Page.cs" />
     <Compile Include="UIObjects\TestSiteBrokenDomain.cs" />
     <Compile Include="UIObjects\TestSiteCustomDomain.cs" />
     <Compile Include="Tests\Common\ButtonTests.cs" />
