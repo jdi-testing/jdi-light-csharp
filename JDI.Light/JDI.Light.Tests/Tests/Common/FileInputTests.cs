@@ -15,6 +15,8 @@ namespace JDI.Light.Tests.Tests.Common
     [TestFixture]
     class FileInputTests : TestBase
     {
+        //Tests require administrator access
+
         [SetUp]
         public void SetUp()
         {
