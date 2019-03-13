@@ -25,6 +25,7 @@ namespace JDI.Light.Tests.Tests.Composite
         public void ExpandMultiDropdown()
         {
             TestSite.Html5Page.MultiDropdown.Expand();
+            TestSite.Html5Page.MultiDropdown.SelectElementByname("Electro");
             var a = TestSite.Html5Page.MultiDropdown.TextElements;
             var b = 5;
         }
