@@ -14,30 +14,64 @@ namespace JDI.Light.Elements.Composite
     {
         [FindBy(Tag = "button")]
         private Button _header;
-
         
-        public List<MultiDropdownElement> TextElements
+        public List<MultiDropdownElement> Options
         {
             get
             {
                 var elems = FindElements(By.XPath(".//li")).ToList();
-                var labels = FindElements(By.XPath(".//li//label")).ToList(); //.Select(x=>(Label)x).ToList();
-                var chBoxes = FindElements(By.XPath(".//li//input")).ToList(); //.Select(x=>(CheckBox)x).ToList();
+                var labels = FindElements(By.XPath(".//li//label")).ToList();
+                var chBoxes = FindElements(By.XPath(".//li//input")).ToList();
                 List<MultiDropdownElement> elementList = new List<MultiDropdownElement>();
                 for (int i = 0; i < elems.Count; i++)
                 {
                     elementList.Add(new MultiDropdownElement(By.XPath(".//li"),labels[i],chBoxes[i], elems[i]));
                 }                
-
                 return elementList;
             }
         }
 
-        public void SelectElementByname(string name)
+        public bool OptionIsEnabled(string name)
         {
-            TextElements.FirstOrDefault(x => x.Text == name).Select();
+            var aa = Options;
+            return Options.Any(x => x.OptionIsEnabled && x.Text == name);
         }
 
+        public void SelectOptionByname(string name)
+        {
+            Expand();
+            Options.FirstOrDefault(x => x.Text == name).Select();
+            Close();
+        }
+
+        public List<string> GetSelectedOptions()
+        {            
+            return Options.Where(x => x.Selected).Select(x=>x.Text).ToList();
+        }
+
+        public bool OptionsAreSelected(List<string> options)
+        {
+            var a = Options.Where(x => x.IsSelected).All(x => options.Contains(x.Text));
+            var b = options.All(x => Options.FirstOrDefault(y => y.Text == x) != null);
+            var c = a && b;
+            return (Options.Where(x=>x.IsSelected).All(x => options.Contains(x.Text)) && options.All(x => Options.Any(y => y.Text == x)));
+        }
+
+        public void SelectOptions(List<string> options)
+        {
+            Expand();
+            foreach(var option in options)
+            {
+                Options.FirstOrDefault(x => x.Text == option).Select();
+            }
+            JsExecutor.ExecuteScript("arguments[0].scrollIntoView();", WebElement);
+            Close();
+        }
+
+        public bool OptionExists(string option)
+        {
+            return Options.Any(x => x.Text == option);
+        }
 
         public MultiDropdown(By locator) : base(locator)
         {
@@ -45,9 +79,14 @@ namespace JDI.Light.Elements.Composite
 
         public void Expand()
         {
-            _header.Click();
+            if(!GetAttribute("class").Contains("open"))
+                _header.Click();
         }
 
+        public void Close()
+        {
+            Expand();
+        }
     }
 
     public class MultiDropdownElement : UIElement
@@ -58,11 +97,19 @@ namespace JDI.Light.Elements.Composite
         [FindBy(Tag = "input")]
         private IWebElement _checkBox;
 
-        private bool IsSelected
+        public bool IsSelected
         {
             get
             {
-                return (this.GetAttribute("class") == "active");
+                return (GetAttribute("class") == "active");
+            }
+        }
+
+        public bool OptionIsEnabled
+        {
+            get
+            {
+                return (GetAttribute("class") != "disabled");
             }
         }
 
@@ -75,10 +122,11 @@ namespace JDI.Light.Elements.Composite
         }
 
         public void Select()
-        {
+        {            
             if (!IsSelected)
             {                
-                _checkBox.Click();
+                JsExecutor.ExecuteScript("arguments[0].scrollIntoView();", _label);
+                _label.Click();
             }
         }
 
@@ -88,6 +136,5 @@ namespace JDI.Light.Elements.Composite
             _label = label;
             _checkBox = checkBox;
         }
-
     }
 }
