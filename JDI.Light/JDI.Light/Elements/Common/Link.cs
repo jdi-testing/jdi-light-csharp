@@ -1,11 +1,12 @@
 ﻿using System;
 using JDI.Light.Elements.Base;
+using JDI.Light.Extensions;
 using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Common
 {
-    public class Link : Text, ILink
+    public class Link : TextElement, ILink
     {
         public Link() : this(null)
         {
@@ -33,12 +34,12 @@ namespace JDI.Light.Elements.Common
             );
         }
 
-        public string WaitMatchReference(string regEx)
+        public string WaitReferenceMatches(string regEx)
         {
             Func<string> TextFunc(UIElement el) => GetReference;
             return Invoker.DoActionWithResult(
                 $"Wait link match regex '{regEx}'",
-                () => Invoker.GetResultByCondition(TextFunc(this), t => t.Contains(regEx))
+                () => Invoker.GetResultByCondition(TextFunc(this), t => t.Matches(regEx))
             );
         }
 

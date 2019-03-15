@@ -13,7 +13,7 @@ namespace JDI.Light.Tests.Tests.Core
             Jdi.KillAllDrivers();
             TestSite.HomePage.Open();
             TestSite.HomePage.Profile.Click();
-            TestSite.HomePage.LoginForm.Submit(User.DefaultUser, "Login");
+            TestSite.HomePage.LoginForm.Submit(User.DefaultUser);
             TestSite.HomePage.CheckOpened();
         }
     }

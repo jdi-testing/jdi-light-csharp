@@ -2,12 +2,11 @@
 
 namespace JDI.Light.Interfaces.Common
 {
-    public interface ITextField : ISetValue<string>, IText
+    public interface ITextField : ISetValue<string>, ITextElement
     {
         void Input(string text);
         new void SendKeys(string text);
         void NewInput(string text);
         new void Clear();
-        void Focus();
     }
 }

@@ -23,21 +23,11 @@ namespace JDI.Light.Elements.Composite
         public ILogger Logger { get; set; }
         public string DriverName { get; set; } = Jdi.DriverFactory.CurrentDriverName;
         public string Name { get; set; }
-        public ISite Parent { get; set; }
+        public IWebSite Parent { get; set; }
         public IWebDriver WebDriver => Jdi.DriverFactory.GetDriver(DriverName);
 
-        protected WebPage() : this(null)
+        protected WebPage()
         {
-        }
-
-        protected WebPage(string url) : this(url, null)
-        {
-        }
-
-        protected WebPage(string url, string title)
-        {
-            _url = url;
-            Title = title;
             Logger = Jdi.Logger;
             Invoker = new ActionInvoker(Logger, Jdi.Timeouts.WaitPageLoadMSec, Jdi.Timeouts.RetryMSec);
             Name = $"{Title} ({Url})";
@@ -50,19 +40,24 @@ namespace JDI.Light.Elements.Composite
             return element;
         }
 
-        public string GetCurrentUrl()
-        {
-            return WebDriver.Url;
-        }
+        public static string PageUrl => Jdi.WebDriver.Url;
+        public static string PageTitle => Jdi.WebDriver.Title;
 
         public string Url
         {
-            get => _url == null || _url.StartsWith("http://") || _url.StartsWith("https://") || !Parent.HasDomain
+            get => _url == null || _url.Contains("://") || !Parent.HasDomain
                 ? _url
-                : Parent.Domain + "/" + new Regex("^//*").Replace(_url, "");
+                : new Regex("//*$").Replace(Parent.Domain, "") + "/" + new Regex("^//*").Replace(_url, "");
             set => _url = value;
         }
-        
+
+        public Form<T> AsForm<T>()
+        {
+            var form = new Form<T>().SetPageObject(this);
+            form.Name = Name + " Form";
+            return form;
+        }
+
         public void Open()
         {
             Invoker.DoActionWithWait($"Open page {Name} by url {Url}",

@@ -1,4 +1,4 @@
-﻿using JDI.Light.Interfaces.Common;
+﻿using System.Text.RegularExpressions;
 using NUnit.Framework;
 
 namespace JDI.Light.Tests.Tests.Common
@@ -6,8 +6,6 @@ namespace JDI.Light.Tests.Tests.Common
     [TestFixture]
     public class LinkTests : TestBase
     {
-        private ILink AboutLink => TestSite.Footer.About;
-
         [SetUp]
         public void SetUp()
         {
@@ -21,14 +19,36 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void ClickTest()
         {
-            AboutLink.Click();
+            TestSite.Footer.AboutLink.Click();
             Assert.IsTrue(TestSite.SupportPage.IsOpened);
         }
 
         [Test]
         public void GetReferenceTest()
         {
-            Jdi.Assert.AreEquals(AboutLink.GetReference(), TestSite.SupportPage.Url);
+            var reference = TestSite.Footer.AboutLink.GetReference();
+            Assert.AreEqual(TestSite.SupportPage.Url, reference);
+        }
+
+        [Test]
+        public void GetReferenceTooltipTest()
+        {
+            var tooltip = TestSite.Footer.AboutLink.GetTooltip();
+            Assert.AreEqual("Tip title", tooltip);
+        }
+
+        [Test]
+        public void WaitReferenceContainsTest()
+        {
+            var reference = TestSite.Footer.AboutLink.WaitReferenceContains("support");
+            Assert.AreEqual(reference, TestSite.SupportPage.Url);
+        }
+
+        [Test]
+        public void WaitReferenceMatchesTest()
+        {
+            var reference = TestSite.Footer.AboutLink.WaitReferenceMatches(".*");
+            Assert.AreEqual(reference, TestSite.SupportPage.Url);
         }
     }
 }

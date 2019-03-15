@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Common
 {
-    public class Label : Text, ILabel
+    public class Label : TextElement, ILabel
     {
         public Label() : this(null)
         {

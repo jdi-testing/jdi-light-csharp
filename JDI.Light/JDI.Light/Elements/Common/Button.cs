@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Common
 {
-    public class Button : Text, IButton
+    public class Button : TextElement, IButton
     {
         public Button()
         {

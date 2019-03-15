@@ -8,7 +8,7 @@ namespace JDI.Light.Tests.UIObjects.Pages
 {
     public class ContactPage : WebPage
     {
-        [FindBy(Css = "main form")]
+        [FindBy(Id = "contact-form")]
         public ContactForm ContactForm;
 
         [FindBy(Css = "main form")]
@@ -18,7 +18,7 @@ namespace JDI.Light.Tests.UIObjects.Pages
         public IButton ContactSubmit;
 
         [FindBy(Id = "description")]
-        public TextArea DescriptionField;
+        public TextArea DescriptionArea;
 
         [FindBy(Id = "last-name")]
         public ITextField LastNameField;
@@ -26,8 +26,11 @@ namespace JDI.Light.Tests.UIObjects.Pages
         [FindBy(Id = "name")]
         public TextField NameField;
 
+        [FindBy(Id = "name")]
+        public Input NameInput;
+
         [FindBy(Css = ".results")]
-        public IText Result;
+        public ITextElement Result;
         
         public void FillAndSubmitForm(string firstName, string secondName, string description)
         {
@@ -39,7 +42,7 @@ namespace JDI.Light.Tests.UIObjects.Pages
         {
             NameField.NewInput(firstName);
             LastNameField.NewInput(secondName);
-            DescriptionField.NewInput(description);
+            DescriptionArea.NewInput(description);
         }
     }
 }

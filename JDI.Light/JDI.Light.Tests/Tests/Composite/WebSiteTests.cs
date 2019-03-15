@@ -1,11 +1,22 @@
-﻿using JDI.Light.Tests.UIObjects.Pages;
+﻿using JDI.Light.Tests.UIObjects.Forms;
+using JDI.Light.Tests.UIObjects.Pages;
 using NUnit.Framework;
+using OpenQA.Selenium;
 
 namespace JDI.Light.Tests.Tests.Composite
 {
     [TestFixture]
     public class WebSiteTests : TestBase
     {
+        [Test]
+        public void GetGenericElementTest()
+        {
+            TestSite.ContactFormPage.Open();
+            var form = TestSite.ContactFormPage.Get<ContactForm>(By.CssSelector("main form"));
+            form.DescriptionField.Value = "some text";
+            Assert.AreEqual("some text", TestSite.ContactFormPage.ContactForm.DescriptionField.Text);
+        }
+
         [Test]
         public void TitleTest()
         {

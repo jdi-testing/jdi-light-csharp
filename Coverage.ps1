@@ -14,6 +14,11 @@ else {
 
 $result = $LASTEXITCODE
 
+$codecov = (Resolve-Path "JDI.Light/packages/Codecov.*/tools/codecov.exe").ToString()
+
+write-host "======= CODECOV PATH: " $codecov " ======="
+& $codecov -f "opencoverCoverage.xml"
+
 if($result -ne 0){
   exit $result
 }

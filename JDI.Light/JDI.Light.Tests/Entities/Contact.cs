@@ -4,7 +4,7 @@ namespace JDI.Light.Tests.Entities
 {
     public class Contact
     {
-        public static readonly Contact DEFAULT_CONTACT = new Contact("Test", "Testov", "Test description", 3, 4);
+        public static readonly Contact DefaultContact = new Contact("Test", "Testov", "Test description", 3, 4);
 
         public Contact(string firstName, string lastName, string description, int firstSummary, int secondSummary)
         {
@@ -16,13 +16,9 @@ namespace JDI.Light.Tests.Entities
         }
 
         public string FirstName { get; set; }
-
         public string LastName { get; set; }
-
         public string Description { get; set; }
-
         public int FirstSummary { get; set; }
-
         public int SecondSummary { get; set; }
 
         public IList<string> ToList()

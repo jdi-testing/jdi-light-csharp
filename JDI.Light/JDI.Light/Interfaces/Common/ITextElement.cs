@@ -2,7 +2,7 @@
 
 namespace JDI.Light.Interfaces.Common
 {
-    public interface IText : IGetValue<string>, IBaseUIElement
+    public interface ITextElement : IGetValue<string>, IBaseUIElement
     {
         string GetText();
         string WaitText(string text);

@@ -13,7 +13,7 @@ namespace JDI.Light.Tests.Entities
         }
 
         [Name("Login")]
-        public string Login { get; set; }
+        public string Login;
 
         [Name("Password")]
         public string Password { get; set; }

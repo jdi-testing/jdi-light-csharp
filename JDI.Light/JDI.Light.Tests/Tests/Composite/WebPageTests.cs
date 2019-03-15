@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Linq;
 using JDI.Light.Tests.Entities;
+using JDI.Light.Tests.UIObjects.Pages;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using static JDI.Light.Elements.Composite.WebPage;
 
 namespace JDI.Light.Tests.Tests.Composite
 {
     [TestFixture]
-    public class PageTests : TestBase
+    public class WebPageTests : TestBase
     {
         [SetUp]
         public void SetUp()
@@ -20,10 +22,18 @@ namespace JDI.Light.Tests.Tests.Composite
         }
 
         [Test]
+        public void GetGenericPageTest()
+        {
+            var p = TestSite.Get<ContactPage>("/contacts.html", "Contact Form");
+            p.Open();
+            p.CheckOpened();
+        }
+
+        [Test]
         public void GetCurrentUrlTest()
         {
             TestSite.ContactFormPage.CheckOpened();
-            Assert.AreEqual(TestSite.ContactFormPage.GetCurrentUrl(), TestSite.ContactFormPage.Url);
+            Assert.AreEqual(PageUrl, TestSite.ContactFormPage.Url);
         }
 
         [Test]
@@ -82,7 +92,7 @@ namespace JDI.Light.Tests.Tests.Composite
             var cookiesCount = cookies.Count;
             Jdi.Assert.AreEquals(cookiesCount, 0);
             TestSite.HomePage.Profile.Click();
-            TestSite.HomePage.LoginForm.Submit(User.DefaultUser, "Login");
+            TestSite.HomePage.LoginForm.Submit(User.DefaultUser);
         }
 
         [Test]

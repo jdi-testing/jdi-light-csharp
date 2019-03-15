@@ -22,7 +22,7 @@ namespace JDI.Light.Tests.UIObjects.Pages
         [FindBy(Id = "calculate-button")]
         public Label Calculate;
 
-        [FindBy(Id = "calculate-button")]
+        [Css("#calculate-button")]
         public IWebElement CalculateButton;
         //public Button CalculateButton;
 
@@ -30,7 +30,7 @@ namespace JDI.Light.Tests.UIObjects.Pages
         public ILabel CalculateLabel;
 
         [FindBy(Css = ".summ-res")]
-        public IText CalculateText;
+        public ITextElement CalculateText;
 
         [FindBy(XPath = "//*[@id='elements-checklist']//*[text()='Water']")]
         [IsChecked(typeof(CustomCheck), nameof(CustomCheck.CheckFunc))]

@@ -13,6 +13,6 @@ namespace JDI.Light.Interfaces
         void IsTrue(bool condition, string message = "");
         void IsFalse(bool condition, string message = "");
         void CollectionEquals<T>(IEnumerable<T> actual, IEnumerable<T> expected);
-        void AreEquals<T>(T actual, T expected, bool logOnlyFail = false);
+        void AreEquals<T>(T actual, T expected);
     }
 }

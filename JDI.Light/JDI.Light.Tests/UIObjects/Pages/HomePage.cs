@@ -13,6 +13,6 @@ namespace JDI.Light.Tests.UIObjects.Pages
         public IButton OpenSearchButton;
 
         [FindBy(Css = ".main-txt")]
-        public Text Text;
+        public TextElement Text;
     }
 }
