@@ -10,5 +10,4 @@ namespace JDI.Light.Elements.Complex.Table
             return this;
         }
     }
-   
 }

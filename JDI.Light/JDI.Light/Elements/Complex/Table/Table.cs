@@ -5,7 +5,6 @@ using JDI.Light.Elements.Base;
 using JDI.Light.Factories;
 using OpenQA.Selenium;
 
-
 namespace JDI.Light.Elements.Complex.Table
 {
     public class Table : UIElement
