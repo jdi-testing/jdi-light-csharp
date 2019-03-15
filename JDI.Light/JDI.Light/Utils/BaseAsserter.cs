@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using JDI.Light.Extensions;
 using JDI.Light.Interfaces;
 
 namespace JDI.Light.Utils
@@ -14,17 +13,6 @@ namespace JDI.Light.Utils
         {
             get => _logger ?? (_logger = Jdi.Logger);
             set => _logger = value;
-        }
-
-        private readonly string _checkMessage;
-
-        public BaseAsserter(string checkMessage) : this()
-        {
-            _checkMessage = GetCheckMessage(checkMessage);
-        }
-
-        public BaseAsserter()
-        {
         }
 
         public virtual void ThrowFail(string message)
@@ -41,43 +29,17 @@ namespace JDI.Light.Utils
             throw new Exception(message);
         }
 
-        private string GetCheckMessage(string checkMessage)
-        {
-            if (string.IsNullOrEmpty(checkMessage)) return string.Empty;
-            var firstWord = checkMessage.Split(' ')[0];
-            if (firstWord.Contains("check", StringComparison.OrdinalIgnoreCase) ||
-                firstWord.Contains("verify", StringComparison.OrdinalIgnoreCase))
-                return checkMessage;
-            return "Check that " + checkMessage;
-        }
-
         public void Contains(string actual, string expected)
         {
-            Contains(actual, expected, false);
-        }
-
-        public void Contains(string actual, string expected, bool logOnlyFail)
-        {
-            Contains(actual, expected, logOnlyFail, null);
-        }
-
-        public void Contains(string actual, string expected, bool logOnlyFail, string failMessage)
-        {
             var result = actual.Contains(expected);
-            AssertAction($"Check that '{actual}' contains '{expected}'", result, logOnlyFail);
+            AssertAction($"Check that '{actual}' contains '{expected}'", result);
         }
 
-        private void AssertAction(string message, bool result, bool logOnlyFail = false, string failMessage = null)
+        private void AssertAction(string message, bool result)
         {
-            if (!logOnlyFail) Logger.Info(GetBeforeMessage(message));
             // TODO: Take screenshot
             //TakeScreenshot();
-            if (!result) AssertException(failMessage ?? message + " failed");
-        }
-
-        private string GetBeforeMessage(string message)
-        {
-            return !string.IsNullOrEmpty(_checkMessage) ? _checkMessage : message;
+            if (!result) AssertException(message + " failed");
         }
 
         private void AssertException(string failMessage, params object[] args)
@@ -99,10 +61,10 @@ namespace JDI.Light.Utils
             AssertAction($"Check that condition is false{msg}", !condition);
         }
 
-        public void AreEquals<T>(T actual, T expected, bool logOnlyFail = false)
+        public void AreEquals<T>(T actual, T expected)
         {
             var result = typeof(T) == typeof(string) ? actual.ToString().Equals(expected.ToString()) : actual.Equals(expected);
-            AssertAction($"Check that '{actual}' equals to '{expected}'", result, logOnlyFail);
+            AssertAction($"Check that '{actual}' equals to '{expected}'", result);
         }
 
         public void CollectionEquals<T>(IEnumerable<T> actual, IEnumerable<T> expected)
@@ -112,18 +74,6 @@ namespace JDI.Light.Utils
             var result = first.OrderBy(i => i).SequenceEqual(second.OrderBy(i => i));
             AssertAction($"Check that collection '{string.Join(", ", first)}' equals to '{string.Join(", ", second)}'",
                 result);
-        }
-        
-        public void HasNoException(Action action)
-        {
-            try
-            {
-                action();
-            }
-            catch (Exception e)
-            {
-                AssertException($"Action throws exception: {e.GetType()} - {e.Message}");
-            }
         }
     }
 }

@@ -6,13 +6,13 @@ using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Common
 {
-    public class Text : UIElement, IText
+    public class TextElement : UIElement, ITextElement
     {
-        public Text() : this(null)
+        public TextElement() : this(null)
         {
         }
 
-        public Text(By byLocator = null)
+        public TextElement(By byLocator = null)
             : base(byLocator)
         {
         }
@@ -35,6 +35,8 @@ namespace JDI.Light.Elements.Common
         {
             return Value;
         }
+
+        public new string Text => GetText();
 
         public string GetText()
         {

@@ -7,7 +7,7 @@ using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Composite
 {
-    public class WebSite : ISite
+    public class WebSite : IWebSite
     {
         public ActionInvoker Invoker { get; set; }
         public ILogger Logger { get; set; }
@@ -31,7 +31,9 @@ namespace JDI.Light.Elements.Composite
         
         public T Get<T>(string relativeUrl, string title = "") where T : WebPage
         {
-            var page = typeof(T).CreateInstance(relativeUrl, title, this);
+            var page = typeof(T).CreateInstance(this);
+            page.Url = relativeUrl;
+            page.Title = title;
             page.InitMembers();
             return (T)page;
         }

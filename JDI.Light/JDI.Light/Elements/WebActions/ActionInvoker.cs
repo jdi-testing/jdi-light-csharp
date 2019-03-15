@@ -46,14 +46,14 @@ namespace JDI.Light.Elements.WebActions
                 action();
                 return true;
             });
-            _logger.Info($"Action '{actionName}' done");
+            _logger.Log($"Action '{actionName}' done", level);
         }
 
         public void DoAction(string actionName, Action action, LogLevel level = LogLevel.Info)
         {
             _logger.Log($"Perform action '{actionName}'", level);
             action();
-            _logger.Info($"Action '{actionName}' done");
+            _logger.Log($"Action '{actionName}' done", level);
         }
 
         public bool Wait(Func<bool> waitFunc)

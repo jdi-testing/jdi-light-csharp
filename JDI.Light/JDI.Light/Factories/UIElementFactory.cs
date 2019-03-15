@@ -15,6 +15,7 @@ namespace JDI.Light.Factories
     {
         public static IBaseUIElement CreateInstance(Type t, By locator, IBaseElement parent)
         {
+            t = t.IsInterface ? MapInterfaceToElement.ClassFromInterface(t) : t;
             var constructors = t.GetConstructors(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
             foreach (var con in constructors)
             {
@@ -56,11 +57,8 @@ namespace JDI.Light.Factories
         public static IBaseElement GetInstanceElement(this IBaseElement parent, MemberInfo member)
         {
             var type = member.GetMemberType();
-            var n = member.Name;
-            var r = type == typeof(IWebElement);
             var v = member.GetMemberValue(parent);
             var instance = (IBaseUIElement)v;
-            type = type.IsInterface ? MapInterfaceToElement.ClassFromInterface(type) : type;
             var element = (UIElement)instance ?? CreateInstance(type, member.GetFindsBy(), parent);
             var checkedAttr = member.GetCustomAttribute<IsCheckedAttribute>(false);
             if (checkedAttr != null && typeof(ICheckBox).IsAssignableFrom(type))

@@ -1,4 +1,5 @@
-﻿using JDI.Light.Tests.UIObjects;
+﻿using System;
+using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 
 namespace JDI.Light.Tests.Tests.Composite
@@ -20,6 +21,15 @@ namespace JDI.Light.Tests.Tests.Composite
         {
             TestSiteCustomDomain.HomePage.Open();
             Jdi.Logger.Info("Custom domain worked!");
+        }
+
+        [Test]
+        public void TestBrokenDomain()
+        {
+            Assert.Throws<MissingMethodException>(() =>
+            {
+                Jdi.InitSite<TestSiteBrokenDomain>();
+            });
         }
 
         [TearDown]

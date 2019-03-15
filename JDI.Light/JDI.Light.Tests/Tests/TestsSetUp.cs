@@ -12,7 +12,7 @@ namespace JDI.Light.Tests.Tests
         {
             Jdi.Init(new NUnitAsserter());
             Jdi.Logger.LogLevel = LogLevel.Debug;
-            Jdi.GetLatestDriver = false;
+            Jdi.DriverFactory.GetLatestDriver = false;
             Jdi.DriverFactory.DriverVersion = "2.41";
             Jdi.Logger.Info("Init test run...");
             Jdi.KillDriver.ProcessToKill = new[] { "chromedriver" };

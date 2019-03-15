@@ -1,5 +1,4 @@
-﻿using JDI.Light.Elements;
-using JDI.Light.Factories;
+﻿using JDI.Light.Factories;
 using JDI.Light.Interfaces;
 using JDI.Light.Interfaces.Composite;
 using JDI.Light.Interfaces.Utils;
@@ -18,7 +17,6 @@ namespace JDI.Light
         public static IAssert Assert;
         public static ILogger Logger;
         public static IKillDriver KillDriver;
-        public static bool GetLatestDriver = true;
 
         static Jdi()
         {
@@ -36,10 +34,9 @@ namespace JDI.Light
             Timeouts = timeouts ?? new Timeouts();
         }
 
-        public static T InitSite<T>() where T : ISite, new()
+        public static T InitSite<T>() where T : IWebSite, new()
         {
-            var instance = WebCascadeInit.InitSite<T>(DriverFactory.CurrentDriverName);
-            return instance;
+            return WebSiteFactory.GetInstanceSite<T>(DriverFactory.CurrentDriverName);
         }
 
         public static object ExecuteScript(string script, params object[] args)

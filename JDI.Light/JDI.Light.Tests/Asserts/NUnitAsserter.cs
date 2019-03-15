@@ -8,10 +8,6 @@ namespace JDI.Light.Tests.Asserts
         {
         }
 
-        public NUnitAsserter(string checkMessage) : base(checkMessage)
-        {
-        }
-
         public override void ThrowFail(string message)
         {
             Jdi.Logger.Error(message);

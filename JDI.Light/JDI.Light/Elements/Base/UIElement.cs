@@ -15,13 +15,25 @@ namespace JDI.Light.Elements.Base
     public class UIElement : IBaseUIElement, IVisible
     {
         private IWebElement _webElement;
+        private string _name;
 
         public By Locator { get; set; }
         public bool OnlyOneElementAllowedInSearch { get; set; } = true;
         public ActionInvoker Invoker { get; set; }
         public ILogger Logger { get; set; }
         public string DriverName { get; set; } = Jdi.DriverFactory.CurrentDriverName;
-        public string Name { get; set; }
+
+        public string Name
+        {
+            get
+            {
+                if(_name != null)
+                    return _name;
+                return _name = GetType().Name;
+            }
+            set => _name = value;
+        }
+
         public IBaseElement Parent { get; set; }
 
         public Func<IWebElement, bool> LocalElementSearchCriteria;
@@ -34,7 +46,6 @@ namespace JDI.Light.Elements.Base
         public bool Selected => WebElement.Selected;
         public Point Location => WebElement.Location;
         public Size Size => WebElement.Size;
-
         protected Func<UIElement, bool> IsDisplayedAction = el => el.FindImmediately(() => el.WebElement.Displayed, false);
         public bool Displayed => Invoker.DoActionWithResult("Is element displayed", () => FindImmediately(() => WebElement.Displayed, false));
         public bool Hidden => Invoker.DoActionWithResult("Is element hidden", () => !IsDisplayedAction(this));
@@ -47,10 +58,11 @@ namespace JDI.Light.Elements.Base
             Locator = byLocator;
         }
 
-        public T Get<T>(By locator) where T : UIElement
+        public T Get<T>(By locator, bool onlyOneElementAllowedInSearch = false) where T : IBaseUIElement
         {
             var element = UIElementFactory.CreateInstance<T>(locator, this);
             element.InitMembers();
+            element.OnlyOneElementAllowedInSearch = onlyOneElementAllowedInSearch;
             return element;
         }
 
@@ -58,7 +70,7 @@ namespace JDI.Light.Elements.Base
         {
             get
             {
-                Logger.Debug($"Get Web Element: {this}");
+                Logger.Debug($"Get Web Element: {this}, Locator: {Locator}");
                 if (_webElement != null)
                 {
                     try
@@ -112,21 +124,18 @@ namespace JDI.Light.Elements.Base
             return result.Where(criteria).ToList();
         }
 
-        private ISearchContext GetSearchContext(IBaseElement element)
+        private ISearchContext GetSearchContext(IBaseElement parent)
         {
-            var el = element as UIElement;
-            if (element == null || el?.Parent == null)
+            var el = parent as UIElement;
+            if (parent == null || el?.Parent == null)
             {
                 return WebDriver.SwitchTo().DefaultContent();
             }
-            var uiElement = (UIElement) element;
-            if (_webElement != null)
-                return uiElement.WebElement;
-            var locator = el.Locator;
-            var searchContext = GetSearchContext(el.Parent);
-            return locator != null
-                ? searchContext.FindElement(locator)
-                : searchContext;
+            var parentUiElement = (UIElement) parent;
+            var locator = parentUiElement.Locator;
+            if (locator != null)
+                return parentUiElement.WebElement;
+            return GetSearchContext(parentUiElement.Parent);
         }
         
         public T FindImmediately<T>(Func<T> func, T ifError)
@@ -188,7 +197,7 @@ namespace JDI.Light.Elements.Base
 
         public new string ToString()
         {
-            return $"Name: '{Name}', Type: '{GetType().Name}', Locator: '{Locator}', In: '{Parent?.GetType().Name ?? ""}'";
+            return $"Name: '{Name ?? ""}', Type: '{GetType().Name}', Locator: '{Locator}', In: '{Parent?.GetType().Name ?? ""}'";
         }
         
         public void WaitDisplayed()

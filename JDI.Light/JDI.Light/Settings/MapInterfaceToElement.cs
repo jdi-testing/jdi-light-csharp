@@ -16,7 +16,7 @@ namespace JDI.Light.Settings
             {typeof(IBaseElement), typeof(UIElement)},
             {typeof(IBaseUIElement), typeof(UIElement)},
             {typeof(IButton), typeof(Button)},
-            {typeof(IText), typeof(Text)},
+            {typeof(ITextElement), typeof(TextElement)},
             {typeof(IImage), typeof(Image)},
             {typeof(ITextArea), typeof(TextArea)},
             {typeof(ITextField), typeof(TextField)},

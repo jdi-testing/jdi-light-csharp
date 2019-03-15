@@ -1,6 +1,6 @@
 ﻿namespace JDI.Light.Interfaces.Common
 {
-    public interface IButton : IText
+    public interface IButton : ITextElement
     {
     }
 }
