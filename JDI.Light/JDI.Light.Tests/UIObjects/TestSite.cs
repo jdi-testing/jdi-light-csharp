@@ -24,6 +24,9 @@ namespace JDI.Light.Tests.UIObjects
         [Page(Url = "/dates.html", Title = "Dates")]
         public DatesPage Dates;
 
+        [Page(Url = "/performance.html", Title = "Performance page")]
+        public PerformancePage PerformancePage;
+
         [Page(Url = "simple-table.html", Title = "Simple Table")]
         public SimpleTablePage SimpleTablePage;
 

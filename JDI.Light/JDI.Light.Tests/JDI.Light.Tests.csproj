@@ -68,6 +68,7 @@
     <Compile Include="Tests\Core\WebDriverFactoryTests.cs" />
     <Compile Include="UIObjects\Pages\BasePage.cs" />
     <Compile Include="UIObjects\Pages\ComplexTablePage.cs" />
+    <Compile Include="UIObjects\Pages\PerformancePage.cs" />
     <Compile Include="UIObjects\TestSiteCustomDomain.cs" />
     <Compile Include="Tests\Common\ButtonTests.cs" />
     <Compile Include="Tests\Common\CheckBoxTests.cs" />

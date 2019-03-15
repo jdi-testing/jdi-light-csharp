@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using JDI.Light.Elements.Composite;
 using JDI.Light.Tests.Entities;
 using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
