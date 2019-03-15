@@ -19,7 +19,7 @@ namespace JDI.Light.Elements.Complex.Table
             _name = name;
         }
 
-        public static Func<Table, TableMatcher[], ReadOnlyCollection<IWebElement>> Table_Matcher = (table, matchers) =>
+        public static readonly Func<Table, TableMatcher[], ReadOnlyCollection<IWebElement>> Table_Matcher = (table, matchers) =>
         {
             string locator = $"./{Join("", matchers.Select(m => m.GetLocator(table) + "/.."))}/td";
             return table.FindElements(By.XPath(locator));

@@ -8,7 +8,7 @@ namespace JDI.Light.Tests.Tests.Composite
     [TestFixture]
     public class TableTests : TestBase
     {
-        private PerformancePage PerformancePage => TestSite.PerformancePage;
+        private static PerformancePage PerformancePage => TestSite.PerformancePage;
 
         [Test]
         public void InitComplexTable()

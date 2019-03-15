@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using JDI.Light.Elements.Composite;
 using JDI.Light.Tests.Entities;
 using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
@@ -12,7 +11,7 @@ namespace JDI.Light.Tests.Tests
 {
     public class TestBase
     {
-        public TestSite TestSite { get; set; }
+        public static TestSite TestSite { get; set; }
 
         [SetUp]
         public virtual void SetUpTest()
