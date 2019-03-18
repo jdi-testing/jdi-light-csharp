@@ -25,7 +25,7 @@ namespace JDI.Light.Elements.Composite
             GetAlert().Dismiss();
         }
 
-        public void SendKeys(string keysToSend)
+        public new void SendKeys(string keysToSend)
         {
             GetAlert().SendKeys(keysToSend);
         }

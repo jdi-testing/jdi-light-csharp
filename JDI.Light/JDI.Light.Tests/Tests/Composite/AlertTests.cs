@@ -28,7 +28,6 @@ namespace JDI.Light.Tests.Tests.Composite
         {
             TestSite.Html5Page.Open();
             TestSite.Html5Page.CheckTitle();
-
             TestSite.Html5Page.JdiLabel.Click();
             Assert.AreEqual(TestSite.Html5Page.GetAlert().GetText(), "JDI Title");
             TestSite.Html5Page.GetAlert().Ok();

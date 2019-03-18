@@ -34,7 +34,7 @@ namespace JDI.Light.Tests.UIObjects
         public ComplexTablePage ComplexTablePage;
 
         [Page(Url = "html5.html", Title = "HTML 5")]
-        public Html5Page Html5Page;
+        public Html5Page Html5Page { get; set; }
 
         [FindBy(Css = ".uui-header")]
         public Header Header;

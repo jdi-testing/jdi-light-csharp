@@ -205,7 +205,11 @@ namespace JDI.Light.Elements.Composite
 
         public Alert GetAlert()
         {
-            return new Alert();
+            var alert = new Alert
+            {
+                Parent = this
+            };
+            return alert;
         }
     }
 }
