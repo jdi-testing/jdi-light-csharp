@@ -7,7 +7,6 @@ namespace JDI.Light.Tests.Tests.Common
     [TestFixture]
     public class DataListTests : TestBase
     {
-
         [SetUp]
         public void SetUp()
         {
@@ -35,7 +34,6 @@ namespace JDI.Light.Tests.Tests.Common
             TestSite.MetalsColorsPage.MetalsDataList.Select(indexToSelect);
 
             Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Metals: value changed to Gold");
-
         }
 
         [Test]
@@ -46,6 +44,5 @@ namespace JDI.Light.Tests.Tests.Common
 
             Jdi.Assert.Contains(TestSite.ActionsLog.Texts[1], "Metals: value changed to My Metal");
         }
-
     }
 }

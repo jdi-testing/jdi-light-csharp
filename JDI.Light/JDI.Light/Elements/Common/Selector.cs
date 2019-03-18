@@ -8,7 +8,6 @@ namespace JDI.Light.Elements.Common
 {
     public class Selector : UIElement
     {
-       
         public By ItemLocator;
         private Action<Selector, string> _selectElementAction = (selector, item) =>
         {
@@ -60,7 +59,6 @@ namespace JDI.Light.Elements.Common
         public string GetSelected(Selector elem)
         {
             return Invoker.DoActionWithResult("Get value", () => _getSelected.Invoke(elem));
-
         }
     }
 }

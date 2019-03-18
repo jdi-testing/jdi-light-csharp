@@ -31,6 +31,5 @@ namespace JDI.Light.Elements.Common
             Clear();
             Invoker.DoActionWithWait($"Input text '{text}' in text field", () => WebElement.SendKeys(text));
         }
-        
     }
 }
