@@ -1,7 +1,6 @@
 ﻿using JDI.Light.Elements.Complex.Table;
-using NHamcrest;
 using static JDI.Light.Elements.Complex.Table.TableMatcher;
-using static NHamcrest.XUnit.Assert;
+using static JDI.Light.Jdi;
 
 namespace JDI.Light.Asserts
 {
@@ -16,7 +15,8 @@ namespace JDI.Light.Asserts
 
         public TableAssert HasRowWithValues(params TableMatcher[] matchers)
         {
-            That(Table_Matcher.Invoke(table, matchers).Count, Is.Not(0));
+            Assert.IsFalse(Table_Matcher.Invoke(table, matchers).Count.Equals(0),
+                "The row does not contain the following values in these columns.");
             return this;
         }
     }

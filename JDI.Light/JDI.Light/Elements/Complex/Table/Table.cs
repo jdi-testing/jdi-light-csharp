@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using JDI.Light.Asserts;
 using JDI.Light.Elements.Base;
@@ -33,6 +34,21 @@ namespace JDI.Light.Elements.Complex.Table
 
         public UIElement[][] Cells => Rows.Select(r => r.FindElements(TableCellsLocator)
             .Select(e => UIElementFactory.CreateInstance<UIElement>(TableCellsLocator, r, e)).ToArray()).ToArray();
+
+        public Line Row(params TableMatcher[] matchers)
+        {
+            var lines = TableMatcher.Table_Matcher.Invoke(this, matchers);
+            if (lines == null || lines.Count.Equals(0))
+            {
+                return null;
+            }
+            var result = new List<string>();
+            for (var i = 0; i < Headers.Count; i++)
+            {
+                result.Add(lines.ElementAt(i).Text);
+            }
+            return Line.InitLine(result, (List<string>)Headers.Select(h => h.Text));
+        }
 
         public TableAssert Is()
         {

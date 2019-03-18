@@ -44,7 +44,7 @@ namespace JDI.Light.Tests.Tests.Composite
             PerformancePage.Open();
             PerformancePage.CheckOpened();
             PerformancePage.UsersTable.AssertThat().HasRowWithValues(
-                ContainsValue("Meyer", InColumn("Name")),
+                ContainsValue("Meyer1", InColumn("Name")),
                 ContainsValue("co.uk", InColumn("Email")));
         }
 

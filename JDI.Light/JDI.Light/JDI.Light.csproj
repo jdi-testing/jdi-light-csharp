@@ -37,12 +37,6 @@
     <Reference Include="AngleSharp, Version=0.9.9.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
       <HintPath>..\packages\AngleSharp.0.9.10\lib\net45\AngleSharp.dll</HintPath>
     </Reference>
-    <Reference Include="NHamcrest, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NHamcrest.2.0.1\lib\net451\NHamcrest.dll</HintPath>
-    </Reference>
-    <Reference Include="NHamcrest.XUnit, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NHamcrest.XUnit.2.0.1\lib\net451\NHamcrest.XUnit.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -79,6 +73,7 @@
     <Compile Include="Attributes\SiteAttribute.cs" />
     <Compile Include="Elements\Complex\Table\Column.cs" />
     <Compile Include="Elements\Complex\Table\DataClass.cs" />
+    <Compile Include="Elements\Complex\Table\Line.cs" />
     <Compile Include="Elements\Complex\Table\NameNum.cs" />
     <Compile Include="Elements\Complex\Table\TableMatcher.cs" />
     <Compile Include="Elements\Composite\Menu.cs" />
