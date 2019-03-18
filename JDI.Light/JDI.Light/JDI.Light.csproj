@@ -68,6 +68,7 @@
     <Compile Include="Attributes\SiteAttribute.cs" />
     <Compile Include="Elements\Common\DataList.cs" />
     <Compile Include="Elements\Common\DropDown.cs" />
+    <Compile Include="Elements\Common\MultiSelector.cs" />
     <Compile Include="Elements\Common\Selector.cs" />
     <Compile Include="Elements\Composite\Menu.cs" />
     <Compile Include="Elements\Composite\Table.cs" />

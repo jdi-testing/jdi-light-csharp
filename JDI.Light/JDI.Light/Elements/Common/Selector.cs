@@ -8,15 +8,11 @@ namespace JDI.Light.Elements.Common
 {
     public class Selector : UIElement
     {
-        public Selector(By byLocator) : base(byLocator)
-        {
-        }
-        
+       
         public By ItemLocator;
         private Action<Selector, string> _selectElementAction = (selector, item) =>
         {
             var els = selector.WebElement.FindElements(selector.ItemLocator);
-
             var itemsList = els.FirstOrDefault(e => e.Text.Equals(item));
             if (itemsList != null)
             {
@@ -24,7 +20,7 @@ namespace JDI.Light.Elements.Common
             }
             else
             {
-                throw new ElementNotFoundException($"Can't find dataList element '{item}' to select. ");
+                throw new ElementNotFoundException($"Can't find element '{item}' to select. ");
             }
         };
 
@@ -34,19 +30,37 @@ namespace JDI.Light.Elements.Common
             els.FirstOrDefault()?.Click();
         };
 
-        public void SelectItem(string value, Selector elem)
+        private Func<Selector, string> _getSelected = (selector) => selector.Text;
+       
+        public Selector(By byLocator) : base(byLocator)
         {
-            ItemLocator = By.XPath("//li/a");
+        }
+
+        public void Select(string value, Selector elem)
+        {
             Invoker.DoAction($"Select item '{string.Join(" -> ", value)}'",
                 () => _selectElementAction.Invoke(elem, value));
         }
 
-        public void SelectItem(int index, Selector elem)
+        public void Select(int index, Selector elem)
         {
-            ItemLocator = By.CssSelector(string.Format($"li:nth-child({index.ToString()})"));
             Invoker.DoAction($"Select item with index - '{string.Join(" -> ", index)}'",
                 () => _selectByIndex.Invoke(elem));
         }
 
+        public void Select(string[] values, Selector elem)
+        {
+            foreach (var value in values)
+            {
+                Invoker.DoAction($"Select item '{string.Join(" -> ", value)}'",
+                    () => _selectElementAction.Invoke(elem, value));
+            }
+        }
+        
+        public string GetSelected(Selector elem)
+        {
+            return Invoker.DoActionWithResult("Get value", () => _getSelected.Invoke(elem));
+
+        }
     }
 }

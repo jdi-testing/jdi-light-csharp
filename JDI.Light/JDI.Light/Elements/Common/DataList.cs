@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using JDI.Light.Elements.Base;
-using JDI.Light.Exceptions;
-using JDI.Light.Interfaces.Common;
+﻿using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Common
@@ -14,20 +10,20 @@ namespace JDI.Light.Elements.Common
         }
 
         public bool Value { get; set; }
-        
+
         public void Select(string value)
         {
-            SelectItem(value, this);
+            Select(value, this);
         }
 
         public void Select(int index)
         {
-            SelectItem(index, this);
+            Select(index, this);
         }
         
         public string GetSelected()
         {
-            return "";
+            return GetSelected(this);
         }
 
         public void Input(string text)
