@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using OpenQA.Selenium;
+using static JDI.Light.Extensions.ArrayExtensions;
 
 namespace JDI.Light.Elements.Common
 {
@@ -46,29 +47,17 @@ namespace JDI.Light.Elements.Common
 
         public void UnselectAll(Array allValues)
         {
-            var values = _getAllValues(allValues);
-            foreach (var value in values)
+            foreach (var value in ToStringExtension(allValues))
             {
                 Invoker.DoAction($"Unselect item '{string.Join(" -> ", value)}'",
                     () => _unselectAll.Invoke(this, value));
             }
         }
         
-        private string[] _getAllValues(Array values)
-        {
-            var arr = new string[values.Length];
-            for (var i = 0; i < values.Length; i++)
-            {
-                arr[i] = values.GetValue(i).ToString();
-            }
-
-            return arr;
-        }
-
         private string[] _getAllSelected(Array values)
         {
             var selectedItems = new List<string>();
-            foreach (var value in _getAllValues(values))
+            foreach (var value in ToStringExtension(values))
             {
                 var els = WebElement.FindElements(MultiItemLocator);
                 var itemsList = els.FirstOrDefault(e => e.Text.Equals(value));
