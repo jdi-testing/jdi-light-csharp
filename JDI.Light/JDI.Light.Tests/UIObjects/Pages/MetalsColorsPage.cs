@@ -24,7 +24,6 @@ namespace JDI.Light.Tests.UIObjects.Pages
 
         [Css("#calculate-button")]
         public IWebElement CalculateButton;
-        //public Button CalculateButton;
 
         [FindBy(Id = "calculate-button")]
         public ILabel CalculateLabel;
