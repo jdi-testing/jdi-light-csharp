@@ -9,7 +9,7 @@ namespace JDI.Light.Extensions
         /// </summary>
         /// <param name="values">Array</param>
         /// <returns>Array of string values</returns>
-        public static string[] ToStringExtension(Array values)
+        public static string[] ToStringArray(this Array values)
         {
             var arr = new string[values.Length];
             for (var i = 0; i < values.Length; i++)

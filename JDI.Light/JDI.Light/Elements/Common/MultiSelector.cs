@@ -47,7 +47,8 @@ namespace JDI.Light.Elements.Common
 
         public void UnselectAll(Array allValues)
         {
-            foreach (var value in ToStringExtension(allValues))
+            
+            foreach (var value in allValues.ToStringArray())
             {
                 Invoker.DoAction($"Unselect item '{string.Join(" -> ", value)}'",
                     () => _unselectAll.Invoke(this, value));
@@ -57,7 +58,7 @@ namespace JDI.Light.Elements.Common
         private string[] _getAllSelected(Array values)
         {
             var selectedItems = new List<string>();
-            foreach (var value in ToStringExtension(values))
+            foreach (var value in values.ToStringArray())
             {
                 var els = WebElement.FindElements(MultiItemLocator);
                 var itemsList = els.FirstOrDefault(e => e.Text.Equals(value));
