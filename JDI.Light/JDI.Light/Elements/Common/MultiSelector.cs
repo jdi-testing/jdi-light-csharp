@@ -47,7 +47,6 @@ namespace JDI.Light.Elements.Common
 
         public void UnselectAll(Array allValues)
         {
-            
             foreach (var value in allValues.ToStringArray())
             {
                 Invoker.DoAction($"Unselect item '{string.Join(" -> ", value)}'",
