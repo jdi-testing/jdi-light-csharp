@@ -7,8 +7,8 @@ namespace JDI.Light.Elements.Common
 {
     public class MultiSelector : Selector
     {
-        public List<By> MultiItemLocators = new List<By>();
-        public By MultiItemLocator;
+        public By MultiItemLocator { get; set; }
+        public List<By> MultiItemLocators { get; set; } = new List<By>();
 
         private Action<MultiSelector, string> _unselectAll = (multiSelector, item) =>
         {

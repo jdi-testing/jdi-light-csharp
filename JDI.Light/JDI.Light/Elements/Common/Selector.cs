@@ -8,7 +8,8 @@ namespace JDI.Light.Elements.Common
 {
     public class Selector : UIElement
     {
-        public By ItemLocator;
+        public By ItemLocator { get; set; }
+
         private Action<Selector, string> _selectElementAction = (selector, item) =>
         {
             var els = selector.WebElement.FindElements(selector.ItemLocator);
