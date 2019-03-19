@@ -41,7 +41,8 @@ namespace JDI.Light.Utils
                                                        && m.GetCustomAttribute<CompilerGeneratedAttribute>() == null);
             var propertyMembers = membersArray.Where(m => m.MemberType == MemberTypes.Property
                                                           && ((PropertyInfo)m).SetMethod != null
-                                                          && m.GetCustomAttribute<CompilerGeneratedAttribute>() == null); members = fieldMembers.Concat(propertyMembers.Where(p => p.Name != "WebElement")).Where(m => m.Name != "Parent" && m.Name != "WebElement");
+                                                          && m.GetCustomAttribute<CompilerGeneratedAttribute>() == null);
+            members = fieldMembers.Concat(propertyMembers.Where(p => p.Name != "WebElement")).Where(m => m.Name != "Parent" && m.Name != "WebElement");
             return types == null || types.Length == 0
                 ? members
                 : members.Where(m => types.Any(t => t.IsAssignableFrom(m.GetMemberType())));
