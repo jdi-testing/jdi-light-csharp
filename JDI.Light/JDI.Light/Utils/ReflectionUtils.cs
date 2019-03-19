@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using JDI.Light.Extensions;
 
 namespace JDI.Light.Utils
@@ -35,8 +36,11 @@ namespace JDI.Light.Utils
         public static IEnumerable<MemberInfo> FilterMembers(this IEnumerable<MemberInfo> members, Type[] types)
         {
             var membersArray = members.ToArray();
-            var fieldMembers = membersArray.Where(m => m.MemberType == MemberTypes.Field);
-            var propertyMembers = membersArray.Where(m => m.MemberType == MemberTypes.Property && ((PropertyInfo)m).SetMethod != null);
+            var fieldMembers = membersArray.Where(m => m.MemberType == MemberTypes.Field 
+                                                       && m.GetCustomAttribute<CompilerGeneratedAttribute>() == null);
+            var propertyMembers = membersArray.Where(m => m.MemberType == MemberTypes.Property 
+                                                          && ((PropertyInfo)m).SetMethod != null 
+                                                          && m.GetCustomAttribute<CompilerGeneratedAttribute>() == null);
             members = fieldMembers.Concat(propertyMembers.Where(p => p.Name != "WebElement")).Where(m => m.Name != "Parent" && m.Name != "WebElement");
             return types == null || types.Length == 0
                 ? members
