@@ -202,5 +202,14 @@ namespace JDI.Light.Elements.Composite
             CheckUrl();
             CheckTitle();
         }
+
+        public Alert GetAlert()
+        {
+            var alert = new Alert
+            {
+                Parent = this
+            };
+            return alert;
+        }
     }
 }
