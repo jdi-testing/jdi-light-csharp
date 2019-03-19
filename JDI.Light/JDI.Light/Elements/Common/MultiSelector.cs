@@ -10,7 +10,7 @@ namespace JDI.Light.Elements.Common
         public By MultiItemLocator { get; set; }
         public List<By> MultiItemLocators { get; set; } = new List<By>();
 
-        private Action<MultiSelector, string> _unselectAll = (multiSelector, item) =>
+        private readonly Action<MultiSelector, string> _unselectAll = (multiSelector, item) =>
         {
             var els = multiSelector.WebElement.FindElements(multiSelector.MultiItemLocator);
             var itemsList = els.FirstOrDefault(e => e.Text.Equals(item));

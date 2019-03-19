@@ -10,7 +10,7 @@ namespace JDI.Light.Elements.Common
     {
         public By ItemLocator { get; set; }
 
-        private Action<Selector, string> _selectElementAction = (selector, item) =>
+        private readonly Action<Selector, string> _selectElementAction = (selector, item) =>
         {
             var els = selector.WebElement.FindElements(selector.ItemLocator);
             var itemsList = els.FirstOrDefault(e => e.Text.Equals(item));
@@ -24,13 +24,13 @@ namespace JDI.Light.Elements.Common
             }
         };
 
-        private Action<Selector> _selectByIndex = (selector) =>
+        private readonly Action<Selector> _selectByIndex = (selector) =>
         {
             var els = selector.WebElement.FindElements(selector.ItemLocator);
             els.FirstOrDefault()?.Click();
         };
 
-        private Func<Selector, string> _getSelected = (selector) => selector.Text;
+        private readonly Func<Selector, string> _getSelected = (selector) => selector.Text;
        
         public Selector(By byLocator) : base(byLocator)
         {

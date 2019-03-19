@@ -120,7 +120,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\JDI.Light\JDI.Light.csproj">
       <Project>{abaf27b0-bfde-4fec-b93e-15b595fa77aa}</Project>
