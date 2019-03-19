@@ -47,7 +47,7 @@ namespace JDI.Light.Elements.Complex.Table
             {
                 result.Add(lines.ElementAt(i).Text);
             }
-            return Line.InitLine(result, (List<string>)Headers.Select(h => h.Text));
+            return Line.InitLine(result, Headers.Select(h => h.Text).ToList());
         }
 
         public TableAssert Is()
