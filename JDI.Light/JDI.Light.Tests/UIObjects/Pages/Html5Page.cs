@@ -7,6 +7,6 @@ namespace JDI.Light.Tests.UIObjects.Pages
     public class Html5Page : WebPage
     {
         [FindBy(Css = "#ages")]
-        public MultiSelector AgeSelector;
+        public MultiSelector AgeSelector { get; set; }
     }
 }
