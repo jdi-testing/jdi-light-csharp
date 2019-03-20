@@ -15,7 +15,7 @@ namespace JDI.Light.Tests.UIObjects
         public Link FileDownload { get; set; }
 		
         [FindBy(Css = ".btn-group")]
-        public MultiDropdown MultiDropdown;
+        public MultiDropdown MultiDropdown { get; set; }
 
         [FindBy(Css = "#ages")]
         public MultiSelector AgeSelector { get; set; }

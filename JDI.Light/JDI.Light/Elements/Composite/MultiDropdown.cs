@@ -75,8 +75,10 @@ namespace JDI.Light.Elements.Composite
 
         public void Expand()
         {
-            if(!GetAttribute("class").Contains("open"))
+            if (!GetAttribute("class").Contains("open"))
+            {
                 _header.Click();
+            }
         }
 
         public void Close()
@@ -92,7 +94,7 @@ namespace JDI.Light.Elements.Composite
             [FindBy(Tag = "input")]
             private IWebElement _checkBox;
 
-            public bool IsSelected
+            public static bool IsSelected
             {
                 get
                 {

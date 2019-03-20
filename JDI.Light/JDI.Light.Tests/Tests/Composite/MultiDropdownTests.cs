@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using JDI.Light.Elements.Composite;
+﻿using System.Collections.Generic;
 using NUnit.Framework;
 using static JDI.Light.Jdi;
 
 namespace JDI.Light.Tests.Tests.Composite
 {
-    [TestFixture()]
+    [TestFixture]
     public class MultiDropdownTests : TestBase
     {       
         [SetUp]
@@ -32,7 +27,7 @@ namespace JDI.Light.Tests.Tests.Composite
         [Test]
         public void SelectMultipleOptions()
         {
-            var optionsList = new List<string>() { "Steam", "Electro" };
+            var optionsList = new List<string> { "Steam", "Electro" };
             TestSite.Html5Page.MultiDropdown.SelectOptions(optionsList);
             Jdi.Assert.IsTrue(TestSite.Html5Page.MultiDropdown.OptionsAreSelected(optionsList));
         }
