@@ -94,7 +94,7 @@ namespace JDI.Light.Elements.Composite
             [FindBy(Tag = "input")]
             private IWebElement _checkBox;
 
-            public static bool IsSelected
+            public bool IsSelected
             {
                 get
                 {
