@@ -32,8 +32,7 @@ namespace JDI.Light.Elements.Composite
         }
 
         public bool OptionIsEnabled(string name)
-        {
-            var aa = Options;
+        {            
             return Options.Any(x => x.OptionIsEnabled && x.Text == name);
         }
 
@@ -84,54 +83,56 @@ namespace JDI.Light.Elements.Composite
         {
             Expand();
         }
+
+        public class MultiDropdownElement : UIElement
+        {
+            [FindBy(Tag = "label")]
+            private IWebElement _label;
+
+            [FindBy(Tag = "input")]
+            private IWebElement _checkBox;
+
+            public bool IsSelected
+            {
+                get
+                {
+                    return (GetAttribute("class") == "active");
+                }
+            }
+
+            public bool OptionIsEnabled
+            {
+                get
+                {
+                    return (GetAttribute("class") != "disabled");
+                }
+            }
+
+            public new string Text
+            {
+                get
+                {
+                    return _label.Text;
+                }
+            }
+
+            public void Select()
+            {
+                if (!IsSelected)
+                {
+                    JsExecutor.ExecuteScript("arguments[0].scrollIntoView();", _label);
+                    _label.Click();
+                }
+            }
+
+            public MultiDropdownElement(By locator, IWebElement label, IWebElement checkBox, IWebElement itself) : base(locator)
+            {
+                WebElement = itself;
+                _label = label;
+                _checkBox = checkBox;
+            }
+        }
     }
 
-    public class MultiDropdownElement : UIElement
-    {
-        [FindBy(Tag = "label")]
-        private IWebElement _label;
-
-        [FindBy(Tag = "input")]
-        private IWebElement _checkBox;
-
-        public bool IsSelected
-        {
-            get
-            {
-                return (GetAttribute("class") == "active");
-            }
-        }
-
-        public bool OptionIsEnabled
-        {
-            get
-            {
-                return (GetAttribute("class") != "disabled");
-            }
-        }
-
-        public new string Text
-        {
-            get
-            {
-                return _label.Text;
-            }
-        }
-
-        public void Select()
-        {            
-            if (!IsSelected)
-            {                
-                JsExecutor.ExecuteScript("arguments[0].scrollIntoView();", _label);
-                _label.Click();
-            }
-        }
-
-        public MultiDropdownElement(By locator, IWebElement label, IWebElement checkBox, IWebElement itself) : base(locator)
-        {
-            WebElement = itself;
-            _label = label;
-            _checkBox = checkBox;
-        }
-    }
+    
 }

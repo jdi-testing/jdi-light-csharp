@@ -40,6 +40,7 @@ namespace JDI.Light.Tests.Tests.Composite
         [Test]
         public void CheckOptionExists()
         {
+            TestSite.Html5Page.MultiDropdown.Expand();
             Jdi.Assert.IsTrue(TestSite.Html5Page.MultiDropdown.OptionExists("Steam"));
             Jdi.Assert.IsFalse(TestSite.Html5Page.MultiDropdown.OptionExists("Steam2"));
         }
@@ -47,7 +48,8 @@ namespace JDI.Light.Tests.Tests.Composite
         [Test]
         public void CheckOptionIsDisabled()
         {
-            Jdi.Assert.IsTrue(TestSite.Html5Page.MultiDropdown.OptionIsEnabled("Disabled"));
+            TestSite.Html5Page.MultiDropdown.Expand();
+            Jdi.Assert.IsFalse(TestSite.Html5Page.MultiDropdown.OptionIsEnabled("Disabled"));
             Jdi.Assert.IsTrue(TestSite.Html5Page.MultiDropdown.OptionIsEnabled("Wood"));
         }
     }
