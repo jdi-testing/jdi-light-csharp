@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using JDI.Light.Asserts;
@@ -29,11 +29,11 @@ namespace JDI.Light.Elements.Complex.Table
             .Select(e => UIElementFactory.CreateInstance<UIElement>(TableHeadersLocator, Body, e)).ToList();
         public UIElement Body => UIElementFactory.CreateInstance<UIElement>(TableBodyLocator, this);
         public UIElement Footer => UIElementFactory.CreateInstance<UIElement>(TableFooterLocator, this);
-        public UIElement[] Rows => Body.FindElements(TableRowsLocator)
-            .Select(e => UIElementFactory.CreateInstance<UIElement>(TableRowsLocator, Body, e)).ToArray();
+        public List<UIElement> Rows => Body.FindElements(TableRowsLocator)
+            .Select(e => UIElementFactory.CreateInstance<UIElement>(TableRowsLocator, Body, e)).ToList();
 
-        public UIElement[][] Cells => Rows.Select(r => r.FindElements(TableCellsLocator)
-            .Select(e => UIElementFactory.CreateInstance<UIElement>(TableCellsLocator, r, e)).ToArray()).ToArray();
+        public List<List<UIElement>> Cells => Rows.Select(r => r.FindElements(TableCellsLocator)
+            .Select(e => UIElementFactory.CreateInstance<UIElement>(TableCellsLocator, r, e)).ToList()).ToList();
 
         public Line Row(params TableMatcher[] matchers)
         {
@@ -48,6 +48,24 @@ namespace JDI.Light.Elements.Complex.Table
                 result.Add(lines.ElementAt(i).Text);
             }
             return Line.InitLine(result, Headers.Select(h => h.Text).ToList());
+        }
+
+        public Line Row(int rowNum)
+        {
+            return new Line(WebRow(rowNum), Headers.Select(h => h.Text).ToList());
+        }
+
+        public List<UIElement> WebRow(int rowNum)
+        {
+            if (rowNum < 1)
+            {
+                throw new ArgumentException($"Rows numeration starts from 1, but requested index is {rowNum}");
+            }
+            if (rowNum > Rows.Count)
+            {
+                throw new ArgumentException($"Table has {Rows.Count} rows, but requested index is {rowNum}");
+            }
+            return Cells.ElementAt(rowNum);
         }
 
         public TableAssert Is()

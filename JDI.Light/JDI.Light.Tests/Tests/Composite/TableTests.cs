@@ -60,12 +60,10 @@ namespace JDI.Light.Tests.Tests.Composite
             PerformancePage.Open();
             PerformancePage.CheckOpened();
             PerformancePage.UsersTable.AssertThat().HasRowWithValues(
-                ContainsValue("Meyer", InColumn(1)),
-                ContainsValue("co.uk", InColumn(3)));
-            var row = PerformancePage.UsersTable.Row(
-                ContainsValue("Meyer", InColumn("Name")),
-                ContainsValue("co.uk", InColumn("Email")));
-            Assert.AreEqual("Brian Meyer;(016977) 0358;mollis.nec@seddictumeleifend.co.uk;Houston",
+                ContainsValue("Burke", InColumn(1)),
+                ContainsValue("ut.edu", InColumn(3)));
+            var row = PerformancePage.UsersTable.Row(1);
+            Assert.AreEqual("Burke Tucker;076 1971 1687;et.euismod.et@ut.edu;GozŽe",
                 row.GetValue());
         }
 
@@ -78,8 +76,8 @@ namespace JDI.Light.Tests.Tests.Composite
                 HasValue("Brian Meyer", InColumn("Name")),
                 HasValue("mollis.nec@seddictumeleifend.co.uk", InColumn("Email")));
             var row = PerformancePage.UsersTable.Row(
-                ContainsValue("Meyer", InColumn("Name")),
-                ContainsValue("co.uk", InColumn("Email")));
+                HasValue("Brian Meyer", InColumn("Name")),
+                HasValue("mollis.nec@seddictumeleifend.co.uk", InColumn("Email")));
             Assert.AreEqual("Brian Meyer;(016977) 0358;mollis.nec@seddictumeleifend.co.uk;Houston",
                 row.GetValue());
         }

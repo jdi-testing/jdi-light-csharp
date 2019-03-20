@@ -8,9 +8,9 @@ namespace JDI.Light.Elements.Complex.Table
     public class Line
     {
         private Dictionary<string, string> _data;
-        private List<UIElement> _elements;
-        private List<string> _headers;
-        private List<string> _list;
+        private readonly List<UIElement> _elements;
+        private readonly List<string> _headers;
+        private readonly List<string> _list;
 
         public Line(List<string> list, List<string> headers)
         {
@@ -25,24 +25,16 @@ namespace JDI.Light.Elements.Complex.Table
             _data = ZipTwoLists(_headers, _elements.Select(el => el.Text).ToList());
         }
 
-        private Dictionary<string, string> ZipTwoLists(IReadOnlyCollection<string> keys, IReadOnlyCollection<string> values)
+        private static Dictionary<string, string> ZipTwoLists(IReadOnlyCollection<string> keys, IReadOnlyCollection<string> values)
         {
             if (keys == null || values == null || keys.Count != values.Count)
                 throw new ArgumentException("Keys or values are null or has not equal count.");
-            var dictionary = new Dictionary<string, string>();
-            try
-            {
-                keys.Zip(values, (f, s) =>
-                {
-                    dictionary.Add(f, s);
-                    return dictionary;
-                });
-                return dictionary;
-            }
-            catch (Exception e)
-            {
-                throw new ArgumentException("Keys collection contains some duplicate values." + e.Message);
-            }
+            return keys.GroupBy(x => x)
+                       .Where(g => g.Count() > 1)
+                       .Select(y => y.Key)
+                       .ToList().Count > 0
+                ? throw new ArgumentException($"{keys} collection contains some duplicate elements")
+                : keys.Zip(values, (k, v) => new { k, v }).ToDictionary(x => x.k, x => x.v);
         }
 
         public static Line InitLine(List<string> list, List<string> headers)
@@ -51,15 +43,19 @@ namespace JDI.Light.Elements.Complex.Table
             return line;
         }
 
-        private Dictionary<string, string> GetData()
+        private Dictionary<string, string> GetData(int minAmount)
         {
+            if (_data == null || _data.Count < minAmount)
+            {
+                _data = ZipTwoLists(_headers, _elements.Select(el => el.Text).ToList());
+            }
             return _data;
         }
 
-        private List<string> GetList(int minAmount)
+        private IEnumerable<string> GetList(int minAmount)
         {
             return _list != null && _list.Count >= minAmount ? _list
-                : (List<string>)GetData().Select(pair => pair.Value);
+                : GetData(minAmount).Select(pair => pair.Value).ToList();
         }
 
         public string GetValue()
