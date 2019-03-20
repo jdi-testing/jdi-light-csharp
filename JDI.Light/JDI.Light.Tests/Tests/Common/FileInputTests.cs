@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
-using OpenQA.Selenium;
 using static JDI.Light.Jdi;
 
 namespace JDI.Light.Tests.Tests.Common
 {
     [TestFixture]
-    class FileInputTests : TestBase
+    internal class FileInputTests : TestBase
     {
+        //Tests require administrator access
+
         [SetUp]
         public void SetUp()
         {
@@ -25,12 +21,14 @@ namespace JDI.Light.Tests.Tests.Common
             Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
-        private string CreateFile(string filename)
+        private static string CreateFile(string filename)
         {
             string filepath = Path.Combine(Directory.GetCurrentDirectory(), filename);
-            var sw = File.CreateText(filepath);
-            sw.WriteLine("hello world");
-            sw.Close();
+            using (var sw = File.CreateText(filepath))
+            {
+                sw.WriteLine("hello world");
+                sw.Close();
+            }
             return filepath;
         }
 
@@ -46,9 +44,9 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void DownloadTest()
         {
-            string userRoot = System.Environment.GetEnvironmentVariable("USERPROFILE");
-            string downloadFolder = Path.Combine(userRoot, "Downloads");
-            string fileToUpload = Path.Combine(downloadFolder, "jdi-logo.jpg");
+            var userRoot = Environment.GetEnvironmentVariable("USERPROFILE");
+            var downloadFolder = Path.Combine(userRoot, "Downloads");
+            var fileToUpload = Path.Combine(downloadFolder, "jdi-logo.jpg");
             if (File.Exists(fileToUpload))
             {
                 File.Delete(fileToUpload);

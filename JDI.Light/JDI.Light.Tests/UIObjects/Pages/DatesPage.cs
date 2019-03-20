@@ -13,8 +13,5 @@ namespace JDI.Light.Tests.UIObjects.Pages
 
         [FindBy(Css = "#datepicker input")]
         public DatePicker Datepicker;
-        
-        [FindBy(Css = "")]
-        public ILabel UploadedFileName;
     }
 }

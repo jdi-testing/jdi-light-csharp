@@ -11,6 +11,7 @@ namespace JDI.Light.Tests.UIObjects
     {
         [Page(Url = "/index.html", Title = "Home Page")]
         public HomePage HomePage;
+
         [Page(Url = "/index.html", Title = "Home Page")]
         public static HomePage HomePageStatic;
 
@@ -30,13 +31,13 @@ namespace JDI.Light.Tests.UIObjects
         public SimpleTablePage SimpleTablePage;
 
         [Page(Url = "/html5.html", Title = "HTML 5")]
-        public Html5Page Html5Page;
+        public Html5Page Html5Page { get; set; }
 
         [Page(Url = "complex-table.html", Title = "Complex Table")]
         public ComplexTablePage ComplexTablePage;
 
         [FindBy(Css = ".uui-header")]
-        public Header Header;
+        public Header Header { get; set; }
 
         [FindBy(Css = ".footer-content")]
         public Footer Footer;
