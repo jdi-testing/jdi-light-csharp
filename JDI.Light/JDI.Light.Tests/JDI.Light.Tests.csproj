@@ -60,11 +60,15 @@
     <Compile Include="Entities\Contact.cs" />
     <Compile Include="Entities\Client.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Enums\Ages.cs" />
     <Compile Include="Enums\Colors.cs" />
     <Compile Include="Enums\Metals.cs" />
     <Compile Include="Enums\Odds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\Common\DataListTests.cs" />
+    <Compile Include="Tests\Common\DropDownTests.cs" />
     <Compile Include="Tests\Common\InputTests.cs" />
+    <Compile Include="Tests\Common\MultiSelectorTests.cs" />
     <Compile Include="Tests\Common\TextAreaTests.cs" />
     <Compile Include="Tests\Common\UIElementTests.cs" />
     <Compile Include="Tests\Composite\AlertTests.cs" />
@@ -116,7 +120,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\JDI.Light\JDI.Light.csproj">
       <Project>{abaf27b0-bfde-4fec-b93e-15b595fa77aa}</Project>

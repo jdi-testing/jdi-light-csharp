@@ -37,7 +37,7 @@ namespace JDI.Light.Tests.UIObjects
         public Html5Page Html5Page { get; set; }
 
         [FindBy(Css = ".uui-header")]
-        public Header Header;
+        public Header Header { get; set; }
 
         [FindBy(Css = ".footer-content")]
         public Footer Footer;

@@ -66,6 +66,10 @@
     <Compile Include="Attributes\NameAttribute.cs" />
     <Compile Include="Attributes\PageAttribute.cs" />
     <Compile Include="Attributes\SiteAttribute.cs" />
+    <Compile Include="Elements\Common\DataList.cs" />
+    <Compile Include="Elements\Common\DropDown.cs" />
+    <Compile Include="Elements\Common\MultiSelector.cs" />
+    <Compile Include="Elements\Common\Selector.cs" />
     <Compile Include="Elements\Composite\Alert.cs" />
     <Compile Include="Elements\Composite\Menu.cs" />
     <Compile Include="Elements\Composite\Table.cs" />
@@ -77,6 +81,7 @@
     <Compile Include="Enums\ScreenshotState.cs" />
     <Compile Include="Enums\TableHeaderType.cs" />
     <Compile Include="Exceptions\ElementNotFoundException.cs" />
+    <Compile Include="Extensions\ArrayExtensions.cs" />
     <Compile Include="Extensions\MemberInfoExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
@@ -90,7 +95,9 @@
     <Compile Include="Interfaces\Base\IVisible.cs" />
     <Compile Include="Interfaces\Common\IButton.cs" />
     <Compile Include="Interfaces\Common\ICheckBox.cs" />
+    <Compile Include="Interfaces\Common\IDataList.cs" />
     <Compile Include="Interfaces\Common\IDatePicker.cs" />
+    <Compile Include="Interfaces\Common\IDropDown.cs" />
     <Compile Include="Interfaces\Common\IImage.cs" />
     <Compile Include="Interfaces\Common\ILabel.cs" />
     <Compile Include="Interfaces\Common\ILink.cs" />
