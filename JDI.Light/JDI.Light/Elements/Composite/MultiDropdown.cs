@@ -132,7 +132,5 @@ namespace JDI.Light.Elements.Composite
                 _checkBox = checkBox;
             }
         }
-    }
-
-    
+    }    
 }
