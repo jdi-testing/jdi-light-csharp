@@ -31,7 +31,7 @@ namespace JDI.Light.Tests.UIObjects
         public SimpleTablePage SimpleTablePage;
 
         [Page(Url = "/html5.html", Title = "HTML 5")]
-        public Html5Page Html5Page;
+        public Html5Page Html5Page { get; set; }
 
         [Page(Url = "complex-table.html", Title = "Complex Table")]
         public ComplexTablePage ComplexTablePage;

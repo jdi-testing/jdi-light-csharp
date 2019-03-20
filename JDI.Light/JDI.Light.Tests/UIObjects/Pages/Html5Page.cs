@@ -9,10 +9,10 @@ namespace JDI.Light.Tests.UIObjects
     public class Html5Page : WebPage
     {
         [FindBy(Css = "#avatar")]
-        public FileInput FileInput;
+        public FileInput FileInput { get; set; }
 
         [FindBy(XPath = "//a[@href='/JDI/images/jdi-logo.jpg']")]
-        public Link FileDownload;
+        public Link FileDownload { get; set; }
 
         [FindBy(Css = "#ages")]
         public MultiSelector AgeSelector { get; set; }
