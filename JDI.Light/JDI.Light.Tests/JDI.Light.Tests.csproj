@@ -80,8 +80,6 @@
     <Compile Include="UIObjects\Pages\ComplexTablePage.cs" />
     <Compile Include="UIObjects\Pages\PerformancePage.cs" />
     <Compile Include="UIObjects\Pages\Html5Page.cs" />
-    <Compile Include="UIObjects\Pages\BasePage.cs" />
-    <Compile Include="UIObjects\Pages\ComplexTablePage.cs" />    
     <Compile Include="UIObjects\TestSiteBrokenDomain.cs" />
     <Compile Include="UIObjects\TestSiteCustomDomain.cs" />
     <Compile Include="Tests\Common\ButtonTests.cs" />
