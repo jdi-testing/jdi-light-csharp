@@ -21,10 +21,9 @@ namespace JDI.Light.Tests.UIObjects.Pages
 
         [FindBy(Id = "calculate-button")]
         public Label Calculate;
-
+        
         [Css("#calculate-button")]
         public IWebElement CalculateButton;
-        //public Button CalculateButton;
 
         [FindBy(Id = "calculate-button")]
         public ILabel CalculateLabel;
@@ -35,8 +34,31 @@ namespace JDI.Light.Tests.UIObjects.Pages
         [FindBy(XPath = "//*[@id='elements-checklist']//*[text()='Water']")]
         [IsChecked(typeof(CustomCheck), nameof(CustomCheck.CheckFunc))]
         public CheckBox CbWater;
-        
+
         [FindBy(Id = "summary-block")]
         public Summary SummaryBlock;
+
+        [FindBy(Css = "#colors")]
+        public DropDown ColorsDropDown { get; set; }
+
+        [FindBy(Css = "#colors .filter-option")]
+        public DropDown ColorsDropDownText { get; set; }
+
+        [FindBy(Css = "#metals")]
+        public DataList MetalsDataList { get; set; }
+
+        [FindBy(Css = "#metals span.caret")]
+        public DataList MetalsDataListCaret { get; set; }
+
+        [FindBy(Css = "#metals input")]
+        public DataList MetalsInput { get; set; }
+
+        [FindBy(Css = "#submit-button")]
+        public Button SubmitButton { get; set; }
+
+        public void OpenDataList()
+        {
+            MetalsDataListCaret.Click();
+        }
     }
 }
