@@ -76,6 +76,7 @@
     <Compile Include="Elements\Complex\Table\Line.cs" />
     <Compile Include="Elements\Complex\Table\NameNum.cs" />
     <Compile Include="Elements\Complex\Table\TableMatcher.cs" />
+    <Compile Include="Elements\Composite\Alert.cs" />
     <Compile Include="Elements\Composite\Menu.cs" />
     <Compile Include="Elements\Complex\Table\Table.cs" />
     <Compile Include="Elements\Composite\TextList.cs" />
