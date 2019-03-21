@@ -20,7 +20,6 @@ namespace JDI.Light.Tests.Tests.Common
             TestSite.MetalsColorsPage.OpenComboBox();
             TestSite.MetalsColorsPage.MetalsComboBox.ItemLocator = By.XPath("//li/a");
             TestSite.MetalsColorsPage.MetalsComboBox.Select(Metals.Bronze.ToString());
-
             Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Metals: value changed to Bronze");
         }
 
