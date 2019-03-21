@@ -17,9 +17,11 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void SelectComboBox()
         {
-            TestSite.MetalsColorsPage.OpenComboBox();
+            TestSite.MetalsColorsPage.MetalsComboBox.CaretLocator = By.CssSelector("#metals span.caret");
+            TestSite.MetalsColorsPage.MetalsComboBox.Expand();
             TestSite.MetalsColorsPage.MetalsComboBox.ItemLocator = By.XPath("//li/a");
             TestSite.MetalsColorsPage.MetalsComboBox.Select(Metals.Bronze.ToString());
+
             Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Metals: value changed to Bronze");
         }
 
@@ -28,7 +30,8 @@ namespace JDI.Light.Tests.Tests.Common
         {
             const int indexToSelect = 2;
 
-            TestSite.MetalsColorsPage.OpenComboBox();
+            TestSite.MetalsColorsPage.MetalsComboBox.CaretLocator = By.CssSelector("#metals span.caret");
+            TestSite.MetalsColorsPage.MetalsComboBox.Expand();
             TestSite.MetalsColorsPage.MetalsComboBox.ItemLocator = By.CssSelector(string.Format($"li:nth-child({indexToSelect.ToString()})"));
             TestSite.MetalsColorsPage.MetalsComboBox.Select(indexToSelect);
 

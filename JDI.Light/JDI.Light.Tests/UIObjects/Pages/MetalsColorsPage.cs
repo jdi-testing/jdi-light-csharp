@@ -64,15 +64,5 @@ namespace JDI.Light.Tests.UIObjects.Pages
 
         [FindBy(Css = "#metals input")]
         public ComboBox MetalsInputComboBox { get; set; }
-
-        public void OpenDataList()
-        {
-            MetalsDataListCaret.Click();
-        }
-
-        public void OpenComboBox()
-        {
-            MetalsComboBoxCaret.Click();
-        }
     }
 }
