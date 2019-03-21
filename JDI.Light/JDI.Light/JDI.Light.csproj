@@ -58,6 +58,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Asserts\TableAssert.cs" />
     <Compile Include="Attributes\ByText.cs" />
     <Compile Include="Attributes\XPathAttribute.cs" />
     <Compile Include="Attributes\CssAttribute.cs" />
@@ -67,6 +68,11 @@
     <Compile Include="Attributes\PageAttribute.cs" />
     <Compile Include="Attributes\SiteAttribute.cs" />
     <Compile Include="Elements\Common\ComboBox.cs" />
+    <Compile Include="Elements\Complex\Table\Column.cs" />
+    <Compile Include="Elements\Complex\Table\DataClass.cs" />
+    <Compile Include="Elements\Complex\Table\Line.cs" />
+    <Compile Include="Elements\Complex\Table\NameNum.cs" />
+    <Compile Include="Elements\Complex\Table\TableMatcher.cs" />
     <Compile Include="Elements\Composite\FileInput.cs" />
     <Compile Include="Elements\Common\DataList.cs" />
     <Compile Include="Elements\Common\DropDown.cs" />
@@ -74,7 +80,7 @@
     <Compile Include="Elements\Common\Selector.cs" />
     <Compile Include="Elements\Composite\Alert.cs" />
     <Compile Include="Elements\Composite\Menu.cs" />
-    <Compile Include="Elements\Composite\Table.cs" />
+    <Compile Include="Elements\Complex\Table\Table.cs" />
     <Compile Include="Elements\Composite\TextList.cs" />
     <Compile Include="Enums\CheckPageType.cs" />
     <Compile Include="Enums\DriverType.cs" />

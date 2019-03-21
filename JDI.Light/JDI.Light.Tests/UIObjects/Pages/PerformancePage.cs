@@ -4,9 +4,8 @@ using JDI.Light.Elements.Composite;
 
 namespace JDI.Light.Tests.UIObjects.Pages
 {
-    public class ComplexTablePage : WebPage
+    public class PerformancePage : WebPage
     {
-        [FindBy(XPath = "//table[@id='complex-table']/tbody/tr/td/div/table")]
-        public Table Table;
+        [FindBy(Css = "#users-table")] public Table UsersTable { get; set; }
     }
 }
