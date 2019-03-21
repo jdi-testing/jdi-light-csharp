@@ -1,10 +1,7 @@
 ﻿using JDI.Light.Elements.Base;
 using OpenQA.Selenium;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using JDI.Light.Attributes;
 using JDI.Light.Elements.Common;
 
@@ -22,7 +19,7 @@ namespace JDI.Light.Elements.Composite
                 var elems = FindElements(By.XPath(".//li")).ToList();
                 var labels = FindElements(By.XPath(".//li//label")).ToList();
                 var chBoxes = FindElements(By.XPath(".//li//input")).ToList();
-                List<MultiDropdownElement> elementList = new List<MultiDropdownElement>();
+                var elementList = new List<MultiDropdownElement>();
                 for (int i = 0; i < elems.Count; i++)
                 {
                     elementList.Add(new MultiDropdownElement(By.XPath(".//li"),labels[i],chBoxes[i], elems[i]));
@@ -69,8 +66,9 @@ namespace JDI.Light.Elements.Composite
             return Options.Any(x => x.Text == option);
         }
 
-        public MultiDropdown(By locator) : base(locator)
+        public MultiDropdown(By locator, Button header) : base(locator)
         {
+            _header = header;
         }
 
         public void Expand()
@@ -84,55 +82,6 @@ namespace JDI.Light.Elements.Composite
         public void Close()
         {
             Expand();
-        }
-
-        public class MultiDropdownElement : UIElement
-        {
-            [FindBy(Tag = "label")]
-            private IWebElement _label;
-
-            [FindBy(Tag = "input")]
-            private IWebElement _checkBox;
-
-            public bool IsSelected
-            {
-                get
-                {
-                    return (GetAttribute("class") == "active");
-                }
-            }
-
-            public bool OptionIsEnabled
-            {
-                get
-                {
-                    return (GetAttribute("class") != "disabled");
-                }
-            }
-
-            public new string Text
-            {
-                get
-                {
-                    return _label.Text;
-                }
-            }
-
-            public void Select()
-            {
-                if (!IsSelected)
-                {
-                    JsExecutor.ExecuteScript("arguments[0].scrollIntoView();", _label);
-                    _label.Click();
-                }
-            }
-
-            public MultiDropdownElement(By locator, IWebElement label, IWebElement checkBox, IWebElement itself) : base(locator)
-            {
-                WebElement = itself;
-                _label = label;
-                _checkBox = checkBox;
-            }
-        }
+        }        
     }    
 }
