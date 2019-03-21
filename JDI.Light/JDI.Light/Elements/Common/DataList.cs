@@ -5,11 +5,18 @@ namespace JDI.Light.Elements.Common
 {
     public class DataList : Selector, IDataList
     {
+        public By CaretLocator { get; set; }
+
         public DataList(By byLocator) : base(byLocator)
         {
         }
 
         public bool Value { get; set; }
+
+        public void Expand()
+        {
+            FindElement(CaretLocator).Click();
+        }
 
         public void Select(string value)
         {

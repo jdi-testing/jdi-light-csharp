@@ -13,7 +13,7 @@ namespace JDI.Light.Tests.Tests
 {
     public class TestBase
     {
-        public TestSite TestSite { get; set; }
+        public static TestSite TestSite { get; set; }
 
         [SetUp]
         public virtual void SetUpTest()
