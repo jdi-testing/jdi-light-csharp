@@ -56,9 +56,13 @@ namespace JDI.Light.Tests.UIObjects.Pages
         [FindBy(Css = "#submit-button")]
         public Button SubmitButton { get; set; }
 
-        public void OpenDataList()
-        {
-            MetalsDataListCaret.Click();
-        }
+        [FindBy(Css = "#metals")]
+        public ComboBox MetalsComboBox { get; set; }
+
+        [FindBy(Css = "#metals span.caret")]
+        public ComboBox MetalsComboBoxCaret { get; set; }
+
+        [FindBy(Css = "#metals input")]
+        public ComboBox MetalsInputComboBox { get; set; }
     }
 }

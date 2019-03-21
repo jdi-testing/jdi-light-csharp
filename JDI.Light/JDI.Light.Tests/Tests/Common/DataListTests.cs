@@ -17,7 +17,8 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void SelectDataList()
         {
-            TestSite.MetalsColorsPage.OpenDataList();
+            TestSite.MetalsColorsPage.MetalsDataList.CaretLocator = By.CssSelector("#metals span.caret");
+            TestSite.MetalsColorsPage.MetalsDataList.Expand();
             TestSite.MetalsColorsPage.MetalsDataList.ItemLocator = By.XPath("//li/a");
             TestSite.MetalsColorsPage.MetalsDataList.Select(Metals.Bronze.ToString());
 
@@ -29,7 +30,8 @@ namespace JDI.Light.Tests.Tests.Common
         {
             const int indexToSelect = 2;
 
-            TestSite.MetalsColorsPage.OpenDataList();
+            TestSite.MetalsColorsPage.MetalsDataList.CaretLocator = By.CssSelector("#metals span.caret");
+            TestSite.MetalsColorsPage.MetalsDataList.Expand();
             TestSite.MetalsColorsPage.MetalsDataList.ItemLocator = By.CssSelector(string.Format($"li:nth-child({indexToSelect.ToString()})"));
             TestSite.MetalsColorsPage.MetalsDataList.Select(indexToSelect);
 
