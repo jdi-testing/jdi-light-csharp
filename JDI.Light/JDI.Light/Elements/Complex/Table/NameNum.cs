@@ -7,30 +7,19 @@ namespace JDI.Light.Elements.Complex.Table
 {
     public class NameNum : DataClass<NameNum>
     {
-        private int num = 0;
-        private string name = "";
+        public int Num { get; set; } = 0;
 
-        public int Num
-        {
-            get => num;
-            set => num = value;
-        }
-
-        public string Name
-        {
-            get => name;
-            set => name = value;
-        }
+        public string Name { get; set; } = "";
 
         public int GetIndex(List<UIElement> headers)
         {
             try
             {
-                return name.Equals("") ? num : headers.IndexOf(headers.First(h => h.Text.Equals(name))) + 1;
+                return Name.Equals("") ? Num : headers.IndexOf(headers.First(h => h.Text.Equals(Name))) + 1;
             }
             catch (Exception e)
             {
-                throw new InvalidOperationException("There is no column in a table with name " + name + ". Exception: " + e.Message);
+                throw new InvalidOperationException("There is no column in a table with name " + Name + ". Exception: " + e.Message);
             }
         }
     }

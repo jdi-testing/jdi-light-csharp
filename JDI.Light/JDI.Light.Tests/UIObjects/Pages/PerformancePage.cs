@@ -6,7 +6,6 @@ namespace JDI.Light.Tests.UIObjects.Pages
 {
     public class PerformancePage : WebPage
     {
-        [FindBy(Css = "#users-table")]
-        public Table UsersTable;
+        [FindBy(Css = "#users-table")] public Table UsersTable { get; set; }
     }
 }
