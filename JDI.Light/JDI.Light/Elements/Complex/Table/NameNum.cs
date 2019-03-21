@@ -7,8 +7,20 @@ namespace JDI.Light.Elements.Complex.Table
 {
     public class NameNum : DataClass<NameNum>
     {
-        public int num = 0;
-        public string name ="";
+        private int num = 0;
+        private string name = "";
+
+        public int Num
+        {
+            get => num;
+            set => num = value;
+        }
+
+        public string Name
+        {
+            get => name;
+            set => name = value;
+        }
 
         public int GetIndex(List<UIElement> headers)
         {

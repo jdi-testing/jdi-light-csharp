@@ -15,13 +15,13 @@
         public static Column ColumnByValue(string value)
         {
             Column column = new Column();
-            return (Column)column.Set(column, s => s.name = value);
+            return (Column)column.Set(column, s => s.Name = value);
         }
 
         public static Column ColumnByNum(int num)
         {
             Column column = new Column();
-            return (Column)column.Set(column, s => s.num = num);
+            return (Column)column.Set(column, s => s.Num = num);
         }
     }
 }

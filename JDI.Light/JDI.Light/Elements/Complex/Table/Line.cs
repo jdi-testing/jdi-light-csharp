@@ -28,11 +28,11 @@ namespace JDI.Light.Elements.Complex.Table
         private static Dictionary<string, string> ZipTwoLists(IReadOnlyCollection<string> keys, IReadOnlyCollection<string> values)
         {
             if (keys == null || values == null || keys.Count != values.Count)
+            {
                 throw new ArgumentException("Keys or values are null or has not equal count.");
-            return keys.GroupBy(x => x)
-                       .Where(g => g.Count() > 1)
-                       .Select(y => y.Key)
-                       .ToList().Count > 0
+            }
+            return
+                keys.Distinct().Count() < keys.Count
                 ? throw new ArgumentException($"{keys} collection contains some duplicate elements")
                 : keys.Zip(values, (k, v) => new { k, v }).ToDictionary(x => x.k, x => x.v);
         }
