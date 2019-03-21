@@ -66,6 +66,10 @@ namespace JDI.Light.Elements.Composite
             return Options.Any(x => x.Text == option);
         }
 
+        public MultiDropdown(By locator) : base(locator)
+        {            
+        }
+
         public MultiDropdown(By locator, Button header) : base(locator)
         {
             _header = header;
