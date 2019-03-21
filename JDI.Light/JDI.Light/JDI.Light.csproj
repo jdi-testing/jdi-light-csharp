@@ -66,6 +66,7 @@
     <Compile Include="Attributes\NameAttribute.cs" />
     <Compile Include="Attributes\PageAttribute.cs" />
     <Compile Include="Attributes\SiteAttribute.cs" />
+    <Compile Include="Elements\Common\ComboBox.cs" />
     <Compile Include="Elements\Composite\FileInput.cs" />
     <Compile Include="Elements\Common\DataList.cs" />
     <Compile Include="Elements\Common\DropDown.cs" />
