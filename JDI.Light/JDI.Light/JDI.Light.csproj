@@ -81,6 +81,8 @@
     <Compile Include="Elements\Common\Selector.cs" />
     <Compile Include="Elements\Composite\Alert.cs" />
     <Compile Include="Elements\Composite\Menu.cs" />
+    <Compile Include="Elements\Composite\MultiDropdown.cs" />
+    <Compile Include="Elements\Composite\MultiDropdownElement.cs" />
     <Compile Include="Elements\Complex\Table\Table.cs" />
     <Compile Include="Elements\Composite\TextList.cs" />
     <Compile Include="Enums\CheckPageType.cs" />
@@ -115,6 +117,7 @@
     <Compile Include="Interfaces\Common\ITextArea.cs" />
     <Compile Include="Interfaces\Common\ITextField.cs" />
     <Compile Include="Interfaces\Composite\IForm.cs" />
+    <Compile Include="Interfaces\Composite\IMultiDropdownElement.cs" />
     <Compile Include="Interfaces\Composite\IPage.cs" />
     <Compile Include="Interfaces\Composite\ISearch.cs" />
     <Compile Include="Interfaces\Composite\IWebSite.cs" />

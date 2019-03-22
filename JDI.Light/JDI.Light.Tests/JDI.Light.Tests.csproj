@@ -74,6 +74,7 @@
     <Compile Include="Tests\Common\RadioButtonTests.cs" />
     <Compile Include="Tests\Common\TextAreaTests.cs" />
     <Compile Include="Tests\Common\UIElementTests.cs" />
+    <Compile Include="Tests\Composite\MultiDropdownTests.cs" />
     <Compile Include="Tests\Composite\AlertTests.cs" />
     <Compile Include="Tests\Composite\SectionTests.cs" />
     <Compile Include="Tests\Core\WebDriverFactoryTests.cs" />
