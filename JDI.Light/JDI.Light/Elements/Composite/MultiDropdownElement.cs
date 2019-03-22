@@ -1,43 +1,33 @@
 ﻿using JDI.Light.Elements.Base;
 using OpenQA.Selenium;
-using JDI.Light.Attributes;
+using JDI.Light.Elements.Common;
+using JDI.Light.Interfaces.Composite;
 
 namespace JDI.Light.Elements.Composite
 {
-    public class MultiDropdownElement : UIElement
+    public class MultiDropdownElement : UIElement, IMultiDropdownElement
     {
-        [FindBy(Tag = "label")]
-        private IWebElement _label;
+        public By LabelLocator { get; set; }
+        public By CheckboxLocator { get; set; }
 
-        [FindBy(Tag = "input")]
-        private IWebElement _checkBox;
-
-        public bool IsSelected
-        {
-            get
-            {
-                return (GetAttribute("class") == "active");
-            }
-        }
-
+        public Label Label => Get<Label>(LabelLocator);
+        public CheckBox CheckBox => Get<CheckBox>(CheckboxLocator);
+        public bool IsSelected => GetAttribute("class") == "active";
         public bool OptionIsEnabled => GetAttribute("class") != "disabled";        
 
-        public new string Text => _label.Text;
+        public new string Text => Label.Text;
 
         public void Select()
         {
             if (!IsSelected)
             {
-                JsExecutor.ExecuteScript("arguments[0].scrollIntoView();", _label);
-                _label.Click();
+                JsExecutor.ExecuteScript("arguments[0].scrollIntoView();", Label.WebElement);
+                Label.Click();
             }
         }
 
-        public MultiDropdownElement(By locator, IWebElement label, IWebElement checkBox, IWebElement itself) : base(locator)
+        public MultiDropdownElement(By locator) : base(locator)
         {
-            WebElement = itself;
-            _label = label;
-            _checkBox = checkBox;
         }
     }
 }

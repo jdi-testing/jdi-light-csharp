@@ -115,6 +115,7 @@
     <Compile Include="Interfaces\Common\ITextArea.cs" />
     <Compile Include="Interfaces\Common\ITextField.cs" />
     <Compile Include="Interfaces\Composite\IForm.cs" />
+    <Compile Include="Interfaces\Composite\IMultiDropdownElement.cs" />
     <Compile Include="Interfaces\Composite\IPage.cs" />
     <Compile Include="Interfaces\Composite\ISearch.cs" />
     <Compile Include="Interfaces\Composite\IWebSite.cs" />

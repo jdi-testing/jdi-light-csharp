@@ -2,27 +2,33 @@
 using OpenQA.Selenium;
 using System.Collections.Generic;
 using System.Linq;
-using JDI.Light.Attributes;
-using JDI.Light.Elements.Common;
+using JDI.Light.Exceptions;
+using JDI.Light.Interfaces.Composite;
 
 namespace JDI.Light.Elements.Composite
 {
     public class MultiDropdown : UIElement
     {
-        [FindBy(Tag = "button")]
-        private Button _header;
-        
-        public List<MultiDropdownElement> Options
+        public By ElementsLocator { get; set; } = By.XPath(".//li");
+        public By LabelsLocator { get; set; } = By.XPath(".//label");
+        public By CheckboxesLocator { get; set; } = By.XPath(".//input");
+        public bool IsExpanded => GetAttribute("class").Contains("open");
+
+        public List<IMultiDropdownElement> Options
         {
             get
             {
-                var elems = FindElements(By.XPath(".//li")).ToList();
-                var labels = FindElements(By.XPath(".//li//label")).ToList();
-                var chBoxes = FindElements(By.XPath(".//li//input")).ToList();
-                var elementList = new List<MultiDropdownElement>();
-                for (int i = 0; i < elems.Count; i++)
+                var elems = FindElements(ElementsLocator).ToList();
+                var elementList = new List<IMultiDropdownElement>();
+                foreach (var t in elems)
                 {
-                    elementList.Add(new MultiDropdownElement(By.XPath(".//li"),labels[i],chBoxes[i], elems[i]));
+                    elementList.Add(new MultiDropdownElement(ElementsLocator)
+                    {
+                        WebElement = t,
+                        CheckboxLocator = CheckboxesLocator,
+                        LabelLocator = LabelsLocator,
+                        Parent = this
+                    });
                 }                
                 return elementList;
             }
@@ -33,21 +39,33 @@ namespace JDI.Light.Elements.Composite
             return Options.Any(x => x.OptionIsEnabled && x.Text == name);
         }
 
-        public void SelectOptionByname(string name)
+        public IMultiDropdownElement GetFirstByText(string text)
+        {
+            var v = Options.FirstOrDefault(x => x.Text == text);
+            if (v == null)
+            {
+                throw new ElementNotFoundException($"Unable to locate element with text '{text}'");
+            }
+
+            return v;
+        }
+
+        public void SelectOption(string text)
         {
             Expand();
-            Options.FirstOrDefault(x => x.Text == name).Select();
+            GetFirstByText(text).Select();
             Close();
         }
 
         public List<string> GetSelectedOptions()
         {            
-            return Options.Where(x => x.Selected).Select(x=>x.Text).ToList();
+            return Options.Where(x => x.IsSelected).Select(x => x.Text).ToList();
         }
 
         public bool OptionsAreSelected(List<string> options)
         {
-            return (Options.Where(x=>x.IsSelected).All(x => options.Contains(x.Text)) && options.All(x => Options.FirstOrDefault(y => y.Text == x).IsSelected));
+            return Options.Where(x => x.IsSelected).All(x => options.Contains(x.Text)) 
+                   && options.All(text => GetFirstByText(text).IsSelected);
         }
 
         public void SelectOptions(List<string> options)
@@ -55,7 +73,7 @@ namespace JDI.Light.Elements.Composite
             Expand();
             foreach(var option in options)
             {
-                Options.FirstOrDefault(x => x.Text == option).Select();
+                GetFirstByText(option).Select();
             }
             JsExecutor.ExecuteScript("arguments[0].scrollIntoView();", WebElement);
             Close();
@@ -70,16 +88,11 @@ namespace JDI.Light.Elements.Composite
         {            
         }
 
-        public MultiDropdown(By locator, Button header) : base(locator)
-        {
-            _header = header;
-        }
-
         public void Expand()
         {
-            if (!GetAttribute("class").Contains("open"))
+            if (!IsExpanded)
             {
-                _header.Click();
+                Click();
             }
         }
 

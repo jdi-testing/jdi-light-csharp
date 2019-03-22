@@ -25,6 +25,14 @@ namespace JDI.Light.Tests.Tests.Composite
         }
 
         [Test]
+        public void SelectSingleOptions()
+        {
+            var optionsList = new List<string> { "Steam", "Electro" };
+            TestSite.Html5Page.MultiDropdown.SelectOption(optionsList);
+            Jdi.Assert.IsTrue(TestSite.Html5Page.MultiDropdown.OptionsAreSelected(optionsList));
+        }
+
+        [Test]
         public void SelectMultipleOptions()
         {
             var optionsList = new List<string> { "Steam", "Electro" };
