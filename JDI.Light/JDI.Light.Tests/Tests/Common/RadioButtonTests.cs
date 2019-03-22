@@ -18,7 +18,6 @@ namespace JDI.Light.Tests.Tests.Common
         public void SelectRadioButton()
         {
             var toSelect = Colors.Blue.ToString();
-
             TestSite.Html5Page.ColorsRadioButton.RadioLocator = By.XPath("//label");
             TestSite.Html5Page.ColorsRadioButton.Select(toSelect);
 
