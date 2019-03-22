@@ -64,8 +64,13 @@ namespace JDI.Light.Elements.Composite
 
         public bool OptionsAreSelected(List<string> options)
         {
-            return Options.Where(x => x.IsSelected).All(x => options.Contains(x.Text)) 
+            return Options.Where(x => x.IsSelected).All(x => options.Contains(x.Text))
                    && options.All(text => GetFirstByText(text).IsSelected);
+        }
+
+        public bool OptionIsSelected(string option)
+        {
+            return Options.Where(x => x.IsSelected).Any(x => option.Equals(x.Text));
         }
 
         public void SelectOptions(List<string> options)
