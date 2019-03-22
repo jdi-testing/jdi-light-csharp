@@ -27,11 +27,6 @@ namespace JDI.Light.Elements.Common
 
         public string GetSelected()
         {
-            return _getSelected();
-        }
-
-        private string _getSelected()
-        {
             var els = WebElement.FindElements(RadioLocator);
             foreach (var element in els)
             {
