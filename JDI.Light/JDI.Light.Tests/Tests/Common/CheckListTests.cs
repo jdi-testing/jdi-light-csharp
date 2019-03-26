@@ -19,7 +19,6 @@ namespace JDI.Light.Tests.Tests.Common
         {
            var toCheck = new[] {"Water", "Wind"};
            TestSite.MetalsColorsPage.ElementsCheckList.Check(toCheck);
-            
 
            Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Wind: condition changed to true");
            Jdi.Assert.Contains(TestSite.ActionsLog.Texts[1], "Water: condition changed to true");
