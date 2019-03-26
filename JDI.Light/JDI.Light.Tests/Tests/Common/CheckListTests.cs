@@ -9,44 +9,49 @@ namespace JDI.Light.Tests.Tests.Common
         [SetUp]
         public void SetUp()
         {
-            TestSite.MetalsColorsPage.Open();
-            TestSite.MetalsColorsPage.CheckOpened();
-            TestSite.MetalsColorsPage.ElementsCheckList.ItemLocator = By.CssSelector(".checkbox > label");
+            TestSite.Html5Page.Open();
+            TestSite.Html5Page.CheckOpened();
+            TestSite.Html5Page.WeatherCheckList.CheckListLocator = By.CssSelector(".html-left > input");
+
+            string[] arr = {"hot", "cold", "rainy", "sunny-day"};
+            TestSite.Html5Page.WeatherCheckList.UncheckAll(arr);
         }
 
         [Test]
         public void CheckCheckList()
         {
-           var toCheck = new[] {"Water", "Wind"};
-           TestSite.MetalsColorsPage.ElementsCheckList.Check(toCheck);
-
-           Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Wind: condition changed to true");
-           Jdi.Assert.Contains(TestSite.ActionsLog.Texts[1], "Water: condition changed to true");
+            TestSite.Html5Page.WeatherCheckList.CheckListLocator = By.CssSelector(".html-left > label");
+            var toCheck = new[] {"Cold", "Sunny"};
+            TestSite.Html5Page.WeatherCheckList.Check(toCheck);
         }
 
         [Test]
         public void CheckByIndexes()
         {
-            var toCheck = new[] { 1, 3};
+            TestSite.Html5Page.WeatherCheckList.CheckListLocator = By.CssSelector(".html-left > label");
+            var toCheck = new[] { 4, 10};
             foreach (var index in toCheck)
             {
-                TestSite.MetalsColorsPage.ElementsCheckList.CheckListLocators.Add(
-                    By.CssSelector($".checkbox:nth-child({index.ToString()})"));
+                TestSite.Html5Page.WeatherCheckList.CheckListLocators.Add(
+                    By.CssSelector($"[name='checks-group']:nth-child({index.ToString()})"));
             }
-            TestSite.MetalsColorsPage.ElementsCheckList.Check(toCheck);
-
-            Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Wind: condition changed to true");
-            Jdi.Assert.Contains(TestSite.ActionsLog.Texts[1], "Water: condition changed to true");
+            TestSite.Html5Page.WeatherCheckList.Check(toCheck);
         }
 
         [Test]
         public void CheckUncheckTest()
         {
-            var toCheck = new[] { "Water", "Wind" };
-            TestSite.MetalsColorsPage.ElementsCheckList.Check(toCheck);
+            TestSite.Html5Page.WeatherCheckList.CheckListLocator = By.CssSelector(".html-left > label");
+            var toCheck = new[] { "Cold", "Sunny" };
+            TestSite.Html5Page.WeatherCheckList.Check(toCheck);
 
-            var toUncheck = new[] { "Water" };
-            TestSite.MetalsColorsPage.ElementsCheckList.Uncheck(toUncheck);
+            var toUncheck = new[] { "Cold" };
+            TestSite.Html5Page.WeatherCheckList.Uncheck(toUncheck);
+
+            string[] arr = { "hot", "cold", "rainy", "sunny-day" };
+            TestSite.Html5Page.WeatherCheckList.CheckListLocator = By.CssSelector(".html-left > input");
+            var checkedValues = TestSite.Html5Page.WeatherCheckList.GetChecked(arr);
+            Assert.AreEqual(checkedValues, new[] { "sunny-day" });
         }
     }
 }

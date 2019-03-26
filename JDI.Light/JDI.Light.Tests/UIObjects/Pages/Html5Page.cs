@@ -2,7 +2,6 @@
 using JDI.Light.Elements.Common;
 using JDI.Light.Elements.Composite;
 using JDI.Light.Interfaces.Common;
-using JDI.Light.Tests.UIObjects.Forms;
 
 namespace JDI.Light.Tests.UIObjects
 {
@@ -28,5 +27,8 @@ namespace JDI.Light.Tests.UIObjects
 
         [FindBy(Css = "div:nth-child(12) > div.html-left")]
         public RadioButton ColorsRadioButton { get; set; }
+
+        [FindBy(Css = "div:nth-child(11) > div.html-left")]
+        public CheckList WeatherCheckList { get; set; }
     }
 }

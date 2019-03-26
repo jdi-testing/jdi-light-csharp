@@ -61,11 +61,5 @@ namespace JDI.Light.Tests.UIObjects.Pages
 
         [FindBy(Css = "#metals input")]
         public ComboBox MetalsInputComboBox { get; set; }
-
-        [FindBy(Css = "#elements-checklist")]
-        public CheckList ElementsCheckList { get; set; }
-
-        [FindBy(Css = ".checkbox:nth-child(1)")]
-        public CheckList CheckListValues { get; set; }
     }
 }

@@ -13,12 +13,40 @@ namespace JDI.Light.Elements.Common
 
         public List<By> CheckListLocators { get; set; } = new List<By>();
 
+        private readonly Action<CheckList, string> _unCheckAll = (checkList, item) =>
+        {
+            var els = checkList.WebElement.FindElements(checkList.CheckListLocator);
+            var itemsList = els.FirstOrDefault(e => e.GetAttribute("id").Equals(item));
+            if (itemsList?.GetAttribute("checked") != null)
+            {
+                itemsList.Click();
+            }
+        };
+
+        private string[] _getAllSelected(Array values)
+        {
+            var selectedItems = new List<string>();
+            foreach (var value in values.ToStringArray())
+            {
+                var els = WebElement.FindElements(CheckListLocator);
+                var itemsList = els.FirstOrDefault(e => e.GetAttribute("id").Equals(value));
+                if (itemsList?.GetAttribute("checked") != null)
+                {
+                    selectedItems.Add(value);
+                }
+            }
+
+            selectedItems.Reverse();
+            return selectedItems.ToArray();
+        }
+
         public CheckList(By byLocator) : base(byLocator)
         {
         }
 
         public void Check(string[] values)
         {
+            ItemLocator = CheckListLocator;
             Select(values, this);
         }
 
@@ -36,28 +64,20 @@ namespace JDI.Light.Elements.Common
             Select(values, this);
         }
 
+        public void UncheckAll(Array allValues)
+        {
+            foreach (var value in allValues.ToStringArray())
+            {
+                Invoker.DoAction($"Unselect item '{string.Join(" -> ", value)}'",
+                    () => _unCheckAll.Invoke(this, value));
+            }
+        }
+
         public string[] GetChecked(Array values)
         {       
-            return _getSelected(values);
+            return _getAllSelected(values);
         }
         
         public bool Value { get; set; }
-
-        private string[] _getSelected(Array values)
-        {
-            var selectedItems = new List<string>();
-            foreach (var value in values.ToStringArray())
-            {
-                var els = WebElement.FindElements(CheckListLocator);
-                var itemsList = els.FirstOrDefault(e => e.Text.Equals(value));
-                if (itemsList?.GetAttribute("::after") != null)
-                {
-                    selectedItems.Add(value);
-                }
-            }
-
-            selectedItems.Reverse();
-            return selectedItems.ToArray();
-        }
     }
 }
