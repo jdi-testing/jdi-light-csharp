@@ -67,6 +67,7 @@
     <Compile Include="Attributes\NameAttribute.cs" />
     <Compile Include="Attributes\PageAttribute.cs" />
     <Compile Include="Attributes\SiteAttribute.cs" />
+    <Compile Include="Elements\Common\CheckList.cs" />
     <Compile Include="Elements\Common\ComboBox.cs" />
     <Compile Include="Elements\Common\RadioButton.cs" />
     <Compile Include="Elements\Complex\Table\Column.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Interfaces\Base\IVisible.cs" />
     <Compile Include="Interfaces\Common\IButton.cs" />
     <Compile Include="Interfaces\Common\ICheckBox.cs" />
+    <Compile Include="Interfaces\Common\ICheckList.cs" />
     <Compile Include="Interfaces\Common\IDataList.cs" />
     <Compile Include="Interfaces\Common\IDatePicker.cs" />
     <Compile Include="Interfaces\Common\IDropDown.cs" />
