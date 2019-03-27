@@ -62,7 +62,6 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Enums\Ages.cs" />
     <Compile Include="Enums\Colors.cs" />
-    <Compile Include="Enums\Elements.cs" />
     <Compile Include="Enums\Metals.cs" />
     <Compile Include="Enums\Odds.cs" />
     <Compile Include="Enums\Weather.cs" />

@@ -10,9 +10,7 @@ namespace JDI.Light.Elements.Common
         protected RadioButton(By byLocator) : base(byLocator)
         {
         }
-
-        public bool Value { get; set; }
-
+        
         public void Select(string value)
         {
             ItemLocator = RadioLocator;

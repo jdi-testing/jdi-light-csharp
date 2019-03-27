@@ -9,8 +9,6 @@ namespace JDI.Light.Elements.Common
         {
         }
         
-        public bool Value { get; set; }
-        
         public void Select(string value)
         {
             Click();

@@ -24,10 +24,20 @@ namespace JDI.Light.Elements.Common
             }
         };
 
-        private readonly Action<Selector> _selectByIndex = (selector) =>
+        private readonly Action<Selector, int> _selectByIndex = (selector, index) =>
         {
             var els = selector.WebElement.FindElements(selector.ItemLocator);
-            els.FirstOrDefault()?.Click();
+            try
+            {
+                var el = els[index];
+                el.Click();
+            }
+            catch (Exception e)
+            {
+                throw new ElementNotFoundException($"Can't find element with index - '{index}' to select. " + e.Message);
+
+            }
+
         };
 
         private readonly Func<Selector, string> _getSelected = (selector) => selector.Text;
@@ -45,7 +55,7 @@ namespace JDI.Light.Elements.Common
         public void Select(int index, Selector elem)
         {
             Invoker.DoAction($"Select item with index - '{string.Join(" -> ", index)}'",
-                () => _selectByIndex.Invoke(elem));
+                () => _selectByIndex.Invoke(elem, index));
         }
 
         public void Select(string[] values, Selector elem)
@@ -56,7 +66,17 @@ namespace JDI.Light.Elements.Common
                     () => _selectElementAction.Invoke(elem, value));
             }
         }
-        
+
+        public void Select(int[] indexes, Selector elem)
+        {
+            foreach (var index in indexes)
+            {
+                 Invoker.DoAction($"Select item with index - '{string.Join(" -> ", index)}'",
+                () => _selectByIndex.Invoke(elem, index));
+            }
+        }
+
+
         public string GetSelected(Selector elem)
         {
             return Invoker.DoActionWithResult("Get value", () => _getSelected.Invoke(elem));

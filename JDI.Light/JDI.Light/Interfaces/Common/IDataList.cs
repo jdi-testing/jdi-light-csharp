@@ -2,7 +2,7 @@
 
 namespace JDI.Light.Interfaces.Common
 {
-    public interface IDataList : IBaseUIElement, ISetValue<bool>
+    public interface IDataList : IBaseUIElement
     {
         void Expand();
         void Select(string value);

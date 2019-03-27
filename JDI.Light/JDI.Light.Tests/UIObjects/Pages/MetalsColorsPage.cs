@@ -47,9 +47,6 @@ namespace JDI.Light.Tests.UIObjects.Pages
         [FindBy(Css = "#metals")]
         public DataList MetalsDataList { get; set; }
 
-        [FindBy(Css = "#metals span.caret")]
-        public DataList MetalsDataListCaret { get; set; }
-
         [FindBy(Css = "#metals input")]
         public DataList MetalsInput { get; set; }
 

@@ -2,7 +2,7 @@
 
 namespace JDI.Light.Interfaces.Common
 {
-    public interface IRadioButton : IBaseUIElement, ISetValue<bool>
+    public interface IRadioButton : IBaseUIElement
     {
         void Select(string value);
         void Select(int index);

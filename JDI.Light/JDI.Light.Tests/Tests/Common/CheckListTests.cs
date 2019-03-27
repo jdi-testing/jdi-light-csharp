@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using JDI.Light.Exceptions;
+using NUnit.Framework;
 using OpenQA.Selenium;
 
 namespace JDI.Light.Tests.Tests.Common
@@ -15,43 +16,40 @@ namespace JDI.Light.Tests.Tests.Common
 
             string[] arr = {"hot", "cold", "rainy", "sunny-day"};
             TestSite.Html5Page.WeatherCheckList.UncheckAll(arr);
+            TestSite.Html5Page.WeatherCheckList.CheckListLocator = By.CssSelector(".html-left > label");
         }
 
         [Test]
         public void CheckCheckList()
         {
-            TestSite.Html5Page.WeatherCheckList.CheckListLocator = By.CssSelector(".html-left > label");
-            var toCheck = new[] {"Cold", "Sunny"};
-            TestSite.Html5Page.WeatherCheckList.Check(toCheck);
+            TestSite.Html5Page.WeatherCheckList.Check(new[] { "Cold", "Sunny" });
+            TestSite.Html5Page.WeatherCheckList.Uncheck("Cold");
         }
 
         [Test]
         public void CheckByIndexes()
         {
-            TestSite.Html5Page.WeatherCheckList.CheckListLocator = By.CssSelector(".html-left > label");
-            var toCheck = new[] { 4, 10};
-            foreach (var index in toCheck)
-            {
-                TestSite.Html5Page.WeatherCheckList.CheckListLocators.Add(
-                    By.CssSelector($"[name='checks-group']:nth-child({index.ToString()})"));
-            }
-            TestSite.Html5Page.WeatherCheckList.Check(toCheck);
+            TestSite.Html5Page.WeatherCheckList.Check(new[] { 1, 2, 3 });
+            TestSite.Html5Page.WeatherCheckList.Uncheck(2);
         }
 
         [Test]
-        public void CheckUncheckTest()
+        public void GetCheckedTest()
         {
-            TestSite.Html5Page.WeatherCheckList.CheckListLocator = By.CssSelector(".html-left > label");
-            var toCheck = new[] { "Cold", "Sunny" };
-            TestSite.Html5Page.WeatherCheckList.Check(toCheck);
+            TestSite.Html5Page.WeatherCheckList.Check(new[] { "Cold", "Sunny" });
 
-            var toUncheck = new[] { "Cold" };
-            TestSite.Html5Page.WeatherCheckList.Uncheck(toUncheck);
-
-            string[] arr = { "hot", "cold", "rainy", "sunny-day" };
             TestSite.Html5Page.WeatherCheckList.CheckListLocator = By.CssSelector(".html-left > input");
+            string[] arr = { "hot", "cold", "rainy", "sunny-day" };
             var checkedValues = TestSite.Html5Page.WeatherCheckList.GetChecked(arr);
-            Assert.AreEqual(checkedValues, new[] { "sunny-day" });
+            Assert.AreEqual(checkedValues, new[] { "sunny-day", "cold" });
+        }
+
+
+        [Test]
+        public void NegativeCheckListTest()
+        {
+            var toCheck = new[] { 1000 };
+            Assert.Throws<ElementNotFoundException>(() => TestSite.Html5Page.WeatherCheckList.Check(toCheck));
         }
     }
 }

@@ -9,7 +9,6 @@ namespace JDI.Light.Elements.Common
     public class MultiSelector : Selector
     {
         public By MultiItemLocator { get; set; }
-        public List<By> MultiItemLocators { get; set; } = new List<By>();
 
         private readonly Action<MultiSelector, string> _unselectAll = (multiSelector, item) =>
         {
@@ -33,28 +32,11 @@ namespace JDI.Light.Elements.Common
 
         public void Select(int[] indexes)
         {
-            for (var i = 0; i < indexes.Length; i++)
-            {
-                ItemLocator = MultiItemLocators[i];
-                Select(indexes[i], this);
-            }
+            ItemLocator = MultiItemLocator;
+            Select(indexes, this);
         }
 
         public string[] GetSelected(Array values)
-        {
-            return _getAllSelected(values);
-        }
-
-        public void UnselectAll(Array allValues)
-        {
-            foreach (var value in allValues.ToStringArray())
-            {
-                Invoker.DoAction($"Unselect item '{string.Join(" -> ", value)}'",
-                    () => _unselectAll.Invoke(this, value));
-            }
-        }
-        
-        private string[] _getAllSelected(Array values)
         {
             var selectedItems = new List<string>();
             foreach (var value in values.ToStringArray())
@@ -69,6 +51,15 @@ namespace JDI.Light.Elements.Common
 
             selectedItems.Reverse();
             return selectedItems.ToArray();
+        }
+
+        public void UnselectAll(Array allValues)
+        {
+            foreach (var value in allValues.ToStringArray())
+            {
+                Invoker.DoAction($"Unselect item '{string.Join(" -> ", value)}'",
+                    () => _unselectAll.Invoke(this, value));
+            }
         }
     }
 }

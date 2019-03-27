@@ -2,7 +2,7 @@
 
 namespace JDI.Light.Interfaces.Common
 {
-    public interface IDropDown : IBaseUIElement, ISetValue<bool>
+    public interface IDropDown : IBaseUIElement
     {
         void Select(string value);
         void Select(int index);
