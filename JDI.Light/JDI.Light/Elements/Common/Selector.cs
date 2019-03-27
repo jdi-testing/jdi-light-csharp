@@ -35,9 +35,7 @@ namespace JDI.Light.Elements.Common
             catch (Exception e)
             {
                 throw new ElementNotFoundException($"Can't find element with index - '{index}' to select. " + e.Message);
-
             }
-
         };
 
         private readonly Func<Selector, string> _getSelected = (selector) => selector.Text;
@@ -75,7 +73,6 @@ namespace JDI.Light.Elements.Common
                 () => _selectByIndex.Invoke(elem, index));
             }
         }
-
 
         public string GetSelected(Selector elem)
         {

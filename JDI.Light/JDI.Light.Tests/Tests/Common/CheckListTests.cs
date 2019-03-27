@@ -44,7 +44,6 @@ namespace JDI.Light.Tests.Tests.Common
             Assert.AreEqual(checkedValues, new[] { "sunny-day", "cold" });
         }
 
-
         [Test]
         public void NegativeCheckListTest()
         {
