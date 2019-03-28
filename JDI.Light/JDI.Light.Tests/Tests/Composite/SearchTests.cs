@@ -20,7 +20,7 @@ namespace JDI.Light.Tests.Tests.Composite
         {
             TestSite.Header.Search.SearchButton.Click();
             TestSite.Header.Search.Find("something");
-            Assert.True(Jdi.WebDriver.Url.Contains("complex-table.html"));
+            Assert.True(Jdi.WebDriver.Url.Contains("search.html"));
         }
     }
 }
