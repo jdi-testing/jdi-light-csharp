@@ -43,5 +43,13 @@ namespace JDI.Light.Tests.Tests.Common
             var setValue = TestSite.Html5Page.PartyTime.GetValue();
             Assert.AreEqual(setValue, "2000-01-01T12:00");
         }
+
+        [Test]
+        public void AutumnDateTimeTest()
+        {
+            TestSite.Html5Page.AutumnDateTime.SetDateTime("2019-W11");
+            var setValue = TestSite.Html5Page.AutumnDateTime.GetValue();
+            Assert.AreEqual(setValue, "2019-W11");
+        }
     }
 }

@@ -42,5 +42,8 @@ namespace JDI.Light.Tests.UIObjects
         
         [FindBy(Css = "#party-time")]
         public DateTimeSelector PartyTime { get; set; }
+
+        [FindBy(Css = "#autumn-week")]
+        public DateTimeSelector AutumnDateTime { get; set; }
     }
 }
