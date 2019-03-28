@@ -69,6 +69,7 @@
     <Compile Include="Attributes\SiteAttribute.cs" />
     <Compile Include="Elements\Common\CheckList.cs" />
     <Compile Include="Elements\Common\ComboBox.cs" />
+    <Compile Include="Elements\Common\DateTimeSelector.cs" />
     <Compile Include="Elements\Common\RadioButton.cs" />
     <Compile Include="Elements\Complex\Table\Column.cs" />
     <Compile Include="Elements\Complex\Table\DataClass.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Interfaces\Common\ICheckList.cs" />
     <Compile Include="Interfaces\Common\IDataList.cs" />
     <Compile Include="Interfaces\Common\IDatePicker.cs" />
+    <Compile Include="Interfaces\Common\IDateTimeSelector.cs" />
     <Compile Include="Interfaces\Common\IDropDown.cs" />
     <Compile Include="Interfaces\Common\IImage.cs" />
     <Compile Include="Interfaces\Common\ILabel.cs" />
