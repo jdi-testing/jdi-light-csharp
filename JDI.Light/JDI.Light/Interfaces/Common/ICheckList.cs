@@ -6,6 +6,7 @@ namespace JDI.Light.Interfaces.Common
 {
     public interface ICheckList : IBaseUIElement
     {
+        By CheckListLocator { get; set; }
         void Check(string[] values);
         void Check(string value);
         void Check(int[] indexes);
@@ -14,6 +15,7 @@ namespace JDI.Light.Interfaces.Common
         void Uncheck(string value);
         void Uncheck(int[] indexes);
         void Uncheck(int index);
+        void UncheckAll(Array allValues);
         string[] GetChecked(Array values);
     }
 }

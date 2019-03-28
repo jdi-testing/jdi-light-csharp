@@ -23,7 +23,11 @@ namespace JDI.Light.Settings
             {typeof(ILabel), typeof(Label)},
             {typeof(ICheckBox), typeof(CheckBox)},
             {typeof(IDatePicker), typeof(DatePicker)},
-            {typeof(ILink), typeof(Link)}
+            {typeof(ILink), typeof(Link)},
+            {typeof(ICheckList), typeof(CheckList) },
+            {typeof(IRadioButton), typeof(RadioButton) },
+            {typeof(IDropDown), typeof(DropDown) },
+            {typeof(IDataList), typeof(DataList) }
         };
 
         public static Type ClassFromInterface(Type clazz)
