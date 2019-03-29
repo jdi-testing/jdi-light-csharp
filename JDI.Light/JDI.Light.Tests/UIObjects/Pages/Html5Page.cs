@@ -32,18 +32,18 @@ namespace JDI.Light.Tests.UIObjects
         public ICheckList WeatherCheckList { get; set; }
 
         [FindBy(Css = "#booking-time")]
-        public DateTimeSelector BookingTime { get; set; }
+        public IDateTimeSelector BookingTime { get; set; }
 
         [FindBy(Css = "#month-date")]
-        public DateTimeSelector MonthOfHolidays { get; set; }
+        public IDateTimeSelector MonthOfHolidays { get; set; }
 
         [FindBy(Css = "#birth-date")]
-        public DateTimeSelector BirthDate { get; set; }
+        public IDateTimeSelector BirthDate { get; set; }
         
         [FindBy(Css = "#party-time")]
-        public DateTimeSelector PartyTime { get; set; }
+        public IDateTimeSelector PartyTime { get; set; }
 
         [FindBy(Css = "#autumn-week")]
-        public DateTimeSelector AutumnDateTime { get; set; }
+        public IDateTimeSelector AutumnDateTime { get; set; }
     }
 }

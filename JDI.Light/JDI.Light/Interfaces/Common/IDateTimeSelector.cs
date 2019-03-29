@@ -2,7 +2,7 @@
 
 namespace JDI.Light.Interfaces.Common
 {
-    public interface IDateTimeSelector
+    public interface IDateTimeSelector : IBaseUIElement
     {
         void SetDateTime(string value);
         string GetValue();
