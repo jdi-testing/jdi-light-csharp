@@ -45,5 +45,8 @@ namespace JDI.Light.Tests.UIObjects
 
         [FindBy(Css = "#autumn-week")]
         public IDateTimeSelector AutumnDateTime { get; set; }
+
+        [FindBy(Css = "#volume")]
+        public IRange VolumeRange { get; set; }
     }
 }
