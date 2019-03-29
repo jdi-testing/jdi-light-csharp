@@ -27,12 +27,10 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void SelectByIndex()
         {
-            const int indexToSelect = 2;
+            TestSite.MetalsColorsPage.ColorsDropDown.ItemLocator = By.CssSelector(".dropdown-menu > li > a");
+            TestSite.MetalsColorsPage.ColorsDropDown.Select(2);
 
-            TestSite.MetalsColorsPage.ColorsDropDown.ItemLocator = By.CssSelector(string.Format($"li:nth-child({indexToSelect.ToString()})"));
-            TestSite.MetalsColorsPage.ColorsDropDown.Select(indexToSelect);
-
-            Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Colors: value changed to Red");
+            Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Colors: value changed to Green");
         }
 
         [Test]

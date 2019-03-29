@@ -39,28 +39,22 @@ namespace JDI.Light.Tests.UIObjects.Pages
         public Summary SummaryBlock;
 
         [FindBy(Css = "#colors")]
-        public DropDown ColorsDropDown { get; set; }
+        public IDropDown ColorsDropDown { get; set; }
 
         [FindBy(Css = "#colors .filter-option")]
-        public DropDown ColorsDropDownText { get; set; }
+        public IDropDown ColorsDropDownText { get; set; }
 
         [FindBy(Css = "#metals")]
-        public DataList MetalsDataList { get; set; }
-
-        [FindBy(Css = "#metals span.caret")]
-        public DataList MetalsDataListCaret { get; set; }
+        public IDataList MetalsDataList { get; set; }
 
         [FindBy(Css = "#metals input")]
-        public DataList MetalsInput { get; set; }
+        public IDataList MetalsInput { get; set; }
 
         [FindBy(Css = "#submit-button")]
         public Button SubmitButton { get; set; }
 
         [FindBy(Css = "#metals")]
         public ComboBox MetalsComboBox { get; set; }
-
-        [FindBy(Css = "#metals span.caret")]
-        public ComboBox MetalsComboBoxCaret { get; set; }
 
         [FindBy(Css = "#metals input")]
         public ComboBox MetalsInputComboBox { get; set; }

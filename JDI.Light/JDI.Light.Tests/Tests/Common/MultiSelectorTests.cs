@@ -13,7 +13,7 @@ namespace JDI.Light.Tests.Tests.Common
         {
             TestSite.Html5Page.Open();
             TestSite.Html5Page.CheckOpened();
-            TestSite.Html5Page.AgeSelector.MultiItemLocator = By.XPath("//option");
+            TestSite.Html5Page.AgeSelector.MultiItemLocator = By.CssSelector("option");
             TestSite.Html5Page.AgeSelector.UnselectAll(Enum.GetValues(typeof(Ages)));
         }
 
@@ -31,16 +31,9 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void MultiSelectByIndexes()
         {
-            var indexesToSelect = new[] {1, 3};
-            foreach (var index in indexesToSelect)
-            {
-                TestSite.Html5Page.AgeSelector.MultiItemLocators.Add(
-                    By.CssSelector($"option:nth-child({index.ToString()})"));
-            }
-            TestSite.Html5Page.AgeSelector.Select(indexesToSelect);
-            
+            TestSite.Html5Page.AgeSelector.Select(new[] { 1, 4 });
             var selectedItems = TestSite.Html5Page.AgeSelector.GetSelected(Enum.GetValues(typeof(Ages)));
-            Assert.AreEqual(selectedItems, new[] {"Metalic", "Electro"});
+            Assert.AreEqual(selectedItems, new[] {"Wood", "Steam" });
         }
     }
 }

@@ -10,9 +10,7 @@ namespace JDI.Light.Elements.Common
         public DataList(By byLocator) : base(byLocator)
         {
         }
-
-        public bool Value { get; set; }
-
+        
         public void Expand()
         {
             FindElement(CaretLocator).Click();
