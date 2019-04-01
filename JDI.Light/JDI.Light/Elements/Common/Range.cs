@@ -1,4 +1,5 @@
-﻿using JDI.Light.Elements.Base;
+﻿using System;
+using JDI.Light.Elements.Base;
 using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
 
@@ -15,9 +16,28 @@ namespace JDI.Light.Elements.Common
             SetAttribute("value", value);
         }
 
+        public void SetRange(int value)
+        {
+            SetAttribute("value", value.ToString());
+        }
+
         public string GetValue()
         {
             return GetAttribute("value");
+        }
+
+        public int GetRange()
+        {
+            return Convert.ToInt32(GetAttribute("value"));
+        }
+        public int Min()
+        {
+            return Convert.ToInt32(GetAttribute("min"));
+        }
+
+        public int Max()
+        {
+            return Convert.ToInt32(GetAttribute("max"));
         }
     }
 }
