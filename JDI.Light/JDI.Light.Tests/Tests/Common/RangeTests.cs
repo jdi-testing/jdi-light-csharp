@@ -17,6 +17,7 @@ namespace JDI.Light.Tests.Tests.Common
         {
             TestSite.Html5Page.VolumeRange.SetRange("50");
             var setValue = TestSite.Html5Page.VolumeRange.GetValue();
+
             Assert.AreEqual(setValue, "50");
         }
     }
