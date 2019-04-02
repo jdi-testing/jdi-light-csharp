@@ -16,7 +16,7 @@ namespace JDI.Light.Elements.Common
             SetAttribute("value", value);
         }
 
-        public void SetRange(int value)
+        public void SetRange(double value)
         {
             SetAttribute("value", value.ToString());
         }
@@ -26,18 +26,18 @@ namespace JDI.Light.Elements.Common
             return GetAttribute("value");
         }
 
-        public int GetRange()
+        public double GetRange()
         {
-            return Convert.ToInt32(GetAttribute("value"));
+            return Convert.ToDouble(GetAttribute("value"));
         }
-        public int Min()
+        public double Min()
         {
-            return Convert.ToInt32(GetAttribute("min"));
+            return Convert.ToDouble(GetAttribute("min"));
         }
 
-        public int Max()
+        public double Max()
         {
-            return Convert.ToInt32(GetAttribute("max"));
+            return Convert.ToDouble(GetAttribute("max"));
         }
     }
 }

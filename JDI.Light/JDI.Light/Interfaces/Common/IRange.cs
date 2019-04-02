@@ -5,10 +5,10 @@ namespace JDI.Light.Interfaces.Common
     public interface IRange : IBaseUIElement
     {
         void SetRange(string value);
-        void SetRange(int value);
+        void SetRange(double value);
         string GetValue();
-        int GetRange();
-        int Min();
-        int Max();
+        double GetRange();
+        double Min();
+        double Max();
     }
 }
