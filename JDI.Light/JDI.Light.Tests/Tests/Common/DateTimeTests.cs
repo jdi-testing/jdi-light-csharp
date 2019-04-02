@@ -62,7 +62,6 @@ namespace JDI.Light.Tests.Tests.Common
 
             TestSite.Html5Page.AutumnDateTime.SetDateTime(_dateTime);
             var setValue = TestSite.Html5Page.AutumnDateTime.GetValue();
-
             Assert.AreEqual(setValue, "2019-W13");
         }
     }
