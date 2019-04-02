@@ -59,7 +59,10 @@ namespace JDI.Light.Factories
             var type = member.GetMemberType();
             var v = member.GetMemberValue(parent);
             var instance = (IBaseUIElement)v;
-            var element = (UIElement)instance ?? CreateInstance(type, member.GetFindsBy(), parent);
+
+            var locator = member.GetFindsBy() ?? By.Id(member.Name);
+          
+            var element = (UIElement)instance ?? CreateInstance(type, locator, parent);
             var checkedAttr = member.GetCustomAttribute<IsCheckedAttribute>(false);
             if (checkedAttr != null && typeof(ICheckBox).IsAssignableFrom(type))
             {
