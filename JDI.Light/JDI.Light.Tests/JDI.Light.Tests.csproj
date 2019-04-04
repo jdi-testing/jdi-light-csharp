@@ -68,12 +68,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\Common\CheckListTests.cs" />
     <Compile Include="Tests\Common\ComboBoxTests.cs" />
+    <Compile Include="Tests\Common\DateTimeTests.cs" />
     <Compile Include="Tests\Common\FileInputTests.cs" />
     <Compile Include="Tests\Common\DataListTests.cs" />
     <Compile Include="Tests\Common\DropDownTests.cs" />
     <Compile Include="Tests\Common\InputTests.cs" />
     <Compile Include="Tests\Common\MultiSelectorTests.cs" />
     <Compile Include="Tests\Common\RadioButtonTests.cs" />
+    <Compile Include="Tests\Common\RangeTests.cs" />
     <Compile Include="Tests\Common\TextAreaTests.cs" />
     <Compile Include="Tests\Common\UIElementTests.cs" />
     <Compile Include="Tests\Composite\MultiDropdownTests.cs" />

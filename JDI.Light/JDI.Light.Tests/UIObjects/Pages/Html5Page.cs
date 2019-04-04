@@ -30,5 +30,23 @@ namespace JDI.Light.Tests.UIObjects
 
         [FindBy(Css = "div:nth-child(11) > div.html-left")]
         public ICheckList WeatherCheckList { get; set; }
+
+        [FindBy(Css = "#booking-time")]
+        public IDateTimeSelector BookingTime { get; set; }
+
+        [FindBy(Css = "#month-date")]
+        public IDateTimeSelector MonthOfHolidays { get; set; }
+
+        [FindBy(Css = "#birth-date")]
+        public IDateTimeSelector BirthDate { get; set; }
+        
+        [FindBy(Css = "#party-time")]
+        public IDateTimeSelector PartyTime { get; set; }
+
+        [FindBy(Css = "#autumn-week")]
+        public IDateTimeSelector AutumnDateTime { get; set; }
+
+        [FindBy(Css = "#volume")]
+        public IRange VolumeRange { get; set; }
     }
 }
