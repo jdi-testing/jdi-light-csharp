@@ -18,8 +18,8 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void SelectDropDown()
         {
-            TestSite.MetalsColorsPage.colors.ItemLocator = By.XPath("//li/a");
-            TestSite.MetalsColorsPage.colors.Select(Colors.Blue.ToString());
+            TestSite.MetalsColorsPage.Colors.ItemLocator = By.XPath("//li/a");
+            TestSite.MetalsColorsPage.Colors.Select(Colors.Blue.ToString());
 
             Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Colors: value changed to Blue");
         }
@@ -27,8 +27,8 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void SelectByIndex()
         {
-            TestSite.MetalsColorsPage.colors.ItemLocator = By.CssSelector(".dropdown-menu > li > a");
-            TestSite.MetalsColorsPage.colors.Select(2);
+            TestSite.MetalsColorsPage.Colors.ItemLocator = By.CssSelector(".dropdown-menu > li > a");
+            TestSite.MetalsColorsPage.Colors.Select(2);
 
             Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Colors: value changed to Green");
         }
@@ -36,8 +36,8 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void GetSelectedTest()
         {
-            TestSite.MetalsColorsPage.colors.ItemLocator = By.XPath("//li/a");
-            TestSite.MetalsColorsPage.colors.Select(Colors.Blue.ToString());
+            TestSite.MetalsColorsPage.Colors.ItemLocator = By.XPath("//li/a");
+            TestSite.MetalsColorsPage.Colors.Select(Colors.Blue.ToString());
 
             var selected = TestSite.MetalsColorsPage.ColorsDropDownText.GetSelected();
             Assert.AreEqual(selected, "Blue");
@@ -46,8 +46,8 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void NegativeDropDownTest()
         {
-            TestSite.MetalsColorsPage.colors.ItemLocator = By.XPath("//li/a");
-            Assert.Throws<ElementNotFoundException>(() => TestSite.MetalsColorsPage.colors.Select("xxx"));
+            TestSite.MetalsColorsPage.Colors.ItemLocator = By.XPath("//li/a");
+            Assert.Throws<ElementNotFoundException>(() => TestSite.MetalsColorsPage.Colors.Select("xxx"));
         }
     }
 }

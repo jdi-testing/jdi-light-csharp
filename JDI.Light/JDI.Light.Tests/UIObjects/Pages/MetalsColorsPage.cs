@@ -39,7 +39,7 @@ namespace JDI.Light.Tests.UIObjects.Pages
         public Summary SummaryBlock;
 
      //  [FindBy(Css = "#colors")]
-        public IDropDown colors { get; set; }
+        public IDropDown Colors { get; set; }
 
         [FindBy(Css = "#colors .filter-option")]
         public IDropDown ColorsDropDownText { get; set; }
@@ -50,7 +50,7 @@ namespace JDI.Light.Tests.UIObjects.Pages
         [FindBy(Css = "#metals input")]
         public IDataList MetalsInput { get; set; }
 
-        [FindBy(Css = "#submit-button")]
+    //    [FindBy(Css = "#submit-button")]
         public Button SubmitButton { get; set; }
 
         [FindBy(Css = "#metals")]

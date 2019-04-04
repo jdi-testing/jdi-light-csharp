@@ -74,5 +74,37 @@ namespace JDI.Light.Extensions
                 result += (char.IsUpper(camel[i]) && !char.IsUpper(camel[i - 1]) ? " " : "") + camel[i];
             return result + camel[camel.Length - 1];
         }
+
+        public static string SplitHyphen(string value)
+        {
+            var text = _cleanupString(value);
+            if (string.IsNullOrEmpty(text))
+            {
+                return "";
+            }
+            else
+            {
+                var result = char.ToString(char.ToLower(text.ElementAt(0)));
+
+                for (var i = 1; i < text.Length; ++i)
+                {
+                    var symbol = text.ElementAt(i);
+                    if (char.IsUpper(symbol))
+                    {
+                        result = result + "-";
+                    }
+
+                    result = result + char.ToLower(symbol);
+                }
+
+                return result;
+            }
+        }
+
+        private static string _cleanupString(string text)
+        {
+            return string.IsNullOrEmpty(text) ? "" : text.Replace("[^a-zA-Z0-9]", "");
+        }
+
     }
 }

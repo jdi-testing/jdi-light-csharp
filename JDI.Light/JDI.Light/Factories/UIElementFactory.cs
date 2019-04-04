@@ -56,11 +56,12 @@ namespace JDI.Light.Factories
 
         public static IBaseElement GetInstanceElement(this IBaseElement parent, MemberInfo member)
         {
+            var smartLocators = new SmartLocators();
+
             var type = member.GetMemberType();
             var v = member.GetMemberValue(parent);
             var instance = (IBaseUIElement)v;
-
-            var locator = member.GetFindsBy() ?? By.Id(member.Name);
+            var locator = member.GetFindsBy() ?? smartLocators.SmartSearch(member);
           
             var element = (UIElement)instance ?? CreateInstance(type, locator, parent);
             var checkedAttr = member.GetCustomAttribute<IsCheckedAttribute>(false);
