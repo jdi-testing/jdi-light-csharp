@@ -18,7 +18,7 @@ namespace JDI.Light
         public static IAssert Assert;
         public static ILogger Logger;
         public static IKillDriver KillDriver;
-        public static List<ISmartLocators> SmartLocators;
+        public static List<ISmartLocators> SmartLocators { get; set; }
 
         static Jdi()
         {

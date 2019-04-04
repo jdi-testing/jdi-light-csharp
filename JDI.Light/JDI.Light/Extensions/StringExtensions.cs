@@ -105,6 +105,5 @@ namespace JDI.Light.Extensions
         {
             return string.IsNullOrEmpty(text) ? "" : text.Replace("[^a-zA-Z0-9]", "");
         }
-
     }
 }
