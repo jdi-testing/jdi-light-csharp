@@ -78,7 +78,7 @@ namespace JDI.Light.Extensions
 
         public static string SplitHyphen(string value)
         {
-            var text = _cleanupString(value);
+            var text = CleanupString(value);
             if (string.IsNullOrEmpty(text))
             {
                 return "";
@@ -100,7 +100,7 @@ namespace JDI.Light.Extensions
             return sb.ToString();
         }
 
-        private static string _cleanupString(string text)
+        private static string CleanupString(string text)
         {
             return string.IsNullOrEmpty(text) ? "" : text.Replace("[^a-zA-Z0-9]", "");
         }

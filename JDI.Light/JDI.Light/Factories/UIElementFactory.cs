@@ -15,7 +15,7 @@ namespace JDI.Light.Factories
 {
     public static class UIElementFactory
     {
-        public static IBaseUIElement CreateInstance(Type t, By locator, IBaseElement parent)
+        public static IBaseUIElement CreateInstance(Type t, By locator, IBaseElement parent, List<By> locators = null)
         {
             t = t.IsInterface ? MapInterfaceToElement.ClassFromInterface(t) : t;
             var constructors = t.GetConstructors(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
@@ -28,6 +28,7 @@ namespace JDI.Light.Factories
                     {
                         var instance = (UIElement)con.Invoke(new object[] {locator});
                         instance.DriverName = parent.DriverName;
+                        instance.SmartLocators = locators;
                         instance.Parent = parent;
                         return instance;
                     }
@@ -36,40 +37,6 @@ namespace JDI.Light.Factories
                         var instance = (UIElement)Activator.CreateInstance(t, true);
                         instance.DriverName = parent.DriverName;
                         instance.Locator = locator;
-                        instance.Parent = parent;
-                        return instance;
-                    }
-                }
-            }
-            throw new MissingMethodException($"Can't find correct constructor to create instance of type {t}");
-        }
-
-        public static IBaseUIElement CreateInstance(Type t, List<By> locators, IBaseElement parent)
-        {
-            t = t.IsInterface ? MapInterfaceToElement.ClassFromInterface(t) : t;
-            var constructors = t.GetConstructors(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
-            foreach (var con in constructors)
-            {
-                var conParams = con.GetParameters();
-                switch (conParams.Length)
-                {
-                    case 1:
-                    {
-                        foreach (var locator in locators)
-                        {
-                            var instance = (UIElement) con.Invoke(new object[] {locator});
-
-                            instance.DriverName = parent.DriverName;
-                            instance.Parent = parent;
-                            return instance;
-                        }
-
-                        return null;
-                    }
-                    case 0:
-                    {
-                        var instance = (UIElement)Activator.CreateInstance(t, true);
-                        instance.DriverName = parent.DriverName;
                         instance.SmartLocators = locators;
                         instance.Parent = parent;
                         return instance;
@@ -78,7 +45,7 @@ namespace JDI.Light.Factories
             }
             throw new MissingMethodException($"Can't find correct constructor to create instance of type {t}");
         }
-
+        
         public static T CreateInstance<T>(By locator, IBaseElement parent) where T : IBaseUIElement
         {
             return (T)CreateInstance(typeof(T), locator, parent);
@@ -93,29 +60,29 @@ namespace JDI.Light.Factories
 
         public static IBaseElement GetInstanceElement(this IBaseElement parent, MemberInfo member)
         {
-            var smartLocatorsList = new List<ISmartLocator> {new SmartLocatorById(), new SmartLocatorByCss()};
-
             var type = member.GetMemberType();
             var v = member.GetMemberValue(parent);
             var instance = (IBaseUIElement)v;
-            
-            var locators = new List<By>();
-            if (member.GetFindsBy() == null)
+
+            var defaultLocator = member.GetLocatorByAttribute();
+            var smartLocators = new List<By>();
+
+            if (defaultLocator != null)
             {
-                foreach (var smartLocator in smartLocatorsList)
-                {
-                    if (smartLocator.SmartSearch(member) != null)
-                    {
-                        locators.Add(smartLocator.SmartSearch(member));
-                    }
-                }
+                smartLocators.Add(defaultLocator);
             }
             else
             {
-                locators.Add(member.GetFindsBy());
+                foreach (var smartLocator in Jdi.SmartLocators)
+                {
+                    if (smartLocator.SmartSearch(member) != null)
+                    {
+                        smartLocators.Add(smartLocator.SmartSearch(member));
+                    }
+                }
             }
 
-            var element = (UIElement)instance ?? CreateInstance(type, locators, parent);
+            var element = (UIElement)instance ?? CreateInstance(type, defaultLocator, parent, smartLocators);
             var checkedAttr = member.GetCustomAttribute<IsCheckedAttribute>(false);
             if (checkedAttr != null && typeof(ICheckBox).IsAssignableFrom(type))
             {
