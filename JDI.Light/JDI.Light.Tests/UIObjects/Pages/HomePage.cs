@@ -14,5 +14,9 @@ namespace JDI.Light.Tests.UIObjects.Pages
 
         [FindBy(Css = ".main-txt")]
         public TextElement Text;
+        
+        public IImage UserIcon { get; set; }
+        
+        public Label MainTitle { get; set; }
     }
 }

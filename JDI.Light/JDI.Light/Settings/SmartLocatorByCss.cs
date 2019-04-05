@@ -1,20 +1,19 @@
-﻿using System.Collections.Generic;
-using System.Reflection;
+﻿using System.Reflection;
 using JDI.Light.Extensions;
 using OpenQA.Selenium;
 
 namespace JDI.Light.Settings
 {
-    public class SmartLocators : ISmartLocators
+    public class SmartLocatorByCss : ISmartLocator
     {
-        public List<string> SmartSearchLocators = new List<string>();
-        
+        public string SmartSearchLocator { get; set; }
         public string SmartSearchName(string name) => StringExtensions.SplitHyphen(name);
 
         public By SmartSearch(MemberInfo member)
         {
+            SmartSearchLocator = ".{0}";
             var smartSearchName = SmartSearchName(member.Name);
-            return By.Id(smartSearchName);
+            return By.CssSelector(string.Format(SmartSearchLocator, smartSearchName));
         }
     }
 }

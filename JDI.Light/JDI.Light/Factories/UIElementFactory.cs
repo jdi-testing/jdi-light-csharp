@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using JDI.Light.Attributes;
 using JDI.Light.Elements.Base;
@@ -42,6 +44,41 @@ namespace JDI.Light.Factories
             throw new MissingMethodException($"Can't find correct constructor to create instance of type {t}");
         }
 
+        public static IBaseUIElement CreateInstance(Type t, List<By> locators, IBaseElement parent)
+        {
+            t = t.IsInterface ? MapInterfaceToElement.ClassFromInterface(t) : t;
+            var constructors = t.GetConstructors(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+            foreach (var con in constructors)
+            {
+                var conParams = con.GetParameters();
+                switch (conParams.Length)
+                {
+                    case 1:
+                    {
+                        foreach (var locator in locators)
+                        {
+                            var instance = (UIElement) con.Invoke(new object[] {locator});
+
+                            instance.DriverName = parent.DriverName;
+                            instance.Parent = parent;
+                            return instance;
+                        }
+
+                        return null;
+                    }
+                    case 0:
+                    {
+                        var instance = (UIElement)Activator.CreateInstance(t, true);
+                        instance.DriverName = parent.DriverName;
+                        instance.SmartLocators = locators;
+                        instance.Parent = parent;
+                        return instance;
+                    }
+                }
+            }
+            throw new MissingMethodException($"Can't find correct constructor to create instance of type {t}");
+        }
+
         public static T CreateInstance<T>(By locator, IBaseElement parent) where T : IBaseUIElement
         {
             return (T)CreateInstance(typeof(T), locator, parent);
@@ -56,14 +93,29 @@ namespace JDI.Light.Factories
 
         public static IBaseElement GetInstanceElement(this IBaseElement parent, MemberInfo member)
         {
-            var smartLocators = new SmartLocators();
+            var smartLocatorsList = new List<ISmartLocator> {new SmartLocatorById(), new SmartLocatorByCss()};
 
             var type = member.GetMemberType();
             var v = member.GetMemberValue(parent);
             var instance = (IBaseUIElement)v;
-            var locator = member.GetFindsBy() ?? smartLocators.SmartSearch(member);
-          
-            var element = (UIElement)instance ?? CreateInstance(type, locator, parent);
+            
+            var locators = new List<By>();
+            if (member.GetFindsBy() == null)
+            {
+                foreach (var smartLocator in smartLocatorsList)
+                {
+                    if (smartLocator.SmartSearch(member) != null)
+                    {
+                        locators.Add(smartLocator.SmartSearch(member));
+                    }
+                }
+            }
+            else
+            {
+                locators.Add(member.GetFindsBy());
+            }
+
+            var element = (UIElement)instance ?? CreateInstance(type, locators, parent);
             var checkedAttr = member.GetCustomAttribute<IsCheckedAttribute>(false);
             if (checkedAttr != null && typeof(ICheckBox).IsAssignableFrom(type))
             {

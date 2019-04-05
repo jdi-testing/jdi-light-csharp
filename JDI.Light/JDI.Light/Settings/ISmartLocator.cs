@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Reflection;
+﻿using System.Reflection;
 using OpenQA.Selenium;
 
 namespace JDI.Light.Settings
 {
-    public interface ISmartLocators
+    public interface ISmartLocator
     {
+        string SmartSearchLocator { get; set; }
         string SmartSearchName(string name);
         By SmartSearch(MemberInfo member);
     }

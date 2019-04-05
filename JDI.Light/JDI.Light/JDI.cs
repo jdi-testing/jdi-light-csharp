@@ -18,7 +18,7 @@ namespace JDI.Light
         public static IAssert Assert;
         public static ILogger Logger;
         public static IKillDriver KillDriver;
-        public static List<ISmartLocators> SmartLocators { get; set; }
+        public static List<ISmartLocator> SmartLocators { get; set; }
 
         static Jdi()
         {
@@ -27,17 +27,14 @@ namespace JDI.Light
         }
 
         public static void Init(IAssert assert = null, ILogger logger = null, 
-            Timeouts timeouts = null, IDriverFactory<IWebDriver> driverFactory = null, List<ISmartLocators> smartLocators = null)
+            Timeouts timeouts = null, IDriverFactory<IWebDriver> driverFactory = null, List<ISmartLocator> smartLocators = null)
         {
             Assert = assert ?? new BaseAsserter();
             Logger = logger ?? new ConsoleLogger();
             Assert.Logger = Logger;
             DriverFactory = driverFactory ?? new WebDriverFactory();
             Timeouts = timeouts ?? new Timeouts();
-            SmartLocators = smartLocators ?? new List<ISmartLocators>();
-            
-            var smartLocator = new SmartLocators();
-            smartLocator.SmartSearchLocators.Add("#%s"/*, "[ui=%s]", "[qa=%s]", "[name=%s]"*/);
+            SmartLocators = smartLocators ?? new List<ISmartLocator>{new SmartLocatorById(), new SmartLocatorByCss()};
         }
 
         public static T InitSite<T>() where T : IWebSite, new()

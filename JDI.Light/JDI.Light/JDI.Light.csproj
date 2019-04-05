@@ -128,8 +128,9 @@
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Enums\LogLevels.cs" />
-    <Compile Include="Settings\ISmartLocators.cs" />
-    <Compile Include="Settings\SmartLocators.cs" />
+    <Compile Include="Settings\ISmartLocator.cs" />
+    <Compile Include="Settings\SmartLocatorByCss.cs" />
+    <Compile Include="Settings\SmartLocatorById.cs" />
     <Compile Include="Utils\BaseAsserter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Factories\WebDriverFactory.cs" />
