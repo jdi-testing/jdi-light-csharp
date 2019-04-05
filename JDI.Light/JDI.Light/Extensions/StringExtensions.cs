@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace JDI.Light.Extensions
@@ -82,23 +83,21 @@ namespace JDI.Light.Extensions
             {
                 return "";
             }
-            else
+
+            var sb = new StringBuilder();
+            sb.Append(char.ToString(char.ToLower(text.ElementAt(0))));
+
+            for (var i = 1; i < text.Length; ++i)
             {
-                var result = char.ToString(char.ToLower(text.ElementAt(0)));
-
-                for (var i = 1; i < text.Length; ++i)
+                var symbol = text.ElementAt(i);
+                if (char.IsUpper(symbol))
                 {
-                    var symbol = text.ElementAt(i);
-                    if (char.IsUpper(symbol))
-                    {
-                        result = result + "-";
-                    }
-
-                    result = result + char.ToLower(symbol);
+                    sb.Append("-");
                 }
-
-                return result;
+                sb.Append(char.ToLower(symbol));
             }
+
+            return sb.ToString();
         }
 
         private static string _cleanupString(string text)
