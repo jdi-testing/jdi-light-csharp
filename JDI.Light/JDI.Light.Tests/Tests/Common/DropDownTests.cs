@@ -12,29 +12,40 @@ namespace JDI.Light.Tests.Tests.Common
         {
             TestSite.MetalsColorsPage.Open();
             TestSite.MetalsColorsPage.CheckOpened();
+            TestSite.MetalsColorsPage.ColorsDropDown.Expand();
         }
 
         [Test]
-        public void SelectDropDown()
+        public void GetValueTest()
         {
-            TestSite.MetalsColorsPage.ColorsDropDown.Expand();
+            var selected = TestSite.MetalsColorsPage.ColorsDropDown.GetSelected();
+            Assert.AreEqual(selected, "Colors");
+        }
+
+        [Test]
+        public void SelectTest()
+        {
             TestSite.MetalsColorsPage.ColorsDropDown.Select(Colors.Blue.ToString());
             Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Colors: value changed to Blue");
         }
 
         [Test]
-        public void SelectByIndex()
+        public void SelectEnumTest()
         {
-            TestSite.MetalsColorsPage.ColorsDropDown.Expand();
-            TestSite.MetalsColorsPage.ColorsDropDown.Select(2);
+            TestSite.MetalsColorsPage.ColorsDropDown.Select(Colors.Blue);
+            Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Colors: value changed to Blue");
+        }
 
+        [Test]
+        public void SelectNumTest()
+        {
+            TestSite.MetalsColorsPage.ColorsDropDown.Select(2);
             Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Colors: value changed to Green");
         }
 
         [Test]
         public void GetSelectedTest()
         {
-            TestSite.MetalsColorsPage.ColorsDropDown.Expand();
             TestSite.MetalsColorsPage.ColorsDropDown.Select(Colors.Blue.ToString());
             var selected = TestSite.MetalsColorsPage.ColorsDropDown.GetSelected();
             Assert.AreEqual(selected, "Blue");

@@ -1,4 +1,5 @@
-﻿using JDI.Light.Interfaces.Common;
+﻿using System;
+using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Common
@@ -35,6 +36,15 @@ namespace JDI.Light.Elements.Common
                 ItemLocator = By.CssSelector(List);
             }
             Select(value, this);
+        }
+
+        public void Select(Enum value)
+        {
+            if (List != null)
+            {
+                ItemLocator = By.CssSelector(List);
+            }
+            Select(value.ToString(), this);
         }
 
         public void Select(int index)

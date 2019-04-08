@@ -1,4 +1,5 @@
-﻿using JDI.Light.Interfaces.Base;
+﻿using System;
+using JDI.Light.Interfaces.Base;
 using OpenQA.Selenium;
 
 namespace JDI.Light.Interfaces.Common
@@ -12,6 +13,7 @@ namespace JDI.Light.Interfaces.Common
 
         void Expand();
         void Select(string value);
+        void Select(Enum value);
         void Select(int index);
         string GetSelected();
     }
