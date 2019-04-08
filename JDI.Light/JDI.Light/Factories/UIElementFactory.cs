@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using JDI.Light.Attributes;
 using JDI.Light.Elements.Base;
@@ -13,7 +15,7 @@ namespace JDI.Light.Factories
 {
     public static class UIElementFactory
     {
-        public static IBaseUIElement CreateInstance(Type t, By locator, IBaseElement parent)
+        public static IBaseUIElement CreateInstance(Type t, By locator, IBaseElement parent, List<By> locators = null)
         {
             t = t.IsInterface ? MapInterfaceToElement.ClassFromInterface(t) : t;
             var constructors = t.GetConstructors(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
@@ -26,6 +28,7 @@ namespace JDI.Light.Factories
                     {
                         var instance = (UIElement)con.Invoke(new object[] {locator});
                         instance.DriverName = parent.DriverName;
+                        instance.SmartLocators = locators;
                         instance.Parent = parent;
                         return instance;
                     }
@@ -34,6 +37,7 @@ namespace JDI.Light.Factories
                         var instance = (UIElement)Activator.CreateInstance(t, true);
                         instance.DriverName = parent.DriverName;
                         instance.Locator = locator;
+                        instance.SmartLocators = locators;
                         instance.Parent = parent;
                         return instance;
                     }
@@ -41,7 +45,7 @@ namespace JDI.Light.Factories
             }
             throw new MissingMethodException($"Can't find correct constructor to create instance of type {t}");
         }
-
+        
         public static T CreateInstance<T>(By locator, IBaseElement parent) where T : IBaseUIElement
         {
             return (T)CreateInstance(typeof(T), locator, parent);
@@ -59,20 +63,31 @@ namespace JDI.Light.Factories
             var type = member.GetMemberType();
             var v = member.GetMemberValue(parent);
             var instance = (IBaseUIElement)v;
-
-            By locator, value = null, list = null, expand = null;
-
+            
+            var defaultLocator = member.GetLocatorByAttribute();
+            var smartLocators = new List<By>();
             var jDropdown = member.GetCustomAttribute<JDropDown>(false);
+            
+            if (defaultLocator != null)
+            {
+                smartLocators.Add(defaultLocator);
+            }
+
             if (jDropdown != null)
             {
-                locator = By.CssSelector(jDropdown.Root());
+                defaultLocator = By.CssSelector(jDropdown.Root());
             }
             else
             {
-                locator = member.GetFindsBy();
+                foreach (var smartLocator in Jdi.SmartLocators)
+                {
+                    if (smartLocator.SmartSearch(member) != null)
+                    {
+                        smartLocators.Add(smartLocator.SmartSearch(member));
+                    }
+                }
             }
-
-            var element = (UIElement)instance ?? CreateInstance(type, locator, parent);
+            var element = (UIElement)instance ?? CreateInstance(type, defaultLocator, parent, smartLocators);
 
             var checkedAttr = member.GetCustomAttribute<IsCheckedAttribute>(false);
             if (checkedAttr != null && typeof(ICheckBox).IsAssignableFrom(type))
@@ -86,8 +101,6 @@ namespace JDI.Light.Factories
                 var dropDown = (DropDown)element;
                 dropDown.Setup((jDropdown.Value()), jDropdown.List(), jDropdown.Expand());
             }
-
-
             return element;
         }
     }

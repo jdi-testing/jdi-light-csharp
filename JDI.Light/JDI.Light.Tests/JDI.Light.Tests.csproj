@@ -81,6 +81,7 @@
     <Compile Include="Tests\Composite\MultiDropdownTests.cs" />
     <Compile Include="Tests\Composite\AlertTests.cs" />
     <Compile Include="Tests\Composite\SectionTests.cs" />
+    <Compile Include="Tests\Core\SmartLocatorsTests.cs" />
     <Compile Include="Tests\Core\WebDriverFactoryTests.cs" />
     <Compile Include="UIObjects\Forms\LoginFormClient.cs" />
     <Compile Include="UIObjects\Pages\BasePage.cs" />

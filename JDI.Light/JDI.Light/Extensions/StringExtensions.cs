@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace JDI.Light.Extensions
@@ -73,6 +74,35 @@ namespace JDI.Light.Extensions
             for (var i = 1; i < camel.Length - 1; i++)
                 result += (char.IsUpper(camel[i]) && !char.IsUpper(camel[i - 1]) ? " " : "") + camel[i];
             return result + camel[camel.Length - 1];
+        }
+
+        public static string SplitHyphen(string value)
+        {
+            var text = CleanupString(value);
+            if (string.IsNullOrEmpty(text))
+            {
+                return "";
+            }
+
+            var sb = new StringBuilder();
+            sb.Append(char.ToString(char.ToLower(text.ElementAt(0))));
+
+            for (var i = 1; i < text.Length; ++i)
+            {
+                var symbol = text.ElementAt(i);
+                if (char.IsUpper(symbol))
+                {
+                    sb.Append("-");
+                }
+                sb.Append(char.ToLower(symbol));
+            }
+
+            return sb.ToString();
+        }
+
+        private static string CleanupString(string text)
+        {
+            return string.IsNullOrEmpty(text) ? "" : text.Replace("[^a-zA-Z0-9]", "");
         }
     }
 }
