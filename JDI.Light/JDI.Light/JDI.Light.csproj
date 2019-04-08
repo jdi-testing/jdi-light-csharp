@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Asserts\TableAssert.cs" />
     <Compile Include="Attributes\ByText.cs" />
+    <Compile Include="Attributes\JDropDown.cs" />
     <Compile Include="Attributes\XPathAttribute.cs" />
     <Compile Include="Attributes\CssAttribute.cs" />
     <Compile Include="Attributes\IsCheckedAttribute.cs" />

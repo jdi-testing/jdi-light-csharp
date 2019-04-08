@@ -59,13 +59,35 @@ namespace JDI.Light.Factories
             var type = member.GetMemberType();
             var v = member.GetMemberValue(parent);
             var instance = (IBaseUIElement)v;
-            var element = (UIElement)instance ?? CreateInstance(type, member.GetFindsBy(), parent);
+
+            By locator, value = null, list = null, expand = null;
+
+            var jDropdown = member.GetCustomAttribute<JDropDown>(false);
+            if (jDropdown != null)
+            {
+                locator = By.CssSelector(jDropdown.Root());
+            }
+            else
+            {
+                locator = member.GetFindsBy();
+            }
+
+            var element = (UIElement)instance ?? CreateInstance(type, locator, parent);
+
             var checkedAttr = member.GetCustomAttribute<IsCheckedAttribute>(false);
             if (checkedAttr != null && typeof(ICheckBox).IsAssignableFrom(type))
             {
                 var checkBox = (CheckBox)element;
                 checkBox.SetIsCheckedFunc(checkedAttr.CheckedDelegate);
             }
+
+            if (jDropdown != null)
+            {
+                var dropDown = (DropDown)element;
+                dropDown.Setup((jDropdown.Value()), jDropdown.List(), jDropdown.Expand());
+            }
+
+
             return element;
         }
     }
