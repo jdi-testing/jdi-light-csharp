@@ -81,7 +81,6 @@ namespace JDI.Light.Factories
                     }
                 }
             }
-
             var element = (UIElement)instance ?? CreateInstance(type, defaultLocator, parent, smartLocators);
             var checkedAttr = member.GetCustomAttribute<IsCheckedAttribute>(false);
             if (checkedAttr != null && typeof(ICheckBox).IsAssignableFrom(type))
