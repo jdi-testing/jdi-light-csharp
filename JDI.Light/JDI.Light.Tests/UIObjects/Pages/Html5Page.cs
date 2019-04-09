@@ -52,5 +52,10 @@ namespace JDI.Light.Tests.UIObjects
         public IDropDown DressCode { get; set; }
 
         public IDropDown DisabledDropdown { get; set; }
+
+        
+        public IDataList IceCream { get; set; }
+        
+        public IDataList IceCreamFlavors { get; set; }
     }
 }
