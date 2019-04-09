@@ -7,28 +7,31 @@ namespace JDI.Light.Elements.Common
 {
     public class DropDown : Selector, IDropDown
     {
+        public SelectElement SelectElement { get; }
+
         public DropDown(By byLocator) : base(byLocator)
         {
+            SelectElement = new SelectElement(this);
         }
 
         public void Select(string value)
         {
-            new SelectElement(this).SelectByText(value);
+            SelectElement.SelectByText(value);
         }
 
         public void Select(Enum value)
         {
-            new SelectElement(this).SelectByText(value.ToString());
+            SelectElement.SelectByText(value.ToString());
         }
 
         public void Select(int index)
         {
-            new SelectElement(this).SelectByIndex(index);
+            SelectElement.SelectByIndex(index);
         }
 
         public string GetSelected()
         {
-            return new SelectElement(this).SelectedOption.Text;
+            return SelectElement.SelectedOption.Text;
         }
     }
 }
