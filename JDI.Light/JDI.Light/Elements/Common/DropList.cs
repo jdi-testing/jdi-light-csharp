@@ -16,9 +16,20 @@ namespace JDI.Light.Elements.Common
       
         public void Setup(string value, string list, string expand)
         {
-            if (value != null) Value = value;
-            if (list != null) List = list;
-            if (expand != null) Expander = expand;
+            if (value != null)
+            {
+                Value = value;
+            }
+
+            if (list != null)
+            {
+                List = list;
+            }
+
+            if (expand != null)
+            {
+                Expander = expand;
+            }
         }
 
         public void Expand()
