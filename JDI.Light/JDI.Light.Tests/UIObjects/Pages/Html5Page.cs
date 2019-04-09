@@ -48,5 +48,9 @@ namespace JDI.Light.Tests.UIObjects
 
         [FindBy(Css = "#volume")]
         public IRange VolumeRange { get; set; }
+
+        public IDropDown DressCode { get; set; }
+
+        public IDropDown DisabledDropdown { get; set; }
     }
 }

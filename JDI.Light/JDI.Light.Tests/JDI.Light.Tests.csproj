@@ -62,6 +62,7 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Enums\Ages.cs" />
     <Compile Include="Enums\Colors.cs" />
+    <Compile Include="Enums\DressCode.cs" />
     <Compile Include="Enums\Metals.cs" />
     <Compile Include="Enums\Odds.cs" />
     <Compile Include="Enums\Weather.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Tests\Common\CheckListTests.cs" />
     <Compile Include="Tests\Common\ComboBoxTests.cs" />
     <Compile Include="Tests\Common\DateTimeTests.cs" />
+    <Compile Include="Tests\Common\DropListTests.cs" />
     <Compile Include="Tests\Common\FileInputTests.cs" />
     <Compile Include="Tests\Common\DataListTests.cs" />
     <Compile Include="Tests\Common\DropDownTests.cs" />

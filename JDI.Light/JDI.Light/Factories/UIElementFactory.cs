@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using JDI.Light.Attributes;
 using JDI.Light.Elements.Base;
@@ -98,8 +97,8 @@ namespace JDI.Light.Factories
 
             if (jDropdown != null)
             {
-                var dropDown = (DropDown)element;
-                dropDown.Setup((jDropdown.Value()), jDropdown.List(), jDropdown.Expand());
+                var dropList = (DropList)element;
+                dropList.Setup((jDropdown.Value()), jDropdown.List(), jDropdown.Expand());
             }
             return element;
         }
