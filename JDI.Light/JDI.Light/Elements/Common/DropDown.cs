@@ -7,11 +7,10 @@ namespace JDI.Light.Elements.Common
 {
     public class DropDown : Selector, IDropDown
     {
-        public SelectElement SelectElement { get; }
+        public SelectElement SelectElement => new SelectElement(this); 
 
         public DropDown(By byLocator) : base(byLocator)
         {
-            SelectElement = new SelectElement(this);
         }
 
         public void Select(string value)
