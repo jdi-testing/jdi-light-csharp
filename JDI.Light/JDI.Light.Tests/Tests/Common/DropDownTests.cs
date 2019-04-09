@@ -61,6 +61,7 @@ namespace JDI.Light.Tests.Tests.Common
             }
             catch (Exception ignore)
             {
+                Jdi.Logger.Info($"Test for DisabledDropdown passed. Exception-{ignore} was thrown.");
             }
             Assert.AreEqual(TestSite.Html5Page.DisabledDropdown.GetSelected(), "Disabled");
         }
