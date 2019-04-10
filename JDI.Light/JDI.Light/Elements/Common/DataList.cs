@@ -1,40 +1,39 @@
-﻿using JDI.Light.Interfaces.Common;
+﻿using System;
+using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Common
 {
     public class DataList : Selector, IDataList
     {
-        public By CaretLocator { get; set; }
-
         public DataList(By byLocator) : base(byLocator)
         {
         }
         
-        public void Expand()
+        public void Select(string text)
         {
-            FindElement(CaretLocator).Click();
+            SetText(text);
         }
 
-        public void Select(string value)
+        public void Select(Enum value)
         {
-            Select(value, this);
+            SetText(value.ToString());
         }
 
         public void Select(int index)
         {
-            Select(index, this);
-        }
-        
-        public string GetSelected()
-        {
-            return GetSelected(this);
+            // TODO: Select by index
         }
 
-        public void Input(string text)
+        public string GetValue()
         {
-            Clear();
-            Invoker.DoActionWithWait($"Input text '{text}' in text field", () => WebElement.SendKeys(text));
+            return WebElement.GetAttribute("value");
+        }
+
+        private void SetText(string text)
+        {
+            var str = "value='" + text + "'";
+            JsExecutor.ExecuteScript("arguments[0]." + str + ";", WebElement);
         }
     }
 }

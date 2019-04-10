@@ -10,35 +10,29 @@ namespace JDI.Light.Tests.Tests.Common
         [SetUp]
         public void SetUp()
         {
-            TestSite.MetalsColorsPage.Open();
-            TestSite.MetalsColorsPage.CheckOpened();
-            TestSite.MetalsColorsPage.MetalsComboBox.CaretLocator = By.CssSelector("#metals span.caret");
+            TestSite.Html5Page.Open();
+            TestSite.Html5Page.CheckOpened();
+            TestSite.Html5Page.IceCreamComboBox.Select("Coconut");
         }
 
         [Test]
-        public void SelectComboBox()
+        public void GetValueTest()
         {
-            TestSite.MetalsColorsPage.MetalsComboBox.Expand();
-            TestSite.MetalsColorsPage.MetalsComboBox.ItemLocator = By.XPath("//li/a");
-            TestSite.MetalsColorsPage.MetalsComboBox.Select(Metals.Bronze.ToString());
-            Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Metals: value changed to Bronze");
+            Assert.AreEqual(TestSite.Html5Page.IceCreamComboBox.GetValue(), "Coconut");
         }
 
         [Test]
-        public void SelectByIndex()
+        public void SelectTest()
         {
-            TestSite.MetalsColorsPage.MetalsComboBox.Expand();
-            TestSite.MetalsColorsPage.MetalsComboBox.ItemLocator = By.CssSelector(".dropdown-menu > li > a");
-            TestSite.MetalsColorsPage.MetalsComboBox.Select(2);
-            Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Metals: value changed to Silver");
+            TestSite.Html5Page.IceCream.Select("Chocolate");
+            Assert.AreEqual(TestSite.Html5Page.IceCreamComboBox.GetValue(), "Chocolate");
         }
 
         [Test]
-        public void FillComboBox()
+        public void SelectEnumTest()
         {
-            TestSite.MetalsColorsPage.MetalsInputComboBox.Input("My Metal");
-            TestSite.MetalsColorsPage.SubmitButton.Click();
-            Jdi.Assert.Contains(TestSite.ActionsLog.Texts[1], "Metals: value changed to My Metal");
+            TestSite.Html5Page.IceCream.Select(IceCream.Strawberry);
+            Assert.AreEqual(TestSite.Html5Page.IceCreamComboBox.GetValue(), "Strawberry");
         }
     }
 }
