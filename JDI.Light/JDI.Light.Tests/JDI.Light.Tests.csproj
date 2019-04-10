@@ -73,6 +73,7 @@
     <Compile Include="Tests\Common\DataListTests.cs" />
     <Compile Include="Tests\Common\DropDownTests.cs" />
     <Compile Include="Tests\Common\InputTests.cs" />
+    <Compile Include="Tests\Common\JDIPerformanceTests.cs" />
     <Compile Include="Tests\Common\MultiSelectorTests.cs" />
     <Compile Include="Tests\Common\RadioButtonTests.cs" />
     <Compile Include="Tests\Common\RangeTests.cs" />
