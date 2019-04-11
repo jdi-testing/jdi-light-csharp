@@ -35,9 +35,9 @@ namespace JDI.Light.Asserts
             return this;
         }
 
-        public TableAssert Size(int size)
+        public TableAssert Size(int expectedSize)
         {
-            Assert.AreEquals(size, TableSize);
+            Assert.AreEquals(expectedSize, TableSize);
             return this;
         }
 
