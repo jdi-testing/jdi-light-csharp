@@ -6,9 +6,12 @@ namespace JDI.Light.Interfaces.Common
     public interface IDateTimeSelector : IBaseUIElement
     {
         string Format { get; set; }
-        void SetDateTime(string value);
+        string Value();
+        string Min();
+        string Max();
+        void SetDateTime(string dateTime);
+
         void SetDateTime(DateTime dateTime);
-        string GetValue();
         DateTime GetDateTime();
     }
 }

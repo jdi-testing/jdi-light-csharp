@@ -10,25 +10,41 @@ namespace JDI.Light.Tests.Tests.Common
         {
             TestSite.Html5Page.Open();
             TestSite.Html5Page.CheckOpened();
+            TestSite.Html5Page.Volume.SetRange(90);
+        }
+        [Test]
+        public void GetValueTest()
+        {
+            Assert.AreEqual(TestSite.Html5Page.DisabledRange.GetRange(), 50);
+        }
+        [Test]
+        public void MinTest()
+        {
+            Assert.AreEqual(TestSite.Html5Page.Volume.Min(), 10);
+        }
+        [Test]
+        public void MaxTest()
+        {
+            Assert.AreEqual(TestSite.Html5Page.Volume.Max(), 100);
+        }
+        [Test]
+        public void StepTest()
+        {
+            Assert.AreEqual(TestSite.Html5Page.Volume.Step(), 5);
         }
 
         [Test]
         public void SetRangeTest()
         {
-            TestSite.Html5Page.VolumeRange.SetRange(50);
-            var setValue = TestSite.Html5Page.VolumeRange.GetRange();
-
-            Assert.AreEqual(setValue, 50);
+            TestSite.Html5Page.Volume.SetRange(10);
+            Assert.AreEqual(TestSite.Html5Page.Volume.GetRange(), 10);
         }
 
         [Test]
         public void RangeTest()
         {
-            var min = TestSite.Html5Page.VolumeRange.Min();
-            var max = TestSite.Html5Page.VolumeRange.Max();
-
-            Assert.AreEqual(min, 10);
-            Assert.AreEqual(max, 100);
+            TestSite.Html5Page.Volume.SetRange("30");
+            Assert.AreEqual(TestSite.Html5Page.Volume.GetValue(), "30");
         }
     }
 }
