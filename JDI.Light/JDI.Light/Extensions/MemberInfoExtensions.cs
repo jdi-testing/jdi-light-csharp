@@ -61,7 +61,7 @@ namespace JDI.Light.Extensions
             }
         }
 
-        public static By GetFindsBy(this MemberInfo member)
+        public static By GetLocatorByAttribute(this MemberInfo member)
         {
             var locator = member.GetCustomAttribute<FindByAttribute>(false)?.ByLocator;
             if (locator != null) return locator;

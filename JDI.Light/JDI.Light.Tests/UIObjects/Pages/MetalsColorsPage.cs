@@ -39,7 +39,7 @@ namespace JDI.Light.Tests.UIObjects.Pages
         public Summary SummaryBlock;
 
         [FindBy(Css = "#colors")]
-        public IDropDown ColorsDropDown { get; set; }
+        public IDropDown Colors { get; set; }
 
         [FindBy(Css = "#colors .filter-option")]
         public IDropDown ColorsDropDownText { get; set; }

@@ -18,6 +18,7 @@ namespace JDI.Light.Elements.Base
         private string _name;
 
         public By Locator { get; set; }
+        public List<By> SmartLocators { get; set; }
         public bool OnlyOneElementAllowedInSearch { get; set; } = true;
         public ActionInvoker Invoker { get; set; }
         public ILogger Logger { get; set; }
@@ -119,7 +120,23 @@ namespace JDI.Light.Elements.Base
             var criteria = LocalElementSearchCriteria ?? Jdi.DriverFactory.ElementSearchCriteria;
             var context = GetSearchContext(Parent);
             var result = Invoker.GetResultByCondition(
-                () => context.FindElements(Locator).ToList(), 
+                () =>
+                {
+                    if (Locator != null)
+                    {
+                        return context.FindElements(Locator).ToList();
+                    }
+
+                    foreach (var smartLocator in SmartLocators)
+                    {
+                        var smartElements = context.FindElements(smartLocator).ToList();
+                        if (smartElements.Any())
+                        {
+                            return smartElements;
+                        }
+                    }
+                    return context.FindElements(Locator).ToList();
+                }, 
                 els => els.Count(criteria) > 0);
             return result.Where(criteria).ToList();
         }
