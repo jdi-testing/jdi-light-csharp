@@ -10,12 +10,12 @@ namespace JDI.Light.Tests.Tests.Common
         {
             TestSite.Html5Page.Open();
             TestSite.Html5Page.CheckOpened();
-            TestSite.Html5Page.Volume.SetRange(90);
+            TestSite.Html5Page.Volume.SetVolume(90);
         }
         [Test]
         public void GetValueTest()
         {
-            Assert.AreEqual(TestSite.Html5Page.DisabledRange.GetRange(), 50);
+            Assert.AreEqual(TestSite.Html5Page.DisabledRange.Volume(), 50);
         }
         [Test]
         public void MinTest()
@@ -36,14 +36,14 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void SetRangeTest()
         {
-            TestSite.Html5Page.Volume.SetRange(10);
-            Assert.AreEqual(TestSite.Html5Page.Volume.GetRange(), 10);
+            TestSite.Html5Page.Volume.SetVolume(10);
+            Assert.AreEqual(TestSite.Html5Page.Volume.Volume(), 10);
         }
 
         [Test]
         public void RangeTest()
         {
-            TestSite.Html5Page.Volume.SetRange("30");
+            TestSite.Html5Page.Volume.SetVolume("30");
             Assert.AreEqual(TestSite.Html5Page.Volume.GetValue(), "30");
         }
     }

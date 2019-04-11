@@ -12,12 +12,12 @@ namespace JDI.Light.Elements.Common
         {
         }
         
-        public void SetRange(string value)
+        public void SetVolume(string value)
         {
             SetAttribute("value", value);
         }
 
-        public void SetRange(double value)
+        public void SetVolume(double value)
         {
             SetAttribute("value", value.ToString(CultureInfo.InvariantCulture));
         }
@@ -27,7 +27,7 @@ namespace JDI.Light.Elements.Common
             return GetAttribute("value");
         }
 
-        public double GetRange()
+        public double Volume()
         {
             return Convert.ToDouble(GetAttribute("value"));
         }
