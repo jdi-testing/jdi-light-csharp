@@ -2,11 +2,13 @@
 
 namespace JDI.Light.Matchers.IntegerMachers
 {
-    public class GreaterThan : Matcher<int>
+    public class GreaterThanMatcher : Matcher<int>
     {
-        public GreaterThan(int rightNumber) : base(rightNumber)
+        private GreaterThanMatcher(int rightNumber) : base(rightNumber)
         {
         }
+
+        public static GreaterThanMatcher GreaterThan(int rightNumber) => new GreaterThanMatcher(rightNumber);
 
         public override string ActionName => "greater than";
 

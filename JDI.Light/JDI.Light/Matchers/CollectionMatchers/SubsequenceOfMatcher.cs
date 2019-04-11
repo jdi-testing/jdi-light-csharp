@@ -4,11 +4,13 @@ using System.Linq;
 
 namespace JDI.Light.Matchers.CollectionMatchers
 {
-    public class SubsequenceOf<T> : Matcher<IEnumerable<T>>
+    public class SubsequenceOfMatcher<T> : Matcher<IEnumerable<T>>
     {
-        public SubsequenceOf(IEnumerable<T> rightValue) : base(rightValue)
+        private SubsequenceOfMatcher(IEnumerable<T> rightValue) : base(rightValue)
         {
         }
+
+        public static SubsequenceOfMatcher<T> SubsequenceOf(IEnumerable<T> rightValue) => new SubsequenceOfMatcher<T>(rightValue);
 
         public override string ActionName => "subsequence of";
 

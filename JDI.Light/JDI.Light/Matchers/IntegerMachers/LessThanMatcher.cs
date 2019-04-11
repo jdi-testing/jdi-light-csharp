@@ -2,11 +2,13 @@
 
 namespace JDI.Light.Matchers.IntegerMachers
 {
-    public class LessThan : Matcher<int>
+    public class LessThanMatcher : Matcher<int>
     {
-        public LessThan(int rightNumber) : base(rightNumber)
+        private LessThanMatcher(int rightNumber) : base(rightNumber)
         {
         }
+
+        public static LessThanMatcher LessThan(int rightNumber) => new LessThanMatcher(rightNumber);
 
         public override string ActionName => "less than";
 

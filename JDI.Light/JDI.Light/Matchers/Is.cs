@@ -6,16 +6,16 @@ namespace JDI.Light.Matchers
 {
     public static class Is
     {
-        public static GreaterThan GreaterThan(int rightNumber) => new GreaterThan(rightNumber);
+        public static GreaterThanMatcher GreaterThan(int rightNumber) => GreaterThanMatcher.GreaterThan(rightNumber);
 
-        public static GreaterThanOrEqualTo GreaterThanOrEqualTo(int rightNumber) =>
-            new GreaterThanOrEqualTo(rightNumber);
+        public static GreaterThanOrEqualToMatcher GreaterThanOrEqualTo(int rightNumber) =>
+            GreaterThanOrEqualToMatcher.GreaterThanOrEqualTo(rightNumber);
 
-        public static LessThan LessThan(int rightNumber) => new LessThan(rightNumber);
+        public static LessThanMatcher LessThan(int rightNumber) => LessThanMatcher.LessThan(rightNumber);
 
-        public static LessThanOrEqualTo LessThanOrEqualTo(int rightNumber) => new LessThanOrEqualTo(rightNumber);
+        public static LessThanOrEqualToMatcher LessThanOrEqualTo(int rightNumber) => LessThanOrEqualToMatcher.LessThanOrEqualTo(rightNumber);
 
-        public static SubsequenceOf<T> SubsequenceOf<T>(IEnumerable<T> rightSubsequence) =>
-            new SubsequenceOf<T>(rightSubsequence);
+        public static SubsequenceOfMatcher<T> SubsequenceOf<T>(IEnumerable<T> rightSubsequence) =>
+            SubsequenceOfMatcher<T>.SubsequenceOf(rightSubsequence);
     }
 }
