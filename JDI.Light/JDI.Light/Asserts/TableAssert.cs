@@ -24,7 +24,6 @@ namespace JDI.Light.Asserts
 
         public TableAssert NotEmpty()
         {
-
             Assert.IsFalse(IsTableEmpty, "The table is empty");
             return this;
         }

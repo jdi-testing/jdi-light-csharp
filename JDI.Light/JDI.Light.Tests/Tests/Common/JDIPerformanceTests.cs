@@ -1,8 +1,8 @@
 ﻿using System;
 using NUnit.Framework;
+using System.Diagnostics;
 using static JDI.Light.Elements.Complex.Table.TableMatcher;
 using static JDI.Light.Elements.Complex.Table.Column;
-using System.Diagnostics;
 
 namespace JDI.Light.Tests.Tests.Common
 {
