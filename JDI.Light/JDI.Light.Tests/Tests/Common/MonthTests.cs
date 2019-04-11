@@ -46,6 +46,7 @@ namespace JDI.Light.Tests.Tests.Common
         {
             TestSite.Html5Page.MonthDate.Format = "yyyy-MM";
             TestSite.Html5Page.MonthDate.SetDateTime(_dateTime);
+
             Assert.AreEqual(TestSite.Html5Page.MonthDate.Value(), "2019-04");
         }
     }
