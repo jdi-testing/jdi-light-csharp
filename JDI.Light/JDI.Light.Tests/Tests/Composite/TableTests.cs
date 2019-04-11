@@ -104,7 +104,10 @@ namespace JDI.Light.Tests.Tests.Composite
             PerformancePage.CheckOpened();
             PerformancePage.UsersTable.AssertThat()
                 .Size(400)
-                .Size(Is.GreaterThan(50))
+                .Size(Is.GreaterThan(399))
+                .Size(Is.LessThanOrEqualTo(400))
+                .Size(Is.GreaterThanOrEqualTo(400))
+                .Size(Is.LessThan(401))
                 .HasRowWithValues(
                     HasValue("Brian Meyer", InColumn("Name")),
                     HasValue("mollis.nec@seddictumeleifend.co.uk", InColumn("Email")))
