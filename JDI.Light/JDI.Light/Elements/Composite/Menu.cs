@@ -2,6 +2,7 @@
 using System.Linq;
 using JDI.Light.Elements.Base;
 using JDI.Light.Exceptions;
+using JDI.Light.Extensions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 
@@ -9,7 +10,7 @@ namespace JDI.Light.Elements.Composite
 {
     public class Menu : UIElement
     {
-        public By MenuItemLocator;
+        public By MenuItemLocator = By.XPath(".//li/a");
 
         private Action<Menu, string[]> _selectElementAction = (menu, itemTexts) =>
             {
@@ -44,6 +45,21 @@ namespace JDI.Light.Elements.Composite
         public void Select(string itemText)
         {
             Invoker.DoAction($"Select menu item '{itemText}'", () => _selectElementAction.Invoke(this, new[] { itemText }));
+        }
+
+        public void Select(Enum item)
+        {
+            Select(item.GetDescription());
+        }
+
+        public void Select(Enum item1, Enum item2)
+        {
+            Select(item1.GetDescription(),item2.GetDescription());
+        }
+
+        public void Select(Enum item1, Enum item2, Enum item3)
+        {
+            Select(item1.GetDescription(), item2.GetDescription(), item3.GetDescription());
         }
 
         public void Select(string itemText1, string itemText2)
