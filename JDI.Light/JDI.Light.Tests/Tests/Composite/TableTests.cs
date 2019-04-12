@@ -1,8 +1,8 @@
-﻿using JDI.Light.Elements.Complex.Table;
-using JDI.Light.Tests.UIObjects.Pages;
+﻿using JDI.Light.Tests.UIObjects.Pages;
 using NUnit.Framework;
 using static JDI.Light.Elements.Complex.Table.Column;
 using static JDI.Light.Elements.Complex.Table.TableMatcher;
+using Is = JDI.Light.Matchers.Is;
 
 namespace JDI.Light.Tests.Tests.Composite
 {
@@ -95,6 +95,27 @@ namespace JDI.Light.Tests.Tests.Composite
                 ContainsValue("co.uk", InColumn("Email")));
             Assert.AreEqual("Brian Meyer;(016977) 0358;mollis.nec@seddictumeleifend.co.uk;Houston",
                 row.GetValue());
+        }
+
+        [Test]
+        public void TableChainTest()
+        {
+            PerformancePage.Open();
+            PerformancePage.CheckOpened();
+            PerformancePage.UsersTable.AssertThat()
+                .Size(400)
+                .Size(Is.GreaterThan(399))
+                .Size(Is.LessThanOrEqualTo(400))
+                .Size(Is.GreaterThanOrEqualTo(400))
+                .Size(Is.LessThan(401))
+                .HasRowWithValues(
+                    HasValue("Brian Meyer", InColumn("Name")),
+                    HasValue("mollis.nec@seddictumeleifend.co.uk", InColumn("Email")))
+                .NotEmpty()
+                .RowsWithValues(3, ContainsValue("Baker", InColumn(1)))
+                .HasColumn("Email")
+                .HasColumns(new[] {"Name", "City"})
+                .Columns(Is.SubsequenceOf(new[] {"Name", "City", "Phone", "Email", "Address"}));
         }
     }
 }
