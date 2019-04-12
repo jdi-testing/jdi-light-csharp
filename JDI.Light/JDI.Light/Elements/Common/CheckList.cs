@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.UI.HtmlControls;
 using JDI.Light.Extensions;
 using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
@@ -9,6 +10,8 @@ namespace JDI.Light.Elements.Common
 {
     public class CheckList : Selector, ICheckList
     {
+        private By checkbox = By.CssSelector("input[type=checkbox][id='%s']");
+
         public By CheckListLocator { get; set; }
         
         public CheckList(By byLocator) : base(byLocator)
@@ -59,9 +62,9 @@ namespace JDI.Light.Elements.Common
             Select(new []{index}, this);
         }
 
-        public void UncheckAll(Array allValues)
+        public void UncheckAll()
         {
-            foreach (var value in allValues.ToStringArray())
+            foreach (var value in Checked())
             {
                 Invoker.DoAction($"Unselect item '{string.Join(" -> ", value)}'",
                     () =>
@@ -76,7 +79,7 @@ namespace JDI.Light.Elements.Common
             }
         }
 
-        public string[] GetChecked(Array values)
+        public string[] Checked(Array values)
         {
             var selectedItems = new List<string>();
             foreach (var value in values.ToStringArray())
@@ -91,6 +94,13 @@ namespace JDI.Light.Elements.Common
 
             selectedItems.Reverse();
             return selectedItems.ToArray();
+        }
+
+        public string[] Checked()
+        {
+            return WebElement.FindElements(CheckListLocator)
+                .Where(element => element.GetAttribute("checked") != null)
+                .Select(element => element.GetAttribute("id")).ToArray();
         }
     }
 }
