@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.UI.HtmlControls;
+using JDI.Light.Elements.Base;
 using JDI.Light.Extensions;
+using JDI.Light.Factories;
 using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
 
@@ -10,35 +11,43 @@ namespace JDI.Light.Elements.Common
 {
     public class CheckList : Selector, ICheckList
     {
-        private By checkbox = By.CssSelector("input[type=checkbox][id='%s']");
-
         public By CheckListLocator { get; set; }
-        
+
+        public By LabelLocator { get; set; }
+
+        private IEnumerable<UIElement> Labels => this.FindElements(LabelLocator)
+            .Select(e => UIElementFactory.CreateInstance<UIElement>(LabelLocator, this, e)).ToList();
+
+        private IEnumerable<UIElement> checkBoxes => this.FindElements(CheckListLocator)
+            .Select(e => UIElementFactory.CreateInstance<UIElement>(CheckListLocator, this, e)).ToList();
+
         public CheckList(By byLocator) : base(byLocator)
         {
+            //CheckListLocator = By.CssSelector(".html-left > input");
+            //LabelLocator = By.CssSelector(".html-left > label");
+            CheckListLocator = By.CssSelector(".html-left > input");
+            LabelLocator = By.CssSelector(".html-left > label");
+            ItemLocator = LabelLocator;
         }
 
         public void Check(string[] values)
         {
-            ItemLocator = CheckListLocator;
+            
             Select(values, this);
         }
 
         public void Check(string value)
         {
-            ItemLocator = CheckListLocator;
             Select(new []{value}, this);
         }
 
         public void Check(int[] indexes)
         {
-            ItemLocator = CheckListLocator;
             Select(indexes, this);
         }
 
         public void Check(int index)
         {
-            ItemLocator = CheckListLocator;
             Select(new []{index}, this);
         }
 
@@ -64,7 +73,7 @@ namespace JDI.Light.Elements.Common
 
         public void UncheckAll()
         {
-            foreach (var value in Checked())
+            foreach (var value in GetChecked())
             {
                 Invoker.DoAction($"Unselect item '{string.Join(" -> ", value)}'",
                     () =>
@@ -79,7 +88,7 @@ namespace JDI.Light.Elements.Common
             }
         }
 
-        public string[] Checked(Array values)
+        public string[] GetChecked(Array values)
         {
             var selectedItems = new List<string>();
             foreach (var value in values.ToStringArray())
@@ -96,11 +105,13 @@ namespace JDI.Light.Elements.Common
             return selectedItems.ToArray();
         }
 
-        public string[] Checked()
+        public string[] GetChecked()
         {
-            return WebElement.FindElements(CheckListLocator)
-                .Where(element => element.GetAttribute("checked") != null)
-                .Select(element => element.GetAttribute("id")).ToArray();
+            var checkedIds = checkBoxes.Where(checkbox => checkbox.GetAttribute("checked") != null)
+                .Select(checkbox => checkbox.GetAttribute("id")).ToList();
+
+            return Labels.Where(label => checkedIds.Contains(label.GetAttribute("for"))).Select(label => label.Text)
+                .ToArray();
         }
     }
 }

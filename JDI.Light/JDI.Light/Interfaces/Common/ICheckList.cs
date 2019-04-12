@@ -16,6 +16,6 @@ namespace JDI.Light.Interfaces.Common
         void Uncheck(int[] indexes);
         void Uncheck(int index);
         void UncheckAll();
-        string[] Checked();
+        string[] GetChecked();
     }
 }

@@ -1,5 +1,4 @@
-﻿using JDI.Light.Elements.Common;
-using JDI.Light.Exceptions;
+﻿using JDI.Light.Exceptions;
 using JDI.Light.Interfaces.Common;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -18,15 +17,14 @@ namespace JDI.Light.Tests.Tests.Common
         {
             TestSite.Html5Page.Open();
             TestSite.Html5Page.CheckOpened();
-            TestSite.Html5Page.WeatherCheckList.CheckListLocator = By.CssSelector(".html-left > input");
-            TestSite.Html5Page.WeatherCheckList.Check(text);
+            //TestSite.Html5Page.WeatherCheckList.Check(text);
             weather = TestSite.Html5Page.WeatherCheckList;
         }
 
         [Test]
         public void GetValueTest()
         {
-            Jdi.Assert.CollectionEquals(new []{text},weather.Checked());
+            Jdi.Assert.CollectionEquals(new[] { text }, weather.GetChecked());
         }
 
         [Test]
@@ -50,7 +48,7 @@ namespace JDI.Light.Tests.Tests.Common
 
             TestSite.Html5Page.WeatherCheckList.CheckListLocator = By.CssSelector(".html-left > input");
             string[] arr = { "hot", "cold", "rainy", "sunny-day" };
-            var checkedValues = TestSite.Html5Page.WeatherCheckList.Checked();
+            var checkedValues = TestSite.Html5Page.WeatherCheckList.GetChecked();
             Assert.AreEqual(checkedValues, new[] { "sunny-day", "cold" });
         }
 
