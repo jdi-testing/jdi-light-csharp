@@ -29,7 +29,6 @@ namespace JDI.Light.Tests.Tests.Common
         {
             TestSite.MetalsColorsPage.MetalsComboBox.Expand();
             TestSite.MetalsColorsPage.MetalsComboBox.ItemLocator = By.CssSelector(".dropdown-menu > li > a");
-
             TestSite.MetalsColorsPage.MetalsComboBox.Select(2);
             Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Metals: value changed to Silver");
         }
