@@ -117,6 +117,7 @@
     <Compile Include="Interfaces\Common\IImage.cs" />
     <Compile Include="Interfaces\Common\ILabel.cs" />
     <Compile Include="Interfaces\Common\ILink.cs" />
+    <Compile Include="Interfaces\Common\IMultiSelector.cs" />
     <Compile Include="Interfaces\Common\IRadioButton.cs" />
     <Compile Include="Interfaces\Common\IRange.cs" />
     <Compile Include="Interfaces\Common\ITextElement.cs" />
