@@ -4,6 +4,7 @@ using JDI.Light.Elements.Base;
 using JDI.Light.Elements.Common;
 using JDI.Light.Factories;
 using JDI.Light.Interfaces.Common;
+using JDI.Light.Interfaces.Complex;
 using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Complex

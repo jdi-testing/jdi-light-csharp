@@ -1,6 +1,6 @@
 ﻿using JDI.Light.Interfaces.Base;
 
-namespace JDI.Light.Interfaces.Common
+namespace JDI.Light.Interfaces.Complex
 {
     public interface ICheckList : IBaseUIElement
     {

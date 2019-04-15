@@ -1,4 +1,5 @@
 ﻿using JDI.Light.Interfaces.Common;
+using JDI.Light.Interfaces.Complex;
 using NUnit.Framework;
 
 namespace JDI.Light.Tests.Tests.Complex
