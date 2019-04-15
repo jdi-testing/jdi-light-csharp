@@ -11,7 +11,5 @@ namespace JDI.Light.Interfaces.Common
         void Select(int index);
         string Selected();
         List<string> Values();
-        List<string> ListEnabled();
-        List<string> ListDisabled();
     }
 }

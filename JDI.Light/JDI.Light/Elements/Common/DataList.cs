@@ -36,19 +36,7 @@ namespace JDI.Light.Elements.Common
             // TODO: Return list of values
             throw new NotImplementedException();
         }
-
-        public List<string> ListEnabled()
-        {
-            // TODO: Return list of enabled values
-            throw new NotImplementedException();
-        }
-
-        public List<string> ListDisabled()
-        {
-            // TODO: Return list of disabled values
-            throw new NotImplementedException();
-        }
-
+        
         private void SetText(string text)
         {
             var str = "value='" + text + "'";

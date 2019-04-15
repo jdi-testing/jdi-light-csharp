@@ -56,6 +56,6 @@ namespace JDI.Light.Tests.UIObjects
         public DataList IceCream { get; set; }
 
         [FindBy(Css = "#ice-cream")]
-        public ComboBox IceCreamComboBox;
+        public ComboBox IceCreamComboBox { get; set; }
     }
 }
