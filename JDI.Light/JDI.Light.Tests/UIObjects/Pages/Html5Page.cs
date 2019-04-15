@@ -17,7 +17,7 @@ namespace JDI.Light.Tests.UIObjects
         public MultiDropdown MultiDropdown { get; set; }
 
         [FindBy(Css = "#ages")]
-        public MultiSelector AgeSelector { get; set; }
+        public MultiSelector Ages { get; set; }
 
         [FindBy(Id = "blue-button")]
         public IButton BlueButton { get; set; }
