@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace JDI.Light.Tests.Tests.Composite
+namespace JDI.Light.Tests.Tests.Simple
 {
     [TestFixture]
     public class AlertTests : TestBase
