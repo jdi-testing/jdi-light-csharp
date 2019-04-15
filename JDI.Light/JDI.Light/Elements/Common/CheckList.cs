@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using JDI.Light.Elements.Base;
 using JDI.Light.Factories;
@@ -10,72 +9,108 @@ namespace JDI.Light.Elements.Common
 {
     public class CheckList : Selector, ICheckList
     {
-        public By CheckListLocator { get; set; }
+        public By CheckListLocator => By.CssSelector(".html-left > input");
 
         public By LabelLocator => By.CssSelector(".html-left > label");
 
-        private List<UIElement> Labels => this.FindElements(LabelLocator)
+        private List<UIElement> Labels => FindElements(LabelLocator)
             .Select(e => UIElementFactory.CreateInstance<UIElement>(LabelLocator, this, e)).ToList();
 
-        private List<UIElement> CheckBoxes => this.FindElements(CheckListLocator)
+        private List<UIElement> CheckBoxes => FindElements(CheckListLocator)
             .Select(e => UIElementFactory.CreateInstance<UIElement>(CheckListLocator, this, e)).ToList();
 
         public CheckList(By byLocator) : base(byLocator)
         {
-            CheckListLocator = By.CssSelector(".html-left > input");
-            ItemLocator = LabelLocator;
         }
 
-        public void Check(params string[] values)
+        public void Check(params string[] names)
         {
-            var indexes = values.Select(GetIndexOf);
-            foreach (var index in indexes)
+
+            foreach (var name in Values())
             {
-                if (IsDisabled(CheckBoxes[index]))
+                var value = CheckBoxes[GetIndexOf(name)];
+                if (IsDisabled(value))
                 {
                     continue;
                 }
-                if (!IsChecked(CheckBoxes[index]))
+                if (IsSelected(value) && !names.Contains(name)
+                    || !IsSelected(value) && names.Contains(name))
                 {
-                    CheckBoxes[index].Click();
+                    value.Click();
                 }
             }
         }
 
         public void Check(int[] indexes)
         {
-            foreach (var index in indexes)
+            for (int i = 1; i < Values().Count; i++)
             {
-                if (IsDisabled(CheckBoxes[index - 1]))
+                var value = CheckBoxes[i - 1];
+                if (IsDisabled(value))
                 {
                     continue;
                 }
-                if (!IsChecked(CheckBoxes[index-1]))
+                if (IsSelected(value) && !indexes.Contains(i)
+                    || !IsSelected(value) && indexes.Contains(i))
                 {
-                    CheckBoxes[index-1].Click();
+                    value.Click();
                 }
             }
         }
 
-        public void Uncheck(params string[] values)
+        public void Uncheck(params string[] names)
         {
-            var indexes = values.Select(GetIndexOf);
-            foreach (var index in indexes)
+            foreach (var name in Values())
             {
-                if (IsChecked(CheckBoxes[index]))
+                var value = CheckBoxes[GetIndexOf(name)];
+                if (IsDisabled(value))
                 {
-                    CheckBoxes[index].Click();
+                    continue;
+                }
+                if (IsSelected(value) && names.Contains(name)
+                    || !IsSelected(value) && !names.Contains(name))
+                {
+                    value.Click();
                 }
             }
         }
 
         public void Uncheck(params int[] indexes)
         {
+            for (int i = 1; i < Values().Count; i++)
+            {
+                var value = CheckBoxes[i - 1];
+                if (IsDisabled(value))
+                {
+                    continue;
+                }
+                if (IsSelected(value) && indexes.Contains(i)
+                    || !IsSelected(value) && !indexes.Contains(i)) 
+                {
+                    value.Click();
+                }
+            }
+        }
+
+        public void Select(params string[] values)
+        {
+            var indexes = values.Select(GetIndexOf);
             foreach (var index in indexes)
             {
-                if (IsChecked(CheckBoxes[index-1]))
+                if (IsEnabled(CheckBoxes[index]))
                 {
-                    CheckBoxes[index-1].Click();
+                    CheckBoxes[index].Click();
+                }
+            }
+        }
+
+        public void Select(params int[] indexes)
+        {
+            foreach (var index in indexes)
+            {
+                if (IsEnabled(CheckBoxes[index]))
+                {
+                    CheckBoxes[index].Click();
                 }
             }
         }
@@ -88,7 +123,7 @@ namespace JDI.Light.Elements.Common
             }
         }
 
-        public string[] GetChecked()
+        public string[] Checked()
         {
             var checkedIds = GetCheckedUIElements().Select(checkbox => checkbox.GetAttribute("id")).ToList();
 
@@ -96,13 +131,19 @@ namespace JDI.Light.Elements.Common
                 .ToArray();
         }
 
+        public List<string> Values() => Labels.Select(label => label.Text.Trim()).ToList();
+
         private IEnumerable<UIElement> GetCheckedUIElements() => CheckBoxes.Where(IsChecked);
 
         private int GetIndexOf(string name) => Labels.FindIndex(label => label.Text == name);
 
         private bool IsChecked(UIElement checkbox) => checkbox.GetAttribute("checked") != null;
 
+        private bool IsSelected(UIElement checkbox) => checkbox.Selected;
+
         // todo remove after inmplementation JDIBase class with is disabled method
-        private bool IsDisabled(UIElement checkbox) => !checkbox.WebElement.Enabled;
+        private bool IsEnabled(UIElement checkbox) => checkbox.WebElement.Enabled;
+
+        private bool IsDisabled(UIElement checkbox) => !IsEnabled(checkbox);
     }
 }

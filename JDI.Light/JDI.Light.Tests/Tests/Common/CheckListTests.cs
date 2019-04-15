@@ -30,27 +30,27 @@ namespace JDI.Light.Tests.Tests.Common
         public void SelectTest()
         {
             weather.Check("Cold", "Hot option");
-            Jdi.Assert.CollectionEquals(new[] { "Cold", "Hot option" }, weather.GetChecked());
+            Jdi.Assert.CollectionEquals(new[] { "Cold", "Hot option" }, weather.Checked());
         }
 
         [Test]
         public void SelectNumTest()
         {
             weather.Check(1, 4);
-            Jdi.Assert.CollectionEquals(new[] { "Hot option", "Sunny" }, weather.GetChecked());
+            Jdi.Assert.CollectionEquals(new[] { "Hot option", "Sunny" }, weather.Checked());
         }
 
         [Test]
         public void SelectedTest()
         {
-            Jdi.Assert.CollectionEquals(new[] { text }, weather.GetChecked());
+            Jdi.Assert.CollectionEquals(new[] { text }, weather.Checked());
         }
 
         [Test]
         public void DisabledTest()
         {
-            weather.Check("Disabled");
-            Jdi.Assert.CollectionEquals(new[] { text }, weather.GetChecked());
+            weather.Select("Disabled");
+            Jdi.Assert.CollectionEquals(new[] { text }, weather.Checked());
         }
     }
 }
