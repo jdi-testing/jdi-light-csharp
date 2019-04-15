@@ -1,8 +1,7 @@
-﻿using System;
-using JDI.Light.Interfaces.Common;
+﻿using JDI.Light.Interfaces.Common;
 using NUnit.Framework;
 
-namespace JDI.Light.Tests.Tests.Common
+namespace JDI.Light.Tests.Tests.Complex
 {
     [TestFixture]
     public class CheckListTests : TestBase

@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using JDI.Light.Elements.Base;
+using JDI.Light.Elements.Common;
 using JDI.Light.Factories;
 using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
 
-namespace JDI.Light.Elements.Common
+namespace JDI.Light.Elements.Complex
 {
     public class CheckList : Selector, ICheckList
     {

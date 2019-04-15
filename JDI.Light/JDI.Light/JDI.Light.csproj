@@ -67,7 +67,7 @@
     <Compile Include="Attributes\NameAttribute.cs" />
     <Compile Include="Attributes\PageAttribute.cs" />
     <Compile Include="Attributes\SiteAttribute.cs" />
-    <Compile Include="Elements\Common\CheckList.cs" />
+    <Compile Include="Elements\Complex\CheckList.cs" />
     <Compile Include="Elements\Common\ComboBox.cs" />
     <Compile Include="Elements\Common\DateTimeSelector.cs" />
     <Compile Include="Elements\Common\RadioButton.cs" />
