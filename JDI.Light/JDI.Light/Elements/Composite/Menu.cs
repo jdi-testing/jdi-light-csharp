@@ -10,7 +10,7 @@ namespace JDI.Light.Elements.Composite
 {
     public class Menu : UIElement
     {
-        public By MenuItemLocator = By.XPath(".//li/a");
+        private By MenuItemLocator = By.XPath(".//li/a");
 
         private Action<Menu, string[]> _selectElementAction = (menu, itemTexts) =>
             {
