@@ -1,4 +1,5 @@
 ﻿using JDI.Light.Exceptions;
+using JDI.Light.Tests.Enums;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
@@ -8,37 +9,69 @@ namespace JDI.Light.Tests.Tests.Composite
     public class MenuTests : TestBase
     {
         [Test]
-        public void SingleLevelTest()
+        public void MultiLevelNegativeTest()
         {
             TestSite.HomePage.Open();
-            TestSite.Header.Menu.MenuItemLocator = By.XPath(".//li/a");
-            TestSite.Header.Menu.Select("CONTACT FORM");
+            Assert.Throws<ElementNotFoundException>(() => TestSite.Header.Menu.Select("SERVICE", "A111222"));
+        }
+
+        [Test]
+        public void SelectTest()
+        {
+            TestSite.SidebarMenu.Select("Contact form");
             TestSite.ContactFormPage.CheckOpened();
         }
 
         [Test]
-        public void SingleLevelNegativeTest()
+        public void SelectEnumTest()
         {
-            TestSite.HomePage.Open();
-            TestSite.Header.Menu.MenuItemLocator = By.XPath(".//li/a");
-            Assert.Throws<ElementNotFoundException>(() => TestSite.Header.Menu.Select("12345"));
+            TestSite.SidebarMenu.Select(Navigation.MetalsColors);
+            TestSite.MetalsColorsPage.CheckOpened();
         }
 
         [Test]
-        public void MultiLevelTest()
+        public void SelectTestList()
         {
-            TestSite.HomePage.Open();
-            TestSite.Header.Menu.MenuItemLocator = By.XPath(".//li/a");
-            TestSite.Header.Menu.Select("SERVICE", "SUPPORT");
-            TestSite.SupportPage.CheckOpened();
+            /* TODO
+            leftMenuList.select("Contact form");
+            contactFormPage.checkOpened();
+            */
         }
-        
+
         [Test]
-        public void MultiLevelNegativeTest()
+        public void GetTestList()
         {
-            TestSite.HomePage.Open();
-            TestSite.Header.Menu.MenuItemLocator = By.XPath(".//li/a");
-            Assert.Throws<ElementNotFoundException>(() => TestSite.Header.Menu.Select("SERVICE", "A111222"));
+            /* TODO
+            HtmlElement item = leftMenuList.get("Contact form");
+            item.show();
+            item.is ().deselected();
+            item.click();
+            item.is ().selected();
+            contactFormPage.checkOpened();
+            */
+        }
+
+        [Test]
+        public void SelectEnumTestList()
+        {
+            /* TODO
+            leftMenuList.select(MetalsColors);
+            metalAndColorsPage.checkOpened();
+            */
+        }
+
+        [Test]
+        public void SelectListTest()
+        {
+            TestSite.SidebarMenu.Select("Service", "Dates");
+            TestSite.Dates.CheckOpened();
+        }
+
+        [Test]
+        public void SelectEnumListTest()
+        {
+            TestSite.SidebarMenu.Select(Navigation.Service, Navigation.Dates);
+            TestSite.Dates.CheckOpened();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace JDI.Light.Tests.UIObjects.Sections
 
         [FindBy(Css = "ul.uui-navigation.nav")]
         public Menu Menu;
-
+        
         public JdiSearch Search;
     }
 }
