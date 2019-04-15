@@ -1,4 +1,5 @@
-﻿using JDI.Light.Interfaces.Base;
+﻿using System.Collections.Generic;
+using JDI.Light.Interfaces.Base;
 
 namespace JDI.Light.Interfaces.Complex
 {
@@ -7,6 +8,6 @@ namespace JDI.Light.Interfaces.Complex
         void Select(string value);
         void Select(int index);
         new string Selected();
-        string[] Values();
+        List<string> Values();
     }
 }

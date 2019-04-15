@@ -3,7 +3,6 @@ using System.Linq;
 using JDI.Light.Elements.Base;
 using JDI.Light.Elements.Common;
 using JDI.Light.Factories;
-using JDI.Light.Interfaces.Common;
 using JDI.Light.Interfaces.Complex;
 using OpenQA.Selenium;
 
@@ -42,9 +41,9 @@ namespace JDI.Light.Elements.Complex
             return Labels.First(label => checkedId.Contains(label.GetAttribute("for")))?.Text;
         }
 
-        public string[] Values()
+        public List<string> Values()
         {
-            return Labels.Select(label => label.Text.Trim()).ToArray();
+            return Labels.Select(label => label.Text.Trim()).ToList();
         }
 
         private bool IsChecked(UIElement radioButton) => radioButton.GetAttribute("checked") != null;
