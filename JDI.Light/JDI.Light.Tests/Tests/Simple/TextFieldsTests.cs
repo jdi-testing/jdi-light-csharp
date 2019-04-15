@@ -2,7 +2,7 @@
 using JDI.Light.Tests.Entities;
 using NUnit.Framework;
 
-namespace JDI.Light.Tests.Tests.Common
+namespace JDI.Light.Tests.Tests.Simple
 {
     [TestFixture]
     public class TextFieldsTests : TestBase
