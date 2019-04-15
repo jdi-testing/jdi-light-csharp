@@ -32,8 +32,7 @@ namespace JDI.Light.Tests.Tests.Composite
         [Test]
         public void SelectTestList()
         {
-            throw new NotFoundException("Test requires JList<HtmlElement> leftMenuList");
-            /*
+            /* TODO
             leftMenuList.select("Contact form");
             contactFormPage.checkOpened();
             */
@@ -42,8 +41,7 @@ namespace JDI.Light.Tests.Tests.Composite
         [Test]
         public void GetTestList()
         {
-            throw new NotFoundException("Test requires JList<HtmlElement> leftMenuList");
-            /*
+            /* TODO
             HtmlElement item = leftMenuList.get("Contact form");
             item.show();
             item.is ().deselected();
@@ -56,8 +54,7 @@ namespace JDI.Light.Tests.Tests.Composite
         [Test]
         public void SelectEnumTestList()
         {
-            throw new NotFoundException("Test requires JList<HtmlElement> leftMenuList");
-            /*
+            /* TODO
             leftMenuList.select(MetalsColors);
             metalAndColorsPage.checkOpened();
             */
