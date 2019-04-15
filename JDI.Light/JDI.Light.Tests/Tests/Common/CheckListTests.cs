@@ -1,7 +1,6 @@
-﻿using JDI.Light.Exceptions;
+﻿using System;
 using JDI.Light.Interfaces.Common;
 using NUnit.Framework;
-using OpenQA.Selenium;
 
 namespace JDI.Light.Tests.Tests.Common
 {
@@ -17,46 +16,41 @@ namespace JDI.Light.Tests.Tests.Common
         {
             TestSite.Html5Page.Open();
             TestSite.Html5Page.CheckOpened();
-            //TestSite.Html5Page.WeatherCheckList.Check(text);
+            TestSite.Html5Page.WeatherCheckList.Check(text);
             weather = TestSite.Html5Page.WeatherCheckList;
         }
 
-        [Test]
+        // todo add test after HasValue interface implementation
+        //[Test]
         public void GetValueTest()
+        {
+        }
+
+        [Test]
+        public void SelectTest()
+        {
+            weather.Check("Cold", "Hot option");
+            Jdi.Assert.CollectionEquals(new[] { "Cold", "Hot option" }, weather.GetChecked());
+        }
+
+        [Test]
+        public void SelectNumTest()
+        {
+            weather.Check(1, 4);
+            Jdi.Assert.CollectionEquals(new[] { "Hot option", "Sunny" }, weather.GetChecked());
+        }
+
+        [Test]
+        public void SelectedTest()
         {
             Jdi.Assert.CollectionEquals(new[] { text }, weather.GetChecked());
         }
 
         [Test]
-        public void CheckCheckList()
+        public void DisabledTest()
         {
-            TestSite.Html5Page.WeatherCheckList.Check(new[] { "Cold", "Sunny" });
-            TestSite.Html5Page.WeatherCheckList.Uncheck("Cold");
-        }
-
-        [Test]
-        public void CheckByIndexes()
-        {
-            TestSite.Html5Page.WeatherCheckList.Check(new[] { 1, 2, 3 });
-            TestSite.Html5Page.WeatherCheckList.Uncheck(2);
-        }
-
-        [Test]
-        public void GetCheckedTest()
-        {
-            TestSite.Html5Page.WeatherCheckList.Check(new[] { "Cold", "Sunny" });
-
-            TestSite.Html5Page.WeatherCheckList.CheckListLocator = By.CssSelector(".html-left > input");
-            string[] arr = { "hot", "cold", "rainy", "sunny-day" };
-            var checkedValues = TestSite.Html5Page.WeatherCheckList.GetChecked();
-            Assert.AreEqual(checkedValues, new[] { "sunny-day", "cold" });
-        }
-
-        [Test]
-        public void NegativeCheckListTest()
-        {
-            var toCheck = new[] { 1000 };
-            Assert.Throws<ElementNotFoundException>(() => TestSite.Html5Page.WeatherCheckList.Check(toCheck));
+            weather.Check("Disabled");
+            Jdi.Assert.CollectionEquals(new[] { text }, weather.GetChecked());
         }
     }
 }

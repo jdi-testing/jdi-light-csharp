@@ -1,5 +1,4 @@
-﻿using System;
-using JDI.Light.Interfaces.Base;
+﻿using JDI.Light.Interfaces.Base;
 using OpenQA.Selenium;
 
 namespace JDI.Light.Interfaces.Common
@@ -7,14 +6,10 @@ namespace JDI.Light.Interfaces.Common
     public interface ICheckList : IBaseUIElement
     {
         By CheckListLocator { get; set; }
-        void Check(string[] values);
-        void Check(string value);
-        void Check(int[] indexes);
-        void Check(int index);
-        void Uncheck(string[] values);
-        void Uncheck(string value);
-        void Uncheck(int[] indexes);
-        void Uncheck(int index);
+        void Check(params string[] values);
+        void Check(params int[] indexes);
+        void Uncheck(params string[] values);
+        void Uncheck(params int[] indexes);
         void UncheckAll();
         string[] GetChecked();
     }
