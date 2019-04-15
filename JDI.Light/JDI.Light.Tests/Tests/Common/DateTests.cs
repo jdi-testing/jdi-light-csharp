@@ -45,6 +45,7 @@ namespace JDI.Light.Tests.Tests.Common
         {
             TestSite.Html5Page.BirthDate.Format = "yyyy-MM-dd";
             TestSite.Html5Page.BirthDate.SetDateTime(_dateTime);
+
             Assert.AreEqual(TestSite.Html5Page.BirthDate.Value(), "2019-04-01");
         }
     }
