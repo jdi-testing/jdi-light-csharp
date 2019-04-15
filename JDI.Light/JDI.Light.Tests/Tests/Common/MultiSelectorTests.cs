@@ -1,7 +1,6 @@
 ﻿using System;
 using JDI.Light.Tests.Enums;
 using NUnit.Framework;
-using OpenQA.Selenium;
 
 namespace JDI.Light.Tests.Tests.Common
 {
@@ -13,27 +12,49 @@ namespace JDI.Light.Tests.Tests.Common
         {
             TestSite.Html5Page.Open();
             TestSite.Html5Page.CheckOpened();
-            TestSite.Html5Page.AgeSelector.MultiItemLocator = By.CssSelector("option");
-            TestSite.Html5Page.AgeSelector.UnselectAll(Enum.GetValues(typeof(Ages)));
+            TestSite.Html5Page.Ages.Check("Steam");
         }
 
         [Test]
-        public void MultiSelectByValues()
+        public void GetValueTest()
         {
-            var toSelect = new[] {Ages.Metalic.ToString(), Ages.Electro.ToString()};
-            
-            TestSite.Html5Page.AgeSelector.Select(toSelect);
-            var selectedItems = TestSite.Html5Page.AgeSelector.GetSelected(Enum.GetValues(typeof(Ages)));
-
-            Assert.AreEqual(selectedItems, toSelect);
+            Assert.AreEqual(TestSite.Html5Page.Ages.Selected(), "Steam");
         }
 
         [Test]
-        public void MultiSelectByIndexes()
+        public void SelectTest()
         {
-            TestSite.Html5Page.AgeSelector.Select(new[] { 1, 4 });
-            var selectedItems = TestSite.Html5Page.AgeSelector.GetSelected(Enum.GetValues(typeof(Ages)));
-            Assert.AreEqual(selectedItems, new[] {"Wood", "Steam" });
+            var toSelect = new[] { "Electro", "Metalic" };
+            TestSite.Html5Page.Ages.Check(toSelect);
+            Assert.AreEqual(TestSite.Html5Page.Ages.Checked(), toSelect);
+        }
+
+        [Test]
+        public void SelectEnumTest()
+        {
+            var toSelect = new Enum[] { Ages.Wood, Ages.Steam };
+            TestSite.Html5Page.Ages.Check(toSelect);
+            Assert.AreEqual(TestSite.Html5Page.Ages.Checked(), new[] { "Steam", "Wood" });
+        }
+
+        [Test]
+        public void SelectNumTest()
+        {
+            TestSite.Html5Page.Ages.Check(new[] { 1, 4 });
+            Assert.AreEqual(TestSite.Html5Page.Ages.Checked(), new[] { "Steam", "Wood" });
+        }
+
+        [Test]
+        public void SelectedTest()
+        {
+            Assert.AreEqual(TestSite.Html5Page.Ages.Checked(), new[] { "Steam" });
+        }
+
+        [Test]
+        public void DisabledTest()
+        {
+            TestSite.Html5Page.Ages.Check("Disabled");
+            Assert.AreEqual(TestSite.Html5Page.Ages.Checked(), "");
         }
     }
 }
