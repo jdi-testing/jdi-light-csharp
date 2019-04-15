@@ -1,65 +1,96 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
-using static JDI.Light.Extensions.ArrayExtensions;
+using OpenQA.Selenium.Support.UI;
 
 namespace JDI.Light.Elements.Common
 {
-    public class MultiSelector : Selector
+    public class MultiSelector : Selector, IMultiSelector
     {
-        public By MultiItemLocator { get; set; }
-
-        private readonly Action<MultiSelector, string> _unselectAll = (multiSelector, item) =>
-        {
-            var els = multiSelector.WebElement.FindElements(multiSelector.MultiItemLocator);
-            var itemsList = els.FirstOrDefault(e => e.Text.Equals(item));
-            if (itemsList?.GetAttribute("selected") != null)
-            {
-                itemsList.Click();
-            }
-        };
+        public SelectElement SelectElement => new SelectElement(this);
 
         public MultiSelector(By byLocator) : base(byLocator)
         {
         }
 
-        public void Select(string[] values)
+        public void Check(string value)
         {
-            ItemLocator = MultiItemLocator;
-            Select(values, this);
+            SelectElement.DeselectAll();
+            SelectElement.SelectByText(value);
         }
 
-        public void Select(int[] indexes)
+        public void Check(int index)
         {
-            ItemLocator = MultiItemLocator;
-            Select(indexes, this);
+            SelectElement.DeselectAll();
+            SelectElement.SelectByIndex(index);
         }
 
-        public string[] GetSelected(Array values)
+        public void Check(string[] values)
         {
-            var selectedItems = new List<string>();
-            foreach (var value in values.ToStringArray())
+            SelectElement.DeselectAll();
+            foreach (var value in values)
             {
-                var els = WebElement.FindElements(MultiItemLocator);
-                var itemsList = els.FirstOrDefault(e => e.Text.Equals(value));
-                if (itemsList?.GetAttribute("selected") != null)
-                {
-                    selectedItems.Add(value);
-                }
+                SelectElement.SelectByText(value);
             }
-
-            selectedItems.Reverse();
-            return selectedItems.ToArray();
         }
 
-        public void UnselectAll(Array allValues)
+        public void Check(Enum[] values)
         {
-            foreach (var value in allValues.ToStringArray())
+            SelectElement.DeselectAll();
+            foreach (var value in values)
             {
-                Invoker.DoAction($"Unselect item '{string.Join(" -> ", value)}'",
-                    () => _unselectAll.Invoke(this, value));
+                SelectElement.SelectByText(value.ToString());
             }
+        }
+
+        public void Check(int[] indexes)
+        {
+            SelectElement.DeselectAll();
+            foreach (var index in indexes)
+            {
+                SelectElement.SelectByIndex(index);
+            }
+        }
+
+        public void Uncheck(string[] values)
+        {
+            foreach (var value in values)
+            {
+                SelectElement.DeselectByText(value);
+            }
+        }
+
+        public void Uncheck(Enum[] values)
+        {
+            foreach (var value in values)
+            {
+                SelectElement.DeselectByText(value.ToString());
+            }
+        }
+
+        public void Uncheck(int[] values)
+        {
+            foreach (var value in values)
+            {
+                SelectElement.DeselectByIndex(value);
+            }
+        }
+
+        public string Selected()
+        {
+            return SelectElement.AllSelectedOptions.First().Text;
+        }
+
+        public List<string> Checked()
+        {
+            var toReturn = new List<string>();
+            foreach (var iWebElement in SelectElement.AllSelectedOptions)
+            {
+                toReturn.Add(iWebElement.Text);
+            }
+            return toReturn;
         }
     }
 }
