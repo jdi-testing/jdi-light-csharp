@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using JDI.Light.Interfaces.Base;
-using OpenQA.Selenium;
 
 namespace JDI.Light.Interfaces.Common
 {
@@ -9,6 +9,9 @@ namespace JDI.Light.Interfaces.Common
         void Select(string value);
         void Select(Enum value);
         void Select(int index);
-        string GetValue();
+        string Selected();
+        List<string> Values();
+        List<string> ListEnabled();
+        List<string> ListDisabled();
     }
 }

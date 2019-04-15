@@ -17,21 +17,21 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void GetValueTest()
         {
-            Assert.AreEqual(TestSite.Html5Page.IceCream.GetValue(), "Coconut");
+            Assert.AreEqual(TestSite.Html5Page.IceCream.Selected(), "Coconut");
         }
 
-    [Test]
+        [Test]
         public void SelectTest()
         {
             TestSite.Html5Page.IceCream.Select("Chocolate");
-            Assert.AreEqual(TestSite.Html5Page.IceCream.GetValue(), "Chocolate");
+            Assert.AreEqual(TestSite.Html5Page.IceCream.Selected(), "Chocolate");
         }
 
         [Test]
         public void SelectEnumTest()
         {
             TestSite.Html5Page.IceCream.Select(IceCream.Strawberry);
-            Assert.AreEqual(TestSite.Html5Page.IceCream.GetValue(), "Strawberry");
+            Assert.AreEqual(TestSite.Html5Page.IceCream.Selected(), "Strawberry");
         }
     }
 }
