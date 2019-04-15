@@ -3,7 +3,6 @@ using System.Linq;
 using JDI.Light.Elements.Base;
 using JDI.Light.Elements.Common;
 using JDI.Light.Factories;
-using JDI.Light.Interfaces.Common;
 using JDI.Light.Interfaces.Complex;
 using OpenQA.Selenium;
 
@@ -34,8 +33,8 @@ namespace JDI.Light.Elements.Complex
                 {
                     continue;
                 }
-                if (IsSelected(value) && !names.Contains(name)
-                    || !IsSelected(value) && names.Contains(name))
+                if ((IsSelected(value) && !names.Contains(name))
+                    || (!IsSelected(value) && names.Contains(name)))
                 {
                     value.Click();
                 }
@@ -51,8 +50,8 @@ namespace JDI.Light.Elements.Complex
                 {
                     continue;
                 }
-                if (IsSelected(value) && !indexes.Contains(i)
-                    || !IsSelected(value) && indexes.Contains(i))
+                if ((IsSelected(value) && !indexes.Contains(i))
+                    || (!IsSelected(value) && indexes.Contains(i)))
                 {
                     value.Click();
                 }
@@ -68,8 +67,8 @@ namespace JDI.Light.Elements.Complex
                 {
                     continue;
                 }
-                if (IsSelected(value) && names.Contains(name)
-                    || !IsSelected(value) && !names.Contains(name))
+                if ((IsSelected(value) && names.Contains(name))
+                    || (!IsSelected(value) && !names.Contains(name)))
                 {
                     value.Click();
                 }
@@ -85,8 +84,8 @@ namespace JDI.Light.Elements.Complex
                 {
                     continue;
                 }
-                if (IsSelected(value) && indexes.Contains(i)
-                    || !IsSelected(value) && !indexes.Contains(i)) 
+                if ((IsSelected(value) && indexes.Contains(i))
+                    || (!IsSelected(value) && !indexes.Contains(i))) 
                 {
                     value.Click();
                 }
