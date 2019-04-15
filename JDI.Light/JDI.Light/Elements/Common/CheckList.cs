@@ -25,7 +25,6 @@ namespace JDI.Light.Elements.Common
 
         public void Check(params string[] names)
         {
-
             foreach (var name in Values())
             {
                 var value = CheckBoxes[GetIndexOf(name)];
@@ -43,7 +42,7 @@ namespace JDI.Light.Elements.Common
 
         public void Check(int[] indexes)
         {
-            for (int i = 1; i < Values().Count; i++)
+            for (int i = 1; i <= Values().Count; i++)
             {
                 var value = CheckBoxes[i - 1];
                 if (IsDisabled(value))
@@ -77,7 +76,7 @@ namespace JDI.Light.Elements.Common
 
         public void Uncheck(params int[] indexes)
         {
-            for (int i = 1; i < Values().Count; i++)
+            for (int i = 1; i <= Values().Count; i++)
             {
                 var value = CheckBoxes[i - 1];
                 if (IsDisabled(value))
@@ -108,9 +107,9 @@ namespace JDI.Light.Elements.Common
         {
             foreach (var index in indexes)
             {
-                if (IsEnabled(CheckBoxes[index]))
+                if (IsEnabled(CheckBoxes[index-1]))
                 {
-                    CheckBoxes[index].Click();
+                    CheckBoxes[index-1].Click();
                 }
             }
         }
