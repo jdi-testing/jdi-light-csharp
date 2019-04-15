@@ -27,7 +27,7 @@ namespace JDI.Light.Settings
             {typeof(IDatePicker), typeof(DatePicker)},
             {typeof(ILink), typeof(Link)},
             {typeof(ICheckList), typeof(CheckList) },
-            {typeof(IRadioButton), typeof(RadioButton) },
+            {typeof(IRadioButtons), typeof(RadioButtons) },
             {typeof(IDropDown), typeof(DropDown) },
             {typeof(IDataList), typeof(DataList) },
             {typeof(IDateTimeSelector), typeof(DateTimeSelector) },

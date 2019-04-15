@@ -27,7 +27,7 @@ namespace JDI.Light.Tests.UIObjects
         public ILabel JdiLabel { get; set; }
 
         [FindBy(Css = "div:nth-child(12) > div.html-left")]
-        public IRadioButton ColorsRadioButton { get; set; }
+        public IRadioButtons ColorsRadioButton { get; set; }
 
         [FindBy(Css = "div:nth-child(11) > div.html-left")]
         public ICheckList WeatherCheckList { get; set; }

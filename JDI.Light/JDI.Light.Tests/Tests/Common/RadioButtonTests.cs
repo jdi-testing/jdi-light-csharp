@@ -1,4 +1,6 @@
-﻿using JDI.Light.Tests.Enums;
+﻿using JDI.Light.Interfaces.Common;
+using JDI.Light.Interfaces.Complex;
+using JDI.Light.Tests.Enums;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
@@ -7,44 +9,48 @@ namespace JDI.Light.Tests.Tests.Common
     [TestFixture]
     public class RadioButtonTests : TestBase
     {
+        private string text = "Green";
+
+        private IRadioButtons colors;
+
         [SetUp]
         public void SetUp()
         {
             TestSite.Html5Page.Open();
             TestSite.Html5Page.CheckOpened();
-            TestSite.Html5Page.ColorsRadioButton.RadioLocator = By.XPath("//label");
+            colors = TestSite.Html5Page.ColorsRadioButton;
+        }
+
+        // todo add test after HasValue interface implementation
+        //[Test]
+        public void GetValueTest()
+        {
         }
 
         [Test]
-        public void SelectRadioButton()
+        public void SelectTest()
         {
-            var toSelect = Colors.Blue.ToString();
-            TestSite.Html5Page.ColorsRadioButton.Select(toSelect);
-
-            TestSite.Html5Page.ColorsRadioButton.RadioLocator = By.CssSelector("[type='radio']");
-            var selectedItems = TestSite.Html5Page.ColorsRadioButton.GetSelected();
-
-            Assert.AreEqual(selectedItems, toSelect.ToLower());
+            colors.Select("Blue");
+            Jdi.Assert.AreEquals("Blue", colors.Selected());
         }
 
         [Test]
-        public void SelectRadioByIndex()
+        public void SelectNumTest()
         {
-            TestSite.Html5Page.ColorsRadioButton.Select(2);
-
-            TestSite.Html5Page.ColorsRadioButton.RadioLocator = By.CssSelector("[type='radio']");
-            var selectedItems = TestSite.Html5Page.ColorsRadioButton.GetSelected();
-
-            Assert.AreEqual(selectedItems, "green");
+            colors.Select(1);
+            Jdi.Assert.AreEquals("Red", colors.Selected());
         }
 
         [Test]
-        public void GetSelectedRadio()
+        public void SelectedTest()
         {
-            TestSite.Html5Page.ColorsRadioButton.RadioLocator = By.CssSelector("[type='radio']");
-            var selectedItems = TestSite.Html5Page.ColorsRadioButton.GetSelected();
+            Jdi.Assert.AreEquals(text, colors.Selected());
+        }
 
-            Assert.AreEqual(selectedItems, Colors.Green.ToString().ToLower());
+        [Test]
+        public void ValueTest()
+        {
+            Jdi.Assert.CollectionEquals(new[] {"Red", "Green", "Blue", "Yellow"}, colors.Values());
         }
     }
 }
