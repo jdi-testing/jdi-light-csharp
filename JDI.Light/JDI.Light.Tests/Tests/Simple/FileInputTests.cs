@@ -4,7 +4,7 @@ using System.Threading;
 using NUnit.Framework;
 using static JDI.Light.Jdi;
 
-namespace JDI.Light.Tests.Tests.Common
+namespace JDI.Light.Tests.Tests.Simple
 {
     [TestFixture]
     internal class FileInputTests : TestBase

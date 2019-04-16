@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Globalization;
-using JDI.Light.Elements.Common;
 using NUnit.Framework;
 
-namespace JDI.Light.Tests.Tests.Common
+namespace JDI.Light.Tests.Tests.Simple
 {
     [TestFixture]
     public class DateTimeTests : TestBase

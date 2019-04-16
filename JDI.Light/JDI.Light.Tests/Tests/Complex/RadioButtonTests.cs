@@ -1,10 +1,7 @@
-﻿using JDI.Light.Interfaces.Common;
-using JDI.Light.Interfaces.Complex;
-using JDI.Light.Tests.Enums;
+﻿using JDI.Light.Interfaces.Complex;
 using NUnit.Framework;
-using OpenQA.Selenium;
 
-namespace JDI.Light.Tests.Tests.Common
+namespace JDI.Light.Tests.Tests.Complex
 {
     [TestFixture]
     public class RadioButtonTests : TestBase
@@ -20,11 +17,11 @@ namespace JDI.Light.Tests.Tests.Common
             TestSite.Html5Page.CheckOpened();
             colors = TestSite.Html5Page.ColorsRadioButton;
         }
-
-        // todo add test after HasValue interface implementation
+        
         //[Test]
         public void GetValueTest()
         {
+            // todo add test after HasValue interface implementation
         }
 
         [Test]
