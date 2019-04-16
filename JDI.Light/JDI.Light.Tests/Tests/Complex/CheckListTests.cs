@@ -9,7 +9,7 @@ namespace JDI.Light.Tests.Tests.Complex
     [TestFixture]
     public class CheckListTests : TestBase
     {
-        private string text = "Hot option";
+        private readonly string text = "Hot option";
 
         private ICheckList weather;
 
@@ -22,10 +22,11 @@ namespace JDI.Light.Tests.Tests.Complex
             weather = TestSite.Html5Page.WeatherCheckList;
         }
 
-        // todo add test after HasValue interface implementation
+        
         //[Test]
         public void GetValueTest()
         {
+            // todo add test after HasValue interface implementation
         }
 
         [Test]
