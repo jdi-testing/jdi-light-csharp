@@ -22,6 +22,9 @@ namespace JDI.Light.Tests.UIObjects
         [FindBy(Id = "blue-button")]
         public IButton BlueButton { get; set; }
 
+        [FindBy(Css = ".red")]
+        public IButton RedButton { get; set; }
+
         [FindBy(Css = "h1")]
         public ILabel JdiLabel { get; set; }
 
@@ -48,5 +51,10 @@ namespace JDI.Light.Tests.UIObjects
 
         [FindBy(Css = "#volume")]
         public IRange VolumeRange { get; set; }
+
+        [FindBy(Css = "[ui=jdi-title]")]
+        public ITitle JdiTitle { get; set; }
+
+        public Button GhostButton { get; set; }
     }
 }

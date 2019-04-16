@@ -72,6 +72,7 @@
     <Compile Include="Elements\Common\DateTimeSelector.cs" />
     <Compile Include="Elements\Common\RadioButton.cs" />
     <Compile Include="Elements\Common\Range.cs" />
+    <Compile Include="Elements\Common\Title.cs" />
     <Compile Include="Elements\Complex\Table\Column.cs" />
     <Compile Include="Elements\Complex\Table\DataClass.cs" />
     <Compile Include="Elements\Complex\Table\Line.cs" />
@@ -82,7 +83,7 @@
     <Compile Include="Elements\Common\DropDown.cs" />
     <Compile Include="Elements\Common\MultiSelector.cs" />
     <Compile Include="Elements\Common\Selector.cs" />
-    <Compile Include="Elements\Composite\Alert.cs" />
+    <Compile Include="Elements\Composite\Alerts.cs" />
     <Compile Include="Elements\Composite\Menu.cs" />
     <Compile Include="Elements\Composite\MultiDropdown.cs" />
     <Compile Include="Elements\Composite\MultiDropdownElement.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="Interfaces\Common\ITextElement.cs" />
     <Compile Include="Interfaces\Common\ITextArea.cs" />
     <Compile Include="Interfaces\Common\ITextField.cs" />
+    <Compile Include="Interfaces\Common\ITitle.cs" />
     <Compile Include="Interfaces\Composite\IForm.cs" />
     <Compile Include="Interfaces\Composite\IMultiDropdownElement.cs" />
     <Compile Include="Interfaces\Composite\IPage.cs" />

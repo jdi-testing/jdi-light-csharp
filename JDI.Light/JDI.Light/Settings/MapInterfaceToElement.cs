@@ -29,7 +29,8 @@ namespace JDI.Light.Settings
             {typeof(IDropDown), typeof(DropDown) },
             {typeof(IDataList), typeof(DataList) },
             {typeof(IDateTimeSelector), typeof(DateTimeSelector) },
-            {typeof(IRange), typeof(Range) }
+            {typeof(IRange), typeof(Range) },
+            {typeof(ITitle), typeof(Title) }
         };
 
         public static Type ClassFromInterface(Type clazz)
