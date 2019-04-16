@@ -21,7 +21,6 @@ namespace JDI.Light.Tests.Tests.Complex
             TestSite.Html5Page.WeatherCheckList.Check(text);
             weather = TestSite.Html5Page.WeatherCheckList;
         }
-
         
         //[Test]
         public void GetValueTest()
