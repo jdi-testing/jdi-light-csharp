@@ -48,7 +48,6 @@ namespace JDI.Light.Tests.Tests.Simple
             var calendar = new GregorianCalendar();
             var weekNum = calendar.GetWeekOfYear(_dateTime, CalendarWeekRule.FirstFullWeek, DayOfWeek.Monday);
             TestSite.Html5Page.AutumnWeek.Format = "yyyy-" + $"W{weekNum}";
-
             TestSite.Html5Page.AutumnWeek.SetDateTime(_dateTime);
             var setValue = TestSite.Html5Page.AutumnWeek.Value();
             Assert.AreEqual(setValue, "2019-W13");
