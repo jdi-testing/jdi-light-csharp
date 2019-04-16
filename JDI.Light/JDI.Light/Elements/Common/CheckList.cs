@@ -18,59 +18,116 @@ namespace JDI.Light.Elements.Common
         public void Check(string[] values)
         {
             ItemLocator = CheckListLocator;
-            Select(values, this);
+            foreach (var value in values)
+            {
+                if (!IsChecked(value))
+                {
+                    GetCheckBox(value).Click();
+                    //Select(new[] { value }, this);
+                }
+            }
         }
 
         public void Check(string value)
         {
             ItemLocator = CheckListLocator;
-            Select(new []{value}, this);
+            if (!IsChecked(value))
+            {
+                Select(new[] { value }, this);
+            }
         }
 
         public void Check(int[] indexes)
         {
             ItemLocator = CheckListLocator;
-            Select(indexes, this);
+            foreach (var index in indexes)
+            {
+                if (!IsChecked(index))
+                {
+                    Select(new[] { index }, this);
+                }
+            }
         }
 
         public void Check(int index)
         {
             ItemLocator = CheckListLocator;
-            Select(new []{index}, this);
+            if (!IsChecked(index))
+            {
+                Select(new[] {index}, this);
+            }
         }
 
         public void Uncheck(string[] values)
         {
-            Select(values, this);
+            ItemLocator = CheckListLocator;
+            foreach (var value in values)
+            {
+                if (IsChecked(value))
+                {
+                    Select(new[] { value }, this);
+                }
+            }
         }
 
         public void Uncheck(string value)
         {
-            Select(new []{value}, this);
+            ItemLocator = CheckListLocator;
+            if (IsChecked(value))
+            {
+                GetCheckBox(value).Click();
+                //Select(new[] {value}, this);
+            }
         }
 
         public void Uncheck(int[] indexes)
         {
-            Select(indexes, this);
+            ItemLocator = CheckListLocator;
+            foreach (var index in indexes)
+            {
+                if (IsChecked(index))
+                {
+                    Select(new[] { index }, this);
+                }
+            }
         }
 
         public void Uncheck(int index)
         {
-            Select(new []{index}, this);
+            ItemLocator = CheckListLocator;
+            if (IsChecked(index))
+            {
+                Select(new[] {index}, this);
+            }
         }
 
-        public void UncheckAll(Array allValues)
+        public void UncheckAll()
         {
-            foreach (var value in allValues.ToStringArray())
+            var els = WebElement.FindElements(CheckListLocator);
+            foreach (var checkBox in els)
             {
-                Invoker.DoAction($"Unselect item '{string.Join(" -> ", value)}'",
+                Invoker.DoAction($"Unselect item '{string.Join(" -> ", checkBox.GetAttribute("id"))}'",
                     () =>
                     {
-                        var els = WebElement.FindElements(CheckListLocator);
-                        var itemsList = els.FirstOrDefault(e => e.GetAttribute("id").Equals(value));
-                        if (itemsList?.GetAttribute("checked") != null)
+                        if (checkBox?.GetAttribute("checked") != null)
                         {
-                            itemsList.Click();
+                            checkBox.Click();
+                        }
+                    });
+            }
+        }
+
+        public void CheckAll()
+        {
+            var els = WebElement.FindElements(CheckListLocator);
+            foreach (var checkBox in els)
+            {
+                Invoker.DoAction($"Unselect item '{string.Join(" -> ", checkBox.GetAttribute("id"))}'",
+                    () =>
+                    {
+                        if (checkBox?.GetAttribute("checked") == null)
+                        {
+                            checkBox.Click();
                         }
                     });
             }
@@ -81,16 +138,44 @@ namespace JDI.Light.Elements.Common
             var selectedItems = new List<string>();
             foreach (var value in values.ToStringArray())
             {
-                var els = WebElement.FindElements(CheckListLocator);
-                var itemsList = els.FirstOrDefault(e => e.GetAttribute("id").Equals(value));
-                if (itemsList?.GetAttribute("checked") != null)
+                if (IsChecked(value))
                 {
                     selectedItems.Add(value);
                 }
             }
-
             selectedItems.Reverse();
             return selectedItems.ToArray();
+        }
+
+        public bool IsChecked(string value)
+        {
+            return GetCheckBox(value)?.GetAttribute("checked") != null;
+        }
+        public bool IsChecked(int index)
+        {
+            return GetCheckBox(index)?.GetAttribute("checked") != null;
+        }
+
+        public bool IsDisabled(string value)
+        {
+            return GetCheckBox(value)?.GetAttribute("disabled") != null;
+        }
+
+        public bool IsDisabled(int index)
+        {
+            return GetCheckBox(index)?.GetAttribute("disabled") != null;
+        }
+
+        private IWebElement GetCheckBox(string value)
+        {
+            var els = WebElement.FindElements(CheckListLocator);
+            return els.FirstOrDefault(e => e.GetAttribute("id").Equals(value));
+        }
+
+        private IWebElement GetCheckBox(int index)
+        {
+            var els = WebElement.FindElements(CheckListLocator);
+            return els[index];
         }
     }
 }
