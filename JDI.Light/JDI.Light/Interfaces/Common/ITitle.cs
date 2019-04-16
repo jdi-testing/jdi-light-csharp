@@ -1,5 +1,4 @@
-﻿
-namespace JDI.Light.Interfaces.Common
+﻿namespace JDI.Light.Interfaces.Common
 {
     public interface ITitle: ITextElement
     {
