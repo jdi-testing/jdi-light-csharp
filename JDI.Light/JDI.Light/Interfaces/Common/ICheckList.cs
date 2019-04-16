@@ -20,5 +20,7 @@ namespace JDI.Light.Interfaces.Common
         string[] GetChecked(Array values);
         bool IsChecked(string value);
         bool IsChecked(int index);
+        bool IsDisabled(string value);
+        bool IsDisabled(int index);
     }
 }

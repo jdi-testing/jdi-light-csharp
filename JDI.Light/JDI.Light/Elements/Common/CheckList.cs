@@ -23,7 +23,6 @@ namespace JDI.Light.Elements.Common
                 if (!IsChecked(value))
                 {
                     GetCheckBox(value).Click();
-                    //Select(new[] { value }, this);
                 }
             }
         }
@@ -33,7 +32,7 @@ namespace JDI.Light.Elements.Common
             ItemLocator = CheckListLocator;
             if (!IsChecked(value))
             {
-                Select(new[] { value }, this);
+                GetCheckBox(value).Click();
             }
         }
 
@@ -44,7 +43,7 @@ namespace JDI.Light.Elements.Common
             {
                 if (!IsChecked(index))
                 {
-                    Select(new[] { index }, this);
+                    GetCheckBox(index).Click();
                 }
             }
         }
@@ -54,7 +53,7 @@ namespace JDI.Light.Elements.Common
             ItemLocator = CheckListLocator;
             if (!IsChecked(index))
             {
-                Select(new[] {index}, this);
+                GetCheckBox(index).Click();
             }
         }
 
@@ -65,7 +64,7 @@ namespace JDI.Light.Elements.Common
             {
                 if (IsChecked(value))
                 {
-                    Select(new[] { value }, this);
+                    GetCheckBox(value).Click();
                 }
             }
         }
@@ -76,7 +75,6 @@ namespace JDI.Light.Elements.Common
             if (IsChecked(value))
             {
                 GetCheckBox(value).Click();
-                //Select(new[] {value}, this);
             }
         }
 
@@ -87,7 +85,7 @@ namespace JDI.Light.Elements.Common
             {
                 if (IsChecked(index))
                 {
-                    Select(new[] { index }, this);
+                    GetCheckBox(index).Click();
                 }
             }
         }
@@ -97,7 +95,7 @@ namespace JDI.Light.Elements.Common
             ItemLocator = CheckListLocator;
             if (IsChecked(index))
             {
-                Select(new[] {index}, this);
+                GetCheckBox(index).Click();
             }
         }
 

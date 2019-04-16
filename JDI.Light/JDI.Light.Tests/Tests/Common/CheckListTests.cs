@@ -60,5 +60,12 @@ namespace JDI.Light.Tests.Tests.Common
             var toCheck = new[] { "1000" };
             Assert.Throws<NullReferenceException>(() => TestSite.Html5Page.WeatherCheckList.Check(toCheck));
         }
+
+        [Test]
+        public void IsDisabledTests()
+        {
+            Assert.IsTrue(TestSite.Html5Page.WeatherCheckList.IsDisabled(4));
+            Assert.IsTrue(TestSite.Html5Page.WeatherCheckList.IsDisabled("disabled-ch"));
+        }
     }
 }
