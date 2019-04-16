@@ -12,7 +12,7 @@ namespace JDI.Light.Tests.Tests.Simple
             TestSite.Html5Page.CheckOpened();
         }
 
-        private string _text = "JDI TESTING PLATFORM";
+        private readonly string _text = "JDI TESTING PLATFORM";
 
         [Test]
         public void GetTextTest()
