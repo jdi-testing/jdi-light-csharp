@@ -34,7 +34,7 @@ namespace JDI.Light.Elements.Complex
             Labels[index-1].Click();
         }
 
-        public string Selected()
+        public new string Selected()
         {
             var checkedId = Radios.First(IsChecked).GetAttribute("id");
 
