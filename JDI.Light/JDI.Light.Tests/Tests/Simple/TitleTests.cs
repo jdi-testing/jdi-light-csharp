@@ -5,14 +5,14 @@ namespace JDI.Light.Tests.Tests.Simple
     [TestFixture]
     public class TitleTests : TestBase
     {
+        private readonly string _text = "JDI TESTING PLATFORM";
+
         [SetUp]
         public void SetUp()
         {
             TestSite.Html5Page.Open();
             TestSite.Html5Page.CheckOpened();
         }
-
-        private readonly string _text = "JDI TESTING PLATFORM";
 
         [Test]
         public void GetTextTest()
