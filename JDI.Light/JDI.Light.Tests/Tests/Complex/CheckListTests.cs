@@ -1,4 +1,6 @@
-﻿using JDI.Light.Interfaces.Common;
+﻿using System.Collections.Generic;
+using System.Net.Mime;
+using JDI.Light.Interfaces.Common;
 using JDI.Light.Interfaces.Complex;
 using NUnit.Framework;
 
@@ -7,7 +9,7 @@ namespace JDI.Light.Tests.Tests.Complex
     [TestFixture]
     public class CheckListTests : TestBase
     {
-        private string text = "Hot option";
+        private readonly string text = "Hot option";
 
         private ICheckList weather;
 
@@ -19,11 +21,11 @@ namespace JDI.Light.Tests.Tests.Complex
             TestSite.Html5Page.WeatherCheckList.Check(text);
             weather = TestSite.Html5Page.WeatherCheckList;
         }
-
-        // todo add test after HasValue interface implementation
+        
         //[Test]
         public void GetValueTest()
         {
+            // todo add test after HasValue interface implementation
         }
 
         [Test]
@@ -51,6 +53,27 @@ namespace JDI.Light.Tests.Tests.Complex
         {
             weather.Select("Disabled");
             Jdi.Assert.CollectionEquals(new[] { text }, weather.Checked());
+        }
+
+        [Test]
+        public void UncheckTest()
+        {
+            weather.Uncheck(text);
+            Jdi.Assert.CollectionEquals(new[] { "Cold", "Rainy day", "Sunny" }, weather.Checked());
+        }
+
+        [Test]
+        public void UncheckNumTest()
+        {
+            weather.Uncheck(1, 3);
+            Jdi.Assert.CollectionEquals(new[] { "Cold", "Sunny" }, weather.Checked());
+        }
+
+        [Test]
+        public void UncheckAll()
+        {
+            weather.UncheckAll();
+            Jdi.Assert.CollectionEquals(new List<string>(), weather.Checked());
         }
     }
 }

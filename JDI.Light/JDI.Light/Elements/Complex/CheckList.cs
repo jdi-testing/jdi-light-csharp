@@ -3,7 +3,6 @@ using System.Linq;
 using JDI.Light.Elements.Base;
 using JDI.Light.Elements.Common;
 using JDI.Light.Factories;
-using JDI.Light.Interfaces.Common;
 using JDI.Light.Interfaces.Complex;
 using OpenQA.Selenium;
 
@@ -11,9 +10,9 @@ namespace JDI.Light.Elements.Complex
 {
     public class CheckList : Selector, ICheckList
     {
-        public By CheckListLocator => By.CssSelector(".html-left > input");
+        public By CheckListLocator { get; set; }
 
-        public By LabelLocator => By.CssSelector(".html-left > label");
+        public By LabelLocator { get; set; }
 
         private List<UIElement> Labels => FindElements(LabelLocator)
             .Select(e => UIElementFactory.CreateInstance<UIElement>(LabelLocator, this, e)).ToList();
@@ -23,6 +22,8 @@ namespace JDI.Light.Elements.Complex
 
         public CheckList(By byLocator) : base(byLocator)
         {
+            CheckListLocator = By.CssSelector(".html-left > input");
+            LabelLocator = By.CssSelector(".html-left > label");
         }
 
         public void Check(params string[] names)
@@ -34,8 +35,8 @@ namespace JDI.Light.Elements.Complex
                 {
                     continue;
                 }
-                if (IsSelected(value) && !names.Contains(name)
-                    || !IsSelected(value) && names.Contains(name))
+                if ((IsSelected(value) && !names.Contains(name))
+                    || (!IsSelected(value) && names.Contains(name)))
                 {
                     value.Click();
                 }
@@ -51,8 +52,8 @@ namespace JDI.Light.Elements.Complex
                 {
                     continue;
                 }
-                if (IsSelected(value) && !indexes.Contains(i)
-                    || !IsSelected(value) && indexes.Contains(i))
+                if ((IsSelected(value) && !indexes.Contains(i))
+                    || (!IsSelected(value) && indexes.Contains(i)))
                 {
                     value.Click();
                 }
@@ -68,8 +69,8 @@ namespace JDI.Light.Elements.Complex
                 {
                     continue;
                 }
-                if (IsSelected(value) && names.Contains(name)
-                    || !IsSelected(value) && !names.Contains(name))
+                if ((IsSelected(value) && names.Contains(name))
+                    || (!IsSelected(value) && !names.Contains(name)))
                 {
                     value.Click();
                 }
@@ -85,8 +86,8 @@ namespace JDI.Light.Elements.Complex
                 {
                     continue;
                 }
-                if (IsSelected(value) && indexes.Contains(i)
-                    || !IsSelected(value) && !indexes.Contains(i)) 
+                if ((IsSelected(value) && indexes.Contains(i))
+                    || (!IsSelected(value) && !indexes.Contains(i))) 
                 {
                     value.Click();
                 }
@@ -138,13 +139,13 @@ namespace JDI.Light.Elements.Complex
 
         private int GetIndexOf(string name) => Labels.FindIndex(label => label.Text == name);
 
-        private bool IsChecked(UIElement checkbox) => checkbox.GetAttribute("checked") != null;
+        private static bool IsChecked(UIElement checkbox) => checkbox.GetAttribute("checked") != null;
 
-        private bool IsSelected(UIElement checkbox) => checkbox.Selected;
+        private static bool IsSelected(UIElement checkbox) => checkbox.Selected;
 
         // todo remove after inmplementation JDIBase class with is disabled method
-        private bool IsEnabled(UIElement checkbox) => checkbox.WebElement.Enabled;
+        private static bool IsEnabled(UIElement checkbox) => checkbox.WebElement.Enabled;
 
-        private bool IsDisabled(UIElement checkbox) => !IsEnabled(checkbox);
+        private static bool IsDisabled(UIElement checkbox) => !IsEnabled(checkbox);
     }
 }
