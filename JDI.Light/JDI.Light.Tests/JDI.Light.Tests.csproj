@@ -83,6 +83,7 @@
     <Compile Include="Tests\Simple\AlertTests.cs" />
     <Compile Include="Tests\Simple\ButtonTests.cs" />
     <Compile Include="Tests\Simple\CheckBoxTests.cs" />
+    <Compile Include="Tests\Simple\ColorPickerTests.cs" />
     <Compile Include="Tests\Simple\DateTimeTests.cs" />
     <Compile Include="Tests\Simple\FileInputTests.cs" />
     <Compile Include="Tests\Simple\ImagesTests.cs" />
