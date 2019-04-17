@@ -1,4 +1,5 @@
-﻿using JDI.Light.Interfaces.Complex;
+﻿using JDI.Light.Exceptions;
+using JDI.Light.Interfaces.Complex;
 using NUnit.Framework;
 
 namespace JDI.Light.Tests.Tests.Complex
@@ -8,46 +9,52 @@ namespace JDI.Light.Tests.Tests.Complex
     {
         private readonly string text = "Green";
 
-        private IRadioButtons colors;
+        private IRadioButtons _colors;
 
         [SetUp]
         public void SetUp()
         {
             TestSite.Html5Page.Open();
             TestSite.Html5Page.CheckOpened();
-            colors = TestSite.Html5Page.ColorsRadioButton;
+            _colors = TestSite.Html5Page.ColorsRadioButton;
         }
 
-        //[Test]
+        [Test]
         public void GetValueTest()
         {
-            // todo add test after HasValue interface implementation
+            Jdi.Assert.AreEquals(text, _colors.Value);
         }
 
         [Test]
         public void SelectTest()
         {
-            colors.Select("Blue");
-            Jdi.Assert.AreEquals("Blue", colors.Selected());
+            _colors.Select("Blue");
+            Jdi.Assert.AreEquals("Blue", _colors.Selected());
         }
 
         [Test]
         public void SelectNumTest()
         {
-            colors.Select(1);
-            Jdi.Assert.AreEquals("Red", colors.Selected());
+            _colors.Select(1);
+            Jdi.Assert.AreEquals("Red", _colors.Selected());
         }
 
         [Test]
         public void SelectedTest()
         {
-            Jdi.Assert.AreEquals(text, colors.Selected());
+            Jdi.Assert.AreEquals(text, _colors.Selected());
         }
 
         [Test]
         public void ValueTest()
         {
-            Jdi.Assert.CollectionEquals(new[] { "Red", "Green", "Blue", "Yellow" }, colors.Values());
+            Jdi.Assert.CollectionEquals(new[] { "Red", "Green", "Blue", "Yellow" }, _colors.Values());
+        }
+
+        [Test]
+        public void WrongNameTest()
+        {
+            Assert.Throws<ElementNotFoundException>(() => _colors.Select("wrong"));
         }
     }
 }

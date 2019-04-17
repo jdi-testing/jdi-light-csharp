@@ -2,35 +2,42 @@
 using System.Linq;
 using JDI.Light.Elements.Base;
 using JDI.Light.Elements.Common;
+using JDI.Light.Exceptions;
 using JDI.Light.Factories;
 using JDI.Light.Interfaces.Complex;
 using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Complex
 {
-    public class RadioButtons : Selector, IRadioButtons
+    public class RadioButtons : UIElement, IRadioButtons
     {
-        public By RadiButtonLocator { get; set; }
+        public By RadioButtonLocator { get; set; }
 
         public By LabelLocator { get; set; }
 
-        private List<UIElement> Labels => FindElements(LabelLocator)
-            .Select(e => UIElementFactory.CreateInstance<UIElement>(LabelLocator, this, e)).ToList();
+        private List<Label> Labels => FindElements(LabelLocator)
+            .Select(element => UIElementFactory.CreateInstance<Label>(LabelLocator, this, element)).ToList();
 
-        private List<UIElement> Radios => FindElements(RadiButtonLocator)
-            .Select(e => UIElementFactory.CreateInstance<UIElement>(RadiButtonLocator, this, e)).ToList();
+        private List<UIElement> Radios => FindElements(RadioButtonLocator)
+            .Select(element => UIElementFactory.CreateInstance<UIElement>(RadioButtonLocator, this, element)).ToList();
 
         protected RadioButtons(By byLocator) : base(byLocator)
         {
-            RadiButtonLocator = By.CssSelector("[type='radio']");
+            RadioButtonLocator = By.CssSelector("[type='radio']");
             LabelLocator = By.CssSelector(".html-left > label");
         }
 
         public By RadioLocator { get; set; }
 
-        public void Select(string value)
+        public void Select(string name)
         {
-            Labels.First(label => label.Text.Trim() == value).Click();
+            var element = Labels.FirstOrDefault(label => label.Text.Trim() == name);
+            if (element == null)
+            {
+                throw new ElementNotFoundException($"label: {name} not found");
+            }
+
+            element.Click();
         }
 
         public void Select(int index)
@@ -49,6 +56,8 @@ namespace JDI.Light.Elements.Complex
         {
             return Labels.Select(label => label.Text.Trim()).ToList();
         }
+
+        public string Value => Selected();
 
         private static bool IsChecked(UIElement radioButton) => radioButton.GetAttribute("checked") != null;
     }
