@@ -49,5 +49,7 @@ namespace JDI.Light.Tests.UIObjects
 
         [FindBy(Css = "#volume")]
         public IRange VolumeRange { get; set; }
+
+        public IProgressBar Progress { get; set; }
     }
 }
