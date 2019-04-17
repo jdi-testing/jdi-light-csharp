@@ -56,24 +56,6 @@ namespace JDI.Light.Elements.Common
                 () => _selectByIndex.Invoke(elem, index));
         }
 
-        public void Select(string[] values, Selector elem)
-        {
-            foreach (var value in values)
-            {
-                Invoker.DoAction($"Select item '{string.Join(" -> ", value)}'",
-                    () => _selectElementAction.Invoke(elem, value));
-            }
-        }
-
-        public void Select(int[] indexes, Selector elem)
-        {
-            foreach (var index in indexes)
-            {
-                 Invoker.DoAction($"Select item with index - '{string.Join(" -> ", index)}'",
-                () => _selectByIndex.Invoke(elem, index));
-            }
-        }
-
         public string GetSelected(Selector elem)
         {
             return Invoker.DoActionWithResult("Get value", () => _getSelected.Invoke(elem));
