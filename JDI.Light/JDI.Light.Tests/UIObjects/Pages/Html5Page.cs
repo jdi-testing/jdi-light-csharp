@@ -57,5 +57,7 @@ namespace JDI.Light.Tests.UIObjects
 
         [FindBy(Css = "#ice-cream")]
         public ComboBox IceCreamComboBox { get; set; }
+
+        public IProgressBar Progress { get; set; }
     }
 }
