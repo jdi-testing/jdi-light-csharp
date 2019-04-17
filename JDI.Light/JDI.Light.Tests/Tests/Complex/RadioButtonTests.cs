@@ -6,7 +6,7 @@ namespace JDI.Light.Tests.Tests.Complex
     [TestFixture]
     public class RadioButtonTests : TestBase
     {
-        private string text = "Green";
+        private readonly string text = "Green";
 
         private IRadioButtons colors;
 
