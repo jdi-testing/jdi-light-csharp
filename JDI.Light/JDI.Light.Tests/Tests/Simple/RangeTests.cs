@@ -12,21 +12,25 @@ namespace JDI.Light.Tests.Tests.Simple
             TestSite.Html5Page.CheckOpened();
             TestSite.Html5Page.Volume.SetVolume(90);
         }
+
         [Test]
         public void GetValueTest()
         {
             Assert.AreEqual(TestSite.Html5Page.DisabledRange.Volume(), 50);
         }
+
         [Test]
         public void MinTest()
         {
             Assert.AreEqual(TestSite.Html5Page.Volume.Min(), 10);
         }
+
         [Test]
         public void MaxTest()
         {
             Assert.AreEqual(TestSite.Html5Page.Volume.Max(), 100);
         }
+
         [Test]
         public void StepTest()
         {
