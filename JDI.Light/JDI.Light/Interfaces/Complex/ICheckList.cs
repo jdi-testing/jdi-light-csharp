@@ -1,8 +1,9 @@
-﻿using JDI.Light.Interfaces.Base;
+﻿using System.Collections.Generic;
+using JDI.Light.Interfaces.Base;
 
 namespace JDI.Light.Interfaces.Complex
 {
-    public interface ICheckList : IBaseUIElement
+    public interface ICheckList : IBaseUIElement, IGetValue<List<string>>
     {
         void Check(params string[] values);
         void Check(params int[] indexes);
