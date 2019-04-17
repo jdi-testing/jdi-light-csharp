@@ -23,14 +23,13 @@ namespace JDI.Light.Tests.Tests.Simple
         [Test]
         public void GetValueTest()
         {
-            // todo add test after HasValue interface implementation
+            Assert.AreEqual(TestSite.Html5Page.JdiTitle.GetValue(), _text);
         }
 
         [Test]
         public void ClickTest()
         {
             TestSite.Html5Page.JdiTitle.Click();
-
             Assert.AreEqual(TestSite.Html5Page.GetAlert().GetAlertText(), "JDI Title");
             TestSite.Html5Page.GetAlert().AcceptAlert();
         }

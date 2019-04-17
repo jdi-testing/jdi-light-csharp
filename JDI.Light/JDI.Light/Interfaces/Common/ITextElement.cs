@@ -7,5 +7,6 @@ namespace JDI.Light.Interfaces.Common
         string GetText();
         string WaitText(string text);
         string WaitMatchText(string regEx);
+        string GetValue();
     }
 }
