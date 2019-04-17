@@ -30,6 +30,7 @@ namespace JDI.Light.Tests.Tests.Simple
         public void ClickTest()
         {
             TestSite.Html5Page.JdiTitle.Click();
+
             Assert.AreEqual(TestSite.Html5Page.GetAlert().GetAlertText(), "JDI Title");
             TestSite.Html5Page.GetAlert().AcceptAlert();
         }
