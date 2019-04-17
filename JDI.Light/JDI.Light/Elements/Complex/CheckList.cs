@@ -44,7 +44,6 @@ namespace JDI.Light.Elements.Complex
                     continue;
                 }
                 if (value.Selected ^ indexes.Contains(i))
-
                 {
                     value.Click();
                 }
