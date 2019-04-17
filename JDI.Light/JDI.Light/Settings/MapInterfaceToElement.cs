@@ -30,7 +30,8 @@ namespace JDI.Light.Settings
             {typeof(IDataList), typeof(DataList) },
             {typeof(IDateTimeSelector), typeof(DateTimeSelector) },
             {typeof(IRange), typeof(Range) },
-            {typeof(ITitle), typeof(Title) }
+            {typeof(ITitle), typeof(Title) },
+            {typeof(IProgressBar), typeof(ProgressBar) }
         };
 
         public static Type ClassFromInterface(Type clazz)

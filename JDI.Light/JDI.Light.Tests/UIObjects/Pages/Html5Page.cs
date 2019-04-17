@@ -56,5 +56,7 @@ namespace JDI.Light.Tests.UIObjects
         public ITitle JdiTitle { get; set; }
 
         public Button GhostButton { get; set; }
+
+        public IProgressBar Progress { get; set; }
     }
 }
