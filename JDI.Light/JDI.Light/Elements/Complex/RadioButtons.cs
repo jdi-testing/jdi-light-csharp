@@ -10,9 +10,9 @@ namespace JDI.Light.Elements.Complex
 {
     public class RadioButtons : Selector, IRadioButtons
     {
-        public By RadiButtonLocator => By.CssSelector("[type='radio']");
+        public By RadiButtonLocator { get; set; }
 
-        public By LabelLocator => By.CssSelector(".html-left > label");
+        public By LabelLocator { get; set; }
 
         private List<UIElement> Labels => FindElements(LabelLocator)
             .Select(e => UIElementFactory.CreateInstance<UIElement>(LabelLocator, this, e)).ToList();
@@ -22,6 +22,8 @@ namespace JDI.Light.Elements.Complex
 
         protected RadioButtons(By byLocator) : base(byLocator)
         {
+            RadiButtonLocator = By.CssSelector("[type='radio']");
+            LabelLocator = By.CssSelector(".html-left > label");
         }
         
         public void Select(string value)
@@ -46,6 +48,6 @@ namespace JDI.Light.Elements.Complex
             return Labels.Select(label => label.Text.Trim()).ToList();
         }
 
-        private bool IsChecked(UIElement radioButton) => radioButton.GetAttribute("checked") != null;
+        private static bool IsChecked(UIElement radioButton) => radioButton.GetAttribute("checked") != null;
     }
 }
