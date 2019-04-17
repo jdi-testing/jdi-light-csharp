@@ -51,5 +51,9 @@ namespace JDI.Light.Tests.UIObjects
 
         [FindBy(Css = "input[type='range'][disabled]")]
         public IRange DisabledRange { get; set; }
+
+        public IRange VolumeRange { get; set; }
+
+        public IProgressBar Progress { get; set; }
     }
 }
