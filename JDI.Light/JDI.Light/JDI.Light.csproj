@@ -116,6 +116,7 @@
     <Compile Include="Interfaces\Common\IDatePicker.cs" />
     <Compile Include="Interfaces\Common\IDateTimeSelector.cs" />
     <Compile Include="Interfaces\Common\IDropDown.cs" />
+    <Compile Include="Interfaces\Common\IIcon.cs" />
     <Compile Include="Interfaces\Common\IImage.cs" />
     <Compile Include="Interfaces\Common\ILabel.cs" />
     <Compile Include="Interfaces\Common\ILink.cs" />
