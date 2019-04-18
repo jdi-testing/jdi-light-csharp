@@ -15,6 +15,7 @@ namespace JDI.Light.Interfaces.Complex
         void Select(params string[] values);
         void Select(params int[] indexes);
         void UncheckAll();
+        void CheckAll();
         string[] Checked();
     }
 }

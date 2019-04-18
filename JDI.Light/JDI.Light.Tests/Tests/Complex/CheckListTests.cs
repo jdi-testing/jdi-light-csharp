@@ -69,10 +69,17 @@ namespace JDI.Light.Tests.Tests.Complex
         }
 
         [Test]
-        public void UncheckAll()
+        public void UncheckAllTest()
         {
             _weather.UncheckAll();
             Jdi.Assert.CollectionEquals(new List<string>(), _weather.Checked());
+        }
+
+        [Test]
+        public void CheckAllTest()
+        {
+            _weather.CheckAll();
+            Jdi.Assert.CollectionEquals(new[] {"Hot option", "Cold", "Rainy day", "Sunny"}, _weather.Checked());
         }
 
         [Test]

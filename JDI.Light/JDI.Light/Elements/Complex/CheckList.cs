@@ -39,7 +39,7 @@ namespace JDI.Light.Elements.Complex
             for (int i = 1; i <= Value.Count; i++)
             {
                 var value = CheckBoxes[i - 1];
-                if (IsDisabled(value))
+                if (!value.Enabled)
                 {
                     continue;
                 }
@@ -61,7 +61,7 @@ namespace JDI.Light.Elements.Complex
             for (int i = 1; i <= Value.Count; i++)
             {
                 var value = CheckBoxes[i - 1];
-                if (IsDisabled(value))
+                if (!value.Enabled)
                 {
                     continue;
                 }
@@ -77,7 +77,7 @@ namespace JDI.Light.Elements.Complex
             var indexes = values.Select(GetIndexOf);
             foreach (var index in indexes)
             {
-                if (IsEnabled(CheckBoxes[index]))
+                if (CheckBoxes[index].Enabled)
                 {
                     CheckBoxes[index].Click();
                 }
@@ -88,7 +88,7 @@ namespace JDI.Light.Elements.Complex
         {
             foreach (var index in indexes)
             {
-                if (IsEnabled(CheckBoxes[index-1]))
+                if (CheckBoxes[index-1].Enabled)
                 {
                     CheckBoxes[index-1].Click();
                 }
@@ -100,6 +100,17 @@ namespace JDI.Light.Elements.Complex
             foreach (var element in GetCheckedUIElements())
             {
                 element.Click();
+            }
+        }
+
+        public void CheckAll()
+        {
+            foreach (var checkBox in CheckBoxes)
+            {
+                if (!checkBox.IsChecked && checkBox.Enabled)
+                {
+                    checkBox.Click();
+                }
             }
         }
 
@@ -124,10 +135,5 @@ namespace JDI.Light.Elements.Complex
             }
             return index;
         }
-
-        // todo remove after inmplementation JDIBase class with is disabled method
-        private bool IsEnabled(UIElement checkbox) => checkbox.WebElement.Enabled;
-
-        private bool IsDisabled(UIElement checkbox) => !IsEnabled(checkbox);
     }
 }
