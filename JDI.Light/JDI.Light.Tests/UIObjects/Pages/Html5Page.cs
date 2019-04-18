@@ -2,6 +2,7 @@
 using JDI.Light.Elements.Common;
 using JDI.Light.Elements.Composite;
 using JDI.Light.Interfaces.Common;
+using JDI.Light.Interfaces.Complex;
 
 namespace JDI.Light.Tests.UIObjects
 {
@@ -48,5 +49,7 @@ namespace JDI.Light.Tests.UIObjects
 
         [FindBy(Css = "#volume")]
         public IRange VolumeRange { get; set; }
+
+        public IProgressBar Progress { get; set; }
     }
 }

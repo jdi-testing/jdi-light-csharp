@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using JDI.Light.Elements.Base;
 using JDI.Light.Elements.Common;
+using JDI.Light.Elements.Complex;
 using JDI.Light.Interfaces.Base;
 using JDI.Light.Interfaces.Common;
+using JDI.Light.Interfaces.Complex;
 using OpenQA.Selenium;
 
 namespace JDI.Light.Settings
@@ -18,6 +20,7 @@ namespace JDI.Light.Settings
             {typeof(IButton), typeof(Button)},
             {typeof(ITextElement), typeof(TextElement)},
             {typeof(IImage), typeof(Image)},
+            {typeof(IIcon), typeof(Image)},
             {typeof(ITextArea), typeof(TextArea)},
             {typeof(ITextField), typeof(TextField)},
             {typeof(ILabel), typeof(Label)},
@@ -29,7 +32,8 @@ namespace JDI.Light.Settings
             {typeof(IDropDown), typeof(DropDown) },
             {typeof(IDataList), typeof(DataList) },
             {typeof(IDateTimeSelector), typeof(DateTimeSelector) },
-            {typeof(IRange), typeof(Range) }
+            {typeof(IRange), typeof(Range) },
+            {typeof(IProgressBar), typeof(ProgressBar) }
         };
 
         public static Type ClassFromInterface(Type clazz)
