@@ -47,7 +47,7 @@ namespace JDI.Light.Elements.Complex
 
         public new string Selected()
         {
-            var checkedId = Radios.First(IsChecked).GetAttribute("id");
+            var checkedId = Radios.First(radio => radio.GetAttribute("checked") != null).GetAttribute("id");
 
             return Labels.First(label => checkedId.Contains(label.GetAttribute("for")))?.Text;
         }
@@ -58,7 +58,5 @@ namespace JDI.Light.Elements.Complex
         }
 
         public string Value => Selected();
-
-        private bool IsChecked(UIElement radioButton) => radioButton.GetAttribute("checked") != null;
     }
 }
