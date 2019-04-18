@@ -14,6 +14,7 @@ namespace JDI.Light.Tests.Tests.Common
             TestSite.Html5Page.Open();
             TestSite.Html5Page.CheckOpened();
             _height = TestSite.Html5Page.Height;
+            _height.SetNumber("2.1");
         }
 
         //[Test]

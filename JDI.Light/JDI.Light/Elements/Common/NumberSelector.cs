@@ -37,6 +37,7 @@ namespace JDI.Light.Elements.Common
 
         public void SetNumber(string number)
         {
+            Clear();
             SendKeys(number);
         }
     }
