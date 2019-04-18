@@ -1,4 +1,5 @@
-﻿using JDI.Light.Elements.Base;
+﻿using System.Globalization;
+using JDI.Light.Elements.Base;
 using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
 
@@ -15,30 +16,30 @@ namespace JDI.Light.Elements.Common
             return GetAttribute("placeholder");
         }
 
-        public string Min()
+        public double Min()
         {
-            return GetAttribute("min");
+            return double.Parse(GetAttribute("min"));
         }
 
-        public string Max()
+        public double Max()
         {
-            return GetAttribute("max");
+            return double.Parse(GetAttribute("max"));
         }
 
-        public string Value()
+        public double Value()
         {
-            return GetAttribute("value");
+            return double.Parse(GetAttribute("value"));
         }
 
-        public string Step()
+        public double Step()
         {
-            return GetAttribute("step");
+            return double.Parse(GetAttribute("step"));
         }
 
-        public void SetNumber(string number)
+        public void SetNumber(double number)
         {
             Clear();
-            SendKeys(number);
+            SendKeys(number.ToString());
         }
     }
 }

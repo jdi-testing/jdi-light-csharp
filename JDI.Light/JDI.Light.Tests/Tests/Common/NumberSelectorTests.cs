@@ -14,7 +14,7 @@ namespace JDI.Light.Tests.Tests.Common
             TestSite.Html5Page.Open();
             TestSite.Html5Page.CheckOpened();
             _height = TestSite.Html5Page.Height;
-            _height.SetNumber("2.1");
+            _height.SetNumber(2.1);
         }
 
         //[Test]
@@ -26,19 +26,19 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void GetNumberTest()
         {
-            Jdi.Assert.AreEquals("2.1", _height.Value());
+            Jdi.Assert.AreEquals(2.1, _height.Value());
         }
 
         [Test]
         public void MinTest()
         {
-            Jdi.Assert.AreEquals("0.3", _height.Min());
+            Jdi.Assert.AreEquals(0.3, _height.Min());
         }
 
         [Test]
         public void MaxTest()
         {
-            Jdi.Assert.AreEquals("2.5", _height.Max());
+            Jdi.Assert.AreEquals(2.5, _height.Max());
         }
 
         [Test]
@@ -50,8 +50,8 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void SetNumberTest()
         {
-            _height.SetNumber("1.4");
-            Jdi.Assert.AreEquals("1.4", _height.Value());
+            _height.SetNumber(1.4);
+            Jdi.Assert.AreEquals(1.4, _height.Value());
         }
     }
 }
