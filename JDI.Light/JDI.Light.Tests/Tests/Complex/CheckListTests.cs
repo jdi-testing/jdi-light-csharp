@@ -67,6 +67,7 @@ namespace JDI.Light.Tests.Tests.Complex
             _weather.Uncheck(1, 3);
             Jdi.Assert.IsFalse(_weather.IsChecked(1));
             Jdi.Assert.IsTrue(_weather.IsChecked(2));
+            Jdi.Assert.IsTrue(_weather.IsChecked("Cold"));
             Jdi.Assert.CollectionEquals(new[] { "Cold", "Sunny" }, _weather.Checked());
         }
 

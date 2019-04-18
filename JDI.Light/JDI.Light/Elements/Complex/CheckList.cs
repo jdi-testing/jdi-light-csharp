@@ -124,7 +124,7 @@ namespace JDI.Light.Elements.Complex
 
         public bool IsChecked(string value)
         {
-            return CheckBoxes[GetIndexOf(value) - 1].GetAttribute("checked") != null;
+            return CheckBoxes[GetIndexOf(value)].GetAttribute("checked") != null;
         }
 
         public bool IsChecked(int index)
