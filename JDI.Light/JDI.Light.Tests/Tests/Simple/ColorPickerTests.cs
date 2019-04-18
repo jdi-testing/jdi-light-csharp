@@ -38,6 +38,7 @@ namespace JDI.Light.Tests.Tests.Simple
             }
             catch (Exception ignore)
             {
+                Jdi.Logger.Info("try-catch block for disabled ColorPicker works correctly");
             }
             Assert.AreEqual(TestSite.Html5Page.DisabledPicker.Color(), _color);
         }
