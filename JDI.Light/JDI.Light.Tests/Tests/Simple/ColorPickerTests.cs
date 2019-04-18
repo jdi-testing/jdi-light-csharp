@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using OpenQA.Selenium;
 
 namespace JDI.Light.Tests.Tests.Simple
 {
@@ -33,15 +34,7 @@ namespace JDI.Light.Tests.Tests.Simple
             TestSite.Html5Page.ColorPicker.SetColor("#432376");
             Assert.AreEqual(TestSite.Html5Page.ColorPicker.Color(), "#432376");
 
-            try
-            {
-                TestSite.Html5Page.DisabledPicker.SetColor("#432376");
-            }
-            catch (Exception ignore)
-            {
-                Jdi.Logger.Info("try-catch block for disabled ColorPicker works correctly");
-            }
-
+            Assert.Throws<Exception>(() => TestSite.Html5Page.DisabledPicker.SetColor("#432376"));
             Assert.AreEqual(TestSite.Html5Page.DisabledPicker.Color(), _color);
         }
     }
