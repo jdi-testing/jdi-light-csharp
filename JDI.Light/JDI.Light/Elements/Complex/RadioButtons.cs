@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using JDI.Light.Elements.Base;
-using JDI.Light.Elements.Common;
 using JDI.Light.Exceptions;
 using JDI.Light.Factories;
 using JDI.Light.Interfaces.Complex;
 using OpenQA.Selenium;
+using Label = JDI.Light.Elements.Common.Label;
 
 namespace JDI.Light.Elements.Complex
 {
@@ -59,6 +59,6 @@ namespace JDI.Light.Elements.Complex
 
         public string Value => Selected();
 
-        private static bool IsChecked(UIElement radioButton) => radioButton.GetAttribute("checked") != null;
+        private bool IsChecked(UIElement radioButton) => radioButton.GetAttribute("checked") != null;
     }
 }
