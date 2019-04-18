@@ -122,6 +122,26 @@ namespace JDI.Light.Elements.Complex
                 .ToArray();
         }
 
+        public bool IsChecked(string value)
+        {
+            return CheckBoxes[GetIndexOf(value)].GetAttribute("checked") != null;
+        }
+
+        public bool IsChecked(int index)
+        {
+            return CheckBoxes[index - 1].GetAttribute("checked") != null;
+        }
+
+        public bool IsDisabled(string value)
+        {
+            return CheckBoxes[GetIndexOf(value)].Enabled != true;
+        }
+
+        public bool IsDisabled(int index)
+        {
+            return CheckBoxes[index - 1].Enabled != true;
+        }
+
         public List<string> Value => Labels.Select(label => label.Text.Trim()).ToList();
 
         private IEnumerable<UIElement> GetCheckedUIElements() => CheckBoxes.Where(element => element.IsChecked);

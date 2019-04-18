@@ -17,5 +17,9 @@ namespace JDI.Light.Interfaces.Complex
         void UncheckAll();
         void CheckAll();
         string[] Checked();
+        bool IsChecked(string value);
+        bool IsChecked(int index);
+        bool IsDisabled(string value);
+        bool IsDisabled(int index);
     }
 }
