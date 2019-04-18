@@ -2,13 +2,12 @@
 
 namespace JDI.Light.Interfaces.Common
 {
-    public interface INumberSelector:  IBaseUIElement
+    public interface INumberSelector:  IBaseUIElement, IGetValue<double>
     {
-        string Placeholder();
-        double Min();
-        double Max();
-        double Value();
-        double Step();
+        string Placeholder { get; }
+        double Min { get; }
+        double Max { get; }
+        double Step { get; }
         void SetNumber(double number);
     }
 }
