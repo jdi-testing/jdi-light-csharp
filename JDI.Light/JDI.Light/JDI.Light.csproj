@@ -72,7 +72,7 @@
     <Compile Include="Elements\Common\ComboBox.cs" />
     <Compile Include="Elements\Common\DateTimeSelector.cs" />
     <Compile Include="Elements\Common\ProgressBar.cs" />
-    <Compile Include="Elements\Common\RadioButton.cs" />
+    <Compile Include="Elements\Complex\RadioButtons.cs" />
     <Compile Include="Elements\Common\Range.cs" />
     <Compile Include="Elements\Complex\Table\Column.cs" />
     <Compile Include="Elements\Complex\Table\DataClass.cs" />
@@ -124,7 +124,7 @@
     <Compile Include="Interfaces\Common\ILink.cs" />
     <Compile Include="Interfaces\Common\IMultiSelector.cs" />
     <Compile Include="Interfaces\Common\IProgressBar.cs" />
-    <Compile Include="Interfaces\Common\IRadioButton.cs" />
+    <Compile Include="Interfaces\Complex\IRadioButtons.cs" />
     <Compile Include="Interfaces\Common\IRange.cs" />
     <Compile Include="Interfaces\Common\ITextElement.cs" />
     <Compile Include="Interfaces\Common\ITextArea.cs" />
