@@ -51,5 +51,9 @@ namespace JDI.Light.Tests.UIObjects
         public IRange VolumeRange { get; set; }
 
         public IProgressBar Progress { get; set; }
+
+        public IColorPicker ColorPicker { get; set; }
+        
+        public IColorPicker DisabledPicker { get; set; }
     }
 }
