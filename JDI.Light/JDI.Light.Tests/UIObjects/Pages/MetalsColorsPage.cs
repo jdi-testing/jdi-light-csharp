@@ -5,6 +5,7 @@ using JDI.Light.Elements.Composite;
 using JDI.Light.Interfaces.Common;
 using JDI.Light.Tests.UIObjects.Sections;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
 
 namespace JDI.Light.Tests.UIObjects.Pages
 {
@@ -38,8 +39,7 @@ namespace JDI.Light.Tests.UIObjects.Pages
         [FindBy(Id = "summary-block")]
         public Summary SummaryBlock;
         
-       // [JDropDown("#colors",  ".filter-option", "li", ".caret")]
-       [JDropDown(Css = new []{ "#colors", ".filter-option", "li", ".caret" })]
+        [JDropDown( "#colors", ".filter-option", "li", ".caret", How.CssSelector)]
         public IDropList ColorsDropDown { get; set; }
 
         [FindBy(Css = "#metals")]
