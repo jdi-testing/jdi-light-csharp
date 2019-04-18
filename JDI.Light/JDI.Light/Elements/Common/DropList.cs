@@ -10,11 +10,11 @@ namespace JDI.Light.Elements.Common
         {
         }
 
-        public string Expander { get; set; }
-        public string Value { get; set; }
-        public string List { get; set; }
+        public By Expander { get; set; }
+        public By Value { get; set; }
+        public By List { get; set; }
       
-        public void Setup(string value, string list, string expand)
+        public void Setup(By value, By list, By expand)
         {
             if (value != null)
             {
@@ -36,7 +36,7 @@ namespace JDI.Light.Elements.Common
         {
             if (Expander != null)
             {
-                FindElement(By.CssSelector(Expander)).Click();
+                FindElement(Expander).Click();
             }
         }
 
@@ -44,7 +44,7 @@ namespace JDI.Light.Elements.Common
         {
             if (List != null)
             {
-                ItemLocator = By.CssSelector(List);
+                ItemLocator = List;
                 Select(value, this);
             }
         }
@@ -53,7 +53,7 @@ namespace JDI.Light.Elements.Common
         {
             if (List != null)
             {
-                ItemLocator = By.CssSelector(List);
+                ItemLocator = List;
                 Select(value.ToString(), this);
             }
         }
@@ -62,7 +62,7 @@ namespace JDI.Light.Elements.Common
         {
             if (List != null)
             {
-                ItemLocator = By.CssSelector(List);
+                ItemLocator = List;
                 Select(index, this);
             }
         }
@@ -71,7 +71,7 @@ namespace JDI.Light.Elements.Common
         {
             if (Value != null)
             {
-                return GetSelected(FindElement(By.CssSelector(Value)));
+                return GetSelected(FindElement(Value));
             }
             return null;
         }

@@ -6,9 +6,9 @@ namespace JDI.Light.Interfaces.Common
 {
     public interface IDropList : IBaseUIElement
     {
-        string Expander { get; set; }
-        string Value { get; set; }
-        string List { get; set; }
+        By Expander { get; set; }
+        By Value { get; set; }
+        By List { get; set; }
 
         void Expand();
         void Select(string value);

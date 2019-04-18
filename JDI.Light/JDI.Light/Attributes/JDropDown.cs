@@ -1,29 +1,58 @@
 ﻿using System;
+using OpenQA.Selenium;
 
 namespace JDI.Light.Attributes
 {
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
     public class JDropDown : Attribute
     {
-        private readonly string _root;
-        private readonly string _value;
-        private readonly string _list;
-        private readonly string _expand;
-
-        public JDropDown(string root, string value, string list, string expand)
+  
+        public string[] Css
         {
-            _root = root;
-            _value = value;
-            _list = list;
-            _expand = expand;
+            set
+            {
+                RootLocator = By.CssSelector(value[0]);
+                ValueLocator = By.CssSelector(value[1]);
+                ListLocator = By.CssSelector(value[2]);
+                ExpandLocator = By.CssSelector(value[3]);
+            }
+            get => new[] {""};
         }
 
-        public string Root() => _root;
+        public By RootLocator { get; private set; }
+        public By ValueLocator { get; private set; }
+        public By ListLocator { get; private set; }
+        public By ExpandLocator { get; private set; }
 
-        public string Value() => _value;
-
-        public string List() => _list;
-
-        public string Expand() => _expand;
+        /*
+        public JDropDown(string root, string value, string list, string expander)
+        {
+            RootLocator = By.CssSelector(root);
+            ValueLocator = By.CssSelector(value);
+            ListLocator  = By.CssSelector(list);
+            ExpandLocator = By.CssSelector(expander);
+        }
+        
+        public string RootByCss
+        {
+            set => RootLocator = By.CssSelector(value);
+            get => "";
+        }
+        public string ValueByCss
+        {
+            set => ValueLocator = By.CssSelector(value);
+            get => "";
+        }
+        public string ListByCss
+        {
+            set => RootLocator = By.CssSelector(value);
+            get => "";
+        }
+        public string ExpanderByCss
+        {
+            set { RootLocator = By.CssSelector(value); }
+            get => "";
+        }
+        */
     }
 }
