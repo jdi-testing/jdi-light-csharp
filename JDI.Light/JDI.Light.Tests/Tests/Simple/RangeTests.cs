@@ -10,7 +10,7 @@ namespace JDI.Light.Tests.Tests.Simple
         {
             TestSite.Html5Page.Open();
             TestSite.Html5Page.CheckOpened();
-            TestSite.Html5Page.Volume.SetVolume(90);
+            TestSite.Html5Page.Volume.SetValue(90);
         }
 
         [Test]
@@ -40,14 +40,14 @@ namespace JDI.Light.Tests.Tests.Simple
         [Test]
         public void SetRangeTest()
         {
-            TestSite.Html5Page.Volume.SetVolume(10);
+            TestSite.Html5Page.Volume.SetValue(10);
             Assert.AreEqual(TestSite.Html5Page.Volume.Volume(), 10);
         }
 
         [Test]
         public void RangeTest()
         {
-            TestSite.Html5Page.Volume.SetVolume("30");
+            TestSite.Html5Page.Volume.SetValue("30");
             Assert.AreEqual(TestSite.Html5Page.Volume.GetValue(), "30");
         }
     }

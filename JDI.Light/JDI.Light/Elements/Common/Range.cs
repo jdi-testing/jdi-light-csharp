@@ -12,12 +12,12 @@ namespace JDI.Light.Elements.Common
         {
         }
         
-        public void SetVolume(string value)
+        public void SetValue(string value)
         {
             SetAttribute("value", value);
         }
 
-        public void SetVolume(double value)
+        public void SetValue(double value)
         {
             SetAttribute("value", value.ToString(CultureInfo.InvariantCulture));
         }

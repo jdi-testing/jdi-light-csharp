@@ -9,7 +9,7 @@ namespace JDI.Light.Interfaces.Common
         double Min();
         double Max();
         double Step();
-        void SetVolume(string value);
-        void SetVolume(double value);
+        void SetValue(string value);
+        void SetValue(double value);
     }
 }
