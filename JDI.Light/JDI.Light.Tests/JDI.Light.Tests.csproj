@@ -74,6 +74,7 @@
     <Compile Include="Tests\Common\InputTests.cs" />
     <Compile Include="Tests\Common\JDIPerformanceTests.cs" />
     <Compile Include="Tests\Common\MultiSelectorTests.cs" />
+    <Compile Include="Tests\Common\NumberSelectorTests.cs" />
     <Compile Include="Tests\Complex\RadioButtonsTests.cs" />
     <Compile Include="Tests\Common\UIElementTests.cs" />
     <Compile Include="Tests\Composite\MultiDropdownTests.cs" />

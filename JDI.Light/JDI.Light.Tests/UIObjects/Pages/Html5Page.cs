@@ -52,6 +52,9 @@ namespace JDI.Light.Tests.UIObjects
 
         public IProgressBar Progress { get; set; }
 
+        [FindBy(Css = "#height")]
+        public INumberSelector Height { get; set; }
+        
         public IColorPicker ColorPicker { get; set; }
         
         public IColorPicker DisabledPicker { get; set; }

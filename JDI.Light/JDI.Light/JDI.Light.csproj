@@ -71,6 +71,7 @@
     <Compile Include="Elements\Complex\CheckList.cs" />
     <Compile Include="Elements\Common\ComboBox.cs" />
     <Compile Include="Elements\Common\DateTimeSelector.cs" />
+    <Compile Include="Elements\Common\NumberSelector.cs" />
     <Compile Include="Elements\Common\ProgressBar.cs" />
     <Compile Include="Elements\Complex\RadioButtons.cs" />
     <Compile Include="Elements\Common\Range.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Interfaces\Common\ILabel.cs" />
     <Compile Include="Interfaces\Common\ILink.cs" />
     <Compile Include="Interfaces\Common\IMultiSelector.cs" />
+    <Compile Include="Interfaces\Common\INumberSelector.cs" />
     <Compile Include="Interfaces\Common\IProgressBar.cs" />
     <Compile Include="Interfaces\Complex\IRadioButtons.cs" />
     <Compile Include="Interfaces\Common\IRange.cs" />
