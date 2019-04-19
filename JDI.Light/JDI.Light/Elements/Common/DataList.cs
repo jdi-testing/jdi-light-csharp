@@ -48,8 +48,7 @@ namespace JDI.Light.Elements.Common
             }
             SetText(select);
         }
-
-      
+        
         public string Selected()
         {
             return WebElement.GetAttribute("value");

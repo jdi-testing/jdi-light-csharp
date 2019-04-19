@@ -82,7 +82,6 @@ namespace JDI.Light.Factories
             {
                 defaultLocator = jDataList.RootLocator;
             }
-
             else
             {
                 foreach (var smartLocator in Jdi.SmartLocators)
