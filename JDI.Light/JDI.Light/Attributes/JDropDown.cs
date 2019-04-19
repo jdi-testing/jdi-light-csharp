@@ -1,4 +1,5 @@
 ﻿using System;
+using JDI.Light.Extensions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
@@ -14,31 +15,10 @@ namespace JDI.Light.Attributes
 
         public JDropDown(string root, string value, string list, string expander, How how = How.CssSelector)
         {
-            switch (how)
-            {
-                case How.CssSelector:
-                {
-                    RootLocator = By.CssSelector(root);
-                    ValueLocator = By.CssSelector(value);
-                    ListLocator = By.CssSelector(list);
-                    ExpandLocator = By.CssSelector(expander);
-                    return;
-                }
-
-                case How.XPath:
-                {
-                    RootLocator = By.XPath(root);
-                    ValueLocator = By.XPath(value);
-                    ListLocator = By.XPath(list);
-                    ExpandLocator = By.XPath(expander);
-                    return;
-                }
-
-                default:
-                {
-                    return;
-                }
-            }
+            RootLocator = how.GetLocator(root);
+            ValueLocator = how.GetLocator(value);
+            ListLocator = how.GetLocator(list);
+            ExpandLocator = how.GetLocator(expander);
         }
     }
 }

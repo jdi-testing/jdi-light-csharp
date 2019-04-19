@@ -73,27 +73,7 @@ namespace JDI.Light.Extensions
             if (locator != null) return locator;
             var findsBy = member.GetCustomAttribute<FindsByAttribute>(false);
             if (findsBy == null) return null;
-            switch (findsBy.How)
-            {
-                case How.Id:
-                    return By.Id(findsBy.Using);
-                case How.Name:
-                    return By.Name(findsBy.Using);
-                case How.TagName:
-                    return By.TagName(findsBy.Using);
-                case How.ClassName:
-                    return By.ClassName(findsBy.Using);
-                case How.CssSelector:
-                    return By.CssSelector(findsBy.Using);
-                case How.LinkText:
-                    return By.LinkText(findsBy.Using);
-                case How.PartialLinkText:
-                    return By.PartialLinkText(findsBy.Using);
-                case How.XPath:
-                    return By.XPath(findsBy.Using);
-                default:
-                    return null;
-            }
+            return findsBy.How.GetLocator(findsBy.Using);
         }
     }
 }
