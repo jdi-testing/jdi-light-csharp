@@ -24,6 +24,7 @@ namespace JDI.Light.Attributes
                     ExpandLocator = By.CssSelector(expander);
                     return;
                 }
+
                 case How.XPath:
                 {
                     RootLocator = By.XPath(root);
@@ -32,6 +33,7 @@ namespace JDI.Light.Attributes
                     ExpandLocator = By.XPath(expander);
                     return;
                 }
+
                 default:
                 {
                     return;
