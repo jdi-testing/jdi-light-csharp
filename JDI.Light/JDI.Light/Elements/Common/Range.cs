@@ -27,10 +27,11 @@ namespace JDI.Light.Elements.Common
             return GetAttribute("value");
         }
 
-        public double Volume()
+        public double Value()
         {
             return Convert.ToDouble(GetAttribute("value"));
         }
+
         public double Min()
         {
             return Convert.ToDouble(GetAttribute("min"));
@@ -40,6 +41,7 @@ namespace JDI.Light.Elements.Common
         {
             return Convert.ToDouble(GetAttribute("max"));
         }
+
         public double Step()
         {
             return Convert.ToDouble(GetAttribute("step"));

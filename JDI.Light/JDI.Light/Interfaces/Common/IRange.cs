@@ -4,7 +4,7 @@ namespace JDI.Light.Interfaces.Common
 {
     public interface IRange : IBaseUIElement
     {
-        double Volume();
+        double Value();
         string GetValue();
         double Min();
         double Max();

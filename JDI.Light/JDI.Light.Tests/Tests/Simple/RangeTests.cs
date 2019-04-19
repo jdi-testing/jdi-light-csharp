@@ -16,7 +16,7 @@ namespace JDI.Light.Tests.Tests.Simple
         [Test]
         public void GetValueTest()
         {
-            Assert.AreEqual(TestSite.Html5Page.DisabledRange.Volume(), 50);
+            Assert.AreEqual(TestSite.Html5Page.DisabledRange.Value(), 50);
         }
 
         [Test]
@@ -41,7 +41,7 @@ namespace JDI.Light.Tests.Tests.Simple
         public void SetRangeTest()
         {
             TestSite.Html5Page.Volume.SetValue(10);
-            Assert.AreEqual(TestSite.Html5Page.Volume.Volume(), 10);
+            Assert.AreEqual(TestSite.Html5Page.Volume.Value(), 10);
         }
 
         [Test]
