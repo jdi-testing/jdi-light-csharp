@@ -31,7 +31,6 @@ namespace JDI.Light.Settings
             {typeof(ILink), typeof(Link)},
             {typeof(ICheckList), typeof(CheckList) },
             {typeof(ICheckList<ICheckBox>), typeof(CheckList<ICheckBox>) },
-            {typeof(ICheckList<MyCheckBox>), typeof(CheckList<MyCheckBox>) },
             {typeof(IRadioButtons), typeof(RadioButtons) },
             {typeof(IDropDown), typeof(DropDown) },
             {typeof(IDataList), typeof(DataList) },

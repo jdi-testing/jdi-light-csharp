@@ -1,9 +1,6 @@
 ﻿using System.Collections.Generic;
-using JDI.Light.Elements.Common;
 using JDI.Light.Exceptions;
-using JDI.Light.Interfaces.Common;
 using JDI.Light.Interfaces.Complex;
-using JDI.Light.Interfaces.Complex.Generic;
 using NUnit.Framework;
 
 namespace JDI.Light.Tests.Tests.Complex
@@ -13,11 +10,7 @@ namespace JDI.Light.Tests.Tests.Complex
     {
         private readonly string text = "Hot option";
 
-        //private ICheckList _weather;
-
-        //private ICheckList<ICheckBox> _weather;
-
-        private ICheckList<MyCheckBox> _weather;
+        private ICheckList _weather;
 
         [SetUp]
         public void SetUp()
@@ -25,8 +18,7 @@ namespace JDI.Light.Tests.Tests.Complex
             TestSite.Html5Page.Open();
             TestSite.Html5Page.CheckOpened();
             TestSite.Html5Page.WeatherCheckList.Check(text);
-            //_weather = TestSite.Html5Page.WeatherCheckList;
-            _weather = TestSite.Html5Page.WeatherMyCheckbox;
+            _weather = TestSite.Html5Page.WeatherCheckList;
         }
         
         [Test]

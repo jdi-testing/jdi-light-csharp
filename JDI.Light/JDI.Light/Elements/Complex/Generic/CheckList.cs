@@ -18,7 +18,7 @@ namespace JDI.Light.Elements.Complex.Generic
         private List<ILabel> Labels => FindElements(LabelLocator)
             .Select(element => UIElementFactory.CreateInstance<ILabel>(LabelLocator, this, element)).ToList();
 
-        private List<TCheckBox> CheckBoxes => FindElements(CheckListLocator)
+        public List<TCheckBox> CheckBoxes => FindElements(CheckListLocator)
             .Select(element => UIElementFactory.CreateInstance<TCheckBox>(CheckListLocator, this, element)).ToList();
 
         public CheckList(By byLocator) : base(byLocator)

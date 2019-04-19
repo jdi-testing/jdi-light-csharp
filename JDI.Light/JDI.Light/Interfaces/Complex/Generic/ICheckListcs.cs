@@ -7,6 +7,7 @@ namespace JDI.Light.Interfaces.Complex.Generic
 {
     public interface ICheckList<TCHeckBox> : IBaseUIElement, IGetValue<List<string>> where TCHeckBox : ICheckBox
     {
+        List<TCHeckBox> CheckBoxes { get; }
         By CheckListLocator { get; set; }
         By LabelLocator { get; set; }
         void Check(params string[] values);
