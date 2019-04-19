@@ -77,6 +77,7 @@
     <Compile Include="Elements\Common\ProgressBar.cs" />
     <Compile Include="Elements\Complex\RadioButtons.cs" />
     <Compile Include="Elements\Common\Range.cs" />
+    <Compile Include="Elements\Common\Title.cs" />
     <Compile Include="Elements\Complex\Table\Column.cs" />
     <Compile Include="Elements\Complex\Table\DataClass.cs" />
     <Compile Include="Elements\Complex\Table\Line.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="Interfaces\Common\ITextElement.cs" />
     <Compile Include="Interfaces\Common\ITextArea.cs" />
     <Compile Include="Interfaces\Common\ITextField.cs" />
+    <Compile Include="Interfaces\Common\ITitle.cs" />
     <Compile Include="Interfaces\Composite\IForm.cs" />
     <Compile Include="Interfaces\Composite\IMultiDropdownElement.cs" />
     <Compile Include="Interfaces\Composite\IPage.cs" />

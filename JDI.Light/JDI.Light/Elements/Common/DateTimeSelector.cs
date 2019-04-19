@@ -12,7 +12,7 @@ namespace JDI.Light.Elements.Common
         protected DateTimeSelector(By byLocator) : base(byLocator)
         {
         }
-
+        
         public void SetDateTime(string value)
         {
             SetAttribute("value", value);
@@ -24,9 +24,19 @@ namespace JDI.Light.Elements.Common
             SetAttribute("value", value);
         }
         
-        public string GetValue()
+        public string Value()
         {
             return GetAttribute("value");
+        }
+
+        public string Max()
+        {
+            return GetAttribute("max");
+        }
+
+        public string Min()
+        {
+            return GetAttribute("min");
         }
 
         public DateTime GetDateTime()
