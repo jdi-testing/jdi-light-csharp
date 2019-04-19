@@ -3,10 +3,9 @@ using System.Linq;
 using JDI.Light.Elements.Base;
 using JDI.Light.Exceptions;
 using JDI.Light.Factories;
+using JDI.Light.Interfaces.Common;
 using JDI.Light.Interfaces.Complex;
 using OpenQA.Selenium;
-using CheckBox = JDI.Light.Elements.Common.CheckBox;
-using Label = JDI.Light.Elements.Common.Label;
 
 namespace JDI.Light.Elements.Complex
 {
@@ -16,11 +15,11 @@ namespace JDI.Light.Elements.Complex
 
         public By LabelLocator { get; set; }
 
-        private List<Label> Labels => FindElements(LabelLocator)
-            .Select(element => UIElementFactory.CreateInstance<Label>(LabelLocator, this, element)).ToList();
+        private List<ILabel> Labels => FindElements(LabelLocator)
+            .Select(element => UIElementFactory.CreateInstance<ILabel>(LabelLocator, this, element)).ToList();
 
-        private List<CheckBox> CheckBoxes => FindElements(CheckListLocator)
-            .Select(element => UIElementFactory.CreateInstance<CheckBox>(CheckListLocator, this, element)).ToList();
+        private List<ICheckBox> CheckBoxes => FindElements(CheckListLocator)
+            .Select(element => UIElementFactory.CreateInstance<ICheckBox>(CheckListLocator, this, element)).ToList();
 
         public CheckList(By byLocator) : base(byLocator)
         {
@@ -43,7 +42,7 @@ namespace JDI.Light.Elements.Complex
                 {
                     continue;
                 }
-                if (value.Selected ^ indexes.Contains(i))
+                if (value.IsChecked ^ indexes.Contains(i))
                 {
                     value.Click();
                 }
@@ -65,7 +64,7 @@ namespace JDI.Light.Elements.Complex
                 {
                     continue;
                 }
-                if (value.Selected == indexes.Contains(i))
+                if (value.IsChecked == indexes.Contains(i))
                 {
                     value.Click();
                 }
@@ -124,12 +123,12 @@ namespace JDI.Light.Elements.Complex
 
         public bool IsChecked(string value)
         {
-            return CheckBoxes[GetIndexOf(value)].GetAttribute("checked") != null;
+            return CheckBoxes[GetIndexOf(value)].IsChecked;
         }
 
         public bool IsChecked(int index)
         {
-            return CheckBoxes[index - 1].GetAttribute("checked") != null;
+            return CheckBoxes[index - 1].IsChecked;
         }
 
         public bool IsDisabled(string value)
@@ -144,7 +143,7 @@ namespace JDI.Light.Elements.Complex
 
         public List<string> Value => Labels.Select(label => label.Text.Trim()).ToList();
 
-        private IEnumerable<UIElement> GetCheckedUIElements() => CheckBoxes.Where(element => element.IsChecked);
+        private IEnumerable<ICheckBox> GetCheckedUIElements() => CheckBoxes.Where(element => element.IsChecked);
 
         private int GetIndexOf(string name)
         {
