@@ -11,13 +11,13 @@ namespace JDI.Light.Elements.Common
         protected Range(By byLocator) : base(byLocator)
         {
         }
-
-        public void SetRange(string value)
+        
+        public void SetValue(string value)
         {
             SetAttribute("value", value);
         }
 
-        public void SetRange(double value)
+        public void SetValue(double value)
         {
             SetAttribute("value", value.ToString(CultureInfo.InvariantCulture));
         }
@@ -27,10 +27,11 @@ namespace JDI.Light.Elements.Common
             return GetAttribute("value");
         }
 
-        public double GetRange()
+        public double Value()
         {
             return Convert.ToDouble(GetAttribute("value"));
         }
+
         public double Min()
         {
             return Convert.ToDouble(GetAttribute("min"));
@@ -39,6 +40,11 @@ namespace JDI.Light.Elements.Common
         public double Max()
         {
             return Convert.ToDouble(GetAttribute("max"));
+        }
+
+        public double Step()
+        {
+            return Convert.ToDouble(GetAttribute("step"));
         }
     }
 }

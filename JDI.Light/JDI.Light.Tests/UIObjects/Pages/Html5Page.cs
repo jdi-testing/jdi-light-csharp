@@ -39,7 +39,7 @@ namespace JDI.Light.Tests.UIObjects
         public IDateTimeSelector BookingTime { get; set; }
 
         [FindBy(Css = "#month-date")]
-        public IDateTimeSelector MonthOfHolidays { get; set; }
+        public IDateTimeSelector MonthDate { get; set; }
 
         [FindBy(Css = "#birth-date")]
         public IDateTimeSelector BirthDate { get; set; }
@@ -48,9 +48,14 @@ namespace JDI.Light.Tests.UIObjects
         public IDateTimeSelector PartyTime { get; set; }
 
         [FindBy(Css = "#autumn-week")]
-        public IDateTimeSelector AutumnDateTime { get; set; }
+        public IDateTimeSelector AutumnWeek { get; set; }
 
         [FindBy(Css = "#volume")]
+        public IRange Volume { get; set; }
+
+        [FindBy(Css = "input[type='range'][disabled]")]
+        public IRange DisabledRange { get; set; }
+
         public IRange VolumeRange { get; set; }
 
         [FindBy(Css = "[ui=jdi-title]")]
