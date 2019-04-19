@@ -30,6 +30,5 @@ namespace JDI.Light.Extensions
                     throw new Exception($"Can't get locator How.{how} for {value} value.");
             }
         }
-        
     }
 }
