@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using NUnit.Framework;
 
 namespace JDI.Light.Tests.Tests.Simple
@@ -17,30 +16,28 @@ namespace JDI.Light.Tests.Tests.Simple
         }
 
         [Test]
-        public void SetTimeTest()
+        public void GetDateTest()
         {
-            TestSite.Html5Page.BookingTime.Format = "H:mm";
-            TestSite.Html5Page.BookingTime.SetDateTime(_dateTime);
-            var setValue = TestSite.Html5Page.BookingTime.GetValue();
-            Assert.AreEqual(setValue, "15:00");
+            Assert.AreEqual(TestSite.Html5Page.PartyTime.Value(), "2018-06-12T19:30");
         }
 
         [Test]
-        public void SetMonthTest()
+        public void MinTest()
         {
-            TestSite.Html5Page.MonthOfHolidays.Format = "yyyy-MM";
-            TestSite.Html5Page.MonthOfHolidays.SetDateTime(_dateTime);
-            var setValue = TestSite.Html5Page.MonthOfHolidays.GetValue();
-            Assert.AreEqual(setValue, "2019-04");
+            Assert.AreEqual(TestSite.Html5Page.PartyTime.Min(), "2018-05-07T00:00");
         }
 
         [Test]
-        public void SetBirthDateTest()
+        public void MaxTest()
         {
-            TestSite.Html5Page.BirthDate.Format = "yyyy-MM-dd";
-            TestSite.Html5Page.BirthDate.SetDateTime(_dateTime);
-            var setValue = TestSite.Html5Page.BirthDate.GetValue();
-            Assert.AreEqual(setValue, "2019-04-01");
+            Assert.AreEqual(TestSite.Html5Page.PartyTime.Max(), "2018-06-14T00:00");
+        }
+
+        [Test]
+        public void SetDateTimeTest()
+        {
+            TestSite.Html5Page.PartyTime.SetDateTime("2017-05-10T00:00");
+            Assert.AreEqual(TestSite.Html5Page.PartyTime.Value(), "2017-05-10T00:00");
         }
 
         [Test]
@@ -48,20 +45,7 @@ namespace JDI.Light.Tests.Tests.Simple
         {
             TestSite.Html5Page.PartyTime.Format = "yyyy-MM-ddTHH:mm";
             TestSite.Html5Page.PartyTime.SetDateTime(_dateTime);
-            var setValue = TestSite.Html5Page.PartyTime.GetDateTime();
-            Assert.AreEqual(setValue, _dateTime);
-        }
-
-        [Test]
-        public void AutumnDateTimeTest()
-        {
-            var calendar = new GregorianCalendar();
-            var weekNum = calendar.GetWeekOfYear(_dateTime, CalendarWeekRule.FirstFullWeek, DayOfWeek.Monday);
-            TestSite.Html5Page.AutumnDateTime.Format = "yyyy-" + $"W{weekNum}";
-
-            TestSite.Html5Page.AutumnDateTime.SetDateTime(_dateTime);
-            var setValue = TestSite.Html5Page.AutumnDateTime.GetValue();
-            Assert.AreEqual(setValue, "2019-W13");
+            Assert.AreEqual(TestSite.Html5Page.PartyTime.GetDateTime(), _dateTime);
         }
     }
 }
