@@ -12,8 +12,8 @@ namespace JDI.Light.Attributes
         public By ListLocator { get; private set; }
         public By ExpandLocator { get; private set; }
 
-       
-        public JDropDown(string root, string value, string list, string expander, How how)
+
+        public JDropDown(string root, string value, string list, string expander, How how = How.CssSelector)
         {
             switch (how)
             {
@@ -25,8 +25,18 @@ namespace JDI.Light.Attributes
                     ExpandLocator = By.CssSelector(expander);
                     return;
                 }
-                default:
+                case How.XPath:
+                {
+                    RootLocator = By.XPath(root);
+                    ValueLocator = By.XPath(value);
+                    ListLocator = By.XPath(list);
+                    ExpandLocator = By.XPath(expander);
                     return;
+                }
+                default:
+                {
+                    return;
+                }
             }
         }
     }
