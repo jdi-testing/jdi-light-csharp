@@ -3,6 +3,7 @@ using JDI.Light.Elements.Common;
 using JDI.Light.Elements.Composite;
 using JDI.Light.Interfaces.Common;
 using JDI.Light.Interfaces.Complex;
+using JDI.Light.Interfaces.Complex.Generic;
 
 namespace JDI.Light.Tests.UIObjects
 {
@@ -31,6 +32,12 @@ namespace JDI.Light.Tests.UIObjects
 
         [FindBy(Css = "div:nth-child(11) > div.html-left")]
         public ICheckList WeatherCheckList { get; set; }
+
+        [FindBy(Css = "div:nth-child(11) > div.html-left")]
+        public ICheckList<ICheckBox> WeatherIcheckbox { get; set; }
+
+        [FindBy(Css = "div:nth-child(11) > div.html-left")]
+        public ICheckList<MyCheckBox> WeatherMyCheckbox { get; set; }
 
         [FindBy(Css = "#booking-time")]
         public IDateTimeSelector BookingTime { get; set; }

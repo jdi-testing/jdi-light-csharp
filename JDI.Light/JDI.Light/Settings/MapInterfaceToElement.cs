@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using JDI.Light.Elements.Base;
 using JDI.Light.Elements.Common;
 using JDI.Light.Elements.Complex;
+using JDI.Light.Elements.Complex.Generic;
 using JDI.Light.Interfaces.Base;
 using JDI.Light.Interfaces.Common;
 using JDI.Light.Interfaces.Complex;
+using JDI.Light.Interfaces.Complex.Generic;
 using OpenQA.Selenium;
 
 namespace JDI.Light.Settings
@@ -28,6 +30,8 @@ namespace JDI.Light.Settings
             {typeof(IDatePicker), typeof(DatePicker)},
             {typeof(ILink), typeof(Link)},
             {typeof(ICheckList), typeof(CheckList) },
+            {typeof(ICheckList<ICheckBox>), typeof(CheckList<ICheckBox>) },
+            {typeof(ICheckList<MyCheckBox>), typeof(CheckList<MyCheckBox>) },
             {typeof(IRadioButtons), typeof(RadioButtons) },
             {typeof(IDropDown), typeof(DropDown) },
             {typeof(IDataList), typeof(DataList) },
