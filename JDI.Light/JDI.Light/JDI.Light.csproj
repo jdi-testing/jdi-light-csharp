@@ -84,7 +84,7 @@
     <Compile Include="Elements\Common\DropDown.cs" />
     <Compile Include="Elements\Common\MultiSelector.cs" />
     <Compile Include="Elements\Common\Selector.cs" />
-    <Compile Include="Elements\Composite\Alerts.cs" />
+    <Compile Include="Elements\Composite\Alert.cs" />
     <Compile Include="Elements\Composite\Menu.cs" />
     <Compile Include="Elements\Composite\MultiDropdown.cs" />
     <Compile Include="Elements\Composite\MultiDropdownElement.cs" />

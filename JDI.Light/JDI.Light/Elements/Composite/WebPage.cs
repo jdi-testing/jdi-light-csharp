@@ -203,9 +203,9 @@ namespace JDI.Light.Elements.Composite
             CheckTitle();
         }
 
-        public Alerts GetAlert()
+        public Alert GetAlert()
         {
-            var alert = new Alerts
+            var alert = new Alert
             {
                 Parent = this
             };

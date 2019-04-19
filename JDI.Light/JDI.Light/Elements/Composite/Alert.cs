@@ -3,9 +3,9 @@ using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Composite
 {
-    public class Alerts : UIElement
+    public class Alert : UIElement
     {
-        public Alerts() : base(null)
+        public Alert() : base(null)
         {
         }
 
