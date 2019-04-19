@@ -12,7 +12,6 @@ namespace JDI.Light.Attributes
         public By ListLocator { get; private set; }
         public By ExpandLocator { get; private set; }
 
-
         public JDropDown(string root, string value, string list, string expander, How how = How.CssSelector)
         {
             switch (how)
