@@ -13,18 +13,21 @@ namespace JDI.Light.Elements.Common
         public Image(By byLocator = null)
             : base(byLocator)
         {
+            
         }
+        
+        public string Src => GetAttributeWithInvoker("src");
 
-        public string GetSource()
-        {
-            return Invoker.DoActionWithResult("Get image source for Element " + this,
-                () => FindImmediately(() => WebElement.GetAttribute("src"), ""));
-        }
+        public string Alt => GetAttributeWithInvoker("alt");
 
-        public string GetAlt()
+        public string Height => GetAttributeWithInvoker("height");
+
+        public string Width => GetAttributeWithInvoker("width");
+
+        private string GetAttributeWithInvoker(string attribute)
         {
-            return Invoker.DoActionWithResult("Get image title for Element " + this,
-                () => FindImmediately(() => WebElement.GetAttribute("alt"), ""));
+            return Invoker.DoActionWithResult($"Get image {attribute} for Element " + this,
+                () => FindImmediately(() => WebElement.GetAttribute(attribute), ""));
         }
     }
 }
