@@ -2,6 +2,7 @@
 using JDI.Light.Elements.Common;
 using JDI.Light.Elements.Composite;
 using JDI.Light.Interfaces.Common;
+using JDI.Light.Interfaces.Complex;
 
 namespace JDI.Light.Tests.UIObjects
 {
@@ -29,7 +30,7 @@ namespace JDI.Light.Tests.UIObjects
         public ILabel JdiLabel { get; set; }
 
         [FindBy(Css = "div:nth-child(12) > div.html-left")]
-        public IRadioButton ColorsRadioButton { get; set; }
+        public IRadioButtons ColorsRadioButton { get; set; }
 
         [FindBy(Css = "div:nth-child(11) > div.html-left")]
         public ICheckList WeatherCheckList { get; set; }
@@ -58,5 +59,12 @@ namespace JDI.Light.Tests.UIObjects
         public Button GhostButton { get; set; }
 
         public IProgressBar Progress { get; set; }
+
+        [FindBy(Css = "#height")]
+        public INumberSelector Height { get; set; }
+        
+        public IColorPicker ColorPicker { get; set; }
+        
+        public IColorPicker DisabledPicker { get; set; }
     }
 }

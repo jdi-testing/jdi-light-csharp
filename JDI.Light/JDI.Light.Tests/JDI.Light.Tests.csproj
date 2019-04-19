@@ -67,14 +67,15 @@
     <Compile Include="Enums\Odds.cs" />
     <Compile Include="Enums\Weather.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\Common\CheckListTests.cs" />
+    <Compile Include="Tests\Complex\CheckListTests.cs" />
     <Compile Include="Tests\Common\ComboBoxTests.cs" />
     <Compile Include="Tests\Common\DataListTests.cs" />
     <Compile Include="Tests\Common\DropDownTests.cs" />
     <Compile Include="Tests\Common\InputTests.cs" />
     <Compile Include="Tests\Common\JDIPerformanceTests.cs" />
     <Compile Include="Tests\Common\MultiSelectorTests.cs" />
-    <Compile Include="Tests\Common\RadioButtonTests.cs" />
+    <Compile Include="Tests\Common\NumberSelectorTests.cs" />
+    <Compile Include="Tests\Complex\RadioButtonsTests.cs" />
     <Compile Include="Tests\Common\UIElementTests.cs" />
     <Compile Include="Tests\Composite\MultiDropdownTests.cs" />
     <Compile Include="Tests\Composite\SectionTests.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Tests\Simple\AlertTests.cs" />
     <Compile Include="Tests\Simple\ButtonTests.cs" />
     <Compile Include="Tests\Simple\CheckBoxTests.cs" />
+    <Compile Include="Tests\Simple\ColorPickerTests.cs" />
     <Compile Include="Tests\Simple\DateTimeTests.cs" />
     <Compile Include="Tests\Simple\FileInputTests.cs" />
     <Compile Include="Tests\Simple\ImagesTests.cs" />
