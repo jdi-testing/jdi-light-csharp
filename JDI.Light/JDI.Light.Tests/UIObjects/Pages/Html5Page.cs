@@ -53,6 +53,7 @@ namespace JDI.Light.Tests.UIObjects
 
         public IDropDown DisabledDropdown { get; set; }
         
+        [JDataList("#ice-cream", "#ice-cream-flavors", "option")]
         public DataList IceCream { get; set; }
 
         [FindBy(Css = "#ice-cream")]
@@ -61,7 +62,7 @@ namespace JDI.Light.Tests.UIObjects
         [FindBy(Css = "#ice-cream-flavors > option:nth-child(1)")]
         public DataList ChocolateIceCream { get; set; }
 
-        [FindBy(Css = "#ice-cream-flavors > option")]
+        [FindBy(Css = "#ice-cream-flavors")]
         public DataList OptionsIceCream { get; set; }
 
         public IProgressBar Progress { get; set; }
