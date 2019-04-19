@@ -34,7 +34,7 @@ namespace JDI.Light.Settings
             {typeof(IDateTimeSelector), typeof(DateTimeSelector) },
             {typeof(IRange), typeof(Range) },
             {typeof(ITitle), typeof(Title) },
-            {typeof(IProgressBar), typeof(ProgressBar) }
+            {typeof(IProgressBar), typeof(ProgressBar) },
             {typeof(INumberSelector), typeof(NumberSelector) },
             {typeof(IColorPicker), typeof(ColorPicker) }
         };
