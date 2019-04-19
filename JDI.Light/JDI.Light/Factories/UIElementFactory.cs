@@ -111,7 +111,7 @@ namespace JDI.Light.Factories
             if (jDataList != null)
             {
                 var dataList = (DataList)element;
-                dataList.Setup(jDataList.ValueLocator, jDataList.ListLocator);
+                dataList.Setup(jDataList.ValuesLocator);
             }
 
             return element;

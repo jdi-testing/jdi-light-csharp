@@ -38,8 +38,8 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void SelectNumTest()
         {
-            TestSite.Html5Page.IceCream.Select("Coconut");
-            TestSite.Html5Page.IceCream.Select(2);
+            TestSite.Html5Page.IceCream.Select(5);
+            Assert.AreEqual(TestSite.Html5Page.IceCream.Selected(), "Vanilla");
         }
     }
 }

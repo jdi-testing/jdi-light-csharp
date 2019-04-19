@@ -8,31 +8,26 @@ namespace JDI.Light.Attributes
     public class JDataList : Attribute
     {
         public By RootLocator { get; private set; }
-        public By ValueLocator { get; private set; }
-        public By ListLocator { get; private set; }
+        public By ValuesLocator { get; private set; }
 
-        public JDataList(string root, string value, string list, How how = How.CssSelector)
+        public JDataList(string root, string values, How how = How.CssSelector)
         {
             switch (how)
             {
                 case How.CssSelector:
                 {
                     RootLocator = By.CssSelector(root);
-                    ValueLocator = By.CssSelector(value);
-                    ListLocator = By.CssSelector(list);
+                    ValuesLocator = By.CssSelector(values);
                     return;
                 }
                 case How.XPath:
                 {
                     RootLocator = By.XPath(root);
-                    ValueLocator = By.XPath(value);
-                    ListLocator = By.XPath(list);
+                    ValuesLocator = By.XPath(values);
                     return;
                 }
                 default:
-                {
                     return;
-                }
             }
         }
     }

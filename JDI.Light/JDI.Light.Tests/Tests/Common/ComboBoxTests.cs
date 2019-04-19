@@ -33,5 +33,12 @@ namespace JDI.Light.Tests.Tests.Common
             TestSite.Html5Page.IceCream.Select(IceCream.Strawberry);
             Assert.AreEqual(TestSite.Html5Page.IceCreamComboBox.Selected(), "Strawberry");
         }
+
+        [Test]
+        public void SelectNumTest()
+        {
+            TestSite.Html5Page.IceCream.Select(5);
+            Assert.AreEqual(TestSite.Html5Page.IceCreamComboBox.Selected(), "Vanilla");
+        }
     }
 }
