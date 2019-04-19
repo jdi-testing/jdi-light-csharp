@@ -35,6 +35,7 @@ namespace JDI.Light.Settings
             {typeof(IRange), typeof(Range) },
             {typeof(IDropList), typeof(DropList) },
             {typeof(IProgressBar), typeof(ProgressBar) },
+            {typeof(INumberSelector), typeof(NumberSelector) },
             {typeof(IColorPicker), typeof(ColorPicker) }
         };
 
