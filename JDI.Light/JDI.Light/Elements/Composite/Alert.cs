@@ -15,22 +15,23 @@ namespace JDI.Light.Elements.Composite
             return _alert ?? (_alert = WebDriver.SwitchTo().Alert());
         }
 
-        public void Ok()
+        public void AcceptAlert()
         {
             GetAlert().Accept();
         }
 
-        public void Cancel()
+        public void DismissAlert()
         {
             GetAlert().Dismiss();
         }
 
-        public new void SendKeys(string keysToSend)
+        public void InputAndAcceptAlert(string keysToSend)
         {
             GetAlert().SendKeys(keysToSend);
+            GetAlert().Accept();
         }
 
-        public string GetText()
+        public string GetAlertText()
         {
             return GetAlert().Text;
         }

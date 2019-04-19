@@ -94,6 +94,7 @@
     <Compile Include="Tests\Simple\TextAreaTests.cs" />
     <Compile Include="Tests\Simple\TextFieldsTests.cs" />
     <Compile Include="Tests\Simple\TextTests.cs" />
+    <Compile Include="Tests\Simple\TitleTests.cs" />
     <Compile Include="UIObjects\Forms\LoginFormClient.cs" />
     <Compile Include="UIObjects\Pages\BasePage.cs" />
     <Compile Include="UIObjects\Pages\ComplexTablePage.cs" />
