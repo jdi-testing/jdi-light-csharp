@@ -38,15 +38,27 @@ namespace JDI.Light.Tests.Tests.Simple
         }
 
         [Test]
-        public void GetSourceTest()
+        public void GetSrcTest()
         {
-            Jdi.Assert.AreEquals(LogoImage.GetSource(), Src);
+            Jdi.Assert.AreEquals(LogoImage.Src, Src);
         }
 
         [Test]
-        public void GetTipTest()
+        public void GetAltTest()
         {
-            Jdi.Assert.AreEquals(LogoImage.GetAlt(), Alt);
+            Jdi.Assert.AreEquals(LogoImage.Alt, Alt);
+        }
+
+        [Test]
+        public void GetHeight()
+        {
+            Jdi.Assert.AreEquals(LogoImage.Height, "31");
+        }
+
+        [Test]
+        public void GetWidth()
+        {
+            Jdi.Assert.AreEquals(LogoImage.Width, "86");
         }
     }
 }
