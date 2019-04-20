@@ -25,10 +25,9 @@ namespace JDI.Light.Asserts
             return this;
         }
 
-        public FileAssert Text(Matcher<string> text)
+        public FileAssert Text(Matcher<string> value)
         {
-
-            Assert.IsTrue(text.IsMatch(File.ReadAllText(_file.FullName)));
+            Assert.IsTrue(value.IsMatch(File.ReadAllText(_file.FullName)));
             return this;
         }
 

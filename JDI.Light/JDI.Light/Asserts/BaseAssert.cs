@@ -3,19 +3,19 @@ namespace JDI.Light.Asserts
 {
     public class BaseAssert
     {
-        public string Name;
-        public string FailElement;
+        private string _name;
+        private string _failElement;
 
         public BaseAssert(string name, string failElement)
         {
-            Name = name;
-            FailElement = failElement;
+            _name = name;
+            _failElement = failElement;
         }
 
         public BaseAssert(string name)
         {
-            Name = name;
-            FailElement = name;
+            _name = name;
+            _failElement = name;
         }
     }
 }
