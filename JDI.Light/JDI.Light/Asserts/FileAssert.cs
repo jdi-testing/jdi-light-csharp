@@ -2,14 +2,13 @@
 using System.IO;
 using JDI.Light.Matchers;
 using static JDI.Light.Jdi;
-
 namespace JDI.Light.Asserts
 {
-    public class FileAssert : BaseAssert
+    public class FileAssert
     {
         private readonly FileInfo _file;
 
-        public FileAssert(string fileName) : base(fileName)
+        public FileAssert(string fileName)
         {
             _file = new FileInfo(Path.Combine(Path.Combine(Environment.GetEnvironmentVariable("USERPROFILE"), "Downloads"), fileName));
         }
