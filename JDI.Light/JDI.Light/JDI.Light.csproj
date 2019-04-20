@@ -58,6 +58,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Asserts\BaseAssert.cs" />
+    <Compile Include="Asserts\FileAssert.cs" />
     <Compile Include="Asserts\TableAssert.cs" />
     <Compile Include="Attributes\ByText.cs" />
     <Compile Include="Attributes\XPathAttribute.cs" />
@@ -142,18 +144,21 @@
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Enums\LogLevels.cs" />
     <Compile Include="Matchers\CollectionMatchers\SubsequenceOfMatcher.cs" />
-    <Compile Include="Matchers\IntegerMachers\GreaterThanOrEqualToMatcher.cs" />
-    <Compile Include="Matchers\IntegerMachers\LessThanOrEqualToMatcher.cs" />
+    <Compile Include="Matchers\IntegerMatchers\GreaterThanOrEqualToMatcher.cs" />
+    <Compile Include="Matchers\IntegerMatchers\LessThanOrEqualToMatcher.cs" />
+    <Compile Include="Matchers\LongMatchers\GreaterThanMatcher.cs" />
+    <Compile Include="Matchers\LongMatchers\Is.cs" />
+    <Compile Include="Matchers\StringMatchers\ContainsStringMatcher.cs" />
     <Compile Include="Settings\ISmartLocator.cs" />
     <Compile Include="Settings\SmartLocatorByCss.cs" />
     <Compile Include="Settings\SmartLocatorById.cs" />
     <Compile Include="Utils\BaseAsserter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Factories\WebDriverFactory.cs" />
-    <Compile Include="Matchers\IntegerMachers\GreaterThanMatcher.cs" />
+    <Compile Include="Matchers\IntegerMatchers\GreaterThanMatcher.cs" />
     <Compile Include="Matchers\Matcher.cs" />
     <Compile Include="Matchers\Is.cs" />
-    <Compile Include="Matchers\IntegerMachers\LessThanMatcher.cs" />
+    <Compile Include="Matchers\IntegerMatchers\LessThanMatcher.cs" />
     <Compile Include="Utils\StaTaskScheduler.cs" />
     <Compile Include="Utils\WinProcUtils.cs" />
     <Compile Include="Utils\WebDriverUtils.cs" />
