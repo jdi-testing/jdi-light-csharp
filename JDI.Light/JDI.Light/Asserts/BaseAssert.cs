@@ -1,5 +1,4 @@
-﻿
-namespace JDI.Light.Asserts
+﻿namespace JDI.Light.Asserts
 {
     public class BaseAssert
     {

@@ -6,7 +6,6 @@ namespace JDI.Light.Matchers.StringMatchers
     {
         private ContainsStringMatcher(string textOccurence) : base(textOccurence)
         {
-
         }
 
         public static ContainsStringMatcher ContainsString(string textOccurence) => new ContainsStringMatcher(textOccurence);
