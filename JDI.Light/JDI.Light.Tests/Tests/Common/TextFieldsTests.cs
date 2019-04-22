@@ -86,7 +86,6 @@ namespace JDI.Light.Tests.Tests.Common
             // todo: implement HasLabel interface
         }
 
-
         [Test]
         public void MultiKeyTest()
         {
