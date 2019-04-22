@@ -1,5 +1,6 @@
 ﻿using JDI.Light.Tests.Enums;
 using NUnit.Framework;
+using System;
 
 namespace JDI.Light.Tests.Tests.Common
 {
@@ -54,7 +55,7 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void DisabledTest()
         {
-            TestSite.Html5Page.DisabledDropdown.Select("Pirate");
+            Assert.Throws<Exception>(() => TestSite.Html5Page.DisabledDropdown.Select("Pirate"));
             Assert.AreEqual(TestSite.Html5Page.DisabledDropdown.GetSelected(), "Disabled");
         }
     }

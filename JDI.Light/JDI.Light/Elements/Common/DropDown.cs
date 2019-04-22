@@ -16,16 +16,28 @@ namespace JDI.Light.Elements.Common
         public void Select(string value)
         {
             SelectElement.SelectByText(value);
+            if (value != SelectElement.SelectedOption.Text)
+            {
+                throw new Exception($"{value} element not selected.");
+            }
         }
 
         public void Select(Enum value)
         {
             SelectElement.SelectByText(value.ToString());
+            if (value.ToString() != SelectElement.SelectedOption.Text)
+            {
+                throw new Exception($"{value} element not selected.");
+            }
         }
 
         public void Select(int index)
         {
             SelectElement.SelectByIndex(index);
+            if (SelectElement.Options[index].Text != SelectElement.SelectedOption.Text)
+            {
+                throw new Exception($"{SelectElement.Options[index].Text} element not selected.");
+            }
         }
 
         public string GetSelected()

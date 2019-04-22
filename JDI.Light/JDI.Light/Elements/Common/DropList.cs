@@ -46,6 +46,10 @@ namespace JDI.Light.Elements.Common
             {
                 ItemLocator = ListLocator;
                 Select(value, this);
+                if (GetSelected() != value)
+                {
+                    throw new Exception($"{value} element not selected.");
+                }
             }
         }
 
@@ -55,6 +59,10 @@ namespace JDI.Light.Elements.Common
             {
                 ItemLocator = ListLocator;
                 Select(value.ToString(), this);
+                if (GetSelected() != value.ToString())
+                {
+                    throw new Exception($"{value} element not selected.");
+                }
             }
         }
 
@@ -64,6 +72,10 @@ namespace JDI.Light.Elements.Common
             {
                 ItemLocator = ListLocator;
                 Select(index, this);
+                if (GetSelectedIndex(this) != index)
+                {
+                    throw new Exception($"Element with {index} index not selected.");
+                }
             }
         }
 
