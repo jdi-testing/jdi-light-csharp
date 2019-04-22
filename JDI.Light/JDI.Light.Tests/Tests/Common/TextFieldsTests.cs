@@ -12,7 +12,6 @@ namespace JDI.Light.Tests.Tests.Common
         private ITextField _name;
         private ITextField _disabledName;
 
-
         [SetUp]
         public void SetUp()
         {
