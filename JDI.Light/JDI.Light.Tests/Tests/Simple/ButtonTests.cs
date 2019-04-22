@@ -32,8 +32,7 @@ namespace JDI.Light.Tests.Tests.Simple
             TestSite.Html5Page.RedButton.Click();
             Assert.AreEqual(TestSite.Html5Page.GetAlert().GetAlertText(), "Red button");
             TestSite.Html5Page.GetAlert().AcceptAlert();
-
-
+            
             TestSite.Html5Page.BlueButton.Click();
             Assert.AreEqual(TestSite.Html5Page.GetAlert().GetAlertText(), "Blue button");
             TestSite.Html5Page.GetAlert().AcceptAlert();
