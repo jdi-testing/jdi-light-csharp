@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
-using static JDI.Light.Jdi;
+using System;
+using OpenQA.Selenium;
 
 namespace JDI.Light.Tests.Tests.Simple
 {
@@ -9,19 +10,43 @@ namespace JDI.Light.Tests.Tests.Simple
         [SetUp]
         public void SetUp()
         {
-            Logger.Info("Navigating to Metals and Colors page.");
-            TestSite.MetalsColorsPage.Open();
-            TestSite.MetalsColorsPage.CheckTitle();
-            Logger.Info("Setup method finished");
-            Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            TestSite.Html5Page.Open();
+            TestSite.Html5Page.CheckOpened();
+        }
+
+        [Test]
+        public void GetTextTest()
+        {
+            Assert.AreEqual(TestSite.Html5Page.RedButton.GetText(), "Big Red Button-Input");
+        }
+
+        [Test]
+        public void GetValueTest()
+        {
+            Assert.AreEqual(TestSite.Html5Page.RedButton.GetValue(), "Big Red Button-Input");
         }
 
         [Test]
         public void ClickTest()
         {
-            TestSite.MetalsColorsPage.CalculateButton.Click();
-            var calcText = TestSite.MetalsColorsPage.CalculateText.Value;
-            Jdi.Assert.Contains(calcText, "Summary: 3");
+            TestSite.Html5Page.RedButton.Click();
+            Assert.AreEqual(TestSite.Html5Page.GetAlert().GetAlertText(), "Red button");
+            TestSite.Html5Page.GetAlert().AcceptAlert();
+            
+            TestSite.Html5Page.BlueButton.Click();
+            Assert.AreEqual(TestSite.Html5Page.GetAlert().GetAlertText(), "Blue button");
+            TestSite.Html5Page.GetAlert().AcceptAlert();
+
+            TestSite.Html5Page.DisabledButton.Click();
+            Assert.Throws<NoAlertPresentException>(() => TestSite.Html5Page.GetAlert().AcceptAlert());
         }
-    }
+
+        [Test]
+        public void SuspendButtonTest()
+        {
+            TestSite.Html5Page.SuspendButton.Click();
+            Assert.AreEqual(TestSite.Html5Page.GetAlert().GetAlertText(), "Suspend button");
+            TestSite.Html5Page.GetAlert().AcceptAlert();
+        }
+}
 }

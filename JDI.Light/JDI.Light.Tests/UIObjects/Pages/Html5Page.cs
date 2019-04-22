@@ -25,6 +25,10 @@ namespace JDI.Light.Tests.UIObjects
 
         [FindBy(Css = ".red")]
         public IButton RedButton { get; set; }
+        
+        public IButton DisabledButton { get; set; }
+
+        public IButton SuspendButton { get; set; }
 
         [FindBy(Css = "h1")]
         public ILabel JdiLabel { get; set; }
