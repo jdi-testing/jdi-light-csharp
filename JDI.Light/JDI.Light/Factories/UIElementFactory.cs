@@ -66,7 +66,8 @@ namespace JDI.Light.Factories
             var defaultLocator = member.GetLocatorByAttribute();
             var smartLocators = new List<By>();
             var jDropdown = member.GetCustomAttribute<JDropDown>(false);
-            
+            var jDataList = member.GetCustomAttribute<JDataList>(false);
+
             if (defaultLocator != null)
             {
                 smartLocators.Add(defaultLocator);
@@ -75,6 +76,11 @@ namespace JDI.Light.Factories
             if (jDropdown != null)
             {
                 defaultLocator = jDropdown.RootLocator;
+            }
+
+            if (jDataList != null)
+            {
+                defaultLocator = jDataList.RootLocator;
             }
             else
             {
@@ -100,6 +106,13 @@ namespace JDI.Light.Factories
                 var dropList = (DropList)element;
                 dropList.Setup(jDropdown.ValueLocator, jDropdown.ListLocator, jDropdown.ExpandLocator);
             }
+
+            if (jDataList != null)
+            {
+                var dataList = (DataList)element;
+                dataList.Setup(jDataList.ValuesLocator);
+            }
+
             return element;
         }
     }

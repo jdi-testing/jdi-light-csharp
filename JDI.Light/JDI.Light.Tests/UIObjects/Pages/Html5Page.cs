@@ -63,6 +63,12 @@ namespace JDI.Light.Tests.UIObjects
 
         public IDropDown DisabledDropdown { get; set; }
         
+        [JDataList("#ice-cream", "#ice-cream-flavors > option")]
+        public DataList IceCream { get; set; }
+
+        [JDataList("#ice-cream", "#ice-cream-flavors > option")]
+        public ComboBox IceCreamComboBox { get; set; }
+        
         [FindBy(Css = "[ui=jdi-title]")]
         public ITitle JdiTitle { get; set; }
 

@@ -1,6 +1,5 @@
 ﻿using JDI.Light.Tests.Enums;
 using NUnit.Framework;
-using OpenQA.Selenium;
 
 namespace JDI.Light.Tests.Tests.Common
 {
@@ -10,35 +9,36 @@ namespace JDI.Light.Tests.Tests.Common
         [SetUp]
         public void SetUp()
         {
-            TestSite.MetalsColorsPage.Open();
-            TestSite.MetalsColorsPage.CheckOpened();
-            TestSite.MetalsColorsPage.MetalsDataList.CaretLocator = By.CssSelector("#metals span.caret");
+            TestSite.Html5Page.Open();
+            TestSite.Html5Page.CheckOpened();
+            TestSite.Html5Page.IceCream.Select("Coconut");
         }
 
         [Test]
-        public void SelectDataList()
+        public void GetValueTest()
         {
-            TestSite.MetalsColorsPage.MetalsDataList.Expand();
-            TestSite.MetalsColorsPage.MetalsDataList.ItemLocator = By.XPath("//li/a");
-            TestSite.MetalsColorsPage.MetalsDataList.Select(Metals.Bronze.ToString());
-            Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Metals: value changed to Bronze");
+            Assert.AreEqual(TestSite.Html5Page.IceCream.Selected(), "Coconut");
         }
 
         [Test]
-        public void SelectByIndex()
+        public void SelectTest()
         {
-            TestSite.MetalsColorsPage.MetalsDataList.Expand();
-            TestSite.MetalsColorsPage.MetalsDataList.ItemLocator = By.CssSelector(".dropdown-menu > li > a");
-            TestSite.MetalsColorsPage.MetalsDataList.Select(2);
-            Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Metals: value changed to Silver");
+            TestSite.Html5Page.IceCream.Select("Chocolate");
+            Assert.AreEqual(TestSite.Html5Page.IceCream.Selected(), "Chocolate");
         }
 
         [Test]
-        public void FillDataList()
+        public void SelectEnumTest()
         {
-            TestSite.MetalsColorsPage.MetalsInput.Input("My Metal");
-            TestSite.MetalsColorsPage.SubmitButton.Click();
-            Jdi.Assert.Contains(TestSite.ActionsLog.Texts[1], "Metals: value changed to My Metal");
+            TestSite.Html5Page.IceCream.Select(IceCream.Strawberry);
+            Assert.AreEqual(TestSite.Html5Page.IceCream.Selected(), "Strawberry");
+        }
+
+        [Test]
+        public void SelectNumTest()
+        {
+            TestSite.Html5Page.IceCream.Select(5);
+            Assert.AreEqual(TestSite.Html5Page.IceCream.Selected(), "Vanilla");
         }
     }
 }
