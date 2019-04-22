@@ -26,7 +26,7 @@ namespace JDI.Light.Tests.Tests.Common
         public void InputTest()
         {
             TestSite.ContactFormPage.NameInput.Input(ToAddText);
-            Jdi.Assert.AreEquals(TestSite.ContactFormPage.NameInput.Value, _defaultText + ToAddText);
+            Jdi.Assert.AreEquals(TestSite.ContactFormPage.NameInput.Value, ToAddText);
         }
 
         [Test]
@@ -34,13 +34,6 @@ namespace JDI.Light.Tests.Tests.Common
         {
             TestSite.ContactFormPage.NameInput.SendKeys(ToAddText);
             Jdi.Assert.AreEquals(TestSite.ContactFormPage.NameInput.Value, _defaultText + ToAddText);
-        }
-
-        [Test]
-        public void NewInputTest()
-        {
-            TestSite.ContactFormPage.NameInput.Input(ToAddText);
-            Jdi.Assert.AreEquals(TestSite.ContactFormPage.NameInput.Value, ToAddText);
         }
 
         [Test]
