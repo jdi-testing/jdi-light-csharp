@@ -26,11 +26,19 @@ namespace JDI.Light.Elements.Common
         public void Select(string text)
         {
             SetText(text);
+            if (Selected() != text)
+            {
+                throw new Exception($"{text} element not selected.");
+            }
         }
 
         public void Select(Enum value)
         {
             SetText(value.ToString());
+            if (Selected() != value.ToString())
+            {
+                throw new Exception($"{value} element not selected.");
+            }
         }
         
         public void Select(int index)
@@ -47,6 +55,11 @@ namespace JDI.Light.Elements.Common
                 throw new ElementNotFoundException($"Can't find element with index - '{index - 1}' to select. " + e.Message);
             }
             SetText(select);
+
+            if (Selected() != select)
+            {
+                throw new Exception($"Element with {index} index not selected.");
+            }
         }
         
         public string Selected()
