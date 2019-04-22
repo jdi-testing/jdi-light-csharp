@@ -38,9 +38,9 @@ namespace JDI.Light.Tests.UIObjects.Forms
 
         public void FillForm(Contact contact)
         {
-            NameField.NewInput(contact.FirstName);
-            LastNameField.NewInput(contact.LastName);
-            DescriptionField.NewInput(contact.Description);
+            NameField.Input(contact.FirstName);
+            LastNameField.Input(contact.LastName);
+            DescriptionField.Input(contact.Description);
         }
     }
 }

@@ -99,7 +99,7 @@
     <Compile Include="Tests\Simple\ProgressTests.cs" />
     <Compile Include="Tests\Simple\RangeTests.cs" />
     <Compile Include="Tests\Simple\TextAreaTests.cs" />
-    <Compile Include="Tests\Simple\TextFieldsTests.cs" />
+    <Compile Include="Tests\Common\TextFieldsTests.cs" />
     <Compile Include="Tests\Simple\TextTests.cs" />
     <Compile Include="Tests\Simple\TitleTests.cs" />
     <Compile Include="UIObjects\Forms\LoginFormClient.cs" />

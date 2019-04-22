@@ -28,7 +28,7 @@ namespace JDI.Light.Elements.Common
         public void AddNewLine(string textLine)
         {
             Invoker.DoActionWithWait("Add text from new line in textarea",
-                () => Input("\n" + textLine));
+                () => SendKeys("\n" + textLine));
         }
 
         public string[] GetLines()

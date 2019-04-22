@@ -6,7 +6,9 @@ namespace JDI.Light.Interfaces.Common
     {
         void Input(string text);
         new void SendKeys(string text);
-        void NewInput(string text);
+        void SetText(string text);
         new void Clear();
+        void Focus();
+        string Placeholder { get; }
     }
 }
