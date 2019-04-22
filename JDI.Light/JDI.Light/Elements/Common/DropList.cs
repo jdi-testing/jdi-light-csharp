@@ -10,68 +10,68 @@ namespace JDI.Light.Elements.Common
         {
         }
 
-        public By Expander { get; set; }
-        public By Value { get; set; }
-        public By List { get; set; }
+        public By ExpanderLocator { get; set; }
+        public By ValueLocator { get; set; }
+        public By ListLocator { get; set; }
       
         public void Setup(By value, By list, By expand)
         {
             if (value != null)
             {
-                Value = value;
+                ValueLocator = value;
             }
 
             if (list != null)
             {
-                List = list;
+                ListLocator = list;
             }
 
             if (expand != null)
             {
-                Expander = expand;
+                ExpanderLocator = expand;
             }
         }
 
         public void Expand()
         {
-            if (Expander != null)
+            if (ExpanderLocator != null)
             {
-                FindElement(Expander).Click();
+                FindElement(ExpanderLocator).Click();
             }
         }
 
         public void Select(string value)
         {
-            if (List != null)
+            if (ListLocator != null)
             {
-                ItemLocator = List;
+                ItemLocator = ListLocator;
                 Select(value, this);
             }
         }
 
         public void Select(Enum value)
         {
-            if (List != null)
+            if (ListLocator != null)
             {
-                ItemLocator = List;
+                ItemLocator = ListLocator;
                 Select(value.ToString(), this);
             }
         }
 
         public void Select(int index)
         {
-            if (List != null)
+            if (ListLocator != null)
             {
-                ItemLocator = List;
+                ItemLocator = ListLocator;
                 Select(index, this);
             }
         }
 
         public string GetSelected()
         {
-            if (Value != null)
+            if (ValueLocator != null)
             {
-                return GetSelected(FindElement(Value));
+                return GetSelected(FindElement(ValueLocator));
             }
             return null;
         }
