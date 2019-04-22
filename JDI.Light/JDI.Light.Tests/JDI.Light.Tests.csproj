@@ -72,14 +72,18 @@
     <Compile Include="Tests\Complex\CheckListTests.cs" />
     <Compile Include="Tests\Common\ComboBoxTests.cs" />
     <Compile Include="Tests\Common\DropListTests.cs" />
+    <Compile Include="Tests\Simple\DateTests.cs" />
     <Compile Include="Tests\Common\DataListTests.cs" />
     <Compile Include="Tests\Common\DropDownTests.cs" />
     <Compile Include="Tests\Common\InputTests.cs" />
+    <Compile Include="Tests\Simple\MonthTests.cs" />
     <Compile Include="Tests\Common\JDIPerformanceTests.cs" />
     <Compile Include="Tests\Common\MultiSelectorTests.cs" />
+    <Compile Include="Tests\Simple\TimeTests.cs" />
     <Compile Include="Tests\Common\NumberSelectorTests.cs" />
     <Compile Include="Tests\Complex\RadioButtonsTests.cs" />
     <Compile Include="Tests\Common\UIElementTests.cs" />
+    <Compile Include="Tests\Simple\WeekTests.cs" />
     <Compile Include="Tests\Composite\MultiDropdownTests.cs" />
     <Compile Include="Tests\Composite\SectionTests.cs" />
     <Compile Include="Tests\Core\SmartLocatorsTests.cs" />
@@ -97,6 +101,7 @@
     <Compile Include="Tests\Simple\TextAreaTests.cs" />
     <Compile Include="Tests\Simple\TextFieldsTests.cs" />
     <Compile Include="Tests\Simple\TextTests.cs" />
+    <Compile Include="Tests\Simple\TitleTests.cs" />
     <Compile Include="UIObjects\Forms\LoginFormClient.cs" />
     <Compile Include="UIObjects\Pages\BasePage.cs" />
     <Compile Include="UIObjects\Pages\ComplexTablePage.cs" />

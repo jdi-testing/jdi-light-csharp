@@ -3,6 +3,7 @@ using JDI.Light.Elements.Common;
 using JDI.Light.Elements.Composite;
 using JDI.Light.Interfaces.Common;
 using JDI.Light.Interfaces.Complex;
+using JDI.Light.Interfaces.Complex.Generic;
 
 namespace JDI.Light.Tests.UIObjects
 {
@@ -23,6 +24,9 @@ namespace JDI.Light.Tests.UIObjects
         [FindBy(Id = "blue-button")]
         public IButton BlueButton { get; set; }
 
+        [FindBy(Css = ".red")]
+        public IButton RedButton { get; set; }
+
         [FindBy(Css = "h1")]
         public ILabel JdiLabel { get; set; }
 
@@ -36,7 +40,7 @@ namespace JDI.Light.Tests.UIObjects
         public IDateTimeSelector BookingTime { get; set; }
 
         [FindBy(Css = "#month-date")]
-        public IDateTimeSelector MonthOfHolidays { get; set; }
+        public IDateTimeSelector MonthDate { get; set; }
 
         [FindBy(Css = "#birth-date")]
         public IDateTimeSelector BirthDate { get; set; }
@@ -45,9 +49,14 @@ namespace JDI.Light.Tests.UIObjects
         public IDateTimeSelector PartyTime { get; set; }
 
         [FindBy(Css = "#autumn-week")]
-        public IDateTimeSelector AutumnDateTime { get; set; }
+        public IDateTimeSelector AutumnWeek { get; set; }
 
         [FindBy(Css = "#volume")]
+        public IRange Volume { get; set; }
+
+        [FindBy(Css = "input[type='range'][disabled]")]
+        public IRange DisabledRange { get; set; }
+
         public IRange VolumeRange { get; set; }
 
         public IDropDown DressCode { get; set; }
@@ -59,6 +68,11 @@ namespace JDI.Light.Tests.UIObjects
 
         [JDataList("#ice-cream", "#ice-cream-flavors > option")]
         public ComboBox IceCreamComboBox { get; set; }
+
+        [FindBy(Css = "[ui=jdi-title]")]
+        public ITitle JdiTitle { get; set; }
+
+        public Button GhostButton { get; set; }
 
         public IProgressBar Progress { get; set; }
 

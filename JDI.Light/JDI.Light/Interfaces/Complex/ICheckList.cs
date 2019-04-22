@@ -1,25 +1,9 @@
-﻿using System.Collections.Generic;
-using JDI.Light.Interfaces.Base;
-using OpenQA.Selenium;
+﻿using JDI.Light.Interfaces.Common;
+using JDI.Light.Interfaces.Complex.Generic;
 
 namespace JDI.Light.Interfaces.Complex
 {
-    public interface ICheckList : IBaseUIElement, IGetValue<List<string>>
+    public interface ICheckList : ICheckList<ICheckBox>
     {
-        By CheckListLocator { get; set; }
-        By LabelLocator { get; set; }
-        void Check(params string[] values);
-        void Check(params int[] indexes);
-        void Uncheck(params string[] values);
-        void Uncheck(params int[] indexes);
-        void Select(params string[] values);
-        void Select(params int[] indexes);
-        void UncheckAll();
-        void CheckAll();
-        string[] Checked();
-        bool IsChecked(string value);
-        bool IsChecked(int index);
-        bool IsDisabled(string value);
-        bool IsDisabled(int index);
     }
 }
