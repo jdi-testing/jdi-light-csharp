@@ -39,7 +39,7 @@ namespace JDI.Light.Tests.Tests.Common
         public void NewInputDatePickerTest()
         {
             DatePicker.SendKeys(CheckDate);
-            DatePicker.NewInput(DefaultDate);
+            DatePicker.Input(DefaultDate);
             Jdi.Assert.AreEquals(DatePicker.Value, DefaultDate);
         }
 

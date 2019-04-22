@@ -99,6 +99,7 @@
     <Compile Include="Enums\RunType.cs" />
     <Compile Include="Enums\ScreenshotState.cs" />
     <Compile Include="Enums\TableHeaderType.cs" />
+    <Compile Include="Exceptions\ElementDisabledException.cs" />
     <Compile Include="Exceptions\ElementNotFoundException.cs" />
     <Compile Include="Extensions\ArrayExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />

@@ -14,7 +14,7 @@ namespace JDI.Light.Elements.Composite
     {
         protected Action<Search, string> FindAction = (s, text) =>
         {
-            s.SearchField.NewInput(text);
+            s.SearchField.Input(text);
             s.SearchButton.Click();
         };
 

@@ -3,7 +3,6 @@ using JDI.Light.Elements.Common;
 using JDI.Light.Elements.Composite;
 using JDI.Light.Interfaces.Common;
 using JDI.Light.Interfaces.Complex;
-using JDI.Light.Interfaces.Complex.Generic;
 
 namespace JDI.Light.Tests.UIObjects
 {
@@ -72,5 +71,11 @@ namespace JDI.Light.Tests.UIObjects
         public IColorPicker ColorPicker { get; set; }
         
         public IColorPicker DisabledPicker { get; set; }
+
+        [FindBy(Css = "div.main-content #name")]
+        public ITextField NameTextField { get; set; }
+
+        [FindBy(Css = "#disabled-name")]
+        public ITextField SurnameTextField { get; set; }
     }
 }

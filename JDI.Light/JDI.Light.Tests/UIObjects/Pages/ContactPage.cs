@@ -40,9 +40,9 @@ namespace JDI.Light.Tests.UIObjects.Pages
         
         private void FillForm(string firstName, string secondName, string description)
         {
-            NameField.NewInput(firstName);
-            LastNameField.NewInput(secondName);
-            DescriptionArea.NewInput(description);
+            NameField.Input(firstName);
+            LastNameField.Input(secondName);
+            DescriptionArea.Input(description);
         }
     }
 }

@@ -39,7 +39,7 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void NewInputTest()
         {
-            TestSite.ContactFormPage.NameInput.NewInput(ToAddText);
+            TestSite.ContactFormPage.NameInput.Input(ToAddText);
             Jdi.Assert.AreEquals(TestSite.ContactFormPage.NameInput.Value, ToAddText);
         }
 
