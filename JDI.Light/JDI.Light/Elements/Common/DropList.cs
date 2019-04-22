@@ -10,68 +10,80 @@ namespace JDI.Light.Elements.Common
         {
         }
 
-        public string Expander { get; set; }
-        public string Value { get; set; }
-        public string List { get; set; }
+        public By ExpanderLocator { get; set; }
+        public By ValueLocator { get; set; }
+        public By ListLocator { get; set; }
       
-        public void Setup(string value, string list, string expand)
+        public void Setup(By value, By list, By expand)
         {
             if (value != null)
             {
-                Value = value;
+                ValueLocator = value;
             }
 
             if (list != null)
             {
-                List = list;
+                ListLocator = list;
             }
 
             if (expand != null)
             {
-                Expander = expand;
+                ExpanderLocator = expand;
             }
         }
 
         public void Expand()
         {
-            if (Expander != null)
+            if (ExpanderLocator != null)
             {
-                FindElement(By.CssSelector(Expander)).Click();
+                FindElement(ExpanderLocator).Click();
             }
         }
 
         public void Select(string value)
         {
-            if (List != null)
+            if (ListLocator != null)
             {
-                ItemLocator = By.CssSelector(List);
+                ItemLocator = ListLocator;
                 Select(value, this);
+                if (GetSelected() != value)
+                {
+                    throw new Exception($"{value} element not selected.");
+                }
             }
         }
 
         public void Select(Enum value)
         {
-            if (List != null)
+            if (ListLocator != null)
             {
-                ItemLocator = By.CssSelector(List);
+                ItemLocator = ListLocator;
                 Select(value.ToString(), this);
+                if (GetSelected() != value.ToString())
+                {
+                    throw new Exception($"{value} element not selected.");
+                }
             }
         }
 
         public void Select(int index)
         {
-            if (List != null)
+            if (ListLocator != null)
             {
-                ItemLocator = By.CssSelector(List);
+                ItemLocator = ListLocator;
                 Select(index, this);
+                if (GetSelectedIndex(this) != index)
+                {
+                    throw new Exception($"Element with {index} index not selected.");
+                }
             }
         }
 
         public string GetSelected()
         {
-            if (Value != null)
+            if (ValueLocator != null)
             {
-                return GetSelected(FindElement(By.CssSelector(Value)));
+                return GetSelected(FindElement(ValueLocator));
             }
             return null;
         }

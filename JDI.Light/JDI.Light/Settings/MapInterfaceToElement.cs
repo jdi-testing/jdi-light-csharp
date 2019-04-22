@@ -36,7 +36,7 @@ namespace JDI.Light.Settings
             {typeof(IDataList), typeof(DataList) },
             {typeof(IDateTimeSelector), typeof(DateTimeSelector) },
             {typeof(IRange), typeof(Range) },
-            {typeof(IDropList), typeof(DropList) }, 
+            {typeof(IDropList), typeof(DropList) },
             {typeof(ITitle), typeof(Title) },
             {typeof(IProgressBar), typeof(ProgressBar) },
             {typeof(INumberSelector), typeof(NumberSelector) },

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using JDI.Light.Matchers.CollectionMatchers;
-using JDI.Light.Matchers.IntegerMachers;
+using JDI.Light.Matchers.IntegerMatchers;
 
 namespace JDI.Light.Matchers
 {

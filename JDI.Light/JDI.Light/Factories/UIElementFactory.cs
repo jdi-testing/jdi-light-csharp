@@ -75,7 +75,7 @@ namespace JDI.Light.Factories
 
             if (jDropdown != null)
             {
-                defaultLocator = By.CssSelector(jDropdown.Root());
+                defaultLocator = jDropdown.RootLocator;
             }
 
             if (jDataList != null)
@@ -104,7 +104,7 @@ namespace JDI.Light.Factories
             if (jDropdown != null)
             {
                 var dropList = (DropList)element;
-                dropList.Setup((jDropdown.Value()), jDropdown.List(), jDropdown.Expand());
+                dropList.Setup(jDropdown.ValueLocator, jDropdown.ListLocator, jDropdown.ExpandLocator);
             }
 
             if (jDataList != null)

@@ -1,6 +1,6 @@
-﻿using System;
-using JDI.Light.Tests.Enums;
+﻿using JDI.Light.Tests.Enums;
 using NUnit.Framework;
+using System;
 
 namespace JDI.Light.Tests.Tests.Common
 {
@@ -55,14 +55,7 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void DisabledTest()
         {
-            try
-            {
-                TestSite.Html5Page.DisabledDropdown.Select("Pirate");
-            }
-            catch (Exception ignore)
-            {
-                Jdi.Logger.Info($"Test for DisabledDropdown passed. Exception-{ignore} was thrown.");
-            }
+            Assert.Throws<Exception>(() => TestSite.Html5Page.DisabledDropdown.Select("Pirate"));
             Assert.AreEqual(TestSite.Html5Page.DisabledDropdown.GetSelected(), "Disabled");
         }
     }

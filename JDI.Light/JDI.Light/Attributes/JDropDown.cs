@@ -1,29 +1,24 @@
 ﻿using System;
+using JDI.Light.Extensions;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
 
 namespace JDI.Light.Attributes
 {
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
     public class JDropDown : Attribute
     {
-        private readonly string _root;
-        private readonly string _value;
-        private readonly string _list;
-        private readonly string _expand;
+        public By RootLocator { get; private set; }
+        public By ValueLocator { get; private set; }
+        public By ListLocator { get; private set; }
+        public By ExpandLocator { get; private set; }
 
-        public JDropDown(string root, string value, string list, string expand)
+        public JDropDown(string root, string value, string list, string expander, How how = How.CssSelector)
         {
-            _root = root;
-            _value = value;
-            _list = list;
-            _expand = expand;
+            RootLocator = how.GetLocator(root);
+            ValueLocator = how.GetLocator(value);
+            ListLocator = how.GetLocator(list);
+            ExpandLocator = how.GetLocator(expander);
         }
-
-        public string Root() => _root;
-
-        public string Value() => _value;
-
-        public string List() => _list;
-
-        public string Expand() => _expand;
     }
 }

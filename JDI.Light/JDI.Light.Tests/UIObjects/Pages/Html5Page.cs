@@ -68,7 +68,7 @@ namespace JDI.Light.Tests.UIObjects
 
         [JDataList("#ice-cream", "#ice-cream-flavors > option")]
         public ComboBox IceCreamComboBox { get; set; }
-
+        
         [FindBy(Css = "[ui=jdi-title]")]
         public ITitle JdiTitle { get; set; }
 

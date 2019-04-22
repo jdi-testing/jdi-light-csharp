@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JDI.Light.Matchers.IntegerMachers
+namespace JDI.Light.Matchers.IntegerMatchers
 {
     public class GreaterThanOrEqualToMatcher : Matcher<int>
     {
