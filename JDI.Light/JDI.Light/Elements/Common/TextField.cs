@@ -61,7 +61,7 @@ namespace JDI.Light.Elements.Common
         {
             if (!Enabled)
             {
-                throw new ElementDisabledException("TextField is disabled");
+                throw new ElementDisabledException(this);
             }
         }
     }
