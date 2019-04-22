@@ -59,6 +59,10 @@ namespace JDI.Light.Tests.UIObjects
 
         public IRange VolumeRange { get; set; }
 
+        public IDropDown DressCode { get; set; }
+
+        public IDropDown DisabledDropdown { get; set; }
+        
         [FindBy(Css = "[ui=jdi-title]")]
         public ITitle JdiTitle { get; set; }
 

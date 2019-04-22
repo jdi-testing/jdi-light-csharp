@@ -1,7 +1,6 @@
-﻿using JDI.Light.Exceptions;
-using JDI.Light.Tests.Enums;
+﻿using JDI.Light.Tests.Enums;
 using NUnit.Framework;
-using OpenQA.Selenium;
+using System;
 
 namespace JDI.Light.Tests.Tests.Common
 {
@@ -11,43 +10,53 @@ namespace JDI.Light.Tests.Tests.Common
         [SetUp]
         public void SetUp()
         {
-            TestSite.MetalsColorsPage.Open();
-            TestSite.MetalsColorsPage.CheckOpened();
+            TestSite.Html5Page.Open();
+            TestSite.Html5Page.CheckOpened();
+            TestSite.Html5Page.DressCode.Select("Casual");
         }
 
         [Test]
-        public void SelectDropDown()
+        public void GetValueTest()
         {
-            TestSite.MetalsColorsPage.Colors.ItemLocator = By.XPath("//li/a");
-            TestSite.MetalsColorsPage.Colors.Select(Colors.Blue.ToString());
-
-            Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Colors: value changed to Blue");
+            Assert.AreEqual(TestSite.Html5Page.DressCode.GetSelected(), "Casual");
         }
 
         [Test]
-        public void SelectByIndex()
+        public void SelectTest()
         {
-            TestSite.MetalsColorsPage.Colors.ItemLocator = By.CssSelector(".dropdown-menu > li > a");
-            TestSite.MetalsColorsPage.Colors.Select(2);
-
-            Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Colors: value changed to Green");
+            TestSite.Html5Page.DressCode.Select("Pirate");
+            Assert.AreEqual(TestSite.Html5Page.DressCode.GetSelected(), "Pirate");
         }
 
         [Test]
-        public void GetSelectedTest()
+        public void SelectEnumTest()
         {
-            TestSite.MetalsColorsPage.Colors.ItemLocator = By.XPath("//li/a");
-            TestSite.MetalsColorsPage.Colors.Select(Colors.Blue.ToString());
-
-            var selected = TestSite.MetalsColorsPage.ColorsDropDownText.GetSelected();
-            Assert.AreEqual(selected, "Blue");
+            TestSite.Html5Page.DressCode.Select(DressCode.Fancy);
+            Assert.AreEqual(TestSite.Html5Page.DressCode.GetSelected(), "Fancy");
         }
 
         [Test]
-        public void NegativeDropDownTest()
+        public void SelectNumTest()
         {
-            TestSite.MetalsColorsPage.Colors.ItemLocator = By.XPath("//li/a");
-            Assert.Throws<ElementNotFoundException>(() => TestSite.MetalsColorsPage.Colors.Select("xxx"));
+            TestSite.Html5Page.DressCode.Select(1);
+            Assert.AreEqual(TestSite.Html5Page.DressCode.GetSelected(), "Casual");
+        }
+
+        [Test]
+        public void BigDropDownTest()
+        {
+            TestSite.PerformancePage.Open();
+            TestSite.PerformancePage.UserNames.Select("Charles Byers");
+
+            var selected = TestSite.PerformancePage.UserNames.GetSelected();
+            Assert.AreEqual(selected, "Charles Byers");
+        }
+
+        [Test]
+        public void DisabledTest()
+        {
+            Assert.Throws<Exception>(() => TestSite.Html5Page.DisabledDropdown.Select("Pirate"));
+            Assert.AreEqual(TestSite.Html5Page.DisabledDropdown.GetSelected(), "Disabled");
         }
     }
 }

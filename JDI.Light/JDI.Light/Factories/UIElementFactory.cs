@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using JDI.Light.Attributes;
 using JDI.Light.Elements.Base;
@@ -63,13 +62,19 @@ namespace JDI.Light.Factories
             var type = member.GetMemberType();
             var v = member.GetMemberValue(parent);
             var instance = (IBaseUIElement)v;
-
+            
             var defaultLocator = member.GetLocatorByAttribute();
             var smartLocators = new List<By>();
-
+            var jDropdown = member.GetCustomAttribute<JDropDown>(false);
+            
             if (defaultLocator != null)
             {
                 smartLocators.Add(defaultLocator);
+            }
+
+            if (jDropdown != null)
+            {
+                defaultLocator = jDropdown.RootLocator;
             }
             else
             {
@@ -82,11 +87,18 @@ namespace JDI.Light.Factories
                 }
             }
             var element = (UIElement)instance ?? CreateInstance(type, defaultLocator, parent, smartLocators);
+
             var checkedAttr = member.GetCustomAttribute<IsCheckedAttribute>(false);
             if (checkedAttr != null && typeof(ICheckBox).IsAssignableFrom(type))
             {
                 var checkBox = (CheckBox)element;
                 checkBox.SetIsCheckedFunc(checkedAttr.CheckedDelegate);
+            }
+
+            if (jDropdown != null)
+            {
+                var dropList = (DropList)element;
+                dropList.Setup(jDropdown.ValueLocator, jDropdown.ListLocator, jDropdown.ExpandLocator);
             }
             return element;
         }

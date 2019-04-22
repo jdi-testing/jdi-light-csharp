@@ -38,8 +38,8 @@ namespace JDI.Light.Elements.Common
             }
         };
 
-        private readonly Func<Selector, string> _getSelected = (selector) => selector.Text;
-       
+        private readonly Func<IWebElement, string> _getSelected = (selector) => selector.Text;
+
         public Selector(By byLocator) : base(byLocator)
         {
         }
@@ -74,9 +74,19 @@ namespace JDI.Light.Elements.Common
             }
         }
 
-        public string GetSelected(Selector elem)
+        public string GetSelected(IWebElement elem)
         {
             return Invoker.DoActionWithResult("Get value", () => _getSelected.Invoke(elem));
+        }
+
+        public int GetSelectedIndex( Selector elem)
+        {
+            var els = elem.WebElement.FindElements(elem.ItemLocator);
+            for (int i = 0; i < els.Count; i++)
+            {
+                if (els[i].GetAttribute("class") == "selected") return i;
+            }
+            return -1;
         }
     }
 }
