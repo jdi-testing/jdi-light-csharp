@@ -1,4 +1,5 @@
 ﻿using System;
+using JDI.Light.Extensions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
@@ -12,23 +13,8 @@ namespace JDI.Light.Attributes
 
         public JDataList(string root, string values, How how = How.CssSelector)
         {
-            switch (how)
-            {
-                case How.CssSelector:
-                {
-                    RootLocator = By.CssSelector(root);
-                    ValuesLocator = By.CssSelector(values);
-                    return;
-                }
-                case How.XPath:
-                {
-                    RootLocator = By.XPath(root);
-                    ValuesLocator = By.XPath(values);
-                    return;
-                }
-                default:
-                    return;
-            }
+            RootLocator = how.GetLocator(root);
+            ValuesLocator = how.GetLocator(values);
         }
     }
 }
