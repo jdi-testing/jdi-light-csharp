@@ -27,28 +27,28 @@ namespace JDI.Light.Asserts
         public SelectAssert Selected(Matcher<IEnumerable<string>> condition)
         {
             Assert.IsTrue(condition.IsMatch(_selector.Checked()),
-                $"checked values {string.Join(",", _selector.Checked())} are not {condition.ActionName} {string.Join(",", condition.RightValue)}");
+                $"checked values {condition.FailedMessage()}");
             return this;
         }
 
         public SelectAssert Values(Matcher<IEnumerable<string>> condition)
         {
             Assert.IsTrue(condition.IsMatch(_selector.Values()),
-                $"available values {string.Join(",", _selector.Values())} are not {condition.ActionName} {string.Join(",", condition.RightValue)}");
+                $"available values {condition.FailedMessage()}");
             return this;
         }
 
         public SelectAssert Enabled(Matcher<IEnumerable<string>> condition)
         {
             Assert.IsTrue(condition.IsMatch(_selector.ListEnabled()),
-                $"enabled values {string.Join(",", _selector.ListEnabled())} are not {condition.ActionName} {string.Join(",", condition.RightValue)}");
+                $"enabled values {condition.FailedMessage()}");
             return this;
         }
 
         public SelectAssert Disabled(Matcher<IEnumerable<string>> condition)
         {
             Assert.IsTrue(condition.IsMatch(_selector.ListDisabled()),
-                $"disabled values {string.Join(",", _selector.ListEnabled())} are not {condition.ActionName} {string.Join(",", condition.RightValue)}");
+                $"disabled values {condition.FailedMessage()}");
             return this;
         }
 
@@ -66,7 +66,7 @@ namespace JDI.Light.Asserts
         {
             var cssValues = GetWebList().Select(element => element.GetCssValue(css)).ToList();
             Assert.IsTrue(condition.IsMatch(cssValues),
-                $"css values {string.Join(",", cssValues)} are not {condition.ActionName} {string.Join(",", condition.RightValue)}");
+                $"css values {condition.FailedMessage()}");
             return this;
         }
 
@@ -74,7 +74,7 @@ namespace JDI.Light.Asserts
         {
             var tags = GetWebList().Select(element => element.TagName).ToList();
             Assert.IsTrue(condition.IsMatch(tags),
-                $"tags {string.Join(",", tags)} are not {condition.ActionName} {string.Join(",", condition.RightValue)}");
+                $"tags {condition.FailedMessage()}");
             return this;
         }
 
@@ -127,7 +127,7 @@ namespace JDI.Light.Asserts
         public SelectAssert Size(Matcher<int> condition)
         {
             Assert.IsTrue(condition.IsMatch(_selector.Size),
-                $"elements count {_selector.Size} is not {condition.ActionName} {condition.RightValue}");
+                $"elements count {condition.FailedMessage()}");
             return this;
         }
 
