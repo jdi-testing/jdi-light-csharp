@@ -2,6 +2,8 @@
 using JDI.Light.Exceptions;
 using JDI.Light.Interfaces.Complex;
 using NUnit.Framework;
+using static JDI.Light.Matchers.CollectionMatchers.HasItemsMatcher<string>;
+using Is = JDI.Light.Matchers.Is;
 
 namespace JDI.Light.Tests.Tests.Complex
 {
@@ -94,8 +96,25 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void IsDisabledTests()
         {
-            Assert.IsTrue(TestSite.Html5Page.WeatherCheckList.IsDisabled(5));
-            Assert.IsTrue(TestSite.Html5Page.WeatherCheckList.IsDisabled("Disabled"));
+            Assert.IsTrue(_weather.IsDisabled(5));
+            Assert.IsTrue(_weather.IsDisabled("Disabled"));
+        }
+
+        [Test]
+        public void IsValidationTests()
+        {
+            _weather.Is()
+                .Selected("Hot option")
+                .Selected(Is.SubsequenceOf(new[] {"Hot option", "Cold"}));
+            _weather.AssertThat()
+                .Values(HasItems(new[] {"Sunny"}))
+                .Disabled(HasItems(new[] {"Disabled"}))
+                .Enabled(HasItems(new[] {"Sunny"}))
+                .Enabled(HasItems(new[] {"Cold", "Sunny"}))
+                .Size(Is.LessThan(6))
+                .Size(5)
+                .AllDisplayed()
+                .NotEmpty();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using JDI.Light.Asserts;
 using JDI.Light.Interfaces.Base;
 
 namespace JDI.Light.Interfaces.Complex
@@ -11,5 +12,7 @@ namespace JDI.Light.Interfaces.Complex
         List<string> ListEnabled();
         List<string> ListDisabled();
         List<IBaseUIElement> AllUI();
+        SelectAssert Is();
+        SelectAssert AssertThat();
     }
 }

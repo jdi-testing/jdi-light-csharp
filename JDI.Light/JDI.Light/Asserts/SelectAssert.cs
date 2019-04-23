@@ -14,7 +14,7 @@ namespace JDI.Light.Asserts
 
         public SelectAssert(ISelector selector)
         {
-
+            _selector = selector;
         }
 
         public SelectAssert Selected(string option)
@@ -72,13 +72,13 @@ namespace JDI.Light.Asserts
 
         public SelectAssert AllSelected()
         {
-            Assert.IsFalse(GetWebList().All(element => element.Selected), "not all elements are selected");
+            Assert.IsTrue(GetWebList().All(element => element.Selected), "not all elements are selected");
             return this;
         }
 
         public SelectAssert AllEnabled()
         {
-            Assert.IsFalse(GetWebList().All(element => element.Selected), "not all elements are enabled");
+            Assert.IsTrue(GetWebList().All(element => element.Enabled), "not all elements are enabled");
             return this;
         }
 

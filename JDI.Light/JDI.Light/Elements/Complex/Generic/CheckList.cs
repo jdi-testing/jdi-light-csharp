@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using JDI.Light.Asserts;
 using JDI.Light.Elements.Base;
 using JDI.Light.Exceptions;
 using JDI.Light.Factories;
@@ -115,13 +117,7 @@ namespace JDI.Light.Elements.Complex.Generic
             }
         }
 
-        public List<string> Checked()
-        {
-            var checkedIds = GetCheckedUIElements().Select(checkbox => checkbox.GetAttribute("id")).ToList();
-
-            return Labels.Where(label => checkedIds.Contains(label.GetAttribute("for"))).Select(label => label.Text)
-                .ToList();
-        }
+        public List<string> Checked() => GetRequiredOption(GetCheckedUIElements);
 
         public bool IsChecked(string value)
         {
@@ -145,15 +141,9 @@ namespace JDI.Light.Elements.Complex.Generic
 
         public List<string> Values() => Labels.Select(label => label.Text.Trim()).ToList();
 
-        public List<string> ListEnabled()
-        {
-            return null;
-        }
+        public List<string> ListEnabled() => GetRequiredOption(GetEnabledUIElements);
 
-        public List<string> ListDisabled()
-        {
-            return null;
-        }
+        public List<string> ListDisabled() => GetRequiredOption(GetDisabledUIElements);
 
         public bool Selected(string option)
         {
@@ -170,7 +160,23 @@ namespace JDI.Light.Elements.Complex.Generic
 
         public bool IsEmpty() => !HasAny();
 
+        public SelectAssert Is() => new SelectAssert(this);
+
+        public SelectAssert AssertThat() => Is();
+
         private IEnumerable<TCheckBox> GetCheckedUIElements() => CheckBoxes.Where(element => element.IsChecked);
+
+        private IEnumerable<TCheckBox> GetEnabledUIElements() => CheckBoxes.Where(element => element.Enabled);
+
+        private IEnumerable<TCheckBox> GetDisabledUIElements() => CheckBoxes.Where(element => !element.Enabled);
+
+        private List<string> GetRequiredOption(Func<IEnumerable<TCheckBox>> option)
+        {
+            var requiredIds = option().Select(checkbox => checkbox.GetAttribute("id")).ToList();
+
+            return Labels.Where(label => requiredIds.Contains(label.GetAttribute("for"))).Select(label => label.Text)
+                .ToList();
+        }
 
         private int GetIndexOf(string name)
         {
