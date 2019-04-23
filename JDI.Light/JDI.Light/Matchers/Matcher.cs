@@ -18,11 +18,12 @@ namespace JDI.Light.Matchers
 
         public string FailedMessage()
         {
-            if (typeof(IEnumerable<object>).IsAssignableFrom(typeof(T)))
+            if (typeof(IEnumerable<object>).IsAssignableFrom(typeof(T)) && typeof(T) != typeof(string))
             {
                 return
                     $"{string.Join(",", LeftValue as IEnumerable<object>)} are not {ActionName} {string.Join(",", RightValue as IEnumerable<object>)}";
             }
+
             return $"{LeftValue} is not {ActionName} {RightValue}";
         }
 

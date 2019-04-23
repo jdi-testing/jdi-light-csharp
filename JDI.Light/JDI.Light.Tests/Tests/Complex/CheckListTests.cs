@@ -114,7 +114,8 @@ namespace JDI.Light.Tests.Tests.Complex
                 .Size(Is.LessThan(6))
                 .Size(5)
                 .AllDisplayed()
-                .NotEmpty();
+                .NotEmpty()
+                .AllTags(Is.SubsequenceOf(new[] {"input"}));
         }
     }
 }
