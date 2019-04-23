@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Asserts\FileAssert.cs" />
+    <Compile Include="Asserts\SelectAssert.cs" />
     <Compile Include="Asserts\TableAssert.cs" />
     <Compile Include="Attributes\ByText.cs" />
     <Compile Include="Attributes\JDataList.cs" />
@@ -136,12 +137,14 @@
     <Compile Include="Interfaces\Common\IMultiSelector.cs" />
     <Compile Include="Interfaces\Common\INumberSelector.cs" />
     <Compile Include="Interfaces\Common\IProgressBar.cs" />
+    <Compile Include="Interfaces\Complex\IHasSize.cs" />
     <Compile Include="Interfaces\Complex\IRadioButtons.cs" />
     <Compile Include="Interfaces\Common\IRange.cs" />
     <Compile Include="Interfaces\Common\ITextElement.cs" />
     <Compile Include="Interfaces\Common\ITextArea.cs" />
     <Compile Include="Interfaces\Common\ITextField.cs" />
     <Compile Include="Interfaces\Common\ITitle.cs" />
+    <Compile Include="Interfaces\Complex\ISelector.cs" />
     <Compile Include="Interfaces\Composite\IForm.cs" />
     <Compile Include="Interfaces\Composite\IMultiDropdownElement.cs" />
     <Compile Include="Interfaces\Composite\IPage.cs" />

@@ -24,7 +24,7 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void GetValueTest()
         {
-            Jdi.Assert.CollectionEquals(new[] {"Hot option", "Cold", "Rainy day", "Sunny", "Disabled"}, _weather.Value);
+            Jdi.Assert.CollectionEquals(new[] {"Hot option"}, _weather.Value);
         }
 
         [Test]

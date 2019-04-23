@@ -3,7 +3,9 @@ using System.Linq;
 using JDI.Light.Elements.Base;
 using JDI.Light.Exceptions;
 using JDI.Light.Factories;
+using JDI.Light.Interfaces.Base;
 using JDI.Light.Interfaces.Common;
+using JDI.Light.Interfaces.Complex;
 using JDI.Light.Interfaces.Complex.Generic;
 using OpenQA.Selenium;
 
@@ -35,7 +37,7 @@ namespace JDI.Light.Elements.Complex.Generic
 
         public void Check(int[] indexes)
         {
-            for (int i = 1; i <= Value.Count; i++)
+            for (int i = 1; i <= Values().Count; i++)
             {
                 var value = CheckBoxes[i - 1];
                 if (!value.Enabled)
@@ -57,7 +59,7 @@ namespace JDI.Light.Elements.Complex.Generic
 
         public void Uncheck(params int[] indexes)
         {
-            for (int i = 1; i <= Value.Count; i++)
+            for (int i = 1; i <= Values().Count; i++)
             {
                 var value = CheckBoxes[i - 1];
                 if (!value.Enabled)
@@ -113,12 +115,12 @@ namespace JDI.Light.Elements.Complex.Generic
             }
         }
 
-        public string[] Checked()
+        public List<string> Checked()
         {
             var checkedIds = GetCheckedUIElements().Select(checkbox => checkbox.GetAttribute("id")).ToList();
 
             return Labels.Where(label => checkedIds.Contains(label.GetAttribute("for"))).Select(label => label.Text)
-                .ToArray();
+                .ToList();
         }
 
         public bool IsChecked(string value)
@@ -141,7 +143,32 @@ namespace JDI.Light.Elements.Complex.Generic
             return CheckBoxes[index - 1].Enabled != true;
         }
 
-        public List<string> Value => Labels.Select(label => label.Text.Trim()).ToList();
+        public List<string> Values() => Labels.Select(label => label.Text.Trim()).ToList();
+
+        public List<string> ListEnabled()
+        {
+            return null;
+        }
+
+        public List<string> ListDisabled()
+        {
+            return null;
+        }
+
+        public bool Selected(string option)
+        {
+            return Checked().Contains(option);
+        }
+
+        public List<string> Value => Checked();
+
+        public List<IBaseUIElement> AllUI() => CheckBoxes.Cast<IBaseUIElement>().ToList();
+
+        int IHasSize.Size => CheckBoxes.Count;
+
+        public bool HasAny() => CheckBoxes.Any();
+
+        public bool IsEmpty() => !HasAny();
 
         private IEnumerable<TCheckBox> GetCheckedUIElements() => CheckBoxes.Where(element => element.IsChecked);
 
