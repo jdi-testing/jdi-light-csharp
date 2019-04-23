@@ -11,7 +11,7 @@ namespace JDI.Light.Asserts
 {
     public class SelectAssert
     {
-        private ISelector _selector;
+        private readonly ISelector _selector;
 
         public SelectAssert(ISelector selector)
         {
