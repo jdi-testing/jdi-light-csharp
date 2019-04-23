@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using JDI.Light.Exceptions;
 using JDI.Light.Interfaces.Base;
@@ -56,7 +57,36 @@ namespace JDI.Light.Asserts
             return Values(condition);
         }
 
+        public SelectAssert Attrs(string attrName, Matcher<IEnumerable<string>> condition)
+        {
+           throw new NotImplementedException("implement after JDIBase creation with getAllAttributes method");
+        }
 
+        public SelectAssert AllCss(string css, Matcher<IEnumerable<string>> condition)
+        {
+            var cssValues = GetWebList().Select(element => element.GetCssValue(css)).ToList();
+            Assert.IsTrue(condition.IsMatch(cssValues),
+                $"css values {string.Join(",", cssValues)} are not {condition.ActionName} {string.Join(",", condition.RightValue)}");
+            return this;
+        }
+
+        public SelectAssert AllTags(Matcher<IEnumerable<string>> condition)
+        {
+            var tags = GetWebList().Select(element => element.TagName).ToList();
+            Assert.IsTrue(condition.IsMatch(tags),
+                $"tags {string.Join(",", tags)} are not {condition.ActionName} {string.Join(",", condition.RightValue)}");
+            return this;
+        }
+
+        public SelectAssert HasCssClasses(params string[] classNames)
+        {
+            throw new NotImplementedException("implement after JDIBase creation with Classes method");
+        }
+
+        public SelectAssert CssClasses(Matcher<IEnumerable<string>> condition)
+        {
+            throw new NotImplementedException("implement after JDIBase creation with Classes method");
+        }
 
         public SelectAssert AllDisplayed()
         {
