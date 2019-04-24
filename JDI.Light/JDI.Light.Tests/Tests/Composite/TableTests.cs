@@ -5,7 +5,6 @@ using static JDI.Light.Elements.Complex.Table.TableMatcher;
 using static JDI.Light.Matchers.StringMatchers.ContainsStringMatcher;
 using Is = JDI.Light.Matchers.Is;
 
-
 namespace JDI.Light.Tests.Tests.Composite
 {
     [TestFixture]

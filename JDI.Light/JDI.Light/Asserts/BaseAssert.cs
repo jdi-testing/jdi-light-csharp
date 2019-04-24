@@ -35,6 +35,5 @@ namespace JDI.Light.Asserts
         protected virtual void Verify()
         {
         }
-
     }
 }
