@@ -24,9 +24,9 @@ namespace JDI.Light.Asserts
             return (T)this;
         }
 
-        public T Css(string css, Matcher<string> condition)
+        public T Css(string propertyName, Matcher<string> condition)
         {
-            Assert.IsTrue(condition.IsMatch(Element.GetCssValue(css)), $"css {condition}");
+            Assert.IsTrue(condition.IsMatch(Element.GetCssValue(propertyName)), $"css {condition}");
             return (T)this;
         }
 
