@@ -58,7 +58,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Asserts\BaseAssert.cs" />
     <Compile Include="Asserts\FileAssert.cs" />
+    <Compile Include="Asserts\IsAssert.cs" />
     <Compile Include="Asserts\TableAssert.cs" />
     <Compile Include="Attributes\ByText.cs" />
     <Compile Include="Attributes\JDataList.cs" />
