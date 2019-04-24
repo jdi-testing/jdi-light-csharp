@@ -164,6 +164,8 @@ namespace JDI.Light.Elements.Complex.Generic
 
         public SelectAssert AssertThat() => Is();
 
+        public SelectAssert Has() => Is();
+
         private IEnumerable<TCheckBox> GetCheckedUIElements() => CheckBoxes.Where(element => element.IsChecked);
 
         private IEnumerable<TCheckBox> GetEnabledUIElements() => CheckBoxes.Where(element => element.Enabled);
