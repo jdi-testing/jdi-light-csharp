@@ -115,7 +115,8 @@ namespace JDI.Light.Tests.Tests.Complex
                 .Size(5)
                 .AllDisplayed()
                 .NotEmpty()
-                .AllTags(Is.SubsequenceOf(new[] {"input"}));
+                .AllTags(Is.SubsequenceOf(new[] {"input"}))
+                .AllCss("color", Is.SubsequenceOf(new[] { "rgba(102, 102, 102, 1)" }));
         }
     }
 }
