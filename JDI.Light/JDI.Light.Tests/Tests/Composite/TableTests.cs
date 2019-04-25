@@ -119,7 +119,11 @@ namespace JDI.Light.Tests.Tests.Composite
                 .Columns(Is.SubsequenceOf(new[] {"Name", "City", "Phone", "Email", "Address"}))
                 .Tag(ContainsString("table"))
                 .Displayed()
-                .Enabled();
+                .Enabled()
+                .Attr("id", ContainsString("users-table"))
+                .CssClass(ContainsString("uui-table"))
+                .Css("color", ContainsString("rgba(102, 102, 102, 1)"))
+                .Text(ContainsString("Name"));
         }
     }
 }
