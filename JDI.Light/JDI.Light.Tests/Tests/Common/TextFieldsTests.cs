@@ -75,6 +75,7 @@ namespace JDI.Light.Tests.Tests.Common
             _disabledName.Is
                 .Disabled()
                 .Displayed();
+            _disabledName.AssertThat.Displayed();
         }
 
         [Test]

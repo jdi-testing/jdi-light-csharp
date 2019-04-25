@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using JDI.Light.Exceptions;
 using JDI.Light.Interfaces.Complex;
 using NUnit.Framework;
@@ -121,6 +122,8 @@ namespace JDI.Light.Tests.Tests.Complex
                 .Attrs(Is.SubsequenceOf(new[] { "class" }))
                 .CssClasses(Is.SubsequenceOf(new[] { "html-left" }))
                 .HasCssClasses("html-left");
+            _weather.CheckBoxes[0].Has.Selected();
+            _weather.CheckBoxes[4].ShouldBe.Deselected();
         }
     }
 }
