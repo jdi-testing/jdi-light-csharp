@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using JDI.Light.Asserts.Generic;
 using JDI.Light.Elements.Complex.Table;
 using JDI.Light.Matchers;
 using static JDI.Light.Elements.Complex.Table.TableMatcher;

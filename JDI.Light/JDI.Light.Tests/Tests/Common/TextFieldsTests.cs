@@ -72,6 +72,9 @@ namespace JDI.Light.Tests.Tests.Common
 
             Assert.Throws<ElementDisabledException>(() => _disabledName.Input(Text));
             Jdi.Assert.AreEquals(_disabledName.GetText(), string.Empty);
+            _disabledName.Is
+                .Disabled()
+                .Displayed();
         }
 
         [Test]

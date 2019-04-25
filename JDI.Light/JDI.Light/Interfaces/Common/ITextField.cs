@@ -1,8 +1,9 @@
-﻿using JDI.Light.Interfaces.Base;
+﻿using JDI.Light.Interfaces.Asserts;
+using JDI.Light.Interfaces.Base;
 
 namespace JDI.Light.Interfaces.Common
 {
-    public interface ITextField : ISetValue<string>, ITextElement
+    public interface ITextField : ISetValue<string>, ITextElement, IHasIsAssert
     {
         void Input(string text);
         new void SendKeys(string text);

@@ -103,10 +103,10 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void IsValidationTests()
         {
-            _weather.Is()
+            _weather.Is
                 .Selected("Hot option")
                 .Selected(Is.SubsequenceOf(new[] {"Hot option", "Cold"}));
-            _weather.AssertThat()
+            _weather.AssertThat
                 .Values(HasItems(new[] {"Sunny"}))
                 .Disabled(HasItems(new[] {"Disabled"}))
                 .Enabled(HasItems(new[] {"Sunny"}))
@@ -115,7 +115,7 @@ namespace JDI.Light.Tests.Tests.Complex
                 .AllDisplayed()
                 .AllTags(Is.SubsequenceOf(new[] {"input"}))
                 .AllCss("color", Is.SubsequenceOf(new[] { "rgba(102, 102, 102, 1)" }));
-            _weather.Has()
+            _weather.Has
                 .Size(5)
                 .NotEmpty()
                 .Attrs(Is.SubsequenceOf(new[] { "class" }))
