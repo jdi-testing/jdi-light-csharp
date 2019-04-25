@@ -11,11 +11,11 @@ using static JDI.Light.Matchers.CollectionMatchers.HasItemsMatcher<string>;
 
 namespace JDI.Light.Asserts
 {
-    public class SelectAssert
+    public class SelectAssert : IsAssert<SelectAssert>
     {
         private readonly ISelector _selector;
 
-        public SelectAssert(ISelector selector)
+        public SelectAssert(ISelector selector) : base(selector)
         {
             _selector = selector;
         }

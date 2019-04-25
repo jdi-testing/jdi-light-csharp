@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using JDI.Light.Elements.Base;
 using JDI.Light.Interfaces.Asserts;
+using JDI.Light.Interfaces.Base;
 using JDI.Light.Matchers;
 using static JDI.Light.Jdi;
 
@@ -8,32 +8,31 @@ namespace JDI.Light.Asserts
 {
     public class IsAssert<T> : BaseAssert, ICommonAssert<T> where T : IsAssert<T>
     {
-        public IsAssert(UIElement element) : base(element)
+        public IsAssert(IBaseUIElement element) : base(element)
         {
         }
-
-        //todo: fix assert describe after merge selectAssert PR to master
+        
         public T Text(Matcher<string> condition)
         {
-            Assert.IsTrue(condition.IsMatch(Element.Text), $"text {condition}");
+            Assert.IsTrue(condition.IsMatch(Element.Text), $"text {condition.FailedMessage()}");
             return (T)this;
         }
 
         public T Attr(string attrName, Matcher<string> condition)
         {
-            Assert.IsTrue(condition.IsMatch(Element.GetAttribute(attrName)), $"attribute {condition}");
+            Assert.IsTrue(condition.IsMatch(Element.GetAttribute(attrName)), $"attribute {condition.FailedMessage()}");
             return (T)this;
         }
 
         public T Css(string propertyName, Matcher<string> condition)
         {
-            Assert.IsTrue(condition.IsMatch(Element.GetCssValue(propertyName)), $"css {condition}");
+            Assert.IsTrue(condition.IsMatch(Element.GetCssValue(propertyName)), $"css {condition.FailedMessage()}");
             return (T)this;
         }
 
         public T Tag(Matcher<string> condition)
         {
-            Assert.IsTrue(condition.IsMatch(Element.TagName), $"tag {condition}");
+            Assert.IsTrue(condition.IsMatch(Element.TagName), $"tag {condition.FailedMessage()}");
             return (T)this;
         }
 
@@ -46,7 +45,7 @@ namespace JDI.Light.Asserts
 
         public T CssClass(Matcher<string> condition)
         {
-            Assert.IsTrue(condition.IsMatch(Element.GetAttribute("class")), $"class {condition}");
+            Assert.IsTrue(condition.IsMatch(Element.GetAttribute("class")), $"class {condition.FailedMessage()}");
             return (T)this;
         }
 

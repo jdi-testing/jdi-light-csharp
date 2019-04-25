@@ -1,5 +1,5 @@
 ﻿using System;
-using JDI.Light.Elements.Base;
+using JDI.Light.Interfaces.Base;
 
 namespace JDI.Light.Asserts
 {
@@ -7,10 +7,10 @@ namespace JDI.Light.Asserts
     {
         public string Name { get; }
         public string FailElement { get; }
-        public UIElement Element { get; }
+        public IBaseUIElement Element { get; }
 
         // todo: use fail element from JDIBase, when implemented
-        public BaseAssert(UIElement element) : this(element.Name, element.Name)
+        public BaseAssert(IBaseUIElement element) : this(element.Name, element.Name)
         {
             Element = element;
         }
