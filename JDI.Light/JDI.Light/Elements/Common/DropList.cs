@@ -68,6 +68,7 @@ namespace JDI.Light.Elements.Common
 
         public void Select(int index)
         {
+            index--;
             if (ListLocator != null)
             {
                 ItemLocator = ListLocator;
