@@ -112,6 +112,7 @@
     <Compile Include="Extensions\MemberInfoExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\UIElementExtensions.cs" />
     <Compile Include="Factories\UIElementFactory.cs" />
     <Compile Include="Factories\WebPageFactory.cs" />
     <Compile Include="Factories\WebSiteFactory.cs" />

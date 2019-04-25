@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using JDI.Light.Elements.Base;
 using JDI.Light.Exceptions;
+using JDI.Light.Extensions;
 using JDI.Light.Interfaces.Base;
 using JDI.Light.Interfaces.Complex;
 using JDI.Light.Matchers;
 using static JDI.Light.Jdi;
+using static JDI.Light.Matchers.CollectionMatchers.HasItemsMatcher<string>;
 
 namespace JDI.Light.Asserts
 {
@@ -57,9 +59,12 @@ namespace JDI.Light.Asserts
             return Values(condition);
         }
 
-        public SelectAssert Attrs(string attrName, Matcher<IEnumerable<string>> condition)
+        public SelectAssert Attrs( Matcher<IEnumerable<string>> condition)
         {
-           throw new NotImplementedException("implement after JDIBase creation with getAllAttributes method");
+            var attributes = (_selector as UIElement).GetAllAttributes().Keys;
+            Assert.IsTrue(condition.IsMatch(attributes),
+                $"attributes {condition.FailedMessage()}");
+            return this;
         }
 
         public SelectAssert AllCss(string css, Matcher<IEnumerable<string>> condition)
@@ -80,12 +85,14 @@ namespace JDI.Light.Asserts
 
         public SelectAssert HasCssClasses(params string[] classNames)
         {
-            throw new NotImplementedException("implement after JDIBase creation with Classes method");
+            return CssClasses(HasItems(classNames));
         }
 
         public SelectAssert CssClasses(Matcher<IEnumerable<string>> condition)
         {
-            throw new NotImplementedException("implement after JDIBase creation with Classes method");
+            Assert.IsTrue(condition.IsMatch(_selector.GetClasses()),
+                $"css classes {condition.FailedMessage()}");
+            return this;
         }
 
         public SelectAssert AllDisplayed()
