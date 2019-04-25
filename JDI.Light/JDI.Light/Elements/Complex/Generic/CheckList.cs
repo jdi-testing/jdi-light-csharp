@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using JDI.Light.Asserts;
 using JDI.Light.Elements.Base;
 using JDI.Light.Exceptions;
 using JDI.Light.Factories;
+using JDI.Light.Interfaces.Base;
 using JDI.Light.Interfaces.Common;
+using JDI.Light.Interfaces.Complex;
 using JDI.Light.Interfaces.Complex.Generic;
 using OpenQA.Selenium;
 
@@ -35,7 +39,7 @@ namespace JDI.Light.Elements.Complex.Generic
 
         public void Check(int[] indexes)
         {
-            for (int i = 1; i <= Value.Count; i++)
+            for (int i = 1; i <= Values().Count; i++)
             {
                 var value = CheckBoxes[i - 1];
                 if (!value.Enabled)
@@ -57,7 +61,7 @@ namespace JDI.Light.Elements.Complex.Generic
 
         public void Uncheck(params int[] indexes)
         {
-            for (int i = 1; i <= Value.Count; i++)
+            for (int i = 1; i <= Values().Count; i++)
             {
                 var value = CheckBoxes[i - 1];
                 if (!value.Enabled)
@@ -113,13 +117,7 @@ namespace JDI.Light.Elements.Complex.Generic
             }
         }
 
-        public string[] Checked()
-        {
-            var checkedIds = GetCheckedUIElements().Select(checkbox => checkbox.GetAttribute("id")).ToList();
-
-            return Labels.Where(label => checkedIds.Contains(label.GetAttribute("for"))).Select(label => label.Text)
-                .ToArray();
-        }
+        public List<string> Checked() => GetRequiredOption(GetCheckedUIElements);
 
         public bool IsChecked(string value)
         {
@@ -141,9 +139,46 @@ namespace JDI.Light.Elements.Complex.Generic
             return CheckBoxes[index - 1].Enabled != true;
         }
 
-        public List<string> Value => Labels.Select(label => label.Text.Trim()).ToList();
+        public List<string> Values() => Labels.Select(label => label.Text.Trim()).ToList();
+
+        public List<string> ListEnabled() => GetRequiredOption(GetEnabledUIElements);
+
+        public List<string> ListDisabled() => GetRequiredOption(GetDisabledUIElements);
+
+        public bool Selected(string option)
+        {
+            return Checked().Contains(option);
+        }
+
+        public List<string> Value => Checked();
+
+        public List<IBaseUIElement> AllUI() => CheckBoxes.Cast<IBaseUIElement>().ToList();
+
+        public int GetSize() => CheckBoxes.Count;
+
+        public bool HasAny() => CheckBoxes.Any();
+
+        public bool IsEmpty() => !HasAny();
+
+        public SelectAssert Is() => new SelectAssert(this);
+
+        public SelectAssert AssertThat() => Is();
+
+        public SelectAssert Has() => Is();
 
         private IEnumerable<TCheckBox> GetCheckedUIElements() => CheckBoxes.Where(element => element.IsChecked);
+
+        private IEnumerable<TCheckBox> GetEnabledUIElements() => CheckBoxes.Where(element => element.Enabled);
+
+        private IEnumerable<TCheckBox> GetDisabledUIElements() => CheckBoxes.Where(element => !element.Enabled);
+
+        private List<string> GetRequiredOption(Func<IEnumerable<TCheckBox>> option)
+        {
+            var requiredIds = option().Select(checkbox => checkbox.GetAttribute("id")).ToList();
+
+            return Labels.Where(label => requiredIds.Contains(label.GetAttribute("for"))).Select(label => label.Text)
+                .ToList();
+        }
 
         private int GetIndexOf(string name)
         {

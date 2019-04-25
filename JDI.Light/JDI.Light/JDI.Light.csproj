@@ -61,6 +61,7 @@
     <Compile Include="Asserts\BaseAssert.cs" />
     <Compile Include="Asserts\FileAssert.cs" />
     <Compile Include="Asserts\IsAssert.cs" />
+    <Compile Include="Asserts\SelectAssert.cs" />
     <Compile Include="Asserts\TableAssert.cs" />
     <Compile Include="Attributes\ByText.cs" />
     <Compile Include="Attributes\JDataList.cs" />
@@ -113,10 +114,12 @@
     <Compile Include="Extensions\MemberInfoExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\UIElementExtensions.cs" />
     <Compile Include="Factories\UIElementFactory.cs" />
     <Compile Include="Factories\WebPageFactory.cs" />
     <Compile Include="Factories\WebSiteFactory.cs" />
     <Compile Include="Interfaces\Asserts\ICommonAssert.cs" />
+    <Compile Include="Interfaces\Asserts\IHasSelectAssert.cs" />
     <Compile Include="Interfaces\Base\IBaseElement.cs" />
     <Compile Include="Interfaces\Base\IBaseUIElement.cs" />
     <Compile Include="Interfaces\Base\IGetValue.cs" />
@@ -139,12 +142,14 @@
     <Compile Include="Interfaces\Common\IMultiSelector.cs" />
     <Compile Include="Interfaces\Common\INumberSelector.cs" />
     <Compile Include="Interfaces\Common\IProgressBar.cs" />
+    <Compile Include="Interfaces\Complex\IHasSize.cs" />
     <Compile Include="Interfaces\Complex\IRadioButtons.cs" />
     <Compile Include="Interfaces\Common\IRange.cs" />
     <Compile Include="Interfaces\Common\ITextElement.cs" />
     <Compile Include="Interfaces\Common\ITextArea.cs" />
     <Compile Include="Interfaces\Common\ITextField.cs" />
     <Compile Include="Interfaces\Common\ITitle.cs" />
+    <Compile Include="Interfaces\Complex\ISelector.cs" />
     <Compile Include="Interfaces\Composite\IForm.cs" />
     <Compile Include="Interfaces\Composite\IMultiDropdownElement.cs" />
     <Compile Include="Interfaces\Composite\IPage.cs" />
@@ -155,6 +160,7 @@
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Enums\LogLevels.cs" />
+    <Compile Include="Matchers\CollectionMatchers\HasItemsMatcher.cs" />
     <Compile Include="Matchers\CollectionMatchers\SubsequenceOfMatcher.cs" />
     <Compile Include="Matchers\IntegerMatchers\GreaterThanOrEqualToMatcher.cs" />
     <Compile Include="Matchers\IntegerMatchers\LessThanOrEqualToMatcher.cs" />

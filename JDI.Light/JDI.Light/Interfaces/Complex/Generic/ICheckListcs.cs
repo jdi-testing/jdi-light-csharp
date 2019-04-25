@@ -5,7 +5,7 @@ using OpenQA.Selenium;
 
 namespace JDI.Light.Interfaces.Complex.Generic
 {
-    public interface ICheckList<TCheckBox> : IBaseUIElement, IGetValue<List<string>> where TCheckBox : ICheckBox
+    public interface ICheckList<TCheckBox> : IBaseUIElement, IGetValue<List<string>>, ISelector where TCheckBox : ICheckBox
     {
         List<TCheckBox> CheckBoxes { get; }
         By CheckListLocator { get; set; }
@@ -18,7 +18,6 @@ namespace JDI.Light.Interfaces.Complex.Generic
         void Select(params int[] indexes);
         void UncheckAll();
         void CheckAll();
-        string[] Checked();
         bool IsChecked(string value);
         bool IsChecked(int index);
         bool IsDisabled(string value);
