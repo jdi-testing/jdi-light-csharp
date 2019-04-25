@@ -126,14 +126,14 @@ namespace JDI.Light.Asserts
 
         public SelectAssert Size(Matcher<int> condition)
         {
-            Assert.IsTrue(condition.IsMatch(_selector.Size),
+            Assert.IsTrue(condition.IsMatch(_selector.GetSize()),
                 $"elements count {condition.FailedMessage()}");
             return this;
         }
 
         public SelectAssert Size(int count)
         {
-            Assert.AreEquals(count, _selector.Size);
+            Assert.AreEquals(count, _selector.GetSize());
             return this;
         }
 

@@ -154,7 +154,7 @@ namespace JDI.Light.Elements.Complex.Generic
 
         public List<IBaseUIElement> AllUI() => CheckBoxes.Cast<IBaseUIElement>().ToList();
 
-        int IHasSize.Size => CheckBoxes.Count;
+        public int GetSize() => CheckBoxes.Count;
 
         public bool HasAny() => CheckBoxes.Any();
 
