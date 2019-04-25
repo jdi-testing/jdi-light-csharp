@@ -33,6 +33,7 @@ namespace JDI.Light.Elements.Common
 
         public void Select(int index)
         {
+            index--;
             SelectElement.SelectByIndex(index);
             if (SelectElement.Options[index].Text != SelectElement.SelectedOption.Text)
             {

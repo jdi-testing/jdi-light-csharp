@@ -33,7 +33,7 @@ namespace JDI.Light.Tests.Tests.Common
         public void SelectNumTest()
         {
             TestSite.MetalsColorsPage.ColorsDropDown.Select(2);
-            Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Colors: value changed to Green");
+            Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Colors: value changed to Red");
         }
 
         [Test]

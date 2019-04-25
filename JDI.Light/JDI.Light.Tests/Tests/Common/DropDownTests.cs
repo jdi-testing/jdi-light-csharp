@@ -39,7 +39,7 @@ namespace JDI.Light.Tests.Tests.Common
         public void SelectNumTest()
         {
             TestSite.Html5Page.DressCode.Select(1);
-            Assert.AreEqual(TestSite.Html5Page.DressCode.GetSelected(), "Casual");
+            Assert.AreEqual(TestSite.Html5Page.DressCode.GetSelected(), "Fancy");
         }
 
         [Test]
