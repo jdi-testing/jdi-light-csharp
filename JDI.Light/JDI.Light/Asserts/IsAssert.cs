@@ -1,4 +1,5 @@
-﻿using JDI.Light.Elements.Base;
+﻿using System.Linq;
+using JDI.Light.Elements.Base;
 using JDI.Light.Interfaces.Asserts;
 using JDI.Light.Matchers;
 using static JDI.Light.Jdi;
@@ -38,7 +39,9 @@ namespace JDI.Light.Asserts
 
         public T HasClass(string className)
         {
-            throw new System.NotImplementedException("implement after selectorassert merge to master");
+            var classes = Element.GetAttribute("class").Split(' ');
+            Assert.IsTrue(classes.Contains(className), $"{Name} doesn't contain class {className}");
+            return (T)this;
         }
 
         public T CssClass(Matcher<string> condition)
@@ -55,7 +58,7 @@ namespace JDI.Light.Asserts
 
         public T Disappear()
         {
-            Assert.IsTrue(Element.Displayed, "element not disappeared");
+            Assert.IsFalse(Element.Displayed, "element not disappeared");
             return (T)this;
         }
 
