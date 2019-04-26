@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using JDI.Light.Exceptions;
 using JDI.Light.Interfaces.Complex;
 using NUnit.Framework;
@@ -124,6 +123,13 @@ namespace JDI.Light.Tests.Tests.Complex
                 .HasCssClasses("html-left");
             _weather.CheckBoxes[0].Has.Selected();
             _weather.CheckBoxes[4].ShouldBe.Deselected();
+        }
+
+        [Test]
+        public void AssertValidationTests()
+        {
+            _weather.AssertThat.Values(HasItems(new[] {"Hot option", "Cold", "Rainy day", "Sunny"}));
+            _weather.AssertThat.Selected("Hot option");
         }
     }
 }
