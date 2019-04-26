@@ -31,17 +31,17 @@ namespace JDI.Light.Elements.Common
 
         public string Value => Invoker.DoActionWithResult("Get value", GetTextAction);
 
-        public string GetValue()
+        public virtual string GetValue()
+        {
+            return Value;
+        }
+
+        public virtual string GetText()
         {
             return Value;
         }
 
         public new string Text => GetText();
-
-        public string GetText()
-        {
-            return Value;
-        }
 
         public string WaitText(string text)
         {
