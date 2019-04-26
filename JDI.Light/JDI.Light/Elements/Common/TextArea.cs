@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
 
@@ -15,7 +16,7 @@ namespace JDI.Light.Elements.Common
         {
         }
 
-        public void InputLines(params string[] textLines)
+        public void SetLines(params string[] textLines)
         {
             Invoker.DoActionWithWait("Input several lines of text in textarea",
                 () =>
@@ -34,6 +35,24 @@ namespace JDI.Light.Elements.Common
         public string[] GetLines()
         {
             return Invoker.DoActionWithResult("Get text as lines", () => Regex.Split(GetTextFunc(this), "\\r\\n"));
+        }
+
+        public int Rows() => Convert.ToInt32(GetAttribute("rows"));
+
+        public int Cols() => Convert.ToInt32(GetAttribute("cols"));
+
+        public int MinLength() => Convert.ToInt32(GetAttribute("minlength"));
+
+        public int MaxLength() => Convert.ToInt32(GetAttribute("maxlength"));
+
+        public override string GetText()
+        {
+            return GetTextFunc(this);
+        }
+
+        public override string GetValue()
+        {
+            return GetTextFunc(this);
         }
     }
 }

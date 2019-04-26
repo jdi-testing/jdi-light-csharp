@@ -91,5 +91,10 @@ namespace JDI.Light.Tests.UIObjects
 
         [FindBy(Css = "#disabled-name")]
         public ITextField SurnameTextField { get; set; }
+        
+        public ITextArea TextArea { get; set; }
+
+        [FindBy(Css = "textarea:nth-child(4)")]
+        public ITextArea DisabledTextArea { get; set; }
     }
 }
