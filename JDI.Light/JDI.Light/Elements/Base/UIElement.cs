@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
+using JDI.Light.Asserts;
 using JDI.Light.Elements.WebActions;
 using JDI.Light.Factories;
 using JDI.Light.Interfaces;
@@ -256,5 +257,11 @@ namespace JDI.Light.Elements.Base
         {
             return WebElement.FindElements(by);
         }
+
+        public IsAssert Is => new IsAssert(this);
+        public IsAssert AssertThat => Is;
+        public IsAssert Has => Is;
+        public IsAssert WaitFor => Is;
+        public IsAssert ShouldBe => Is;
     }
 }

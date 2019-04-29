@@ -1,8 +1,9 @@
-﻿using JDI.Light.Interfaces.Base;
+﻿using JDI.Light.Interfaces.Asserts;
+using JDI.Light.Interfaces.Base;
 
 namespace JDI.Light.Interfaces.Common
 {
-    public interface ITextElement : IGetValue<string>, IBaseUIElement
+    public interface ITextElement : IGetValue<string>, IBaseUIElement, IHasIsAssert
     {
         string GetText();
         string WaitText(string text);

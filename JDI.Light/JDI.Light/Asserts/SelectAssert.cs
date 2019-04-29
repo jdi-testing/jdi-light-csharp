@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using JDI.Light.Asserts.Generic;
 using JDI.Light.Elements.Base;
 using JDI.Light.Exceptions;
 using JDI.Light.Extensions;
@@ -11,11 +12,11 @@ using static JDI.Light.Matchers.CollectionMatchers.HasItemsMatcher<string>;
 
 namespace JDI.Light.Asserts
 {
-    public class SelectAssert
+    public class SelectAssert : IsAssert<SelectAssert>
     {
         private readonly ISelector _selector;
 
-        public SelectAssert(ISelector selector)
+        public SelectAssert(ISelector selector) : base(selector)
         {
             _selector = selector;
         }

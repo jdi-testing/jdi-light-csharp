@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using static JDI.Light.Elements.Complex.Table.Column;
 using static JDI.Light.Elements.Complex.Table.TableMatcher;
+using static JDI.Light.Matchers.StringMatchers.ContainsStringMatcher;
 using Is = JDI.Light.Matchers.Is;
 
 namespace JDI.Light.Tests.Tests.Composite
@@ -115,7 +116,15 @@ namespace JDI.Light.Tests.Tests.Composite
                 .RowsWithValues(3, ContainsValue("Baker", InColumn(1)))
                 .HasColumn("Email")
                 .HasColumns(new[] {"Name", "City"})
-                .Columns(Is.SubsequenceOf(new[] {"Name", "City", "Phone", "Email", "Address"}));
+                .Columns(Is.SubsequenceOf(new[] {"Name", "City", "Phone", "Email", "Address"}))
+                .Tag(ContainsString("table"))
+                .Displayed()
+                .Enabled()
+                .Attr("id", ContainsString("users-table"))
+                .CssClass(ContainsString("uui-table"))
+                .Css("color", ContainsString("rgba(102, 102, 102, 1)"))
+                .Text(ContainsString("Name"))
+                .HasClass("stripe");
         }
     }
 }
