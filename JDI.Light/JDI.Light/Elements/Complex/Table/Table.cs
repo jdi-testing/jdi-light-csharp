@@ -68,12 +68,12 @@ namespace JDI.Light.Elements.Complex.Table
             return Cells.ElementAt(rowNum);
         }
 
-        public TableAssert Is()
+        public new TableAssert Is()
         {
             return new TableAssert(this);
         }
 
-        public TableAssert AssertThat()
+        public new TableAssert AssertThat()
         {
             return Is();
         }

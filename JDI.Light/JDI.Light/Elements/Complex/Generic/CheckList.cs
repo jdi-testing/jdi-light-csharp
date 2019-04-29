@@ -42,6 +42,7 @@ namespace JDI.Light.Elements.Complex.Generic
             for (int i = 1; i <= Values().Count; i++)
             {
                 var value = CheckBoxes[i - 1];
+                CheckEnabled(true);
                 if (!value.Enabled)
                 {
                     continue;
@@ -64,6 +65,7 @@ namespace JDI.Light.Elements.Complex.Generic
             for (int i = 1; i <= Values().Count; i++)
             {
                 var value = CheckBoxes[i - 1];
+                CheckEnabled(true);
                 if (!value.Enabled)
                 {
                     continue;
@@ -160,11 +162,11 @@ namespace JDI.Light.Elements.Complex.Generic
 
         public bool IsEmpty() => !HasAny();
 
-        public SelectAssert Is() => new SelectAssert(this);
+        public new SelectAssert Is => new SelectAssert(this);
 
-        public SelectAssert AssertThat() => Is();
+        public new SelectAssert AssertThat => Is;
 
-        public SelectAssert Has() => Is();
+        public new SelectAssert Has => Is;
 
         private IEnumerable<TCheckBox> GetCheckedUIElements() => CheckBoxes.Where(element => element.IsChecked);
 

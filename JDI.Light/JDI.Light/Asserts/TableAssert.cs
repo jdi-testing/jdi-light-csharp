@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using JDI.Light.Asserts.Generic;
 using JDI.Light.Elements.Complex.Table;
 using JDI.Light.Matchers;
 using static JDI.Light.Elements.Complex.Table.TableMatcher;
@@ -7,11 +8,11 @@ using static JDI.Light.Jdi;
 
 namespace JDI.Light.Asserts
 {
-    public class TableAssert
+    public class TableAssert : IsAssert<TableAssert>
     {
         protected Table Table { get; }
 
-        public TableAssert(Table table)
+        public TableAssert(Table table) : base(table)
         {
             Table = table;
         }
