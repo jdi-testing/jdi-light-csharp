@@ -42,6 +42,7 @@ namespace JDI.Light.Elements.Common
 
         public void Select(string value)
         {
+            CheckEnabled(true);
             if (ListLocator != null)
             {
                 ItemLocator = ListLocator;
@@ -55,6 +56,7 @@ namespace JDI.Light.Elements.Common
 
         public void Select(Enum value)
         {
+            CheckEnabled(true);
             if (ListLocator != null)
             {
                 ItemLocator = ListLocator;
@@ -68,6 +70,7 @@ namespace JDI.Light.Elements.Common
 
         public void Select(int index)
         {
+            CheckEnabled(true);
             index--;
             if (ListLocator != null)
             {

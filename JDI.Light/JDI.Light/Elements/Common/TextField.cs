@@ -18,7 +18,7 @@ namespace JDI.Light.Elements.Common
 
         public void Input(string text)
         {
-            CheckEnabled();
+            CheckEnabled(true);
             Clear();
             SendKeys(text);
         }
@@ -36,7 +36,7 @@ namespace JDI.Light.Elements.Common
 
         public new void SendKeys(string text)
         {
-            CheckEnabled();
+            CheckEnabled(true);
             Invoker.DoActionWithWait($"Input text '{text}' in text field", () => WebElement.SendKeys(text));
         }
 
@@ -56,13 +56,5 @@ namespace JDI.Light.Elements.Common
         }
 
         public string Placeholder => GetAttribute("placeholder");
-
-        protected void CheckEnabled()
-        {
-            if (!Enabled)
-            {
-                throw new ElementDisabledException(this);
-            }
-        }
     }
 }

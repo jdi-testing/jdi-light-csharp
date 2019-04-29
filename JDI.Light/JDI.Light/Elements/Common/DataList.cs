@@ -25,6 +25,7 @@ namespace JDI.Light.Elements.Common
 
         public void Select(string text)
         {
+            CheckEnabled(true);
             SetText(text);
             if (Selected() != text)
             {
@@ -34,6 +35,7 @@ namespace JDI.Light.Elements.Common
 
         public void Select(Enum value)
         {
+            CheckEnabled(true);
             SetText(value.ToString());
             if (Selected() != value.ToString())
             {
@@ -43,6 +45,7 @@ namespace JDI.Light.Elements.Common
         
         public void Select(int index)
         {
+            CheckEnabled(true);
             string select;
             var els = WebDriver.FindElements(ValuesLocator);
             try

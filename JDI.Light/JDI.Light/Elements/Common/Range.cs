@@ -14,11 +14,13 @@ namespace JDI.Light.Elements.Common
         
         public void SetValue(string value)
         {
+            CheckEnabled(true);
             SetAttribute("value", value);
         }
 
         public void SetValue(double value)
         {
+            CheckEnabled(true);
             SetAttribute("value", value.ToString(CultureInfo.InvariantCulture));
         }
 

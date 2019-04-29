@@ -17,6 +17,7 @@ namespace JDI.Light.Elements.Common
 
         public void InputLines(params string[] textLines)
         {
+            CheckEnabled(true);
             Invoker.DoActionWithWait("Input several lines of text in textarea",
                 () =>
                 {
@@ -27,6 +28,7 @@ namespace JDI.Light.Elements.Common
 
         public void AddNewLine(string textLine)
         {
+            CheckEnabled(true);
             Invoker.DoActionWithWait("Add text from new line in textarea",
                 () => SendKeys("\n" + textLine));
         }

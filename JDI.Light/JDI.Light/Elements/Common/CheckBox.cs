@@ -42,6 +42,7 @@ namespace JDI.Light.Elements.Common
 
         public void Check()
         {
+            CheckEnabled(true);
             Invoker.DoActionWithWait("Check Checkbox", () => 
             {
                 if (!_isCheckedFunc(this))
@@ -53,6 +54,7 @@ namespace JDI.Light.Elements.Common
 
         public void Uncheck()
         {
+            CheckEnabled(true);
             Invoker.DoActionWithWait("Uncheck Checkbox", () => {
                 if (_isCheckedFunc(this))
                     Click();

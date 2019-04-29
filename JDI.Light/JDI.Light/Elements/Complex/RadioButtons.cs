@@ -31,6 +31,7 @@ namespace JDI.Light.Elements.Complex
 
         public void Select(string name)
         {
+            CheckEnabled(true);
             var element = Labels.FirstOrDefault(label => label.Text.Trim() == name);
             if (element == null)
             {
@@ -42,6 +43,7 @@ namespace JDI.Light.Elements.Complex
 
         public void Select(int index)
         {
+            CheckEnabled(true);
             Labels[index - 1].Click();
         }
 

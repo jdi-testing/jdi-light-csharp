@@ -15,11 +15,13 @@ namespace JDI.Light.Elements.Common
         
         public void SetDateTime(string value)
         {
+            CheckEnabled(true);
             SetAttribute("value", value);
         }
 
         public void SetDateTime(DateTime dateTime)
         {
+            CheckEnabled(true);
             var value = dateTime.ToString(Format);
             SetAttribute("value", value);
         }

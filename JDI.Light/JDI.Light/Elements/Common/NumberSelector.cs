@@ -23,6 +23,7 @@ namespace JDI.Light.Elements.Common
 
         public void SetNumber(double number)
         {
+            CheckEnabled(true);
             Clear();
             SendKeys(number.ToString(CultureInfo.InvariantCulture));
         }
