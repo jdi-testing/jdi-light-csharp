@@ -58,7 +58,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Asserts\BaseAssert.cs" />
     <Compile Include="Asserts\FileAssert.cs" />
     <Compile Include="Asserts\Generic\IsAssert.cs" />
     <Compile Include="Asserts\IsAssert.cs" />

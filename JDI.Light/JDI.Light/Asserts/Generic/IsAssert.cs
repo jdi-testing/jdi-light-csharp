@@ -5,10 +5,13 @@ using JDI.Light.Matchers;
 
 namespace JDI.Light.Asserts.Generic
 {
-    public class IsAssert<T> : BaseAssert, ICommonAssert<T> where T : IsAssert<T>
+    public class IsAssert<T> : ICommonAssert<T> where T : IsAssert<T>
     {
-        public IsAssert(IBaseUIElement element) : base(element)
+        public IBaseUIElement Element { get; }
+
+        public IsAssert(IBaseUIElement element)
         {
+            Element = element;
         }
         
         public T Text(Matcher<string> condition)
@@ -38,7 +41,7 @@ namespace JDI.Light.Asserts.Generic
         public T HasClass(string className)
         {
             var classes = Element.GetAttribute("class").Split(' ');
-            Jdi.Assert.IsTrue(classes.Contains(className), $"{Name} doesn't contain class {className}");
+            Jdi.Assert.IsTrue(classes.Contains(className), $"{Element.Name} doesn't contain class {className}");
             return (T)this;
         }
 
