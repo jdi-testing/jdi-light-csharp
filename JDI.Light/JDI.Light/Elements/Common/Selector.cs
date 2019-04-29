@@ -47,7 +47,6 @@ namespace JDI.Light.Elements.Common
 
         public void Select(string value, Selector elem)
         {
-
             Invoker.DoAction($"Select item '{string.Join(" -> ", value)}'",
                 () => _selectElementAction.Invoke(elem, value));
         }
