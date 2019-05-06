@@ -8,6 +8,6 @@ namespace JDI.Light.Interfaces.Common
         double Min { get; }
         double Max { get; }
         double Step { get; }
-        void SetNumber(double number);
+        void SetNumber(double number, bool checkEnabled = true);
     }
 }

@@ -50,7 +50,7 @@ namespace JDI.Light.Tests.Tests.Simple
         public void GetLinesTest()
         {
             TestSite.Html5Page.TextArea.Clear();
-            TestSite.Html5Page.TextArea.SetLines("test 1", "test 2", "test 3");
+            TestSite.Html5Page.TextArea.SetLines(true, "test 1", "test 2", "test 3");
             Jdi.Assert.CollectionEquals(TestSite.Html5Page.TextArea.GetLines(), new[] { "test 1", "test 2", "test 3" });
         }
 
@@ -72,6 +72,9 @@ namespace JDI.Light.Tests.Tests.Simple
         public void DisabledTest()
         {
             Assert.Throws<ElementDisabledException>(() => TestSite.Html5Page.DisabledTextArea.SetText(Text));
+
+            Assert.Throws<ElementDisabledException>(() => TestSite.Html5Page.DisabledTextArea.SetLines(true, "line1", "line2"));
+            Jdi.Assert.CollectionEquals(TestSite.Html5Page.DisabledTextArea.GetLines(), new[] { "" });
         }
 
         [Test]
@@ -84,7 +87,7 @@ namespace JDI.Light.Tests.Tests.Simple
         public void AddNewLineTest()
         {
             TestSite.Html5Page.TextArea.Clear();
-            TestSite.Html5Page.TextArea.SetLines("line1", "line2");
+            Assert.DoesNotThrow(() => TestSite.Html5Page.TextArea.SetLines(true, "line1", "line2"));
             TestSite.Html5Page.TextArea.AddNewLine("line3");
             Jdi.Assert.CollectionEquals(TestSite.Html5Page.TextArea.GetLines(), new[] { "line1", "line2", "line3" });
         }

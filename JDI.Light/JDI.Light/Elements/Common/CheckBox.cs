@@ -19,15 +19,15 @@ namespace JDI.Light.Elements.Common
             _isCheckedFunc = func;
         }
 
-        protected Action<CheckBox, bool> SetValueAction = (cb, value) =>
+        protected Action<CheckBox, bool, bool> SetValueAction = (cb, value, checkEnabled) =>
         {
             if (value)
             {
-                cb.Check();
+                cb.Check(checkEnabled);
             }
             else
             {
-                cb.Uncheck();
+                cb.Uncheck(checkEnabled);
             }
         };
 
@@ -40,8 +40,9 @@ namespace JDI.Light.Elements.Common
         {
         }
 
-        public void Check()
+        public void Check(bool checkEnabled = true)
         {
+            CheckEnabled(checkEnabled);
             Invoker.DoActionWithWait("Check Checkbox", () => 
             {
                 if (!_isCheckedFunc(this))
@@ -51,8 +52,9 @@ namespace JDI.Light.Elements.Common
             });
         }
 
-        public void Uncheck()
+        public void Uncheck(bool checkEnabled = true)
         {
+            CheckEnabled(checkEnabled);
             Invoker.DoActionWithWait("Uncheck Checkbox", () => {
                 if (_isCheckedFunc(this))
                     Click();
@@ -68,7 +70,7 @@ namespace JDI.Light.Elements.Common
         public bool Value
         {
             get => Invoker.DoActionWithResult("Get value", () => _isCheckedFunc(this));
-            set => Invoker.DoAction("Set value", () => SetValueAction(this, value));
+            set => Invoker.DoAction("Set value", () => SetValueAction(this, value, true));
         }
 
         public bool GetValue()

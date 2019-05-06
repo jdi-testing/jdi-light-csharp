@@ -6,15 +6,15 @@ namespace JDI.Light.Interfaces.Common
 {
     public interface IMultiSelector : IBaseUIElement
     {
-        void Check(string value);
-        void Check(int index);
-        void Check(string[] values);
-        void Check(Enum[] values);
-        void Check(int[] values);
+        void Check(string value, bool checkEnabled = true);
+        void Check(int index, bool checkEnabled = true);
+        void Check(string[] values, bool checkEnabled = true);
+        void Check(Enum[] values, bool checkEnabled = true);
+        void Check(int[] values, bool checkEnabled = true);
 
-        void Uncheck(string[] values);
-        void Uncheck(Enum[] values);
-        void Uncheck(int[] values);
+        void Uncheck(string[] values, bool checkEnabled = true);
+        void Uncheck(Enum[] values, bool checkEnabled = true);
+        void Uncheck(int[] values, bool checkEnabled = true);
 
         string Selected();
         List<string> Checked();

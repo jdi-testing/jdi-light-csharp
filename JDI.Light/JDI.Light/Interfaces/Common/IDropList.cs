@@ -11,9 +11,9 @@ namespace JDI.Light.Interfaces.Common
         By ListLocator { get; set; }
 
         void Expand();
-        void Select(string value);
-        void Select(Enum value);
-        void Select(int index);
+        void Select(string value, bool checkEnables = true);
+        void Select(Enum value, bool checkEnables = true);
+        void Select(int index, bool checkEnables = true);
         string GetSelected();
     }
 }

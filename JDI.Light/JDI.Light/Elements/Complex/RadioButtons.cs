@@ -29,19 +29,20 @@ namespace JDI.Light.Elements.Complex
 
         public By RadioLocator { get; set; }
 
-        public void Select(string name)
+        public void Select(string name, bool checkEnabled = true)
         {
             var element = Labels.FirstOrDefault(label => label.Text.Trim() == name);
             if (element == null)
             {
                 throw new ElementNotFoundException($"label: {name} not found");
             }
-
+            CheckEnabled(name, checkEnabled);
             element.Click();
         }
 
-        public void Select(int index)
+        public void Select(int index, bool checkEnabled = true)
         {
+            CheckEnabled(checkEnabled);
             Labels[index - 1].Click();
         }
 
@@ -58,5 +59,17 @@ namespace JDI.Light.Elements.Complex
         }
 
         public string Value => Selected();
+
+        private void CheckEnabled(string name, bool checkEnabled = true)
+        {
+            if (checkEnabled)
+            {
+                var element = Radios.First(radio => radio.GetAttribute("id") == name.ToLower());
+                if (!element.Enabled)
+                {
+                    throw new ElementDisabledException(this);
+                }
+            }
+        }
     }
 }

@@ -15,65 +15,75 @@ namespace JDI.Light.Elements.Common
         {
         }
 
-        public void Check(string value)
+        public void Check(string value, bool checkEnabled = true)
         {
             SelectElement.DeselectAll();
+
+            CheckEnabled(checkEnabled, SelectElement, value);
             SelectElement.SelectByText(value);
         }
 
-        public void Check(int index)
+        public void Check(int index, bool checkEnabled = true)
         {
             SelectElement.DeselectAll();
+
+            CheckEnabled(checkEnabled, SelectElement, null, index);
             SelectElement.SelectByIndex(index);
         }
 
-        public void Check(string[] values)
+        public void Check(string[] values, bool checkEnabled = true)
         {
             SelectElement.DeselectAll();
             foreach (var value in values)
             {
+                CheckEnabled(checkEnabled, SelectElement, value);
                 SelectElement.SelectByText(value);
             }
         }
 
-        public void Check(Enum[] values)
+        public void Check(Enum[] values, bool checkEnabled = true)
         {
             SelectElement.DeselectAll();
             foreach (var value in values)
             {
+                CheckEnabled(checkEnabled, SelectElement, value.ToString());
                 SelectElement.SelectByText(value.ToString());
             }
         }
 
-        public void Check(int[] indexes)
+        public void Check(int[] indexes, bool checkEnabled = true)
         {
             SelectElement.DeselectAll();
             foreach (var index in indexes)
             {
+                CheckEnabled(checkEnabled, SelectElement, null, index);
                 SelectElement.SelectByIndex(index);
             }
         }
 
-        public void Uncheck(string[] values)
+        public void Uncheck(string[] values, bool checkEnabled = true)
         {
             foreach (var value in values)
             {
+                CheckEnabled(checkEnabled, SelectElement, value);
                 SelectElement.DeselectByText(value);
             }
         }
 
-        public void Uncheck(Enum[] values)
+        public void Uncheck(Enum[] values, bool checkEnabled = true)
         {
             foreach (var value in values)
             {
+                CheckEnabled(checkEnabled, SelectElement, value.ToString());
                 SelectElement.DeselectByText(value.ToString());
             }
         }
 
-        public void Uncheck(int[] values)
+        public void Uncheck(int[] values, bool checkEnabled = true)
         {
             foreach (var value in values)
             {
+                CheckEnabled(checkEnabled, SelectElement, null, value);
                 SelectElement.DeselectByIndex(value);
             }
         }

@@ -2,12 +2,12 @@
 {
     public interface ITextArea : ITextField
     {
-        void SetLines(params string[] textLines);
+        void SetLines(bool checkEnabled = true, params string[] textLines);
         string[] GetLines();
         int Rows();
         int Cols();
         int MinLength();
         int MaxLength();
-        void AddNewLine(string textLine);
+        void AddNewLine(string textLine, bool checkEnabled = true);
     }
 }

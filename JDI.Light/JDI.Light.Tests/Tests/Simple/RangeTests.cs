@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using JDI.Light.Exceptions;
+using NUnit.Framework;
 
 namespace JDI.Light.Tests.Tests.Simple
 {
@@ -49,6 +50,15 @@ namespace JDI.Light.Tests.Tests.Simple
         {
             TestSite.Html5Page.Volume.SetValue("30");
             Assert.AreEqual(TestSite.Html5Page.Volume.GetValue(), "30");
+        }
+
+        [Test]
+        public void CheckEnabledTest()
+        {
+            Assert.Throws<ElementDisabledException>(() => TestSite.Html5Page.DisabledRange.SetValue("30", true));
+            Assert.AreEqual(TestSite.Html5Page.DisabledRange.GetValue(), "50");
+
+            Assert.DoesNotThrow(() => TestSite.Html5Page.DisabledRange.SetValue("30", false));
         }
     }
 }

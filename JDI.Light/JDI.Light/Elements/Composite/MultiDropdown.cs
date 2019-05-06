@@ -52,6 +52,7 @@ namespace JDI.Light.Elements.Composite
 
         public void SelectOption(string text)
         {
+            CheckEnabled(true);
             Expand();
             GetFirstByText(text).Select();
             Close();
@@ -75,6 +76,7 @@ namespace JDI.Light.Elements.Composite
 
         public void SelectOptions(List<string> options)
         {
+            CheckEnabled(true);
             Expand();
             foreach(var option in options)
             {

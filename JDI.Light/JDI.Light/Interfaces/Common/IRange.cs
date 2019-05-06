@@ -9,7 +9,7 @@ namespace JDI.Light.Interfaces.Common
         double Min();
         double Max();
         double Step();
-        void SetValue(string value);
-        void SetValue(double value);
+        void SetValue(string value, bool checkEnabled = true);
+        void SetValue(double value, bool checkEnabled = true);
     }
 }
