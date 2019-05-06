@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using JDI.Light.Asserts;
 using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
 
@@ -54,5 +55,8 @@ namespace JDI.Light.Elements.Common
         {
             return GetTextFunc(this);
         }
+
+        public new TextAreaAssert Is() => new TextAreaAssert(this);
+        public new TextAreaAssert AssertThat() => Is();
     }
 }
