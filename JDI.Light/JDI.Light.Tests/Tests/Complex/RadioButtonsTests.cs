@@ -62,7 +62,6 @@ namespace JDI.Light.Tests.Tests.Complex
         {
             Assert.Throws<ElementDisabledException>(() => _colors.Select("Yellow"));
             Jdi.Assert.AreEquals(text, _colors.Selected());
-
         }
     }
 }
