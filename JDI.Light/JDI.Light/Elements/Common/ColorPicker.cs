@@ -15,9 +15,9 @@ namespace JDI.Light.Elements.Common
             return GetAttribute("value");
         }
 
-        public void SetColor(string color)
+        public void SetColor(string color, bool checkEnabled = true)
         {
-            CheckEnabled(true);
+            CheckEnabled(checkEnabled);
             SetAttribute("value", color);
         }
     }

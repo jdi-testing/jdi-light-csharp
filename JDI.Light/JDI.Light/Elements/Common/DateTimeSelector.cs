@@ -13,15 +13,15 @@ namespace JDI.Light.Elements.Common
         {
         }
         
-        public void SetDateTime(string value)
+        public void SetDateTime(string value, bool checkEnabled = true)
         {
-            CheckEnabled(true);
+            CheckEnabled(checkEnabled);
             SetAttribute("value", value);
         }
 
-        public void SetDateTime(DateTime dateTime)
+        public void SetDateTime(DateTime dateTime, bool checkEnabled = true)
         {
-            CheckEnabled(true);
+            CheckEnabled(checkEnabled);
             var value = dateTime.ToString(Format);
             SetAttribute("value", value);
         }

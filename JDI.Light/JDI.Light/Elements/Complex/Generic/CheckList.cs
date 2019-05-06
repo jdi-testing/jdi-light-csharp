@@ -7,7 +7,6 @@ using JDI.Light.Exceptions;
 using JDI.Light.Factories;
 using JDI.Light.Interfaces.Base;
 using JDI.Light.Interfaces.Common;
-using JDI.Light.Interfaces.Complex;
 using JDI.Light.Interfaces.Complex.Generic;
 using OpenQA.Selenium;
 
@@ -31,84 +30,73 @@ namespace JDI.Light.Elements.Complex.Generic
             LabelLocator = By.CssSelector(".html-left > label");
         }
 
-        public void Check(params string[] names)
+        public void Check(bool checkEnabled = true, params string[] names)
         {
             var indexes = names.Select(name => GetIndexOf(name) + 1).ToArray();
-            Check(indexes);
+            Check(checkEnabled, indexes);
         }
 
-        public void Check(int[] indexes)
+        public void Check(bool checkEnabled = true, params int[] indexes)
         {
             for (int i = 1; i <= Values().Count; i++)
             {
                 var value = CheckBoxes[i - 1];
-                CheckEnabled(true);
-                if (!value.Enabled)
-                {
-                    continue;
-                }
                 if (value.IsChecked ^ indexes.Contains(i))
                 {
+                    CheckEnabled(value, checkEnabled);
                     value.Click();
                 }
             }
         }
 
-        public void Uncheck(params string[] names)
+        public void Uncheck(bool checkEnabled = true, params string[] names)
         {
             var indexes = names.Select(name => GetIndexOf(name) + 1).ToArray();
-            Uncheck(indexes);
+            Uncheck(checkEnabled, indexes);
         }
 
-        public void Uncheck(params int[] indexes)
+        public void Uncheck(bool checkEnabled = false, params int[] indexes)
         {
             for (int i = 1; i <= Values().Count; i++)
             {
                 var value = CheckBoxes[i - 1];
-                CheckEnabled(true);
-                if (!value.Enabled)
-                {
-                    continue;
-                }
                 if (value.IsChecked == indexes.Contains(i))
                 {
+                    CheckEnabled(value, checkEnabled);
                     value.Click();
                 }
             }
         }
 
-        public void Select(params string[] values)
+        public void Select(bool checkEnabled = true, params string[] values)
         {
             var indexes = values.Select(GetIndexOf);
             foreach (var index in indexes)
             {
-                if (CheckBoxes[index].Enabled)
-                {
-                    CheckBoxes[index].Click();
-                }
+                CheckEnabled(CheckBoxes[index], checkEnabled);
+                CheckBoxes[index].Click();
             }
         }
 
-        public void Select(params int[] indexes)
+        public void Select(bool checkEnabled = true, params int[] indexes)
         {
             foreach (var index in indexes)
             {
-                if (CheckBoxes[index - 1].Enabled)
-                {
-                    CheckBoxes[index - 1].Click();
-                }
+                CheckEnabled(CheckBoxes[index - 1], checkEnabled);
+                CheckBoxes[index - 1].Click();
             }
         }
 
-        public void UncheckAll()
+        public void UncheckAll(bool checkEnabled = false)
         {
             foreach (var element in GetCheckedUIElements())
             {
+                CheckEnabled(element, checkEnabled);
                 element.Click();
             }
         }
 
-        public void CheckAll()
+        public void CheckAll(bool checkEnabled = true)
         {
             foreach (var checkBox in CheckBoxes)
             {
@@ -190,6 +178,17 @@ namespace JDI.Light.Elements.Complex.Generic
                 throw new ElementNotFoundException($"cant find label: {name}");
             }
             return index;
+        }
+
+        private void CheckEnabled(TCheckBox checkbox, bool checkEnabled = true)
+        {
+            if (checkEnabled)
+            {
+                if (!checkbox.Enabled)
+                {
+                    throw new ElementDisabledException(this);
+                }
+            }
         }
     }
 }

@@ -12,15 +12,15 @@ namespace JDI.Light.Elements.Common
         {
         }
         
-        public void SetValue(string value)
+        public void SetValue(string value, bool checkEnabled = true)
         {
-            CheckEnabled(true);
+            CheckEnabled(checkEnabled);
             SetAttribute("value", value);
         }
 
-        public void SetValue(double value)
+        public void SetValue(double value, bool checkEnabled = true)
         {
-            CheckEnabled(true);
+            CheckEnabled(checkEnabled);
             SetAttribute("value", value.ToString(CultureInfo.InvariantCulture));
         }
 

@@ -20,7 +20,7 @@ namespace JDI.Light.Tests.Tests.Simple
         [Test]
         public void CheckSingleTest()
         {
-            TestSite.MetalsColorsPage.CbWater.Check();
+            Assert.DoesNotThrow(() => TestSite.MetalsColorsPage.CbWater.Check(true));
             Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Water: condition changed to true");
         }
 

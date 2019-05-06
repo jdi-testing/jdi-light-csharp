@@ -13,10 +13,10 @@ namespace JDI.Light.Elements.Common
         {
         }
 
-        public void Select(string value)
+        public void Select(string value, bool checkEnables = true)
         {
-            CheckEnabled(true);
-            CheckEnabled(true, SelectElement, value);
+            CheckEnabled(checkEnables);
+            CheckEnabled(checkEnables, SelectElement, value);
             SelectElement.SelectByText(value);
             if (value != SelectElement.SelectedOption.Text)
             {
@@ -24,10 +24,10 @@ namespace JDI.Light.Elements.Common
             }
         }
 
-        public void Select(Enum value)
+        public void Select(Enum value, bool checkEnables = true)
         {
-            CheckEnabled(true);
-            CheckEnabled(true, SelectElement, value.ToString());
+            CheckEnabled(checkEnables);
+            CheckEnabled(checkEnables, SelectElement, value.ToString());
             SelectElement.SelectByText(value.ToString());
             if (value.ToString() != SelectElement.SelectedOption.Text)
             {
@@ -35,11 +35,11 @@ namespace JDI.Light.Elements.Common
             }
         }
 
-        public void Select(int index)
+        public void Select(int index, bool checkEnables = true)
         {
-            CheckEnabled(true);
+            CheckEnabled(checkEnables);
             index--;
-            CheckEnabled(true, SelectElement, null, index);
+            CheckEnabled(checkEnables, SelectElement, null, index);
             SelectElement.SelectByIndex(index);
             if (SelectElement.Options[index].Text != SelectElement.SelectedOption.Text)
             {

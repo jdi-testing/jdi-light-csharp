@@ -54,7 +54,10 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void DisabledTest()
         {
-            Assert.Throws<ElementDisabledException>(() => TestSite.Html5Page.Ages.Check("Disabled"));
+            Assert.Throws<ElementDisabledException>(() => TestSite.Html5Page.Ages.Check("Disabled", true));
+            Assert.AreEqual(TestSite.Html5Page.Ages.Checked(), "");
+
+            Assert.DoesNotThrow(() => TestSite.Html5Page.Ages.Check("Disabled", false));
             Assert.AreEqual(TestSite.Html5Page.Ages.Checked(), "");
         }
     }

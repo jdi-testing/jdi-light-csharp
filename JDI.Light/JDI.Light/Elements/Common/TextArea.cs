@@ -16,9 +16,9 @@ namespace JDI.Light.Elements.Common
         {
         }
 
-        public void SetLines(params string[] textLines)
+        public void SetLines(bool checkEnabled = true, params string[] textLines)
         {
-            CheckEnabled(true);
+            CheckEnabled(checkEnabled);
             Invoker.DoActionWithWait("Input several lines of text in textarea",
                 () =>
                 {
@@ -27,9 +27,9 @@ namespace JDI.Light.Elements.Common
                 });
         }
 
-        public void AddNewLine(string textLine)
+        public void AddNewLine(string textLine, bool checkEnabled = true)
         {
-            CheckEnabled(true);
+            CheckEnabled(checkEnabled);
             Invoker.DoActionWithWait("Add text from new line in textarea",
                 () => SendKeys("\n" + textLine));
         }

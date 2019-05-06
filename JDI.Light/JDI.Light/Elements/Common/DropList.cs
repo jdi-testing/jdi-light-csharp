@@ -40,9 +40,9 @@ namespace JDI.Light.Elements.Common
             }
         }
 
-        public void Select(string value)
+        public void Select(string value, bool checkEnables = true)
         {
-            CheckEnabled(true);
+            CheckEnabled(checkEnables);
             if (ListLocator != null)
             {
                 ItemLocator = ListLocator;
@@ -54,9 +54,9 @@ namespace JDI.Light.Elements.Common
             }
         }
 
-        public void Select(Enum value)
+        public void Select(Enum value, bool checkEnables = true)
         {
-            CheckEnabled(true);
+            CheckEnabled(checkEnables);
             if (ListLocator != null)
             {
                 ItemLocator = ListLocator;
@@ -68,9 +68,9 @@ namespace JDI.Light.Elements.Common
             }
         }
 
-        public void Select(int index)
+        public void Select(int index, bool checkEnables = true)
         {
-            CheckEnabled(true);
+            CheckEnabled(checkEnables);
             index--;
             if (ListLocator != null)
             {

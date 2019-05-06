@@ -11,7 +11,7 @@ namespace JDI.Light.Tests.Tests.Common
         {
             TestSite.Html5Page.Open();
             TestSite.Html5Page.CheckOpened();
-            TestSite.Html5Page.IceCream.Select("Coconut");
+            Assert.DoesNotThrow(() => TestSite.Html5Page.IceCream.Select("Coconut", true));
         }
 
         [Test]

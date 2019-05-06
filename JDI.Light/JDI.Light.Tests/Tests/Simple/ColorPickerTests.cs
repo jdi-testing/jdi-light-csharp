@@ -34,9 +34,16 @@ namespace JDI.Light.Tests.Tests.Simple
         {
             TestSite.Html5Page.ColorPicker.SetColor("#432376");
             Assert.AreEqual(TestSite.Html5Page.ColorPicker.Color(), "#432376");
+        }
 
-            Assert.Throws<ElementDisabledException>(() => TestSite.Html5Page.DisabledPicker.SetColor("#432376"));
+        [Test]
+        public void CheckEnabledTest()
+        {
+            Assert.Throws<ElementDisabledException>(() => TestSite.Html5Page.DisabledPicker.SetColor("#432376", true));
             Assert.AreEqual(TestSite.Html5Page.DisabledPicker.Color(), _color);
+
+            Assert.DoesNotThrow(() => TestSite.Html5Page.DisabledPicker.SetColor("#432376", false));
+            Assert.AreEqual(TestSite.Html5Page.DisabledPicker.Color(), "#432376");
         }
     }
 }
