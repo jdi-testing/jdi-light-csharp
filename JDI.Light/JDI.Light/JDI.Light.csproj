@@ -61,6 +61,7 @@
     <Compile Include="Asserts\FileAssert.cs" />
     <Compile Include="Asserts\Generic\IsAssert.cs" />
     <Compile Include="Asserts\IsAssert.cs" />
+    <Compile Include="Asserts\ProgressAssert.cs" />
     <Compile Include="Asserts\SelectAssert.cs" />
     <Compile Include="Asserts\TableAssert.cs" />
     <Compile Include="Asserts\TextAreaAssert.cs" />
@@ -165,6 +166,7 @@
     <Compile Include="Enums\LogLevels.cs" />
     <Compile Include="Matchers\CollectionMatchers\HasItemsMatcher.cs" />
     <Compile Include="Matchers\CollectionMatchers\SubsequenceOfMatcher.cs" />
+    <Compile Include="Matchers\IntegerMatchers\EqualToMatcher.cs" />
     <Compile Include="Matchers\IntegerMatchers\GreaterThanOrEqualToMatcher.cs" />
     <Compile Include="Matchers\IntegerMatchers\LessThanOrEqualToMatcher.cs" />
     <Compile Include="Matchers\LongMatchers\GreaterThanMatcher.cs" />
