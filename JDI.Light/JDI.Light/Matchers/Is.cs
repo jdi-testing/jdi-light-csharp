@@ -17,5 +17,7 @@ namespace JDI.Light.Matchers
 
         public static SubsequenceOfMatcher<T> SubsequenceOf<T>(IEnumerable<T> rightSubsequence) =>
             SubsequenceOfMatcher<T>.SubsequenceOf(rightSubsequence);
+
+        public static EqualToMatcher EqualTo(int rightNumber) => EqualToMatcher.EqualTo(rightNumber);
     }
 }
