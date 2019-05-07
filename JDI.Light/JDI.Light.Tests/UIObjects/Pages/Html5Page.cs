@@ -82,7 +82,7 @@ namespace JDI.Light.Tests.UIObjects
         [FindBy(Css = "#height")]
         public INumberSelector Height { get; set; }
         
-        public IColorPicker ColorPicker { get; set; }
+        public ColorPicker ColorPicker { get; set; }
         
         public IColorPicker DisabledPicker { get; set; }
 

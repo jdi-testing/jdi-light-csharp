@@ -121,6 +121,7 @@
     <Compile Include="Interfaces\Asserts\ICommonAssert.cs" />
     <Compile Include="Interfaces\Asserts\IHasIsAssert.cs" />
     <Compile Include="Interfaces\Asserts\IHasSelectAssert.cs" />
+    <Compile Include="Interfaces\Base\HasLabel.cs" />
     <Compile Include="Interfaces\Base\IBaseElement.cs" />
     <Compile Include="Interfaces\Base\IBaseUIElement.cs" />
     <Compile Include="Interfaces\Base\IGetValue.cs" />

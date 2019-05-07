@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading;
 using JDI.Light.Asserts;
+using JDI.Light.Elements.Common;
 using JDI.Light.Elements.WebActions;
 using JDI.Light.Factories;
 using JDI.Light.Interfaces;
@@ -13,7 +14,7 @@ using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Base
 {
-    public class UIElement : IBaseUIElement, IVisible
+    public class UIElement : IBaseUIElement, IVisible, IHasLabel
     {
         private IWebElement _webElement;
         private string _name;
@@ -66,6 +67,16 @@ namespace JDI.Light.Elements.Base
             element.InitMembers();
             element.OnlyOneElementAllowedInSearch = onlyOneElementAllowedInSearch;
             return element;
+        }
+
+        public Label Label()
+        {
+            return Get<Label>(By.CssSelector($"[for={WebElement.GetAttribute("id")}]"));
+        }
+
+        public string LabelText()
+        {
+            return Label().Text;
         }
 
         public IWebElement WebElement

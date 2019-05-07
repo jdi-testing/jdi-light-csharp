@@ -1,6 +1,5 @@
 ﻿using System;
 using NUnit.Framework;
-using OpenQA.Selenium;
 
 namespace JDI.Light.Tests.Tests.Simple
 {
@@ -19,7 +18,7 @@ namespace JDI.Light.Tests.Tests.Simple
         [Test]
         public void GetLabelTextTest()
         {
-            // todo add test after HasLabel interface implementation
+            Assert.AreEqual(TestSite.Html5Page.ColorPicker.LabelText(), "Select a color");
         }
 
         [Test]
