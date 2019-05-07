@@ -172,6 +172,7 @@
     <Compile Include="Matchers\LongMatchers\GreaterThanMatcher.cs" />
     <Compile Include="Matchers\LongMatchers\Is.cs" />
     <Compile Include="Matchers\StringMatchers\ContainsStringMatcher.cs" />
+    <Compile Include="Matchers\StringMatchers\EqualToMatcher.cs" />
     <Compile Include="Settings\ISmartLocator.cs" />
     <Compile Include="Settings\SmartLocatorByCss.cs" />
     <Compile Include="Settings\SmartLocatorById.cs" />

@@ -1,5 +1,7 @@
 ﻿using JDI.Light.Exceptions;
+using JDI.Light.Matchers.StringMatchers;
 using NUnit.Framework;
+using Is = JDI.Light.Matchers.Is;
 
 namespace JDI.Light.Tests.Tests.Simple
 {
@@ -75,18 +77,28 @@ namespace JDI.Light.Tests.Tests.Simple
         }
 
         [Test]
-        public void FocusTest()
-        {
-            TestSite.Html5Page.TextArea.Focus();
-        }
-
-        [Test]
         public void AddNewLineTest()
         {
             TestSite.Html5Page.TextArea.Clear();
             TestSite.Html5Page.TextArea.SetLines("line1", "line2");
             TestSite.Html5Page.TextArea.AddNewLine("line3");
             Jdi.Assert.CollectionEquals(TestSite.Html5Page.TextArea.GetLines(), new[] { "line1", "line2", "line3" });
+        }
+
+        [Test]
+        public void FocusTest()
+        {
+            TestSite.Html5Page.TextArea.Focus();
+        }
+
+        [Test]
+        public void IsValidationTest()
+        {
+            TestSite.Html5Page.TextArea.Is().Enabled();
+            TestSite.Html5Page.TextArea.SetText(Text);
+            TestSite.Html5Page.TextArea.Is().Text(Is.EqualTo(Text))
+                .Text(ContainsStringMatcher.ContainsString("Area"));
+            TestSite.Html5Page.DisabledTextArea.Is().Displayed();
         }
 
         [Test]
