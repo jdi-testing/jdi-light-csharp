@@ -3,6 +3,7 @@ using System.Linq;
 using JDI.Light.Elements.Base;
 using JDI.Light.Exceptions;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace JDI.Light.Elements.Common
 {
@@ -87,6 +88,31 @@ namespace JDI.Light.Elements.Common
                 if (els[i].GetAttribute("class") == "selected") return i;
             }
             return -1;
+        }
+
+        protected void CheckEnabled(bool toCheck, SelectElement selElem, string item, int index = -1)
+        {
+            if (toCheck)
+            {
+                var options = selElem.Options;
+                if (index != -1)
+                {
+                    if (!options[index].Enabled)
+                    {
+                        throw new ElementDisabledException(this);
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < options.Count; i++)
+                    {
+                        if (options[i].Text.Equals(item) && !options[i].Enabled)
+                        {
+                            throw new ElementDisabledException(this);
+                        }
+                    }
+                }
+            }
         }
     }
 }

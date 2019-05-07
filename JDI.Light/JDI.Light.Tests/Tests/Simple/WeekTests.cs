@@ -38,7 +38,7 @@ namespace JDI.Light.Tests.Tests.Simple
         [Test]
         public void SetDateTimeTest()
         {
-            TestSite.Html5Page.AutumnWeek.SetDateTime("2018-W12");
+            Assert.DoesNotThrow(() => TestSite.Html5Page.AutumnWeek.SetDateTime("2018-W12", true));
             Assert.AreEqual(TestSite.Html5Page.AutumnWeek.Value(), "2018-W12");
         }
 

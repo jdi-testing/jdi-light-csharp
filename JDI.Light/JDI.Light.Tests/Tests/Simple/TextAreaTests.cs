@@ -52,7 +52,7 @@ namespace JDI.Light.Tests.Tests.Simple
         public void GetLinesTest()
         {
             TestSite.Html5Page.TextArea.Clear();
-            TestSite.Html5Page.TextArea.SetLines("test 1", "test 2", "test 3");
+            TestSite.Html5Page.TextArea.SetLines(true, "test 1", "test 2", "test 3");
             Jdi.Assert.CollectionEquals(TestSite.Html5Page.TextArea.GetLines(), new[] { "test 1", "test 2", "test 3" });
         }
 
@@ -73,14 +73,15 @@ namespace JDI.Light.Tests.Tests.Simple
         [Test]
         public void DisabledTest()
         {
-            Assert.Throws<ElementDisabledException>(() => TestSite.Html5Page.DisabledTextArea.SetText(Text));
+            Assert.Throws<ElementDisabledException>(() => TestSite.Html5Page.DisabledTextArea.SetLines(true, Text));
+            Jdi.Assert.CollectionEquals(TestSite.Html5Page.DisabledTextArea.GetLines(), new[] { "" });
         }
 
         [Test]
         public void AddNewLineTest()
         {
             TestSite.Html5Page.TextArea.Clear();
-            TestSite.Html5Page.TextArea.SetLines("line1", "line2");
+            TestSite.Html5Page.TextArea.SetLines(true, "line1", "line2");
             TestSite.Html5Page.TextArea.AddNewLine("line3");
             Jdi.Assert.CollectionEquals(TestSite.Html5Page.TextArea.GetLines(), new[] { "line1", "line2", "line3" });
         }
@@ -102,12 +103,24 @@ namespace JDI.Light.Tests.Tests.Simple
         }
 
         [Test]
+        public void AssertValidationTest()
+        {
+            TestSite.Html5Page.TextArea.SetText(Text);
+            TestSite.Html5Page.TextArea.AssertThat().Text(Is.EqualTo(Text));
+        }
+        
+        [Test]
         public void RowsTest()
         {
             Assert.AreEqual(TestSite.Html5Page.TextArea.Rows(), 3);
             Assert.AreEqual(TestSite.Html5Page.TextArea.Cols(), 33);
             Assert.AreEqual(TestSite.Html5Page.TextArea.MinLength(), 10);
             Assert.AreEqual(TestSite.Html5Page.TextArea.MaxLength(), 200);
+
+            TestSite.Html5Page.TextArea.Is().RowsCount(Is.EqualTo(3))
+                .ColsCount(Is.EqualTo(33))
+                .MinLength(Is.EqualTo(10))
+                .MaxLength(Is.EqualTo(200));
         }
     }
 }

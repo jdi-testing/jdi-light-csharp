@@ -21,8 +21,9 @@ namespace JDI.Light.Elements.Common
 
         public double Step => double.Parse(GetAttribute("step"));
 
-        public void SetNumber(double number)
+        public void SetNumber(double number, bool checkEnabled = true)
         {
+            CheckEnabled(checkEnabled);
             Clear();
             SendKeys(number.ToString(CultureInfo.InvariantCulture));
         }

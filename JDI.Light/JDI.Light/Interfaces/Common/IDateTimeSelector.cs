@@ -9,9 +9,9 @@ namespace JDI.Light.Interfaces.Common
         string Value();
         string Min();
         string Max();
-        void SetDateTime(string dateTime);
+        void SetDateTime(string dateTime, bool checkEnabled = true);
 
-        void SetDateTime(DateTime dateTime);
+        void SetDateTime(DateTime dateTime, bool checkEnabled = true);
         DateTime GetDateTime();
     }
 }
