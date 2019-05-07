@@ -30,7 +30,7 @@ namespace JDI.Light.Asserts
         }
         public TextAreaAssert MaxLength(Matcher<int> condition)
         {
-            Assert.IsTrue(condition.IsMatch(TextArea.MaxLength()), $"The min length {TextArea.MaxLength()} is not {condition.ActionName} {condition.RightValue}");
+            Assert.IsTrue(condition.IsMatch(TextArea.MaxLength()), $"The max length {TextArea.MaxLength()} is not {condition.ActionName} {condition.RightValue}");
             return this;
         }
     }
