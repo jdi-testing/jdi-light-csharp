@@ -78,7 +78,6 @@ namespace JDI.Light.Tests.Tests.Simple
         {
             Assert.Throws<ElementDisabledException>(() => TestSite.Html5Page.DisabledRange.SetValue("30", true));
             Assert.AreEqual(TestSite.Html5Page.DisabledRange.GetValue(), "50");
-
             Assert.DoesNotThrow(() => TestSite.Html5Page.DisabledRange.SetValue("30", false));
         }
     }
