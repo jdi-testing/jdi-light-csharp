@@ -19,7 +19,7 @@ namespace JDI.Light.Tests.Tests.Complex
         {
             TestSite.Html5Page.Open();
             TestSite.Html5Page.CheckOpened();
-            TestSite.Html5Page.WeatherCheckList.Check(text);
+            Assert.DoesNotThrow(() => TestSite.Html5Page.WeatherCheckList.Check(true, text));
             _weather = TestSite.Html5Page.WeatherCheckList;
         }
         
@@ -32,14 +32,14 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void SelectTest()
         {
-            _weather.Check("Cold", "Hot option");
+            _weather.Check(true, "Cold", "Hot option");
             Jdi.Assert.CollectionEquals(new[] { "Cold", "Hot option" }, _weather.Checked());
         }
 
         [Test]
         public void SelectNumTest()
         {
-            _weather.Check(1, 4);
+            _weather.Check(true, 1, 4);
             Jdi.Assert.CollectionEquals(new[] { "Hot option", "Sunny" }, _weather.Checked());
         }
 
@@ -52,21 +52,21 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void DisabledTest()
         {
-            _weather.Select("Disabled");
+            Assert.Throws<ElementDisabledException>(() => _weather.Select(true, "Disabled"));
             Jdi.Assert.CollectionEquals(new[] { text }, _weather.Checked());
         }
 
         [Test]
         public void UncheckTest()
         {
-            _weather.Uncheck(text);
+            _weather.Uncheck(false, text);
             Jdi.Assert.CollectionEquals(new[] { "Cold", "Rainy day", "Sunny" }, _weather.Checked());
         }
 
         [Test]
         public void UncheckNumTest()
         {
-            _weather.Uncheck(1, 3);
+            _weather.Uncheck(false, 1, 3);
             Jdi.Assert.IsFalse(_weather.IsChecked(1));
             Jdi.Assert.IsTrue(_weather.IsChecked(2));
             Jdi.Assert.IsTrue(_weather.IsChecked("Cold"));
@@ -90,7 +90,7 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void WrongName()
         {
-            Assert.Throws<ElementNotFoundException>(() => _weather.Check("wrong"));
+            Assert.Throws<ElementNotFoundException>(() => _weather.Check(true, "wrong"));
         }
 
         [Test]

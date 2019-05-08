@@ -36,7 +36,7 @@ namespace JDI.Light.Tests.Tests.Simple
         [Test]
         public void SetDateTimeTest()
         {
-            TestSite.Html5Page.BirthDate.SetDateTime("2018-11-13");
+            Assert.DoesNotThrow(() => TestSite.Html5Page.BirthDate.SetDateTime("2018-11-13", true));
             Assert.AreEqual(TestSite.Html5Page.BirthDate.Value(), "2018-11-13");
         }
 

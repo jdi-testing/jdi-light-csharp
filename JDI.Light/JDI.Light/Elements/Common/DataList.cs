@@ -23,8 +23,9 @@ namespace JDI.Light.Elements.Common
             }
         }
 
-        public void Select(string text)
+        public void Select(string text, bool checkEnabled = true)
         {
+            CheckEnabled(checkEnabled);
             SetText(text);
             if (Selected() != text)
             {
@@ -32,8 +33,9 @@ namespace JDI.Light.Elements.Common
             }
         }
 
-        public void Select(Enum value)
+        public void Select(Enum value, bool checkEnabled = true)
         {
+            CheckEnabled(checkEnabled);
             SetText(value.ToString());
             if (Selected() != value.ToString())
             {
@@ -41,8 +43,9 @@ namespace JDI.Light.Elements.Common
             }
         }
         
-        public void Select(int index)
+        public void Select(int index, bool checkEnabled = true)
         {
+            CheckEnabled(checkEnabled);
             string select;
             var els = WebDriver.FindElements(ValuesLocator);
             try

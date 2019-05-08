@@ -8,8 +8,8 @@ namespace JDI.Light.Interfaces.Complex
     {
         By RadioButtonLocator { get; set; }
         By LabelLocator { get; set; }
-        void Select(string value);
-        void Select(int index);
+        void Select(string value, bool checkEnabled = true);
+        void Select(int index, bool checkEnabled = true);
         new string Selected();
         List<string> Values();
     }

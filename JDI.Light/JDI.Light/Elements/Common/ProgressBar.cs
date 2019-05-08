@@ -1,4 +1,5 @@
-﻿using JDI.Light.Elements.Base;
+﻿using JDI.Light.Asserts;
+using JDI.Light.Elements.Base;
 using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
 
@@ -19,5 +20,8 @@ namespace JDI.Light.Elements.Common
         {
             return GetAttribute("max");
         }
+
+        public new ProgressAssert Is() => new ProgressAssert(this);
+        public new ProgressAssert AssertThat() => Is();
     }
 }

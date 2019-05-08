@@ -1,4 +1,5 @@
 ﻿using System;
+using JDI.Light.Exceptions;
 using JDI.Light.Tests.Enums;
 using NUnit.Framework;
 
@@ -53,7 +54,10 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void DisabledTest()
         {
-            TestSite.Html5Page.Ages.Check("Disabled");
+            Assert.Throws<ElementDisabledException>(() => TestSite.Html5Page.Ages.Check("Disabled", true));
+            Assert.AreEqual(TestSite.Html5Page.Ages.Checked(), "");
+
+            Assert.DoesNotThrow(() => TestSite.Html5Page.Ages.Check("Disabled", false));
             Assert.AreEqual(TestSite.Html5Page.Ages.Checked(), "");
         }
     }

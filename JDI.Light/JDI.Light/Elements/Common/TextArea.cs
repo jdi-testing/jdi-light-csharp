@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using JDI.Light.Asserts;
 using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
 
@@ -16,8 +17,9 @@ namespace JDI.Light.Elements.Common
         {
         }
 
-        public void SetLines(params string[] textLines)
+        public void SetLines(bool checkEnabled = true, params string[] textLines)
         {
+            CheckEnabled(checkEnabled);
             Invoker.DoActionWithWait("Input several lines of text in textarea",
                 () =>
                 {
@@ -26,8 +28,9 @@ namespace JDI.Light.Elements.Common
                 });
         }
 
-        public void AddNewLine(string textLine)
+        public void AddNewLine(string textLine, bool checkEnabled = true)
         {
+            CheckEnabled(checkEnabled);
             Invoker.DoActionWithWait("Add text from new line in textarea",
                 () => SendKeys("\n" + textLine));
         }
@@ -54,5 +57,8 @@ namespace JDI.Light.Elements.Common
         {
             return GetTextFunc(this);
         }
+
+        public new TextAreaAssert Is() => new TextAreaAssert(this);
+        public new TextAreaAssert AssertThat() => Is();
     }
 }

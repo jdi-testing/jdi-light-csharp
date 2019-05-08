@@ -18,7 +18,7 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void SelectTest()
         {
-            TestSite.MetalsColorsPage.ColorsDropDown.Select(Colors.Blue.ToString());
+            Assert.DoesNotThrow(() => TestSite.MetalsColorsPage.ColorsDropDown.Select(Colors.Blue.ToString(), true));
             Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Colors: value changed to Blue");
         }
 

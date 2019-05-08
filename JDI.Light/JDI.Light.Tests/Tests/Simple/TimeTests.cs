@@ -37,7 +37,7 @@ namespace JDI.Light.Tests.Tests.Simple
         [Test]
         public void SetDateTimeTest()
         {
-            TestSite.Html5Page.BookingTime.SetDateTime("05:00");
+            Assert.DoesNotThrow(() => TestSite.Html5Page.BookingTime.SetDateTime("05:00", true));
             Assert.AreEqual(TestSite.Html5Page.BookingTime.Value(), "05:00");
         }
 

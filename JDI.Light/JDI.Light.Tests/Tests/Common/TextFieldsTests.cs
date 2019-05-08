@@ -69,6 +69,9 @@ namespace JDI.Light.Tests.Tests.Common
             Assert.Throws<ElementDisabledException>(() => TestSite.Html5Page.SurnameTextField.Input(Text));
             Jdi.Assert.AreEquals(TestSite.Html5Page.SurnameTextField.GetText(), string.Empty);
             TestSite.Html5Page.SurnameTextField.Is
+            Assert.Throws<ElementDisabledException>(() => _disabledName.Input(Text, true));
+            Jdi.Assert.AreEquals(_disabledName.GetText(), string.Empty);
+            _disabledName.Is
                 .Disabled()
                 .Displayed();
             TestSite.Html5Page.SurnameTextField.AssertThat.Displayed();

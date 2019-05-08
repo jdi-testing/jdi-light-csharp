@@ -21,6 +21,7 @@ namespace JDI.Light.Elements.Composite
         {
             if (!IsSelected)
             {
+                CheckEnabled(true);
                 JsExecutor.ExecuteScript("arguments[0].scrollIntoView();", Label.WebElement);
                 Label.Click();
             }

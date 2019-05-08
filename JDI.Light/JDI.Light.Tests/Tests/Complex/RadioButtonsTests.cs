@@ -56,5 +56,12 @@ namespace JDI.Light.Tests.Tests.Complex
         {
             Assert.Throws<ElementNotFoundException>(() => _colors.Select("wrong"));
         }
+
+        [Test]
+        public void CheckEnabledTest()
+        {
+            Assert.Throws<ElementDisabledException>(() => _colors.Select("Yellow"));
+            Jdi.Assert.AreEquals(text, _colors.Selected());
+        }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using JDI.Light.Elements.Base;
-using JDI.Light.Exceptions;
 using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
 
@@ -16,9 +15,9 @@ namespace JDI.Light.Elements.Common
         {
         }
 
-        public void Input(string text)
+        public void Input(string text, bool checkEnabled = true)
         {
-            CheckEnabled();
+            CheckEnabled(checkEnabled);
             Clear();
             SendKeys(text);
         }
@@ -36,7 +35,7 @@ namespace JDI.Light.Elements.Common
 
         public new void SendKeys(string text)
         {
-            CheckEnabled();
+            CheckEnabled(true);
             Invoker.DoActionWithWait($"Input text '{text}' in text field", () => WebElement.SendKeys(text));
         }
 
@@ -50,19 +49,11 @@ namespace JDI.Light.Elements.Common
             Invoker.DoActionWithWait("Focus on text field", () => WebElement.Click());
         }
 
-        public void SetText(string text)
+        public void SetText(string text, bool checkEnabled = true)
         {
-            Input(text);
+            Input(text, checkEnabled);
         }
 
         public string Placeholder => GetAttribute("placeholder");
-
-        protected void CheckEnabled()
-        {
-            if (!Enabled)
-            {
-                throw new ElementDisabledException(this);
-            }
-        }
     }
 }
