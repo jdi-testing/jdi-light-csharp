@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using JDI.Light.Matchers.CollectionMatchers;
 using JDI.Light.Matchers.IntegerMatchers;
+using JDI.Light.Matchers.StringMatchers;
+using EqualToMatcher = JDI.Light.Matchers.IntegerMatchers.EqualToMatcher;
 
 namespace JDI.Light.Matchers
 {
@@ -21,5 +23,7 @@ namespace JDI.Light.Matchers
         public static EqualToMatcher EqualTo(int rightNumber) => EqualToMatcher.EqualTo(rightNumber);
 
         public static StringMatchers.EqualToMatcher EqualTo(string rightNumber) => StringMatchers.EqualToMatcher.EqualTo(rightNumber);
+
+        public static EqualToIgnoringCaseMatcher EqualToIgnoringCase(string rightNumber) => EqualToIgnoringCaseMatcher.EqualTo(rightNumber);
     }
 }

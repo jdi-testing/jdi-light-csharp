@@ -1,6 +1,4 @@
-﻿using System;
-using JDI.Light.Elements.Base;
-using JDI.Light.Extensions;
+﻿using JDI.Light.Asserts;
 using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
 
@@ -17,36 +15,23 @@ namespace JDI.Light.Elements.Common
         {
         }
 
-        public string GetReference()
+        public string Alt()
         {
-            return Invoker.DoActionWithResult(
-                "Get link reference", 
-                () => FindImmediately(() => WebElement.GetAttribute("href"), ""),
-                href => $"Get href of link '{href}'");
+            return GetAttribute("alt");
         }
 
-        public string WaitReferenceContains(string text)
+        public string Ref()
         {
-            Func<string> TextFunc (UIElement el) => GetReference;
-            return Invoker.DoActionWithResult(
-                $"Wait link contains '{text}'",
-                () => Invoker.GetResultByCondition(TextFunc(this), t => t.Contains(text))
-            );
+            return GetAttribute("href");
         }
 
-        public string WaitReferenceMatches(string regEx)
+        public string Url()
         {
-            Func<string> TextFunc(UIElement el) => GetReference;
-            return Invoker.DoActionWithResult(
-                $"Wait link match regex '{regEx}'",
-                () => Invoker.GetResultByCondition(TextFunc(this), t => t.Matches(regEx))
-            );
+            return Jdi.WebDriver.Url;
         }
 
-        public string GetTooltip()
-        {
-            return Invoker.DoActionWithResult("Get link tooltip", 
-                () => FindImmediately(() => WebElement.GetAttribute("title"), ""), href => $"Get link tooltip '{href}'");
-        }
+        public new LinkAssert Is() => new LinkAssert(this);
+
+        public new LinkAssert AssertThat() => Is();
     }
 }

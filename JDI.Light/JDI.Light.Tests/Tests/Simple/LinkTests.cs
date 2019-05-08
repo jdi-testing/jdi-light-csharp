@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using JDI.Light.Matchers.StringMatchers;
+using NUnit.Framework;
+using Is = JDI.Light.Matchers.Is;
 
 namespace JDI.Light.Tests.Tests.Simple
 {
@@ -8,46 +10,69 @@ namespace JDI.Light.Tests.Tests.Simple
         [SetUp]
         public void SetUp()
         {
-            Jdi.Logger.Info("Navigating to Metals and Colors page.");
-            TestSite.HomePage.Open();
-            TestSite.HomePage.CheckTitle();
-            Jdi.Logger.Info("Setup method finished");
-            Jdi.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            TestSite.Html5Page.Open();
+            TestSite.Html5Page.CheckTitle();
+        }
+
+        private readonly string Text = "Github JDI";
+
+        [Test]
+        public void GetTextTest()
+        {
+            Assert.AreEqual(TestSite.Html5Page.GithubLink.GetText(), Text);
+        }
+
+        [Test]
+        public void GetValueTest()
+        {
+            Assert.AreEqual(TestSite.Html5Page.GithubLink.GetValue(), Text);
+        }
+
+        [Test]
+        public void GetRefTest()
+        {
+            Assert.AreEqual(TestSite.Html5Page.GithubLink.Ref(), "https://github.com/jdi-testing");
+        }
+
+        [Test]
+        public void GetUrlTest()
+        {
+            Assert.AreEqual(TestSite.Html5Page.GithubLink.Url(), "https://epam.github.io/JDI/html5.html");
+        }
+
+        [Test]
+        public void GetAltTest()
+        {
+            Assert.AreEqual(TestSite.Html5Page.GithubLink.Alt(), "Github JDI Link");
         }
 
         [Test]
         public void ClickTest()
         {
-            TestSite.Footer.AboutLink.Click();
-            Assert.IsTrue(TestSite.SupportPage.IsOpened);
+            TestSite.Html5Page.GithubLink.Click();
+            Assert.AreEqual(TestSite.Html5Page.GithubLink.Url(), "https://github.com/jdi-testing");
+            TestSite.Html5Page.Open();
         }
 
         [Test]
-        public void GetReferenceTest()
+        public void IsValidationTest()
         {
-            var reference = TestSite.Footer.AboutLink.GetReference();
-            Assert.AreEqual(TestSite.SupportPage.Url, reference);
+            TestSite.Html5Page.GithubLink.Is().Text(Is.EqualTo(Text))
+                .Text(Is.EqualToIgnoringCase("Github jdi"))
+                .Enabled();
         }
 
         [Test]
-        public void GetReferenceTooltipTest()
+        public void LinkValidationTest()
         {
-            var tooltip = TestSite.Footer.AboutLink.GetTooltip();
-            Assert.AreEqual("Tip title", tooltip);
+            TestSite.Html5Page.GithubLink.Is().Ref(ContainsStringMatcher.ContainsString("github"))
+                .Alt(ContainsStringMatcher.ContainsString("JDI"));
         }
 
         [Test]
-        public void WaitReferenceContainsTest()
+        public void AssertValidationTest()
         {
-            var reference = TestSite.Footer.AboutLink.WaitReferenceContains("support");
-            Assert.AreEqual(reference, TestSite.SupportPage.Url);
-        }
-
-        [Test]
-        public void WaitReferenceMatchesTest()
-        {
-            var reference = TestSite.Footer.AboutLink.WaitReferenceMatches(".*");
-            Assert.AreEqual(reference, TestSite.SupportPage.Url);
+            TestSite.Html5Page.GithubLink.AssertThat().Text(Is.EqualTo(Text));
         }
     }
 }
