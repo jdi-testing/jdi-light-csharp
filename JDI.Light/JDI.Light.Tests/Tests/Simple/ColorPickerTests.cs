@@ -1,5 +1,4 @@
-﻿using System;
-using JDI.Light.Exceptions;
+﻿using JDI.Light.Exceptions;
 using NUnit.Framework;
 using static NUnit.Framework.Assert;
 
@@ -33,10 +32,6 @@ namespace JDI.Light.Tests.Tests.Simple
         public void SetColorTest()
         {
             TestSite.Html5Page.ColorPicker.SetColor("#432376");
-            AreEqual(TestSite.Html5Page.ColorPicker.Color(), "#432376");
-
-            Throws<Exception>(() => TestSite.Html5Page.DisabledPicker.SetColor("#432376"));
-            AreEqual(TestSite.Html5Page.DisabledPicker.Color(), _color);
             AreEqual(TestSite.Html5Page.ColorPicker.Color(), "#432376");
         }
 
