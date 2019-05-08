@@ -7,7 +7,6 @@ using JDI.Light.Exceptions;
 using JDI.Light.Factories;
 using JDI.Light.Interfaces.Base;
 using JDI.Light.Interfaces.Common;
-using JDI.Light.Interfaces.Complex;
 using JDI.Light.Interfaces.Complex.Generic;
 using OpenQA.Selenium;
 
