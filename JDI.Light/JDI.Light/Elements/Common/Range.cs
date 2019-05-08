@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using JDI.Light.Asserts;
 using JDI.Light.Elements.Base;
 using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
@@ -48,5 +49,8 @@ namespace JDI.Light.Elements.Common
         {
             return Convert.ToDouble(GetAttribute("step"));
         }
+
+        public new RangeAssert Is() => new RangeAssert(this);
+        public new RangeAssert AssertThat() => Is();
     }
 }
