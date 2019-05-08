@@ -1,4 +1,6 @@
-﻿namespace JDI.Light.Interfaces.Common
+﻿using JDI.Light.Asserts;
+
+namespace JDI.Light.Interfaces.Common
 {
     public interface ITextArea : ITextField
     {
@@ -9,5 +11,8 @@
         int MinLength();
         int MaxLength();
         void AddNewLine(string textLine, bool checkEnabled = true);
+
+        new TextAreaAssert Is();
+        new TextAreaAssert AssertThat();
     }
 }
