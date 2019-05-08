@@ -37,17 +37,17 @@ namespace JDI.Light.Tests.Tests.Simple
 
             Throws<Exception>(() => TestSite.Html5Page.DisabledPicker.SetColor("#432376"));
             AreEqual(TestSite.Html5Page.DisabledPicker.Color(), _color);
-            Assert.AreEqual(TestSite.Html5Page.ColorPicker.Color(), "#432376");
+            AreEqual(TestSite.Html5Page.ColorPicker.Color(), "#432376");
         }
 
         [Test]
         public void CheckEnabledTest()
         {
-            Assert.Throws<ElementDisabledException>(() => TestSite.Html5Page.DisabledPicker.SetColor("#432376", true));
-            Assert.AreEqual(TestSite.Html5Page.DisabledPicker.Color(), _color);
+            Throws<ElementDisabledException>(() => TestSite.Html5Page.DisabledPicker.SetColor("#432376", true));
+            AreEqual(TestSite.Html5Page.DisabledPicker.Color(), _color);
 
-            Assert.DoesNotThrow(() => TestSite.Html5Page.DisabledPicker.SetColor("#432376", false));
-            Assert.AreEqual(TestSite.Html5Page.DisabledPicker.Color(), "#432376");
+            DoesNotThrow(() => TestSite.Html5Page.DisabledPicker.SetColor("#432376", false));
+            AreEqual(TestSite.Html5Page.DisabledPicker.Color(), "#432376");
         }
     }
 }

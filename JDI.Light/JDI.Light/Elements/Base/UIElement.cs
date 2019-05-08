@@ -12,7 +12,6 @@ using JDI.Light.Factories;
 using JDI.Light.Interfaces;
 using JDI.Light.Interfaces.Base;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 
 namespace JDI.Light.Elements.Base
 {
