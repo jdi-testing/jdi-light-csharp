@@ -1,4 +1,5 @@
-﻿using JDI.Light.Elements.Base;
+﻿using JDI.Light.Asserts;
+using JDI.Light.Elements.Base;
 using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
 
@@ -23,11 +24,15 @@ namespace JDI.Light.Elements.Common
         public string Height => GetAttributeWithInvoker("height");
 
         public string Width => GetAttributeWithInvoker("width");
-
+        
         private string GetAttributeWithInvoker(string attribute)
         {
             return Invoker.DoActionWithResult($"Get image {attribute} for Element " + this,
                 () => FindImmediately(() => WebElement.GetAttribute(attribute), ""));
         }
+
+        public new ImageAssert Is() => new ImageAssert(this);
+
+        public new ImageAssert AssertThat() => Is();
     }
 }

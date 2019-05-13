@@ -99,5 +99,7 @@ namespace JDI.Light.Tests.UIObjects
 
         [FindBy(Css = "[ui = github-link]")]
         public ILink GithubLink { get; set; }
+
+        public IImage JdiLogo { get; set; }
     }
 }

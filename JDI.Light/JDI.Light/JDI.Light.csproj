@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Asserts\FileAssert.cs" />
     <Compile Include="Asserts\Generic\IsAssert.cs" />
+    <Compile Include="Asserts\ImageAssert.cs" />
     <Compile Include="Asserts\IsAssert.cs" />
     <Compile Include="Asserts\NumberAssert.cs" />
     <Compile Include="Asserts\LinkAssert.cs" />
