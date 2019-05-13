@@ -62,7 +62,7 @@ namespace JDI.Light.Elements.Base
             Locator = byLocator;
         }
 
-        public T Get<T>(By locator, bool onlyOneElementAllowedInSearch = false) where T : IBaseUIElement
+        public T GetChild<T>(By locator, bool onlyOneElementAllowedInSearch = false) where T : IBaseUIElement
         {
             var element = UIElementFactory.CreateInstance<T>(locator, this);
             element.InitMembers();
@@ -72,7 +72,10 @@ namespace JDI.Light.Elements.Base
 
         public Label Label()
         {
-            return Get<Label>(By.CssSelector($"[for={WebElement.GetAttribute("id")}]"));
+            var label = UIElementFactory.CreateInstance<Label>(By.CssSelector($"[for={WebElement.GetAttribute("id")}]"), Parent);
+            label.InitMembers();
+            label.OnlyOneElementAllowedInSearch = true;
+            return label;
         }
 
         public string LabelText()

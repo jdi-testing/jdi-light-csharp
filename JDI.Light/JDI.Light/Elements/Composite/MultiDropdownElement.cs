@@ -10,8 +10,8 @@ namespace JDI.Light.Elements.Composite
         public By LabelLocator { get; set; }
         public By CheckboxLocator { get; set; }
 
-        public Label Label => Get<Label>(LabelLocator);
-        public CheckBox CheckBox => Get<CheckBox>(CheckboxLocator);
+        public Label Label => GetChild<Label>(LabelLocator);
+        public CheckBox CheckBox => GetChild<CheckBox>(CheckboxLocator);
         public bool IsSelected => GetAttribute("class") == "active";
         public bool OptionIsEnabled => GetAttribute("class") != "disabled";        
 

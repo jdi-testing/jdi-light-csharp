@@ -13,11 +13,11 @@ namespace JDI.Light.Tests.Tests.Common
             const string text = "some dummy text";
             TestSite.ContactFormPage.Open();
             TestSite.ContactFormPage.CheckOpened();
-            var descFieldAsInterface = TestSite.ContactFormPage.ContactForm.Get<ITextArea>(By.CssSelector("textarea#description"));
+            var descFieldAsInterface = TestSite.ContactFormPage.ContactForm.GetChild<ITextArea>(By.CssSelector("textarea#description"));
             descFieldAsInterface.Input(text);
             Assert.AreEqual(text, TestSite.ContactFormPage.ContactForm.DescriptionField.Text);
             descFieldAsInterface.Clear();
-            var descFieldAsUIElement = TestSite.ContactFormPage.ContactForm.Get<UIElement>(By.CssSelector("textarea#description"));
+            var descFieldAsUIElement = TestSite.ContactFormPage.ContactForm.GetChild<UIElement>(By.CssSelector("textarea#description"));
             descFieldAsUIElement.SendKeys(text);
             Assert.AreEqual(text, TestSite.ContactFormPage.ContactForm.DescriptionField.Text);
             descFieldAsUIElement.Clear();

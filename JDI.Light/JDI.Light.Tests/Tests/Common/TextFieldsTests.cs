@@ -84,8 +84,9 @@ namespace JDI.Light.Tests.Tests.Common
         public void LabelTest()
         {
             Assert.AreEqual(TestSite.Html5Page.NameTextField.Label().GetText(), "Your name:");
-            TestSite.Html5Page.NameTextField.Is.Text(ContainsString("Your"));
+            TestSite.Html5Page.NameTextField.Label().Is.Text(ContainsString("Your"));
             Assert.AreEqual(TestSite.Html5Page.SurnameTextField.Label().GetText(), "Surname:");
+            TestSite.Html5Page.SurnameTextField.Label().Is.Text(ContainsString("Surname:"));
         }
 
         [Test]
