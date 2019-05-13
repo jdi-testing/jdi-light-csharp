@@ -1,6 +1,8 @@
 ﻿using JDI.Light.Exceptions;
 using JDI.Light.Interfaces.Common;
+using JDI.Light.Matchers.StringMatchers;
 using NUnit.Framework;
+using Is = JDI.Light.Matchers.Is;
 
 namespace JDI.Light.Tests.Tests.Common
 {
@@ -38,19 +40,19 @@ namespace JDI.Light.Tests.Tests.Common
         }
 
         [Test]
-        public void InputTest()
-        {
-            _name.Input("New text");
-            Jdi.Assert.AreEquals(_name.GetText(), "New text");
-        }
-        
-        [Test]
         public void SendKeyTest()
         {
             _name.SendKeys("Test");
             Jdi.Assert.AreEquals(_name.GetValue(), Text + "Test");
         }
 
+        [Test]
+        public void InputTest()
+        {
+            _name.Input("New text");
+            Jdi.Assert.AreEquals(_name.GetText(), "New text");
+        }
+        
         [Test]
         public void ClearTest()
         {
@@ -84,6 +86,15 @@ namespace JDI.Light.Tests.Tests.Common
             _name.Focus();
         }
 
+        [Test]
+        public void IsValidationTest()
+        {
+            _name.Is.Enabled()
+                .Text(Is.EqualTo(Text))
+                .Text(ContainsStringMatcher.ContainsString("Field"));
+            _disabledName.Is.Disabled();
+        }
+
         //[Test]
         public void LabelTest()
         {
@@ -91,13 +102,9 @@ namespace JDI.Light.Tests.Tests.Common
         }
 
         [Test]
-        public void MultiKeyTest()
+        public void AssertValidationTest()
         {
-            foreach (var letter in ToAddText)
-            {
-                _name.SendKeys(letter.ToString());
-            }
-            Jdi.Assert.AreEquals(_name.Value, Text + ToAddText);
+            _name.AssertThat.Text(Is.EqualTo(Text));
         }
     }
 }
