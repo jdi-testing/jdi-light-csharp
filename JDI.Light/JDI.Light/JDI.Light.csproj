@@ -61,6 +61,7 @@
     <Compile Include="Asserts\FileAssert.cs" />
     <Compile Include="Asserts\Generic\IsAssert.cs" />
     <Compile Include="Asserts\IsAssert.cs" />
+    <Compile Include="Asserts\LinkAssert.cs" />
     <Compile Include="Asserts\ProgressAssert.cs" />
     <Compile Include="Asserts\RangeAssert.cs" />
     <Compile Include="Asserts\SelectAssert.cs" />
@@ -173,6 +174,7 @@
     <Compile Include="Matchers\LongMatchers\GreaterThanMatcher.cs" />
     <Compile Include="Matchers\LongMatchers\Is.cs" />
     <Compile Include="Matchers\StringMatchers\ContainsStringMatcher.cs" />
+    <Compile Include="Matchers\StringMatchers\EqualToIgnoringCaseMatcher.cs" />
     <Compile Include="Matchers\StringMatchers\EqualToMatcher.cs" />
     <Compile Include="Settings\ISmartLocator.cs" />
     <Compile Include="Settings\SmartLocatorByCss.cs" />
