@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using JDI.Light.Matchers.CollectionMatchers;
 using JDI.Light.Matchers.IntegerMatchers;
+using JDI.Light.Matchers.StringMatchers;
+using EqualToMatcher = JDI.Light.Matchers.IntegerMatchers.EqualToMatcher;
 
 namespace JDI.Light.Matchers
 {
@@ -32,5 +34,7 @@ namespace JDI.Light.Matchers
         public static DoubleMatchers.GreaterThanMatcher GreaterThan(double rightNumber) => DoubleMatchers.GreaterThanMatcher.GreaterThan(rightNumber);
 
         public static DoubleMatchers.LessThanMatcher LessThan(double rightNumber) => DoubleMatchers.LessThanMatcher.LessThan(rightNumber);
+
+        public static EqualToIgnoringCaseMatcher EqualToIgnoringCase(string rightNumber) => EqualToIgnoringCaseMatcher.EqualTo(rightNumber);
     }
 }

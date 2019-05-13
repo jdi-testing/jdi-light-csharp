@@ -96,5 +96,8 @@ namespace JDI.Light.Tests.UIObjects
 
         [FindBy(Css = "textarea:nth-child(4)")]
         public ITextArea DisabledTextArea { get; set; }
+
+        [FindBy(Css = "[ui = github-link]")]
+        public ILink GithubLink { get; set; }
     }
 }
