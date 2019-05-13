@@ -84,7 +84,7 @@ namespace JDI.Light.Elements.Composite
         public void Submit(T entity, By locator)
         {
             Fill(FieldsAsDictionary(entity));
-            Get<IButton>(locator).Click();
+            GetChild<IButton>(locator).Click();
         }
 
         public IList<string> Verify(Dictionary<string, string> objStrings)
