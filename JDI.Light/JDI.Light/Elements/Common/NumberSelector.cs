@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using JDI.Light.Asserts;
 using JDI.Light.Elements.Base;
 using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
@@ -27,5 +28,8 @@ namespace JDI.Light.Elements.Common
             Clear();
             SendKeys(number.ToString(CultureInfo.InvariantCulture));
         }
+
+        public new NumberAssert Is() => new NumberAssert(this);
+        public new NumberAssert AssertThat() => Is();
     }
 }

@@ -24,6 +24,17 @@ namespace JDI.Light.Matchers
 
         public static StringMatchers.EqualToMatcher EqualTo(string rightNumber) => StringMatchers.EqualToMatcher.EqualTo(rightNumber);
 
+        public static DoubleMatchers.EqualToMatcher EqualTo(double rightNumber) => DoubleMatchers.EqualToMatcher.EqualTo(rightNumber);
+
+        public static DoubleMatchers.GreaterThanOrEqualToMatcher GreaterThanOrEqualTo(double rightNumber) =>
+            DoubleMatchers.GreaterThanOrEqualToMatcher.GreaterThanOrEqualTo(rightNumber);
+
+        public static DoubleMatchers.LessThanOrEqualToMatcher LessThanOrEqualTo(double rightNumber) => DoubleMatchers.LessThanOrEqualToMatcher.LessThanOrEqualTo(rightNumber);
+
+        public static DoubleMatchers.GreaterThanMatcher GreaterThan(double rightNumber) => DoubleMatchers.GreaterThanMatcher.GreaterThan(rightNumber);
+
+        public static DoubleMatchers.LessThanMatcher LessThan(double rightNumber) => DoubleMatchers.LessThanMatcher.LessThan(rightNumber);
+
         public static EqualToIgnoringCaseMatcher EqualToIgnoringCase(string rightNumber) => EqualToIgnoringCaseMatcher.EqualTo(rightNumber);
     }
 }

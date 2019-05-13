@@ -7,6 +7,7 @@ namespace JDI.Light.Matchers.IntegerMatchers
         private EqualToMatcher(int rightNumber) : base(rightNumber)
         {
         }
+
         public static EqualToMatcher EqualTo(int rightNumber) => new EqualToMatcher(rightNumber);
 
         public override string ActionName => "equal to";
