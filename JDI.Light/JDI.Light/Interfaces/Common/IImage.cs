@@ -1,4 +1,5 @@
-﻿using JDI.Light.Interfaces.Base;
+﻿using JDI.Light.Asserts;
+using JDI.Light.Interfaces.Base;
 
 namespace JDI.Light.Interfaces.Common
 {
@@ -8,5 +9,8 @@ namespace JDI.Light.Interfaces.Common
         string Alt { get; }
         string Height { get; }
         string Width { get; }
+
+        ImageAssert Is();
+        ImageAssert AssertThat();
     }
 }

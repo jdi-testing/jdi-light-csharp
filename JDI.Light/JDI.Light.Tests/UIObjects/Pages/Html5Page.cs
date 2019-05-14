@@ -82,15 +82,15 @@ namespace JDI.Light.Tests.UIObjects
         [FindBy(Css = "#height")]
         public INumberSelector Height { get; set; }
         
-        public IColorPicker ColorPicker { get; set; }
+        public ColorPicker ColorPicker { get; set; }
         
         public IColorPicker DisabledPicker { get; set; }
 
         [FindBy(Css = "div.main-content #name")]
-        public ITextField NameTextField { get; set; }
+        public TextField NameTextField { get; set; }
 
         [FindBy(Css = "#disabled-name")]
-        public ITextField SurnameTextField { get; set; }
+        public TextField SurnameTextField { get; set; }
         
         public ITextArea TextArea { get; set; }
 
@@ -99,5 +99,7 @@ namespace JDI.Light.Tests.UIObjects
 
         [FindBy(Css = "[ui = github-link]")]
         public ILink GithubLink { get; set; }
+
+        public IImage JdiLogo { get; set; }
     }
 }

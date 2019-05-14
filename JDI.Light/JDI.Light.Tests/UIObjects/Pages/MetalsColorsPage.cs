@@ -15,7 +15,7 @@ namespace JDI.Light.Tests.UIObjects.Pages
         {
             public static bool CheckFunc(UIElement e)
             {
-                var a = e.Get<UIElement>(By.XPath("//*[@id='elements-checklist']//*[*[text()='Water']]/input"));
+                var a = e.GetChild<UIElement>(By.XPath("//*[@id='elements-checklist']//*[*[text()='Water']]/input"));
                 return a.FindImmediately(() => a.GetAttribute("checked") != null, false);
             }
         }

@@ -5,17 +5,17 @@ using System.Drawing;
 using System.Linq;
 using System.Threading;
 using JDI.Light.Asserts;
+using JDI.Light.Elements.Common;
 using JDI.Light.Elements.WebActions;
 using JDI.Light.Exceptions;
 using JDI.Light.Factories;
 using JDI.Light.Interfaces;
 using JDI.Light.Interfaces.Base;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 
 namespace JDI.Light.Elements.Base
 {
-    public class UIElement : IBaseUIElement, IVisible
+    public class UIElement : IBaseUIElement, IVisible, IHasLabel
     {
         private IWebElement _webElement;
         private string _name;
@@ -62,12 +62,25 @@ namespace JDI.Light.Elements.Base
             Locator = byLocator;
         }
 
-        public T Get<T>(By locator, bool onlyOneElementAllowedInSearch = false) where T : IBaseUIElement
+        public T GetChild<T>(By locator, bool onlyOneElementAllowedInSearch = false) where T : IBaseUIElement
         {
             var element = UIElementFactory.CreateInstance<T>(locator, this);
             element.InitMembers();
             element.OnlyOneElementAllowedInSearch = onlyOneElementAllowedInSearch;
             return element;
+        }
+
+        public Label Label()
+        {
+            var label = UIElementFactory.CreateInstance<Label>(By.CssSelector($"[for={WebElement.GetAttribute("id")}]"), Parent);
+            label.InitMembers();
+            label.OnlyOneElementAllowedInSearch = true;
+            return label;
+        }
+
+        public string LabelText()
+        {
+            return Label().Text;
         }
 
         public IWebElement WebElement

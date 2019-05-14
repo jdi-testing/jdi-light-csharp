@@ -60,7 +60,9 @@
   <ItemGroup>
     <Compile Include="Asserts\FileAssert.cs" />
     <Compile Include="Asserts\Generic\IsAssert.cs" />
+    <Compile Include="Asserts\ImageAssert.cs" />
     <Compile Include="Asserts\IsAssert.cs" />
+    <Compile Include="Asserts\NumberAssert.cs" />
     <Compile Include="Asserts\LinkAssert.cs" />
     <Compile Include="Asserts\ProgressAssert.cs" />
     <Compile Include="Asserts\RangeAssert.cs" />
@@ -126,6 +128,7 @@
     <Compile Include="Interfaces\Asserts\ICommonAssert.cs" />
     <Compile Include="Interfaces\Asserts\IHasIsAssert.cs" />
     <Compile Include="Interfaces\Asserts\IHasSelectAssert.cs" />
+    <Compile Include="Interfaces\Base\HasLabel.cs" />
     <Compile Include="Interfaces\Base\IBaseElement.cs" />
     <Compile Include="Interfaces\Base\IBaseUIElement.cs" />
     <Compile Include="Interfaces\Base\IGetValue.cs" />
@@ -168,6 +171,11 @@
     <Compile Include="Enums\LogLevels.cs" />
     <Compile Include="Matchers\CollectionMatchers\HasItemsMatcher.cs" />
     <Compile Include="Matchers\CollectionMatchers\SubsequenceOfMatcher.cs" />
+    <Compile Include="Matchers\DoubleMatchers\EqualToMatcher.cs" />
+    <Compile Include="Matchers\DoubleMatchers\GreaterThanMatcher.cs" />
+    <Compile Include="Matchers\DoubleMatchers\GreaterThanOrEqualToMatcher.cs" />
+    <Compile Include="Matchers\DoubleMatchers\LessThanMatcher.cs" />
+    <Compile Include="Matchers\DoubleMatchers\LessThanOrEqualToMatcher.cs" />
     <Compile Include="Matchers\IntegerMatchers\EqualToMatcher.cs" />
     <Compile Include="Matchers\IntegerMatchers\GreaterThanOrEqualToMatcher.cs" />
     <Compile Include="Matchers\IntegerMatchers\LessThanOrEqualToMatcher.cs" />

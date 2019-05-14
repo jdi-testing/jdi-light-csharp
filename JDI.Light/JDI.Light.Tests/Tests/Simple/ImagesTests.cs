@@ -1,64 +1,57 @@
 ﻿using JDI.Light.Interfaces.Common;
+using JDI.Light.Matchers.StringMatchers;
 using NUnit.Framework;
+using Is = JDI.Light.Matchers.Is;
 
 namespace JDI.Light.Tests.Tests.Simple
 {
     [TestFixture]
     public class ImagesTests : TestBase
     {
-        private const string Alt = "ALT";
-        private const string Src = "https://epam.github.io/JDI/images/Logo_Epam_Color.svg";
-        private IImage LogoImage => TestSite.HomePage.LogoImage;
+        private IImage JdiLogo => TestSite.Html5Page.JdiLogo;
 
         [SetUp]
         public void SetUp()
         {
-            Jdi.Logger.Info("Navigating to Home page.");
-            TestSite.HomePage.Open();
-            TestSite.HomePage.CheckTitle();
-            Jdi.Logger.Info("Setup method finished");
-            Jdi.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            TestSite.Html5Page.Open();
+            TestSite.Html5Page.CheckTitle();
         }
 
-        [Test]
-        public void ClickTest()
-        {
-            TestSite.ContactFormPage.Open();
-            LogoImage.Click();
-            Assert.IsTrue(TestSite.HomePage.IsOpened);
-        }
-
-        [Test]
-        public void SetAttributeTest()
-        {
-            var _attributeName = "testAttr";
-            var _value = "testValue";
-            LogoImage.SetAttribute(_attributeName, _value);
-            Jdi.Assert.AreEquals(LogoImage.GetAttribute(_attributeName), _value);
-        }
+        private const string Text = "https://epam.github.io/JDI/images/jdi-logo.jpg";
 
         [Test]
         public void GetSrcTest()
         {
-            Jdi.Assert.AreEquals(LogoImage.Src, Src);
+            Jdi.Assert.AreEquals(JdiLogo.Src, Text);
         }
 
         [Test]
         public void GetAltTest()
         {
-            Jdi.Assert.AreEquals(LogoImage.Alt, Alt);
+            Jdi.Assert.AreEquals(JdiLogo.Alt, "Jdi Logo 2");
         }
 
         [Test]
-        public void GetHeight()
+        public void ClickTest()
         {
-            Jdi.Assert.AreEquals(LogoImage.Height, "31");
+            JdiLogo.Click();
+            Assert.AreEqual(TestSite.Html5Page.GetAlert().GetAlertText(), "JDI Logo");
+            TestSite.Html5Page.GetAlert().AcceptAlert();
         }
 
         [Test]
-        public void GetWidth()
+        public void IsValidationTest()
         {
-            Jdi.Assert.AreEquals(LogoImage.Width, "86");
+            JdiLogo.Is().Src(ContainsStringMatcher.ContainsString("jdi-logo.jpg"))
+                .Alt(Is.EqualTo("Jdi Logo 2"));
+            JdiLogo.AssertThat().Height(Is.EqualTo(100))
+                .Width(Is.EqualTo(101));
+        }
+
+        [Test]
+        public void AssertValidationTest()
+        {
+            JdiLogo.AssertThat().Alt(Is.EqualTo("Jdi Logo 2"));
         }
     }
 }
