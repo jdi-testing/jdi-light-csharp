@@ -14,7 +14,7 @@ namespace JDI.Light.Tests.UIObjects
         [FindBy(XPath = "//a[@href='/JDI/images/jdi-logo.jpg']")]
         public Link FileDownload { get; set; }
 		
-        [FindBy(Css = "#ages")]
+        [FindBy(Css = "#multi-dropdown")]
         public MultiSelector MultiDropdown { get; set; }
         
         public MultiSelector Ages { get; set; }
