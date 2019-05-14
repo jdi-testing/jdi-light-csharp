@@ -1,83 +1,61 @@
-﻿using System;
-using JDI.Light.Exceptions;
-using JDI.Light.Matchers.CollectionMatchers;
-using JDI.Light.Tests.Enums;
+﻿using System.Collections.Generic;
 using NUnit.Framework;
+using static JDI.Light.Jdi;
 
 namespace JDI.Light.Tests.Tests.Composite
 {
     [TestFixture]
     public class MultiDropdownTests : TestBase
-    {       
+    {
         [SetUp]
         public void SetUp()
         {
+            Logger.Info("Navigating to HTML5 page.");
             TestSite.Html5Page.Open();
+            TestSite.Html5Page.CheckTitle();
             TestSite.Html5Page.CheckOpened();
-            TestSite.Html5Page.MultiDropdown.Check("Steam");
+            Logger.Info("Setup method finished");
+            Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         [Test]
-        public void GetValueTest()
+        public void ExpandMultiDropdown()
         {
-            Assert.AreEqual(TestSite.Html5Page.MultiDropdown.Selected(), "Steam");
+            TestSite.Html5Page.MultiDropdown.Expand();
         }
 
         [Test]
-        public void SelectTest()
+        public void SelectSingleOption()
         {
-            var toSelect = new[] { "Electro", "Metalic" };
-            TestSite.Html5Page.MultiDropdown.Check(toSelect);
-            Assert.AreEqual(TestSite.Html5Page.MultiDropdown.Checked(), toSelect);
+            var option = "Electro";
+            TestSite.Html5Page.MultiDropdown.SelectOption(option);
+            var selectedOptions = TestSite.Html5Page.MultiDropdown.GetSelectedOptions();
+            Jdi.Assert.IsTrue(TestSite.Html5Page.MultiDropdown.OptionIsSelected(option));
+            Jdi.Assert.IsTrue(selectedOptions.Contains(option));
         }
 
         [Test]
-        public void SelectEnumTest()
+        public void SelectMultipleOptions()
         {
-            var toSelect = new Enum[] { Ages.Wood, Ages.Steam };
-            TestSite.Html5Page.MultiDropdown.Check(toSelect);
-            Assert.AreEqual(TestSite.Html5Page.MultiDropdown.Checked(), new[] { "Steam", "Wood" });
+            var optionsList = new List<string> { "Steam", "Electro" };
+            TestSite.Html5Page.MultiDropdown.SelectOptions(optionsList);
+            Jdi.Assert.IsTrue(TestSite.Html5Page.MultiDropdown.OptionsAreSelected(optionsList));
         }
 
         [Test]
-        public void SelectNumTest()
+        public void CheckOptionExists()
         {
-            TestSite.Html5Page.MultiDropdown.Check(new[] { 1, 4 });
-            Assert.AreEqual(TestSite.Html5Page.MultiDropdown.Checked(), new[] { "Steam", "Wood" });
+            TestSite.Html5Page.MultiDropdown.Expand();
+            Jdi.Assert.IsTrue(TestSite.Html5Page.MultiDropdown.OptionExists("Steam"));
+            Jdi.Assert.IsFalse(TestSite.Html5Page.MultiDropdown.OptionExists("Steam2"));
         }
 
         [Test]
-        public void SelectedTest()
+        public void CheckOptionIsDisabled()
         {
-            Assert.AreEqual(TestSite.Html5Page.MultiDropdown.Checked(), new[] { "Steam" });
-        }
-
-        [Test]
-        public void DisabledTest()
-        {
-            Assert.Throws<ElementDisabledException>(() => TestSite.Html5Page.MultiDropdown.Check("Disabled", true));
-            Assert.AreEqual(TestSite.Html5Page.MultiDropdown.Checked(), "");
-
-            Assert.DoesNotThrow(() => TestSite.Html5Page.MultiDropdown.Check("Disabled", false));
-            Assert.AreEqual(TestSite.Html5Page.MultiDropdown.Checked(), "");
-        }
-
-        [Test]
-        public void IsValidationTest()
-        {
-            TestSite.Html5Page.MultiDropdown.Is.Selected("Steam")
-                .Selected(Ages.Steam.ToString())
-                .Values(HasItemsMatcher<string>.HasItems(new[] {"Wood"}))
-                .Disabled(HasItemsMatcher<string>.HasItems(new[] {"Disabled"}))
-                .Enabled(HasItemsMatcher<string>.HasItems(new[] {"Electro", "Metalic"}));
-        }
-
-        [Test]
-        public void AssertValidationTest()
-        {
-            TestSite.Html5Page.MultiDropdown.AssertThat
-                .Values(ContainsInAnyOrderMatcher<string>.ContainsInAnyOrder(new[] {"Disabled", "Electro", "Metalic", "Wood", "Steam"}))
-                .Selected(Ages.Steam.ToString());
+            TestSite.Html5Page.MultiDropdown.Expand();
+            Jdi.Assert.IsFalse(TestSite.Html5Page.MultiDropdown.OptionIsEnabled("Disabled"));
+            Jdi.Assert.IsTrue(TestSite.Html5Page.MultiDropdown.OptionIsEnabled("Wood"));
         }
     }
 }
