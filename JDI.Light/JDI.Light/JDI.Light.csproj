@@ -80,6 +80,7 @@
     <Compile Include="Attributes\NameAttribute.cs" />
     <Compile Include="Attributes\PageAttribute.cs" />
     <Compile Include="Attributes\SiteAttribute.cs" />
+    <Compile Include="Elements\Base\BaseValidation.cs" />
     <Compile Include="Elements\Common\ColorPicker.cs" />
     <Compile Include="Elements\Complex\CheckList.cs" />
     <Compile Include="Elements\Common\ComboBox.cs" />

@@ -1,4 +1,5 @@
-﻿using JDI.Light.Interfaces.Asserts;
+﻿using JDI.Light.Asserts;
+using JDI.Light.Interfaces.Asserts;
 using JDI.Light.Interfaces.Base;
 
 namespace JDI.Light.Interfaces.Common
@@ -9,5 +10,8 @@ namespace JDI.Light.Interfaces.Common
         string WaitText(string text);
         string WaitMatchText(string regEx);
         string GetValue();
+
+        new TextAssert Is { get; }
+        new TextAssert AssertThat { get; }
     }
 }
