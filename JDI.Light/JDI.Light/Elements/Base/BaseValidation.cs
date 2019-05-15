@@ -2,7 +2,7 @@
 
 namespace JDI.Light.Elements.Base
 {
-    public class BaseValidation
+    public static class BaseValidation
     {
         public static void BaseElementValidation(UIElement element)
         {
