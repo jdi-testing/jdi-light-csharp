@@ -36,6 +36,20 @@ namespace JDI.Light.Tests.Tests.Simple
         }
 
         [Test]
+        public void IsValidationTest()
+        {
+            TestSite.Html5Page.DisabledPicker.Is().Color(_color)
+                .Disabled();
+            TestSite.Html5Page.ColorPicker.Is().Enabled();
+        }
+
+        [Test]
+        public void AssertValidationTest()
+        {
+            TestSite.Html5Page.DisabledPicker.AssertThat().Color(_color);
+        }
+
+        [Test]
         public void CheckEnabledTest()
         {
             Throws<ElementDisabledException>(() => TestSite.Html5Page.DisabledPicker.SetColor("#432376", true));
