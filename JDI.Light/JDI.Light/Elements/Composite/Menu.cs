@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Collections.ObjectModel;
 using System.Linq;
 using JDI.Light.Asserts;
 using JDI.Light.Elements.Base;
@@ -10,6 +11,7 @@ using JDI.Light.Extensions;
 using JDI.Light.Interfaces.Complex;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 
 namespace JDI.Light.Elements.Composite
 {
@@ -17,7 +19,7 @@ namespace JDI.Light.Elements.Composite
     public class Menu : UIElement, IMenuSelector
     {
         public By MenuItemLocator { get; set; } = By.XPath(".//li/a");
-
+        public SelectElement SelectElement => new SelectElement(this);
         public ReadOnlyCollection<IWebElement> MenuList => FindElements(By.XPath(".//li"));
 
         private Action<Menu, string[]> _selectElementAction = (menu, itemTexts) =>

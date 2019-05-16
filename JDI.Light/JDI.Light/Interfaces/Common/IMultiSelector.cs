@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using JDI.Light.Interfaces.Base;
+using JDI.Light.Interfaces.Complex;
 
 namespace JDI.Light.Interfaces.Common
 {
-    public interface IMultiSelector : IBaseUIElement
+    public interface IMultiSelector : IBaseUIElement, ISelector
     {
         void Check(string value, bool checkEnabled = true);
         void Check(int index, bool checkEnabled = true);

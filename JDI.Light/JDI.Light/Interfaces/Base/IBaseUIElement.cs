@@ -10,5 +10,6 @@ namespace JDI.Light.Interfaces.Base
         IWebElement WebElement { get; set; }
         void SetAttribute(string attributeName, string value);
         void Highlight(string borderColor, string backgroundColor, int highlightMillisecondsTime);
+        void Show();
     }
 }

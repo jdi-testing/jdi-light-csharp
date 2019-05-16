@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using JDI.Light.Asserts;
+using JDI.Light.Interfaces.Base;
 using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
@@ -10,7 +12,7 @@ namespace JDI.Light.Elements.Common
     public class MultiSelector : Selector, IMultiSelector
     {
         public SelectElement SelectElement => new SelectElement(this);
-
+        
         public MultiSelector(By byLocator) : base(byLocator)
         {
         }
@@ -102,5 +104,62 @@ namespace JDI.Light.Elements.Common
             }
             return toReturn;
         }
+
+        public bool Selected(string option)
+        {
+            return Selected().Contains(option);
+        }
+
+        public List<string> Values()
+        {
+            var list = new List<string>();
+            foreach (var option in SelectElement.Options)
+            {
+                list.Add(option.Text);
+            }
+            return list;
+        }
+
+        public List<string> ListEnabled()
+        {
+            var list = new List<string>();
+            foreach (var option in SelectElement.Options)
+            {
+                if (option.Enabled)
+                {
+                    list.Add(option.Text);
+                }
+            }
+
+            return list;
+        }
+
+        public List<string> ListDisabled()
+        {
+            var list = new List<string>();
+            foreach (var option in SelectElement.Options)
+            {
+                if (!option.Enabled)
+                {
+                    list.Add(option.Text);
+                }
+            }
+
+            return list;
+        }
+
+        public List<IBaseUIElement> AllUI() => SelectElement.Options.Cast<IBaseUIElement>().ToList();
+
+        public int GetSize() => SelectElement.Options.Count;
+
+        public bool IsEmpty() => !HasAny();
+
+        public bool HasAny() => SelectElement.Options.Any();
+
+        public new SelectAssert Is => new SelectAssert(this);
+
+        public new SelectAssert AssertThat => Is;
+
+        public new SelectAssert Has => Is;
     }
 }

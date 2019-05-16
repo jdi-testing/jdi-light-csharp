@@ -47,6 +47,7 @@ namespace JDI.Light.Elements.Base
         public string TagName => WebElement.TagName;
         public string Text => WebElement.Text;
         public bool Enabled => WebElement.Enabled;
+        public bool Disabled => !WebElement.Enabled;
         public bool Selected => WebElement.Selected;
         public Point Location => WebElement.Location;
         public Size Size => WebElement.Size;
@@ -256,6 +257,11 @@ namespace JDI.Light.Elements.Base
         public void Submit()
         {
             Invoker.DoActionWithWait("Submit an Element", () => WebElement.Submit());
+        }
+
+        public void Show()
+        {
+            JsExecutor.ExecuteScript("arguments[0].scrollIntoView();", WebElement);
         }
 
         public void Click()

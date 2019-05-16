@@ -1,6 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using static JDI.Light.Elements.Base.BaseValidation;
+using static JDI.Light.Matchers.StringMatchers.ContainsStringMatcher;
+using static JDI.Light.Matchers.StringMatchers.EqualToMatcher;
 
 namespace JDI.Light.Tests.Tests.Simple
 {
@@ -90,6 +93,27 @@ namespace JDI.Light.Tests.Tests.Simple
                 TestSite.HomePage.Open();
             });
             Jdi.Assert.AreEquals(actualResultTask.Result, _expectedText);
+        }
+
+        [Test]
+        public void IsValidationTest()
+        {
+            TestSite.HomePage.Text.Is.Enabled();
+            TestSite.HomePage.Text.Is.Text(EqualTo(_expectedText));
+            TestSite.HomePage.Text.Is.Text(ContainsString(_contains));
+        }
+
+        [Test]
+        public void AssertValidationTest()
+        {
+            TestSite.HomePage.Text.AssertThat.Text(EqualTo(_expectedText));
+        }
+
+        [Test]
+        public void BaseValidationTest()
+        {
+            TestSite.Html5Page.Open();
+            BaseElementValidation(TestSite.Html5Page.JdiText);
         }
     }
 }

@@ -81,6 +81,7 @@
     <Compile Include="Attributes\NameAttribute.cs" />
     <Compile Include="Attributes\PageAttribute.cs" />
     <Compile Include="Attributes\SiteAttribute.cs" />
+    <Compile Include="Elements\Base\BaseValidation.cs" />
     <Compile Include="Elements\Common\ColorPicker.cs" />
     <Compile Include="Elements\Complex\CheckList.cs" />
     <Compile Include="Elements\Common\ComboBox.cs" />
@@ -173,6 +174,7 @@
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Enums\LogLevels.cs" />
+    <Compile Include="Matchers\CollectionMatchers\ContainsInAnyOrderMatcher.cs" />
     <Compile Include="Matchers\CollectionMatchers\HasItemsMatcher.cs" />
     <Compile Include="Matchers\CollectionMatchers\SubsequenceOfMatcher.cs" />
     <Compile Include="Matchers\DoubleMatchers\EqualToMatcher.cs" />
