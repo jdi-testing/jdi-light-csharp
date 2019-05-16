@@ -11,19 +11,23 @@ Powerful Framework for UI Automation Testing on C#
 
 ## Documentation
 
-Can be found [here](https://jdi-docs.github.io/jdi-light/#jdi-light-framework)
+Can be found [here](https://jdi-docs.github.io/jdi-light/#common-elements)
 
 ## Introduction
 
 JDI – is the test Framework for UI test automation that helps to makes your tests fast and sustainable and provide obvious and predictable test run result
 
 ## Highlights
-- Has simple integration with any Selenium based project that allows to increase projects stability, add user actions logs and enrich standard WebElements capabilities with new features in minutes
-- Extends Page Objects pattern with powerful UI Elements: Buttons, TextFields, Forms, Tables etc
-- Write stable and predictable tests that fail only because of changing business logic or layout. No more waits, thread sleep and other flaky staff
-- Increase your tests execution speed in general and especially for complex cases like search in big tables, dropdowns with hundreds elements or enter text with thousand lines
-- Get detailed logs and good reports of all user actions with no effort
-- Easy integration with all modern Automation tools
+
+  - Has simple integration with any Selenium based project that allows to increase projects stability, add user actions logs and enrich standard WebElements capabilities with new features in minutes
+  - Extends Page Objects pattern with powerful UI Elements: Buttons, TextFields, Forms, Tables etc
+  - Write stable and predictable tests that fail only because of changing business logic or layout. No more waits, thread sleep and other flaky staff
+  - Increase your tests execution speed in general and especially for complex cases like search in big tables, dropdowns with hundreds elements or enter text with thousand lines
+  - Get detailed logs and good reports of all user actions with no effort
+  - Easy integration with all modern Automation tools
 
 ## License
+
+[MIT License](https://github.com/jdi-testing/jdi-light-csharp/blob/master/LICENSE) is used for this project.
+
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fjdi-testing%2Fjdi-light-csharp.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fjdi-testing%2Fjdi-light-csharp?ref=badge_large)
