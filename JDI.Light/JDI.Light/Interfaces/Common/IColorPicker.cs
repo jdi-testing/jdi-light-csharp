@@ -1,4 +1,5 @@
-﻿using JDI.Light.Interfaces.Base;
+﻿using JDI.Light.Asserts;
+using JDI.Light.Interfaces.Base;
 
 namespace JDI.Light.Interfaces.Common
 {
@@ -6,5 +7,7 @@ namespace JDI.Light.Interfaces.Common
     {
         string Color();
         void SetColor(string color, bool checkEnabled = true);
+        ColorAssert Is();
+        ColorAssert AssertThat();
     }
 }
