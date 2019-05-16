@@ -38,7 +38,7 @@ namespace JDI.Light.Tests.Tests.Simple
         [Test]
         public void IsValidationTest()
         {
-            TestSite.Html5Page.DisabledPicker.Is().Color(_color)
+            TestSite.Html5Page.DisabledPicker.Is().ExpectedColor(_color)
                 .Disabled();
             TestSite.Html5Page.ColorPicker.Is().Enabled();
         }
@@ -46,7 +46,7 @@ namespace JDI.Light.Tests.Tests.Simple
         [Test]
         public void AssertValidationTest()
         {
-            TestSite.Html5Page.DisabledPicker.AssertThat().Color(_color);
+            TestSite.Html5Page.DisabledPicker.AssertThat().ExpectedColor(_color);
         }
 
         [Test]

@@ -13,7 +13,7 @@ namespace JDI.Light.Asserts
             ColorPicker = colorPicker;
         }
 
-        public ColorAssert Color(string color)
+        public ColorAssert ExpectedColor(string color)
         {
             Assert.AreEquals(ColorPicker.Color(), color);
             return this;
