@@ -9,6 +9,9 @@
 # JDI Light (.NET)
 Powerful Framework for UI Automation Testing on C#
 
+## Documentation
+
+Can be found [here](https://jdi-docs.github.io/jdi-light/#jdi-light-framework)
 
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fjdi-testing%2Fjdi-light-csharp.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fjdi-testing%2Fjdi-light-csharp?ref=badge_large)
