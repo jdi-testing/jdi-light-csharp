@@ -1,7 +1,7 @@
 ﻿using JDI.Light.Elements.Complex.Generic;
 using JDI.Light.Interfaces.Common;
-using JDI.Light.Interfaces.Complex;
 using OpenQA.Selenium;
+using ICheckList = JDI.Light.Interfaces.Complex.ICheckList;
 
 namespace JDI.Light.Elements.Complex
 {

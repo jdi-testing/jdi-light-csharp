@@ -62,6 +62,7 @@
     <Compile Include="Asserts\Generic\IsAssert.cs" />
     <Compile Include="Asserts\ImageAssert.cs" />
     <Compile Include="Asserts\IsAssert.cs" />
+    <Compile Include="Asserts\MenuSelectAssert.cs" />
     <Compile Include="Asserts\NumberAssert.cs" />
     <Compile Include="Asserts\LinkAssert.cs" />
     <Compile Include="Asserts\ProgressAssert.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Interfaces\Asserts\ICommonAssert.cs" />
     <Compile Include="Interfaces\Asserts\IHasIsAssert.cs" />
     <Compile Include="Interfaces\Asserts\IHasSelectAssert.cs" />
+    <Compile Include="Interfaces\Asserts\IHasSelectMenuAssert.cs" />
     <Compile Include="Interfaces\Base\HasLabel.cs" />
     <Compile Include="Interfaces\Base\IBaseElement.cs" />
     <Compile Include="Interfaces\Base\IBaseUIElement.cs" />
@@ -137,8 +139,9 @@
     <Compile Include="Interfaces\Base\IVisible.cs" />
     <Compile Include="Interfaces\Common\IButton.cs" />
     <Compile Include="Interfaces\Common\ICheckBox.cs" />
+    <Compile Include="Interfaces\Common\ICheckList.cs" />
     <Compile Include="Interfaces\Common\IColorPicker.cs" />
-    <Compile Include="Interfaces\Complex\Generic\ICheckListcs.cs" />
+    <Compile Include="Interfaces\Complex\Generic\ICheckList.cs" />
     <Compile Include="Interfaces\Complex\ICheckList.cs" />
     <Compile Include="Interfaces\Common\IDataList.cs" />
     <Compile Include="Interfaces\Common\IDatePicker.cs" />
@@ -153,6 +156,7 @@
     <Compile Include="Interfaces\Common\INumberSelector.cs" />
     <Compile Include="Interfaces\Common\IProgressBar.cs" />
     <Compile Include="Interfaces\Complex\IHasSize.cs" />
+    <Compile Include="Interfaces\Complex\IMenuSelector.cs" />
     <Compile Include="Interfaces\Complex\IRadioButtons.cs" />
     <Compile Include="Interfaces\Common\IRange.cs" />
     <Compile Include="Interfaces\Common\ITextElement.cs" />

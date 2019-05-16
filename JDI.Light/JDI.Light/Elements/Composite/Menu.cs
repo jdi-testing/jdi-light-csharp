@@ -1,21 +1,25 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Collections.ObjectModel;
 using System.Linq;
+using JDI.Light.Asserts;
 using JDI.Light.Elements.Base;
 using JDI.Light.Exceptions;
 using JDI.Light.Extensions;
+using JDI.Light.Interfaces.Complex;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 
 namespace JDI.Light.Elements.Composite
 {
-    public class Menu : UIElement
+    [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
+    public class Menu : UIElement, IMenuSelector
     {
         public By MenuItemLocator { get; set; } = By.XPath(".//li/a");
-
         public SelectElement SelectElement => new SelectElement(this);
-
         public ReadOnlyCollection<IWebElement> MenuList => FindElements(By.XPath(".//li"));
 
         private Action<Menu, string[]> _selectElementAction = (menu, itemTexts) =>
@@ -82,5 +86,14 @@ namespace JDI.Light.Elements.Composite
         {
             Invoker.DoAction($"Select menu item '{string.Join(" -> ", itemTexts)}'", () => _selectElementAction.Invoke(this, itemTexts));
         }
+
+        public bool Selected(string option)
+        {
+           return MenuList.FirstOrDefault(e => e.Text.Equals(option)).GetAttribute("class").Contains("active");
+        }
+
+        public new MenuSelectAssert Is => new MenuSelectAssert(this);
+
+        public new MenuSelectAssert AssertThat => Is;
     }
 }

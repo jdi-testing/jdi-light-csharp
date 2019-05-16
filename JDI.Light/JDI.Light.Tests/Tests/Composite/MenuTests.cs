@@ -1,7 +1,6 @@
 ﻿using JDI.Light.Exceptions;
 using JDI.Light.Tests.Enums;
 using NUnit.Framework;
-using OpenQA.Selenium;
 
 namespace JDI.Light.Tests.Tests.Composite
 {
@@ -72,6 +71,20 @@ namespace JDI.Light.Tests.Tests.Composite
         {
             TestSite.SidebarMenu.Select(Navigation.Service, Navigation.Dates);
             TestSite.Dates.CheckOpened();
+        }
+
+        [Test]
+        public void IsValidationTest()
+        {
+            TestSite.SidebarMenu.Select("Elements packs", "HTML 5");
+            TestSite.SidebarMenu.Is.Selected("HTML 5");
+        }
+
+        [Test]
+        public void AssertValidationTest()
+        {
+            TestSite.SidebarMenu.Select("Elements packs", "HTML 5");
+            TestSite.SidebarMenu.AssertThat.Selected("HTML 5");
         }
     }
 }
