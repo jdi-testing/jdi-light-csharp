@@ -50,52 +50,6 @@ namespace JDI.Light.Tests.Tests.Simple
         }
 
         [Test]
-        public void WaitMatchTest()
-        {
-            Jdi.Assert.AreEquals(TestSite.HomePage.Text.WaitMatchText(_regEx), _expectedText);
-        }
-
-        [Test]
-        public void WaitMatchTextParallelTest()
-        {
-            TestSite.SupportPage.Open();
-            var actualResultTask = Task.Factory.StartNew(() =>
-            {
-                Thread.Sleep(200);
-                return TestSite.HomePage.Text.WaitMatchText(_regEx);
-            });
-            Task.Factory.StartNew(() =>
-            {
-                Thread.Sleep(100);
-                TestSite.HomePage.Open();
-            });
-            Jdi.Assert.AreEquals(actualResultTask.Result, _expectedText);
-        }
-
-        [Test]
-        public void WaitText()
-        {
-            Jdi.Assert.AreEquals(TestSite.HomePage.Text.WaitText(_contains), _expectedText);
-        }
-
-        [Test]
-        public void WaitTextParallelTest()
-        {
-            TestSite.SupportPage.Open();
-            var actualResultTask = Task.Factory.StartNew(() =>
-            {
-                Thread.Sleep(200);
-                return TestSite.HomePage.Text.WaitText(_contains);
-            });
-            Task.Run(() =>
-            {
-                Thread.Sleep(100);
-                TestSite.HomePage.Open();
-            });
-            Jdi.Assert.AreEquals(actualResultTask.Result, _expectedText);
-        }
-
-        [Test]
         public void IsValidationTest()
         {
             TestSite.HomePage.Text.Is.Enabled();

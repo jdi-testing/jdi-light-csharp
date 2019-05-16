@@ -1,7 +1,6 @@
 ﻿using System;
 using JDI.Light.Asserts;
 using JDI.Light.Elements.Base;
-using JDI.Light.Extensions;
 using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
 
@@ -43,16 +42,6 @@ namespace JDI.Light.Elements.Common
         }
 
         public new string Text => GetText();
-
-        public string WaitText(string text)
-        {
-            return Invoker.DoActionWithResult($"Wait text contains '{text}'", TextAction(), checkResultFunc: t => t.Contains(text));
-        }
-
-        public string WaitMatchText(string regEx)
-        {
-            return Invoker.DoActionWithResult($"Wait text match regex '{regEx}'", TextAction(), checkResultFunc: t => t.Matches(regEx));
-        }
 
         public new TextAssert Is => new TextAssert(this);
 
