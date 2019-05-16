@@ -2,10 +2,8 @@
 using System.Threading.Tasks;
 using NUnit.Framework;
 using static JDI.Light.Elements.Base.BaseValidation;
-using static JDI.Light.Jdi;
 using static JDI.Light.Matchers.StringMatchers.ContainsStringMatcher;
 using static JDI.Light.Matchers.StringMatchers.EqualToMatcher;
-using static JDI.Light.Matchers.StringMatchers.RegexMatcher;
 
 namespace JDI.Light.Tests.Tests.Simple
 {
@@ -15,9 +13,9 @@ namespace JDI.Light.Tests.Tests.Simple
         [SetUp]
         public void SetUp()
         {
-            Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            Jdi.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
             TestSite.HomePage.Open();
-            Logger.Info("Setup method finished");
+            Jdi.Logger.Info("Setup method finished");
         }
 
         private readonly string _expectedText = ("Lorem ipsum dolor sit amet, consectetur adipisicing elit,"
@@ -54,7 +52,7 @@ namespace JDI.Light.Tests.Tests.Simple
         [Test]
         public void WaitMatchTest()
         {
-            Jdi.Assert.AreEquals(TestSite.HomePage.Text.WaitFor.Text(MatchRegexp(_regEx)).Element.Text, _expectedText);
+            Jdi.Assert.AreEquals(TestSite.HomePage.Text.WaitMatchText(_regEx), _expectedText);
         }
 
         [Test]
@@ -64,20 +62,20 @@ namespace JDI.Light.Tests.Tests.Simple
             var actualResultTask = Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(200);
-                return TestSite.HomePage.Text.WaitFor.Text(MatchRegexp(_regEx));
+                return TestSite.HomePage.Text.WaitMatchText(_regEx);
             });
             Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(100);
                 TestSite.HomePage.Open();
             });
-            Jdi.Assert.AreEquals(actualResultTask.Result.Element.Text, _expectedText);
+            Jdi.Assert.AreEquals(actualResultTask.Result, _expectedText);
         }
 
         [Test]
         public void WaitText()
         {
-            Jdi.Assert.AreEquals(TestSite.HomePage.Text.WaitFor.Text(ContainsString(_contains)).Element.Text, _expectedText);
+            Jdi.Assert.AreEquals(TestSite.HomePage.Text.WaitText(_contains), _expectedText);
         }
 
         [Test]
@@ -87,14 +85,14 @@ namespace JDI.Light.Tests.Tests.Simple
             var actualResultTask = Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(200);
-                return TestSite.HomePage.Text.WaitFor.Text(ContainsString(_contains));
+                return TestSite.HomePage.Text.WaitText(_contains);
             });
             Task.Run(() =>
             {
                 Thread.Sleep(100);
                 TestSite.HomePage.Open();
             });
-            Jdi.Assert.AreEquals(actualResultTask.Result.Element.Text, _expectedText);
+            Jdi.Assert.AreEquals(actualResultTask.Result, _expectedText);
         }
 
         [Test]

@@ -7,6 +7,8 @@ namespace JDI.Light.Interfaces.Common
     public interface ITextElement : IGetValue<string>, IBaseUIElement, IHasIsAssert
     {
         string GetText();
+        string WaitText(string text);
+        string WaitMatchText(string regEx);
         string GetValue();
 
         new TextAssert Is { get; }
