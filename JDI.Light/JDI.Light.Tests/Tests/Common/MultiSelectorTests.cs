@@ -1,5 +1,6 @@
 ﻿using System;
 using JDI.Light.Exceptions;
+using JDI.Light.Matchers.CollectionMatchers;
 using JDI.Light.Tests.Enums;
 using NUnit.Framework;
 
@@ -59,6 +60,24 @@ namespace JDI.Light.Tests.Tests.Common
 
             Assert.DoesNotThrow(() => TestSite.Html5Page.Ages.Check("Disabled", false));
             Assert.AreEqual(TestSite.Html5Page.Ages.Checked(), "");
+        }
+
+        [Test]
+        public void IsValidationTest()
+        {
+            TestSite.Html5Page.Ages.Is.Selected("Steam")
+                .Selected(Ages.Steam.ToString())
+                .Values(HasItemsMatcher<string>.HasItems(new[] { "Wood" }))
+                .Disabled(HasItemsMatcher<string>.HasItems(new[] { "Disabled" }))
+                .Enabled(HasItemsMatcher<string>.HasItems(new[] { "Electro", "Metalic" }));
+        }
+
+        [Test]
+        public void AssertValidationTest()
+        {
+            TestSite.Html5Page.Ages.AssertThat
+                .Values(ContainsInAnyOrderMatcher<string>.ContainsInAnyOrder(new[] { "Disabled", "Electro", "Metalic", "Wood", "Steam" }))
+                .Selected(Ages.Steam.ToString());
         }
     }
 }

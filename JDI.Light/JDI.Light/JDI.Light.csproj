@@ -169,6 +169,7 @@
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Enums\LogLevels.cs" />
+    <Compile Include="Matchers\CollectionMatchers\ContainsInAnyOrderMatcher.cs" />
     <Compile Include="Matchers\CollectionMatchers\HasItemsMatcher.cs" />
     <Compile Include="Matchers\CollectionMatchers\SubsequenceOfMatcher.cs" />
     <Compile Include="Matchers\DoubleMatchers\EqualToMatcher.cs" />

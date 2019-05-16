@@ -6,7 +6,7 @@ namespace JDI.Light.Tests.Tests.Composite
 {
     [TestFixture]
     public class MultiDropdownTests : TestBase
-    {       
+    {
         [SetUp]
         public void SetUp()
         {

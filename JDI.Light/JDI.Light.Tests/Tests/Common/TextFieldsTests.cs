@@ -1,5 +1,7 @@
 ﻿using JDI.Light.Exceptions;
+using JDI.Light.Matchers.StringMatchers;
 using NUnit.Framework;
+using Is = JDI.Light.Matchers.Is;
 using static JDI.Light.Matchers.StringMatchers.ContainsStringMatcher;
 
 namespace JDI.Light.Tests.Tests.Common
@@ -46,7 +48,7 @@ namespace JDI.Light.Tests.Tests.Common
             TestSite.Html5Page.NameTextField.SendKeys("Test");
             Jdi.Assert.AreEquals(TestSite.Html5Page.NameTextField.GetValue(), Text + "Test");
         }
-
+        
         [Test]
         public void ClearTest()
         {
@@ -81,6 +83,15 @@ namespace JDI.Light.Tests.Tests.Common
         }
 
         [Test]
+        public void IsValidationTest()
+        {
+            TestSite.Html5Page.NameTextField.Is.Enabled()
+                .Text(Is.EqualTo(Text))
+                .Text(ContainsStringMatcher.ContainsString("Field"));
+            TestSite.Html5Page.SurnameTextField.Is.Disabled();
+        }
+
+        [Test]
         public void LabelTest()
         {
             Assert.AreEqual(TestSite.Html5Page.NameTextField.Label().GetText(), "Your name:");
@@ -90,13 +101,9 @@ namespace JDI.Light.Tests.Tests.Common
         }
 
         [Test]
-        public void MultiKeyTest()
+        public void AssertValidationTest()
         {
-            foreach (var letter in ToAddText)
-            {
-                TestSite.Html5Page.NameTextField.SendKeys(letter.ToString());
-            }
-            Jdi.Assert.AreEquals(TestSite.Html5Page.NameTextField.Value, Text + ToAddText);
+            TestSite.Html5Page.NameTextField.AssertThat.Text(Is.EqualTo(Text));
         }
     }
 }

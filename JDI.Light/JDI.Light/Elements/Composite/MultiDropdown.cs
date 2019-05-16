@@ -106,6 +106,6 @@ namespace JDI.Light.Elements.Composite
         public void Close()
         {
             Expand();
-        }        
+        }
     }    
 }
