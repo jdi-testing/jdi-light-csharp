@@ -78,6 +78,10 @@ namespace JDI.Light.Tests.UIObjects
 
         public IProgressBar Progress { get; set; }
 
+        [FindBy(Css = "[ui=jdi-text]")]
+        
+        public TextElement JdiText { get; set; }
+
         [FindBy(Css = "#height")]
         public INumberSelector Height { get; set; }
         

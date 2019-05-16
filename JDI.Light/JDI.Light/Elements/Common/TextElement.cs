@@ -1,4 +1,5 @@
 ﻿using System;
+using JDI.Light.Asserts;
 using JDI.Light.Elements.Base;
 using JDI.Light.Extensions;
 using JDI.Light.Interfaces.Common;
@@ -52,5 +53,9 @@ namespace JDI.Light.Elements.Common
         {
             return Invoker.DoActionWithResult($"Wait text match regex '{regEx}'", TextAction(), checkResultFunc: t => t.Matches(regEx));
         }
+
+        public new TextAssert Is => new TextAssert(this);
+
+        public new TextAssert AssertThat => Is;
     }
 }
