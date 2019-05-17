@@ -10,7 +10,7 @@ namespace JDI.Light.Tests.Tests.Common
     [TestFixture]
     public class DataListTests : TestBase
     {
-        private string _text = "Coconut";
+        private readonly string _text = "Coconut";
 
         [SetUp]
         public void SetUp()

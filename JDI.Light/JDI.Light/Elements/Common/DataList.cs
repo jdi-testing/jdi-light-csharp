@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using JDI.Light.Asserts;
 using JDI.Light.Exceptions;
-using JDI.Light.Factories;
 using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 
 namespace JDI.Light.Elements.Common
 {
@@ -71,11 +69,6 @@ namespace JDI.Light.Elements.Common
         public string Selected()
         {
             return WebElement.GetAttribute("value");
-        }
-
-        public DataList GetSelectedElement()
-        {
-            return UIElementFactory.CreateInstance<DataList>(By.XPath($".//option[@value='{Selected()}']"), Parent);
         }
 
         public List<string> Values()
