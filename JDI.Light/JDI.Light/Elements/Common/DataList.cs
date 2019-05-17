@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using JDI.Light.Asserts;
 using JDI.Light.Exceptions;
+using JDI.Light.Factories;
 using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace JDI.Light.Elements.Common
 {
@@ -70,6 +73,11 @@ namespace JDI.Light.Elements.Common
             return WebElement.GetAttribute("value");
         }
 
+        public DataList GetSelectedElement()
+        {
+            return UIElementFactory.CreateInstance<DataList>(By.XPath($".//option[@value='{Selected()}']"), Parent);
+        }
+
         public List<string> Values()
         {
             var list = new List<string>();
@@ -86,5 +94,9 @@ namespace JDI.Light.Elements.Common
             var str = "value='" + text + "'";
             JsExecutor.ExecuteScript("arguments[0]." + str + ";", WebElement);
         }
+
+        public new DataListAssert Is => new DataListAssert(this);
+
+        public new DataListAssert AssertThat => Is;
     }
 }
