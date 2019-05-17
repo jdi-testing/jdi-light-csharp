@@ -43,8 +43,6 @@ namespace JDI.Light.Elements.Common
 
         public new TextAssert Is => new TextAssert(this);
 
-        public new TextAssert WaitFor => Is;
-
         public new TextAssert AssertThat => Is;
     }
 }

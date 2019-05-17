@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using JDI.Light.Asserts;
 using JDI.Light.Exceptions;
 using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
@@ -86,5 +87,9 @@ namespace JDI.Light.Elements.Common
             var str = "value='" + text + "'";
             JsExecutor.ExecuteScript("arguments[0]." + str + ";", WebElement);
         }
+
+        public new DataListAssert Is => new DataListAssert(this);
+
+        public new DataListAssert AssertThat => Is;
     }
 }
