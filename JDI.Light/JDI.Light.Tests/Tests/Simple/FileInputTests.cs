@@ -1,9 +1,11 @@
 ﻿using System;
 using System.IO;
+using JDI.Light.Tests.Utils;
 using NUnit.Framework;
 using static System.Threading.Thread;
 using static JDI.Light.Asserts.FileAssert;
 using static JDI.Light.Elements.Base.BaseValidation;
+using static JDI.Light.Jdi;
 using static JDI.Light.Matchers.LongMatchers.GreaterThanMatcher;
 using static JDI.Light.Matchers.LongMatchers.IsMatcher;
 using static JDI.Light.Matchers.StringMatchers.ContainsStringMatcher;
@@ -22,11 +24,11 @@ namespace JDI.Light.Tests.Tests.Simple
         [SetUp]
         public void SetUp()
         {
-            Jdi.Logger.Info("Navigating to HTML5 page.");
+            Logger.Info("Navigating to HTML5 page.");
             TestSite.Html5Page.Open();
             TestSite.Html5Page.CheckTitle();
-            Jdi.Logger.Info("Setup method finished");
-            Jdi.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            Logger.Info("Setup method finished");
+            Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         private static string CreateFile(string filename)
@@ -56,8 +58,9 @@ namespace JDI.Light.Tests.Tests.Simple
             {
                 TestSite.Html5Page.DisabledFileInput.SelectFile(CreateFile(_fileName));
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Logger.Exception(e);
             }
             Sleep(2000);
             TestSite.Html5Page.DisabledFileInput.Is.Text(EqualTo(""));
