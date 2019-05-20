@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
-using System;
+using JDI.Light.Matchers.StringMatchers;
 using OpenQA.Selenium;
+using Is = JDI.Light.Matchers.Is;
 
 namespace JDI.Light.Tests.Tests.Simple
 {
@@ -39,6 +40,27 @@ namespace JDI.Light.Tests.Tests.Simple
 
             TestSite.Html5Page.DisabledButton.Click();
             Assert.Throws<NoAlertPresentException>(() => TestSite.Html5Page.GetAlert().AcceptAlert());
+        }
+
+        [Test]
+        public void IsValidationTest()
+        {
+            TestSite.Html5Page.RedButton.Is.Displayed()
+                .Enabled()
+                .Text(Is.EqualTo("Big Red Button-Input"))
+                .Text(ContainsStringMatcher.ContainsString("Red Button"))
+                .CssClass(Is.EqualTo("uui-button red"))
+                .Attr("type", Is.EqualTo("button"))
+                .Tag(Is.EqualTo("input"));
+            TestSite.Html5Page.BlueButton.Is.Text(ContainsStringMatcher.ContainsString("Blue Button".ToUpper()));
+            TestSite.Html5Page.DisabledButton.Is.Text(ContainsStringMatcher.ContainsString("Disabled Button".ToUpper()))
+                .Disabled();
+        }
+
+        [Test]
+        public void AssertValidationTest()
+        {
+            TestSite.Html5Page.RedButton.AssertThat.Text(Is.EqualTo("Big Red Button-Input"));
         }
 
         [Test]
