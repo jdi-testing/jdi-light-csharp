@@ -12,6 +12,9 @@ namespace JDI.Light.Tests.UIObjects
         [FindBy(Css = "#avatar")]
         public FileInput FileInput { get; set; }
 
+        [FindBy(Css = "input[type=file][disabled]")]
+        public FileInput DisabledFileInput { get; set; }
+
         [FindBy(XPath = "//a[@href='/JDI/images/jdi-logo.jpg']")]
         public Link FileDownload { get; set; }
 

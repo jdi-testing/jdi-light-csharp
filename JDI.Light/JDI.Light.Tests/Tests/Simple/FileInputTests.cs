@@ -1,12 +1,15 @@
 ﻿using System;
 using System.IO;
-using System.Threading;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
+using static System.Threading.Thread;
 using static JDI.Light.Asserts.FileAssert;
+using static JDI.Light.Elements.Base.BaseValidation;
+using static JDI.Light.Jdi;
 using static JDI.Light.Matchers.LongMatchers.GreaterThanMatcher;
 using static JDI.Light.Matchers.LongMatchers.IsMatcher;
 using static JDI.Light.Matchers.StringMatchers.ContainsStringMatcher;
+using static JDI.Light.Matchers.StringMatchers.EqualToMatcher;
+using static NUnit.Framework.Assert;
 
 namespace JDI.Light.Tests.Tests.Simple
 {
@@ -15,19 +18,21 @@ namespace JDI.Light.Tests.Tests.Simple
     {
         //Tests require administrator access
 
+        private readonly string _fileName = "test.txt";
+
         [SetUp]
         public void SetUp()
         {
-            Jdi.Logger.Info("Navigating to HTML5 page.");
+            Logger.Info("Navigating to HTML5 page.");
             TestSite.Html5Page.Open();
             TestSite.Html5Page.CheckTitle();
-            Jdi.Logger.Info("Setup method finished");
-            Jdi.Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
+            Logger.Info("Setup method finished");
+            Logger.Info("Start test: " + TestContext.CurrentContext.Test.Name);
         }
 
         private static string CreateFile(string filename)
         {
-            string filepath = Path.Combine(Directory.GetCurrentDirectory(), filename);
+            var filepath = Path.Combine(Directory.GetCurrentDirectory(), filename);
             using (var sw = File.CreateText(filepath))
             {
                 sw.WriteLine("hello world");
@@ -39,16 +44,38 @@ namespace JDI.Light.Tests.Tests.Simple
         [Test]
         public void FileInputTest()
         {
-            string filename = "test.txt";
-            TestSite.Html5Page.FileInput.SelectFile(CreateFile(filename));
+            TestSite.Html5Page.FileInput.SelectFile(CreateFile(_fileName));
             var uploadedFile = TestSite.Html5Page.FileInput.GetAttribute("value");
-            Jdi.Assert.Contains(uploadedFile, filename);
+            Jdi.Assert.Contains(uploadedFile, _fileName);
+        }
+
+        [Test]
+        public void DisabledUploadTest()
+        {
+            Sleep(2000);
+            try
+            {
+                TestSite.Html5Page.DisabledFileInput.SelectFile(CreateFile(_fileName));
+            }
+            catch (Exception e)
+            {
+                Logger.Exception(e);
+            }
+            Sleep(2000);
+            TestSite.Html5Page.DisabledFileInput.Is.Text(EqualTo(""));
         }
 
         private static void CreateTextFile(string fileName)
         {
             File.WriteAllText(Path.Combine(Path.Combine(Environment.GetEnvironmentVariable("USERPROFILE"), "Downloads"),
             fileName), "Earth provides enough to satisfy every man's needs, but not every man's greed");
+        }
+
+        [Test]
+        public void LabelTest()
+        {
+            AreEqual(TestSite.Html5Page.FileInput.LabelText(), "Profile picture:");
+            TestSite.Html5Page.FileInput.Label().Is.Text(ContainsString("picture"));
         }
 
         [Test]
@@ -63,7 +90,7 @@ namespace JDI.Light.Tests.Tests.Simple
                 File.Delete(fileToUpload);
             }
             TestSite.Html5Page.FileDownload.Click();
-            Thread.Sleep(5000);
+            Sleep(5000);
             AssertThatFile(fileToUpload).IsDownloaded().HasSize(Is(32225));
             AssertThatFile(fileToUpload).HasSize(GreaterThan(100));
         }
@@ -75,6 +102,12 @@ namespace JDI.Light.Tests.Tests.Simple
             var fileName = "gandhi.txt";
             CreateTextFile("gandhi.txt");
             AssertThatFile(fileName).Text(ContainsString("enough to satisfy"));
+        }
+
+        [Test]
+        public void BaseValidationTest()
+        {
+            BaseElementValidation(TestSite.Html5Page.FileInput);
         }
     }
 }
