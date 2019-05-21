@@ -1,5 +1,9 @@
-﻿using JDI.Light.Tests.Enums;
+﻿using System.Collections.Generic;
+using System.Linq;
+using JDI.Light.Exceptions;
+using JDI.Light.Tests.Enums;
 using NUnit.Framework;
+using OpenQA.Selenium;
 using static JDI.Light.Elements.Base.BaseValidation;
 using static JDI.Light.Matchers.StringMatchers.ContainsStringMatcher;
 using static JDI.Light.Matchers.StringMatchers.EqualToMatcher;
@@ -10,14 +14,15 @@ namespace JDI.Light.Tests.Tests.Common
     [TestFixture]
     public class DataListTests : TestBase
     {
-        private readonly string _text = "Coconut";
+        private const string Text = "Coconut";
+        private readonly List<string> _options = new List<string>{ "Chocolate", "Coconut", "Mint", "Strawberry", "Vanilla" };
 
         [SetUp]
         public void SetUp()
         {
             TestSite.Html5Page.Open();
             TestSite.Html5Page.CheckOpened();
-            DoesNotThrow(() => TestSite.Html5Page.IceCream.Select("Coconut", true));
+            DoesNotThrow(() => TestSite.Html5Page.IceCream.Select("Coconut"));
         }
 
         [Test]
@@ -58,7 +63,7 @@ namespace JDI.Light.Tests.Tests.Common
         public void IsValidationTest()
         {
             TestSite.Html5Page.IceCream.Is.Enabled();
-            TestSite.Html5Page.IceCream.Is.Attr("value" ,EqualTo(_text));
+            TestSite.Html5Page.IceCream.Is.Attr("value" ,EqualTo(Text));
             TestSite.Html5Page.IceCream.Select("Vanilla");
             TestSite.Html5Page.IceCream.Is.Attr("value", ContainsString("Van"));
         }
@@ -66,7 +71,31 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void AssertValidationTest()
         {
-            TestSite.Html5Page.IceCream.AssertThat.Attr("value", ContainsString(_text));
+            TestSite.Html5Page.IceCream.AssertThat.Attr("value", ContainsString(Text));
+        }
+
+        [Test]
+        public void AssertOptionsValuesTest()
+        {
+            IsTrue(TestSite.Html5Page.IceCream.Values().SequenceEqual(_options));
+        }
+
+        [Test]
+        public void NegativeSelectTest()
+        {
+            Throws<ElementNotSelectableException>(() => TestSite.Html5Page.DisabledDropdownAsDataList.Select("Fancy", false));
+        }
+
+        [Test]
+        public void NegativeSelectEnumTest()
+        {
+            Throws<ElementNotSelectableException>(() => TestSite.Html5Page.DisabledDropdownAsDataList.Select(DressCode.Fancy, false));
+        }
+
+        [Test]
+        public void NegativeSelectNumTest()
+        {
+            Throws<ElementNotFoundException>(() => TestSite.Html5Page.IceCream.Select(7, false));
         }
 
         [Test]
