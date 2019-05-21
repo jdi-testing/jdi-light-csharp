@@ -30,7 +30,7 @@ namespace JDI.Light.Elements.Common
             SetText(text);
             if (Selected() != text)
             {
-                throw new Exception($"{text} element not selected.");
+                throw new ElementNotSelectableException($"{text} element is not selected.");
             }
         }
 
@@ -40,7 +40,7 @@ namespace JDI.Light.Elements.Common
             SetText(value.ToString());
             if (Selected() != value.ToString())
             {
-                throw new Exception($"{value} element not selected.");
+                throw new ElementNotSelectableException($"{value} element is not selected.");
             }
         }
         
@@ -62,7 +62,7 @@ namespace JDI.Light.Elements.Common
 
             if (Selected() != select)
             {
-                throw new Exception($"Element with {index} index not selected.");
+                throw new ElementNotSelectableException($"Element with {index} index not selected.");
             }
         }
         
