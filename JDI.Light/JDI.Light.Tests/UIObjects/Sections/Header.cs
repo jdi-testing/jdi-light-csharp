@@ -13,5 +13,8 @@ namespace JDI.Light.Tests.UIObjects.Sections
         public Menu Menu;
         
         public JdiSearch Search;
+
+        [FindBy(Css = "#user-icon")]
+        public IIcon UserIcon { get; set; }
     }
 }

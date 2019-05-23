@@ -62,6 +62,7 @@
     <Compile Include="Asserts\DataListAssert.cs" />
     <Compile Include="Asserts\FileAssert.cs" />
     <Compile Include="Asserts\Generic\IsAssert.cs" />
+    <Compile Include="Asserts\IconAssert.cs" />
     <Compile Include="Asserts\ImageAssert.cs" />
     <Compile Include="Asserts\IsAssert.cs" />
     <Compile Include="Asserts\MenuSelectAssert.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Attributes\SiteAttribute.cs" />
     <Compile Include="Elements\Base\BaseValidation.cs" />
     <Compile Include="Elements\Common\ColorPicker.cs" />
+    <Compile Include="Elements\Common\Icon.cs" />
     <Compile Include="Elements\Complex\CheckList.cs" />
     <Compile Include="Elements\Common\ComboBox.cs" />
     <Compile Include="Elements\Common\DateTimeSelector.cs" />

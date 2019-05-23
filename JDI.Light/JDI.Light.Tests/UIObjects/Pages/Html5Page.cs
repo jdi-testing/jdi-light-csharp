@@ -111,5 +111,6 @@ namespace JDI.Light.Tests.UIObjects
         public ILink GithubLink { get; set; }
 
         public IImage JdiLogo { get; set; }
+
     }
 }
