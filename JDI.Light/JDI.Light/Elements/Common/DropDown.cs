@@ -1,4 +1,5 @@
 ﻿using System;
+using JDI.Light.Asserts;
 using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
@@ -51,5 +52,9 @@ namespace JDI.Light.Elements.Common
         {
             return SelectElement.SelectedOption.Text;
         }
+
+        public new DropDownAssert Is => new DropDownAssert(this);
+
+        public new DropDownAssert AssertThat => Is;
     }
 }
