@@ -8,7 +8,6 @@ namespace JDI.Light.Tests.Tests.Simple
     [TestFixture]
     public class IconTests : TestBase
     {
-        
         private IIcon JdiLogo => TestSite.Header.UserIcon;
 
         [SetUp]
@@ -45,6 +44,5 @@ namespace JDI.Light.Tests.Tests.Simple
         {
             JdiLogo.AssertThat().Src(Is.EqualTo(Text));
         }
-        
     }
 }
