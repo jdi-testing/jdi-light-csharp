@@ -1,4 +1,5 @@
 ﻿using System;
+using JDI.Light.Asserts;
 using JDI.Light.Elements.Base;
 using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
@@ -77,5 +78,9 @@ namespace JDI.Light.Elements.Common
         {
             return Value;
         }
+
+        public new CheckBoxAssert Is => new CheckBoxAssert(this);
+
+        public new CheckBoxAssert AssertThat => Is;
     }
 }

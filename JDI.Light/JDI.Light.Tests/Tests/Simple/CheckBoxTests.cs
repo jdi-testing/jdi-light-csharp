@@ -1,5 +1,8 @@
 ﻿using JDI.Light.Tests.DataProviders;
 using NUnit.Framework;
+using static JDI.Light.Elements.Base.BaseValidation;
+using static JDI.Light.Matchers.StringMatchers.ContainsStringMatcher;
+using static JDI.Light.Matchers.StringMatchers.EqualToIgnoringCaseMatcher;
 
 namespace JDI.Light.Tests.Tests.Simple
 {
@@ -67,6 +70,40 @@ namespace JDI.Light.Tests.Tests.Simple
             TestSite.MetalsColorsPage.CbWater.Value = value;
             var resultMsg = "Water: condition changed to " + expected.ToString().ToLower();
             Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], resultMsg);
+        }
+
+        [Test]
+        public void IsValidationTest()
+        {
+            TestSite.Html5Page.Open();
+            TestSite.Html5Page.AcceptConditions.Is.Selected();
+            TestSite.Html5Page.AcceptConditions.Click();
+            TestSite.Html5Page.AcceptConditions.Is.Deselected();
+            TestSite.Html5Page.AcceptConditions.Is.Enabled();
+            TestSite.Html5Page.AcceptConditions.Is.Displayed();
+        }
+
+        [Test]
+        public void LabelTest()
+        {
+            TestSite.Html5Page.Open();
+            Assert.AreEqual("Accept terms and conditions", TestSite.Html5Page.AcceptConditions.Label().GetText());
+            TestSite.Html5Page.AcceptConditions.Label().Is.Text(ContainsString("terms and conditions"));
+            TestSite.Html5Page.AcceptConditions.Label().Is.Text(EqualTo("accept terms and conditions"));
+        }
+
+        [Test]
+        public void AssertValidationTest()
+        {
+            TestSite.Html5Page.Open();
+            TestSite.Html5Page.AcceptConditions.AssertThat.Selected();
+        }
+
+        [Test]
+        public void BaseValidationTest()
+        {
+            TestSite.Html5Page.Open();
+            BaseElementValidation(TestSite.Html5Page.AcceptConditions);
         }
     }
 }
