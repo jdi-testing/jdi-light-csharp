@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace JDI.Light.Elements.Common
 {
-    public class Icon : UIElement, IIcon
+    public class Icon : Image, IIcon
     {
         protected Icon(By byLocator) : base(byLocator)
         {

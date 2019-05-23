@@ -1,8 +1,8 @@
 ﻿using JDI.Light.Asserts.Generic;
 using JDI.Light.Elements.Common;
 using JDI.Light.Matchers;
-using static JDI.Light.Jdi;
 using System;
+using static JDI.Light.Jdi;
 
 namespace JDI.Light.Asserts
 {

@@ -23,7 +23,7 @@ namespace JDI.Light.Settings
             {typeof(IButton), typeof(Button)},
             {typeof(ITextElement), typeof(TextElement)},
             {typeof(IImage), typeof(Image)},
-            {typeof(IIcon), typeof(Image)},
+            {typeof(IIcon), typeof(Icon)},
             {typeof(ITextArea), typeof(TextArea)},
             {typeof(ITextField), typeof(TextField)},
             {typeof(ILabel), typeof(Label)},

@@ -8,15 +8,16 @@ namespace JDI.Light.Tests.Tests.Simple
     [TestFixture]
     public class IconTests : TestBase
     {
+        
         private IIcon JdiLogo => TestSite.Header.UserIcon;
 
         [SetUp]
         public void SetUp()
         {
-            TestSite.Html5Page.Open();
+            TestSite.HomePage.Open();
         }
 
-        private const string Text = "images/icons/user-icon.jpg";
+        private const string Text = "https://epam.github.io/JDI/images/icons/user-icon.jpg";
 
         [Test]
         public void GetSrcTest()
@@ -35,8 +36,8 @@ namespace JDI.Light.Tests.Tests.Simple
         {
             JdiLogo.Is().Src(ContainsStringMatcher.ContainsString("user-icon.jpg"))
                 .Alt(Is.EqualTo(""));
-            JdiLogo.AssertThat().Height(Is.EqualTo(100))
-                .Width(Is.EqualTo(101));
+            JdiLogo.AssertThat().Height(Is.EqualTo(30))
+                .Width(Is.EqualTo(30));
         }
 
         [Test]
@@ -44,5 +45,6 @@ namespace JDI.Light.Tests.Tests.Simple
         {
             JdiLogo.AssertThat().Src(Is.EqualTo(Text));
         }
+        
     }
 }
