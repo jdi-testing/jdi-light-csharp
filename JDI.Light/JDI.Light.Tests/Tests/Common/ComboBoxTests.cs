@@ -41,7 +41,5 @@ namespace JDI.Light.Tests.Tests.Common
             TestSite.Html5Page.IceCream.Select(5);
             Jdi.Assert.AreEquals(TestSite.Html5Page.IceCreamComboBox.Selected(), "Vanilla");
         }
-
-
     }
 }
