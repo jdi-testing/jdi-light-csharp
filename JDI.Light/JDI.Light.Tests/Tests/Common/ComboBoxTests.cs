@@ -1,4 +1,5 @@
-﻿using JDI.Light.Tests.Enums;
+﻿using JDI.Light.Matchers.StringMatchers;
+using JDI.Light.Tests.Enums;
 using NUnit.Framework;
 using Is = JDI.Light.Matchers.Is;
 
@@ -25,14 +26,14 @@ namespace JDI.Light.Tests.Tests.Common
         public void SelectTest()
         {
             TestSite.Html5Page.IceCream.Select("Chocolate");
-            Jdi.Assert.AreEquals(TestSite.Html5Page.IceCreamComboBox.Selected(), "Chocolate");
+            TestSite.Html5Page.IceCreamComboBox.Is().Selected(Is.EqualTo("Chocolate"));            
         }
 
         [Test]
         public void SelectEnumTest()
         {
             TestSite.Html5Page.IceCream.Select(IceCream.Strawberry);
-            Jdi.Assert.AreEquals(TestSite.Html5Page.IceCreamComboBox.Selected(), "Strawberry");            
+            TestSite.Html5Page.IceCreamComboBox.AssertThat().Selected(Is.EqualTo("Strawberry"));            
         }
 
         [Test]
