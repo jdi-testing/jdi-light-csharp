@@ -2,7 +2,10 @@
 using OpenQA.Selenium;
 using System.Collections.Generic;
 using System.Linq;
+using JDI.Light.Asserts;
+using JDI.Light.Elements.Common;
 using JDI.Light.Exceptions;
+using JDI.Light.Factories;
 using JDI.Light.Interfaces.Composite;
 
 namespace JDI.Light.Elements.Composite
@@ -42,6 +45,7 @@ namespace JDI.Light.Elements.Composite
         public IMultiDropdownElement GetFirstByText(string text)
         {
             var v = Options.FirstOrDefault(x => x.Text == text);
+            var option = Options.Any(o=>o.Text == "Steam");
             if (v == null)
             {
                 throw new ElementNotFoundException($"Unable to locate element with text '{text}'");
@@ -86,6 +90,15 @@ namespace JDI.Light.Elements.Composite
             Close();
         }
 
+        public new Label Label()
+        {
+            var selectElement = UIElementFactory.CreateInstance<UIElement>(By.XPath(".//div[@class='btn-group']/preceding-sibling::select"), Parent);
+            var label = UIElementFactory.CreateInstance<Label>(By.CssSelector($"[for={selectElement.GetAttribute("id")}]"), Parent);
+            label.InitMembers();
+            label.OnlyOneElementAllowedInSearch = true;
+            return label;
+        }
+
         public bool OptionExists(string option)
         {
             return Options.Any(x => x.Text == option);
@@ -107,5 +120,9 @@ namespace JDI.Light.Elements.Composite
         {
             Expand();
         }
-    }    
+
+        public new MultiDropdownAssert Is => new MultiDropdownAssert(this);
+
+        public new MultiDropdownAssert AssertThat => Is;
+    }   
 }
