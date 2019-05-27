@@ -82,7 +82,7 @@ namespace JDI.Light.Tests.UIObjects
         public ComboBox IceCreamComboBox { get; set; }
         
         [FindBy(Css = "[ui=jdi-title]")]
-        public ITitle JdiTitle { get; set; }
+        public TextElement JdiTitle { get; set; }
 
         public Button GhostButton { get; set; }
 
