@@ -1,5 +1,7 @@
-﻿using JDI.Light.Tests.Enums;
+﻿using JDI.Light.Matchers.StringMatchers;
+using JDI.Light.Tests.Enums;
 using NUnit.Framework;
+using Is = JDI.Light.Matchers.Is;
 
 namespace JDI.Light.Tests.Tests.Common
 {
@@ -17,28 +19,28 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void GetValueTest()
         {
-            Assert.AreEqual(TestSite.Html5Page.IceCreamComboBox.Selected(), "Coconut");
+            Jdi.Assert.AreEquals(TestSite.Html5Page.IceCreamComboBox.Selected(), "Coconut");
         }
 
         [Test]
         public void SelectTest()
         {
             TestSite.Html5Page.IceCream.Select("Chocolate");
-            Assert.AreEqual(TestSite.Html5Page.IceCreamComboBox.Selected(), "Chocolate");
+            TestSite.Html5Page.IceCreamComboBox.Is().Selected(Is.EqualTo("Chocolate"));            
         }
 
         [Test]
         public void SelectEnumTest()
         {
             TestSite.Html5Page.IceCream.Select(IceCream.Strawberry);
-            Assert.AreEqual(TestSite.Html5Page.IceCreamComboBox.Selected(), "Strawberry");
+            TestSite.Html5Page.IceCreamComboBox.AssertThat().Selected(Is.EqualTo("Strawberry"));            
         }
 
         [Test]
         public void SelectNumTest()
         {
             TestSite.Html5Page.IceCream.Select(5);
-            Assert.AreEqual(TestSite.Html5Page.IceCreamComboBox.Selected(), "Vanilla");
+            Jdi.Assert.AreEquals(TestSite.Html5Page.IceCreamComboBox.Selected(), "Vanilla");
         }
     }
 }
