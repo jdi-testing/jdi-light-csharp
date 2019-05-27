@@ -45,7 +45,6 @@ namespace JDI.Light.Elements.Composite
         public IMultiDropdownElement GetFirstByText(string text)
         {
             var v = Options.FirstOrDefault(x => x.Text == text);
-            var option = Options.Any(o=>o.Text == "Steam");
             if (v == null)
             {
                 throw new ElementNotFoundException($"Unable to locate element with text '{text}'");
