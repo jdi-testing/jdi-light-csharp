@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using JDI.Light.Asserts;
 using JDI.Light.Interfaces.Base;
 using OpenQA.Selenium;
 
@@ -12,5 +13,7 @@ namespace JDI.Light.Interfaces.Complex
         void Select(int index, bool checkEnabled = true);
         new string Selected();
         List<string> Values();
+        RadioButtonAssert Is();
+        RadioButtonAssert AssertThat();
     }
 }
