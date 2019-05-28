@@ -71,17 +71,18 @@ namespace JDI.Light.Elements.Base
             return element;
         }
 
-        public Label Label()
+        public Label Label(string forId = "")
         {
-            var label = UIElementFactory.CreateInstance<Label>(By.CssSelector($"[for={WebElement.GetAttribute("id")}]"), Parent);
+            var id = string.IsNullOrEmpty(forId) ? WebElement.GetAttribute("id") : forId;
+            var label = UIElementFactory.CreateInstance<Label>(By.CssSelector($"[for={id}]"), Parent);
             label.InitMembers();
             label.OnlyOneElementAllowedInSearch = true;
             return label;
         }
 
-        public string LabelText()
+        public string LabelText(string forId = "")
         {
-            return Label().Text;
+            return Label(forId).Text;
         }
 
         public IWebElement WebElement
@@ -136,7 +137,7 @@ namespace JDI.Light.Elements.Base
         {
             var criteria = LocalElementSearchCriteria ?? Jdi.DriverFactory.ElementSearchCriteria;
             var context = GetSearchContext(Parent);
-            var result = Invoker.GetResultByCondition(
+            var result = Invoker.GetResultByCondition("Getting web elements",
                 () =>
                 {
                     if (Locator != null)

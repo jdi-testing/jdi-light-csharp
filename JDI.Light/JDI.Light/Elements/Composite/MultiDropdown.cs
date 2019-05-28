@@ -3,9 +3,7 @@ using OpenQA.Selenium;
 using System.Collections.Generic;
 using System.Linq;
 using JDI.Light.Asserts;
-using JDI.Light.Elements.Common;
 using JDI.Light.Exceptions;
-using JDI.Light.Factories;
 using JDI.Light.Interfaces.Composite;
 
 namespace JDI.Light.Elements.Composite
@@ -13,7 +11,7 @@ namespace JDI.Light.Elements.Composite
     public class MultiDropdown : UIElement
     {
         public By ElementsLocator { get; set; } = By.XPath(".//li");
-        public By LabelsLocator { get; set; } = By.XPath(".//label");
+        public By ElementsLabelLocator { get; set; } = By.XPath(".//label");
         public By CheckboxesLocator { get; set; } = By.XPath(".//input");
         public bool IsExpanded => GetAttribute("class").Contains("open");
 
@@ -29,7 +27,7 @@ namespace JDI.Light.Elements.Composite
                     {
                         WebElement = t,
                         CheckboxLocator = CheckboxesLocator,
-                        LabelLocator = LabelsLocator,
+                        LabelLocator = ElementsLabelLocator,
                         Parent = this
                     });
                 }                
@@ -87,15 +85,6 @@ namespace JDI.Light.Elements.Composite
             }
             JsExecutor.ExecuteScript("arguments[0].scrollIntoView();", WebElement);
             Close();
-        }
-
-        public new Label Label()
-        {
-            var selectElement = UIElementFactory.CreateInstance<UIElement>(By.XPath(".//div[@class='btn-group']/preceding-sibling::select"), Parent);
-            var label = UIElementFactory.CreateInstance<Label>(By.CssSelector($"[for={selectElement.GetAttribute("id")}]"), Parent);
-            label.InitMembers();
-            label.OnlyOneElementAllowedInSearch = true;
-            return label;
         }
 
         public bool OptionExists(string option)

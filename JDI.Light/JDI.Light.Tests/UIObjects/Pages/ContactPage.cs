@@ -10,7 +10,7 @@ namespace JDI.Light.Tests.UIObjects.Pages
     {
         [FindBy(Id = "contact-form")]
         public ContactForm ContactForm;
-
+        
         [FindBy(Css = "main form")]
         public ContactFormTwoButtons ContactFormTwoButtons;
 

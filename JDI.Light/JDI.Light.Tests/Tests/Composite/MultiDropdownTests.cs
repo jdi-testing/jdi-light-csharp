@@ -66,8 +66,8 @@ namespace JDI.Light.Tests.Tests.Composite
         [Test]
         public void LabelTest()
         {
-            Jdi.Assert.AreEquals(TestSite.Html5Page.MultiDropdown.Label().GetText(), "Multi dropdown:");
-            TestSite.Html5Page.MultiDropdown.Label().Is.Text(ContainsString("Multi"));
+            Jdi.Assert.AreEquals(TestSite.Html5Page.MultiDropdown.Label("multi-dropdown").GetText(), "Multi dropdown:");
+            TestSite.Html5Page.MultiDropdown.Label("multi-dropdown").Is.Text(ContainsString("Multi"));
         }
 
         [Test]

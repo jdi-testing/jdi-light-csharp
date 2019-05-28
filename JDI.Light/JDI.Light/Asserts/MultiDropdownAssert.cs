@@ -31,7 +31,7 @@ namespace JDI.Light.Asserts
 
         public MultiDropdownAssert Values(Matcher<IEnumerable<string>> condition)
         {
-            Assert.IsTrue(condition.IsMatch(MultiDropdown.Options.Select(o => o.Text)),
+            Assert.IsTrue(condition.IsMatch(MultiDropdown.Options.Select(o => o.Text)), 
                 $"available values {condition.FailedMessage()}");
             return this;
         }
