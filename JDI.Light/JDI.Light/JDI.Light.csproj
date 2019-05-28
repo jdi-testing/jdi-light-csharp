@@ -72,6 +72,7 @@
     <Compile Include="Asserts\NumberAssert.cs" />
     <Compile Include="Asserts\LinkAssert.cs" />
     <Compile Include="Asserts\ProgressAssert.cs" />
+    <Compile Include="Asserts\RadioButtonAssert.cs" />
     <Compile Include="Asserts\RangeAssert.cs" />
     <Compile Include="Asserts\SelectAssert.cs" />
     <Compile Include="Asserts\TableAssert.cs" />

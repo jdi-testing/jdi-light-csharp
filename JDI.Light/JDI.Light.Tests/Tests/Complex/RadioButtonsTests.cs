@@ -1,6 +1,7 @@
 ﻿using JDI.Light.Exceptions;
 using JDI.Light.Interfaces.Complex;
 using NUnit.Framework;
+using Is = JDI.Light.Matchers.Is;
 
 namespace JDI.Light.Tests.Tests.Complex
 {
@@ -22,27 +23,27 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void GetValueTest()
         {
-            Jdi.Assert.AreEquals(text, _colors.Value);
+            _colors.AssertThat().Selected(Is.EqualTo(text));
         }
 
         [Test]
         public void SelectTest()
         {
             _colors.Select("Blue");
-            Jdi.Assert.AreEquals("Blue", _colors.Selected());
+            _colors.AssertThat().Selected(Is.EqualTo("Blue"));
         }
 
         [Test]
         public void SelectNumTest()
         {
             _colors.Select(1);
-            Jdi.Assert.AreEquals("Red", _colors.Selected());
+            _colors.AssertThat().Selected(Is.EqualTo("Red"));
         }
 
         [Test]
         public void SelectedTest()
         {
-            Jdi.Assert.AreEquals(text, _colors.Selected());
+            _colors.AssertThat().Selected(Is.EqualTo(text));            
         }
 
         [Test]
@@ -61,7 +62,7 @@ namespace JDI.Light.Tests.Tests.Complex
         public void CheckEnabledTest()
         {
             Assert.Throws<ElementDisabledException>(() => _colors.Select("Yellow"));
-            Jdi.Assert.AreEquals(text, _colors.Selected());
+            _colors.Is().Selected(Is.EqualTo(text));            
         }
     }
 }

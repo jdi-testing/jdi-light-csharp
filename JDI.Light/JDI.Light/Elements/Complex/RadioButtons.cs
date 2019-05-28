@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using JDI.Light.Asserts;
 using JDI.Light.Elements.Base;
 using JDI.Light.Exceptions;
 using JDI.Light.Factories;
@@ -71,5 +72,8 @@ namespace JDI.Light.Elements.Complex
                 }
             }
         }
+
+        public new RadioButtonAssert Is() => new RadioButtonAssert(this);
+        public new RadioButtonAssert AssertThat() => Is();
     }
 }
