@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
-using JDI.Light.Exceptions;
+﻿using JDI.Light.Exceptions;
 using JDI.Light.Interfaces.Complex;
 using NUnit.Framework;
 using static JDI.Light.Matchers.CollectionMatchers.HasItemsMatcher<string>;
+using static JDI.Light.Matchers.IntegerMatchers.HasSizeMatcher;
+using static NUnit.Framework.Assert;
 using Is = JDI.Light.Matchers.Is;
 
 namespace JDI.Light.Tests.Tests.Complex
@@ -10,7 +11,7 @@ namespace JDI.Light.Tests.Tests.Complex
     [TestFixture]
     public class CheckListTests : TestBase
     {
-        private readonly string text = "Hot option";
+        private const string Text = "Hot option";
 
         private ICheckList _weather;
 
@@ -19,7 +20,7 @@ namespace JDI.Light.Tests.Tests.Complex
         {
             TestSite.Html5Page.Open();
             TestSite.Html5Page.CheckOpened();
-            Assert.DoesNotThrow(() => TestSite.Html5Page.WeatherCheckList.Check(true, text));
+            DoesNotThrow(() => TestSite.Html5Page.WeatherCheckList.Check(true, Text));
             _weather = TestSite.Html5Page.WeatherCheckList;
         }
         
@@ -46,62 +47,56 @@ namespace JDI.Light.Tests.Tests.Complex
         [Test]
         public void SelectedTest()
         {
-            Jdi.Assert.CollectionEquals(new[] { text }, _weather.Checked());
+            Jdi.Assert.CollectionEquals(new[] { Text }, _weather.Checked());
         }
 
         [Test]
         public void DisabledTest()
         {
-            Assert.Throws<ElementDisabledException>(() => _weather.Select(true, "Disabled"));
-            Jdi.Assert.CollectionEquals(new[] { text }, _weather.Checked());
+            Throws<ElementDisabledException>(() => _weather.Select(true, "Disabled"));
+            Jdi.Assert.CollectionEquals(new[] { Text }, _weather.Checked());
         }
 
         [Test]
         public void UncheckTest()
         {
-            _weather.Uncheck(false, text);
-            Jdi.Assert.CollectionEquals(new[] { "Cold", "Rainy day", "Sunny" }, _weather.Checked());
-        }
-
-        [Test]
-        public void UncheckNumTest()
-        {
-            _weather.Uncheck(false, 1, 3);
-            Jdi.Assert.IsFalse(_weather.IsChecked(1));
-            Jdi.Assert.IsTrue(_weather.IsChecked(2));
-            Jdi.Assert.IsTrue(_weather.IsChecked("Cold"));
-            Jdi.Assert.CollectionEquals(new[] { "Cold", "Sunny" }, _weather.Checked());
+            _weather.Check(false, "Rainy day", "Sunny");
+            _weather.Uncheck(false, "Rainy day", "Sunny");
+            _weather.Is.Selected(HasSize(2));
+            _weather.Is.Selected(HasItems(new[] { "Hot option", "Cold" }));
         }
 
         [Test]
         public void UncheckAllTest()
         {
+            _weather.Uncheck(false, "Rainy day", "Sunny");
             _weather.UncheckAll();
-            Jdi.Assert.CollectionEquals(new List<string>(), _weather.Checked());
+            _weather.Is.Selected(HasSize(0));
         }
 
         [Test]
         public void CheckAllTest()
         {
             _weather.CheckAll();
-            Jdi.Assert.CollectionEquals(new[] {"Hot option", "Cold", "Rainy day", "Sunny"}, _weather.Checked());
+            _weather.Is.Selected(HasSize(4));
+            _weather.Is.Selected(HasItems(new[] { "Hot option", "Cold", "Rainy day", "Sunny" }));
         }
 
         [Test]
         public void WrongName()
         {
-            Assert.Throws<ElementNotFoundException>(() => _weather.Check(true, "wrong"));
+            Throws<ElementNotFoundException>(() => _weather.Check(true, "wrong"));
         }
 
         [Test]
-        public void IsDisabledTests()
+        public void IsDisabledTest()
         {
-            Assert.IsTrue(_weather.IsDisabled(5));
-            Assert.IsTrue(_weather.IsDisabled("Disabled"));
+            _weather.Select(false, "Disabled");
+            _weather.Is.Selected(HasItems(new [] { "Hot option" } ));
         }
 
         [Test]
-        public void IsValidationTests()
+        public void IsValidationTest()
         {
             _weather.Is
                 .Selected("Hot option")
@@ -126,7 +121,7 @@ namespace JDI.Light.Tests.Tests.Complex
         }
 
         [Test]
-        public void AssertValidationTests()
+        public void AssertValidationTest()
         {
             _weather.AssertThat.Values(HasItems(new[] {"Hot option", "Cold", "Rainy day", "Sunny"}));
             _weather.AssertThat.Selected("Hot option");

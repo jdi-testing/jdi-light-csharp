@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using JDI.Light.Asserts.Generic;
 using JDI.Light.Elements.Base;
@@ -30,6 +31,13 @@ namespace JDI.Light.Asserts
         public SelectAssert Selected(Matcher<IEnumerable<string>> condition)
         {
             Assert.IsTrue(condition.IsMatch(_selector.Checked()),
+                $"checked values {condition.FailedMessage()}");
+            return this;
+        }
+
+        public SelectAssert Selected(Matcher<int> condition)
+        {
+            Assert.IsTrue(condition.IsMatch(_selector.Checked().Count),
                 $"checked values {condition.FailedMessage()}");
             return this;
         }
