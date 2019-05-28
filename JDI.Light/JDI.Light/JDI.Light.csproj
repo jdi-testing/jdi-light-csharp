@@ -59,7 +59,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Asserts\CheckBoxAssert.cs" />
-    <Compile Include="Asserts\CheckListAssert.cs" />
     <Compile Include="Asserts\ColorAssert.cs" />
     <Compile Include="Asserts\ComboBoxAssert.cs" />
     <Compile Include="Asserts\DataListAssert.cs" />
