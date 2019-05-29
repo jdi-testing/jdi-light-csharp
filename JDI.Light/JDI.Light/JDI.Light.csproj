@@ -62,6 +62,7 @@
     <Compile Include="Asserts\ColorAssert.cs" />
     <Compile Include="Asserts\ComboBoxAssert.cs" />
     <Compile Include="Asserts\DataListAssert.cs" />
+    <Compile Include="Asserts\DateTimeSelectorAssert.cs" />
     <Compile Include="Asserts\DropDownAssert.cs" />
     <Compile Include="Asserts\FileAssert.cs" />
     <Compile Include="Asserts\Generic\IsAssert.cs" />

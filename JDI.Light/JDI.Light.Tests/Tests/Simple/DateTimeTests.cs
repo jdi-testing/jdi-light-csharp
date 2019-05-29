@@ -1,5 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
+using static JDI.Light.Matchers.LongMatchers.IsMatcher;
+using Is = JDI.Light.Matchers.Is;
 
 namespace JDI.Light.Tests.Tests.Simple
 {
@@ -17,27 +19,27 @@ namespace JDI.Light.Tests.Tests.Simple
 
         [Test]
         public void GetDateTest()
-        {
-            Assert.AreEqual(TestSite.Html5Page.PartyTime.Value(), "2018-06-12T19:30");
+        {            
+            TestSite.Html5Page.PartyTime.AssertThat().SelectedTime(Is.EqualToIgnoringCase("2018-06-12T19:30"));
         }
 
         [Test]
         public void MinTest()
-        {
-            Assert.AreEqual(TestSite.Html5Page.PartyTime.Min(), "2018-05-07T00:00");
+        {            
+            TestSite.Html5Page.PartyTime.AssertThat().HasMinTime(Is.EqualToIgnoringCase("2018-05-07T00:00"));
         }
 
         [Test]
         public void MaxTest()
-        {
-            Assert.AreEqual(TestSite.Html5Page.PartyTime.Max(), "2018-06-14T00:00");
+        {            
+            TestSite.Html5Page.PartyTime.AssertThat().HasMaxTime(Is.EqualToIgnoringCase("2018-06-14T00:00"));
         }
 
         [Test]
         public void SetDateTimeTest()
         {
-            Assert.DoesNotThrow(() => TestSite.Html5Page.PartyTime.SetDateTime("2017-05-10T00:00", true));
-            Assert.AreEqual(TestSite.Html5Page.PartyTime.Value(), "2017-05-10T00:00");
+            Assert.DoesNotThrow(() => TestSite.Html5Page.PartyTime.SetDateTime("2017-05-10T00:00", true));            
+            TestSite.Html5Page.PartyTime.AssertThat().SelectedTime(Is.EqualToIgnoringCase("2017-05-10T00:00"));
         }
 
         [Test]
@@ -45,7 +47,7 @@ namespace JDI.Light.Tests.Tests.Simple
         {
             TestSite.Html5Page.PartyTime.Format = "yyyy-MM-ddTHH:mm";
             TestSite.Html5Page.PartyTime.SetDateTime(_dateTime);
-            Assert.AreEqual(TestSite.Html5Page.PartyTime.GetDateTime(), _dateTime);
+            TestSite.Html5Page.PartyTime.Is().SelectedTime(Is(_dateTime.ToBinary()));            
         }
     }
 }
