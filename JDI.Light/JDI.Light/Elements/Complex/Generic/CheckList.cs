@@ -109,26 +109,6 @@ namespace JDI.Light.Elements.Complex.Generic
 
         public List<string> Checked() => GetRequiredOption(GetCheckedUIElements);
 
-        public bool IsChecked(string value)
-        {
-            return CheckBoxes[GetIndexOf(value)].IsChecked;
-        }
-
-        public bool IsChecked(int index)
-        {
-            return CheckBoxes[index - 1].IsChecked;
-        }
-
-        public bool IsDisabled(string value)
-        {
-            return CheckBoxes[GetIndexOf(value)].Enabled != true;
-        }
-
-        public bool IsDisabled(int index)
-        {
-            return CheckBoxes[index - 1].Enabled != true;
-        }
-
         public List<string> Values() => Labels.Select(label => label.Text.Trim()).ToList();
 
         public List<string> ListEnabled() => GetRequiredOption(GetEnabledUIElements);

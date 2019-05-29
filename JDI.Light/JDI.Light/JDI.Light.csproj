@@ -194,6 +194,7 @@
     <Compile Include="Matchers\DoubleMatchers\LessThanOrEqualToMatcher.cs" />
     <Compile Include="Matchers\IntegerMatchers\EqualToMatcher.cs" />
     <Compile Include="Matchers\IntegerMatchers\GreaterThanOrEqualToMatcher.cs" />
+    <Compile Include="Matchers\IntegerMatchers\HasSizeMatcher.cs" />
     <Compile Include="Matchers\IntegerMatchers\LessThanOrEqualToMatcher.cs" />
     <Compile Include="Matchers\LongMatchers\GreaterThanMatcher.cs" />
     <Compile Include="Matchers\LongMatchers\Is.cs" />
