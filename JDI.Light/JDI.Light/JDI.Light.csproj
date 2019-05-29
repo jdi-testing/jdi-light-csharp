@@ -69,6 +69,7 @@
     <Compile Include="Asserts\ImageAssert.cs" />
     <Compile Include="Asserts\IsAssert.cs" />
     <Compile Include="Asserts\MenuSelectAssert.cs" />
+    <Compile Include="Asserts\MultiDropdownAssert.cs" />
     <Compile Include="Asserts\NumberAssert.cs" />
     <Compile Include="Asserts\LinkAssert.cs" />
     <Compile Include="Asserts\ProgressAssert.cs" />

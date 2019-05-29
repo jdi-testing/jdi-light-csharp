@@ -25,7 +25,7 @@ namespace JDI.Light.Elements.WebActions
         {
             checkResultFunc = checkResultFunc ?? (r => r != null);
             _logger.Log($"Perform action with result '{actionName}'", level);
-            return GetResultByCondition(() =>
+            return GetResultByCondition(actionName, () =>
             {
                 var result = func.Invoke();
                 if (result == null)
@@ -41,7 +41,7 @@ namespace JDI.Light.Elements.WebActions
         public void DoActionWithWait(string actionName, Action action, LogLevel level = LogLevel.Info)
         {
             _logger.Log($"Perform action '{actionName}'", level);
-            Wait(() =>
+            Wait(actionName, () =>
             {
                 action();
                 return true;
@@ -56,12 +56,12 @@ namespace JDI.Light.Elements.WebActions
             _logger.Log($"Action '{actionName}' done", level);
         }
 
-        public bool Wait(Func<bool> waitFunc)
+        public bool Wait(string actionName, Func<bool> waitFunc)
         {
-            return GetResultByCondition(waitFunc, b => true);
+            return GetResultByCondition(actionName, waitFunc, b => true);
         }
 
-        public T GetResultByCondition<T>(Func<T> getFunc, Func<T, bool> conditionFunc)
+        public T GetResultByCondition<T>(string actionName, Func<T> getResultFunction, Func<T, bool> conditionFunc)
         {
             Exception lastException = null;
             using (var tokenSource = new CancellationTokenSource())
@@ -82,7 +82,7 @@ namespace JDI.Light.Elements.WebActions
                                     token.ThrowIfCancellationRequested();
                                 }
 
-                                var result = getFunc.Invoke();
+                                var result = getResultFunction.Invoke();
                                 if (result != null && conditionFunc.Invoke(result))
                                     return result;
                             }
@@ -100,7 +100,7 @@ namespace JDI.Light.Elements.WebActions
                             Thread.Sleep(_retryTimeoutInMSec);
                         }
 
-                        throw lastException ?? new OperationCanceledException("Operation was canceled!");
+                        throw lastException ?? new OperationCanceledException($"Operation '{actionName}' was canceled!");
                     }, token, TaskCreationOptions.AttachedToParent, sta);
                     if (!task.Wait(_timeoutInMSec))
                     {
