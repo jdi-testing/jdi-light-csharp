@@ -42,6 +42,8 @@ namespace JDI.Light.Tests.UIObjects
         [FindBy(Css = ".uui-header")]
         public Header Header { get; set; }
 
+        public JdiSearch JdiSearch { get; set; }
+
         [FindBy(Css = "ul.sidebar-menu")]
         public Menu SidebarMenu;
 

@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using JDI.Light.Elements.Base;
 using JDI.Light.Interfaces.Base;
+using static JDI.Light.Jdi;
 
 namespace JDI.Light.Extensions
 {
@@ -25,6 +27,27 @@ namespace JDI.Light.Extensions
                 result = new Dictionary<string, object>();
             }
             return result;
+        }
+
+        public static void CheckInitializedElement(this IBaseElement expectedParent, UIElement htmlElementToCheck, string expectedLocator, string expectedName, string expectedSmartLocator)
+        {
+            if (htmlElementToCheck != null)
+            {
+                if (htmlElementToCheck.Locator != null)
+                {
+                    Assert.AreEquals(htmlElementToCheck.Locator.ToString(), expectedLocator);
+                }
+                else
+                {
+                    Assert.AreEquals(htmlElementToCheck.SmartLocators[0].ToString(), expectedSmartLocator);
+                }
+                Assert.AreEquals(htmlElementToCheck.Parent, expectedParent);
+                Assert.AreEquals(htmlElementToCheck.Name, expectedName);
+            }
+            else
+            {
+                throw new ArgumentNullException($"{expectedName} element is null.");
+            }
         }
     }
 }
