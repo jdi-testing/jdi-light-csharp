@@ -1,4 +1,5 @@
 ﻿using System;
+using JDI.Light.Asserts;
 using JDI.Light.Elements.Base;
 using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
@@ -46,5 +47,8 @@ namespace JDI.Light.Elements.Common
             return DateTime.ParseExact(GetAttribute("value"), Format,
                 System.Globalization.CultureInfo.InvariantCulture);
         }
+
+        public new DateTimeSelectorAssert Is() => new DateTimeSelectorAssert(this);
+        public new DateTimeSelectorAssert AssertThat() => Is();
     }
 }

@@ -131,7 +131,7 @@ namespace JDI.Light.Elements.Composite
                 new[] {CheckPageType.None, CheckPageType.Equal}.Contains(CheckUrlType))
             {
                 if (string.IsNullOrEmpty(Url)) return;
-                Jdi.Assert.IsTrue(Invoker.Wait(() =>
+                Jdi.Assert.IsTrue(Invoker.Wait("Checking that URL matches the template", () =>
                 {
                     Logger.Debug($"Current URL: {WebDriver.Url}");
                     return WebDriver.Url.Equals(Url);
@@ -141,20 +141,20 @@ namespace JDI.Light.Elements.Composite
                 switch (CheckUrlType)
                 {
                     case CheckPageType.None:
-                        Jdi.Assert.IsTrue(Invoker.Wait(() =>
+                        Jdi.Assert.IsTrue(Invoker.Wait("Checking that URL matches the template", () =>
                         {
                             Logger.Debug($"Current URL: {WebDriver.Url}");
                             return WebDriver.Url.Contains(UrlTemplate) || WebDriver.Url.Matches(UrlTemplate);
                         }));
                         break;
                     case CheckPageType.Equal:
-                        Jdi.Assert.IsTrue(Invoker.Wait(() => WebDriver.Url.Equals(Url)));
+                        Jdi.Assert.IsTrue(Invoker.Wait("Checking that URL equals the expected value", () => WebDriver.Url.Equals(Url)));
                         break;
                     case CheckPageType.Match:
-                        Jdi.Assert.IsTrue(Invoker.Wait(() => WebDriver.Url.Matches(UrlTemplate)));
+                        Jdi.Assert.IsTrue(Invoker.Wait("Checking that URL matches the template", () => WebDriver.Url.Matches(UrlTemplate)));
                         break;
                     case CheckPageType.Contains:
-                        Jdi.Assert.IsTrue(Invoker.Wait(() => WebDriver.Url.Contains(string.IsNullOrEmpty(UrlTemplate)
+                        Jdi.Assert.IsTrue(Invoker.Wait("Checking that URL contains the template", () => WebDriver.Url.Contains(string.IsNullOrEmpty(UrlTemplate)
                             ? Url
                             : UrlTemplate)));
                         break;
@@ -167,28 +167,28 @@ namespace JDI.Light.Elements.Composite
             switch (CheckTitleType)
             {
                 case CheckPageType.None:
-                    Jdi.Assert.IsTrue(Invoker.Wait(() =>
+                    Jdi.Assert.IsTrue(Invoker.Wait("Checking that page title equals to expected", () =>
                     {
                         Logger.Debug($"Actual: '{WebDriver.Title}', Expected: '{Title}'");
                         return WebDriver.Title.Equals(Title);
                     }));
                     break;
                 case CheckPageType.Equal:
-                    Jdi.Assert.IsTrue(Invoker.Wait(() =>
+                    Jdi.Assert.IsTrue(Invoker.Wait("Checking that page title equals to expected", () =>
                     {
                         Logger.Debug($"Actual: '{WebDriver.Title}', Expected: '{Title}'");
                         return WebDriver.Title.Equals(Title);
                     }));
                     break;
                 case CheckPageType.Match:
-                    Jdi.Assert.IsTrue(Invoker.Wait(() =>
+                    Jdi.Assert.IsTrue(Invoker.Wait("Checking that page title matches expected", () =>
                     {
                         Logger.Debug($"Actual: '{WebDriver.Title}', Expected: '{Title}'");
                         return WebDriver.Title.Matches(Title);
                     }));
                     break;
                 case CheckPageType.Contains:
-                    Jdi.Assert.IsTrue(Invoker.Wait(() =>
+                    Jdi.Assert.IsTrue(Invoker.Wait("Checking that page title contains expected", () =>
                     {
                         Logger.Debug($"Actual: '{WebDriver.Title}', Expected: '{Title}'");
                         return WebDriver.Title.Contains(Title);

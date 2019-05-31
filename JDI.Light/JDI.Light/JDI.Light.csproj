@@ -62,6 +62,7 @@
     <Compile Include="Asserts\ColorAssert.cs" />
     <Compile Include="Asserts\ComboBoxAssert.cs" />
     <Compile Include="Asserts\DataListAssert.cs" />
+    <Compile Include="Asserts\DateTimeSelectorAssert.cs" />
     <Compile Include="Asserts\DropDownAssert.cs" />
     <Compile Include="Asserts\FileAssert.cs" />
     <Compile Include="Asserts\Generic\IsAssert.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Asserts\ImageAssert.cs" />
     <Compile Include="Asserts\IsAssert.cs" />
     <Compile Include="Asserts\MenuSelectAssert.cs" />
+    <Compile Include="Asserts\MultiDropdownAssert.cs" />
     <Compile Include="Asserts\NumberAssert.cs" />
     <Compile Include="Asserts\LinkAssert.cs" />
     <Compile Include="Asserts\ProgressAssert.cs" />
@@ -193,6 +195,7 @@
     <Compile Include="Matchers\DoubleMatchers\LessThanOrEqualToMatcher.cs" />
     <Compile Include="Matchers\IntegerMatchers\EqualToMatcher.cs" />
     <Compile Include="Matchers\IntegerMatchers\GreaterThanOrEqualToMatcher.cs" />
+    <Compile Include="Matchers\IntegerMatchers\HasSizeMatcher.cs" />
     <Compile Include="Matchers\IntegerMatchers\LessThanOrEqualToMatcher.cs" />
     <Compile Include="Matchers\LongMatchers\GreaterThanMatcher.cs" />
     <Compile Include="Matchers\LongMatchers\Is.cs" />
