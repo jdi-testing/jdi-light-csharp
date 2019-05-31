@@ -4,7 +4,7 @@ namespace JDI.Light.Interfaces.Base
 {
     public interface IHasLabel
     {
-        Label Label();
-        string LabelText();
+        Label Label(string forId = "");
+        string LabelText(string forId = "");
     }
 }

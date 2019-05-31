@@ -1,4 +1,5 @@
 ﻿using System;
+using JDI.Light.Asserts;
 using JDI.Light.Interfaces.Base;
 
 namespace JDI.Light.Interfaces.Common
@@ -13,5 +14,8 @@ namespace JDI.Light.Interfaces.Common
 
         void SetDateTime(DateTime dateTime, bool checkEnabled = true);
         DateTime GetDateTime();
+
+        DateTimeSelectorAssert Is();
+        DateTimeSelectorAssert AssertThat();
     }
 }
