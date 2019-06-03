@@ -7,14 +7,14 @@ namespace JDI.Light.Tests.UIObjects.Sections
     public class Header : Section
     {
         [FindBy(XPath = "//img[@src=\"label/Logo_Epam_Color.svg\"]")]
-        public Image Image;
+        public Image Image { get; set; }
 
         [FindBy(Css = "ul.uui-navigation.nav")]
-        public Menu Menu;
-        
-        public JdiSearch Search;
+        public Menu Menu { get; set; }
+
+        public JdiSearch Search { get; set; }
 
         [FindBy(Css = "#user-icon")]
-        public Icon UserIcon;
+        public Icon UserIcon { get; set; }
     }
 }

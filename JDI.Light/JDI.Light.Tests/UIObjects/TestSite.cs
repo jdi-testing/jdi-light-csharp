@@ -48,7 +48,7 @@ namespace JDI.Light.Tests.UIObjects
         public Menu SidebarMenu;
 
         [FindBy(Css = ".footer-content")]
-        public Footer Footer;
+        public Footer Footer { get; set; }
 
         [FindBy(Css = ".logs li")]
         public TextList ActionsLog;

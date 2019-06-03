@@ -6,6 +6,7 @@ namespace JDI.Light.Tests.UIObjects.Sections
 {
     public class Summary : Section
     {
-        [FindBy(Id = "calculate-button")] public Button Calculate;
+        [FindBy(Id = "calculate-button")]
+        public Button Calculate { get; set; }
     }
 }
