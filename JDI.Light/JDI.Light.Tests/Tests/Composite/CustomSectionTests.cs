@@ -26,7 +26,9 @@ namespace JDI.Light.Tests.Tests.Composite
         [TestCaseSource(nameof(_contactSectionCases))]
         public void CustomContactSectionTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
         {
-            ContactSection.CheckInitializedElement(ContactSection.GetType().GetField(htmlElementToCheckName).GetValue(ContactSection) as UIElement, expectedLocator, expectedName, expectedSmartLocator);
+            var targetElement =
+                ContactSection.GetType().GetMember(htmlElementToCheckName)[0].GetMemberValue(ContactSection) as UIElement;
+            ContactSection.CheckInitializedElement(targetElement, expectedLocator, expectedName, expectedSmartLocator);
         }
 
         [Test]
@@ -38,13 +40,17 @@ namespace JDI.Light.Tests.Tests.Composite
         [TestCaseSource(nameof(_headerSectionCases))]
         public void CustomHeaderSectionTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
         {
-            HeaderSection.CheckInitializedElement(HeaderSection.GetType().GetField(htmlElementToCheckName).GetValue(HeaderSection) as UIElement, expectedLocator, expectedName, expectedSmartLocator);
+            var targetElement =
+                HeaderSection.GetType().GetMember(htmlElementToCheckName)[0].GetMemberValue(HeaderSection) as UIElement;
+            HeaderSection.CheckInitializedElement(targetElement, expectedLocator, expectedName, expectedSmartLocator);
         }
 
         [TestCaseSource(nameof(_jdiSearchSectionCases))]
         public void CustomJdiSearchSectionTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
         {
-            JdiSearchSection.CheckInitializedElement(JdiSearchSection.GetType().GetField(htmlElementToCheckName).GetValue(JdiSearchSection) as UIElement, expectedLocator, expectedName, expectedSmartLocator);
+            var targetElement =
+                JdiSearchSection.GetType().GetMember(htmlElementToCheckName)[0].GetMemberValue(JdiSearchSection) as UIElement;
+            JdiSearchSection.CheckInitializedElement(targetElement, expectedLocator, expectedName, expectedSmartLocator);
         }
 
         [Test]
