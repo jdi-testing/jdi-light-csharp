@@ -9,23 +9,23 @@ namespace JDI.Light.Tests.UIObjects.Sections
     {
         [FindBy(Css = "textarea#description")]
         [Name("Description")]
-        public TextArea DescriptionField;
+        public TextArea DescriptionField { get; set; }
 
         [FindBy(XPath = ".//a[@class='ui-slider-handle ui-state-default ui-corner-all' and position()=1]")]
-        public Link FirstRoller;
+        public Link FirstRoller { get; set; }
 
         [FindBy(Css = "input#last-name")]
         [Name("LastName")]
-        public TextField LastNameField;
+        public TextField LastNameField { get; set; }
 
         [FindBy(Css = "input#name")]
         [Name("FirstName")]
-        public TextField NameField;
+        public TextField NameField { get; set; }
 
         [FindBy(XPath = ".//a[@class='ui-slider-handle ui-state-default ui-corner-all' and position()=2]")]
-        public Link SecondRoller;
+        public Link SecondRoller { get; set; }
 
         [FindBy(XPath = "//button[@type='submit' and contains(., 'Submit')]")]
-        public UIElement SubmitButton;
+        public UIElement SubmitButton { get; set; }
     }
 }

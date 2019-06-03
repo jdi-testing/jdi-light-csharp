@@ -10,10 +10,10 @@ namespace JDI.Light.Tests.UIObjects.Pages
     public class ContactPage : WebPage
     {
         [FindBy(Id = "contact-form")]
-        public ContactForm ContactForm;
+        public ContactForm ContactForm; 
 
         [FindBy(Id = "contact-form")]
-        public Contact ContactSection;
+        public Contact ContactSection { get; set; }
 
         [FindBy(Css = "main form")]
         public ContactFormTwoButtons ContactFormTwoButtons;
