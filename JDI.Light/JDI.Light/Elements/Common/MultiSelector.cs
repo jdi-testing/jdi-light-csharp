@@ -150,7 +150,7 @@ namespace JDI.Light.Elements.Common
 
         public List<IBaseUIElement> AllUI() => SelectElement.Options.Cast<IBaseUIElement>().ToList();
 
-        public int GetSize() => SelectElement.Options.Count;
+        public int Size() => SelectElement.Options.Count;
 
         public bool IsEmpty() => !HasAny();
 

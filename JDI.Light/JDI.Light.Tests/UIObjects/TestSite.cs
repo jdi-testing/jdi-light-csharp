@@ -42,11 +42,13 @@ namespace JDI.Light.Tests.UIObjects
         [FindBy(Css = ".uui-header")]
         public Header Header { get; set; }
 
+        public JdiSearch JdiSearch { get; set; }
+
         [FindBy(Css = "ul.sidebar-menu")]
         public Menu SidebarMenu;
 
         [FindBy(Css = ".footer-content")]
-        public Footer Footer;
+        public Footer Footer { get; set; }
 
         [FindBy(Css = ".logs li")]
         public TextList ActionsLog;
