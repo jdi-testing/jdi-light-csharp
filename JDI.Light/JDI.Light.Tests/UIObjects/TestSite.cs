@@ -2,6 +2,7 @@
 using JDI.Light.Elements.Composite;
 using JDI.Light.Tests.UIObjects.Forms;
 using JDI.Light.Tests.UIObjects.Pages;
+using JDI.Light.Tests.UIObjects.PseudoSite;
 using JDI.Light.Tests.UIObjects.Sections;
 
 namespace JDI.Light.Tests.UIObjects
@@ -39,14 +40,19 @@ namespace JDI.Light.Tests.UIObjects
         [Page(Url = "complex-table.html", Title = "Complex Table")]
         public ComplexTablePage ComplexTablePage;
 
+        [Page(Url = "/pseudo-site.html", Title = "Pseudo Site")]
+        public PseudoSitePage PseudoSitePage { get; set; }
+
         [FindBy(Css = ".uui-header")]
         public Header Header { get; set; }
+
+        public JdiSearch JdiSearch { get; set; }
 
         [FindBy(Css = "ul.sidebar-menu")]
         public Menu SidebarMenu;
 
         [FindBy(Css = ".footer-content")]
-        public Footer Footer;
+        public Footer Footer { get; set; }
 
         [FindBy(Css = ".logs li")]
         public TextList ActionsLog;

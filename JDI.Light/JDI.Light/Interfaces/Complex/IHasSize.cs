@@ -2,7 +2,7 @@
 {
     public interface IHasSize
     {
-        int GetSize();
+        int Size();
         bool IsEmpty();
         bool HasAny();
     }

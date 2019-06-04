@@ -1,20 +1,20 @@
 ﻿using JDI.Light.Attributes;
+using JDI.Light.Elements.Common;
 using JDI.Light.Elements.Composite;
-using JDI.Light.Interfaces.Common;
 
 namespace JDI.Light.Tests.UIObjects.Sections
 {
     public class Header : Section
     {
         [FindBy(XPath = "//img[@src=\"label/Logo_Epam_Color.svg\"]")]
-        public IImage Image;
+        public Image Image { get; set; }
 
         [FindBy(Css = "ul.uui-navigation.nav")]
-        public Menu Menu;
-        
-        public JdiSearch Search;
+        public Menu Menu { get; set; }
+
+        public JdiSearch Search { get; set; }
 
         [FindBy(Css = "#user-icon")]
-        public IIcon UserIcon { get; set; }
+        public Icon UserIcon { get; set; }
     }
 }

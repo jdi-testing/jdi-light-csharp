@@ -1,8 +1,10 @@
-﻿using JDI.Light.Attributes;
+﻿using System.Collections.Generic;
+using JDI.Light.Attributes;
 using JDI.Light.Elements.Common;
 using JDI.Light.Elements.Composite;
 using JDI.Light.Interfaces.Common;
 using JDI.Light.Interfaces.Complex;
+using OpenQA.Selenium;
 using ICheckList = JDI.Light.Interfaces.Complex.ICheckList;
 
 namespace JDI.Light.Tests.UIObjects
@@ -74,6 +76,9 @@ namespace JDI.Light.Tests.UIObjects
 
         [JDataList("#disabled-dropdown", "#disabled-dropdown > option")]
         public DataList DisabledDropdownAsDataList { get; set; }
+
+        [FindBy(XPath = ".//datalist[@id='ice-cream-flavors']/option")]
+        public List<IWebElement> DropdownAsDataList { get; set; }
 
         [JDataList("#ice-cream", "#ice-cream-flavors > option")]
         public DataList IceCream { get; set; }
