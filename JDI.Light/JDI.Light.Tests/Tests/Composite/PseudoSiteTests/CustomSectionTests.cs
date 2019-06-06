@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using JDI.Light.Elements.Base;
 using JDI.Light.Extensions;
+using JDI.Light.Tests.UIObjects;
 using JDI.Light.Tests.UIObjects.Sections.PseudoSections;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -10,6 +11,15 @@ namespace JDI.Light.Tests.Tests.Composite.PseudoSiteTests
     public class CustomSectionTests : TestBase
     {
         private static CustomSection CustomSection => TestSite.PseudoSitePage.CustomSection;
+
+        [SetUp]
+        public override void SetUpTest()
+        {
+            Jdi.Logger.Info("Test Base Set up started...");
+            TestSite = Jdi.InitSite<TestSite>();
+            Jdi.Logger.Info("Test Base Set up done.");
+            Jdi.Logger.Info("Run test...");
+        }
 
         [TestCaseSource(nameof(_customSectionWebElementData))]
         public void CustomSectionWebElementTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
@@ -89,6 +99,12 @@ namespace JDI.Light.Tests.Tests.Composite.PseudoSiteTests
             var targetElement =
                 CustomSection.GetType().GetMember(htmlElementToCheckName)[0].GetMemberValue(CustomSection) as UIElement;
             CustomSection.CheckInitializedElement(targetElement, expectedLocator, expectedName, expectedSmartLocator);
+        }
+
+        [TearDown]
+        public override void TestTearDown()
+        {
+            Jdi.Logger.Info("Run test tear down done.");
         }
 
         private static object[] _customSectionWebElementData =
