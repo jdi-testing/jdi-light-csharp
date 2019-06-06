@@ -12,7 +12,7 @@ namespace JDI.Light.Tests.Tests.Composite.PseudoSiteTests
         private static ExtendedSection ExtendedSection => TestSite.PseudoSitePage.ExtendedSection;
 
         [TestCaseSource(nameof(_extendedSectionWebElementData))]
-        public void CustomSectionWebElementTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
+        public void ExtendedSectionWebElementTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
         {
             var targetElement =
                 ExtendedSection.GetType().GetMember(htmlElementToCheckName)[0].GetMemberValue(ExtendedSection) as UIElement;
@@ -20,7 +20,7 @@ namespace JDI.Light.Tests.Tests.Composite.PseudoSiteTests
         }
 
         //[TestCaseSource(nameof(_extendedSectionListWebElementData))] //Fix initialization of List<IWebElement> element
-        public void CustomSectionListWebElementTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
+        public void ExtendedSectionListWebElementTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
         {
             var targetElement =
                 ExtendedSection.GetType().GetMember(htmlElementToCheckName)[0].GetMemberValue(ExtendedSection) as List<IWebElement>;
@@ -28,7 +28,7 @@ namespace JDI.Light.Tests.Tests.Composite.PseudoSiteTests
         }
 
         [TestCaseSource(nameof(_extendedSectionUIWebElementData))]
-        public void CustomSectionUIElementTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
+        public void ExtendedSectionUIElementTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
         {
             var targetElement =
                 ExtendedSection.GetType().GetMember(htmlElementToCheckName)[0].GetMemberValue(ExtendedSection) as UIElement;
@@ -36,7 +36,7 @@ namespace JDI.Light.Tests.Tests.Composite.PseudoSiteTests
         }
 
         [TestCaseSource(nameof(_extendedSectionButtonElementData))]
-        public void CustomSectionButtonTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
+        public void ExtendedSectionButtonTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
         {
             var targetElement =
                 ExtendedSection.GetType().GetMember(htmlElementToCheckName)[0].GetMemberValue(ExtendedSection) as UIElement;
@@ -84,7 +84,7 @@ namespace JDI.Light.Tests.Tests.Composite.PseudoSiteTests
         }
 
         [TestCaseSource(nameof(_extendedSectionDropDownData))]
-        public void CustomSectionDropDownTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
+        public void ExtendedSectionDropDownTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
         {
             var targetElement =
                 ExtendedSection.GetType().GetMember(htmlElementToCheckName)[0].GetMemberValue(ExtendedSection) as UIElement;

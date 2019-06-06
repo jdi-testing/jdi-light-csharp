@@ -74,7 +74,9 @@
     <Compile Include="Tests\Common\DropListTests.cs" />
     <Compile Include="Tests\Composite\CustomSectionTests.cs" />
     <Compile Include="Tests\Composite\PseudoSiteTests\CustomSectionTests.cs" />
+    <Compile Include="Tests\Composite\PseudoSiteTests\CustomSectionUITests.cs" />
     <Compile Include="Tests\Composite\PseudoSiteTests\ExtendedSectionTests.cs" />
+    <Compile Include="Tests\Composite\PseudoSiteTests\ExtendedSectionUITests.cs" />
     <Compile Include="Tests\Simple\DateTests.cs" />
     <Compile Include="Tests\Common\DataListTests.cs" />
     <Compile Include="Tests\Common\DropDownTests.cs" />
