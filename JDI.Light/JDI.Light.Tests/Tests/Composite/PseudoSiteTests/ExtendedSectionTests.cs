@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using JDI.Light.Elements.Base;
 using JDI.Light.Extensions;
-using JDI.Light.Tests.UIObjects.PseudoSections;
+using JDI.Light.Tests.UIObjects.Sections.PseudoSections;
 using NUnit.Framework;
 using OpenQA.Selenium;
 

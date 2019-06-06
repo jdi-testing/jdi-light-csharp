@@ -2,190 +2,189 @@
 using JDI.Light.Attributes;
 using JDI.Light.Elements.Base;
 using JDI.Light.Elements.Common;
-using JDI.Light.Elements.Composite;
 using JDI.Light.Interfaces.Base;
 using OpenQA.Selenium;
 
-namespace JDI.Light.Tests.UIObjects.PseudoSections
+namespace JDI.Light.Tests.UIObjects.Sections.PseudoSections
 {
-    public class CustomSection : Section
+    public class ExtendedSection : CustomSection
     {
-        #region CustomSectionWebElement
+        #region ExtendedSectionWebElement
 
         [FindBy(Id = "webElementPackage")]
-        public IWebElement WebElementPackage { get; set; }
+        public new IWebElement WebElementPackage { get; set; }
 
-        [FindBy(Id = "webElementPublic")] 
-        public IWebElement WebElementPublic { get; set; }
+        [FindBy(Id = "webElementPublic")]
+        public new IWebElement WebElementPublic { get; set; }
 
         [FindBy(Id = "webElementPrivate")]
-        public IWebElement WebElementPrivate { get; set; }
+        public new IWebElement WebElementPrivate { get; set; }
 
         [FindBy(Css = ".webElementPackageUI")]
-        public IWebElement WebElementPackageUI { get; set; }
+        public new IWebElement WebElementPackageUI { get; set; }
 
         [FindBy(Css = ".webElementPublicUI")]
-        public IWebElement WebElementPublicUI { get; set; }
+        public new IWebElement WebElementPublicUI { get; set; }
 
         [FindBy(Css = ".webElementPackageCss")]
-        public IWebElement WebElementPackageCss { get; set; }
+        public new IWebElement WebElementPackageCss { get; set; }
 
         [FindBy(XPath = "//*[@class='webElementPublicXPath']")]
-        public IWebElement WebElementPublicXPath { get; set; }
+        public new IWebElement WebElementPublicXPath { get; set; }
 
         #endregion
 
-        #region CustomSectionListWebElement  TODO:// Add initialization of List<IWebElement>
+        #region ExtendedSectionListWebElement  TODO:// Add initialization of List<IWebElement>
 
-        [FindBy(Id = "listWebElementPackage")] 
-        public List<IWebElement> ListWebElementPackage { get; set; }
+        [FindBy(Id = "listWebElementPackage")]
+        public new List<IWebElement> ListWebElementPackage { get; set; }
 
         [FindBy(Id = "listWebElementPublic")]
-        public List<IWebElement> ListWebElementPublic { get; set; }
+        public new List<IWebElement> ListWebElementPublic { get; set; }
 
         [FindBy(Id = "listWebElementPrivate")]
-        public List<IWebElement> ListWebElementPrivate { get; set; }
+        public new List<IWebElement> ListWebElementPrivate { get; set; }
 
         [FindBy(Css = ".listWebElementPackageUI")]
-        public List<IWebElement> ListWebElementPackageUI { get; set; }
+        public new List<IWebElement> ListWebElementPackageUI { get; set; }
 
         [FindBy(Css = ".listWebElementPublicUI")]
-        public List<IWebElement> ListWebElementPublicUI { get; set; }
+        public new List<IWebElement> ListWebElementPublicUI { get; set; }
 
         [FindBy(Css = ".listWebElementPackageCss")]
-        public List<IWebElement> ListWebElementPackageCss { get; set; }
+        public new List<IWebElement> ListWebElementPackageCss { get; set; }
 
         [FindBy(XPath = "//*[@class='listWebElementPublicXPath']")]
-        public List<IWebElement> ListWebElementPublicXPath { get; set; }
+        public new List<IWebElement> ListWebElementPublicXPath { get; set; }
 
         #endregion
 
-        #region CustomSectionUIElement
+        #region ExtendedSectionUIElement
 
         [FindBy(Id = "uielementPackage")]
-        public UIElement UIWebElementPackage { get; set; }
+        public new UIElement UIWebElementPackage { get; set; }
 
         [FindBy(Id = "uielementPublic")]
-        public UIElement UIWebElementPublic { get; set; }
+        public new UIElement UIWebElementPublic { get; set; }
 
         [FindBy(Id = "uielementPrivate")]
-        public UIElement UIWebElementPrivate { get; set; }
+        public new UIElement UIWebElementPrivate { get; set; }
 
         [FindBy(Css = ".uielementPackageUI")]
-        public UIElement UIWebElementPackageUI { get; set; }
+        public new UIElement UIWebElementPackageUI { get; set; }
 
         [FindBy(Css = ".uielementPublicUI")]
-        public UIElement UIWebElementPublicUI { get; set; }
+        public new UIElement UIWebElementPublicUI { get; set; }
 
         [FindBy(Css = ".uielementPackageCss")]
-        public UIElement UIWebElementPackageCss { get; set; }
+        public new UIElement UIWebElementPackageCss { get; set; }
 
         [FindBy(XPath = "//*[@class='uielementPublicXPath']")]
-        public UIElement UIWebElementPublicXPath { get; set; }
+        public new UIElement UIWebElementPublicXPath { get; set; }
 
         #endregion
 
-        #region customSectionButtonElement
+        #region ExtendedSectionButtonElement
 
         [FindBy(Id = "buttonPackage")]
-        public Button ButtonPackage { get; set; }
+        public new Button ButtonPackage { get; set; }
 
         [FindBy(Id = "buttonPublic")]
-        public Button ButtonPublic { get; set; }
+        public new Button ButtonPublic { get; set; }
 
         [FindBy(Id = "buttonPrivate")]
-        public Button ButtonPrivate { get; set; }
+        public new Button ButtonPrivate { get; set; }
 
         [FindBy(Css = ".buttonPackageUI")]
-        public Button ButtonPackageUI { get; set; }
+        public new Button ButtonPackageUI { get; set; }
 
         [FindBy(Css = ".buttonPublicUI")]
-        public Button ButtonPublicUI { get; set; }
+        public new Button ButtonPublicUI { get; set; }
 
         [FindBy(Css = ".buttonPackageCss")]
-        public UIElement ButtonPackageCss { get; set; }
+        public new UIElement ButtonPackageCss { get; set; }
 
         [FindBy(XPath = "//*[@class='buttonPublicXPath']")]
-        public UIElement ButtonPublicXPath { get; set; }
+        public new UIElement ButtonPublicXPath { get; set; }
 
         #endregion
 
-        #region CustomSectionListUIElement  TODO:// Add initialization of List<IWebElement>
+        #region ExtendedSectionListUIElement  TODO:// Add initialization of List<IWebElement>
 
         [FindBy(Id = "listUIElementPackage")]
-        public List<UIElement> ListUIElementPackage { get; set; }
+        public new List<UIElement> ListUIElementPackage { get; set; }
 
         [FindBy(Id = "listUIElementPublic")]
-        public List<UIElement> ListUIElementPublic { get; set; }
+        public new List<UIElement> ListUIElementPublic { get; set; }
 
         [FindBy(Id = "listUIElementPrivate")]
-        public List<UIElement> ListUIElementPrivate { get; set; }
+        public new List<UIElement> ListUIElementPrivate { get; set; }
 
         [FindBy(Css = ".listUIElementPackageUI")]
-        public List<UIElement> ListUIElementPackageUI { get; set; }
+        public new List<UIElement> ListUIElementPackageUI { get; set; }
 
         [FindBy(Css = ".listUIElementPublicUI")]
-        public List<UIElement> ListUIElementPublicUI { get; set; }
+        public new List<UIElement> ListUIElementPublicUI { get; set; }
 
         [FindBy(Css = ".listUIElementPackageCss")]
-        public List<UIElement> ListUIElementPackageCss { get; set; }
+        public new List<UIElement> ListUIElementPackageCss { get; set; }
 
         [FindBy(XPath = "//*[@class='listUIElementPublicXPath']")]
-        public List<UIElement> ListUIElementPublicXPath { get; set; }
+        public new List<UIElement> ListUIElementPublicXPath { get; set; }
 
         #endregion
 
-        #region customSectionWebList  TODO:// Add initialization of List<IWebElement>
+        #region ExtendedSectionWebList  TODO:// Add initialization of List<IWebElement>
 
         [FindBy(Id = "webListPackage")]
-        public List<IBaseUIElement> WebListPackage { get; set; }
+        public new List<IBaseUIElement> WebListPackage { get; set; }
 
         [FindBy(Id = "webListPublic")]
-        public List<IBaseUIElement> WebListPublic { get; set; }
+        public new List<IBaseUIElement> WebListPublic { get; set; }
 
         [FindBy(Id = "webListPrivate")]
-        public List<IBaseUIElement> WebListPrivate { get; set; }
+        public new List<IBaseUIElement> WebListPrivate { get; set; }
 
         [FindBy(Css = ".webListPackageUI")]
-        public List<IBaseUIElement> WebListPackageUI { get; set; }
+        public new List<IBaseUIElement> WebListPackageUI { get; set; }
 
         [FindBy(Css = ".webListPublicUI")]
-        public List<IBaseUIElement> WebListPublicUI { get; set; }
+        public new List<IBaseUIElement> WebListPublicUI { get; set; }
 
         [FindBy(Css = ".webListPackageCss")]
-        public List<IBaseUIElement> WebListPackageCss { get; set; }
+        public new List<IBaseUIElement> WebListPackageCss { get; set; }
 
         [FindBy(XPath = "//*[@class='webListPublicXPath']")]
-        public List<IBaseUIElement> WebListPublicXPath { get; set; }
+        public new List<IBaseUIElement> WebListPublicXPath { get; set; }
 
         #endregion
 
-        #region CustomSectionListButtonPublic  TODO:// Add initialization of List<IWebElement>
+        #region ExtendedSectionListButtonPublic  TODO:// Add initialization of List<IWebElement>
 
         [FindBy(Id = "listButtonPackage")]
-        public List<Button> ListButtonPackage { get; set; }
+        public new List<Button> ListButtonPackage { get; set; }
 
         [FindBy(Id = "listButtonPublic")]
-        public List<Button> ListButtonPublic { get; set; }
+        public new List<Button> ListButtonPublic { get; set; }
 
         [FindBy(Id = "listButtonPrivate")]
-        public List<Button> ListButtonPrivate { get; set; }
+        public new List<Button> ListButtonPrivate { get; set; }
 
         [FindBy(Css = ".listButtonPackageUI")]
-        public List<Button> ListButtonPackageUI { get; set; }
+        public new List<Button> ListButtonPackageUI { get; set; }
 
         [FindBy(Css = ".listButtonPublicUI")]
-        public List<Button> ListButtonPublicUI { get; set; }
+        public new List<Button> ListButtonPublicUI { get; set; }
 
         [FindBy(Css = ".listButtonPackageCss")]
-        public List<Button> ListButtonPackageCss { get; set; }
+        public new List<Button> ListButtonPackageCss { get; set; }
 
         [FindBy(XPath = "//*[@class='listButtonPublicXPath']")]
-        public List<Button> ListButtonPublicXPath { get; set; }
+        public new List<Button> ListButtonPublicXPath { get; set; }
 
         #endregion
 
-        #region CustomSectionUIListSomeData
+        #region ExtendedSectionUIListSomeData
 
         /*[FindBy(Id = "uilistSomedataPackage")] TODO:// Implement UIList<T>
         public UIList<CustomSection, SomeData> UilistSomedataPackage { get; set; }
@@ -210,7 +209,7 @@ namespace JDI.Light.Tests.UIObjects.PseudoSections
 
         #endregion
 
-        #region CustomSectionUIListQuestion
+        #region ExtendedSectionUIListQuestion
 
         /*[FindBy(Id = "uilistQuestionPackage")] TODO:// Implement UIList<T>
         public UIList<CustomSection> UilistQuestionPackage { get; set; }
@@ -235,22 +234,22 @@ namespace JDI.Light.Tests.UIObjects.PseudoSections
 
         #endregion
 
-        #region CustomSectionDropDown
+        #region ExtendedSectionDropDown
 
         [JDropDown("div[ui=droplistPackage]", "input", "li", ".expand")]
-        public DropList DropListPackage { get; set; }
+        public new DropList DropListPackage { get; set; }
 
         [JDropDown("div[ui=droplistPublic]", "input", "li", ".expand")]
-        public DropList DroplistPublic { get; set; }
+        public new DropList DroplistPublic { get; set; }
 
         [JDropDown("div[ui=droplistPrivate]", "input", "li", ".expand")]
-        public DropList DroplistPrivate { get; set; }
+        public new DropList DroplistPrivate { get; set; }
 
         [FindBy(Css = ".droplistPackageUI")]
-        public DropList DroplistPackageUI { get; set; }
+        public new DropList DroplistPackageUI { get; set; }
 
         [FindBy(Css = ".droplistPublicUI")]
-        public DropList DroplistPublicUI { get; set; }
+        public new DropList DroplistPublicUI { get; set; }
 
         #endregion
     }

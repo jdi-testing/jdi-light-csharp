@@ -1,9 +1,9 @@
 ﻿using JDI.Light.Elements.Base;
-using JDI.Light.Tests.UIObjects.PseudoSections;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using System.Collections.Generic;
 using JDI.Light.Extensions;
+using JDI.Light.Tests.UIObjects.Sections.PseudoSections;
 
 namespace JDI.Light.Tests.Tests.Composite.PseudoSiteTests
 {

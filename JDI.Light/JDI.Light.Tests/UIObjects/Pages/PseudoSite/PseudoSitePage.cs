@@ -1,8 +1,8 @@
 ﻿using JDI.Light.Attributes;
 using JDI.Light.Elements.Composite;
-using JDI.Light.Tests.UIObjects.PseudoSections;
+using JDI.Light.Tests.UIObjects.Sections.PseudoSections;
 
-namespace JDI.Light.Tests.UIObjects.PseudoSite
+namespace JDI.Light.Tests.UIObjects.Pages.PseudoSite
 {
     public class PseudoSitePage : WebPage
     {
