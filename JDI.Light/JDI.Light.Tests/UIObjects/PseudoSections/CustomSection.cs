@@ -12,7 +12,6 @@ namespace JDI.Light.Tests.UIObjects.PseudoSections
     {
         #region CustomSectionWebElement
 
-
         [FindBy(Id = "webElementPackage")]
         public IWebElement WebElementPackage { get; set; }
 
