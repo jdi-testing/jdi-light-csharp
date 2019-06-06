@@ -74,6 +74,7 @@
     <Compile Include="Tests\Common\DropListTests.cs" />
     <Compile Include="Tests\Composite\CustomSectionTests.cs" />
     <Compile Include="Tests\Composite\PseudoSiteTests\CustomSectionTests.cs" />
+    <Compile Include="Tests\Composite\PseudoSiteTests\ExtendedSectionTests.cs" />
     <Compile Include="Tests\Simple\DateTests.cs" />
     <Compile Include="Tests\Common\DataListTests.cs" />
     <Compile Include="Tests\Common\DropDownTests.cs" />
@@ -111,6 +112,7 @@
     <Compile Include="UIObjects\Pages\PerformancePage.cs" />
     <Compile Include="UIObjects\Pages\Html5Page.cs" />
     <Compile Include="UIObjects\PseudoSections\CustomSection.cs" />
+    <Compile Include="UIObjects\PseudoSections\ExtendedSection.cs" />
     <Compile Include="UIObjects\PseudoSite\PseudoSitePage.cs" />
     <Compile Include="UIObjects\Sections\Contact.cs" />
     <Compile Include="UIObjects\TestSiteBrokenDomain.cs" />

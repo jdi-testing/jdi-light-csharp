@@ -7,7 +7,9 @@ namespace JDI.Light.Tests.UIObjects.PseudoSite
     public class PseudoSitePage : WebPage
     {
         [FindBy(Css = ".customSectionUI")]
-        public CustomSection CustomSectionUI { get; set; }
         public CustomSection CustomSection { get; set; }
+
+        [FindBy(Css = ".extendedSectionUI")]
+        public ExtendedSection ExtendedSection { get; set; }
     }
 }
