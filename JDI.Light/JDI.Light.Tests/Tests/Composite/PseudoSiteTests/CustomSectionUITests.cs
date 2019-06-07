@@ -29,7 +29,8 @@ namespace JDI.Light.Tests.Tests.Composite.PseudoSiteTests
             CustomSectionUI.CheckInitializedElement(targetElement, expectedLocator, expectedName, expectedSmartLocator);
         }
 
-        //[TestCaseSource(nameof(_customSectionUIListWebElementData))] //Fix initialization of List<IWebElement> element
+        [TestCaseSource(nameof(_customSectionUIListWebElementData))]
+        [Ignore("Ignore a test. Fix initialization of List<IWebElement> element")]
         public void CustomSectionListWebElementTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
         {
             var targetElement =
@@ -53,7 +54,8 @@ namespace JDI.Light.Tests.Tests.Composite.PseudoSiteTests
             CustomSectionUI.CheckInitializedElement(targetElement, expectedLocator, expectedName, expectedSmartLocator);
         }
 
-        //[TestCaseSource(nameof(_customSectionUIWebListData))] //Fix initialization of List<IWebElement> element
+        [TestCaseSource(nameof(_customSectionUIWebListData))]
+        [Ignore("Ignore a test. Fix initialization of List<IWebElement> element")]
         public void CustomSectionUIWebListTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
         {
             var targetElement =
@@ -61,7 +63,8 @@ namespace JDI.Light.Tests.Tests.Composite.PseudoSiteTests
             //CustomSectionUI.CheckInitializedElement(targetElement, expectedLocator, expectedName, expectedSmartLocator);
         }
 
-        //[TestCaseSource(nameof(_customSectionUIListUIElementPublicData))] //Fix initialization of List<IWebElement> element
+        [TestCaseSource(nameof(_customSectionUIListUIElementPublicData))]
+        [Ignore("Ignore a test. Fix initialization of List<IWebElement> element")]
         public void CustomSectionUIListUIElementPublicTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
         {
             var targetElement =
@@ -69,7 +72,8 @@ namespace JDI.Light.Tests.Tests.Composite.PseudoSiteTests
             //CustomSectionUI.CheckInitializedElement(targetElement, expectedLocator, expectedName, expectedSmartLocator);
         }
 
-        //[TestCaseSource(nameof(_customSectionUIListButtonPublicData))] //Fix initialization of List<IWebElement> element
+        [TestCaseSource(nameof(_customSectionUIListButtonPublicData))]
+        [Ignore("Ignore a test. Fix initialization of List<IWebElement> element")]
         public void CustomSectionUIListButtonPublicTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
         {
             var targetElement =
@@ -77,7 +81,8 @@ namespace JDI.Light.Tests.Tests.Composite.PseudoSiteTests
             //CustomSectionUI.CheckInitializedElement(targetElement, expectedLocator, expectedName, expectedSmartLocator);
         }
 
-        //[TestCaseSource(nameof(_customSectionUIUIListSomeData))] //Uncomment when UIList<T> will be implemented
+        //[TestCaseSource(nameof(_customSectionUIUIListSomeData))]
+        [Ignore("Ignore a test. Uncomment when UIList<T> will be implemented")]
         public void CustomSectionUiuiListSomeDataTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
         {
             var targetElement =
@@ -85,7 +90,8 @@ namespace JDI.Light.Tests.Tests.Composite.PseudoSiteTests
             //CustomSectionUI.CheckInitializedElement(targetElement, expectedLocator, expectedName, expectedSmartLocator);
         }
 
-        //[TestCaseSource(nameof(_customSectionUIUIListQuestionData))] //Uncomment when UIList<T> will be implemented
+        //[TestCaseSource(nameof(_customSectionUIUIListQuestionData))]
+        [Ignore("Ignore a test. Uncomment when UIList<T> will be implemented")]
         public void CustomSectionUiuiListQuestionTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
         {
             var targetElement =

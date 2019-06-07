@@ -29,7 +29,8 @@ namespace JDI.Light.Tests.Tests.Composite.PseudoSiteTests
             ExtendedSectionUI.CheckInitializedElement(targetElement, expectedLocator, expectedName, expectedSmartLocator);
         }
 
-        //[TestCaseSource(nameof(_extendedSectionUIListWebElementData))] //Fix initialization of List<IWebElement> element
+        [TestCaseSource(nameof(_extendedSectionUIListWebElementData))]
+        [Ignore("Ignore a test. Fix initialization of List<IWebElement> element")]
         public void ExtendedSectionUIListWebElementTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
         {
             var targetElement =
@@ -53,7 +54,8 @@ namespace JDI.Light.Tests.Tests.Composite.PseudoSiteTests
             ExtendedSectionUI.CheckInitializedElement(targetElement, expectedLocator, expectedName, expectedSmartLocator);
         }
 
-        //[TestCaseSource(nameof(_extendedSectionUIWebListData))] //Fix initialization of List<IWebElement> element
+        [TestCaseSource(nameof(_extendedSectionUIWebListData))]
+        [Ignore("Ignore a test. Fix initialization of List<IWebElement> element")]
         public void ExtendedSectionUIWebListTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
         {
             var targetElement =
@@ -61,7 +63,8 @@ namespace JDI.Light.Tests.Tests.Composite.PseudoSiteTests
             //ExtendedSectionUI.CheckInitializedElement(targetElement, expectedLocator, expectedName, expectedSmartLocator);
         }
 
-        //[TestCaseSource(nameof(_extendedSectionUIListUIElementPublicData))] //Fix initialization of List<IWebElement> element
+        [TestCaseSource(nameof(_extendedSectionUIListUIElementPublicData))]
+        [Ignore("Ignore a test. Fix initialization of List<IWebElement> element")]
         public void ExtendedSectionUIListUIElementPublicTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
         {
             var targetElement =
@@ -69,7 +72,8 @@ namespace JDI.Light.Tests.Tests.Composite.PseudoSiteTests
             //ExtendedSectionUI.CheckInitializedElement(targetElement, expectedLocator, expectedName, expectedSmartLocator);
         }
 
-        //[TestCaseSource(nameof(_extendedSectionUIListButtonPublicData))] //Fix initialization of List<IWebElement> element
+        [TestCaseSource(nameof(_extendedSectionUIListButtonPublicData))]
+        [Ignore("Ignore a test. Fix initialization of List<IWebElement> element")]
         public void ExtendedSectionUIListButtonPublicTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
         {
             var targetElement =
@@ -77,7 +81,8 @@ namespace JDI.Light.Tests.Tests.Composite.PseudoSiteTests
             //ExtendedSectionUI.CheckInitializedElement(targetElement, expectedLocator, expectedName, expectedSmartLocator);
         }
 
-        //[TestCaseSource(nameof(_extendedSectionUIUIListSomeData))] //Uncomment when UIList<T> will be implemented
+        //[TestCaseSource(nameof(_extendedSectionUIUIListSomeData))]
+        [Ignore("Ignore a test. Uncomment when UIList<T> will be implemented")]
         public void ExtendedSectionUiuiListSomeDataTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
         {
             var targetElement =
@@ -85,7 +90,8 @@ namespace JDI.Light.Tests.Tests.Composite.PseudoSiteTests
             //ExtendedSectionUI.CheckInitializedElement(targetElement, expectedLocator, expectedName, expectedSmartLocator);
         }
 
-        //[TestCaseSource(nameof(_extendedSectionUIUIListQuestionData))] //Uncomment when UIList<T> will be implemented
+        //[TestCaseSource(nameof(_extendedSectionUIUIListQuestionData))]
+        [Ignore("Ignore a test. Uncomment when UIList<T> will be implemented")]
         public void ExtendedSectionUiuiListQuestionTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
         {
             var targetElement =

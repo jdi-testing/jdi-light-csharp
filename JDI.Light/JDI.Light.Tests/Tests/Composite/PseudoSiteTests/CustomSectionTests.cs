@@ -29,7 +29,8 @@ namespace JDI.Light.Tests.Tests.Composite.PseudoSiteTests
             CustomSection.CheckInitializedElement(targetElement, expectedLocator, expectedName, expectedSmartLocator);
         }
 
-        //[TestCaseSource(nameof(_customSectionListWebElementData))] //Fix initialization of List<IWebElement> element
+        [TestCaseSource(nameof(_customSectionListWebElementData))]
+        [Ignore("Ignore a test. Fix initialization of List<IWebElement> element")]
         public void CustomSectionListWebElementTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
         {
             var targetElement =
@@ -53,7 +54,8 @@ namespace JDI.Light.Tests.Tests.Composite.PseudoSiteTests
             CustomSection.CheckInitializedElement(targetElement, expectedLocator, expectedName, expectedSmartLocator);
         }
 
-        //[TestCaseSource(nameof(_customSectionWebListData))] //Fix initialization of List<IWebElement> element
+        [TestCaseSource(nameof(_customSectionWebListData))]
+        [Ignore("Ignore a test. Fix initialization of List<IWebElement> element")]
         public void CustomSectionWebListTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
         {
             var targetElement =
@@ -61,7 +63,8 @@ namespace JDI.Light.Tests.Tests.Composite.PseudoSiteTests
             //CustomSection.CheckInitializedElement(targetElement, expectedLocator, expectedName, expectedSmartLocator);
         }
 
-        //[TestCaseSource(nameof(_customSectionListUIElementPublicData))] //Fix initialization of List<IWebElement> element
+        [TestCaseSource(nameof(_customSectionListUIElementPublicData))]
+        [Ignore("Ignore a test. Fix initialization of List<IWebElement> element")]
         public void CustomSectionListUIElementPublicTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
         {
             var targetElement =
@@ -69,7 +72,8 @@ namespace JDI.Light.Tests.Tests.Composite.PseudoSiteTests
             //CustomSection.CheckInitializedElement(targetElement, expectedLocator, expectedName, expectedSmartLocator);
         }
 
-        //[TestCaseSource(nameof(_customSectionListButtonPublicData))] //Fix initialization of List<IWebElement> element
+        [TestCaseSource(nameof(_customSectionListButtonPublicData))]
+        [Ignore("Ignore a test. Fix initialization of List<IWebElement> element")]
         public void CustomSectionListButtonPublicTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
         {
             var targetElement =
@@ -77,7 +81,8 @@ namespace JDI.Light.Tests.Tests.Composite.PseudoSiteTests
             //CustomSection.CheckInitializedElement(targetElement, expectedLocator, expectedName, expectedSmartLocator);
         }
 
-        //[TestCaseSource(nameof(_customSectionUIListSomeData))] //Uncomment when UIList<T> will be implemented
+        //[TestCaseSource(nameof(_customSectionUIListSomeData))]
+        [Ignore("Ignore a test. Uncomment when UIList<T> will be implemented")]
         public void CustomSectionUIListSomeDataTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
         {
             var targetElement =
@@ -85,7 +90,8 @@ namespace JDI.Light.Tests.Tests.Composite.PseudoSiteTests
             //CustomSection.CheckInitializedElement(targetElement, expectedLocator, expectedName, expectedSmartLocator);
         }
 
-        //[TestCaseSource(nameof(_customSectionUIListQuestionData))] //Uncomment when UIList<T> will be implemented
+        //[TestCaseSource(nameof(_customSectionUIListQuestionData))]
+        [Ignore("Ignore a test. Uncomment when UIList<T> will be implemented")]
         public void CustomSectionUIListQuestionTest(string htmlElementToCheckName, string expectedLocator, string expectedName, string expectedSmartLocator)
         {
             var targetElement =
