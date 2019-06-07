@@ -88,10 +88,12 @@ namespace JDI.Light.Elements.Composite
             {
                 foreach (var item in MenuList)
                 {
-                    if (item.Text != value) continue;
-                    var action = new Actions(WebDriver);
-                    action.MoveToElement(item).Click().Build().Perform();
-                    break;
+                    if (item.Text == value)
+                    {
+                        var action = new Actions(WebDriver);
+                        action.MoveToElement(item).Click().Build().Perform();
+                        break;
+                    }
                 }
             }
         }
