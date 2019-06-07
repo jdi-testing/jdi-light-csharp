@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Collections.ObjectModel;
 using System.Linq;
 using JDI.Light.Asserts;
 using JDI.Light.Elements.Base;
@@ -19,7 +18,6 @@ namespace JDI.Light.Elements.Composite
     public class Menu : UIElement, IMenuSelector
     {
         public By MenuItemLocator { get; set; } = By.XPath(".//li/a");
-        public SelectElement SelectElement => new SelectElement(this);
         public ReadOnlyCollection<IWebElement> MenuList => FindElements(By.XPath(".//li"));
 
         private Action<Menu, string[]> _selectElementAction = (menu, itemTexts) =>
@@ -52,44 +50,50 @@ namespace JDI.Light.Elements.Composite
         {
         }
 
-        public void Select(string itemText)
+        public List<string> Values()
         {
-            Invoker.DoAction($"Select menu item '{itemText}'", () => _selectElementAction.Invoke(this, new[] { itemText }));
+            return MenuList.Select(i => i.Text).ToList();
         }
 
-        public void Select(Enum item)
+        public new int Size() => Values().Count;
+
+        public void Select(params Enum[] items)
         {
-            Select(item.GetDescription());
+            var itemTexts = items.Select(i => i.GetDescription()).ToArray();
+            Select(itemTexts);
         }
 
-        public void Select(Enum item1, Enum item2)
+        public void Select(params int[] items)
         {
-            Select(item1.GetDescription(),item2.GetDescription());
+            foreach (var item in items)
+            {
+                var itemText = MenuList.ElementAt(item);
+                Select(itemText.Text);
+            }
         }
 
-        public void Select(Enum item1, Enum item2, Enum item3)
-        {
-            Select(item1.GetDescription(), item2.GetDescription(), item3.GetDescription());
-        }
-
-        public void Select(string itemText1, string itemText2)
-        {
-            Select(new[]{itemText1, itemText2});
-        }
-
-        public void Select(string itemText1, string itemText2, string itemText3)
-        {
-            Select(new[] { itemText1, itemText2, itemText3 });
-        }
-
-        public void Select(string[] itemTexts)
+        public void Select(params string[] itemTexts)
         {
             Invoker.DoAction($"Select menu item '{string.Join(" -> ", itemTexts)}'", () => _selectElementAction.Invoke(this, itemTexts));
         }
 
         public bool Selected(string option)
         {
-           return MenuList.FirstOrDefault(e => e.Text.Equals(option)).GetAttribute("class").Contains("active");
+            return MenuList.FirstOrDefault(e => e.Text.Equals(option)).GetAttribute("class").Contains("active");
+        }
+
+        public void HoverAndClick(params string[] values)
+        {
+            foreach (var value in values)
+            {
+                foreach (var item in MenuList)
+                {
+                    if (item.Text != value) continue;
+                    var action = new Actions(WebDriver);
+                    action.MoveToElement(item).Click().Build().Perform();
+                    break;
+                }
+            }
         }
 
         public new MenuSelectAssert Is => new MenuSelectAssert(this);
