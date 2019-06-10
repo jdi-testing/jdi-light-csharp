@@ -55,7 +55,7 @@ namespace JDI.Light.Tests.UIObjects
         [Page(Url = "pagewithboth.com", Title = "Page with both")]
         public PageWithBoth PageWithBoth { get; set; }
 
-        public PageWithoutBoth PageWithoutBoth;
+        public PageWithoutBoth PageWithoutBoth { get; set; }
 
         [FindBy(Css = ".uui-header")]
         public Header Header { get; set; }

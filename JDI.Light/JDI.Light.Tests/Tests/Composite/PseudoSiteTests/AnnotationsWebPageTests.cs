@@ -20,9 +20,11 @@ namespace JDI.Light.Tests.Tests.Composite.PseudoSiteTests
         [TestCaseSource(nameof(_annotationsWebPageData))]
         public void AnnotationsWebPageTest(string webPage, string expectedUrl, string expectedTitle)
         {
-            if (!(TestSite.GetType().GetMember(webPage)[0].GetMemberValue(TestSite) is WebPage targetElement)) return;
-            AreEqual(targetElement.Url, expectedUrl);
-            AreEqual(targetElement.Title, expectedTitle);
+            if (TestSite.GetType().GetMember(webPage)[0].GetMemberValue(TestSite) is WebPage targetElement)
+            {
+                AreEqual(targetElement.Url, expectedUrl);
+                AreEqual(targetElement.Title, expectedTitle);
+            }
         }
 
         private static object[] _annotationsWebPageData =
