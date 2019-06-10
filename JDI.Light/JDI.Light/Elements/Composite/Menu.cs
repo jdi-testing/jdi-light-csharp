@@ -11,7 +11,6 @@ using JDI.Light.Interfaces.Complex;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 
-
 namespace JDI.Light.Elements.Composite
 {
     [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
