@@ -10,7 +10,7 @@ using JDI.Light.Extensions;
 using JDI.Light.Interfaces.Complex;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.UI;
+
 
 namespace JDI.Light.Elements.Composite
 {
@@ -80,6 +80,11 @@ namespace JDI.Light.Elements.Composite
         public bool Selected(string option)
         {
             return MenuList.FirstOrDefault(e => e.Text.Equals(option)).GetAttribute("class").Contains("active");
+        }
+
+        public string Selected()
+        {
+            return MenuList.FirstOrDefault(e => e.GetAttribute("class").Contains("active")).Text;
         }
 
         public void HoverAndClick(params string[] values)

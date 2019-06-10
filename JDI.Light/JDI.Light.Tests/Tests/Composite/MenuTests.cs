@@ -20,6 +20,7 @@ namespace JDI.Light.Tests.Tests.Composite
         {
             TestSite.SidebarMenu.Select("Contact form");
             TestSite.ContactFormPage.CheckOpened();
+            Assert.AreEqual("Contact form", TestSite.SidebarMenu.Selected());
         }
 
         [Test]
