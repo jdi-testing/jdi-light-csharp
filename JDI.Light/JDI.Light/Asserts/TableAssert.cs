@@ -19,26 +19,26 @@ namespace JDI.Light.Asserts
 
         public TableAssert Empty()
         {
-            Assert.IsTrue(IsTableEmpty, "The table is not empty");
+            Assert.IsTrue(Table.IsTableEmpty, "The table is not empty");
             return this;
         }
 
         public TableAssert NotEmpty()
         {
-            Assert.IsFalse(IsTableEmpty, "The table is empty");
+            Assert.IsFalse(Table.IsTableEmpty, "The table is empty");
             return this;
         }
 
         public TableAssert Size(Matcher<int> condition)
         {
-            Assert.IsTrue(condition.IsMatch(TableSize),
-                $"The table size {TableSize} is not {condition.ActionName} {condition.RightValue}");
+            Assert.IsTrue(condition.IsMatch(Table.TableSize),
+                $"The table size {Table.TableSize} is not {condition.ActionName} {condition.RightValue}");
             return this;
         }
 
         public TableAssert Size(int expectedSize)
         {
-            Assert.AreEquals(expectedSize, TableSize);
+            Assert.AreEquals(expectedSize, Table.TableSize);
             return this;
         }
 
@@ -79,10 +79,5 @@ namespace JDI.Light.Asserts
                 "The row does not contain the following values in these columns.");
             return this;
         }
-
-        //todo remove after implementation in Table class
-        protected int TableSize => Table.Rows.Count - 1;
-
-        protected bool IsTableEmpty => TableSize == 0;
     }
 }
