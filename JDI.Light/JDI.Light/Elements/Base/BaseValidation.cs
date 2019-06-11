@@ -32,8 +32,10 @@ namespace JDI.Light.Elements.Base
             finally
             {
                 var passedTime = DateTime.Now.Millisecond - start;
-                Assert.IsTrue(passedTime > min*1000-500);
-                Assert.IsTrue(passedTime < max*1000+500);
+                var minV1 = (min * 1000);
+                var maxV2 = (max * 1000);
+                Assert.IsTrue(passedTime > minV1 - 500);
+                Assert.IsTrue(passedTime < maxV2 + 500);
             }
         }
 
