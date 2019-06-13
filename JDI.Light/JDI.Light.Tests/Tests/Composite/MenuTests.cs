@@ -1,6 +1,7 @@
 ﻿using JDI.Light.Exceptions;
-using JDI.Light.Tests.Enums;
 using NUnit.Framework;
+using static JDI.Light.Matchers.Is;
+using static JDI.Light.Tests.Enums.Navigation;
 
 namespace JDI.Light.Tests.Tests.Composite
 {
@@ -19,12 +20,13 @@ namespace JDI.Light.Tests.Tests.Composite
         {
             TestSite.SidebarMenu.Select("Contact form");
             TestSite.ContactFormPage.CheckOpened();
+            Assert.AreEqual("Contact form", TestSite.SidebarMenu.Selected());
         }
 
         [Test]
         public void SelectEnumTest()
         {
-            TestSite.SidebarMenu.Select(Navigation.MetalsColors);
+            TestSite.SidebarMenu.Select(MetalsColors);
             TestSite.MetalsColorsPage.CheckOpened();
         }
 
@@ -69,8 +71,29 @@ namespace JDI.Light.Tests.Tests.Composite
         [Test]
         public void SelectEnumListTest()
         {
-            TestSite.SidebarMenu.Select(Navigation.Service, Navigation.Dates);
+            TestSite.SidebarMenu.Select(Service, Dates);
             TestSite.Dates.CheckOpened();
+        }
+
+        [Test]
+        public void RefreshIndexSelectTest()
+        {
+            TestSite.Header.Menu.Select(2);
+            TestSite.Header.Menu.Select(8);
+            TestSite.UsersPage.CheckOpened();
+        }
+
+        [Test]
+        public void RefreshAssertMenuTest()
+        {
+            TestSite.SidebarMenu.AssertThat.Size(EqualTo(16));
+        }
+
+        [Test]
+        public void HoverAndClickTest()
+        {
+            TestSite.SidebarMenu.HoverAndClick("Elements packs", "HTML 5");
+            TestSite.Html5Page.CheckOpened();
         }
 
         [Test]

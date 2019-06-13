@@ -39,6 +39,9 @@ namespace JDI.Light.Tests.UIObjects
         [Page(Url = "complex-table.html", Title = "Complex Table")]
         public ComplexTablePage ComplexTablePage;
 
+        [Page(Url = "user-table.html", Title = "User Table")]
+        public UsersTablePage UsersPage { get; set; }
+
         [FindBy(Css = ".uui-header")]
         public Header Header { get; set; }
 
