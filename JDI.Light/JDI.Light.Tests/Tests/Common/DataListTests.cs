@@ -93,6 +93,12 @@ namespace JDI.Light.Tests.Tests.Common
         }
 
         [Test]
+        public void SelectValueTest()
+        {
+            var els = TestSite.Html5Page.DropdownAsDataList;
+        }
+
+        [Test]
         public void NegativeSelectNumTest()
         {
             Throws<ElementNotFoundException>(() => TestSite.Html5Page.IceCream.Select(7, false));

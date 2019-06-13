@@ -2,6 +2,7 @@
 using JDI.Light.Elements.Composite;
 using JDI.Light.Tests.UIObjects.Forms;
 using JDI.Light.Tests.UIObjects.Pages;
+using JDI.Light.Tests.UIObjects.Pages.PseudoSite;
 using JDI.Light.Tests.UIObjects.Sections;
 
 namespace JDI.Light.Tests.UIObjects
@@ -39,6 +40,23 @@ namespace JDI.Light.Tests.UIObjects
         [Page(Url = "complex-table.html", Title = "Complex Table")]
         public ComplexTablePage ComplexTablePage;
 
+        [Page(Url = "/pseudo-site.html", Title = "Pseudo Site")]
+        public PseudoSitePage PseudoSitePage { get; set; }
+
+        [Page(Url = "pagewithurl.com")]
+        public PageWithUrl PageWithUrl { get; set; }
+
+        [Page(Url = "/pagewithurl.com")]
+        public PageWithUrl SlashPageWithUrl { get; set; }
+
+        [Page(Title = "Page with Title")]
+        public PageWithTitle PageWithTitle { get; set; }
+
+        [Page(Url = "pagewithboth.com", Title = "Page with both")]
+        public PageWithBoth PageWithBoth { get; set; }
+
+        public PageWithoutBoth PageWithoutBoth { get; set; }
+        
         [Page(Url = "user-table.html", Title = "User Table")]
         public UsersTablePage UsersPage { get; set; }
 
