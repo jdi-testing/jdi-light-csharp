@@ -6,5 +6,6 @@ namespace JDI.Light.Interfaces.Complex
     public interface IMenuSelector : IBaseUIElement, IHasSelectMenuAssert
     {
         bool Selected(string option);
+        int Size();
     }
 }

@@ -121,6 +121,7 @@
     <Compile Include="UIObjects\Sections\PseudoSections\CustomSection.cs" />
     <Compile Include="UIObjects\Sections\PseudoSections\ExtendedSection.cs" />
     <Compile Include="UIObjects\Pages\PseudoSite\PseudoSitePage.cs" />
+    <Compile Include="UIObjects\Pages\UsersTablePage.cs" />
     <Compile Include="UIObjects\Sections\Contact.cs" />
     <Compile Include="UIObjects\TestSiteBrokenDomain.cs" />
     <Compile Include="UIObjects\TestSiteCustomDomain.cs" />

@@ -68,6 +68,10 @@ namespace JDI.Light.Elements.Complex.Table
             return Cells.ElementAt(rowNum);
         }
 
+        public int TableSize => Rows.Count - 1;
+
+        public bool IsTableEmpty => TableSize == 0;
+
         public new TableAssert Is()
         {
             return new TableAssert(this);
