@@ -50,7 +50,7 @@ namespace JDI.Light.Tools
 
         public bool HasValue()
         {
-            return _isFinal || IsUseCache() && _value != null && _elementCache == GetGlobalCache();
+            return _isFinal || (IsUseCache() && _value != null && _elementCache == GetGlobalCache());
         }
 
         public T Get(Func<T> defaultResult)
