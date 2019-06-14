@@ -1,4 +1,5 @@
-﻿using JDI.Light.Interfaces.Common;
+﻿using JDI.Light.Elements.Base;
+using JDI.Light.Elements.Common;
 using JDI.Light.Matchers.StringMatchers;
 using NUnit.Framework;
 using Is = JDI.Light.Matchers.Is;
@@ -8,7 +9,7 @@ namespace JDI.Light.Tests.Tests.Simple
     [TestFixture]
     public class ImagesTests : TestBase
     {
-        private IImage JdiLogo => TestSite.Html5Page.JdiLogo;
+        private Image JdiLogo => TestSite.Html5Page.JdiLogo;
 
         [SetUp]
         public void SetUp()
@@ -52,6 +53,12 @@ namespace JDI.Light.Tests.Tests.Simple
         public void AssertValidationTest()
         {
             JdiLogo.AssertThat().Alt(Is.EqualTo("Jdi Logo 2"));
+        }
+
+        [Test]
+        public void BaseValidationTest()
+        {
+            BaseValidation.BaseElementValidation(JdiLogo);
         }
     }
 }

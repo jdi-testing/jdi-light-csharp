@@ -1,12 +1,6 @@
 ﻿using JDI.Light.Asserts;
-using JDI.Light.Elements.Base;
 using JDI.Light.Interfaces.Common;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JDI.Light.Elements.Common
 {
