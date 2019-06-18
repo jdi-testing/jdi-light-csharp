@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using JDI.Light.Elements.Base;
+using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Complex.Table
 {
     public class Line
     {
         private Dictionary<string, string> _data;
-        private readonly List<UIElement> _elements;
-        private readonly List<string> _headers;
+        private static IEnumerable<IWebElement> _elements;
+        private static List<string> _headers;
         private readonly List<string> _list;
 
         public Line(List<string> list, List<string> headers)
@@ -18,23 +19,25 @@ namespace JDI.Light.Elements.Complex.Table
             _headers = headers;
         }
 
-        public Line(List<UIElement> elements, List<string> headers)
+        public Line(IEnumerable<IWebElement> elements, List<string> headers)
         {
             _elements = elements;
             _headers = headers;
-            _data = ZipTwoLists(_headers, _elements.Select(el => el.Text).ToList());
+            _data = ZipTwoLists(_headers, _elements.Select(el => el.Text));
         }
 
-        private static Dictionary<string, string> ZipTwoLists(IReadOnlyCollection<string> keys, IReadOnlyCollection<string> values)
+        private static Dictionary<string, string> ZipTwoLists(IEnumerable<string> keys, IEnumerable<string> values)
         {
-            if (keys == null || values == null || keys.Count != values.Count)
+            var enumerable = keys as IList<string> ?? keys.ToList();
+            var second = values as IList<string> ?? values.ToList();
+            if (keys == null || values == null || enumerable.Count != second.Count)
             {
                 throw new ArgumentException("Keys or values are null or has not equal count.");
             }
             return
-                keys.Distinct().Count() < keys.Count
+                enumerable.Distinct().Count() < enumerable.Count
                 ? throw new ArgumentException($"{keys} collection contains some duplicate elements")
-                : keys.Zip(values, (k, v) => new { k, v }).ToDictionary(x => x.k, x => x.v);
+                : enumerable.Zip(second, (k, v) => new { k, v }).ToDictionary(x => x.k, x => x.v);
         }
 
         public static Line InitLine(List<string> list, List<string> headers)

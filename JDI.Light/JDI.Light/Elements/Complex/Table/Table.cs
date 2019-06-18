@@ -10,6 +10,10 @@ namespace JDI.Light.Elements.Complex.Table
 {
     public class Table : UIElement
     {
+        public int FirstColumnIndex = -1;
+        public int[] ColumnsMapping = { };
+        public bool HeaderIsRow = true;
+
         public Table(By locator) : base(locator)
         {
             TableHeadersLocator = By.XPath(".//tr/th");
@@ -17,6 +21,7 @@ namespace JDI.Light.Elements.Complex.Table
             TableFooterLocator = By.XPath(".//tfoot");
             TableRowsLocator = By.XPath(".//tr");
             TableCellsLocator = By.XPath(".//td");
+            TableRowLocator = By.XPath(".//tr[{0}]/td");
         }
 
         public By TableHeadersLocator { get; set; }
@@ -24,6 +29,7 @@ namespace JDI.Light.Elements.Complex.Table
         public By TableFooterLocator { get; set; }
         public By TableRowsLocator { get; set; }
         public By TableCellsLocator { get; set; }
+        public By TableRowLocator { get; set; }
 
         public List<UIElement> Headers => Body.FindElements(TableHeadersLocator)
             .Select(e => UIElementFactory.CreateInstance<UIElement>(TableHeadersLocator, Body, e)).ToList();
@@ -52,10 +58,11 @@ namespace JDI.Light.Elements.Complex.Table
 
         public Line Row(int rowNum)
         {
-            return new Line(WebRow(rowNum), Headers.Select(h => h.Text).ToList());
+            var headerValues = Headers.Select(h => h.Text).ToList();
+            return new Line(WebRow(rowNum), headerValues);
         }
 
-        public List<UIElement> WebRow(int rowNum)
+        public IEnumerable<IWebElement> WebRow(int rowNum)
         {
             if (rowNum < 1)
             {
@@ -65,7 +72,54 @@ namespace JDI.Light.Elements.Complex.Table
             {
                 throw new ArgumentException($"Table has {Rows.Count} rows, but requested index is {rowNum}");
             }
-            return Cells.ElementAt(rowNum);
+            return GetRow(rowNum);
+        }
+
+        public IEnumerable<IWebElement> GetRow(int rowNum)
+        {
+            var elements = GetRowByIndex(GetRowIndex(rowNum));
+            //elements = elements.Where(el => el.Displayed).ToList();
+            var result = new List<IWebElement>();
+            if (FirstColumnIndex <= 1 && ColumnsMapping.Length <= 0) return elements;
+            for (var i = 1; i <= Headers.Count; i++)
+            {
+                result.Add(elements.ElementAt(i - 1));
+            }
+            return elements;
+        }
+
+        public IEnumerable<IWebElement> GetRowByIndex(int rowNum)
+        {
+            return FindElements(FillByTemplate(TableRowLocator, rowNum));
+        }
+
+        public int GetRowIndex(int rowNum)
+        {
+            if (!HeaderIsRow) return HeaderIsRow ? rowNum + 1 : rowNum;
+            var firstRow = GetRowByIndex(1).Select(c=> c.Text).ToList();
+            HeaderIsRow = firstRow.Count == 0 || Headers.Select(h => h.Text).Union(firstRow).Any();
+            return HeaderIsRow ? rowNum + 1 : rowNum;
+        }
+
+        public By FillByTemplate(By by, params object[] args)
+        {
+            var byLocator = GetByLocator(by);
+            try
+            {
+                byLocator = string.Format(byLocator, args);
+            }
+            catch (FormatException)
+            {
+                throw new FormatException("Bad locator template '" + byLocator + "'. Args: " + string.Join("", args));
+            }
+            return By.XPath(byLocator);
+        }
+
+        public static string GetByLocator(By by)
+        {
+            var byAsString = by.ToString();
+            var index = byAsString.IndexOf(": ", StringComparison.Ordinal) + 2;
+            return byAsString.Substring(index);
         }
 
         public int TableSize => Rows.Count - 1;

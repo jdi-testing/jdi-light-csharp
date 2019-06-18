@@ -3,6 +3,7 @@ using NUnit.Framework;
 using static JDI.Light.Elements.Complex.Table.Column;
 using static JDI.Light.Elements.Complex.Table.TableMatcher;
 using static JDI.Light.Matchers.StringMatchers.ContainsStringMatcher;
+using static NUnit.Framework.Assert;
 using Is = JDI.Light.Matchers.Is;
 
 namespace JDI.Light.Tests.Tests.Composite
@@ -75,7 +76,7 @@ namespace JDI.Light.Tests.Tests.Composite
             var row = PerformancePage.UsersTable.Row(
                 HasValue("Brian Meyer", InColumn("Name")),
                 HasValue("mollis.nec@seddictumeleifend.co.uk", InColumn("Email")));
-            Assert.AreEqual("Brian Meyer;(016977) 0358;mollis.nec@seddictumeleifend.co.uk;Houston",
+            AreEqual("Brian Meyer;(016977) 0358;mollis.nec@seddictumeleifend.co.uk;Houston",
                 row.GetValue());
             PerformancePage.UsersTable.Is().HasRowWithValues(HasValue("Brian Meyer", InColumn("Name")), HasValue("(016977) 0358", InColumn("Phone")),
                 HasValue("mollis.nec@seddictumeleifend.co.uk", InColumn("Email")), HasValue("Houston", InColumn("City")));
@@ -91,6 +92,14 @@ namespace JDI.Light.Tests.Tests.Composite
                 HasValue("mollis.nec@seddictumeleifend.co.uk", InColumn(3)));
             PerformancePage.UsersTable.Is().HasRowWithValues( HasValue("Brian Meyer", InColumn("Name")), HasValue("(016977) 0358", InColumn("Phone")),
                 HasValue("mollis.nec@seddictumeleifend.co.uk", InColumn("Email")), HasValue("Houston", InColumn("City")));
+        }
+
+        [Test]
+        public void TablePerformanceTest()
+        {
+            PerformancePage.Open();
+            PerformancePage.CheckOpened();
+            AreEqual("Burke Tucker;076 1971 1687;et.euismod.et@ut.edu;GozŽe", PerformancePage.UsersTable.Row(1).GetValue());
         }
 
         [Test]
