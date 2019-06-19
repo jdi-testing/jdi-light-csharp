@@ -95,11 +95,27 @@ namespace JDI.Light.Tests.Tests.Composite
         }
 
         [Test]
-        public void TablePerformanceTest()
+        public void TableRowPerformanceTest()
         {
             PerformancePage.Open();
             PerformancePage.CheckOpened();
             AreEqual("Burke Tucker;076 1971 1687;et.euismod.et@ut.edu;GozŽe", PerformancePage.UsersTable.Row(1).GetValue());
+        }
+
+        [Test]
+        public void TableCellPerformanceTest()
+        {
+            PerformancePage.Open();
+            PerformancePage.CheckOpened();
+            AreEqual("ipsum.non.arcu@auctorullamcorper.ca", PerformancePage.UsersTable.Cell(3, 4));
+        }
+
+        [Test]
+        public void TableColumnPerformanceTest()
+        {
+            PerformancePage.Open();
+            PerformancePage.CheckOpened();
+            AreEqual("076 1971 1687;(011307) 16843;0", PerformancePage.UsersTable.Column(2).GetValue().Substring(0, 30));
         }
 
         [Test]

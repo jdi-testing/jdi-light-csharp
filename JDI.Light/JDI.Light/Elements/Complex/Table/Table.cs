@@ -5,6 +5,7 @@ using JDI.Light.Asserts;
 using JDI.Light.Elements.Base;
 using JDI.Light.Factories;
 using OpenQA.Selenium;
+using static System.String;
 
 namespace JDI.Light.Elements.Complex.Table
 {
@@ -22,6 +23,8 @@ namespace JDI.Light.Elements.Complex.Table
             TableRowsLocator = By.XPath(".//tr");
             TableCellsLocator = By.XPath(".//td");
             TableRowLocator = By.XPath(".//tr[{0}]/td");
+            CellLocator = By.XPath(".//tr[{1}]/td[{0}]");
+            ColumnLocator = By.XPath(".//tr/td[{0}]");
         }
 
         public By TableHeadersLocator { get; set; }
@@ -30,6 +33,8 @@ namespace JDI.Light.Elements.Complex.Table
         public By TableRowsLocator { get; set; }
         public By TableCellsLocator { get; set; }
         public By TableRowLocator { get; set; }
+        public By CellLocator { get; set; }
+        public By ColumnLocator { get; set; }
 
         public List<UIElement> Headers => Body.FindElements(TableHeadersLocator)
             .Select(e => UIElementFactory.CreateInstance<UIElement>(TableHeadersLocator, Body, e)).ToList();
@@ -62,6 +67,17 @@ namespace JDI.Light.Elements.Complex.Table
             return new Line(WebRow(rowNum), headerValues);
         }
 
+        public string Cell(int colNum, int rowNum)
+        {
+            return WebCell(colNum, rowNum).Text;
+        }
+
+        public Line Column(int colNum)
+        {
+            var headerValues = Headers.Select(h => h.Text).ToList();
+            return new Line(WebColumn(colNum).Select(c => c.Text).ToList(), headerValues);
+        }
+
         public IEnumerable<IWebElement> WebRow(int rowNum)
         {
             if (rowNum < 1)
@@ -73,6 +89,20 @@ namespace JDI.Light.Elements.Complex.Table
                 throw new ArgumentException($"Table has {Rows.Count} rows, but requested index is {rowNum}");
             }
             return GetRow(rowNum);
+        }
+
+        public IWebElement WebCell(int colNum, int rowNum)
+        {
+            return GetCell(colNum, rowNum);
+        }
+
+        public IEnumerable<IWebElement> WebColumn(int colNum)
+        {
+            if (colNum < 1)
+            {
+                throw new ArgumentException($"Columns numeration starts from 1 (but requested index is {colNum})");
+            }
+            return GetColumn(colNum);
         }
 
         public IEnumerable<IWebElement> GetRow(int rowNum)
@@ -93,24 +123,43 @@ namespace JDI.Light.Elements.Complex.Table
             return FindElements(FillByTemplate(TableRowLocator, rowNum));
         }
 
+        public IWebElement GetCell(int colNum, int rowNum)
+        {
+            return FindElement(FillByTemplate(CellLocator, GetColumnIndex(colNum), GetRowIndex(rowNum), this));
+        }
+
+        public IEnumerable<IWebElement> GetColumn(int colNum)
+        {
+            return FindElements(FillByTemplate(ColumnLocator, GetColumnIndex(colNum), this));
+        }
+
         public int GetRowIndex(int rowNum)
         {
             if (!HeaderIsRow) { return HeaderIsRow ? rowNum + 1 : rowNum; }
-            var firstRow = GetRowByIndex(1).Select(c=> c.Text).ToList();
+            var firstRow = GetRowByIndex(1).Select(c => c.Text).ToList();
             HeaderIsRow = firstRow.Count == 0 || Headers.Select(h => h.Text).Union(firstRow).Any();
             return HeaderIsRow ? rowNum + 1 : rowNum;
         }
 
-        public By FillByTemplate(By by, params object[] args)
+        private int GetColumnIndex(int index)
+        {
+            if (FirstColumnIndex > 1)
+            {
+                return index + FirstColumnIndex - 1;
+            }
+            return ColumnsMapping.Length > 0 ? ColumnsMapping[index - 1] : index;
+        }
+
+        public static By FillByTemplate(By by, params object[] args)
         {
             var byLocator = GetByLocator(by);
             try
             {
-                byLocator = string.Format(byLocator, args);
+                byLocator = Format(byLocator, args);
             }
             catch (FormatException)
             {
-                throw new FormatException("Bad locator template '" + byLocator + "'. Args: " + string.Join("", args));
+                throw new FormatException("Bad locator template '" + byLocator + "'. Args: " + Join("", args));
             }
             return By.XPath(byLocator);
         }

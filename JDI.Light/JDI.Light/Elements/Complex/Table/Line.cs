@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using JDI.Light.Elements.Base;
 using OpenQA.Selenium;
 
 namespace JDI.Light.Elements.Complex.Table
