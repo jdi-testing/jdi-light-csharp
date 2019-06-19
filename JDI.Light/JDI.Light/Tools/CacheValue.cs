@@ -5,20 +5,20 @@ namespace JDI.Light.Tools
 {
     public class CacheValue<T>
     {
-        private static readonly ThreadLocal<long> globalCache = new ThreadLocal<long>();
+        private readonly ThreadLocal<long> _globalCache = new ThreadLocal<long>();
 
-        private static long GetGlobalCache()
+        private long GetGlobalCache()
         {
-            if (globalCache.Value == 0)
+            if (_globalCache.Value == 0)
             {
-                globalCache.Value = 0L;
+                _globalCache.Value = 0L;
             }
-            return globalCache.Value;
+            return _globalCache.Value;
         }
 
-        public static void Reset()
+        public void Reset()
         {
-            globalCache.Value = DateTime.Now.Millisecond;
+            _globalCache.Value = DateTime.Now.Millisecond;
         }
 
         private long _elementCache;
