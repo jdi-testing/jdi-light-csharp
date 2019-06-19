@@ -87,7 +87,9 @@ namespace JDI.Light.Tools
         public T SetForce(T value)
         {
             if (_isFinal)
+            { 
                 return value;
+            }
             _elementCache = GetGlobalCache();
             _value = value;
             return value;
