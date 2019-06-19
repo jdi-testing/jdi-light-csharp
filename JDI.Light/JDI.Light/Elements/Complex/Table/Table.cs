@@ -10,9 +10,9 @@ namespace JDI.Light.Elements.Complex.Table
 {
     public class Table : UIElement
     {
-        public int FirstColumnIndex = -1;
-        public int[] ColumnsMapping = { };
-        public bool HeaderIsRow = true;
+        public int FirstColumnIndex { get; set; } = -1;
+        public int[] ColumnsMapping { get; set; } = { };
+        public bool HeaderIsRow { get; set; } = true;
 
         public Table(By locator) : base(locator)
         {
@@ -80,12 +80,12 @@ namespace JDI.Light.Elements.Complex.Table
             var elements = GetRowByIndex(GetRowIndex(rowNum));
             //elements = elements.Where(el => el.Displayed).ToList();
             var result = new List<IWebElement>();
-            if (FirstColumnIndex <= 1 && ColumnsMapping.Length <= 0) return elements;
+            if (FirstColumnIndex <= 1 || ColumnsMapping.Length <= 0) return elements;
             for (var i = 1; i <= Headers.Count; i++)
             {
                 result.Add(elements.ElementAt(i - 1));
             }
-            return elements;
+            return result;
         }
 
         public IEnumerable<IWebElement> GetRowByIndex(int rowNum)
@@ -95,7 +95,7 @@ namespace JDI.Light.Elements.Complex.Table
 
         public int GetRowIndex(int rowNum)
         {
-            if (!HeaderIsRow) return HeaderIsRow ? rowNum + 1 : rowNum;
+            if (!HeaderIsRow) { return HeaderIsRow ? rowNum + 1 : rowNum; }
             var firstRow = GetRowByIndex(1).Select(c=> c.Text).ToList();
             HeaderIsRow = firstRow.Count == 0 || Headers.Select(h => h.Text).Union(firstRow).Any();
             return HeaderIsRow ? rowNum + 1 : rowNum;
