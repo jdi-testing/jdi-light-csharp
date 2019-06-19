@@ -108,9 +108,8 @@ namespace JDI.Light.Elements.Complex.Table
         public IEnumerable<IWebElement> GetRow(int rowNum)
         {
             var elements = GetRowByIndex(GetRowIndex(rowNum));
-            //elements = elements.Where(el => el.Displayed).ToList();
             var result = new List<IWebElement>();
-            if (FirstColumnIndex <= 1 || ColumnsMapping.Length <= 0) return elements;
+            if (FirstColumnIndex <= 1 || ColumnsMapping.Length <= 0) { return elements; }
             for (var i = 1; i <= Headers.Count; i++)
             {
                 result.Add(elements.ElementAt(i - 1));
