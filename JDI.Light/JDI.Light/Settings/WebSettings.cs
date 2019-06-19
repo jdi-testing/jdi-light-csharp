@@ -3,11 +3,11 @@ using System;
 
 namespace JDI.Light.Settings
 {
-    public class WebSettings
+    public static class WebSettings
     {
-        public static Func<IWebElement, bool> VisibleElement = el => el.Displayed;
-        public static Func<IWebElement, bool> SearchCondition = VisibleElement;
-        public static Func<IWebElement, bool> AnyElement = el => el != null;
-        public static Func<IWebElement, bool> EnabledElement = el => el != null && el.Displayed && el.Enabled;
+        public static Func<IWebElement, bool> VisibleElement { get; set; } = el => el.Displayed;
+        public static Func<IWebElement, bool> SearchCondition { get; set; } = VisibleElement;
+        public static Func<IWebElement, bool> AnyElement { get; set; } = el => el != null;
+        public static Func<IWebElement, bool> EnabledElement { get; set; } = el => el != null && el.Displayed && el.Enabled;
     }
 }

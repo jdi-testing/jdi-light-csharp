@@ -92,6 +92,7 @@
     <Compile Include="Attributes\PageAttribute.cs" />
     <Compile Include="Attributes\SiteAttribute.cs" />
     <Compile Include="Elements\Base\BaseValidation.cs" />
+    <Compile Include="Elements\Base\JDIBase.cs" />
     <Compile Include="Elements\Common\ColorPicker.cs" />
     <Compile Include="Elements\Common\Icon.cs" />
     <Compile Include="Elements\Complex\CheckList.cs" />
@@ -206,6 +207,8 @@
     <Compile Include="Settings\ISmartLocator.cs" />
     <Compile Include="Settings\SmartLocatorByCss.cs" />
     <Compile Include="Settings\SmartLocatorById.cs" />
+    <Compile Include="Settings\WebSettings.cs" />
+    <Compile Include="Tools\CacheValue.cs" />
     <Compile Include="Utils\BaseAsserter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Factories\WebDriverFactory.cs" />

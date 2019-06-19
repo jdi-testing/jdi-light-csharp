@@ -21,7 +21,7 @@ namespace JDI.Light.Tools
             globalCache.Value = DateTime.Now.Millisecond;
         }
 
-        private long _elementCache = 0;
+        private long _elementCache;
         private T _value;
         private bool _isFinal = false;
         private Func<T> _getRule = null;
@@ -40,7 +40,9 @@ namespace JDI.Light.Tools
         public void Clear()
         {
             if (!_isFinal)
+            { 
                 _value = default(T);
+            }
         }
 
         public void SetRule(Func<T> getRule)
@@ -50,16 +52,20 @@ namespace JDI.Light.Tools
 
         public bool HasValue()
         {
-            return _isFinal || (IsUseCache() && _value != null && _elementCache == GetGlobalCache());
+            return _isFinal || (IsUseCache() && !Equals(_value, default(T)) && _elementCache == GetGlobalCache());
         }
 
         public T Get(Func<T> defaultResult)
         {
             if (_isFinal)
+            { 
                 return _value;
+            }
             if (!IsUseCache())
+            { 
                 return defaultResult.Invoke();
-            if (_elementCache >= GetGlobalCache() && _value != null) return _value;
+            }
+            if (_elementCache >= GetGlobalCache() && !Equals(_value, default(T))) { return _value; }
             _value = _getRule.Invoke();
             _elementCache = GetGlobalCache();
             return _value;
