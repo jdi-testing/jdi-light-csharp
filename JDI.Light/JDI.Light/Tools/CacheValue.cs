@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace JDI.Light.Tools
 {
-    public class CacheValue<T>
+    public class CacheValue<T> : IDisposable
     {
         private readonly ThreadLocal<long> _globalCache = new ThreadLocal<long>();
 
@@ -23,8 +23,8 @@ namespace JDI.Light.Tools
 
         private long _elementCache;
         private T _value;
-        private bool _isFinal = false;
-        private Func<T> _getRule = null;
+        public bool IsFinal;
+        private Func<T> _getRule;
 
         public CacheValue()
         {
@@ -39,7 +39,7 @@ namespace JDI.Light.Tools
 
         public void Clear()
         {
-            if (!_isFinal)
+            if (!IsFinal)
             { 
                 _value = default(T);
             }
@@ -52,12 +52,12 @@ namespace JDI.Light.Tools
 
         public bool HasValue()
         {
-            return _isFinal || (IsUseCache() && !Equals(_value, default(T)) && _elementCache == GetGlobalCache());
+            return IsFinal || (IsUseCache() && !Equals(_value, default(T)) && _elementCache == GetGlobalCache());
         }
 
         public T Get(Func<T> defaultResult)
         {
-            if (_isFinal)
+            if (IsFinal)
             { 
                 return _value;
             }
@@ -86,7 +86,7 @@ namespace JDI.Light.Tools
 
         public T SetForce(T value)
         {
-            if (_isFinal)
+            if (IsFinal)
             { 
                 return value;
             }
@@ -98,15 +98,20 @@ namespace JDI.Light.Tools
         public T SetFinal(T value)
         {
             _value = value;
-            _isFinal = true;
+            IsFinal = true;
             return value;
         }
 
         public T Set(T value)
         {
-            return _isFinal || !IsUseCache()
+            return IsFinal || !IsUseCache()
                 ? value
                 : SetForce(value);
+        }
+
+        public void Dispose()
+        {
+            _globalCache?.Dispose();
         }
     }
 }
