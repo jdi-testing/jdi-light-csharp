@@ -23,7 +23,7 @@ namespace JDI.Light.Tools
 
         private long _elementCache;
         private T _value;
-        public bool IsFinal;
+        public bool IsFinal { get; set; }
         private Func<T> _getRule;
 
         public CacheValue()
