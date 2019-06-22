@@ -5,13 +5,14 @@ using JDI.Light.Asserts;
 using JDI.Light.Elements.Base;
 using JDI.Light.Factories;
 using OpenQA.Selenium;
+using static System.Globalization.CultureInfo;
 using static System.String;
 
 namespace JDI.Light.Elements.Complex.Table
 {
     public class Table : UIElement
     {
-        public static Func<string, string> Simplify { get; set; } = s => s.ToLower().Replace("[^a-zA-Z0-9]", "");
+        public static Func<string, string> Simplify { get; set; } = s => s.ToLower(InvariantCulture).Replace("[^a-zA-Z0-9]", "");
         public static Func<string, string> TrimPreview { get; set; } = el => el.Trim().Replace(" +", " ").Replace("\r\n", "");
 
         public int FirstColumnIndex { get; set; } = -1;

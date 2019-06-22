@@ -125,8 +125,7 @@ namespace JDI.Light.Tests.Tests.Composite
             PerformancePage.Open();
             PerformancePage.CheckOpened();
             AreEqual("076 1971 1687;(011307) 16843;0", PerformancePage.UsersTable.Column(2).GetValue().Substring(0, 30));
-            AreEqual(PerformancePage.UsersTable.Column("Phone").GetValue().Substring(0, 30),
-                "076 1971 1687;(011307) 16843;0");
+            AreEqual("076 1971 1687;(011307) 16843;0", PerformancePage.UsersTable.Column("Phone").GetValue().Substring(0, 30));
         }
 
         [Test]
