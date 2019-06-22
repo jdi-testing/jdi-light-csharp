@@ -11,9 +11,14 @@ namespace JDI.Light.Elements.Complex.Table
 {
     public class Table : UIElement
     {
+        public static Func<string, string> Simplify { get; set; } = s => s.ToLower().Replace("[^a-zA-Z0-9]", "");
+        public static Func<string, string> TrimPreview { get; set; } = el => el.Trim().Replace(" +", " ").Replace("\r\n", "");
+
         public int FirstColumnIndex { get; set; } = -1;
         public int[] ColumnsMapping { get; set; } = { };
         public bool HeaderIsRow { get; set; } = true;
+        public int RowHeaderIndex { get; set; } = -1;
+        public string RowHeaderName { get; set; } = "";
 
         public Table(By locator) : base(locator)
         {
@@ -67,15 +72,42 @@ namespace JDI.Light.Elements.Complex.Table
             return new Line(WebRow(rowNum), headerValues);
         }
 
+        public Line Row(string rowName)
+        {
+            var headerValues = Headers.Select(h => h.Text).ToList();
+            return new Line(WebRow(rowName), headerValues);
+        }
+
         public string Cell(int colNum, int rowNum)
         {
             return WebCell(colNum, rowNum).Text;
+        }
+
+        public string Cell(string colName, int rowNum)
+        {
+            return Cell(GetColumnIndexByName(colName), rowNum);
+        }
+
+        public string Cell(int colNum, string rowName)
+        {
+            return Cell(colNum, GetRowIndexByName(rowName));
+        }
+
+        public string Cell(string colName, string rowName)
+        {
+            return Cell(GetColumnIndexByName(colName), GetRowIndexByName(rowName));
         }
 
         public Line Column(int colNum)
         {
             var headerValues = Headers.Select(h => h.Text).ToList();
             return new Line(WebColumn(colNum).Select(c => c.Text).ToList(), headerValues);
+        }
+
+        public Line Column(string colName)
+        {
+            var headerValues = Headers.Select(h => h.Text).ToList();
+            return new Line(WebColumn(colName).Select(c => c.Text).ToList(), headerValues);
         }
 
         public IEnumerable<IWebElement> WebRow(int rowNum)
@@ -89,6 +121,11 @@ namespace JDI.Light.Elements.Complex.Table
                 throw new ArgumentException($"Table has {Rows.Count} rows, but requested index is {rowNum}");
             }
             return GetRow(rowNum);
+        }
+
+        public IEnumerable<IWebElement> WebRow(string rowName)
+        {
+            return WebRow(GetRowIndexByName(rowName));
         }
 
         public IWebElement WebCell(int colNum, int rowNum)
@@ -105,6 +142,11 @@ namespace JDI.Light.Elements.Complex.Table
             return GetColumn(colNum);
         }
 
+        public IEnumerable<IWebElement> WebColumn(string colName)
+        {
+            return WebColumn(GetColumnIndexByName(colName));
+        }
+
         public IEnumerable<IWebElement> GetRow(int rowNum)
         {
             var elements = GetRowByIndex(GetRowIndex(rowNum));
@@ -115,6 +157,11 @@ namespace JDI.Light.Elements.Complex.Table
                 result.Add(elements.ElementAt(i - 1));
             }
             return result;
+        }
+
+        public string Preview()
+        {
+            return TrimPreview.Invoke(Text);
         }
 
         public IEnumerable<IWebElement> GetRowByIndex(int rowNum)
@@ -147,6 +194,59 @@ namespace JDI.Light.Elements.Complex.Table
                 return index + FirstColumnIndex - 1;
             }
             return ColumnsMapping.Length > 0 ? ColumnsMapping[index - 1] : index;
+        }
+
+        public int GetColumnIndexByName(string colName)
+        {
+            var colIndex = Headers.FindIndex(h => Simplify.Invoke(h.Text).Equals(Simplify.Invoke(colName)));
+            if (colIndex == -1)
+            {
+                throw new ArgumentException($"Cannot find column {colName}");
+            }
+            return colIndex + 1;
+        }
+
+        public int GetRowIndexByName(string rowName)
+        {
+            var rowHeader = GetRowHeaderIndex() == -1 ? WebColumn(1).Select(el => el.Text).ToList() : GetRowHeader();
+            var rowIndex = rowHeader.FindIndex(h => Simplify.Invoke(h).Equals(Simplify.Invoke(rowName)));
+            if (rowIndex == -1)
+            {
+                throw new ArgumentException($"Cannot find row {rowName}");
+            }
+            return rowIndex + 1;
+        }
+
+        public List<string> GetRowHeader()
+        {
+            if (GetRowHeaderIndex() != -1) { return  WebColumn(GetRowHeaderIndex()).Select(el => el.Text).ToList(); }
+            var result = new List<string>();
+            for (var i = 1; i <= GetCount(); i++)
+            {
+                result.Add(i + "");
+            }
+            return result;
+        }
+
+        public int GetCount()
+        {
+            var firstColumn = FindElements(FillByTemplate(ColumnLocator, 1, this));
+            return firstColumn.Count;
+        }
+
+        public int GetRowHeaderIndex()
+        {
+            if (RowHeaderIndex == -1 && RowHeaderName.Equals(Empty)) { return RowHeaderIndex; }
+            var index =  Headers.FindIndex(h => Simplify.Invoke(h.Text).Equals(Simplify.Invoke(RowHeaderName)));
+            if (index > -1)
+            {
+                RowHeaderIndex = index + 1;
+            }
+            else
+            {
+                throw new ArgumentException($"Cannot find rowHeader {RowHeaderName} in 'header' {Join("", Headers.Select(h => h.Text))}. Please correct params");
+            }
+            return RowHeaderIndex;
         }
 
         public static By FillByTemplate(By by, params object[] args)

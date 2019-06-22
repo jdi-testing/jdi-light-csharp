@@ -100,6 +100,12 @@ namespace JDI.Light.Tests.Tests.Composite
             PerformancePage.Open();
             PerformancePage.CheckOpened();
             AreEqual("Burke Tucker;076 1971 1687;et.euismod.et@ut.edu;GozŽe", PerformancePage.UsersTable.Row(1).GetValue());
+            AreEqual("Burke Tucker;076 1971 1687;et.euismod.et@ut.edu;GozŽe", PerformancePage.UsersTable.Row("Burke Tucker").GetValue());
+            var value = PerformancePage.UsersTable.Preview();
+            AreEqual("Name Phone Email City" +
+                "Burke Tucker 076 1971 1687 et.euismod.et@ut.edu GozŽe" +
+                "Grady Brock (011307) 16843 cursus.et@commodo.org Alcobendas" +
+                "Harding Lloyd 0800 1111 neque.In.ornare@mauris.co.uk Beauvais", value.Substring(0, 194));
         }
 
         [Test]
@@ -108,6 +114,9 @@ namespace JDI.Light.Tests.Tests.Composite
             PerformancePage.Open();
             PerformancePage.CheckOpened();
             AreEqual("ipsum.non.arcu@auctorullamcorper.ca", PerformancePage.UsersTable.Cell(3, 4));
+            AreEqual("ipsum.non.arcu@auctorullamcorper.ca", PerformancePage.UsersTable.Cell("Email", 4));
+            AreEqual("ipsum.non.arcu@auctorullamcorper.ca", PerformancePage.UsersTable.Cell(3, "Zachary Hendrix"));
+            AreEqual("ipsum.non.arcu@auctorullamcorper.ca", PerformancePage.UsersTable.Cell("Email", "Zachary Hendrix"));
         }
 
         [Test]
@@ -116,6 +125,8 @@ namespace JDI.Light.Tests.Tests.Composite
             PerformancePage.Open();
             PerformancePage.CheckOpened();
             AreEqual("076 1971 1687;(011307) 16843;0", PerformancePage.UsersTable.Column(2).GetValue().Substring(0, 30));
+            AreEqual(PerformancePage.UsersTable.Column("Phone").GetValue().Substring(0, 30),
+                "076 1971 1687;(011307) 16843;0");
         }
 
         [Test]
