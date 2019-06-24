@@ -1,4 +1,5 @@
-﻿using JDI.Light.Tests.UIObjects.Pages;
+﻿using JDI.Light.Tests.Enums;
+using JDI.Light.Tests.UIObjects.Pages;
 using NUnit.Framework;
 using static JDI.Light.Elements.Complex.Table.Column;
 using static JDI.Light.Elements.Complex.Table.TableMatcher;
@@ -101,6 +102,7 @@ namespace JDI.Light.Tests.Tests.Composite
             PerformancePage.CheckOpened();
             AreEqual("Burke Tucker;076 1971 1687;et.euismod.et@ut.edu;GozŽe", PerformancePage.UsersTable.Row(1).GetValue());
             AreEqual("Burke Tucker;076 1971 1687;et.euismod.et@ut.edu;GozŽe", PerformancePage.UsersTable.Row("Burke Tucker").GetValue());
+            AreEqual("Burke Tucker;076 1971 1687;et.euismod.et@ut.edu;GozŽe", PerformancePage.UsersTable.Row(Users.Name).GetValue());
             var value = PerformancePage.UsersTable.Preview();
             AreEqual("Name Phone Email City" +
                 "Burke Tucker 076 1971 1687 et.euismod.et@ut.edu GozŽe" +
@@ -126,6 +128,7 @@ namespace JDI.Light.Tests.Tests.Composite
             PerformancePage.CheckOpened();
             AreEqual("076 1971 1687;(011307) 16843;0", PerformancePage.UsersTable.Column(2).GetValue().Substring(0, 30));
             AreEqual("076 1971 1687;(011307) 16843;0", PerformancePage.UsersTable.Column("Phone").GetValue().Substring(0, 30));
+            AreEqual("076 1971 1687;(011307) 16843;0", PerformancePage.UsersTable.Column(Users.Phone).GetValue().Substring(0, 30));
         }
 
         [Test]

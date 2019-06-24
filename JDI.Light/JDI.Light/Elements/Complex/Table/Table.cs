@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using JDI.Light.Asserts;
 using JDI.Light.Elements.Base;
+using JDI.Light.Extensions;
 using JDI.Light.Factories;
+using JDI.Light.Matchers;
 using OpenQA.Selenium;
 using static System.Globalization.CultureInfo;
 using static System.String;
@@ -67,6 +69,51 @@ namespace JDI.Light.Elements.Complex.Table
             return Line.InitLine(result, Headers.Select(h => h.Text).ToList());
         }
 
+        public List<Line> FilterRows(Matcher<string> matcher, Column column)
+        {
+            return RowsAsLines().Where(line => matcher.IsMatch(line.GetColumnName(column.GetIndex(Headers)))).ToList();
+        }
+
+        public List<Line> FilterRows(params KeyValuePair<Matcher<string>, Column>[] matchers)
+        {
+            return RowsAsLines().Where(line => matchers.All(m => m.Key.IsMatch(line.GetColumnName(m.Value.GetIndex(Headers))))).ToList();
+        }
+
+        public List<Line> RowsAsLines(params TableMatcher[] matchers)
+        {
+            var lines = TableMatcher.Table_Matcher.Invoke(this, matchers).Select(v => v.Text);
+            var enumerable = lines as IList<string> ?? lines.ToList();
+            if (!enumerable.Any())
+            {
+                return null;
+            }
+            var listOfLines = new List<Line>();
+            var result = new List<string>();
+            for (var i = 0; i < enumerable.Count(); i++)
+            {
+                result.Add(enumerable.ElementAt(i));
+                if (result.Count != Headers.Capacity)  { continue; }
+                listOfLines.Add(Line.InitLine(result, Headers.Select(h => h.Text).ToList()));
+                result.Clear();
+            }
+            return listOfLines;
+        }
+
+        public Line Row(params KeyValuePair<Matcher<string>, Column>[] matchers)
+        {
+            return RowsAsLines().First(line => matchers.All(m => m.Key.IsMatch(line.GetColumnName(m.Value.GetIndex(Headers)))));
+        }
+
+        public List<Line> RowsAsLines()
+        {
+            return (List<Line>) Rows.Select(row => new Line(row.WebElements.Select(el => el.Text).ToList(), Headers.Select(h => h.Text).ToList()));
+        }
+
+        public Line Row(Matcher<string> matcher, Column column)
+        {
+            return RowsAsLines().First(line => matcher.IsMatch(line.GetColumnName(column.GetIndex(Headers))));
+        }
+
         public Line Row(int rowNum)
         {
             var headerValues = Headers.Select(h => h.Text).ToList();
@@ -77,6 +124,11 @@ namespace JDI.Light.Elements.Complex.Table
         {
             var headerValues = Headers.Select(h => h.Text).ToList();
             return new Line(WebRow(rowName), headerValues);
+        }
+
+        public Line Row(Enum rowName)
+        {
+            return Row(rowName.GetDescription());
         }
 
         public string Cell(int colNum, int rowNum)
@@ -109,6 +161,16 @@ namespace JDI.Light.Elements.Complex.Table
         {
             var headerValues = Headers.Select(h => h.Text).ToList();
             return new Line(WebColumn(colName).Select(c => c.Text).ToList(), headerValues);
+        }
+
+        public Line Column(Enum colName)
+        {
+            return Column(colName.ToString());
+        }
+
+        public List<Line> Columns()
+        {
+            return GetColumns().Select(row => new Line(row.Value, GetRowHeader())).ToList();
         }
 
         public IEnumerable<IWebElement> WebRow(int rowNum)
@@ -156,6 +218,16 @@ namespace JDI.Light.Elements.Complex.Table
             for (var i = 1; i <= Headers.Count; i++)
             {
                 result.Add(elements.ElementAt(i - 1));
+            }
+            return result;
+        }
+
+        public Dictionary<string, List<IWebElement>> GetColumns()
+        {
+            var result = new Dictionary<string, List<IWebElement>>();
+            for (var i = 0; i < TableSize; i++)
+            {
+                result.Add(i+"", WebColumn(i).ToList());
             }
             return result;
         }

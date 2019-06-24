@@ -54,6 +54,11 @@ namespace JDI.Light.Elements.Complex.Table
             return _data;
         }
 
+        public string GetColumnName(int index)
+        {
+            return _list.ElementAt(index);
+        }
+
         private IEnumerable<string> GetList(int minAmount)
         {
             return _list != null && _list.Count >= minAmount ? _list
