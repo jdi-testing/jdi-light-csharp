@@ -17,11 +17,11 @@ jobs:
       with:
         dotnet-version: 3.1.101
     - name: Install dependencies
-      working-directory: '/JDI.Light'
+      working-directory: './JDI.Light'
       run: dotnet restore
     - name: Build
-      working-directory: '../JDI.Light'
+      working-directory: './JDI.Light'
       run: dotnet build --configuration Release --no-restore
     - name: Test
-      working-directory: '../JDI.Light'
+      working-directory: './JDI.Light'
       run: dotnet test --no-restore --verbosity normal
