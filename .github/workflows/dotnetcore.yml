@@ -8,14 +8,13 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 4.5.2
+        dotnet-version: 4.x
     - name: Install dependencies
       working-directory: './JDI.Light'
       run: dotnet restore
