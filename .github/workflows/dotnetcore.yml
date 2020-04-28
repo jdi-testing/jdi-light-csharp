@@ -14,7 +14,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 4.0.30319.42000
+        dotnet-version: 4.6.1
     - name: Install dependencies
       working-directory: './JDI.Light'
       run: dotnet restore
