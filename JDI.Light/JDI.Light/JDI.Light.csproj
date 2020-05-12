@@ -121,6 +121,7 @@
     <Compile Include="Elements\Composite\MultiDropdownElement.cs" />
     <Compile Include="Elements\Complex\Table\Table.cs" />
     <Compile Include="Elements\Composite\TextList.cs" />
+    <Compile Include="Elements\Init\EntitiesCollection.cs" />
     <Compile Include="Enums\CheckPageType.cs" />
     <Compile Include="Enums\DriverType.cs" />
     <Compile Include="Enums\ElementIndexType.cs" />
