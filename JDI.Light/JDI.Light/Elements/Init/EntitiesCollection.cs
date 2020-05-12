@@ -6,7 +6,12 @@ namespace JDI.Light.Elements.Init
 {
     public class EntitiesCollection
     {
-        public static Dictionary<string, IPage> Pages = new Dictionary<string, IPage>();
-        public static Dictionary<string, List<IBaseElement>> Elements = new Dictionary<string, List<IBaseElement>>();
+        protected EntitiesCollection()
+        {
+        }
+
+        public static Dictionary<string, IPage> Pages { get; set; } = new Dictionary<string, IPage>();
+
+        public static Dictionary<string, List<IBaseElement>> Elements { get; set; } = new Dictionary<string, List<IBaseElement>>();
     }
 }
