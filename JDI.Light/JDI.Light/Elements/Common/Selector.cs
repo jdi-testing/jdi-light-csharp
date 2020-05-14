@@ -85,7 +85,10 @@ namespace JDI.Light.Elements.Common
             var els = elem.WebElement.FindElements(elem.ItemLocator);
             for (int i = 0; i < els.Count; i++)
             {
-                if (els[i].GetAttribute("class") == "selected") return i;
+                if (els[i].GetAttribute("class") == "selected")
+                {
+                    return i;
+                }
             }
             return -1;
         }

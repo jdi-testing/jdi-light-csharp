@@ -23,9 +23,10 @@ namespace JDI.Light.Extensions
             {
                 var exeContent = File.ReadAllText(path);
                 if (exeContent.Contains(version))
+                {
                     result = true;
+                }
             }
-
             return result;
         }
 
@@ -42,9 +43,10 @@ namespace JDI.Light.Extensions
             {
                 var versionInfo = FileVersionInfo.GetVersionInfo(path);
                 if (versionInfo.ProductVersion.Contains(version))
+                {
                     result = true;
+                }
             }
-
             return result;
         }
 
@@ -72,7 +74,9 @@ namespace JDI.Light.Extensions
         {
             var result = camel.ToUpper().FirstOrDefault().ToString();
             for (var i = 1; i < camel.Length - 1; i++)
+            {
                 result += (char.IsUpper(camel[i]) && !char.IsUpper(camel[i - 1]) ? " " : "") + camel[i];
+            }
             return result + camel[camel.Length - 1];
         }
 

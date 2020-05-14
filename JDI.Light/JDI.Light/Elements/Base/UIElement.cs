@@ -113,8 +113,10 @@ namespace JDI.Light.Elements.Base
                         break;
                     default:
                         if (OnlyOneElementAllowedInSearch)
+                        {
                             throw Jdi.Assert.Exception(
                                 $"Find {result.Count} elements instead of one for Element '{this}' during {Jdi.Timeouts.WaitElementMSec} milliseconds");
+                        }
                         break;
                 }
                 return _webElement = result[0];
@@ -169,7 +171,9 @@ namespace JDI.Light.Elements.Base
             var parentUiElement = (UIElement) parent;
             var locator = parentUiElement.Locator;
             if (locator != null)
+            {
                 return parentUiElement.WebElement;
+            }
             return GetSearchContext(parentUiElement.Parent);
         }
         

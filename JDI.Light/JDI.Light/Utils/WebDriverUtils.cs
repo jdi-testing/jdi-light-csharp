@@ -111,11 +111,11 @@ namespace JDI.Light.Utils
             if (!IsLocalVersionLatestVersion(type, driverLocationPath, version))
             {
                 if (File.Exists(driverFullPath))
+                {
                     File.Delete(driverFullPath);
-
+                }
                 new WebDriverManager.DriverManager().SetUpDriver(url, driverFullPath, binaryName);
             }
-
             return driverLocationPath;
         }
 

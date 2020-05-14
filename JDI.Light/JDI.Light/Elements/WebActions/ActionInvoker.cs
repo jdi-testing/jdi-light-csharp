@@ -29,7 +29,9 @@ namespace JDI.Light.Elements.WebActions
             {
                 var result = func.Invoke();
                 if (result == null)
+                {
                     throw Jdi.Assert.Exception($"Do action {actionName} failed. Can't get result.");
+                }
                 var stringResult = logResult == null
                     ? result.ToString()
                     : logResult.Invoke(result);

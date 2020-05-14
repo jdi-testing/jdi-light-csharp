@@ -88,7 +88,9 @@ namespace JDI.Light.Factories
             try
             {
                 if (!string.IsNullOrEmpty(CurrentDriverName))
+                {
                     return GetDriver(CurrentDriverName);
+                }
                 RegisterDriver(DriverType.Chrome);
                 return GetDriver(DriverType.Chrome);
             }
@@ -103,10 +105,16 @@ namespace JDI.Light.Factories
         {
             driverName = driverName ?? CurrentDriverName;
             if (!Drivers.ContainsKey(driverName))
+            {
                 if (Drivers.Count == 0)
+                {
                     RegisterDriver(driverName);
-                else
-                    throw new Exception($"Can't find driver with name {driverName}");
+                }
+            }
+            else
+            {
+                throw new Exception($"Can't find driver with name {driverName}");
+            }
             try
             {
                 if (RunDrivers.TryGetValue(driverName, out var driver))
