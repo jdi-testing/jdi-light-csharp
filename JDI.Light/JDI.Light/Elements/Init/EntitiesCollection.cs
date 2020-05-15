@@ -3,6 +3,8 @@ using JDI.Light.Interfaces.Base;
 using JDI.Light.Interfaces.Composite;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+
 
 namespace JDI.Light.Elements.Init
 {
@@ -47,6 +49,44 @@ namespace JDI.Light.Elements.Init
             {
                 throw new ElementNotFoundException($"No page found with name {pageName}");
             }
+        }
+
+        public static IBaseElement getWebElement(string elementName)
+        {
+            if (Elements.ContainsKey(elementName))
+            {
+                List<IBaseElement> foundElements = Elements[elementName];
+                if (foundElements.Count > 1)
+                {
+                    var element = foundElements.First();
+                    if (element != null)
+                    {
+                        return element;
+                    }
+                }
+                return foundElements[0];
+            }
+            else
+            {
+                throw new ElementNotFoundException($"No elements were found with name {elementName}");
+            }
+        }
+
+        public static T getWebElement<T>(string elementName, T type)
+        {
+            var foundElement = getWebElement(elementName);
+            if (foundElement != null)
+            {
+                if (foundElement.GetType().IsClass)
+                {
+                    return (T)foundElement;
+                }
+                else
+                {
+                    throw new InvalidCastException($"Can't cast element {foundElement.GetType()} to {type}");
+                }
+            }
+            throw new ElementNotFoundException($"No entity were found with name {elementName}");
         }
     }
 }
