@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using NUnit.Framework;
 using static System.Threading.Thread;
 using static JDI.Light.Asserts.FileAssert;
@@ -32,7 +34,10 @@ namespace JDI.Light.Tests.Tests.Simple
 
         private static string CreateFile(string filename)
         {
-            var filepath = Path.Combine(Directory.GetCurrentDirectory(), filename);
+            var locationDir = Assembly.GetExecutingAssembly().Location;
+            var locationArr = locationDir.Split('\\');
+            var locationArr1 = locationArr.Take(locationArr.Count() - 1).ToArray();
+            var filepath = Path.Combine(string.Join("\\", locationArr1), filename);
             using (var sw = File.CreateText(filepath))
             {
                 sw.WriteLine("hello world");
