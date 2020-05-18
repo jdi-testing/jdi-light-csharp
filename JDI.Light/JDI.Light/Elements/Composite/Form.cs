@@ -49,10 +49,16 @@ namespace JDI.Light.Elements.Composite
             var fieldsToSet = pageObject.GetMembers(typeof(ISetValue<string>));
             foreach (var data in dataMap)
             {
-                if (data.Value.Equals("null")) continue;
+                if (data.Value.Equals("null"))
+                {
+                    continue;
+                }
                 var fieldValue = fieldsToSet.FirstOrDefault(f =>
                     data.Key.SimplifiedEqual(f.GetElementName()));
-                if (fieldValue == null) continue;
+                if (fieldValue == null)
+                {
+                    continue;
+                }
                 var setValueElement = (ISetValue<string>) fieldValue.GetMemberValue(pageObject);
                 setValueElement.Value = data.Value;
             }
@@ -112,7 +118,9 @@ namespace JDI.Light.Elements.Composite
         {
             var result = Verify(objStrings);
             if (result.Count > 0)
+            {
                 throw Jdi.Assert.Exception($"Check form failed: {string.Join(Environment.NewLine, result)}");
+            }
         }
 
         public void Login(T entity)
@@ -124,12 +132,16 @@ namespace JDI.Light.Elements.Composite
         {
             var fields = GetFieldsOfType(obj, typeof(IButton)).ToList();
             if (!fields.Any())
+            {
                 fields = GetFieldsOfType(obj, typeof(IWebElement)).ToList();
+            }
             switch (fields.Count)
             {
                 case 0:
                     if (obj.GetType().Name.Equals("Form"))
+                    {
                         return new Button(By.CssSelector("[type=submit]"));
+                    }
                     throw Jdi.Assert.Exception($"Can't find any buttons on form '{obj}.");
                 case 1:
                     return (IButton) fields.First().GetMemberValue(obj);

@@ -47,9 +47,13 @@ namespace JDI.Light.Elements.Common
             Invoker.DoActionWithWait("Check Checkbox", () => 
             {
                 if (!_isCheckedFunc(this))
+                {
                     Click();
+                }
                 if (!_isCheckedFunc(this))
+                {
                     throw Jdi.Assert.Exception("Can't check element. Verify locator for click or isCheckedAction");
+                }
             });
         }
 
@@ -58,9 +62,13 @@ namespace JDI.Light.Elements.Common
             CheckEnabled(checkEnabled);
             Invoker.DoActionWithWait("Uncheck Checkbox", () => {
                 if (_isCheckedFunc(this))
+                {
                     Click();
+                }
                 if (_isCheckedFunc(this))
+                {
                     throw Jdi.Assert.Exception("Can't uncheck element. Verify locator for click or isCheckedAction");
+                }
             });
         }
 

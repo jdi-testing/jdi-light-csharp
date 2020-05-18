@@ -54,7 +54,10 @@ namespace JDI.Light.Tests.Tests.Common
         [Test]
         public void MultiKeyTest()
         {
-            foreach (var ch in DefaultDate) DatePicker.SendKeys(ch.ToString());
+            foreach (var ch in DefaultDate) 
+            {
+                DatePicker.SendKeys(ch.ToString());
+            }
             Jdi.Assert.AreEquals(DatePicker.Value, DefaultDate);
         }
     }

@@ -72,8 +72,10 @@ namespace JDI.Light.Elements.Composite
             {
                 var url = WebDriver.Url;
                 if (string.IsNullOrEmpty(UrlTemplate)
-                    && new[] { CheckPageType.None, CheckPageType.Equal }.Contains(CheckUrlType))
+                    && new[] {CheckPageType.None, CheckPageType.Equal}.Contains(CheckUrlType))
+                {
                     return url.Equals(Url);
+                }
                 switch (CheckUrlType)
                 {
                     case CheckPageType.None:
@@ -130,7 +132,10 @@ namespace JDI.Light.Elements.Composite
             if (string.IsNullOrEmpty(UrlTemplate) &&
                 new[] {CheckPageType.None, CheckPageType.Equal}.Contains(CheckUrlType))
             {
-                if (string.IsNullOrEmpty(Url)) return;
+                if (string.IsNullOrEmpty(Url))
+                {
+                    return;
+                }
                 Jdi.Assert.IsTrue(Invoker.Wait("Checking that URL matches the template", () =>
                 {
                     Logger.Debug($"Current URL: {WebDriver.Url}");
@@ -138,6 +143,7 @@ namespace JDI.Light.Elements.Composite
                 }));
             }
             else
+            {
                 switch (CheckUrlType)
                 {
                     case CheckPageType.None:
@@ -159,6 +165,7 @@ namespace JDI.Light.Elements.Composite
                             : UrlTemplate)));
                         break;
                 }
+            }
         }
 
         public void CheckTitle()
