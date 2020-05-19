@@ -2,6 +2,7 @@
 using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 
+
 namespace JDI.Light.Tests.Tests.Composite
 {
     [TestFixture]
@@ -35,6 +36,9 @@ namespace JDI.Light.Tests.Tests.Composite
         [TearDown]
         public override void TestTearDown()
         {
+            //not implemented yet
+            //required, will be implemented for using in future
+            //do not remove
         }
     }
 }

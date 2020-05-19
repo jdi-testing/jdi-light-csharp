@@ -39,7 +39,10 @@ namespace JDI.Light.Utils
         {
             // TODO: Take screenshot
             //TakeScreenshot();
-            if (!result) AssertException(message + " failed");
+            if (!result)
+            {
+                AssertException(message + " failed");
+            }
         }
 
         private void AssertException(string failMessage, params object[] args)

@@ -63,7 +63,9 @@ namespace JDI.Light.Elements.Composite
             Invoker.DoActionWithWait($"Open page {Name} by url {Url}",
                 () => WebDriver.Navigate().GoToUrl(Url));
             if (CheckAfterOpen)
+            {
                 CheckOpened();
+            }
         }
 
         public bool IsOpened

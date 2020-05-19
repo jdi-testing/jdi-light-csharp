@@ -26,9 +26,13 @@ namespace JDI.Light.Factories
             WebDriverSettings = driver =>
             {
                 if (BrowserSize.Height == 0)
+                {
                     driver.Manage().Window.Maximize();
+                }
                 else
+                {
                     driver.Manage().Window.Size = BrowserSize;
+                }
                 driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(Jdi.Timeouts.WaitElementMSec);
                 return driver;
             };
@@ -197,7 +201,9 @@ namespace JDI.Light.Factories
         private string GetDriverName(string driverName)
         {
             if (!Drivers.ContainsKey(driverName))
+            {
                 return driverName;
+            }
             string newName;
             var i = 1;
             do
@@ -211,8 +217,11 @@ namespace JDI.Light.Factories
         public string RegisterDriver(string driverName, Func<IWebDriver> driver)
         {
             if (Drivers.ContainsKey(driverName))
+            {
                 throw Jdi.Assert.Exception(
                     $"Can't register WebDriver {driverName}. Driver with the same name already registered");
+
+            }
             try
             {
                 Drivers.Add(driverName, driver);

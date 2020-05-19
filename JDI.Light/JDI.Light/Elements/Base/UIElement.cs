@@ -31,8 +31,10 @@ namespace JDI.Light.Elements.Base
         {
             get
             {
-                if(_name != null)
+                if (_name != null)
+                {
                     return _name;
+                }
                 return _name = GetType().Name;
             }
             set => _name = value;

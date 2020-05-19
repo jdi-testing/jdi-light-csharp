@@ -23,7 +23,10 @@ namespace JDI.Light.Factories
             var pageAttribute = memberInfo.GetCustomAttribute<PageAttribute>(false);
             var instance = (IPage) (memberInfo.GetMemberValue(parent)
                 ?? memberInfo.GetMemberType().CreateInstance((IWebSite) parent));
-            if (pageAttribute == null) return instance;
+            if (pageAttribute == null)
+            {
+                return instance;
+            }
             instance.Url = pageAttribute.Url;
             instance.Title = pageAttribute.Title;
             instance.UrlTemplate = pageAttribute.UrlTemplate;

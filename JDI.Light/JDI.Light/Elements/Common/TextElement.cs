@@ -22,7 +22,9 @@ namespace JDI.Light.Elements.Common
             var e = WebElement;
             var getText = e.Text ?? "";
             if (!getText.Equals(""))
+            {
                 return getText;
+            }
             var getValue = e.GetAttribute("value");
             return getValue ?? getText;
         }

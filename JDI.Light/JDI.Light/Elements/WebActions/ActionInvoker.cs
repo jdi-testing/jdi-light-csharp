@@ -86,7 +86,9 @@ namespace JDI.Light.Elements.WebActions
 
                                 var result = getResultFunction.Invoke();
                                 if (result != null && conditionFunc.Invoke(result))
+                                {
                                     return result;
+                                }
                             }
                             catch (OperationCanceledException e)
                             {
