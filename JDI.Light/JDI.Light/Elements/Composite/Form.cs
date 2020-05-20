@@ -162,7 +162,6 @@ namespace JDI.Light.Elements.Composite
             {
                 throw Jdi.Assert.Exception($"Can't find button '{buttonName}' for Element '{obj}'");
             }
-
             return button;
         }
     }
