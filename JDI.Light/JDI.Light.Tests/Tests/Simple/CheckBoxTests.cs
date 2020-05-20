@@ -25,9 +25,9 @@ namespace JDI.Light.Tests.Tests.Simple
         {
             /*
             5/19/2020: update Alex T remove true
-            CbWater.Check(true));
+            from line30: CbWater.Check(true));
             Reason: true used as default value
-            */
+            */ CbWater.Check();
             Assert.DoesNotThrow(() => TestSite.MetalsColorsPage.CbWater.Check());
             Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Water: condition changed to true");
         }
