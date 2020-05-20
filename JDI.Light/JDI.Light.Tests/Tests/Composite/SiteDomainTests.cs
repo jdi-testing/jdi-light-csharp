@@ -35,10 +35,6 @@ namespace JDI.Light.Tests.Tests.Composite
 
         [TearDown]
         public override void TestTearDown()
-        {
-            //not implemented yet
-            //required, will be implemented for using in future
-            //do not remove
-        }
+        {}
     }
 }
