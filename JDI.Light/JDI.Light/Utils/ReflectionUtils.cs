@@ -17,7 +17,9 @@ namespace JDI.Light.Utils
         private static IEnumerable<MemberInfo> GetMembersDeep(this Type type, params Type[] stopTypes)
         {
             if (stopTypes.Contains(type))
+            {
                 return new List<MemberInfo>();
+            }
             var result = InstanceMembers(type).ToList();
             result.ToList().AddRange(GetMembersDeep(type.BaseType, stopTypes));
             return result;

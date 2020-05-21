@@ -34,7 +34,6 @@ namespace JDI.Light.Tests.Tests.Composite
 
         [TearDown]
         public override void TestTearDown()
-        {
-        }
+        {}
     }
 }

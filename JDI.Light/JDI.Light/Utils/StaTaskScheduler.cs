@@ -14,7 +14,10 @@ namespace JDI.Light.Utils
 
         public StaTaskScheduler(int numberOfThreads)
         {
-            if (numberOfThreads < 1) throw new ArgumentOutOfRangeException(nameof(numberOfThreads));
+            if (numberOfThreads < 1)
+            {
+                throw new ArgumentOutOfRangeException(nameof(numberOfThreads));
+            }
             _tasks = new BlockingCollection<Task>();
             _threads = Enumerable.Range(0, numberOfThreads).Select(i =>
             {

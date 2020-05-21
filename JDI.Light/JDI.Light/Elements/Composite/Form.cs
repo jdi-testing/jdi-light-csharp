@@ -100,11 +100,16 @@ namespace JDI.Light.Elements.Composite
             {
                 var fieldValue = objStrings.FirstOrDefault(pair =>
                     pair.Key.SimplifiedEqual(member.GetElementName())).Value;
-                if (fieldValue == null) return;
+                if (fieldValue == null)
+                {
+                    return;
+                }
                 var valueMember = (IGetValue<string>) member.GetMemberValue(pageObject);
                 var actual = valueMember.Value.Trim();
                 if (!actual.Equals(fieldValue))
+                {
                     compareFalse.Add($"Field '{member.Name}' (Actual: '{actual}' <> Expected: '{fieldValue}')");
+                }
             });
             return compareFalse;
         }
@@ -154,7 +159,9 @@ namespace JDI.Light.Elements.Composite
             var buttons = fields.Where(f => f.GetMemberValue(obj) is IButton).Select(f => (IButton)f);
             var button = buttons.First(b => b.Name.Replace("Button", "").SimplifiedEqual(buttonName));
             if (button == null)
+            {
                 throw Jdi.Assert.Exception($"Can't find button '{buttonName}' for Element '{obj}'");
+            }
             return button;
         }
     }

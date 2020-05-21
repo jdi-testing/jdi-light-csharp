@@ -64,15 +64,30 @@ namespace JDI.Light.Extensions
         public static By GetLocatorByAttribute(this MemberInfo member)
         {
             var locator = member.GetCustomAttribute<FindByAttribute>(false)?.ByLocator;
-            if (locator != null) return locator;
+            if (locator != null)
+            {
+                return locator;
+            }
             locator = member.GetCustomAttribute<CssAttribute>(false)?.Value;
-            if (locator != null) return locator;
+            if (locator != null)
+            {
+                return locator;
+            }
             locator = member.GetCustomAttribute<XPathAttribute>(false)?.Value;
-            if (locator != null) return locator;
+            if (locator != null)
+            {
+                return locator;
+            }
             locator = member.GetCustomAttribute<ByText>(false)?.Value;
-            if (locator != null) return locator;
+            if (locator != null)
+            {
+                return locator;
+            }
             var findsBy = member.GetCustomAttribute<FindsByAttribute>(false);
-            if (findsBy == null) return null;
+            if (findsBy == null)
+            {
+                return null;
+            }
             return findsBy.How.GetLocator(findsBy.Using);
         }
     }

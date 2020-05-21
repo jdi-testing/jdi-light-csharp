@@ -23,7 +23,7 @@ namespace JDI.Light.Tests.Tests.Simple
         [Test]
         public void CheckSingleTest()
         {
-            Assert.DoesNotThrow(() => TestSite.MetalsColorsPage.CbWater.Check(true));
+            Assert.DoesNotThrow(() => TestSite.MetalsColorsPage.CbWater.Check());
             Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], "Water: condition changed to true");
         }
 
@@ -66,7 +66,10 @@ namespace JDI.Light.Tests.Tests.Simple
         [TestCaseSource(typeof(CheckBoxProvider), nameof(CheckBoxProvider.InputData))]
         public void SetValueTest(bool value, bool expected)
         {
-            if (!expected) TestSite.MetalsColorsPage.CbWater.Click();
+            if (!expected)
+            {
+                TestSite.MetalsColorsPage.CbWater.Click();
+            }
             TestSite.MetalsColorsPage.CbWater.Value = value;
             var resultMsg = "Water: condition changed to " + expected.ToString().ToLower();
             Jdi.Assert.Contains(TestSite.ActionsLog.Texts[0], resultMsg);
