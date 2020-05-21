@@ -132,7 +132,6 @@ namespace JDI.Light.Factories
                     RunDrivers.TryAdd(driverName, result);
                     return result;
                 }
-
                 throw new ApplicationException($"Can't get WebDriver {driverName}. This Driver name is not registered");
             }
             catch (Exception e)
@@ -220,7 +219,6 @@ namespace JDI.Light.Factories
             {
                 throw Jdi.Assert.Exception(
                     $"Can't register WebDriver {driverName}. Driver with the same name already registered");
-
             }
             try
             {
