@@ -183,7 +183,9 @@ namespace JDI.Light.Factories
             if (GetLatestDriver)
             {
                 if (!WebDriverUtils.IsLocalVersionLatestVersion(driverType, DriverPath))
-                    DriverPath = WebDriverUtils.GetLatestVersion(driverType);
+                {
+                DriverPath = WebDriverUtils.GetLatestVersion(driverType);
+                }
             }
             else
             {
