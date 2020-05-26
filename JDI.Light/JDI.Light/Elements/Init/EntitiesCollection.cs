@@ -17,7 +17,7 @@ namespace JDI.Light.Elements.Init
         public static Dictionary<string, IPage> Pages { get; set; } = new Dictionary<string, IPage>();
         public static Dictionary<string, List<IBaseElement>> Elements { get; set; } = new Dictionary<string, List<IBaseElement>>();
 
-        public static T GetPage<T>(string pageName, T type)
+        public static T GetPage<T>(string pageName)
         {
             var page = GetPage(pageName);
             if (page != null)
@@ -28,7 +28,7 @@ namespace JDI.Light.Elements.Init
                 }
                 else
                 {
-                    throw new InvalidCastException($"Can't cast element {page.GetType()} to {type}");
+                    throw new InvalidCastException($"Can't cast element {page.GetType()} to {nameof(T)}");
                 }
             }
             throw new ElementNotFoundException($"No page found with name {pageName}");
@@ -72,7 +72,7 @@ namespace JDI.Light.Elements.Init
             }
         }
 
-        public static T GetWebElement<T>(string elementName, T type)
+        public static T GetWebElement<T>(string elementName)
         {
             var foundElement = GetWebElement(elementName);
             if (foundElement != null)
@@ -83,7 +83,7 @@ namespace JDI.Light.Elements.Init
                 }
                 else
                 {
-                    throw new InvalidCastException($"Can't cast element {foundElement.GetType()} to {type}");
+                    throw new InvalidCastException($"Can't cast element {foundElement.GetType()} to {nameof(T)}");
                 }
             }
             throw new ElementNotFoundException($"No entity were found with name {elementName}");
