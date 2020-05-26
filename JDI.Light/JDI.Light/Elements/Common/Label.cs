@@ -9,7 +9,7 @@ namespace JDI.Light.Elements.Common
         {
         }
 
-        public Label(By byLocator = null)
+        public Label(By byLocator)
             : base(byLocator)
         {
         }
