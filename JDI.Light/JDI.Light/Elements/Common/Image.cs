@@ -11,7 +11,7 @@ namespace JDI.Light.Elements.Common
         {
         }
 
-        public Image(By byLocator = null)
+        public Image(By byLocator)
             : base(byLocator)
         {
             

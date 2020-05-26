@@ -10,7 +10,7 @@ namespace JDI.Light.Elements.Common
         {
         }
 
-        public Link(By byLocator = null)
+        public Link(By byLocator)
             : base(byLocator)
         {
         }

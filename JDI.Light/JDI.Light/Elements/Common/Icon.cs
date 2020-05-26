@@ -10,13 +10,13 @@ namespace JDI.Light.Elements.Common
         {
         }
 
-        public string Src => GetAttributeWithInvoker("src");
+        public new string Src => GetAttributeWithInvoker("src");
 
-        public string Alt => GetAttributeWithInvoker("alt");
+        public new string Alt => GetAttributeWithInvoker("alt");
 
-        public string Height => GetAttributeWithInvoker("height");
+        public new string Height => GetAttributeWithInvoker("height");
 
-        public string Width => GetAttributeWithInvoker("width");
+        public new string Width => GetAttributeWithInvoker("width");
 
         private string GetAttributeWithInvoker(string attribute)
         {

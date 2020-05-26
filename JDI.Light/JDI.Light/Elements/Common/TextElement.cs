@@ -12,7 +12,7 @@ namespace JDI.Light.Elements.Common
         {
         }
 
-        public TextElement(By byLocator = null)
+        public TextElement(By byLocator)
             : base(byLocator)
         {
         }

@@ -9,7 +9,7 @@ namespace JDI.Light.Elements.Common
         {
         }
 
-        public DatePicker(By byLocator = null)
+        public DatePicker(By byLocator)
             : base(byLocator)
         {
         }

@@ -36,7 +36,7 @@ namespace JDI.Light.Elements.Common
         {
         }
 
-        public CheckBox(By byLocator = null)
+        public CheckBox(By byLocator)
             : base(byLocator)
         {
         }
