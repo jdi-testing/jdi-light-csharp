@@ -8,11 +8,11 @@ namespace JDI.Light.Tests.UIObjects.Forms
     public class LoginForm : Form<User>
     {
         [FindBy(Css = "button.btn-login")]
-        [Name("Login")]
+        [Name("LoginBtn")]
         public IButton LoginButton;
         
         [FindBy(Css = "#name")]
-        [Name("Login")]
+        [Name("LoginField")]
         public ITextField LoginField;
 
         [FindBy(Css = "#password")]
