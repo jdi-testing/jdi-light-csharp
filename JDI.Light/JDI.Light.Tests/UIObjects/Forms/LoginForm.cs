@@ -8,7 +8,7 @@ namespace JDI.Light.Tests.UIObjects.Forms
     public class LoginForm : Form<User>
     {
         [FindBy(Css = "button.btn-login")]
-        [Name("LoginBtn")]
+        [Name("Login")]
         public IButton LoginButton;
         
         [FindBy(Css = "#name")]
