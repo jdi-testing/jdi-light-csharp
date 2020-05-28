@@ -66,7 +66,8 @@ namespace JDI.Light.Elements.Composite
             if (CheckAfterOpen)
             {
                 CheckOpened();
-            SetCurrentPage(this);
+                SetCurrentPage(this);
+            }
         }
 
         public static string GetCurrentPage()
