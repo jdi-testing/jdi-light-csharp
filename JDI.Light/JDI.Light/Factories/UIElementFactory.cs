@@ -40,6 +40,7 @@ namespace JDI.Light.Factories
                         instance.Parent = parent;
                         return instance;
                     }
+                    default: break;
                 }
             }
             throw new MissingMethodException($"Can't find correct constructor to create instance of type {t}");

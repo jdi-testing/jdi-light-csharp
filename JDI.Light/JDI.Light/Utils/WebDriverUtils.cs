@@ -38,6 +38,7 @@ namespace JDI.Light.Utils
                     driverBinaryName = new InternetExplorerConfig().GetBinaryName();
                     result = Path.Combine(executingPath, driverBinaryName).CheckDriverVersionFormExeAttributes(latestVersion);
                     break;
+                default: break;
             }
 
             return result;
@@ -100,6 +101,7 @@ namespace JDI.Light.Utils
                     url = currentArchitecture == Architecture.X32 ? ieConfig.GetUrl32() : ieConfig.GetUrl64();
                     url = UrlHelper.BuildUrl(url, latestVersionNumber);
                     break;
+                default: break;
             }
 
             var driverLocationPath = version == ""

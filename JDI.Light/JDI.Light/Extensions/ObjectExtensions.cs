@@ -27,6 +27,7 @@ namespace JDI.Light.Extensions
                     case IConvertible _:
                         strValue = v.ToString();
                         break;
+                    default: break;
                 }
                 var attr = prop.GetCustomAttribute<NameAttribute>(false);
                 var n = attr?.Name.SplitCamelCase() ?? "";
