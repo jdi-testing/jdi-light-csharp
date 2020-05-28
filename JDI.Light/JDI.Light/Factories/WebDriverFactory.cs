@@ -114,11 +114,11 @@ namespace JDI.Light.Factories
                 {
                     RegisterDriver(driverName);
                 }
-            }
-            else
-            {
-                throw new Exception($"Can't find driver with name {driverName}");
-            }
+                else
+                {
+                    throw new Exception($"Can't find driver with name {driverName}");
+                }
+            }            
             try
             {
                 if (RunDrivers.TryGetValue(driverName, out var driver))
