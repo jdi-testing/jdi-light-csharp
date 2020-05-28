@@ -19,7 +19,7 @@ namespace JDI.Light.Elements.Init
         public static Dictionary<string, IPage> Pages { get; set; } = new Dictionary<string, IPage>();
         public static Dictionary<string, List<IBaseElement>> Elements { get; set; } = new Dictionary<string, List<IBaseElement>>();
 
-        public static T getPage<T>(string pageName, T type)
+        public static T GetPage<T>(string pageName, T type)
         {
             var page = GetPage(pageName);
             if (page != null)
