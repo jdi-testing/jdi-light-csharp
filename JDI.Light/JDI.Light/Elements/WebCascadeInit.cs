@@ -29,7 +29,10 @@ namespace JDI.Light.Elements
                 if (typeof(IPage).IsAssignableFrom(type))
                 {
                     instance = targetElement.GetInstancePage(member);
-                    EntitiesCollection.Pages.Add(member.GetElementName(), targetElement.GetInstancePage(member));
+                    if (!EntitiesCollection.Pages.Keys.Contains(member.GetElementName()))
+                    {
+                        EntitiesCollection.Pages.Add(member.GetElementName(), targetElement.GetInstancePage(member));
+                    }
                 }
                 else
                 {
