@@ -61,7 +61,7 @@ namespace JDI.Light.Elements.Base
         public bool Displayed => Invoker.DoActionWithResult("Is element displayed", () => FindImmediately(() => WebElement.Displayed, false));
         public bool Hidden => Invoker.DoActionWithResult("Is element hidden", () => !IsDisplayedAction(this));
         public Func<UIElement, bool> WaitDisplayedAction => el => WebElement.Displayed;
-        public string PageName;
+        public string PageName { get; set; }
 
         protected UIElement(By byLocator)
         {
