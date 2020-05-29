@@ -58,6 +58,12 @@ namespace JDI.Light.Elements.Init
             if (Elements.ContainsKey(elementName))
             {
                 List<IBaseElement> foundElements = Elements[elementName];
+
+                if (foundElements.Count == 1)
+                {
+                    return foundElements[0];
+                }
+
                 return foundElements.OfType<UIElement>()
                     .First(el => el.GetParentPage().Name
                      .Equals(WebPage.GetCurrentPage()));
