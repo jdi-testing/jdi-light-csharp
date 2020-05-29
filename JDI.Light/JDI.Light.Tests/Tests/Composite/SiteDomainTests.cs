@@ -34,6 +34,8 @@ namespace JDI.Light.Tests.Tests.Composite
 
         [TearDown]
         public override void TestTearDown()
-        {}
+        {
+            Jdi.Logger.Info("Run test tear down done.");
+        }
     }
 }

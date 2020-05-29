@@ -6,12 +6,16 @@ using System.Linq;
 using System.Threading;
 using JDI.Light.Asserts;
 using JDI.Light.Elements.Common;
+using JDI.Light.Elements.Composite;
 using JDI.Light.Elements.WebActions;
 using JDI.Light.Exceptions;
 using JDI.Light.Factories;
 using JDI.Light.Interfaces;
 using JDI.Light.Interfaces.Base;
+using JDI.Light.Interfaces.Composite;
+using JDI.Light.Elements.Init;
 using OpenQA.Selenium;
+
 
 namespace JDI.Light.Elements.Base
 {
@@ -57,6 +61,7 @@ namespace JDI.Light.Elements.Base
         public bool Displayed => Invoker.DoActionWithResult("Is element displayed", () => FindImmediately(() => WebElement.Displayed, false));
         public bool Hidden => Invoker.DoActionWithResult("Is element hidden", () => !IsDisplayedAction(this));
         public Func<UIElement, bool> WaitDisplayedAction => el => WebElement.Displayed;
+        public string PageName { get; set; }
 
         protected UIElement(By byLocator)
         {
@@ -285,8 +290,43 @@ namespace JDI.Light.Elements.Base
         {
             return WebElement.FindElements(by);
         }
-        
-        protected void CheckEnabled(bool toCheck)
+
+        public IPage GetParentPage()
+        {
+            if (PageName != null)
+            {
+                return EntitiesCollection.Pages.ContainsKey(PageName)
+                    ? EntitiesCollection.Pages[PageName]
+                    : null;
+            }
+            if (Parent == null)
+            {
+                return null;
+            }
+            if (Parent is WebPage)
+            {
+                return (IPage)Parent;
+            }
+            return ((UIElement)Parent).GetParentPage();
+        }
+
+        public bool HasParent(string name)
+        {
+            if (Parent == null) {
+                return false;
+            }
+            if ( Parent is WebPage || Parent is IPage)
+            {
+                return true;
+            }
+            if (!(Parent is JDIBase))
+            {
+                return false;
+            }
+            return ((JDIBase) Parent).HasParent(name);
+        }
+
+    protected void CheckEnabled(bool toCheck)
         {
             if (toCheck)
             {

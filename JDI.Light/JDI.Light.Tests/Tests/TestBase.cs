@@ -20,8 +20,8 @@ namespace JDI.Light.Tests.Tests
         {
             Jdi.Logger.Info("Test Base Set up started...");
             TestSite = Jdi.InitSite<TestSite>();
-            //TestSite.HomePage.Open();
-            HomePageStatic.Open();
+            TestSite.HomePage.Open();
+            //HomePageStatic.Open();
             TestSite.HomePage.Profile.Click();
             LoginFormPage.AsForm<Client>().Login(DefaultClient);
             Jdi.Logger.Info("Test Base Set up done.");

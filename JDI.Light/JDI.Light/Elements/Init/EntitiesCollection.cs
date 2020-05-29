@@ -1,6 +1,8 @@
-﻿using JDI.Light.Exceptions;
+﻿using JDI.Light.Elements.Base;
+using JDI.Light.Exceptions;
 using JDI.Light.Interfaces.Base;
 using JDI.Light.Interfaces.Composite;
+using JDI.Light.Elements.Composite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,15 +58,15 @@ namespace JDI.Light.Elements.Init
             if (Elements.ContainsKey(elementName))
             {
                 List<IBaseElement> foundElements = Elements[elementName];
-                if (foundElements.Count > 1)
+
+                if (foundElements.Count == 1)
                 {
-                    var element = foundElements.First();
-                    if (element != null)
-                    {
-                        return element;
-                    }
+                    return foundElements[0];
                 }
-                return foundElements[0];
+
+                return foundElements.OfType<UIElement>()
+                    .First(el => el.GetParentPage().Name
+                     .Equals(WebPage.GetCurrentPage()));
             }
             else
             {

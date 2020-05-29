@@ -25,6 +25,7 @@ namespace JDI.Light.Elements.Composite
         public string Name { get; set; }
         public IWebSite Parent { get; set; }
         public IWebDriver WebDriver => Jdi.DriverFactory.GetDriver(DriverName);
+        public static string CurrentPage { get; set; }
 
         protected WebPage()
         {
@@ -66,6 +67,17 @@ namespace JDI.Light.Elements.Composite
             {
                 CheckOpened();
             }
+            SetCurrentPage(this);
+        }
+
+        public static string GetCurrentPage()
+        {
+            return CurrentPage;
+        }
+
+        public static void SetCurrentPage(WebPage webPage)
+        {
+            CurrentPage = webPage.Name;
         }
 
         public bool IsOpened

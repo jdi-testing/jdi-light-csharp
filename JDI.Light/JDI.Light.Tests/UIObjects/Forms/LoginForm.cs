@@ -12,7 +12,7 @@ namespace JDI.Light.Tests.UIObjects.Forms
         public IButton LoginButton;
         
         [FindBy(Css = "#name")]
-        [Name("Login")]
+        [Name("LoginField")]
         public ITextField LoginField;
 
         [FindBy(Css = "#password")]
