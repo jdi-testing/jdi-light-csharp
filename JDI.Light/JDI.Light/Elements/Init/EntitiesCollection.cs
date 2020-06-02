@@ -53,6 +53,15 @@ namespace JDI.Light.Elements.Init
             }
         }
 
+        public static void UpdatePage(IPage page)
+        {
+            if (Pages.ContainsKey(page.Name))
+            {
+                Pages.Remove(page.Name);
+                Pages.Add(page.Name, page);
+            }
+        }
+
         public static IBaseElement GetWebElement(string elementName)
         {
             if (Elements.ContainsKey(elementName))
