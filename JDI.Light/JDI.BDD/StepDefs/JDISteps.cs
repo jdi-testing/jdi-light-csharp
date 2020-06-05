@@ -10,36 +10,8 @@ namespace JDI.BDD.StepDefs
     [Binding]
     public class JDISteps
     {
-        [Then(@"the (.*) is disabled")]
-        public void IsDisabled(string name)
-        {
-            Assert.IsTrue(EntitiesCollection.GetWebElement<UIElement>(name).Disabled);
-        }
 
-        [Then(@"the (.*) is enabled")]
-        public void IsEnabled(string name)
-        {
-            Assert.IsTrue(EntitiesCollection.GetWebElement<UIElement>(name).Enabled);
-        }
-
-        [Then(@"the (.*) is enabled")]
-        public void IsDisplayed(string name)
-        {
-            Assert.IsTrue(EntitiesCollection.GetWebElement<UIElement>(name).Displayed);
-        }
-
-        [Then(@"the (.*) is hidden")]
-        public void IsHidden(string name)
-        {
-            Assert.IsTrue(EntitiesCollection.GetWebElement<UIElement>(name).Hidden);
-        }
-
-        [Then(@"the (.*) is selected")]
-        public void IsSelected(string name)
-        {
-            Assert.IsTrue(EntitiesCollection.GetWebElement<UIElement>(name).Selected);
-        }
-
+    #region WHEN
         [When(@"I send keys (.*) to (.*)")]
         public void SendKeys(string value, string name)
         {
@@ -80,6 +52,38 @@ namespace JDI.BDD.StepDefs
         public void Show(string name)
         {
             EntitiesCollection.GetWebElement<UIElement>(name).Show();
+        }
+
+    #endregion
+
+        [Then(@"the (.*) is disabled")]
+        public void IsDisabled(string name)
+        {
+            Assert.IsTrue(EntitiesCollection.GetWebElement<UIElement>(name).Disabled);
+        }
+
+        [Then(@"the (.*) is enabled")]
+        public void IsEnabled(string name)
+        {
+            Assert.IsTrue(EntitiesCollection.GetWebElement<UIElement>(name).Enabled);
+        }
+
+        [Then(@"the (.*) is enabled")]
+        public void IsDisplayed(string name)
+        {
+            Assert.IsTrue(EntitiesCollection.GetWebElement<UIElement>(name).Displayed);
+        }
+
+        [Then(@"the (.*) is hidden")]
+        public void IsHidden(string name)
+        {
+            Assert.IsTrue(EntitiesCollection.GetWebElement<UIElement>(name).Hidden);
+        }
+
+        [Then(@"the (.*) is selected")]
+        public void IsSelected(string name)
+        {
+            Assert.IsTrue(EntitiesCollection.GetWebElement<UIElement>(name).Selected);
         }
 
         [Then(@"the (.*) text equals to (.*)")]
