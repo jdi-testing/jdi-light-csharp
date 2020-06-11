@@ -95,13 +95,12 @@ namespace JDI.Light.Utils
                     url = currentArchitecture == Architecture.X32 ? fConfig.GetUrl32() : fConfig.GetUrl64();
                     url = UrlHelper.BuildUrl(url, latestVersionNumber);
                     break;
-                case DriverType.IE:
+                default:
                     var ieConfig = new InternetExplorerConfig();
                     binaryName = ieConfig.GetBinaryName();
                     url = currentArchitecture == Architecture.X32 ? ieConfig.GetUrl32() : ieConfig.GetUrl64();
                     url = UrlHelper.BuildUrl(url, latestVersionNumber);
                     break;
-                default: break;
             }
 
             var driverLocationPath = version == ""

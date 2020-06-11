@@ -86,9 +86,8 @@ namespace JDI.Light.Elements.Composite
                         return url.Equals(Url);
                     case CheckPageType.Match:
                         return url.Matches(UrlTemplate);
-                    case CheckPageType.Contains:
+                    default:
                         return url.Contains(string.IsNullOrEmpty(UrlTemplate) ? Url : UrlTemplate);
-                    default: break;
                 }
 
                 return false;
@@ -197,7 +196,7 @@ namespace JDI.Light.Elements.Composite
                         return WebDriver.Title.Matches(Title);
                     }));
                     break;
-                case CheckPageType.Contains:
+                default:
                     Jdi.Assert.IsTrue(Invoker.Wait("Checking that page title contains expected", () =>
                     {
                         Logger.Debug($"Actual: '{WebDriver.Title}', Expected: '{Title}'");

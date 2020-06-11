@@ -31,7 +31,7 @@ namespace JDI.Light.Factories
                         instance.Parent = parent;
                         return instance;
                     }
-                    case 0:
+                    default:
                     {
                         var instance = (UIElement)Activator.CreateInstance(t, true);
                         instance.DriverName = parent.DriverName;
@@ -40,7 +40,6 @@ namespace JDI.Light.Factories
                         instance.Parent = parent;
                         return instance;
                     }
-                    default: break;
                 }
             }
             throw new MissingMethodException($"Can't find correct constructor to create instance of type {t}");
