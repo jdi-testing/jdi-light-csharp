@@ -34,11 +34,10 @@ namespace JDI.Light.Utils
                     driverBinaryName = new FirefoxConfig().GetBinaryName();
                     result = Path.Combine(executingPath, driverBinaryName).CheckDriverVersionFromExe(latestVersion);
                     break;
-                case DriverType.IE:
+                default:
                     driverBinaryName = new InternetExplorerConfig().GetBinaryName();
                     result = Path.Combine(executingPath, driverBinaryName).CheckDriverVersionFormExeAttributes(latestVersion);
                     break;
-                default: break;
             }
 
             return result;
