@@ -165,18 +165,13 @@ namespace JDI.Light.Factories
                     return;
                 default:
                 {
-                    DoNothing();
+                    RunType = RunType.Local;
                     break;
                 }
             }
 
-            RunType = RunType.Local;
         }
 
-
-        private void DoNothing()
-        {
-        }
         public bool HasDrivers()
         {
             return Drivers.Any();
@@ -259,12 +254,11 @@ namespace JDI.Light.Factories
                     return RegisterRemoteDriver(driverType);
                 default:
                 {
-                    DoNothing();
+                    throw new Exception($"Can't register driver: {driverType}");
                     break;
                 }
             }
 
-            throw new Exception($"Can't register driver: {driverType}");
         }
 
         private string RegisterRemoteDriver(DriverType driverType)
