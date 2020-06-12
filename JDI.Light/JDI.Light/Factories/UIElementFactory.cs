@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Reflection;
 using JDI.Light.Attributes;
 using JDI.Light.Elements.Base;
@@ -40,11 +41,7 @@ namespace JDI.Light.Factories
                         instance.Parent = parent;
                         return instance;
                     }
-                    default:
-                    {
-                        DoNothing();
-                        break;
-                    }
+
                 }
             }
             throw new MissingMethodException($"Can't find correct constructor to create instance of type {t}");
@@ -53,6 +50,7 @@ namespace JDI.Light.Factories
 
         private static void DoNothing()
         {
+            
         }
 
 
