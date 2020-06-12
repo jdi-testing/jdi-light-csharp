@@ -34,7 +34,7 @@ namespace JDI.Light.Utils
                     driverBinaryName = new FirefoxConfig().GetBinaryName();
                     result = Path.Combine(executingPath, driverBinaryName).CheckDriverVersionFromExe(latestVersion);
                     break;
-                case DriverType.IE:
+                default:
                     driverBinaryName = new InternetExplorerConfig().GetBinaryName();
                     result = Path.Combine(executingPath, driverBinaryName).CheckDriverVersionFormExeAttributes(latestVersion);
                     break;
@@ -59,7 +59,7 @@ namespace JDI.Light.Utils
                 case DriverType.Firefox:
                     latestVersion = new FirefoxConfig().GetLatestVersion();
                     break;
-                case DriverType.IE:
+                default:
                     latestVersion = new InternetExplorerConfig().GetLatestVersion();
                     break;
             }
@@ -88,7 +88,7 @@ namespace JDI.Light.Utils
                     url = currentArchitecture == Architecture.X32 ? cConfig.GetUrl32() : cConfig.GetUrl64();
                     url = UrlHelper.BuildUrl(url, latestVersionNumber);
                     break;
-                case DriverType.Firefox:
+                default:
                     var fConfig = new FirefoxConfig();
                     binaryName = fConfig.GetBinaryName();
                     url = currentArchitecture == Architecture.X32 ? fConfig.GetUrl32() : fConfig.GetUrl64();

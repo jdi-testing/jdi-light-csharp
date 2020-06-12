@@ -31,7 +31,7 @@ namespace JDI.Light.Factories
                         instance.Parent = parent;
                         return instance;
                     }
-                    case 0:
+                    default:
                     {
                         var instance = (UIElement)Activator.CreateInstance(t, true);
                         instance.DriverName = parent.DriverName;

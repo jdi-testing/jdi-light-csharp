@@ -98,7 +98,7 @@ namespace JDI.Light.Elements.Composite
                         return url.Equals(Url);
                     case CheckPageType.Match:
                         return url.Matches(UrlTemplate);
-                    case CheckPageType.Contains:
+                    default:
                         return url.Contains(string.IsNullOrEmpty(UrlTemplate) ? Url : UrlTemplate);
                 }
 
