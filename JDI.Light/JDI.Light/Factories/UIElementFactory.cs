@@ -40,11 +40,22 @@ namespace JDI.Light.Factories
                         instance.Parent = parent;
                         return instance;
                     }
+                    default:
+                    {
+                        DoNothing();
+                        break;
+                    }
                 }
             }
             throw new MissingMethodException($"Can't find correct constructor to create instance of type {t}");
         }
-        
+
+
+        private static void DoNothing()
+        {
+        }
+
+
         public static T CreateInstance<T>(By locator, IBaseElement parent) where T : IBaseUIElement
         {
             return (T)CreateInstance(typeof(T), locator, parent);

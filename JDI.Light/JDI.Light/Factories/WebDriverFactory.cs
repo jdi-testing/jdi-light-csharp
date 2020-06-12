@@ -163,11 +163,20 @@ namespace JDI.Light.Factories
                 case "remote":
                     RunType = RunType.Remote;
                     return;
+                default:
+                {
+                    DoNothing();
+                    break;
+                }
             }
 
             RunType = RunType.Local;
         }
 
+
+        private void DoNothing()
+        {
+        }
         public bool HasDrivers()
         {
             return Drivers.Any();
@@ -248,6 +257,11 @@ namespace JDI.Light.Factories
                     return RegisterLocalDriver(driverType);
                 case RunType.Remote:
                     return RegisterRemoteDriver(driverType);
+                default:
+                {
+                    DoNothing();
+                    break;
+                }
             }
 
             throw new Exception($"Can't register driver: {driverType}");
