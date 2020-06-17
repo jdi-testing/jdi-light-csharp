@@ -24,27 +24,27 @@ namespace JDI.Light.Factories
                 switch (conParams.Length)
                 {
                     case 1:
-                    {
-                        var instance = (UIElement)con.Invoke(new object[] {locator});
-                        instance.DriverName = parent.DriverName;
-                        instance.SmartLocators = locators;
-                        instance.Parent = parent;
-                        return instance;
-                    }
-                    case 0:
-                    {
-                        var instance = (UIElement)Activator.CreateInstance(t, true);
-                        instance.DriverName = parent.DriverName;
-                        instance.Locator = locator;
-                        instance.SmartLocators = locators;
-                        instance.Parent = parent;
-                        return instance;
-                    }
+                        {
+                            var instance = (UIElement)con.Invoke(new object[] { locator });
+                            instance.DriverName = parent.DriverName;
+                            instance.SmartLocators = locators;
+                            instance.Parent = parent;
+                            return instance;
+                        }
+                    default:
+                        {
+                            var instance = (UIElement)Activator.CreateInstance(t, true);
+                            instance.DriverName = parent.DriverName;
+                            instance.Locator = locator;
+                            instance.SmartLocators = locators;
+                            instance.Parent = parent;
+                            return instance;
+                        }
                 }
             }
             throw new MissingMethodException($"Can't find correct constructor to create instance of type {t}");
         }
-        
+
         public static T CreateInstance<T>(By locator, IBaseElement parent) where T : IBaseUIElement
         {
             return (T)CreateInstance(typeof(T), locator, parent);
@@ -62,7 +62,7 @@ namespace JDI.Light.Factories
             var type = member.GetMemberType();
             var v = member.GetMemberValue(parent);
             var instance = (IBaseUIElement)v;
-            
+
             var defaultLocator = member.GetLocatorByAttribute();
             var smartLocators = new List<By>();
             var jDropdown = member.GetCustomAttribute<JDropDown>(false);

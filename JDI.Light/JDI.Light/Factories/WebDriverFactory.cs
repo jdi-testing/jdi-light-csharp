@@ -86,7 +86,7 @@ namespace JDI.Light.Factories
             }
             set => _currentDriverName = value;
         }
-        
+
         public IWebDriver GetDriver()
         {
             try
@@ -118,7 +118,7 @@ namespace JDI.Light.Factories
                 {
                     throw new Exception($"Can't find driver with name {driverName}");
                 }
-            }            
+            }
             try
             {
                 if (RunDrivers.TryGetValue(driverName, out var driver))
@@ -184,7 +184,7 @@ namespace JDI.Light.Factories
             {
                 if (!WebDriverUtils.IsLocalVersionLatestVersion(driverType, DriverPath))
                 {
-                DriverPath = WebDriverUtils.GetLatestVersion(driverType);
+                    DriverPath = WebDriverUtils.GetLatestVersion(driverType);
                 }
             }
             else
