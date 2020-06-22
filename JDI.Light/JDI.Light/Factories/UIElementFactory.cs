@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Reflection;
 using JDI.Light.Attributes;
 using JDI.Light.Elements.Base;
@@ -9,6 +10,7 @@ using JDI.Light.Interfaces.Base;
 using JDI.Light.Interfaces.Common;
 using JDI.Light.Settings;
 using OpenQA.Selenium;
+using static System.ComponentModel.InvalidEnumArgumentException;
 
 namespace JDI.Light.Factories
 {
@@ -42,7 +44,7 @@ namespace JDI.Light.Factories
                         }
                 }
             }
-            throw new MissingMethodException($"Can't find correct constructor to create instance of type {t}");
+            throw new InvalidEnumArgumentException("the specified case is not supported");
         }
 
         public static T CreateInstance<T>(By locator, IBaseElement parent) where T : IBaseUIElement
