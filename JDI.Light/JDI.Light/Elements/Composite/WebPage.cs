@@ -13,7 +13,7 @@ namespace JDI.Light.Elements.Composite
 {
     public class WebPage : IPage
     {
-        public bool CheckAfterOpen = false;
+        public bool CheckAfterOpen;
         private string _url;
         public CheckPageType CheckTitleType { get; set; } = CheckPageType.None;
         public CheckPageType CheckUrlType { get; set; } = CheckPageType.None;
