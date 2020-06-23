@@ -12,6 +12,7 @@ using JDI.Light.Settings;
 using OpenQA.Selenium;
 using static System.ComponentModel.InvalidEnumArgumentException;
 
+
 namespace JDI.Light.Factories
 {
     public static class UIElementFactory
@@ -33,7 +34,7 @@ namespace JDI.Light.Factories
                             instance.Parent = parent;
                             return instance;
                         }
-                    default:
+                    case 0:
                         {
                             var instance = (UIElement)Activator.CreateInstance(t, true);
                             instance.DriverName = parent.DriverName;
@@ -42,9 +43,11 @@ namespace JDI.Light.Factories
                             instance.Parent = parent;
                             return instance;
                         }
+                    default:
+                        throw new InvalidEnumArgumentException("the specified case is not supported");
                 }
             }
-            throw new InvalidEnumArgumentException("the specified case is not supported");
+            throw new MissingMethodException($"Can't find correct constructor to create instance of type {t}");
         }
 
         public static T CreateInstance<T>(By locator, IBaseElement parent) where T : IBaseUIElement
