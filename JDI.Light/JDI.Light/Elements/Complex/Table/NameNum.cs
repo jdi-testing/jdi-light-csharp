@@ -7,7 +7,7 @@ namespace JDI.Light.Elements.Complex.Table
 {
     public class NameNum : DataClass<NameNum>
     {
-        public int Num { get; set; };
+        public int Num { get; set; }
 
         public string Name { get; set; } = "";
 
