@@ -9,6 +9,7 @@ using JDI.Light.Interfaces.Base;
 using JDI.Light.Interfaces.Common;
 using JDI.Light.Settings;
 using OpenQA.Selenium;
+using static System.ComponentModel.InvalidEnumArgumentException;
 
 namespace JDI.Light.Factories
 {
@@ -40,6 +41,9 @@ namespace JDI.Light.Factories
                         instance.Parent = parent;
                         return instance;
                     }
+                    default:
+                        throw new MissingMethodException($"Can't find correct constructor to create instance of type {t}");
+                        break;
                 }
             }
             throw new MissingMethodException($"Can't find correct constructor to create instance of type {t}");
