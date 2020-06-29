@@ -12,7 +12,6 @@ using JDI.Light.Settings;
 using OpenQA.Selenium;
 using static System.ComponentModel.InvalidEnumArgumentException;
 
-
 namespace JDI.Light.Factories
 {
     public static class UIElementFactory
