@@ -163,9 +163,10 @@ namespace JDI.Light.Factories
                 case "remote":
                     RunType = RunType.Remote;
                     return;
+                default:
+                    RunType = RunType.Local;
+                    return;
             }
-
-            RunType = RunType.Local;
         }
 
         public bool HasDrivers()
