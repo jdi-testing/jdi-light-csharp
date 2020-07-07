@@ -30,7 +30,6 @@ namespace JDI.Light.Extensions
                     default:
                         strValue = "null";
                         break;
-
                 }
                 var attr = prop.GetCustomAttribute<NameAttribute>(false);
                 var n = attr?.Name.SplitCamelCase() ?? "";

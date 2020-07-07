@@ -157,9 +157,6 @@ namespace JDI.Light.Factories
         {
             switch (runType)
             {
-                case "local":
-                    RunType = RunType.Local;
-                    return;
                 case "remote":
                     RunType = RunType.Remote;
                     return;

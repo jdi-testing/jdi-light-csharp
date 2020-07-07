@@ -102,9 +102,7 @@ namespace JDI.Light.Elements.Composite
                         return url.Contains(string.IsNullOrEmpty(UrlTemplate) ? Url : UrlTemplate);
                     default:
                         return url.Contains(UrlTemplate) || url.Matches(UrlTemplate);
-
                 }
-
                 return false;
             }
         }
@@ -184,7 +182,6 @@ namespace JDI.Light.Elements.Composite
                 }
             }
         }
-
         public void CheckTitle()
         {
             Jdi.Logger.Info($"Checking page title. Title = '{Title}', CheckType = {CheckTitleType}");
