@@ -92,16 +92,15 @@ namespace JDI.Light.Elements.Composite
                 }
                 switch (CheckUrlType)
                 {
-                    case CheckPageType.None:
-                        return url.Contains(UrlTemplate) || url.Matches(UrlTemplate);
                     case CheckPageType.Equal:
                         return url.Equals(Url);
                     case CheckPageType.Match:
                         return url.Matches(UrlTemplate);
                     case CheckPageType.Contains:
                         return url.Contains(string.IsNullOrEmpty(UrlTemplate) ? Url : UrlTemplate);
+                    default:
+                        return url.Contains(UrlTemplate) || url.Matches(UrlTemplate);
                 }
-
                 return false;
             }
         }

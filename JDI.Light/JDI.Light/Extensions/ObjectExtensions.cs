@@ -18,14 +18,14 @@ namespace JDI.Light.Extensions
                 string strValue = null;
                 switch (v)
                 {
-                    case null:
-                        strValue = "null";
-                        break;
                     case string s:
                         strValue = s;
                         break;
                     case IConvertible _:
                         strValue = v.ToString();
+                        break;
+                    default:
+                        strValue = "null";
                         break;
                 }
                 var attr = prop.GetCustomAttribute<NameAttribute>(false);

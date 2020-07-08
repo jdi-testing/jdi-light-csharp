@@ -157,11 +157,11 @@ namespace JDI.Light.Factories
         {
             switch (runType)
             {
-                case "local":
-                    RunType = RunType.Local;
-                    return;
                 case "remote":
                     RunType = RunType.Remote;
+                    return;
+                default:
+                    RunType = RunType.Local;
                     return;
             }
 
@@ -244,10 +244,10 @@ namespace JDI.Light.Factories
         {
             switch (RunType)
             {
-                case RunType.Local:
-                    return RegisterLocalDriver(driverType);
                 case RunType.Remote:
                     return RegisterRemoteDriver(driverType);
+                default:
+                    return RegisterLocalDriver(driverType);
             }
 
             throw new Exception($"Can't register driver: {driverType}");
