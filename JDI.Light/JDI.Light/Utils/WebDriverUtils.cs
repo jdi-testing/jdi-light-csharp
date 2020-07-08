@@ -53,14 +53,14 @@ namespace JDI.Light.Utils
             var latestVersion = "";
             switch (type)
             {
-                case DriverType.Chrome:
-                    latestVersion = new ChromeConfig().GetLatestVersion();
-                    break;
                 case DriverType.Firefox:
                     latestVersion = new FirefoxConfig().GetLatestVersion();
                     break;
                 case DriverType.IE:
                     latestVersion = new InternetExplorerConfig().GetLatestVersion();
+                    break;
+                default:
+                    latestVersion = new ChromeConfig().GetLatestVersion();
                     break;
             }
 
