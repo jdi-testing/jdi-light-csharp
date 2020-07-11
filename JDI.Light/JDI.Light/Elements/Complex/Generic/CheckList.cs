@@ -43,7 +43,7 @@ namespace JDI.Light.Elements.Complex.Generic
                 var value = CheckBoxes[i - 1];
                 if (value.IsChecked ^ indexes.Contains(i))
                 {
-                    CheckEnabled(value, checkEnabled);
+                    IsCheckEnabled(value, checkEnabled);
                     value.Click();
                 }
             }
@@ -62,7 +62,7 @@ namespace JDI.Light.Elements.Complex.Generic
                 var value = CheckBoxes[i - 1];
                 if (value.IsChecked == indexes.Contains(i))
                 {
-                    CheckEnabled(value, checkEnabled);
+                    IsCheckEnabled(value, checkEnabled);
                     value.Click();
                 }
             }
@@ -73,7 +73,7 @@ namespace JDI.Light.Elements.Complex.Generic
             var indexes = values.Select(GetIndexOf);
             foreach (var index in indexes)
             {
-                CheckEnabled(CheckBoxes[index], checkEnabled);
+                IsCheckEnabled(CheckBoxes[index], checkEnabled);
                 CheckBoxes[index].Click();
             }
         }
@@ -82,7 +82,7 @@ namespace JDI.Light.Elements.Complex.Generic
         {
             foreach (var index in indexes)
             {
-                CheckEnabled(CheckBoxes[index - 1], checkEnabled);
+                IsCheckEnabled(CheckBoxes[index - 1], checkEnabled);
                 CheckBoxes[index - 1].Click();
             }
         }
@@ -91,7 +91,7 @@ namespace JDI.Light.Elements.Complex.Generic
         {
             foreach (var element in GetCheckedUIElements())
             {
-                CheckEnabled(element, checkEnabled);
+                IsCheckEnabled(element, checkEnabled);
                 element.Click();
             }
         }
@@ -160,7 +160,7 @@ namespace JDI.Light.Elements.Complex.Generic
             return index;
         }
 
-        private void CheckEnabled(TCheckBox checkbox, bool checkEnabled = true)
+        private void IsCheckEnabled(TCheckBox checkbox, bool checkEnabled = true)
         {
             if (checkEnabled)
             {
