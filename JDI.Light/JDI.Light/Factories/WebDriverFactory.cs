@@ -153,19 +153,13 @@ namespace JDI.Light.Factories
             }
         }
 
+
         public void SetRunType(string runType)
         {
-            switch (runType)
-            {
-                case "remote":
-                    RunType = RunType.Remote;
-                    return;
-                default:
-                    RunType = RunType.Local;
-                    return;
-            }
-
-            RunType = RunType.Local;
+            if (runType == "remote")
+                RunType = RunType.Local;
+            else
+                RunType = RunType.Local;
         }
 
         public bool HasDrivers()
@@ -242,15 +236,10 @@ namespace JDI.Light.Factories
 
         public string RegisterDriver(DriverType driverType)
         {
-            switch (RunType)
-            {
-                case RunType.Remote:
-                    return RegisterRemoteDriver(driverType);
-                default:
-                    return RegisterLocalDriver(driverType);
-            }
-
-            throw new Exception($"Can't register driver: {driverType}");
+            if (RunType == RunType.Remote)
+                return RegisterLocalDriver(driverType);
+            else
+                return RegisterRemoteDriver(driverType);
         }
 
         private string RegisterRemoteDriver(DriverType driverType)
