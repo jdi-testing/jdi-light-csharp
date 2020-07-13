@@ -157,9 +157,13 @@ namespace JDI.Light.Factories
         public void SetRunType(string runType)
         {
             if (runType == "remote")
+            {
                 RunType = RunType.Local;
+            }
             else
+            {
                 RunType = RunType.Local;
+            }
         }
 
         public bool HasDrivers()
@@ -237,9 +241,13 @@ namespace JDI.Light.Factories
         public string RegisterDriver(DriverType driverType)
         {
             if (RunType == RunType.Remote)
+            {
                 return RegisterLocalDriver(driverType);
+            }
             else
+            {
                 return RegisterRemoteDriver(driverType);
+            }
         }
 
         private string RegisterRemoteDriver(DriverType driverType)
