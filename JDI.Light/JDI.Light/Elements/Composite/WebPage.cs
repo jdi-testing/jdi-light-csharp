@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿/using System.Linq;
 using System.Text.RegularExpressions;
 using JDI.Light.Elements.Base;
 using JDI.Light.Elements.WebActions;
@@ -159,13 +159,6 @@ namespace JDI.Light.Elements.Composite
             {
                 switch (CheckUrlType)
                 {
-                    case CheckPageType.None:
-                        Jdi.Assert.IsTrue(Invoker.Wait("Checking that URL matches the template", () =>
-                        {
-                            Logger.Debug($"Current URL: {WebDriver.Url}");
-                            return WebDriver.Url.Contains(UrlTemplate) || WebDriver.Url.Matches(UrlTemplate);
-                        }));
-                        break;
                     case CheckPageType.Equal:
                         Jdi.Assert.IsTrue(Invoker.Wait("Checking that URL equals the expected value", () => WebDriver.Url.Equals(Url)));
                         break;
@@ -177,6 +170,13 @@ namespace JDI.Light.Elements.Composite
                             ? Url
                             : UrlTemplate)));
                         break;
+                    default:
+                        Jdi.Assert.IsTrue(Invoker.Wait("Checking that URL matches the template", () =>
+                        {
+                            Logger.Debug($"Current URL: {WebDriver.Url}");
+                            return WebDriver.Url.Contains(UrlTemplate) || WebDriver.Url.Matches(UrlTemplate);
+                        }));
+                        break;
                 }
             }
         }
@@ -186,13 +186,6 @@ namespace JDI.Light.Elements.Composite
             Jdi.Logger.Info($"Checking page title. Title = '{Title}', CheckType = {CheckTitleType}");
             switch (CheckTitleType)
             {
-                case CheckPageType.None:
-                    Jdi.Assert.IsTrue(Invoker.Wait("Checking that page title equals to expected", () =>
-                    {
-                        Logger.Debug($"Actual: '{WebDriver.Title}', Expected: '{Title}'");
-                        return WebDriver.Title.Equals(Title);
-                    }));
-                    break;
                 case CheckPageType.Equal:
                     Jdi.Assert.IsTrue(Invoker.Wait("Checking that page title equals to expected", () =>
                     {
@@ -212,6 +205,13 @@ namespace JDI.Light.Elements.Composite
                     {
                         Logger.Debug($"Actual: '{WebDriver.Title}', Expected: '{Title}'");
                         return WebDriver.Title.Contains(Title);
+                    }));
+                    break;
+                default:
+                    Jdi.Assert.IsTrue(Invoker.Wait("Checking that page title equals to expected", () =>
+                    {
+                        Logger.Debug($"Actual: '{WebDriver.Title}', Expected: '{Title}'");
+                        return WebDriver.Title.Equals(Title);
                     }));
                     break;
             }
