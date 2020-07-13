@@ -155,19 +155,9 @@ namespace JDI.Light.Factories
 
         public void SetRunType(string runType)
         {
-            switch (runType)
-            {
-                case "local":
-                    RunType = RunType.Local;
-                    return;
-                case "remote":
-                    RunType = RunType.Remote;
-                    return;
-            }
 
-            RunType = RunType.Local;
+            if (runType == "local")? RunType = RunType.Local : RunType = RunType.Remote;
         }
-
         public bool HasDrivers()
         {
             return Drivers.Any();
@@ -242,15 +232,10 @@ namespace JDI.Light.Factories
 
         public string RegisterDriver(DriverType driverType)
         {
-            switch (RunType)
-            {
-                case RunType.Local:
-                    return RegisterLocalDriver(driverType);
-                case RunType.Remote:
-                    return RegisterRemoteDriver(driverType);
-            }
-
-            throw new Exception($"Can't register driver: {driverType}");
+            if (RunType == RunType.Local) 
+            { return RegisterLocalDriver(driverType)}
+            else 
+            { return RegisterRemoteDriver(driverType); }
         }
 
         private string RegisterRemoteDriver(DriverType driverType)
