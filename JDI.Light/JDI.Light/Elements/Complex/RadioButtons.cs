@@ -37,7 +37,7 @@ namespace JDI.Light.Elements.Complex
             {
                 throw new ElementNotFoundException($"label: {name} not found");
             }
-            CheckEnabled(name, checkEnabled);
+            IsCheckEnabled(name, checkEnabled);
             element.Click();
         }
 
@@ -61,7 +61,7 @@ namespace JDI.Light.Elements.Complex
 
         public string Value => Selected();
 
-        private void CheckEnabled(string name, bool checkEnabled = true)
+        private void IsCheckEnabled(string name, bool checkEnabled = true)
         {
             if (checkEnabled)
             {
