@@ -81,12 +81,6 @@ namespace JDI.Light.Utils
             var currentArchitecture = ArchitectureHelper.GetArchitecture();
             switch (type)
             {
-                case DriverType.Chrome:
-                    var cConfig = new ChromeConfig();
-                    binaryName = cConfig.GetBinaryName();
-                    url = currentArchitecture == Architecture.X32 ? cConfig.GetUrl32() : cConfig.GetUrl64();
-                    url = UrlHelper.BuildUrl(url, latestVersionNumber);
-                    break;
                 case DriverType.Firefox:
                     var fConfig = new FirefoxConfig();
                     binaryName = fConfig.GetBinaryName();
@@ -97,6 +91,12 @@ namespace JDI.Light.Utils
                     var ieConfig = new InternetExplorerConfig();
                     binaryName = ieConfig.GetBinaryName();
                     url = currentArchitecture == Architecture.X32 ? ieConfig.GetUrl32() : ieConfig.GetUrl64();
+                    url = UrlHelper.BuildUrl(url, latestVersionNumber);
+                    break;
+                default:
+                    var cConfig = new ChromeConfig();
+                    binaryName = cConfig.GetBinaryName();
+                    url = currentArchitecture == Architecture.X32 ? cConfig.GetUrl32() : cConfig.GetUrl64();
                     url = UrlHelper.BuildUrl(url, latestVersionNumber);
                     break;
             }
