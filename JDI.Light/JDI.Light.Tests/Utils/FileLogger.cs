@@ -10,7 +10,7 @@ namespace JDI.Light.Tests.Utils
 {
     public class FileLogger : ILogger
     {
-        public static string LogFilePath = @"C:\temp\jdi.txt";
+        public readonly string LogFilePath = @"C:\temp\jdi.txt";
 
         public LogLevel LogLevel { get; set; } = LogLevel.Info;
 
