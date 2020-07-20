@@ -18,10 +18,16 @@ namespace JDI.Light
         public static readonly IAssert Assert;
         public static readonly ILogger Logger;
         public static readonly IKillDriver KillDriver;
+
         public static List<ISmartLocator> SmartLocators { get; set; }
 
         static Jdi()
         {
+            Assert = Assert ?? new BaseAsserter();
+            Logger = Logger ?? new ConsoleLogger();
+            DriverFactory = DriverFactory ?? new WebDriverFactory();
+            Timeouts = Timeouts ?? new Timeouts();
+
             Timeouts = new Timeouts();
             KillDriver = new WinProcUtils();
         }
@@ -29,11 +35,7 @@ namespace JDI.Light
         public static void Init(IAssert assert = null, ILogger logger = null, 
             Timeouts timeouts = null, IDriverFactory<IWebDriver> driverFactory = null, List<ISmartLocator> smartLocators = null)
         {
-            Assert = assert ?? new BaseAsserter();
-            Logger = logger ?? new ConsoleLogger();
             Assert.Logger = Logger;
-            DriverFactory = driverFactory ?? new WebDriverFactory();
-            Timeouts = timeouts ?? new Timeouts();
             SmartLocators = smartLocators ?? new List<ISmartLocator>{new SmartLocatorById(), new SmartLocatorByCss()};
         }
 
