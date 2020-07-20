@@ -75,6 +75,6 @@ namespace JDI.Light.Tests.UIObjects
         public TextList ActionsLog;
 
         [FindBy(Id = "login-form")]
-        public static LoginFormClient LoginFormPage;
+        public static readonly LoginFormClient LoginFormPage;
     }
 }
