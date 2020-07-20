@@ -12,12 +12,12 @@ namespace JDI.Light
 {
     public static class Jdi
     {
-        public static IDriverFactory<IWebDriver> DriverFactory;
+        public static readonly IDriverFactory<IWebDriver> DriverFactory;
         public static IWebDriver WebDriver => DriverFactory.GetDriver();
-        public static Timeouts Timeouts;
-        public static IAssert Assert;
-        public static ILogger Logger;
-        public static IKillDriver KillDriver;
+        public static readonly Timeouts Timeouts;
+        public static readonly IAssert Assert;
+        public static readonly ILogger Logger;
+        public static readonly IKillDriver KillDriver;
         public static List<ISmartLocator> SmartLocators { get; set; }
 
         static Jdi()

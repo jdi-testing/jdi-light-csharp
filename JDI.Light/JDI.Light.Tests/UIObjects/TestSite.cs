@@ -14,7 +14,7 @@ namespace JDI.Light.Tests.UIObjects
         public HomePage HomePage;
 
         [Page(Url = "/index.html", Title = "Home Page")]
-        public static HomePage HomePageStatic;
+        public static readonly HomePage HomePageStatic;
 
         [Page(Url = "/contacts.html", Title = "Contact Form")]
         public ContactPage ContactFormPage;

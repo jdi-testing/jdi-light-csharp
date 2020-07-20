@@ -9,10 +9,10 @@ namespace JDI.Light.Tests.UIObjects.Pages
     public class BasePage : WebPage
     {
         [FindBy(Css = ".uui-header")]
-        public static Header Header;
+        public static  readonly Header Header;
 
         [FindBy(Css = ".footer-content")]
-        public static Footer Footer;
+        public static readonly Footer Footer;
 
         [FindBy(Id = "login-form")]
         public LoginForm LoginForm;

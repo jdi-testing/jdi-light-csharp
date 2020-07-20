@@ -133,7 +133,7 @@ namespace JDI.Light.Elements.Composite
             Submit(entity, "Login");
         }
 
-        public static Func<object, string, IButton> GetButton = (obj, buttonName) =>
+        public static readonly Func<object, string, IButton> GetButton = (obj, buttonName) =>
         {
             var fields = GetFieldsOfType(obj, typeof(IButton)).ToList();
             if (!fields.Any())
