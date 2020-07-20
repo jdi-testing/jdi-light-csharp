@@ -18,12 +18,13 @@ namespace JDI.Light.Tests.Tests
         [SetUp]
         public virtual void SetUpTest()
         {
+            Client client = new Client();
             Jdi.Logger.Info("Test Base Set up started...");
             TestSite = Jdi.InitSite<TestSite>();
             TestSite.HomePage.Open();
             //HomePageStatic.Open();
             TestSite.HomePage.Profile.Click();
-            LoginFormPage.AsForm<Client>().Login(DefaultClient);
+            LoginFormPage.AsForm<Client>().Login(client.DefaultClient);
             Jdi.Logger.Info("Test Base Set up done.");
             Jdi.Logger.Info("Run test...");
         }
