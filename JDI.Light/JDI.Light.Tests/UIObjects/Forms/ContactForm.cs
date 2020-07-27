@@ -14,7 +14,7 @@ namespace JDI.Light.Tests.UIObjects.Forms
         public ITextArea DescriptionField;
 
         [FindBy(XPath = ".//a[@class='ui-slider-handle ui-state-default ui-corner-all' and position()=1]")]
-        public Link FirstRoller;
+        private Link FirstRoller;
 
         [FindBy(Css = "input#last-name")]
         [Name("LastName")]
@@ -25,7 +25,7 @@ namespace JDI.Light.Tests.UIObjects.Forms
         public ITextField NameField;
 
         [FindBy(XPath = ".//a[@class='ui-slider-handle ui-state-default ui-corner-all' and position()=2]")]
-        public Link SecondRoller;
+        private Link SecondRoller;
 
         [FindBy(XPath = "//button[@type='submit' and contains(., 'Submit')]")]
         public IButton SubmitButton;
