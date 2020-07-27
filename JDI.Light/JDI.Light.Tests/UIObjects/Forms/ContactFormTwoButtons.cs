@@ -12,18 +12,18 @@ namespace JDI.Light.Tests.UIObjects.Forms
         public TextArea Description;
 
         [FindBy(XPath = ".//a[@class='ui-slider-handle ui-state-default ui-corner-all' and position()=1]")]
-        public Link FirstRoller;
+        private Link FirstRoller;
 
         [FindBy(Id = "last-name")]
         public TextField LastName;
 
         [FindBy(Id = "name")]
-        public new TextField Name;
+        private new TextField Name;
 
         [FindBy(XPath = ".//a[@class='ui-slider-handle ui-state-default ui-corner-all' and position()=2]")]
-        public Link SecondRoller;
+        private Link SecondRoller;
 
         [FindBy(XPath = "//*[text()='Submit']")]
-        public new IButton Submit;
+        private new IButton Submit;
     }
 }
