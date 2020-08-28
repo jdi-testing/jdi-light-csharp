@@ -30,7 +30,7 @@ namespace JDI.Light.Elements.Composite
         protected WebPage()
         {
             Logger = Jdi.Logger;
-            Invoker = new ActionInvoker(Logger, Jdi.Timeouts.getPageLoadMSec(), Jdi.Timeouts.getRetryMSec());
+            Invoker = new ActionInvoker(Logger, Jdi.Timeouts.GetPageLoadMSec(), Jdi.Timeouts.GetRetryMSec());
             Name = $"{Title} ({Url})";
         }
         

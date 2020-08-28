@@ -15,15 +15,15 @@ namespace JDI.Light.Settings
             WaitPageLoadMSec = 30000;
 
         }
-        public int getRetryMSec()
+        public int GetRetryMSec()
         {
             return RetryMSec;
         }
-        public int geWaitElementMSec()
+        public int GeWaitElementMSec()
         {
             return WaitElementMSec;
         }
-        public int getPageLoadMSec()
+        public int GetPageLoadMSec()
         {
             return WaitPageLoadMSec;
         }
