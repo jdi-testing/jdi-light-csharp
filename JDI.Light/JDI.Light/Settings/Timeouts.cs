@@ -2,8 +2,15 @@
 {
     public class Timeouts
     {
-        public int RetryMSec = 500;
-        public int WaitElementMSec = 20000;
-        public int WaitPageLoadMSec = 30000;
+        private int RetryMSec { get; }
+        private int WaitElementMSec { get; }
+        private int WaitPageLoadMSec { get; }
+
+        public Timeouts()
+        {
+            RetryMSec = 500;
+            WaitElementMSec = 20000;
+            WaitPageLoadMSec = 30000;
+        }
     }
 }
