@@ -2,9 +2,9 @@
 {
     public class Timeouts
     {
-        public readonly int RetryMSec;
-        public readonly int WaitElementMSec;
-        public readonly int WaitPageLoadMSec;
+        private int RetryMSec { get; }
+        private int WaitElementMSec { get; }
+        private int WaitPageLoadMSec { get; }
 
         public Timeouts()
         {
