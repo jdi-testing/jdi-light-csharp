@@ -66,7 +66,7 @@ namespace JDI.Light.Elements.Base
         protected UIElement(By byLocator)
         {
             Logger = Jdi.Logger;
-            Invoker = new ActionInvoker(Logger, Jdi.Timeouts.WaitElementMSec, Jdi.Timeouts.RetryMSec);
+            Invoker = new ActionInvoker(Logger, Jdi.Timeouts.geWaitElementMSec(), Jdi.Timeouts.getRetryMSec());
             Locator = byLocator;
         }
 
@@ -114,7 +114,7 @@ namespace JDI.Light.Elements.Base
                 switch (result.Count)
                 {
                     case 0:
-                        throw Jdi.Assert.Exception($"Can't find Element '{this}' during {Jdi.Timeouts.WaitElementMSec} milliseconds");
+                        throw Jdi.Assert.Exception($"Can't find Element '{this}' during {Jdi.Timeouts.geWaitElementMSec()} milliseconds");
                     case 1:
                         Logger.Debug($"One Web Element found: '{this}'");
                         break;
@@ -122,7 +122,7 @@ namespace JDI.Light.Elements.Base
                         if (OnlyOneElementAllowedInSearch)
                         {
                             throw Jdi.Assert.Exception(
-                                $"Find {result.Count} elements instead of one for Element '{this}' during {Jdi.Timeouts.WaitElementMSec} milliseconds");
+                                $"Find {result.Count} elements instead of one for Element '{this}' during {Jdi.Timeouts.geWaitElementMSec()} milliseconds");
                         }
                         break;
                 }
@@ -200,7 +200,7 @@ namespace JDI.Light.Elements.Base
             }
 
             LocalElementSearchCriteria = temp;
-            SetWaitTimeout(Jdi.Timeouts.WaitElementMSec);
+            SetWaitTimeout(Jdi.Timeouts.geWaitElementMSec());
             return result;
         }
         

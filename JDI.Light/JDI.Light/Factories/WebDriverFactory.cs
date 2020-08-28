@@ -33,7 +33,7 @@ namespace JDI.Light.Factories
                 {
                     driver.Manage().Window.Size = BrowserSize;
                 }
-                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(Jdi.Timeouts.WaitElementMSec);
+                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(Jdi.Timeouts.geWaitElementMSec());
                 return driver;
             };
             RunDrivers = new ConcurrentDictionary<string, IWebDriver>();
