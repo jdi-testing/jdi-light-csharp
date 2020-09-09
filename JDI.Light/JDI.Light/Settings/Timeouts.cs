@@ -4,9 +4,9 @@ namespace JDI.Light.Settings
 {
     public class Timeouts
     {
-        private int RetryMSec;
-        private int WaitElementMSec;
-        private int WaitPageLoadMSec;
+        private readonly int RetryMSec;
+        private readonly int WaitElementMSec;
+        private readonly int WaitPageLoadMSec;
 
         public Timeouts()
         {
