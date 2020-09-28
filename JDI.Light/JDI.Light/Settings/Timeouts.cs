@@ -1,10 +1,10 @@
-﻿namespace JDI.Light.Settings
+namespace JDI.Light.Settings
 {
     public class Timeouts
     {
-        private int RetryMSec { get; }
-        private int WaitElementMSec { get; }
-        private int WaitPageLoadMSec { get; }
+        public int RetryMSec { get; }
+        public int WaitElementMSec { get; }
+        public int WaitPageLoadMSec { get; }
 
         public Timeouts()
         {
