@@ -11,7 +11,7 @@
 *.sln.docstates
 
 # GIT-specific folder
-.git/
+.git/*
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
