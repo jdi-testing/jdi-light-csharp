@@ -1,0 +1,5 @@
+languages:
+  cs:
+exclude_paths:
+  - '.git/**'
+  - '.github/**'
