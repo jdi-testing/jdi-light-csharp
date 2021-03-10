@@ -1,4 +1,6 @@
 name: .NET Core
+env:
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
 
 on:
   push:
@@ -15,12 +17,17 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101
+
+    - name: Install Nuget
+      run: sudo apt install nuget   
+
+    - name: Move to JDI.Light folder
+      run: |
+        cd ./JDI.Light
+
     - name: Install dependencies
-      working-directory: './JDI.Light'
-      run: dotnet restore
-#    - name: Build
-#     working-directory: './JDI.Light'
-#      run: dotnet build --configuration Release --no-restore
-#    - name: Test
-#      working-directory: './JDI.Light'
-#      run: dotnet test --no-restore --verbosity normal
+      run: nuget restore JDI.Light.sln -PackagesDirectory .\packages
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+    - name: Test
+      run: dotnet test --no-restore --verbosity normal

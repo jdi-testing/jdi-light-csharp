@@ -17,6 +17,7 @@ namespace JDI.Light.Utils
 
         public virtual void ThrowFail(string message)
         {
+            throw new Exception(message);
         }
 
         public void ThrowFail(string message, Exception ex)
