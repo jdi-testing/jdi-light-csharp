@@ -22,9 +22,10 @@ jobs:
       run: |
         cd ./JDI.Light
         dir
+        nuget restore -help
 
     - name: Install dependencies
-      run: nuget restore -PackagesDirectory ./packages
+      run: nuget restore JDI.Light.sln -PackagesDirectory ./packages
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
