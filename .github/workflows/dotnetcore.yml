@@ -24,7 +24,7 @@ jobs:
         dir
 
     - name: Install dependencies
-      run: nuget restore ./JDI.Light.sln -PackagesDirectory ./packages
+      run: nuget restore -PackagesDirectory ./packages
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
