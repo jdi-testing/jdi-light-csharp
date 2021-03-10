@@ -21,12 +21,13 @@ jobs:
     - name: Move to JDI.Light folder
       run: |
         cd ./JDI.Light
-        dir
-        nuget restore -help
+        ls -l
 
     - name: Install dependencies
-      run: nuget restore JDI.Light.sln -PackagesDirectory ./packages
+      run: nuget restore JDI.Light.sln
+
     - name: Build
       run: dotnet build --configuration Release --no-restore
+      
     - name: Test
       run: dotnet test --no-restore --verbosity normal
