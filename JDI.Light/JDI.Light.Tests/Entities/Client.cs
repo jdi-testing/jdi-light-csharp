@@ -5,7 +5,7 @@ namespace JDI.Light.Tests.Entities
     public class Client
     {
         public readonly Client DefaultClient;
-        protected string Login, Password;
+        public string Login, Password;
 
         public Client()
         {
