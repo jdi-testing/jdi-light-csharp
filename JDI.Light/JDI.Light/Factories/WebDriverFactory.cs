@@ -55,6 +55,7 @@ namespace JDI.Light.Factories
                     {
                         var o = new ChromeOptions();
                         o.AddArgument("-no-sandbox");
+                        o.AddArgument("--headless");
                         return string.IsNullOrEmpty(path) ? new ChromeDriver(o) : new ChromeDriver(path, o, TimeSpan.FromSeconds(150));
                     }
                 },
