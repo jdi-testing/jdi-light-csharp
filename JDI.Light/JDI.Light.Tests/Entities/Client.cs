@@ -9,7 +9,7 @@ namespace JDI.Light.Tests.Entities
 
         public Client()
         {
-            DefaultClient = new Client("epam", "1234");
+            DefaultClient = new Client("Roman", "Jdi1234");
         }
 
         public Client(string login, string password)
