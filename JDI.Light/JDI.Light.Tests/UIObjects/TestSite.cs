@@ -7,7 +7,7 @@ using JDI.Light.Tests.UIObjects.Sections;
 
 namespace JDI.Light.Tests.UIObjects
 {
-    [Site(Domain = "https://epam.github.io/JDI")]
+    [Site(Domain = "https://jdi-testing.github.io/jdi-light")]
     public class TestSite : WebSite
     {
         [Page(Url = "/index.html", Title = "Home Page")]
