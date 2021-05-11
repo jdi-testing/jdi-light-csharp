@@ -23,6 +23,7 @@ namespace JDI.Light.Tests.Tests
             TestSite = Jdi.InitSite<TestSite>();
             TestSite.HomePage.Open();
             //HomePageStatic.Open();
+            Jdi.WebDriver.Navigate().Refresh();
             TestSite.HomePage.Profile.Click();
             LoginFormPage.AsForm<Client>().Login(client.DefaultClient);
             Jdi.Logger.Info("Test Base Set up done.");
