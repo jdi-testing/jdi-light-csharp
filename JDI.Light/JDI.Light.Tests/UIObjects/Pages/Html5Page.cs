@@ -104,7 +104,7 @@ namespace JDI.Light.Tests.UIObjects
         
         public IColorPicker DisabledPicker { get; set; }
 
-        [FindBy(Css = "div.main-content #name")]
+        [FindBy(Css = "div.main-content #your-name")]
         public TextField NameTextField { get; set; }
 
         [FindBy(Css = "#disabled-name")]

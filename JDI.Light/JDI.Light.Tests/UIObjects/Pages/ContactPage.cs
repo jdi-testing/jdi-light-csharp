@@ -27,10 +27,10 @@ namespace JDI.Light.Tests.UIObjects.Pages
         [FindBy(Id = "last-name")]
         public ITextField LastNameField;
 
-        [FindBy(Id = "name")]
+        [FindBy(Id = "first-name")]
         public TextField NameField;
 
-        [FindBy(Id = "name")]
+        [FindBy(Id = "first-name")]
         public Input NameInput;
 
         [FindBy(Css = ".results")]
