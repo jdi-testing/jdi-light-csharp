@@ -37,7 +37,7 @@ namespace JDI.Light.Tests.Tests.Simple
         [Test]
         public void GetUrlTest()
         {
-            Assert.AreEqual(TestSite.Html5Page.GithubLink.Url(), "https://epam.github.io/JDI/html5.html");
+            Assert.AreEqual(TestSite.Html5Page.GithubLink.Url(), "https://jdi-testing.github.io/jdi-light/html5.html");
         }
 
         [Test]

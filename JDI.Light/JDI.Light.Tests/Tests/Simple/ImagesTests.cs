@@ -18,7 +18,7 @@ namespace JDI.Light.Tests.Tests.Simple
             TestSite.Html5Page.CheckTitle();
         }
 
-        private const string Text = "https://epam.github.io/JDI/images/jdi-logo.jpg";
+        private const string Text = "https://jdi-testing.github.io/jdi-light/images/jdi-logo.jpg";
 
         [Test]
         public void GetSrcTest()
