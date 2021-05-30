@@ -86,7 +86,7 @@ namespace JDI.Light.Tests.Tests.Composite
         [Test]
         public void RefreshAssertMenuTest()
         {
-            TestSite.SidebarMenu.AssertThat.Size(EqualTo(16));
+            TestSite.SidebarMenu.AssertThat.Size(EqualTo(22));
         }
 
         [Test]
