@@ -1,4 +1,5 @@
 ﻿using JDI.Light.Tests.Entities;
+using JDI.Light.Tests.UIObjects;
 using NUnit.Framework;
 
 namespace JDI.Light.Tests.Tests.Core
@@ -8,12 +9,13 @@ namespace JDI.Light.Tests.Tests.Core
         [Test]
         public void CanRecreateKilledDriver()
         {
+            Client client = new Client();
             TestSite.HomePage.CheckOpened();
             Jdi.CloseDriver();
             Jdi.KillAllDrivers();
             TestSite.HomePage.Open();
             TestSite.HomePage.Profile.Click();
-            TestSite.HomePage.LoginForm.Submit(User.DefaultUser);
+            TestSite.LoginFormPage.AsForm<Client>().Login(client.DefaultClient);
             TestSite.HomePage.CheckOpened();
         }
     }

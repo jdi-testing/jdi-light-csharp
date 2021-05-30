@@ -44,7 +44,7 @@ namespace JDI.Light.Tests.Tests.Composite
         public void OpenBaseUrlTest()
         {
             TestSite.OpenBaseUrl();
-            Assert.AreEqual("https://epam.github.io/", TestSite.Url);
+            Assert.AreEqual("https://jdi-testing.github.io/jdi-light/index.html", TestSite.Url);
         }
         
         [Test]

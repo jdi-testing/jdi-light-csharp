@@ -17,7 +17,7 @@ namespace JDI.Light.Tests.UIObjects
         [FindBy(Css = "input[type=file][disabled]")]
         public FileInput DisabledFileInput { get; set; }
 
-        [FindBy(XPath = "//a[@href='/JDI/images/jdi-logo.jpg']")]
+        [FindBy(XPath = "//a[@href='/jdi-light/images/jdi-logo.jpg']")]
         public Link FileDownload { get; set; }
 
         [FindBy(Css = "#accept-conditions")]
