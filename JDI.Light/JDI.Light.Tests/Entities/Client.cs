@@ -5,7 +5,6 @@ namespace JDI.Light.Tests.Entities
     public class Client
     {
         public readonly Client DefaultClient;
-        public string Login, Password;
 
         public Client()
         {
@@ -17,5 +16,10 @@ namespace JDI.Light.Tests.Entities
             Login = login;
             Password = password;
         }
+        [Name("Login")]
+        public string Login;
+
+        [Name("Password")]
+        public string Password { get; set; }
     }
 }

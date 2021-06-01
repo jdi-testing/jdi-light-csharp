@@ -29,10 +29,10 @@ namespace JDI.Light.Tests.Tests.Composite.PseudoSiteTests
 
         private static object[] _annotationsWebPageData =
         {
-            new object[] { nameof(TestSite.PageWithBoth), "https://epam.github.io/JDI/pagewithboth.com", "Page with both" },
-            new object[] { nameof(TestSite.PageWithTitle), "https://epam.github.io/JDI/", "Page with Title" },
-            new object[] { nameof(TestSite.PageWithUrl), "https://epam.github.io/JDI/pagewithurl.com", "" },
-            new object[] { nameof(TestSite.SlashPageWithUrl), "https://epam.github.io/JDI/pagewithurl.com", "" },
+            new object[] { nameof(TestSite.PageWithBoth), "https://jdi-testing.github.io/jdi-light/pagewithboth.com", "Page with both" },
+            new object[] { nameof(TestSite.PageWithTitle), "https://jdi-testing.github.io/jdi-light/", "Page with Title" },
+            new object[] { nameof(TestSite.PageWithUrl), "https://jdi-testing.github.io/jdi-light/pagewithurl.com", "" },
+            new object[] { nameof(TestSite.SlashPageWithUrl), "https://jdi-testing.github.io/jdi-light/pagewithurl.com", "" },
             new object[] { nameof(TestSite.PageWithoutBoth), null, null }
         };
 

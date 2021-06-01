@@ -17,7 +17,7 @@ namespace JDI.Light.Tests.Tests.Simple
             TestSite.HomePage.Open();
         }
 
-        private const string Text = "https://epam.github.io/JDI/images/icons/user-icon.jpg";
+        private const string Text = "https://jdi-testing.github.io/jdi-light/images/icons/user-icon.jpg";
 
         [Test]
         public void GetSrcTest()

@@ -86,6 +86,7 @@ namespace JDI.Light.Tests.Tests.Simple
         [Test]
         public void DownloadTest()
         {
+            //Can't run in headless mode
             CleanupDownloads();
             var userRoot = Environment.GetEnvironmentVariable("USERPROFILE");
             var downloadFolder = Path.Combine(userRoot, "Downloads");

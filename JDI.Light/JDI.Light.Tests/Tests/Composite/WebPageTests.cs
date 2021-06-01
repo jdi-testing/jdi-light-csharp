@@ -5,6 +5,7 @@ using JDI.Light.Tests.UIObjects.Pages;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using static JDI.Light.Elements.Composite.WebPage;
+using JDI.Light.Tests.UIObjects;
 
 namespace JDI.Light.Tests.Tests.Composite
 {
@@ -79,6 +80,7 @@ namespace JDI.Light.Tests.Tests.Composite
         [Test]
         public void DeleteAllCookiesTest()
         {
+            Client client = new Client();
             TestSite.HomePage.Open();
             var cookie1 = new Cookie($"key: {Guid.NewGuid()}", $"value: {Guid.NewGuid()}");
             var cookie2 = new Cookie($"key: {Guid.NewGuid()}", $"value: {Guid.NewGuid()}");
@@ -92,7 +94,7 @@ namespace JDI.Light.Tests.Tests.Composite
             var cookiesCount = cookies.Count;
             Jdi.Assert.AreEquals(cookiesCount, 0);
             TestSite.HomePage.Profile.Click();
-            TestSite.HomePage.LoginForm.Submit(User.DefaultUser);
+            TestSite.LoginFormPage.AsForm<Client>().Login(client.DefaultClient);
         }
 
         [Test]
