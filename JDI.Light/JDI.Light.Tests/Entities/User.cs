@@ -4,7 +4,7 @@ namespace JDI.Light.Tests.Entities
 {
     public class User
     {
-        public static readonly User DefaultUser = new User("epam", "1234");
+        public static readonly User DefaultUser = new User("Roman", "Jdi1234");
 
         public User(string login, string password)
         {
