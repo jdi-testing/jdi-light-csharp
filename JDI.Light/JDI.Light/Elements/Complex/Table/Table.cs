@@ -12,7 +12,7 @@ namespace JDI.Light.Elements.Complex.Table
     {
         public Table(By locator) : base(locator)
         {
-            TableHeadersLocator = By.XPath(".//tr/th");
+            TableHeadersLocator = By.XPath("//tr/th");
             TableBodyLocator = By.XPath(".//tbody");
             TableFooterLocator = By.XPath(".//tfoot");
             TableRowsLocator = By.XPath(".//tr");
@@ -68,7 +68,7 @@ namespace JDI.Light.Elements.Complex.Table
             return Cells.ElementAt(rowNum);
         }
 
-        public int TableSize => Rows.Count - 1;
+        public int TableSize => Rows.Count;
 
         public bool IsTableEmpty => TableSize == 0;
 
